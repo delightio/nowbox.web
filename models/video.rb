@@ -1,5 +1,5 @@
 module Aji
-  class Video
+  class Video < ActiveRecord::Base
     # ## Video Schema
     # - id: Integer
     # - external_id: String
