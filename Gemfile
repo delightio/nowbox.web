@@ -5,7 +5,7 @@ gem 'thor' # Better command line utility than rake.
 gem 'grape'
 
 gem 'pg'
-gem 'activerecord'
+gem 'activerecord', :require => 'active_record'
 
 # literate comments, generating lovely documentation HTML.
 gem 'rocco'

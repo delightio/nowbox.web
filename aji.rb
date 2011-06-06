@@ -12,6 +12,8 @@ module Aji
 
   # Load settings from configs or environment variables.
   # SETTINGS = YAML.load_file("./config/settings.yml")[RACK_ENV]
+  ActiveRecord::Base.establish_connection(
+    YAML.load_file("config/database.yml")[RACK_ENV])
 
   class Error < RuntimeError; end
   class API < Grape::API

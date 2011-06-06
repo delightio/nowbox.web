@@ -1,0 +1,18 @@
+development:
+  adapter: postgres
+  database: aji_dev
+  username: username
+  password: nil
+  host: localhost
+
+test:
+  adapter: postgres
+  database: aji_test
+  username: username
+  password: password
+  host: localhost
+
+production:
+  adapter: postgres
+  database: aji_prod
+  username: username
