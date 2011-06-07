@@ -17,4 +17,11 @@ class Aji < Thor
     tmpl << "  def self.down\n    \n  end\nend"
     `echo '#{tmpl}' > ./db/migrate/#{Time.now.strftime("%Y%m%d%H%M%S")}_#{title}.rb`
   end
+
+  desc "console", "An application console for Aji"
+  def console
+    # Shell out to an irb session with the local environment loaded.
+    irb_command = "irb -r #{Dir.pwd}/aji.rb"
+    exec irb_command
+  end
 end

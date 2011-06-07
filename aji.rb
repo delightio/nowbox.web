@@ -14,13 +14,13 @@ module Aji
   # SETTINGS = YAML.load_file("./config/settings.yml")[RACK_ENV]
   ActiveRecord::Base.establish_connection(
     YAML.load_file("config/database.yml")[RACK_ENV])
-
-  s = YAML.load_file("config/redis.yml")
-  h = Hash.new
-  s.each { |k,v| h[k.to_sym] = v }
-  def Aji.redis
-    @@redis ||= Redis.new(h)
-  end
+  # Run all un-run migrations.
+  ActiveRecord::Migrator.migrate("db/migrate/")
+  s = YAML.load_file("config/redis.yml")[RACK_ENV]
+  hash = Hash.new
+  s.each { |k,v| hash[k.to_sym] = v }
+  REDIS = Redis.new hash
+  Redis::Objects.redis = REDIS
 
   class Error < RuntimeError; end
   class API < Grape::API
