@@ -22,7 +22,11 @@ module Aji
   REDIS = Redis.new hash
   Redis::Objects.redis = REDIS
 
+  # An application specific error class.
   class Error < RuntimeError; end
+  # An error to raise when a required interface method has not been overridden
+  # by a subclass.
+  class InterfaceMethodNotImplemented < Aji::Error; end
   class API < Grape::API
     get do
       "API Up and running!"
