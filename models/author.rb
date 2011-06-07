@@ -14,6 +14,8 @@ module Aji
     validates_presence_of :video_source
     validates_inclusion_of :video_source, :in => [ :youtube ]
 
+    has_and_belongs_to_many :authors_channels
+
     def video_source
       s = read_attribute(:video_source)
       s.to_sym if s
