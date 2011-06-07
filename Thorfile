@@ -11,11 +11,12 @@ class Aji < Thor
 
   desc "migration TITLE", "generate a new migration based on the title"
   def migration title
+    filename = "#{Time.now.strftime("%Y%m%d%H%M%S")}_#{title}.rb"
     tmpl = "class #{title.split('_').map(&:capitalize).join('')}"
-    tmpl << "< ActiveRecord::Migration\n"
-    tmpl << "  def self.up\n    \n  end\n\n"
-    tmpl << "  def self.down\n    \n  end\nend"
-    `echo '#{tmpl}' > ./db/migrate/#{Time.now.strftime("%Y%m%d%H%M%S")}_#{title}.rb`
+    tmpl << " < ActiveRecord::Migration\n"
+    tmpl << "  def self.up\n\n  end\n\n"
+    tmpl << "  def self.down\n\n  end\nend"
+    `echo '#{tmpl}' > ./db/migrate/#{filename}`
   end
 
   desc "console", "An application console for Aji"
