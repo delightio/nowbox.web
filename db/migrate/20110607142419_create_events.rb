@@ -5,7 +5,7 @@ class CreateEvents < ActiveRecord::Migration
       t.integer :video_id, :null => false
       t.integer :channel_id, :null => false
       t.decimal :video_elapsed, :default => 0.0, :null => false
-      t.event_type :default => :view, :null => false
+      t.string :event_type, :default => :view, :null => false
 
       t.timestamps
     end
