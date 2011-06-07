@@ -25,4 +25,9 @@ class Aji < Thor
     irb_command = "irb -r #{Dir.pwd}/aji.rb"
     exec irb_command
   end
+
+  desc "spec", "Run application spec tests"
+  def spec
+    exec "bin/rspec spec"
+  end
 end

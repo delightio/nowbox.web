@@ -11,7 +11,7 @@ module Aji
     sorted_set :videos
     # We are using video source as an enum type so we must constrain it to
     # known values or nil. The easiest way to to so is with this validation.
-    validates_inclusion of :video_source, :in => [ :youtube ]
+    validates_inclusion_of :video_source, :in => [ :youtube ]
 
     def video_source
       read_attribute(:video_source).to_sym
