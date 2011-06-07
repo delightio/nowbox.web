@@ -15,6 +15,13 @@ module Aji
   ActiveRecord::Base.establish_connection(
     YAML.load_file("config/database.yml")[RACK_ENV])
 
+  s = YAML.load_file("config/redis.yml")
+  h = Hash.new
+  s.each { |k,v| h[k.to_sym] = v }
+  def Aji.redis
+    @@redis ||= Redis.new(h)
+  end
+
   class Error < RuntimeError; end
   class API < Grape::API
     get do
