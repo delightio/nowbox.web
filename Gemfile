@@ -4,6 +4,8 @@ gem 'rake'
 gem 'thor' # Better command line utility than rake.
 gem 'grape'
 
+gem 'redis'
+gem 'redis-objects'
 gem 'pg'
 gem 'activerecord', :require => 'active_record'
 

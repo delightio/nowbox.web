@@ -1,0 +1,17 @@
+development:
+  host: localhost
+  db: 0
+  thread_safe: true
+  #   port: 6379
+  #   password: nil
+  #   timeout: 5
+
+test:
+  host: localhost
+  db: 3
+  thread_safe: true
+
+production:
+  host: redis
+  db: 0
+  thread_safe: true

@@ -1,6 +1,7 @@
 .DS_Store
 config/settings.yml
 config/database.yml
+config/redis.yml
 .bundle
 db/*.sqlite3
 log/*.log
