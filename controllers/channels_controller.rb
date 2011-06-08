@@ -10,9 +10,7 @@ module Aji
       end
 
       get '/trending/videos' do
-        channel = Channel.trending or
-          no_channel_error "trending"
-        channel.videos
+        TrendingChannel.channel
       end
 
       get '/:channel_id/videos/' do

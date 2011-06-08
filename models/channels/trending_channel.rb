@@ -26,6 +26,10 @@ module Aji
           videos[new_video.id] = index
         end
       end
+
+      # There should only ever be one trending channel. This class method
+      # fetches it.
+      def TrendingChannel.channel; TrendingChannel.first; end
     end
   end
 end
