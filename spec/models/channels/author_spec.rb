@@ -7,8 +7,9 @@ describe Aji::Channels::Author do
         :video_source => :youtube
       author.save
 
-      ac = Channels::Author.new(:authors => Array.new(author),
+      ac = Aji::Channels::Author.new(:authors => Array(author),
                                 :title => "nicnicolecole's channel")
+      ac.save
       ac.content_videos.should be_empty
       ac.populate
       ac.content_videos.should_not be_empty

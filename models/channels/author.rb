@@ -1,7 +1,7 @@
 module Aji
   module Channels
     class Author < Channel
-      has_and_belongs_to_many :authors,
+      has_and_belongs_to_many :authors, :class_name => 'Aji::Author',
         :join_table => :authors_authors_channels, :foreign_key => :channel_id,
         :association_foreign_key => :author_id
 
@@ -10,14 +10,13 @@ module Aji
           # Fetch videos from specific sources.
           case a.video_source
           when :youtube
-            if a.own_zset.count == 0
+            if a.own_zset.members.count == 0
               yt_videos = YouTubeIt::Client.new.videos_by(
-                :user => "#{a.screen_name}", :max_results => 100,
-                :order_by => 'published').videos
+                :user => "#{a.screen_name}", :order_by => 'published').videos
                 yt_videos.each_with_index do |v, n|
-                  a.own_zset[Video.find_or_create(
+                  a.own_zset[Video.find_or_create_by_external_id(
+                    v.video_id.split(':').last,
                     :title => v.title,
-                    :external_id => v.video_id.split(':').last,
                     :description => v.description,
                     :author => a,
                     :source => :youtube,
