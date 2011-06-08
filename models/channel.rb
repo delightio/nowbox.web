@@ -15,11 +15,11 @@ module Aji
     include Redis::Objects
     sorted_set :videos
     list :authors
-    
+
     def self.trending
       Channel.find :type=>'TrendingChannel'
     end
-    
+
     # The populate interface method is called by background tasks to fill the
     # channel with videos based on the specific channel type.
     def populate
