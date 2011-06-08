@@ -41,35 +41,3 @@ Factory.define :video, :class => 'Aji::Video' do |a|
   a.description { random_string(50) }
   a.viewable_mobile true
 end
-
-#Factory.define :library_album, :class => 'Kampanchi::Album' do |a|
-#  a.name  "Library"
-#  a.album_type "system"
-#end
-#
-#Factory.define :trash_album, :class => 'Kampanchi::Album' do |a|
-#  a.name  "Trash"
-#  a.album_type "system"
-#end
-#
-#Factory.define :user, :class => 'Kampanchi::User' do |u|
-#  u.name {random_string}
-#end
-#
-#Factory.define :album, :class => 'Kampanchi::Album' do |a|
-#  a.name {random_string}
-#  a.after_create { |album| album.add_user(Factory :user) if album.users.count==0 }
-#end
-#
-#Factory.define :invitation, :class => 'Kampanchi::Invitation' do |i|
-#  i.code { (rand 9999).to_s }
-#  i.after_build { |invitation| a = Factory :album; invitation.album=a; invitation.user=a.users.first}
-#end
-#
-#Factory.define :media, :class => 'Kampanchi::Media' do |m|
-#  m.file_name { random_filename }
-#  m.size { random_size }
-#  m.checksum { random_uuid }
-#  m.owner { Factory(:user).id }
-#  m.after_create { |media| media.add_album(Factory :album) }
-#end
