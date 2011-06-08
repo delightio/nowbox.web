@@ -1,7 +1,9 @@
 module Aji
   module Channels
     class Author < Channel
-      has_and_belongs_to_many :authors
+      has_and_belongs_to_many :authors,
+        :join_table => :authors_authors_channels, :foreign_key => :channel_id,
+        :association_foreign_key => :author_id
 
       def populate
         authors.each_with_index do |a, i|
