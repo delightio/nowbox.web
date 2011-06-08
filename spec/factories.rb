@@ -40,4 +40,10 @@ Factory.define :video, :class => 'Aji::Video' do |a|
   a.title { random_string }
   a.description { random_string(50) }
   a.viewable_mobile true
+  a.association :author
+end
+
+Factory.define :author, :class => 'Aji::Author' do |a|
+  a.screen_name { random_string }
+  a.video_source { random_video_source }
 end
