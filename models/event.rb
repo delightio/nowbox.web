@@ -13,7 +13,7 @@ module Aji
     belongs_to :video
     belongs_to :channel
     validates_inclusion_of :event_type,
-      :in => [ :view, :share, :upvote, :downvote ]
+      :in => [ :view, :share, :upvote, :downvote, :enqueue, :dequeue ]
 
     def event_type
       read_attribute(:event_type).to_sym

@@ -29,7 +29,7 @@ module Aji
       when :enqueue
         queued[video_id] = at_time
       when :dequeue
-        queued.delete video_id rescue false
+        queued.delete video_id
       end
     end
     
