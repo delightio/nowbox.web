@@ -9,5 +9,6 @@ module Aji
   # - created_at: DateTime
   # - updated_at: DateTime
   class Video < ActiveRecord::Base
+    has_many :events
   end
 end

@@ -12,6 +12,8 @@ module Aji
   # - created_at: DateTime
   # - updated_at: DateTime
   class Channel < ActiveRecord::Base
+    has_many :events
+    
     include Redis::Objects
     sorted_set :videos
     list :authors

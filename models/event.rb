@@ -9,6 +9,9 @@ module Aji
   # - created_at: DateTime
   # - updated_at: DateTime
   class Event < ActiveRecord::Base
+    belongs_to :user
+    belongs_to :video
+    belongs_to :channel
     validates_inclusion_of :event_type,
       :in => [ :view, :share, :upvote, :downvote ]
 
