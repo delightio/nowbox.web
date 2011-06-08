@@ -9,8 +9,9 @@ module Aji
           no_channel_error params[:channel_id]
       end
       
-      get '/live/videos' do
-        channel = Channel.live
+      get '/trending/videos' do
+        channel = Channel.trending or
+          no_channel_error "trending"
         channel.videos
       end
       
