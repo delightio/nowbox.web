@@ -8,7 +8,8 @@ module Aji
   # - updated_at: DateTime
   class Author < ActiveRecord::Base
     include Redis::Objects
-    sorted_set :videos
+    sorted_set :own_zset
+
     # We are using video source as an enum type so we must constrain it to
     # known values or nil. The easiest way to to so is with this validation.
     validates_presence_of :video_source
@@ -18,6 +19,10 @@ module Aji
       :class_name => 'Channels::Author',
       :join_table => :authors_authors_channels,
       :foreign_key => :author_id, :association_foreign_key => :channel_id
+
+    def own_videos
+      Video.find(own_zset.members)
+    end
 
     def video_source
       s = read_attribute(:video_source)
