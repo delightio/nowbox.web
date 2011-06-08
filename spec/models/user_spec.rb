@@ -10,14 +10,14 @@ describe Aji::User do
         user.viewed.members.should include event.video.id.to_s
       end
     end
-    
+
     it "should never fail dequeuing a video" do
       user = Factory :user
       event = Factory :event, :event_type => :dequeue
       lambda { user.cache_event event }.should_not raise_error
       user.queued.members.should_not include event.video.id.to_s
     end
-    
+
     it "should dequeue enqueued video" do
       user = Factory :user
       event = Factory :event, :event_type => :enqueue
@@ -26,6 +26,18 @@ describe Aji::User do
       event.event_type = :dequeue
       user.cache_event event
       user.queued.members.should_not include event.video.id.to_s
+    end
+  end
+
+  describe "video_collections" do
+    context "when accessing a video collection" do
+      it "should return a list of video objects" do
+        user = Factory :user
+        5.times do
+          user.queued_zset[Factory(:video).id] = Time.now
+        end
+        user.queued_videos.first.class.should == Aji::Video
+      end
     end
   end
 end
