@@ -7,14 +7,14 @@ module Aji
 
   class User < ActiveRecord::Base
     has_many :events
-    
+
     include Redis::Objects
-    sorted_set :shared
-    sorted_set :liked # upvoted or shared
-    sorted_set :downvoted
-    sorted_set :viewed
-    sorted_set :queued
-    
+    sorted_set :shared_zset
+    sorted_set :liked_zset # upvoted or shared
+    sorted_set :downvoted_zset
+    sorted_set :viewed_zset
+    sorted_set :queued_zset
+
     def cache_event event
       at_time = event.created_at.to_i
       video_id = event.video_id
@@ -32,6 +32,32 @@ module Aji
         queued.delete video_id
       end
     end
-    
+
+    %w(shared_zset liked_zset downvoted_zset viewed_zset queued_zset).
+      map(&:to_sym).each do |sym|
+      define_method :"#{sym}_videos" do
+        Video.find(send(sym).members)
+      end
+    end
+
+#    def shared_videos
+#      shared.members.map { |id| Video.find(id) }
+#    end
+#
+#    def liked_videos
+#      liked.members.map { |id| Video.find(id) }
+#    end
+#
+#    def downvoted_videos
+#      downvoted.members.map { |id| Video.find(id) }
+#    end
+#
+#    def viewed_videos
+#      viewed.members.map { |id| Video.find(id) }
+#    end
+#
+#    def queued_videos
+#      queued.members.map { |id| Video.find(id) }
+#    end
   end
 end

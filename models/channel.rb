@@ -13,13 +13,13 @@ module Aji
   # - updated_at: DateTime
   class Channel < ActiveRecord::Base
     has_many :events
-    
+
     include Redis::Objects
-    sorted_set :videos
+    sorted_set :content_zset
     list :authors
 
-    def self.trending
-      Channel.find :type=>'Trending'
+    def content_videos
+      Video.find(content_zset.members)
     end
 
     # The populate interface method is called by background tasks to fill the
