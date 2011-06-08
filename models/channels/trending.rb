@@ -22,8 +22,8 @@ module Aji
                             :description            => :description }
           h={}; mapping_nw_aji.each_pair{ |nw,aji| h[aji] = nowmov_hash[nw] }
           h[:viewable_mobile] = true # since we asked for mobile target
-          new_video = Video.find_or_create h # TODO: how do we generate author as well?
-          videos[new_video.id] = index
+          video = Aji::Video.find_or_create_from_hash h # TODO: how do we generate author as well?
+          videos[video.id] = index
         end
       end
 
