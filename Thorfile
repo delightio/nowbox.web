@@ -2,6 +2,8 @@ require 'bundler'
 Bundler.require
 
 class Aji < Thor
+
+  map "c" => :console, "s" => :server, "sp" => :spec
   desc "migrate", "Migrate the database through scripts in db/migrate."
   def migrate
     ActiveRecord::Base.establish_connection(
@@ -29,5 +31,10 @@ class Aji < Thor
   desc "spec", "Run application spec tests"
   def spec
     exec "bin/rspec spec"
+  end
+
+  desc "server", "Run Aji webserver"
+  def server env="development"
+    exec "bin/rackup -E #{env}"
   end
 end
