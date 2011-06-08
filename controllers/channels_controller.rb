@@ -10,7 +10,7 @@ module Aji
       end
 
       get '/trending/videos' do
-        TrendingChannel.channel
+        Trending.channel
       end
 
       get '/:channel_id/videos/' do

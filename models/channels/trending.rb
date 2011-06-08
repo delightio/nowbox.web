@@ -3,7 +3,7 @@ require 'json'
 
 module Aji
   module Channels
-    class TrendingChannel < Channel
+    class Trending < Channel
       def populate args={}
         url = args[:url] || "nowmov.com"
         path = args[:path] || "/live/videos"
@@ -29,7 +29,7 @@ module Aji
 
       # There should only ever be one trending channel. This class method
       # fetches it.
-      def TrendingChannel.channel; TrendingChannel.first; end
+      def Trending.channel; Trending.first; end
     end
   end
 end

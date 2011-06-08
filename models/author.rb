@@ -15,7 +15,7 @@ module Aji
     validates_inclusion_of :video_source, :in => [ :youtube ]
 
     has_and_belongs_to_many :authors_channels,
-      :class_name => 'Channels::AuthorsChannel'
+      :class_name => 'Channels::Authors'
 
     def video_source
       s = read_attribute(:video_source)

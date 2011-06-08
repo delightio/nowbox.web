@@ -1,6 +1,6 @@
 require File.expand_path("../../../spec_helper", __FILE__)
 
-describe Aji::Channels::AuthorsChannel do
+describe Aji::Channels::Authors do
   describe "#populate" do
 
   end

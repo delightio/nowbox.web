@@ -19,7 +19,7 @@ module Aji
     list :authors
 
     def self.trending
-      Channel.find :type=>'TrendingChannel'
+      Channel.find :type=>'Trending'
     end
 
     # The populate interface method is called by background tasks to fill the
