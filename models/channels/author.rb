@@ -1,6 +1,6 @@
 module Aji
   module Channels
-    class Authors < Channel
+    class Author < Channel
       has_and_belongs_to_many :authors
 
       def populate

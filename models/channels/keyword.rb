@@ -1,6 +1,6 @@
 module Aji
   module Channels
-    class Keywords < Channel
+    class Keyword < Channel
     end
   end
 end
