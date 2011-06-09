@@ -10,6 +10,10 @@ module Aji
   # Set Rack environment if not specified.
   RACK_ENV = ENV['RACK_ENV'] || "development"
 
+  def Aji.conf
+    @@conf ||= YAML.load_file("config/settings.yml")[RACK_ENV]
+  end
+
   # Load settings from configs or environment variables.
   # SETTINGS = YAML.load_file("./config/settings.yml")[RACK_ENV]
   ActiveRecord::Base.establish_connection(
