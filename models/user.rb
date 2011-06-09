@@ -44,25 +44,5 @@ module Aji
     def subscribed_channels
       Channel.find(subscribed_zset.members)
     end
-
-#    def shared_videos
-#      shared.members.map { |id| Video.find(id) }
-#    end
-#
-#    def liked_videos
-#      liked.members.map { |id| Video.find(id) }
-#    end
-#
-#    def downvoted_videos
-#      downvoted.members.map { |id| Video.find(id) }
-#    end
-#
-#    def viewed_videos
-#      viewed.members.map { |id| Video.find(id) }
-#    end
-#
-#    def queued_videos
-#      queued.members.map { |id| Video.find(id) }
-#    end
   end
 end

@@ -8,6 +8,8 @@ module Aji
   # - updated_at: DateTime
   class ExternalAccount < ActiveRecord::Base
     include Redis::Objects
+    serialize :user_info
+    serialize :credentials
 
     validates_presence_of :provider, :uid
   end

@@ -8,7 +8,7 @@ module Aji
       sorted_set :tweeted_zset
 
       def tweeted_videos
-        Video.find tweeted.members
+        Video.find tweeted_zset.members
       end
     end
   end
