@@ -1,36 +1,13 @@
 module Aji
-  # ## Author Schema
-  # - id: Integer
-  # - screen_name: String
-  # - videos: Redis::Objects::SortedSet
-  # - video_source: Symbol as enum (String in DB)
-  # - created_at: DateTime
-  # - updated_at: DateTime
-  class Author < ActiveRecord::Base
-    include Redis::Objects
-    sorted_set :own_zset
-
-    # We are using video source as an enum type so we must constrain it to
-    # known values or nil. The easiest way to to so is with this validation.
-    validates_presence_of :video_source
-    validates_inclusion_of :video_source, :in => [ :youtube ]
-
-    has_and_belongs_to_many :author_channels,
-      :class_name => 'Channels::Author',
-      :join_table => :authors_authors_channels,
-      :foreign_key => :author_id, :association_foreign_key => :channel_id
-
-    def own_videos
-      Video.find(own_zset.members)
-    end
-
-    def video_source
-      s = read_attribute(:video_source)
-      s.to_sym if s
-    end
-
-    def video_source= value
-      write_attribute(:video_source, value && value.to_s || nil)
+  module ExternalAccounts
+    # ## ExternalAccounts::Youtube Schema Extensions
+    # - own_zset: Redis::Objects::SortedSet
+    class Youtube
+      has_and_belongs_to_many :channels,
+        :class_name => 'Channels::YoutubeAccount',
+        :join_table => :youtube_youtube_channels,
+        :foreign_key => :account_id, :association_foreign_key => :channel_id
     end
   end
 end
+
