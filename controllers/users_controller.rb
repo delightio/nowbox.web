@@ -1,19 +1,18 @@
 module Aji
   class API
     version '1'
-
+    
     resource :users do
-
+      
       get '/:user_id' do
         user = User.find(params[:user_id]) or
-          no_user_error params[:user_id]
+          not_found_error!(User, params)
       end
-
-      helpers do
-        def no_user_error id
-          error! "User[#{id}] does not exist", 404
-        end
+      
+      post '/' do
+        User.create(params) or creation_error!(User, params) 
       end
+      
     end
   end
 end

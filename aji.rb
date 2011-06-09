@@ -28,7 +28,9 @@ module Aji
     YAML.load_file("config/database.yml")[RACK_ENV])
   # Run all un-run migrations.
   ActiveRecord::Migrator.migrate("db/migrate/")
-
+  
+  BASE_URI = Aji.conf["base_url"] || "localhost"
+  
   # An application specific error class.
   class Error < RuntimeError; end
   # An error to raise when a required interface method has not been overridden

@@ -5,7 +5,15 @@ module Aji
         :class_name => 'Aji::ExternalAccounts::Youtube',
         :join_table => :youtube_youtube_channels, :foreign_key => :channel_id,
         :association_foreign_key => :account_id
-
+      
+      def serializable_hash
+        Hash[:id => id,
+             :tytpe => type.split("::").last,
+             :title => title,
+             :thumbnail_uri => "",
+             :resource_uri => ""]
+      end
+      
       def populate
         accounts.each_with_index do |a, i|
           # Fetch videos from specific sources.

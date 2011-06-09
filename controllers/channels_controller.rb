@@ -3,26 +3,28 @@ module Aji
     version '1'
 
     resource :channels do
-
+      
       get '/:channel_id' do
-        channel = Channel.find(params[:channel_id]) or
-        no_channel_error(params[:channel_id])
+        find_channel_by_id_or_error params[:channel_id]
       end
-
-      get '/trending/videos' do
-        Trending.channel
+      
+      post do
+        channel = Channel.create(params) or creation_error!(params)
       end
-
-      get '/:channel_id/videos/' do
-        channel = Channel.find(params[:channel_id]) or
-          no_channel_error(params[:channel_id])
-        channel.videos
+      
+      put '/:channel_id' do
+        channel = find_channel_by_id_or_error params[:channel_id]
+        error!("Unknown action: #{params[:action]}", 400) if !Channel.supported_actions.include? params[:action]
+        channel.send params[:action], params[:action_params]
       end
-
+      
+      get '/:channel_id/videos' do
+        channel = find_channel_by_id_or_error params[:channel_id]
+        user = find_user_by_id_or_error params[:user_id]
+        user.personalized_videos :channel => channel, :params => params
+      end
+      
       helpers do
-        def no_channel_error id
-          error! "Channel[#{id}] does not exist", 404
-        end
       end
     end
   end

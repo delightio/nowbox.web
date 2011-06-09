@@ -4,6 +4,15 @@ require 'json'
 module Aji
   module Channels
     class Trending < Channel
+      
+      def serializable_hash options={}
+        h = super
+        h["title"] = "Trending"
+        h["thumbnail_uri"] = ""
+        h["resource_uri"] = ""
+        h
+      end
+      
       def populate args={}
         url = args[:url] || "nowmov.com"
         path = args[:path] || "/live/videos"
@@ -28,10 +37,6 @@ module Aji
           content_zset[video.id] = index
         end
       end
-
-      # There should only ever be one trending channel. This class method
-      # fetches it.
-      def Trending.channel; Trending.first; end
     end
   end
 end

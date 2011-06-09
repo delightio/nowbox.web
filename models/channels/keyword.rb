@@ -4,7 +4,7 @@ module Aji
     # - keywords: Serialized array of strings
     class Keyword < Channel
       serialize :keywords
-
+      
       def populate
         (1..3).each do |page|
           vids = YouTubeIt::Client.new.videos_by(:query => keywords.join(' '),

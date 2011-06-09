@@ -34,6 +34,9 @@ end
 Factory.define :channel, :class => 'Aji::Channel' do |a|
 end
 
+Factory.define :trending_channel, :class => 'Aji::Channels::Trending' do |a|
+end
+
 Factory.define :video, :class => 'Aji::Video' do |a|
   a.external_id { random_string }
   a.source { random_video_source }
