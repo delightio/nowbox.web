@@ -7,7 +7,7 @@ describe Aji::User do
       [ :view, :share, :upvote, :downvote ].each do |event_type|
         event = Factory :event, :event_type => event_type
         user.cache_event event
-        user.viewed.members.should include event.video.id.to_s
+        user.viewed_videos.should include event.video
       end
     end
 
@@ -15,17 +15,17 @@ describe Aji::User do
       user = Factory :user
       event = Factory :event, :event_type => :dequeue
       lambda { user.cache_event event }.should_not raise_error
-      user.queued.members.should_not include event.video.id.to_s
+      user.queued_videos.should_not include event.video
     end
 
     it "should dequeue enqueued video" do
       user = Factory :user
       event = Factory :event, :event_type => :enqueue
       user.cache_event event
-      user.queued.members.should include event.video.id.to_s
+      user.queued_videos.should include event.video
       event.event_type = :dequeue
       user.cache_event event
-      user.queued.members.should_not include event.video.id.to_s
+      user.queued_videos.should_not include event.video
     end
   end
 
@@ -34,7 +34,7 @@ describe Aji::User do
       it "should return a list of video objects" do
         user = Factory :user
         5.times do
-          user.queued_zset[Factory(:video).id] = Time.now
+          user.queued_zset[Factory(:video).id] = Time.now.to_i
         end
         user.queued_videos.first.class.should == Aji::Video
       end
