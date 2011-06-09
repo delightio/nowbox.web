@@ -14,17 +14,20 @@ module Aji
     @@conf ||= YAML.load_file("config/settings.yml")[RACK_ENV]
   end
 
+  # Establish Redis connection.
+  # TODO: Add support for URL specified Redis.
+  s = YAML.load_file("config/redis.yml")[RACK_ENV]
+  hash = Hash.new
+  s.each { |k,v| hash[k.to_sym] = v }
+  def Aji.redis; Redis.new hash; end
+  Redis::Objects.redis = Aji.redis
+
   # Load settings from configs or environment variables.
   # SETTINGS = YAML.load_file("./config/settings.yml")[RACK_ENV]
   ActiveRecord::Base.establish_connection(
     YAML.load_file("config/database.yml")[RACK_ENV])
   # Run all un-run migrations.
   ActiveRecord::Migrator.migrate("db/migrate/")
-  s = YAML.load_file("config/redis.yml")[RACK_ENV]
-  hash = Hash.new
-  s.each { |k,v| hash[k.to_sym] = v }
-  REDIS = Redis.new hash
-  Redis::Objects.redis = REDIS
 
   # An application specific error class.
   class Error < RuntimeError; end
