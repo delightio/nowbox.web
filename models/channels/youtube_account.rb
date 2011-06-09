@@ -17,18 +17,18 @@ module Aji
                   v.video_id.split(':').last,
                   :title => v.title,
                   :description => v.description,
-                  :external_accounexternal_account => a,
+                  :external_account => a,
                   :source => :youtube,
                   :viewable_mobile => v.noembed).id] = v.published_at.to_i
               end
           end
-        end
 
-        a.own_zset.members.each_with_index do |v, k|
-          # Until I can write my own Redis-backed ZSet class or come up with
-          # a suitable interface to Redis::Objects::SortedSet, this is a 
-          # clever trick to get unique ranks for each video into a channel.
-          content_zset[v] = "#{i + 1}#{k + 1}".to_i
+          a.own_zset.members.each_with_index do |v, k|
+            # Until I can write my own Redis-backed ZSet class or come up with
+            # a suitable interface to Redis::Objects::SortedSet, this is a 
+            # clever trick to get unique ranks for each video into a channel.
+            content_zset[v] = "#{i + 1}#{k + 1}".to_i
+          end
         end
       end
     end

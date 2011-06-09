@@ -18,7 +18,7 @@ module Aji
       read_attribute(:source).to_sym
     end
 
-    def source value
+    def source= value
       write_attribute(:source, value.to_sym)
     end
   end
