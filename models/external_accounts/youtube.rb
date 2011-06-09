@@ -3,6 +3,7 @@ module Aji
     # ## ExternalAccounts::Youtube Schema Extensions
     # - own_zset: Redis::Objects::SortedSet
     class Youtube
+			sorted_set 
       has_and_belongs_to_many :channels,
         :class_name => 'Channels::YoutubeAccount',
         :join_table => :youtube_youtube_channels,
@@ -10,4 +11,3 @@ module Aji
     end
   end
 end
-
