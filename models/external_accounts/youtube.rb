@@ -2,6 +2,10 @@ module Aji
   module ExternalAccounts
     # ## ExternalAccounts::Youtube Schema Extensions
     # - own_zset: Redis::Objects::SortedSet
+    # TODO: Currently overloading ExternalAccount#uid to store youtube
+    # username. This is more than likely not the actual Youtube uid so we
+    # sould determine what it is and store it in the user_info hash with the
+    # other user params.
     class Youtube < ExternalAccount
       include Redis::Objects
 
