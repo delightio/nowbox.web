@@ -11,7 +11,7 @@ module Aji
           # Fetch videos from specific sources.
           if a.own_zset.members.count == 0
             yt_videos = YouTubeIt::Client.new.videos_by(
-              :user => "#{a}", :order_by => 'published').videos
+              :user => "#{a.uid}", :order_by => 'published').videos
               yt_videos.each_with_index do |v, n|
                 a.own_zset[Video.find_or_create_by_external_id(
                   v.video_id.split(':').last,
