@@ -14,6 +14,7 @@ gem 'activerecord', :require => 'active_record'
 gem 'rocco'
 
 # Libraries used by the backend.
+gem 'omniauth'
 gem 'youtube_it'
 
 # Bundle gems for the local environment. Make sure to

@@ -14,6 +14,7 @@ module Aji
     sorted_set :downvoted_zset
     sorted_set :viewed_zset
     sorted_set :queued_zset
+    sorted_set :subscribed_zset # User's Subscribed channels.
 
     def cache_event event
       at_time = event.created_at.to_i
@@ -38,6 +39,10 @@ module Aji
       define_method :"#{sym}_videos" do
         Video.find(send(sym).members)
       end
+    end
+
+    def subscribed_channels
+      Channel.find(subscribed_zset.members)
     end
 
 #    def shared_videos
