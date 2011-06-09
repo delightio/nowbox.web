@@ -1,11 +1,11 @@
 module Aji
   # ## Video Schema
   # - id: Integer
-  # - author_id: Integer (Foreign Key)
+  # - account_id: Integer (Foreign Key)
   # - external_id: String
   # - source: String
   # - title: String
-  # - description: String
+  # - description: Text
   # - viewable_mobile: Boolean
   # - created_at: DateTime
   # - updated_at: DateTime
@@ -13,9 +13,13 @@ module Aji
     has_many :events
     belongs_to :external_account, :class_name => 'ExternalAccounts::Youtube'
 
-    def self.find_or_create_from_hash h
-      # TODO: need to check all fields
-      Aji::Video.find_or_create_by_external_id h[:external_id]
+    # Symbolize source attribute.
+    def source
+      read_attribute(:source).to_sym
+    end
+
+    def source value
+      write_attribute(:source, value.to_sym)
     end
   end
 end
