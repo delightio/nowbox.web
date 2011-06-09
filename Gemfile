@@ -8,7 +8,7 @@ gem 'grape'
 gem 'redis'
 gem 'redis-objects', :require => 'redis/objects'
 gem 'pg'
-gem 'activerecord', :require => 'active_record'
+gem 'activerecord', ">=3.1.0rc2", :require => 'active_record'
 
 # Literate comments, generating lovely documentation HTML.
 gem 'rocco'
