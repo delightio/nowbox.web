@@ -17,7 +17,7 @@ module Aji
                   v.video_id.split(':').last,
                   :title => v.title,
                   :description => v.description,
-                  :author => a,
+                  :external_accounexternal_account => a,
                   :source => :youtube,
                   :viewable_mobile => v.noembed).id] = v.published_at.to_i
               end

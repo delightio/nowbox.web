@@ -8,7 +8,6 @@ module Aji
   # - title: String
   # - channel_type: String
   # - videos: Redis::Objects::SortedSet
-  # - authors: Redis::Objects::Authors
   # - created_at: DateTime
   # - updated_at: DateTime
   class Channel < ActiveRecord::Base
@@ -16,7 +15,6 @@ module Aji
 
     include Redis::Objects
     sorted_set :content_zset
-    list :authors
 
     def content_videos
       Video.find(content_zset.members)

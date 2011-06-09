@@ -4,6 +4,6 @@ class AddExternalAccountToVideo < ActiveRecord::Migration
   end
 
   def self.down
-    remove_column :videos, :author_id
+    remove_column :videos, :external_account_id
   end
 end

@@ -40,10 +40,11 @@ Factory.define :video, :class => 'Aji::Video' do |a|
   a.title { random_string }
   a.description { random_string(50) }
   a.viewable_mobile true
-  a.association :author
+  a.association :account
 end
 
-Factory.define :author, :class => 'Aji::Author' do |a|
-  a.screen_name { random_string }
-  a.video_source { random_video_source }
-end
+Factory.define :youtube_account,
+  :class => 'Aji::ExternalAccounts::Youtube' do |a|
+    a.uid { random_string }
+    a.provider { random_video_source }
+  end

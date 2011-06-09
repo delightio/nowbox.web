@@ -10,13 +10,14 @@ module Aji
           vids = YouTubeIt::Client.new.videos_by(:query => keywords.join(' '),
                                                  :page => page).videos
           vids.each_with_index do |v, i|
-            author = Aji::Author.find_or_create_by_screen_name(v.author.name,
-              :video_source => :youtube)
+            external_account =
+              Aji::ExternalAccounts::Youtube.find_or_create_by_uid(
+                v.author.name, :provider => "youtube")
             content_zset[Video.find_or_create_by_external_id(
               v.video_id.split(':').last,
               :title => v.title,
               :description => v.description,
-              :author => author,
+              :external_account => external_account,
               :source => :youtube,
               :viewable_mobile => v.noembed).id] = "#{page}#{i}".to_i
           end

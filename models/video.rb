@@ -11,7 +11,7 @@ module Aji
   # - updated_at: DateTime
   class Video < ActiveRecord::Base
     has_many :events
-    belongs_to :author
+    belongs_to :external_account, :class_name => 'ExternalAccounts::Youtube'
 
     def self.find_or_create_from_hash h
       # TODO: need to check all fields
