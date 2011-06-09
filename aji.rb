@@ -19,8 +19,8 @@ module Aji
   s = YAML.load_file("config/redis.yml")[RACK_ENV]
   hash = Hash.new
   s.each { |k,v| hash[k.to_sym] = v }
-  def Aji.redis; Redis.new hash; end
-  Redis::Objects.redis = Aji.redis
+  REDIS = Redis.new hash
+  Redis::Objects.redis = REDIS
 
   # Load settings from configs or environment variables.
   # SETTINGS = YAML.load_file("./config/settings.yml")[RACK_ENV]
