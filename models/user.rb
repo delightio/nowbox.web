@@ -14,18 +14,22 @@ module Aji
     sorted_set :downvoted_zset
     sorted_set :viewed_zset
     sorted_set :queued_zset
-    sorted_set :subscribed_zset # User's Subscribed channels.
+    list :subscribed_list # User's Subscribed channels.
     
     def self.supported_channel_actions; [:subscribe, :unsubscribe, :move]; end
-    def subscribe args={}
-      true
+    def subscribe channel, args={}
+      subscribed_list << channel.id
+      subscribed_list.include?(channel.id)
     end
-    def unsubscribe args={}
-      true
+    def unsubscribe channel, args={}
+      subscribed_list.delete channel.id
+      !subscribed_list.include?(channel.id)
     end
-    def move args={}
+    def move channel, args={}
       return false if args[:new_position].nil?
-      true
+      subscribed_list.delete channel.id
+      REDIS.lset subscribed_list.key, args[:new_position].to_i, channel.id
+      subscribed_list.include?(channel.id)
     end
     
     def cache_event event
@@ -54,7 +58,7 @@ module Aji
     end
 
     def subscribed_channels
-      Channel.find(subscribed_zset.members)
+      Channel.find(subscribed_list.values)
     end
   end
 end

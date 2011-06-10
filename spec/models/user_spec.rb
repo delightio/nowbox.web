@@ -28,7 +28,7 @@ describe Aji::User do
       user.queued_videos.should_not include event.video
     end
   end
-
+  
   describe "video_collections" do
     context "when accessing a video collection" do
       it "should return a list of video objects" do
@@ -40,4 +40,16 @@ describe Aji::User do
       end
     end
   end
+  
+  describe "channel subscription management" do
+    it "should add and remove channel accordingly" do
+      user = Factory :user
+      channel = Factory :trending_channel
+      user.subscribe channel
+      user.subscribed_channels.should include channel
+      user.unsubscribe channel
+      user.subscribed_channels.should_not include channel
+    end
+  end
+  
 end
