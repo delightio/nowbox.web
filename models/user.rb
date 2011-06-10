@@ -19,14 +19,14 @@ module Aji
     def self.supported_channel_actions; [:subscribe, :unsubscribe, :arrange]; end
     def subscribe channel, args={}
       subscribed_list << channel.id
-      subscribed_list.include?(channel.id)
+      subscribed_list.include? channel.id.to_s
     end
     def unsubscribe channel, args={}
       subscribed_list.delete channel.id
-      !subscribed_list.include?(channel.id)
+      !subscribed_list.include? channel.id.to_s
     end
     def arrange channel, args={}
-      new_position = args[:new_position]
+      new_position = (args[:new_position] || args["new_position"]).to_i
       return false if new_position.nil? || !subscribed_list.include?(channel.id.to_s)
       return true if subscribed_list[new_position]==channel.id.to_s # below logic doesn't work for same pos
       subscribed_list.delete channel.id.to_s
@@ -36,7 +36,7 @@ module Aji
         channel_id_at_new_position = subscribed_list[new_position]
         REDIS.linsert subscribed_list.key, "BEFORE", channel_id_at_new_position, channel.id
       end
-      subscribed_list.include?(channel.id)
+      subscribed_list.include? channel.id.to_s
     end
     
     def cache_event event

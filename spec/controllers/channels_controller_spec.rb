@@ -31,8 +31,38 @@ module Aji
           last_response.status.should == 400
         end
         
-        User.supported_channel_actions.each do |channel_action|
-          it "should respond to user's #{channel_action} aciton on channel"
+        it "should allow subscribing" do
+          channel = Factory :trending_channel
+          user = Factory :user
+          params = {:user_id => user.id, :channel_action => :subscribe}
+          put "#{resource_uri}/#{channel.id}", params
+          last_response.status.should == 200
+        end
+        
+        it "should allow unsubscribing" do
+          channel = Factory :trending_channel
+          user = Factory :user
+          user.subscribe channel
+          params = {:user_id => user.id, :channel_action => :unsubscribe}
+          put "#{resource_uri}/#{channel.id}", params
+          last_response.status.should == 200
+          user.subscribed_channels.should_not include channel
+        end
+        
+        it "should allow channel arrangment" do
+          user = Factory :user
+          channels = []
+          5.times do |n|
+            channels << Factory(:channel)
+            user.subscribe channels.last
+          end
+          old_position = 3
+          new_position = 1
+          channel = channels[old_position]
+          params = {:user_id => user.id, :channel_action => :arrange, :channel_action_params=>{:new_position=>new_position}}
+          put "#{resource_uri}/#{channel.id}", params
+          last_response.status.should == 200
+          user.subscribed_channels[new_position] = channel
         end
         
       end
