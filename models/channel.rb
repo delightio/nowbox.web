@@ -16,8 +16,12 @@ module Aji
     include Redis::Objects
     sorted_set :content_zset
     
-    def content_videos
-      Video.find(content_zset.members)
+    def content_video_ids limit=-1
+      content_zset.revrange 0, limit
+    end
+    
+    def content_videos limit=-1
+      content_video_ids.map { |vid| Video.find vid }
     end
     
     # The populate interface method is called by background tasks to fill the
@@ -34,6 +38,21 @@ module Aji
            "thumbnail_uir" => "",
            "resource_uri" => "#{BASE_URI}/"]
     end
-
+    
+    def personalized_content_videos args
+      user = args[:user]
+      raise ArgumentError, "User missing for Channel[#{self.id}].personalized #{args.inspect}" if user.nil?
+      # TODO: just take out viewed videos
+      limit = args[:limit] || 20
+      new_video_ids = []
+      viewed_video_ids = Set.new user.viewed_zset.range(0,-1)
+      content_video_ids.each do |channel_video_id|
+        new_video_ids << channel_video_id if !viewed_video_ids.member? channel_video_id
+        break if new_video_ids.count >= limit
+      end
+      # new_video_ids = content_zset - user.viewed_zset # TODO: zdiff not found?
+      new_video_ids.map { |vid| Video.find vid }
+    end
+    
   end
 end

@@ -34,6 +34,15 @@ end
 Factory.define :channel, :class => 'Aji::Channel' do |a|
 end
 
+Factory.define :channel_with_videos, :parent => :channel do |a|
+  a.after_create do |c|
+    50.times do |n|
+      v = Factory :video
+      c.content_zset[v.id] = Time.now.to_i
+    end
+  end
+end
+
 Factory.define :trending_channel, :class => 'Aji::Channels::Trending' do |a|
 end
 
