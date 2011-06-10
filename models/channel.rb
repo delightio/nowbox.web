@@ -6,31 +6,31 @@ module Aji
   # ## Channel Schema
   # - id: Integer
   # - title: String
-  # - channel_type: String
-  # - videos: Redis::Objects::SortedSet
+  # - type: String (ActiveRecord Column: ACCESS ONLY, DO NOT CHANGE)
+  # - content_zset: Redis::Objects::SortedSet
   # - created_at: DateTime
   # - updated_at: DateTime
   class Channel < ActiveRecord::Base
     has_many :events
-    
+
     include Redis::Objects
     sorted_set :content_zset
-    
+
     def content_video_ids limit=-1
       content_zset.revrange 0, limit
     end
-    
+
     def content_videos limit=-1
       content_video_ids.map { |vid| Video.find vid }
     end
-    
+
     # The populate interface method is called by background tasks to fill the
     # channel with videos based on the specific channel type.
     def populate
       raise InterfaceMethodNotImplemented.new(
         "#{self.class} must override Channel#perform.")
     end
-    
+
     def serializable_hash options={}
       Hash["id" => id,
            "type" => (type||"").split("::").last,
@@ -38,7 +38,7 @@ module Aji
            "thumbnail_uir" => "",
            "resource_uri" => "#{BASE_URI}/"]
     end
-    
+
     def personalized_content_videos args
       user = args[:user]
       raise ArgumentError, "User missing for Channel[#{self.id}].personalized #{args.inspect}" if user.nil?
@@ -53,6 +53,6 @@ module Aji
       # new_video_ids = content_zset - user.viewed_zset # TODO: zdiff not found?
       new_video_ids.map { |vid| Video.find vid }
     end
-    
+
   end
 end
