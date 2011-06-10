@@ -10,7 +10,6 @@ module Aji
       describe "#{resource_uri}/:channel_id" do
       
         it "should return 404 if not found" do
-          puts "#{resource_uri}/#{rand(100)}"
           get "#{resource_uri}/#{rand(100)}"
           last_response.status.should == 404
         end
@@ -66,6 +65,22 @@ module Aji
         end
         
       end
+      
+      describe "#{resource_uri}/:channel_id/videos" do
+        it "should not returned viewed videos" do
+          channel = Factory :channel_with_videos
+          viewed_video = channel.content_videos.sample
+          user = Factory :user
+          event = Factory :event, :event_type => :view, :user => user, :video => viewed_video
+          params = {:user_id => user.id }
+          get "#{resource_uri}/#{channel.id}/videos", params
+          last_response.status.should == 200
+          body_hash = JSON.parse last_response.body
+          video_ids = body_hash.map {|h| h["video"]["id"]}
+          video_ids.should_not include viewed_video.id
+        end
+      end
+      
     end
   end
 end

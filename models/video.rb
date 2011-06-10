@@ -21,5 +21,16 @@ module Aji
     def source= value
       write_attribute(:source, value.to_sym)
     end
+    
+    def serializable_hash options={}
+      Hash["id" => id,
+           "title" => title,
+           "description" => description,
+           "source" => source,
+           "external_id" => external_id,
+           "external_account_id" => external_account_id,
+           "thumbnail_uri" => ""]
+    end
+    
   end
 end
