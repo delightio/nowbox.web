@@ -7,7 +7,7 @@ module Aji
   describe API do
     describe "resource: #{resource}" do
       
-      describe "#{resource_uri}/:channel_id" do
+      describe "#{resource_uri}/:id" do
       
         it "should return 404 if not found" do
           get "#{resource_uri}/#{rand(100)}"
@@ -66,7 +66,7 @@ module Aji
         
       end
       
-      describe "#{resource_uri}/:channel_id/videos" do
+      describe "#{resource_uri}/:id/videos" do
         it "should not returned viewed videos" do
           channel = Factory :channel_with_videos
           viewed_video = channel.content_videos.sample

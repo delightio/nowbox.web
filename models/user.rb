@@ -80,5 +80,11 @@ module Aji
       # Channel.find(subscribed_list.values) # TODO: Is AR caching this query? My list came out the same after User#arrange
       subscribed_list.map { |cid| Channel.find cid }
     end
+    
+    def serializable_hash
+      Hash["id" => id,
+           "channel_ids" => subscribed_list.values]
+    end
+    
   end
 end

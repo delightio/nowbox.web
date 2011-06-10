@@ -50,7 +50,7 @@ describe Aji::User do
     end
   end
   
-  describe "channel subscription management" do
+  context "channel subscription management" do
     it "should add and remove channel accordingly" do
       user = Factory :user
       channel = Factory :trending_channel
@@ -78,6 +78,19 @@ describe Aji::User do
       user.subscribed_channels.size.should == n
       user.subscribed_channels[old_position].should_not == channels[old_position]
       user.subscribed_channels[args[:new_position]].should == channels[old_position]
+    end
+  end
+  
+  describe "#serializable_hash" do
+    it "should return subscribed channel list" do
+      user = Factory :user
+      channel_ids = Set.new
+      5.times do |n|
+        channel = Factory :channel_with_videos
+        channel_ids << channel.id
+        user.subscribe channel
+      end
+      user.serializable_hash["channel_ids"].should == user.subscribed_list.values
     end
   end
   

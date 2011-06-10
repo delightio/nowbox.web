@@ -5,8 +5,7 @@ module Aji
     resource :users do
       
       get '/:user_id' do
-        user = User.find(params[:user_id]) or
-          not_found_error!(User, params)
+        find_user_by_id_or_error params[:user_id]
       end
       
       post '/' do
