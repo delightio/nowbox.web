@@ -33,7 +33,7 @@ module Aji
     
     def serializable_hash options={}
       Hash["id" => id,
-           "tytpe" => (type||"").split("::").last,
+           "type" => (type||"").split("::").last,
            "title" => title,
            "thumbnail_uir" => "",
            "resource_uri" => "#{BASE_URI}/"]

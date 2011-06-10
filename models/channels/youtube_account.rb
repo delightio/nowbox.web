@@ -8,7 +8,7 @@ module Aji
       
       def serializable_hash
         Hash[:id => id,
-             :tytpe => type.split("::").last,
+             :type => type.split("::").last,
              :title => title,
              :thumbnail_uri => "",
              :resource_uri => ""]
