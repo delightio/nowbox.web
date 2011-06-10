@@ -16,6 +16,18 @@ module Aji
     sorted_set :queued_zset
     sorted_set :subscribed_zset # User's Subscribed channels.
     
+    def self.supported_channel_actions; [:subscribe, :unsubscribe, :move]; end
+    def subscribe args={}
+      true
+    end
+    def unsubscribe args={}
+      true
+    end
+    def move args={}
+      return false if args[:new_position].nil?
+      true
+    end
+    
     def cache_event event
       at_time = event.created_at.to_i
       video_id = event.video_id
