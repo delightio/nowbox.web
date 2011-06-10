@@ -28,6 +28,14 @@ describe Aji::User do
       user.cache_event event
       user.queued_videos.should_not include event.video
     end
+    
+    it "should not mark a video viewed when queuing" do
+      user = Factory :user
+      event = Factory :event, :event_type => :enqueue
+      user.cache_event event
+      user.viewed_videos.should_not include event.video
+    end
+    
   end
   
   describe "video_collections" do

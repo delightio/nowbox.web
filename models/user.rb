@@ -43,17 +43,29 @@ module Aji
       at_time = event.created_at.to_i
       video_id = event.video_id
       
-      viewed_zset[video_id] = at_time
       case event.event_type
-      when :share, :upvote
+      when :view
+        viewed_zset[video_id] = at_time
+        
+      when :share
+        viewed_zset[video_id] = at_time
         liked_zset[video_id] = at_time
-        shared_zset[video_id] = at_time if event.event_type==:shared
+        shared_zset[video_id] = at_time
+        
+      when :upvote
+        viewed_zset[video_id] = at_time
+        liked_zset[video_id] = at_time
+        
       when :downvote
+        viewed_zset[video_id] = at_time
         downvoted_zset[video_id] = at_time
+        
       when :enqueue
         queued_zset[video_id] = at_time
+        
       when :dequeue
         queued_zset.delete video_id
+        
       end
     end
 
