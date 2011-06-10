@@ -25,4 +25,8 @@ RSpec.configure do |config|
   # config.mock_with :rr
   config.mock_with :rspec
   config.include TestMixin
+  config.before(:each) do
+    Aji::REDIS.keys.each { |k| Aji::REDIS.del k }
+    [Aji::User, Aji::Channel, Aji::Event, Aji::ExternalAccount, Aji::Video].map{|c| c.all.each{|obj| obj.delete} }
+  end
 end

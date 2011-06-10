@@ -16,7 +16,7 @@ module Aji
     sorted_set :queued_zset
     list :subscribed_list # User's Subscribed channels.
     
-    def self.supported_channel_actions; [:subscribe, :unsubscribe, :move]; end
+    def self.supported_channel_actions; [:subscribe, :unsubscribe, :arrange]; end
     def subscribe channel, args={}
       subscribed_list << channel.id
       subscribed_list.include?(channel.id)
@@ -25,10 +25,17 @@ module Aji
       subscribed_list.delete channel.id
       !subscribed_list.include?(channel.id)
     end
-    def move channel, args={}
-      return false if args[:new_position].nil?
-      subscribed_list.delete channel.id
-      REDIS.lset subscribed_list.key, args[:new_position].to_i, channel.id
+    def arrange channel, args={}
+      new_position = args[:new_position]
+      return false if new_position.nil? || !subscribed_list.include?(channel.id.to_s)
+      return true if subscribed_list[new_position]==channel.id.to_s # below logic doesn't work for same pos
+      subscribed_list.delete channel.id.to_s
+      if subscribed_list.length <= new_position
+        subscribed_list << channel.id
+      else
+        channel_id_at_new_position = subscribed_list[new_position]
+        REDIS.linsert subscribed_list.key, "BEFORE", channel_id_at_new_position, channel.id
+      end
       subscribed_list.include?(channel.id)
     end
     
@@ -58,7 +65,8 @@ module Aji
     end
 
     def subscribed_channels
-      Channel.find(subscribed_list.values)
+      # Channel.find(subscribed_list.values) # TODO: Is AR caching this query? My list came out the same after User#arrange
+      subscribed_list.map { |cid| Channel.find cid }
     end
   end
 end

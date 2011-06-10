@@ -16,8 +16,6 @@ module Aji
     include Redis::Objects
     sorted_set :content_zset
     
-    def supported_actions; [:subscribe, :unsubscribe, :move]; end
-    
     def content_videos
       Video.find(content_zset.members)
     end

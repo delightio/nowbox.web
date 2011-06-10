@@ -6,10 +6,6 @@ module Aji
 
   describe API do
     describe "resource: #{resource}" do
-      before(:each) do
-        REDIS.keys.each {|k| REDIS.del k}
-        Channel.all.each {|c| c.delete}
-      end
       
       describe "#{resource_uri}/:channel_id" do
       

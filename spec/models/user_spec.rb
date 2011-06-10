@@ -1,6 +1,7 @@
 require File.expand_path("../../spec_helper", __FILE__)
 
 describe Aji::User do
+  
   describe "#cache_event" do
     it "should cache video id in viewed regardless of event type" do
       user = Factory :user
@@ -49,6 +50,26 @@ describe Aji::User do
       user.subscribed_channels.should include channel
       user.unsubscribe channel
       user.subscribed_channels.should_not include channel
+    end
+    it "should move given channel into corresponding position" do
+      n = 10
+      user = Factory :user
+      channels = []
+      n.times do |n|
+        channel = Factory :channel
+        channels << channel
+        user.subscribe channel
+      end
+      user.subscribed_channels.size.should == n
+      old_position = rand(n)
+      user.subscribed_channels[old_position].should == channels[old_position]
+      begin
+        args = {:new_position => rand(n)}
+      end while args[:new_position]==old_position
+      user.arrange channels[old_position], args
+      user.subscribed_channels.size.should == n
+      user.subscribed_channels[old_position].should_not == channels[old_position]
+      user.subscribed_channels[args[:new_position]].should == channels[old_position]
     end
   end
   
