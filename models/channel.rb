@@ -28,7 +28,7 @@ module Aji
     # channel with videos based on the specific channel type.
     def populate
       raise InterfaceMethodNotImplemented.new(
-        "#{self.class} must override Channel#perform.")
+        "#{self.class} must override Channel#populate.")
     end
 
     def serializable_hash options={}
@@ -45,6 +45,7 @@ module Aji
       # TODO: just take out viewed videos
       limit = args[:limit] || 20
       new_video_ids = []
+      # TODO: use Redis for this..
       viewed_video_ids = Set.new user.viewed_zset.range(0,-1)
       content_video_ids.each do |channel_video_id|
         new_video_ids << channel_video_id if !viewed_video_ids.member? channel_video_id
