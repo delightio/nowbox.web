@@ -1,17 +1,8 @@
 development:
-  host: localhost
-  db: 0
-  thread_safe: true
-  #   port: 6379
-  #   password: nil
-  #   timeout: 5
-
+  REDISTOGO_URL: redis://localhost/0
+  
 test:
-  host: localhost
-  db: 3
-  thread_safe: true
-
+  REDISTOGO_URL: redis://localhost/3
+  
 production:
-  host: redis
-  db: 0
-  thread_safe: true
+  REDISTOGO_URL: redis://localhost/5
