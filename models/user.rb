@@ -85,7 +85,7 @@ module Aji
       subscribed_list.map { |cid| Channel.find cid }
     end
     
-    def serializable_hash
+    def serializable_hash options={}
       Hash["id" => id,
            "first_name" => first_name,
            "last_name" => last_name,
