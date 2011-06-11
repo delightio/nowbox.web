@@ -21,8 +21,7 @@ module Aji
   
   # Load settings from configs or environment variables.
   # SETTINGS = YAML.load_file("./config/settings.yml")[RACK_ENV]
-  ActiveRecord::Base.establish_connection(
-    ENV["DATABASE_URL"] || YAML.load_file("config/database.yml")[RACK_ENV])
+  ActiveRecord::Base.establish_connection(YAML.load_file("config/database.yml")[RACK_ENV])
   # Run all un-run migrations.
   ActiveRecord::Migrator.migrate("db/migrate/")
   
