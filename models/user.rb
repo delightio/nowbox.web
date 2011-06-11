@@ -9,7 +9,8 @@ module Aji
 
   class User < ActiveRecord::Base
     has_many :events
-
+    validates_presence_of :email, :first_name
+    
     include Redis::Objects
     sorted_set :shared_zset
     sorted_set :liked_zset # upvoted or shared
