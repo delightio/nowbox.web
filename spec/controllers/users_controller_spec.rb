@@ -7,8 +7,7 @@ module Aji
   describe API do
     describe "resource: #{resource}" do
       
-      describe "#{resource_uri}/:id" do
-      
+      describe "get #{resource_uri}/:id" do
         it "should return 404 if not found" do
           get "#{resource_uri}/#{rand(100)}"
           last_response.status.should == 404
@@ -23,7 +22,9 @@ module Aji
           body_hash.should == user.serializable_hash
           body_hash["channel"].should == user.subscribed_list.map {|cid| cid.to_s}
         end
-        
+      end
+      
+      describe "post #{resource_uri}/:id" do
         it "should create user object on post" do
           email = random_email
           first_name = random_string
@@ -35,7 +36,6 @@ module Aji
           u = User.find user_hash["id"] # ensure we can look up the user again
           u.email.should == email
         end
-        
       end
       
     end

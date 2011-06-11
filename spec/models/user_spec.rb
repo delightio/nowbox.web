@@ -82,7 +82,7 @@ describe Aji::User do
   end
   
   describe "#serializable_hash" do
-    it "should return subscribed channel list" do
+    it "should include subscribed channel list" do
       user = Factory :user
       channel_ids = Set.new
       5.times do |n|
