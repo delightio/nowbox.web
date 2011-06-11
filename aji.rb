@@ -15,8 +15,8 @@ module Aji
   end
 
   # Establish Redis connection.
-  redis_url = ENV["REDISTOGO_URL"] || YAML.load_file("config/redis.yml")[RACK_ENV]
-  REDIS = Redis.connect redis_url
+  redis_url = ENV["REDISTOGO_URL"] || YAML.load_file("config/redis.yml")[RACK_ENV]["REDISTOGO_URL"]
+  REDIS = Redis.connect :url=>redis_url
   Redis::Objects.redis = REDIS
   
   # Load settings from configs or environment variables.
