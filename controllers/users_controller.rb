@@ -9,7 +9,10 @@ module Aji
       end
       
       post '/' do
-        User.create(params) or creation_error!(User, params) 
+        User.create(:email => params[:email],
+                    :first_name => params[:first_name],
+                    :last_name => params[:last_name]) or
+          creation_error!(User, params)
       end
       
     end

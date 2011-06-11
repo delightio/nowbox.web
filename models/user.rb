@@ -2,6 +2,8 @@ module Aji
   # ## User Schema
   # - id: Integer
   # - email: String
+  # - first_name: String
+  # - last_name: String
   # - created_at: DateTime
   # - updated_at: DateTime
 
@@ -83,7 +85,9 @@ module Aji
     
     def serializable_hash
       Hash["id" => id,
-           "channel_ids" => subscribed_list.values]
+           "first_name" => first_name,
+           "last_name" => last_name,
+           "channel" => subscribed_list.values] # TODO: not sure why /channels/:id/videos will return ["video"=> list of videos]
     end
     
   end

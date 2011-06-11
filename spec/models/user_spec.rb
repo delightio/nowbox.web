@@ -90,7 +90,7 @@ describe Aji::User do
         channel_ids << channel.id
         user.subscribe channel
       end
-      user.serializable_hash["channel_ids"].should == user.subscribed_list.values
+      user.serializable_hash["channel"].should == user.subscribed_list.values
     end
   end
   
