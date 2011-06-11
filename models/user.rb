@@ -2,12 +2,16 @@ module Aji
   # ## User Schema
   # - id: Integer
   # - email: String
+  # - first_name: String
+  # - last_name: String
   # - created_at: DateTime
   # - updated_at: DateTime
 
   class User < ActiveRecord::Base
     has_many :events
-
+    validates_presence_of :email, :first_name
+    validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
+    
     include Redis::Objects
     sorted_set :shared_zset
     sorted_set :liked_zset # upvoted or shared
@@ -81,9 +85,11 @@ module Aji
       subscribed_list.map { |cid| Channel.find cid }
     end
     
-    def serializable_hash
+    def serializable_hash options={}
       Hash["id" => id,
-           "channel_ids" => subscribed_list.values]
+           "first_name" => first_name,
+           "last_name" => last_name,
+           "channel" => subscribed_list.values] # TODO: not sure why /channels/:id/videos will return ["video"=> list of videos]
     end
     
   end

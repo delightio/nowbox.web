@@ -37,4 +37,15 @@ class Aji < Thor
   def server env="development"
     exec "bin/rackup -E #{env}"
   end
+  
+  desc "docs", "generate Rocco documentation"
+  def docs
+    exec "bin/rocco -o docs/ aji.rb controllers/*"
+  end
+  
+  desc "docs_clean", "Remove all files from docs/ directory"
+  def docs_clean
+    exec "rm -r docs/*"
+  end
+  
 end
