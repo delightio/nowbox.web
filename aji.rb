@@ -24,7 +24,7 @@ module Aji
   # SETTINGS = YAML.load_file("./config/settings.yml")[RACK_ENV]
   
   # Establish ActiveRecord conneciton and run all necessary migration
-  ActiveRecord::Base.establish_connection YAML.load(File.read('config/database.yml'))[RACK_ENV]
+  ActiveRecord::Base.establish_connection YAML.load_file('config/database.yml')[RACK_ENV]
   ActiveRecord::Migrator.migrate("db/migrate/")
   
   # An application specific error class.
