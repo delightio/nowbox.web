@@ -10,10 +10,10 @@ module Aji
   # Set Rack environment if not specified.
   RACK_ENV = ENV['RACK_ENV'] || "development"
 
-  def Aji.conf
-    @@conf ||= YAML.load_file("config/settings.yml")[RACK_ENV]
+  def Aji.conf key
+    ENV[key] || YAML.load_file("config/settings.yml")[RACK_ENV][key]
   end
-  BASE_URI = Aji.conf["base_url"] || "localhost"
+  BASE_URI = Aji.conf('BASE_URL') || 'localhost'
   
   # Establish Redis connection.
   redis_url = ENV["REDISTOGO_URL"] || YAML.load_file("config/redis.yml")[RACK_ENV]["REDISTOGO_URL"]
