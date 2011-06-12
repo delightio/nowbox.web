@@ -23,25 +23,27 @@ module Aji
   # Load settings from configs or environment variables.
   # SETTINGS = YAML.load_file("./config/settings.yml")[RACK_ENV]
   
-  # Establish ActiveRecord conneciton and run all necessary migration
-  
-  # HACK
+  # HACK: config.database.yml is a erb and for some reasons
   if ENV['DATABASE_URL']
-    uri = URI.parse ENV['DATABASE_URL']
-    adapter = uri.scheme
-    adapter = "postgresql" if adapter == "postgres"
-    database = (uri.path || "").split("/")[1]
-    dbconfig = { :adapter => adapter,
-                 :database => database,
-                 :host => uri.host,
-                 :port => uri.port,
-                 :username => uri.user,
-                 :password => uri.password,
-                 :params => CGI.parse(uri.query || "")
-      }
+    # uri = URI.parse ENV['DATABASE_URL']
+    # adapter = uri.scheme
+    # adapter = "postgresql" if adapter == "postgres"
+    # database = (uri.path || "").split("/")[1]
+    # dbconfig = { :adapter => adapter,
+    #              :database => database,
+    #              :host => uri.host,
+    #              :port => uri.port,
+    #              :username => uri.user,
+    #              :password => uri.password,
+    #              :params => CGI.parse(uri.query || "")
+    #   }
+    dbconfig = YAML.load(File.read('config/database.yml'))[RACK_ENV]
+puts "dbconfig: #{dbconfig.inspect}"
   else
     dbconfig = YAML.load_file('config/database.yml')[RACK_ENV]
   end
+  
+  # Establish ActiveRecord conneciton and run all necessary migration
   ActiveRecord::Base.establish_connection dbconfig
   ActiveRecord::Migrator.migrate("db/migrate/")
   
