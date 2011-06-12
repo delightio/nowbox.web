@@ -33,8 +33,7 @@ module Aji
             :title            => video_hash["title"],
             :description      => video_hash["description"],
             :viewable_mobile  => true) # since we specified mobile target.
-          # Place the video in the channel.
-          content_zset[video.id] = index
+          content_zset[video.id] = limit - index
         end
       end
     end
