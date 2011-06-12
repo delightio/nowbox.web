@@ -5,6 +5,12 @@ module Aji
     class Keyword < Channel
       serialize :keywords
       
+      def serializable_hash options={}
+        h = super
+        h["title"] = keywords.join ", "
+        h
+      end
+      
       def populate
         (1..3).each do |page|
           vids = YouTubeIt::Client.new.videos_by(:query => keywords.join(' '),
