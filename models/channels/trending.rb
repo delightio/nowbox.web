@@ -8,8 +8,6 @@ module Aji
       def serializable_hash options={}
         h = super
         h["title"] = "Trending"
-        h["thumbnail_uri"] = ""
-        h["resource_uri"] = ""
         h
       end
       

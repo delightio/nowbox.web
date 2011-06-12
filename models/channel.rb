@@ -32,11 +32,13 @@ module Aji
     end
 
     def serializable_hash options={}
+      thumbnail_uri = ""
+      thumbnail_uri = Video.find(content_video_ids(1).first).thumbnail_uri if content_video_ids.count > 0
       Hash["id" => id,
            "type" => (type||"").split("::").last,
            "title" => title,
-           "thumbnail_uir" => "",
-           "resource_uri" => "#{BASE_URL}/"]
+           "thumbnail_uri" => thumbnail_uri,
+           "resource_uri" => "#{BASE_URL}/channels/#{self.id}"]
     end
 
     def personalized_content_videos args

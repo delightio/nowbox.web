@@ -22,6 +22,14 @@ module Aji
       write_attribute(:source, value.to_sym)
     end
     
+    def thumbnail_uri
+      path = case source
+             when :youtube then "http://img.youtube.com/vi/#{self.external_id}/0.jpg"
+             else ""
+             end
+      path
+    end
+    
     def serializable_hash options={}
       Hash["id" => id,
            "title" => title,
