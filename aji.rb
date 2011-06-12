@@ -24,6 +24,14 @@ module Aji
   # SETTINGS = YAML.load_file("./config/settings.yml")[RACK_ENV]
   
   # Establish ActiveRecord conneciton and run all necessary migration
+  
+  puts "Trying to establish AR connection..."
+  puts "DATABASE_URL: #{ENV['DATABASE_URL']}"
+  puts "Trying to load config/database.yml"
+  puts " content:"
+  f = File.open 'config/database.yml'
+  f.each_line {|line| puts line }
+  puts "--"
   ActiveRecord::Base.establish_connection YAML.load_file('config/database.yml')[RACK_ENV]
   ActiveRecord::Migrator.migrate("db/migrate/")
   
