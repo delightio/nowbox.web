@@ -23,6 +23,10 @@ def random_boolean
   [true, false].sample
 end
 
+def random_category
+  Aji::Channel.supported_categories.sample
+end
+
 Factory.define :user, :class => 'Aji::User' do |a|
   a.email { random_email }
   a.first_name { random_string }
@@ -49,6 +53,7 @@ end
 Factory.define :channel, :class => 'Aji::Channel' do |a|
   a.title { random_string }
   a.default_listing { random_boolean }
+  a.after_create { |c| c.category = random_category }
 end
 
 Factory.define :channel_with_videos, :parent => :channel do |a|

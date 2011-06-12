@@ -8,11 +8,14 @@ module Aji
   # - title: String
   # - type: String (ActiveRecord Column: ACCESS ONLY, DO NOT CHANGE)
   # - default_listing: Boolean
+  # - category: String 
   # - content_zset: Redis::Objects::SortedSet
   # - created_at: DateTime
   # - updated_at: DateTime
   class Channel < ActiveRecord::Base
     has_many :events
+    validates_inclusion_of :category,
+      :in => [ :undefined, :news, :sports, :music, :science, :comedy, :cars, :kids, :trailers, :gamming ]
     
     include Redis::Objects
     sorted_set :content_zset
@@ -24,7 +27,11 @@ module Aji
     def content_videos limit=-1
       content_video_ids.map { |vid| Video.find vid }
     end
-
+    
+    def self.supported_categories; [ :undefined, :news, :sports, :music, :science, :comedy, :cars, :kids, :trailers, :gaming ]; end
+    def category; read_attribute(:category).to_s.to_sym; end
+    def category= value; write_attribute(:category, value.to_s); end
+    
     # The populate interface method is called by background tasks to fill the
     # channel with videos based on the specific channel type.
     def populate
