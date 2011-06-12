@@ -2,17 +2,17 @@
 #
 # Aji Beta Twitter keys.
 development:
-  consumer_key: "XDYm9fcC4Xb3XYvJpMNw"
-  consumer_secret: "XDYm9fcC4Xb3XYvJpMNw"
+  CONSUMER_KEY: "XDYm9fcC4Xb3XYvJpMNw"
+  CONSUMER_SECRET: "XDYm9fcC4Xb3XYvJpMNw"
   base_uri: "localhost"
 
 production:
-  consumer_key: "XDYm9fcC4Xb3XYvJpMNw"
-  consumer_secret: "XDYm9fcC4Xb3XYvJpMNw"
+  CONSUMER_KEY: "XDYm9fcC4Xb3XYvJpMNw"
+  CONSUMER_SECRET: "XDYm9fcC4Xb3XYvJpMNw"
   base_uri: "http://aji.heroku.com"
 
 test:
-  consumer_key: ""
-  consumer_secret: ""
+  CONSUMER_KEY: ""
+  CONSUMER_SECRET: ""
   base_uri: "localhost"
   
