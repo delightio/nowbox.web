@@ -23,15 +23,15 @@ module Aji
         response = Net::HTTP.get url, path
         video_hashes = JSON.parse response
         video_hashes.each_with_index do |video_hash, index|
-          youtube_account = ExternalAccounts::Youtube.find_or_create_from_uid(
-            video_hash[:author_username], :provider => "youtube")
-
-          video = Aji::Video.find_or_create_from_external_id(
-            video_hash[:service_external_id],
+          youtube_account = Aji::ExternalAccounts::Youtube.find_or_create_by_uid(
+            video_hash["author_username"], :provider => "youtube")
+            
+          video = Aji::Video.find_or_create_by_external_id(
+            video_hash["service_external_id"],
             :external_account => youtube_account,
-            :source           => video_hash[:service_name],
-            :title            => video_hash[:title],
-            :description      => video_hash[:description],
+            :source           => video_hash["service_name"],
+            :title            => video_hash["title"],
+            :description      => video_hash["description"],
             :viewable_mobile  => true) # since we specified mobile target.
           # Place the video in the channel.
           content_zset[video.id] = index
