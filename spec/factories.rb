@@ -19,6 +19,10 @@ def random_video_source
   [:youtube].sample
 end
 
+def random_boolean
+  [true, false].sample
+end
+
 Factory.define :user, :class => 'Aji::User' do |a|
   a.email { random_email }
   a.first_name { random_string }
@@ -43,6 +47,8 @@ Factory.define :event, :class => 'Aji::Event' do |a|
 end
 
 Factory.define :channel, :class => 'Aji::Channel' do |a|
+  a.title { random_string }
+  a.default_listing { random_boolean }
 end
 
 Factory.define :channel_with_videos, :parent => :channel do |a|

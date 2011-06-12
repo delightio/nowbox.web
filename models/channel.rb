@@ -7,12 +7,13 @@ module Aji
   # - id: Integer
   # - title: String
   # - type: String (ActiveRecord Column: ACCESS ONLY, DO NOT CHANGE)
+  # - default_listing: Boolean
   # - content_zset: Redis::Objects::SortedSet
   # - created_at: DateTime
   # - updated_at: DateTime
   class Channel < ActiveRecord::Base
     has_many :events
-
+    
     include Redis::Objects
     sorted_set :content_zset
 
@@ -36,6 +37,7 @@ module Aji
       thumbnail_uri = Video.find(content_video_ids(1).first).thumbnail_uri if content_video_ids.count > 0
       Hash["id" => id,
            "type" => (type||"").split("::").last,
+           "default_listing" => default_listing,
            "title" => title,
            "thumbnail_uri" => thumbnail_uri,
            "resource_uri" => "#{BASE_URL}/channels/#{self.id}"]
@@ -56,6 +58,10 @@ module Aji
       # new_video_ids = content_zset - user.viewed_zset # TODO: zdiff not found?
       new_video_ids.map { |vid| Video.find vid }
     end
-
+    
+    def self.default_listing
+      find_all_by_default_listing true
+    end
+    
   end
 end

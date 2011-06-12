@@ -8,6 +8,10 @@ module Aji
         find_channel_by_id_or_error params[:channel_id]
       end
       
+      get do
+        Channel.default_listing
+      end
+      
       post do
         channel = Channel.create(params) or creation_error!(params)
       end
@@ -18,7 +22,6 @@ module Aji
         user = find_user_by_id_or_error params[:user_id]
         succeeded = user.send params[:channel_action], channel, params[:channel_action_params]
         error!("User[#{user.id}] cannot #{params[:channel_action]} Channel[#{channel.id}] with params: #{params[:channel_action_params].inspect}", 400) if !succeeded
-        "ok"
       end
       
       get '/:channel_id/videos' do

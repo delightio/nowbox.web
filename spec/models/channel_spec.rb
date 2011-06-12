@@ -47,6 +47,21 @@ describe Aji::Channel do
       last_video_score= channel.content_zset.score personalized_videos.last.id
       top_video_score.should >= last_video_score
     end
-    
   end
+  
+  describe ".default_listing" do
+    it "should return all channels marked as default" do
+      n = 5
+      channels = []
+      n.times do |n|
+        channels << Factory(:channel_with_videos, :default_listing=>false)
+      end
+      Aji::Channel.default_listing.should be_empty
+      default_channel = channels[rand(n-1)]
+      default_channel.default_listing = true
+      default_channel.save
+      Aji::Channel.default_listing.should include default_channel
+    end
+  end
+  
 end

@@ -7,6 +7,23 @@ module Aji
   describe API do
     describe "resource: #{resource}" do
       
+      describe "get #{resource_uri}" do
+        it "should return all default channels" do
+          channels = []
+          total = 5
+          total.times {|n| channels << Factory(:channel_with_videos,:default_listing=>false) }
+          default = [0,1,2,3,4].sample(2)
+          channels[default.first].update_attributes :default_listing => true
+          channels[default.last].update_attributes :default_listing => true
+          get "#{resource_uri}"
+          last_response.status.should == 200
+          body_hash = JSON.parse last_response.body
+          returned_channels = body_hash.map {|h| h["channel"]}
+          returned_channels.should include channels[default.first].serializable_hash
+          returned_channels.should include channels[default.last].serializable_hash
+        end
+      end
+      
       describe "get #{resource_uri}/:id" do
         it "should return 404 if not found" do
           get "#{resource_uri}/#{rand(100)}"
