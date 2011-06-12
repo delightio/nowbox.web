@@ -1,1 +1,1 @@
-web: bundle exec thor aji:server
+web: bundle exec bin/rackup -p $PORT
