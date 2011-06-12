@@ -36,7 +36,7 @@ module Aji
            "type" => (type||"").split("::").last,
            "title" => title,
            "thumbnail_uir" => "",
-           "resource_uri" => "#{BASE_URI}/"]
+           "resource_uri" => "#{BASE_URL}/"]
     end
 
     def personalized_content_videos args

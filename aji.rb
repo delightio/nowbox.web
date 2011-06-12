@@ -13,7 +13,7 @@ module Aji
   def Aji.conf key, setting_yml='config/settings.yml'
     ENV[key] || YAML.load_file(setting_yml)[RACK_ENV][key]
   end
-  BASE_URI = Aji.conf('BASE_URL') || 'localhost'
+  BASE_URL = Aji.conf('BASE_URL') || 'localhost'
   
   # Establish Redis connection.
   redis_url = Aji.conf 'REDISTOGO_URL'
