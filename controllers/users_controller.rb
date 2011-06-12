@@ -5,7 +5,7 @@
 # {"id":1,
 #  "first_name":"thomas",
 #  "last_name":null,
-#  "channel":["1","2","3","4","5","6"]}
+#  "subscribed_chanel_ids":["1","2","3","4","5","6"]}
 module Aji
   class API
     version '1'

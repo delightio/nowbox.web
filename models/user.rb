@@ -89,7 +89,7 @@ module Aji
       Hash["id" => id,
            "first_name" => first_name,
            "last_name" => last_name,
-           "channel" => subscribed_list.values] # TODO: not sure why /channels/:id/videos will return ["video"=> list of videos]
+           "subscribed_channel_ids" => subscribed_list.values]
     end
     
   end

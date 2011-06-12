@@ -13,14 +13,14 @@ module Aji
           last_response.status.should == 404
         end
         
-        it "should channel info if found" do
+        it "should return user info if found" do
           user = Factory :user_with_channels
           channel_ids = user.subscribed_list
           get "#{resource_uri}/#{user.id}"
           last_response.status.should == 200
           body_hash = JSON.parse last_response.body
           body_hash.should == user.serializable_hash
-          body_hash["channel"].should == user.subscribed_list.map {|cid| cid.to_s}
+          body_hash["subscribed_channel_ids"].should == user.subscribed_channels.map {|c| c.id.to_s}
         end
       end
       
