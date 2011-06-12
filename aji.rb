@@ -25,14 +25,24 @@ module Aji
   
   # Establish ActiveRecord conneciton and run all necessary migration
   
-  puts "Trying to establish AR connection..."
-  puts "DATABASE_URL: #{ENV['DATABASE_URL']}"
-  puts "Trying to load config/database.yml"
-  puts " content:"
-  f = File.open 'config/database.yml'
-  f.each_line {|line| puts line }
-  puts "--"
-  ActiveRecord::Base.establish_connection YAML.load_file('config/database.yml')[RACK_ENV]
+  # HACK
+  if ENV['DATABASE_URL']
+    uri = URI.parse ENV['DATABASE_URL']
+    adapter = uri.scheme
+    adapter = "postgresql" if adapter == "postgres"
+    database = (uri.path || "").split("/")[1]
+    dbconfig = { :adapter => adapter,
+                 :database => database,
+                 :host => uri.host,
+                 :port => uri.port,
+                 :username => uri.user,
+                 :password => uri.password,
+                 :params => CGI.parse(uri.query || "")
+      }
+  else
+    dbconfig = YAML.load_file('config/database.yml')[RACK_ENV]
+  end
+  ActiveRecord::Base.establish_connection dbconfig
   ActiveRecord::Migrator.migrate("db/migrate/")
   
   # An application specific error class.
