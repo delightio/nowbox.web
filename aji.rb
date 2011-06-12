@@ -13,7 +13,8 @@ module Aji
   def Aji.conf
     @@conf ||= YAML.load_file("config/settings.yml")[RACK_ENV]
   end
-
+  BASE_URI = Aji.conf["base_url"] || "localhost"
+  
   # Establish Redis connection.
   redis_url = ENV["REDISTOGO_URL"] || YAML.load_file("config/redis.yml")[RACK_ENV]["REDISTOGO_URL"]
   REDIS = Redis.connect :url=>redis_url
@@ -21,19 +22,10 @@ module Aji
   
   # Load settings from configs or environment variables.
   # SETTINGS = YAML.load_file("./config/settings.yml")[RACK_ENV]
-# dbyml = YAML.load_file(File.read("config/database.yml"))[RACK_ENV]
-# puts "ActiveRecord: Establishing connect to #{dbyml}"
-#   ActiveRecord::Base.establish_connection(YAML.load_file("config/database.yml")[RACK_ENV])
   
-  dbconfig = YAML.load(File.read('config/database.yml'))
-puts "ActiveRecord: Establishing connect to #{dbconfig[RACK_ENV]}"
-  ActiveRecord::Base.establish_connection dbconfig[RACK_ENV]
-  
-  # Run all un-run migrations.
+  # Establish ActiveRecord conneciton and run all necessary migration
+  ActiveRecord::Base.establish_connection YAML.load(File.read('config/database.yml'))[RACK_ENV]
   ActiveRecord::Migrator.migrate("db/migrate/")
-puts "connection: #{ActiveRecord::Base.connection}"
-  
-  BASE_URI = Aji.conf["base_url"] || "localhost"
   
   # An application specific error class.
   class Error < RuntimeError; end
