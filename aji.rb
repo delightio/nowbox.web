@@ -23,7 +23,7 @@ module Aji
   # Load settings from configs or environment variables.
   # SETTINGS = YAML.load_file("./config/settings.yml")[RACK_ENV]
   
-  # HACK: Heroku reture a ERB version of config/database.yml. 
+  # HACK: Heroku returns a ERB version of config/database.yml. 
   # I had to manually do the following for deployment.
   if ENV['DATABASE_URL']
     uri = URI.parse ENV['DATABASE_URL']
