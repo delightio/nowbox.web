@@ -53,7 +53,7 @@ end
 Factory.define :channel, :class => 'Aji::Channel' do |a|
   a.title { random_string }
   a.default_listing { random_boolean }
-  a.after_create { |c| c.category = random_category }
+  a.category { random_category }
 end
 
 Factory.define :channel_with_videos, :parent => :channel do |a|
