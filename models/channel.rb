@@ -28,7 +28,7 @@ module Aji
     include Redis::Objects
     sorted_set :content_zset
     def content_video_ids limit=-1; content_zset.revrange 0, limit; end
-    def content_videos limit=-1; content_video_ids.map { |vid| Video.find vid }; end
+    def content_videos limit=-1; content_video_ids(limit).map { |vid| Video.find vid }; end
     
     def serializable_hash options={}
       thumbnail_uri = ""
