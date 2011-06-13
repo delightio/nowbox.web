@@ -25,7 +25,9 @@ module Aji
       end
       
       describe "post #{resource_uri}/:id" do
-        it "should create user object on post" do
+        it "should create user object on post with default channel listing" do
+          default_channels = []
+          5.times { |n| default_channels << Factory(:channel_with_videos, :default_listing=>true)}
           email = random_email
           first_name = random_string
           params = { :email => email, :first_name => first_name, :last_name => random_string }
@@ -35,6 +37,9 @@ module Aji
           user_hash["first_name"].should == first_name
           u = User.find user_hash["id"] # ensure we can look up the user again
           u.email.should == email
+          default_channels.each do |c|
+            u.subscribed_channels.should include c
+          end
         end
       end
       

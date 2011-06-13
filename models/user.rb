@@ -16,6 +16,7 @@ module Aji
     has_many :events
     validates_presence_of :email, :first_name
     validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
+    after_create :subscribe_default_channels
     
     include Redis::Objects
     sorted_set :shared_zset
@@ -25,7 +26,6 @@ module Aji
     sorted_set :queued_zset
     list :subscribed_list # User's Subscribed channels.
     
-    def self.supported_channel_actions; [:subscribe, :unsubscribe, :arrange]; end
     def subscribe channel, args={}
       subscribed_list << channel.id
       subscribed_list.include? channel.id.to_s
@@ -46,6 +46,10 @@ module Aji
         REDIS.linsert subscribed_list.key, "BEFORE", channel_id_at_new_position, channel.id
       end
       subscribed_list.include? channel.id.to_s
+    end
+    def subscribe_default_channels
+      Channel.default_listing.each { |c| subscribe c }
+      # TODO: we are pulling in the whole channel object but we really only care about Channel#id
     end
     
     def cache_event event
