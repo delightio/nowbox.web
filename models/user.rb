@@ -1,4 +1,10 @@
 module Aji
+  class Supported
+    def self.channel_actions
+      [:subscribe, :unsubscribe, :arrange]
+    end
+  end
+  
   # ## User Schema
   # - id: Integer
   # - email: String
@@ -6,7 +12,6 @@ module Aji
   # - last_name: String
   # - created_at: DateTime
   # - updated_at: DateTime
-
   class User < ActiveRecord::Base
     has_many :events
     validates_presence_of :email, :first_name

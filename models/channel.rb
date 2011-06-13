@@ -1,4 +1,10 @@
 module Aji
+  class Supported
+    def self.categories
+      [ :undefined, :news, :sports, :music, :science, :comedy, :cars, :kids, :trailers, :gaming ]
+    end
+  end
+  
   # This is an interface class. Only actions and fields common to all Channel
   # types are included here. Required methods are defined and documented here
   # and raise an exception until overriden in a subclass.
@@ -14,23 +20,16 @@ module Aji
   # - updated_at: DateTime
   class Channel < ActiveRecord::Base
     has_many :events
-    validates_inclusion_of :category,
-      :in => [ :undefined, :news, :sports, :music, :science, :comedy, :cars, :kids, :trailers, :gamming ]
+    validates_inclusion_of :category, :in => Aji::Supported.categories
+    def category; read_attribute(:category).to_s.to_sym; end
+    def category= value; write_attribute(:category, value.to_s); end
     
     include Redis::Objects
     sorted_set :content_zset
 
-    def content_video_ids limit=-1
-      content_zset.revrange 0, limit
-    end
-
-    def content_videos limit=-1
-      content_video_ids.map { |vid| Video.find vid }
-    end
+    def content_video_ids limit=-1; content_zset.revrange 0, limit; end
+    def content_videos limit=-1; content_video_ids.map { |vid| Video.find vid }; end
     
-    def self.supported_categories; [ :undefined, :news, :sports, :music, :science, :comedy, :cars, :kids, :trailers, :gaming ]; end
-    def category; read_attribute(:category).to_s.to_sym; end
-    def category= value; write_attribute(:category, value.to_s); end
     
     # The populate interface method is called by background tasks to fill the
     # channel with videos based on the specific channel type.
@@ -71,4 +70,5 @@ module Aji
     end
     
   end
+  
 end

@@ -12,7 +12,7 @@ def random_email
 end
 
 def random_event_type
-  [ :view, :share, :upvote, :downvote ].sample
+  Aji::Supported.event_types.sample
 end
 
 def random_video_source
@@ -24,7 +24,7 @@ def random_boolean
 end
 
 def random_category
-  Aji::Channel.supported_categories.sample
+  Aji::Supported.categories.sample
 end
 
 Factory.define :user, :class => 'Aji::User' do |a|
