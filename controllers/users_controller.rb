@@ -2,14 +2,14 @@
 # =================
 # User object json:
 #
-# {"id":1,
-#  "first_name":"thomas",
-#  "last_name":null,
-#  "subscribed_chanel_ids":["1","2","3","4","5","6"]}
+# {`id`:1,
+#  `first_name`:"thomas",
+#  `last_name`:null,
+#  `subscribed_chanel_ids`:["1","2","3","4","5","6"]}
 module Aji
   class API
     version '1'
-    
+    # `http://API_HOST/1/users`
     resource :users do
       
       # ## GET users/:user_id
