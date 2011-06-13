@@ -9,7 +9,7 @@ development:
 production:
   CONSUMER_KEY: "XDYm9fcC4Xb3XYvJpMNw"
   CONSUMER_SECRET: "XDYm9fcC4Xb3XYvJpMNw"
-  base_uri: "http://aji.heroku.com"
+  base_uri: "aji.heroku.com"
 
 test:
   CONSUMER_KEY: ""
