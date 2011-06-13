@@ -14,13 +14,8 @@ module Aji
     belongs_to :external_account, :class_name => 'ExternalAccounts::Youtube'
 
     # Symbolize source attribute.
-    def source
-      read_attribute(:source).to_sym
-    end
-
-    def source= value
-      write_attribute(:source, value.to_sym)
-    end
+    def source; read_attribute(:source).to_sym; end
+    def source= value; write_attribute(:source, value.to_sym); end
     
     def thumbnail_uri
       path = case source
@@ -31,12 +26,18 @@ module Aji
     end
     
     def serializable_hash options={}
+      author = external_account # TODO: 1. asusme only 1 EA per video and 2. overloading EA#id
+      author_hash = {}
+      author_hash["username"] = author.username
+      author_hash["profile_uri"] = author.profile_uri
+      author_hash["external_account_id"] = author.id
       Hash["id" => id,
            "title" => title,
            "description" => description,
+           "thumbnail_uri" => thumbnail_uri,
            "source" => source,
            "external_id" => external_id,
-           "external_account_id" => external_account_id,
+           "author" => author_hash,
            "thumbnail_uri" => thumbnail_uri]
     end
     

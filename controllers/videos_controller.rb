@@ -1,26 +1,33 @@
 # Videos Controller
-# ================
-# *Handles RESTful actions around [`Aji::Video`][VM] for the API*
-# [VM]: ../models/video.html
+# =================
+# Video object json:
+#
+#{`id`:1,
+# `title`:"Did you hear a click?",
+# `description`:"Rita and Frank try to take a still photo to email...",
+# `thumbnail_uri`:"http://img.youtube.com/vi/cRBcP6MmE8g/0.jpg",
+# `source`:"youtube",
+# `external_id`:"cRBcP6MmE8g",
+# `author`:
+# {`username`:"espo633",
+# `profile_uri`:"http://www.youtube.com/user/espo633",
+# `external_account_id`:1}
+# }
 module Aji
   class API
-    # This is a version 1 controller so all actions are namespaced under
-    # `http://API_HOST/1/`.
     version '1'
-
-    # All actions are centered around the users resource and namespaced under
-    # `http://API_HOST/1/users`
+    # `http://API_HOST/1/videos`
     resource :videos do
-      # ## GET users [.json]  
-      # __Returns__ a JSON serialized list of all videos with `id`, `title`,
-      # `external_id`, and `description` and HTTP Code 200 OK if
-      # successful, HTTP Code 400 otherwise.  
-      # __Required params__ none.  
-      # __Optional params__ `name`: name of a specific user to find.  
-      get do
-        Video.all
+      
+      # ## GET users/:video_id
+      # __Returns__ the user with the specified id and HTTP Status Code 200 or 404
+      #
+      # __Required params__ `video_id` the unique id of the video.  
+      # __Optional params__ none.
+      get '/:video_id' do
+        find_video_by_id_or_error params[:video_id]
       end
-
+      
     end
   end
 end

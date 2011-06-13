@@ -13,7 +13,10 @@ module Aji
       end
       def find_user_by_id_or_error id
         Aji::User.find_by_id(id) or not_found_error!(User, id)
-      end      
+      end
+      def find_video_by_id_or_error id
+        Aji::Video.find_by_id(id) or not_found_error!(User, id)
+      end
     end
   end
 end
