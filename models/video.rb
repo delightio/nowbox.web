@@ -37,7 +37,7 @@ module Aji
            "source" => source,
            "external_id" => external_id,
            "external_account_id" => external_account_id,
-           "thumbnail_uri" => ""]
+           "thumbnail_uri" => thumbnail_uri]
     end
     
   end
