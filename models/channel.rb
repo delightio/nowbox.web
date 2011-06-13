@@ -47,7 +47,7 @@ module Aji
            "default_listing" => default_listing,
            "title" => title,
            "thumbnail_uri" => thumbnail_uri,
-           "resource_uri" => "#{BASE_URL}/channels/#{self.id}"]
+           "resource_uri" => "#{BASE_URL}/#{Aji::API.version.first}/channels/#{self.id}"]
     end
 
     def personalized_content_videos args
