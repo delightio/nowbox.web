@@ -2,7 +2,7 @@ require 'rubygems'
 require 'bundler'
 Bundler.require
 
-# This is the initilization file for the Kampanchi API. All set up, library
+# This is the initilization file for the Aji API. All set up, library
 # loading and application level settings are done here.
 module Aji
   def Aji.root; Dir.pwd; end
@@ -19,9 +19,6 @@ module Aji
   redis_url = Aji.conf 'REDISTOGO_URL'
   REDIS = Redis.connect :url=>redis_url
   Redis::Objects.redis = REDIS
-  
-  # Load settings from configs or environment variables.
-  # SETTINGS = YAML.load_file("./config/settings.yml")[RACK_ENV]
   
   # HACK: Heroku returns a ERB version of config/database.yml. 
   # I had to manually do the following for deployment.
