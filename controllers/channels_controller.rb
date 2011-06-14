@@ -60,7 +60,7 @@ module Aji
       get '/:channel_id/videos' do
         channel = find_channel_by_id_or_error params[:channel_id]
         user = find_user_by_id_or_error params[:user_id]
-        channel.personalized_content_videos :user => user, :params => params
+        channel.personalized_content_videos params.merge(:user=>user)
       end
 
     end

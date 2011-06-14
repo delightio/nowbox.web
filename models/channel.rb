@@ -53,7 +53,7 @@ module Aji
       user = args[:user]
       raise ArgumentError, "User missing for Channel[#{self.id}].personalized #{args.inspect}" if user.nil?
       # TODO: just take out viewed videos
-      limit = args[:limit] || 20
+      limit = (args[:limit] || 20).to_i
       new_video_ids = []
       # TODO: use Redis for this..
       viewed_video_ids = Set.new user.viewed_zset.range(0,-1)

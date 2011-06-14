@@ -88,6 +88,18 @@ module Aji
       end
       
       describe "get #{resource_uri}/:id/videos" do
+        it "should respect limit params" do
+          limit = 3
+          channel = Factory :channel_with_videos
+          channel.content_videos.count.should > limit
+          user = Factory :user
+          params = {:user_id=>user.id, :limit=>3}
+          get "#{resource_uri}/#{channel.id}/videos", params
+          last_response.status.should == 200
+          body_hash = JSON.parse last_response.body
+          body_hash.count.should == limit
+        end
+        
         it "should not returned viewed videos" do
           channel = Factory :channel_with_videos
           viewed_video = channel.content_videos.sample
