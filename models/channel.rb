@@ -1,7 +1,7 @@
 module Aji
   class Supported
     def self.categories
-      [ :undefined, :news, :sports, :music, :science, :comedy, :cars, :kids, :trailers, :gaming ]
+      [ :undefined, :news, :sports, :music, :science, :comedy, :cars, :kids, :trailers, :gaming, :ted, :funny ]
     end
   end
   

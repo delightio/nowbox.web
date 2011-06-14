@@ -71,3 +71,5 @@ Dir.glob("models/external_accounts/*.rb").each { |r| require  "#{Aji.root}/#{r}"
 Dir.glob("helpers/*.rb").each { |r| require "#{Aji.root}/#{r}" }
 Dir.glob("controllers/*_controller.rb").each { |r| require "#{Aji.root}/#{r}" }
 
+Dir.glob("queues/*.rb").each { |r| require "#{Aji.root}/#{r}" }
+

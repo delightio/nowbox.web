@@ -30,14 +30,16 @@ module Aji
           # Load or create Youtube account for each author.
           accounts = Array.new
           authors.each do |a|
-            accounts << ExternalAccount::Youtube.
+            accounts << ExternalAccounts::Youtube.
               find_or_create_by_uid_and_provider(a, :youtube)
           end
           # Create Youtube account channel.
-          channel = Channels::YoutubeAccount.find_or_create_by_title(channel,
-            :accounts => accounts)
+          channel = Channels::YoutubeAccount.find_or_create_by_title(name,
+            :accounts => accounts, :default_listing => true, :category => name.downcase)
           # Add the channel to a seperate queue to be populated.
-          Resqueue.enqueue PopulateChannel channel.id
+#          Resqueue.enqueue PopulateChannel channel.id
+puts "Populating Channel[#{channel.id}]: #{channel.inspect}..."
+channel.populate
         end
       end
     end
