@@ -15,7 +15,7 @@ module Aji
       # ## GET users/:user_id
       # __Returns__ the user with the specified id and HTTP Status Code 200 or 404
       #
-      # __Required params__ `user_id` the unique id of the user.  
+      # __Required params__ `user_id` unique id of the user.  
       # __Optional params__ none.
       get '/:user_id' do
         find_user_by_id_or_error params[:user_id]
@@ -26,9 +26,9 @@ module Aji
       # __Returns__ the created user and HTTP Status Code 201 if successful or
       # a JSON encoded error message if not.
       #
-      # __Required params__ `email`: Email address of the user.  
-      # __Required params__ `first_name`: The first name of the user.  
-      # __Optional params__ `last_name`: The last name of the user.
+      # __Required params__ `email` email address of the user.  
+      # __Required params__ `first_name` first name of the user.  
+      # __Optional params__ `last_name` last name of the user.
       post '/' do
         User.create(:email => params[:email],
                     :first_name => params[:first_name],

@@ -22,7 +22,7 @@ module Aji
       # ## GET users/:video_id
       # __Returns__ the user with the specified id and HTTP Status Code 200 or 404
       #
-      # __Required params__ `video_id` the unique id of the video.  
+      # __Required params__ `video_id` unique id of the video.  
       # __Optional params__ none.
       get '/:video_id' do
         find_video_by_id_or_error params[:video_id]
