@@ -18,8 +18,8 @@ module Aji
       # ## GET channels/:channel_id
       # __Returns__ the channel with the specified id and HTTP Status Code 200 or 404
       #
-      # __Required params__ `channel_id` unique id of the channel.  
-      # __Optional params__ none.
+      # __Required params__ `channel_id` unique id of the channel  
+      # __Optional params__ none
       get '/:channel_id' do
         find_channel_by_id_or_error params[:channel_id]
       end
@@ -27,8 +27,8 @@ module Aji
       # ## GET channels/
       # __Returns__ the default list of channels
       #
-      # __Required params__ none.  
-      # __Optional params__ none.
+      # __Required params__ none  
+      # __Optional params__ none
       get do
         Channel.default_listing
       end
@@ -40,7 +40,7 @@ module Aji
       # ## PUT channels/:channel_id
       # __Returns__ succeed or not on the given channel action and HTTP Status Code 200, 400 or 404
       #
-      # __Required params__ `channel_id` unique id of the channel.  
+      # __Required params__ `channel_id` unique id of the channel  
       # __Required params__ `channel_action` subscribe, unsubscribe, arrange  
       # __Optional params__ `channel_action_params[new_position]` new position for given channel
       put '/:channel_id' do
@@ -54,9 +54,9 @@ module Aji
       # ## GET channels/:channel_id/videos
       # __Returns__ all the videos of given channel and HTTP Status Code 200 or 404
       #
-      # __Required params__ `channel_id` unique id of the channel.  
-      # __Required params__ `user_id` unique id of the user.  
-      # __Optional params__ none.
+      # __Required params__ `channel_id` unique id of the channel  
+      # __Required params__ `user_id` unique id of the user  
+      # __Optional params__ none
       get '/:channel_id/videos' do
         channel = find_channel_by_id_or_error params[:channel_id]
         user = find_user_by_id_or_error params[:user_id]
