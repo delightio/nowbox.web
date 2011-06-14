@@ -18,8 +18,11 @@ module Aji
       # __Optional params__ none
       post do
         p = params.delete_if {|k| k=="version" || k==:version}
-        event = Event.create(p) or
-          error!("Cannot create event from: #{p.inspect}", 400)
+        begin
+          event = Event.create(p)
+        rescue => e
+          error!("Cannot create event from: #{p.inspect}. Error: #{e.inspect}", 400)
+        end
       end
     end
   end
