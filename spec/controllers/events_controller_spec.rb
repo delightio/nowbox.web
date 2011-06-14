@@ -12,7 +12,7 @@ module Aji
           user = Factory :user
           channel = Factory :channel_with_videos
           video = channel.content_videos.sample
-          event_type = Aji::Supported.event_types.sample
+          event_type = Aji::Supported.event_types.delete_if{|t| t==:enqueue||t==:dequeue}.sample
           user.viewed_videos.should_not include video
           params = { :user_id=>user.id, :video_id=>video.id, :channel_id=>channel.id, :video_elapsed=>rand(10), :event_type=>event_type}
           post "#{resource_uri}/", params
