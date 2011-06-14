@@ -19,13 +19,14 @@ module Aji
           last_response.status.should ==201
           user.viewed_videos.should include video
         end
-        it "should return 400 if missing parameters"
+        it "should return 400 if missing parameters" do
           user = Factory :user
           channel = Factory :channel_with_videos
           event_type = Aji::Supported.event_types.sample
           params = { :user_id=>user.id, :channel_id=>channel.id, :video_elapsed=>rand(10), :event_type=>event_type }
           post "#{resource_uri}/", params
           last_response.status.should == 400
+        end
       end
       
     end

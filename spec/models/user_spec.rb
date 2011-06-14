@@ -3,9 +3,9 @@ require File.expand_path("../../spec_helper", __FILE__)
 describe Aji::User do
   
   describe "#cache_event" do
-    it "should cache video id in viewed regardless of event type" do
+    it "should cache video id in viewed regardless of event type except :enqueue and :dequeue" do
       user = Factory :user
-      Aji::Supported.event_types.each do |event_type|
+      Aji::Supported.event_types.delete_if{|t| t==:enqueue||t==:dequeue}.each do |event_type|
         event = Factory :event, :event_type => event_type
         user.cache_event event
         user.viewed_videos.should include event.video
