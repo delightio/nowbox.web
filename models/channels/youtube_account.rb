@@ -5,13 +5,13 @@ module Aji
         :class_name => 'Aji::ExternalAccounts::Youtube',
         :join_table => :youtube_youtube_channels, :foreign_key => :channel_id,
         :association_foreign_key => :account_id
-        
+
       def serializable_hash options={}
         h = super
         h["title"] = accounts.map(&:uid).join ", "
         h
       end
-      
+
       def populate
         accounts.each_with_index do |a, i|
           # Fetch videos from specific sources.
@@ -31,7 +31,7 @@ module Aji
 
           a.own_zset.members.each_with_index do |v, k|
             # Until I can write my own Redis-backed ZSet class or come up with
-            # a suitable interface to Redis::Objects::SortedSet, this is a 
+            # a suitable interface to Redis::Objects::SortedSet, this is a
             # clever trick to get unique ranks for each video into a channel.
             content_zset[v] = "#{i + 1}#{k + 1}".to_i
           end
