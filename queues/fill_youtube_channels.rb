@@ -7,22 +7,22 @@ module Aji
     # often.
     class FillYoutubeChannels
       # Specify a class attribute `queue` which resque uses for job control.
-      @@queue = :fill_youtube_channels
+      @@queue = :normal
 
       def self.perform
         channels = {
           "TED" => %w{ TEDxTalks tedtalksdirector },
-          "Sports" => %w{ nba nhlvideo CBSSports foxsports ESPN } ,
-          "Cars" =>   %w{ AstonMartin BMW ferrariworld TopGear motortrend
+          "sports" => %w{ nba nhlvideo CBSSports foxsports ESPN } ,
+          "cars" =>   %w{ AstonMartin BMW ferrariworld TopGear motortrend
             AutomotiveTv autoblogger },
-          "Trailers" => %w{ LionsgateLIVE SonyPictures MARVEL },
-          #"music" => %w{VEVO BritneySpearsVEVO LadyGagaVEVO JustinBieberVEVO
-          #RihannaVEVO keshaVEVO Maroon5VEVO ColdplayVEVO AdamLambertVEVO},
-          "News" => %w{AssociatedPress CNN PBSNewsHour BBC CBS},
-          "Funny" => %w{ Break cheezburger failblog},
-          "Kids" =>  %w{ EricHermanMusic ArthurTV1996 pingu TheGiggleBellies
+            "trailers" => %w{ LionsgateLIVE SonyPictures MARVEL },
+            #"music" => %w{VEVO BritneySpearsVEVO LadyGagaVEVO JustinBieberVEVO
+            #RihannaVEVO keshaVEVO Maroon5VEVO ColdplayVEVO AdamLambertVEVO},
+            "news" => %w{AssociatedPress CNN PBSNewsHour BBC CBS},
+            "funny" => %w{ Break cheezburger failblog},
+            "kids" =>  %w{ EricHermanMusic ArthurTV1996 pingu TheGiggleBellies
             RajshriKids GoldenNickelodeon SockeyeMedia SuperAwesomeSylvia },
-          "Science" => %w{ NationalGeographic NatGeoWiLd discoverynetworks
+            "science" => %w{ NationalGeographic NatGeoWiLd discoverynetworks
             AnimalPlanetTV ScienceChannel}
         }
 
@@ -35,11 +35,13 @@ module Aji
           end
           # Create Youtube account channel.
           channel = Channels::YoutubeAccount.find_or_create_by_title(name,
-            :accounts => accounts, :default_listing => true, :category => name.downcase)
+            :accounts => accounts, :default_listing => true,
+            :category => name.downcase)
+
           # Add the channel to a seperate queue to be populated.
-#          Resqueue.enqueue PopulateChannel channel.id
-puts "Populating Channel[#{channel.id}]: #{channel.inspect}..."
-channel.populate
+          #          Resqueue.enqueue PopulateChannel channel.id
+          puts "Populating Channel[#{channel.id}]: #{channel.inspect}..."
+          channel.populate
         end
       end
     end
