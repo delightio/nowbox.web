@@ -9,4 +9,12 @@ use OmniAuth::Builder do
   #  { :scope => 'publish_stream,offline_access' }
   #provider :identica, Aji.conf['identica_key'], Aji.conf['identica_secret']
 end
-run Aji::API
+
+
+map '/' do
+  run Aji::Viewer
+end
+
+map '/1' do
+  run Aji::API
+end

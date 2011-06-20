@@ -48,7 +48,7 @@ module Aji
   class InterfaceMethodNotImplemented < Aji::Error; end
   class API < Grape::API
     get do
-      "API Up and running!"
+      "API Version 1 up and running!"
     end
   end
 end
@@ -57,19 +57,13 @@ end
 # The deployed app actually works as expected. However, %heroku run console
 # does not know anything about Aji::* objects.
 
-# Dir.glob("models/*.rb").each { |r| require_relative r }
-# # Must load channel subtypes after other models for dependency reasons.
-# Dir.glob("models/channels/*.rb").each { |r| require_relative r }
-# Dir.glob("models/external_accounts/*.rb").each { |r| require_relative r }
-# Dir.glob("helpers/*.rb").each { |r| require_relative r }
-# Dir.glob("controllers/*_controller.rb").each { |r| require_relative r }
-
-Dir.glob("models/*.rb").each { |r| require "#{Aji.root}/#{r}" }
+Dir.glob("models/*.rb").each { |r| require_relative r }
 # Must load channel subtypes after other models for dependency reasons.
-Dir.glob("models/channels/*.rb").each { |r| require "#{Aji.root}/#{r}" }
-Dir.glob("models/external_accounts/*.rb").each { |r| require "#{Aji.root}/#{r}" }
-Dir.glob("helpers/*.rb").each { |r| require "#{Aji.root}/#{r}" }
-Dir.glob("controllers/*_controller.rb").each { |r| require "#{Aji.root}/#{r}" }
+Dir.glob("models/channels/*.rb").each { |r| require_relative r }
+Dir.glob("models/external_accounts/*.rb").each { |r| require_relative r }
+Dir.glob("helpers/*.rb").each { |r| require_relative r }
+Dir.glob("controllers/*_controller.rb").each { |r| require_relative r }
+Dir.glob("queues/*.rb").each { |r| require_relative r }
 
-Dir.glob("queues/*.rb").each { |r| require "#{Aji.root}/#{r}" }
-
+# Add Sinatra web viewer.
+require_relative "lib/viewer/viewer.rb"
