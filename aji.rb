@@ -47,6 +47,7 @@ module Aji
   # by a subclass.
   class InterfaceMethodNotImplemented < Aji::Error; end
   class API < Grape::API
+    version '1'
     get do
       "API Version 1 up and running!"
     end

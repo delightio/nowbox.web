@@ -10,11 +10,10 @@ use OmniAuth::Builder do
   #provider :identica, Aji.conf['identica_key'], Aji.conf['identica_secret']
 end
 
+map '/api' do
+  run Aji::API
+end
 
 map '/' do
   run Aji::Viewer
-end
-
-map '/1' do
-  run Aji::API
 end
