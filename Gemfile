@@ -1,8 +1,12 @@
 source 'http://rubygems.org'
 
+# Application Frameworks and Utilities
 gem 'rake'
 gem 'thor' # Better command line utility than rake.
 gem 'grape'
+gem 'sinatra', :require => 'sinatra/base'
+gem 'thin' # Heroku recommends the Thin web server.
+
 
 # Data persistence and related.
 gem 'redis'
