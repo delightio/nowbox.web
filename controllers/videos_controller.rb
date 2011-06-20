@@ -18,7 +18,7 @@ module Aji
     version '1'
     # `http://API_HOST/1/videos`
     resource :videos do
-      
+
       # ## GET users/:video_id
       # __Returns__ the user with the specified id and HTTP Status Code 200 or 404
       #
@@ -27,7 +27,7 @@ module Aji
       get '/:video_id' do
         find_video_by_id_or_error params[:video_id]
       end
-      
+
     end
   end
 end
