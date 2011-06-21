@@ -7,7 +7,7 @@ module Aji
     # often.
     class FillYoutubeChannels
       # Specify a class attribute `queue` which resque uses for job control.
-      @queue = :normal
+      @queue = :fill_youtube_channels
 
       def self.perform
         channels = {
@@ -39,9 +39,7 @@ module Aji
             :category => name.downcase)
 
           # Add the channel to a seperate queue to be populated.
-          #          Resqueue.enqueue PopulateChannel channel.id
-          puts "Populating Channel[#{channel.id}]: #{channel.inspect}..."
-          channel.populate
+          Resque.enqueue PopulateChannel channel.id
         end
       end
     end
