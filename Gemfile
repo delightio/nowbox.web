@@ -19,6 +19,7 @@ gem 'activerecord', ">=3.1.0rc2", :require => 'active_record'
 gem 'rocco'
 
 # Libraries used by the backend.
+gem 'resque-scheduler'
 gem 'omniauth'
 gem 'youtube_it'
 
