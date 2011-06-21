@@ -7,7 +7,7 @@ module Aji
     # often.
     class FillYoutubeChannels
       # Specify a class attribute `queue` which resque uses for job control.
-      @@queue = :normal
+      @queue = :normal
 
       def self.perform
         channels = {
