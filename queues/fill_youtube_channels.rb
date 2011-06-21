@@ -39,7 +39,7 @@ module Aji
             :category => name.downcase)
 
           # Add the channel to a seperate queue to be populated.
-          Resque.enqueue PopulateChannel channel.id
+          Resque.enqueue PopulateChannel, channel.id
         end
       end
     end
