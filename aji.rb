@@ -10,14 +10,15 @@ module Aji
   # Set Rack environment if not specified.
   RACK_ENV = ENV['RACK_ENV'] || "development"
 
-  def Aji.conf key, setting_yml='config/settings.yml'
-    ENV[key] || YAML.load_file(setting_yml)[RACK_ENV][key]
+  def Aji.conf
+    @conf_hash ||= YAML.load_file("config/settings.yml")[RACK_ENV].merge ENV
   end
-  BASE_URL = Aji.conf('BASE_URL') || 'localhost'
+  BASE_URL = Aji.conf['BASE_URL'] || 'localhost'
 
   # Establish Redis connection.
-  redis_url = Aji.conf 'REDISTOGO_URL'
+  redis_url = Aji.conf['REDISTOGO_URL']
   REDIS = Redis.connect :url=>redis_url
+  Resque.redis = REDIS
   Redis::Objects.redis = REDIS
 
   # HACK: Heroku returns a ERB version of config/database.yml.
