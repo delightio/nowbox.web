@@ -20,6 +20,7 @@ module Aji
   REDIS = Redis.connect :url=>redis_url
   Resque.redis = REDIS
   Redis::Objects.redis = REDIS
+  Resque.schedule = YAML.load_file 'config/resque_schedule.yml'
 
   # HACK: Heroku returns a ERB version of config/database.yml.
   # I had to manually do the following for deployment.
