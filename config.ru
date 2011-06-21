@@ -10,6 +10,17 @@ use OmniAuth::Builder do
   #provider :identica, Aji.conf['identica_key'], Aji.conf['identica_secret']
 end
 
+map '/resque' do
+  use Rack::Auth::Basic do |username, password|
+    [ username, password ] == ["resque", "mellon" ]
+  end
+  run Resque::Server
+end
 
-run Aji::API
-#run Rack::URLMap.new '/1' => Aji::API, '/' => Aji::Viewer
+map '/v' do
+  run Aji::Viewer
+end
+
+map '/' do
+  run Aji::API
+end
