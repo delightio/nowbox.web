@@ -1,18 +1,20 @@
 if File.exists? "config/settings.yml"
-  Aji.conf.merge! YAML.load_file("config/settings.yml")[Aji::RACK_ENV]
+  Aji.conf.merge!(YAML.load_file("config/settings.yml")[Aji::RACK_ENV])
+  Aji.conf['RESQUE_SCHEDULE'] = YAML.load_file("config/resque_schedule.yml")
 else
-  Aji.conf.merge! ENV
+  Aji.conf.merge!(ENV)
 end
+
 db = URI Aji.conf['DATABASE_URL']
 redis = URI Aji.conf['REDISTOGO_URL']
 
 # Parse Postgres connection settings.
 Aji.conf['DATABASE'] = {
-  :adapter => db.scheme << 'ql',
+  :adapter => "#{db.scheme}ql",
   :host => db.host,
   :port => db.port,
   :database => db.path[1..-1],
-  :username => db.username,
+  :username => db.user,
   :password => db.password
 }
 
@@ -25,4 +27,8 @@ Aji.conf['REDIS'] = {
 }
 
 # Parse Resque Schedule Yaml.
-Aji.conf['RESQUE_SCHEDULE'] = YAML.load Aji.conf['RESQUE_SCHEDULE']
+if Aji.conf['RESQUE_SCHEDULE'].class == String
+  Aji.conf['RESQUE_SCHEDULE'] = YAML.load Aji.conf['RESQUE_SCHEDULE']
+end
+
+Aji.conf.freeze

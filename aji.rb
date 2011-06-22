@@ -10,11 +10,11 @@ module Aji
   # Set Rack environment if not specified.
   RACK_ENV = ENV['RACK_ENV'] || "development"
 
-  def Aji.conf; @conf_hash || Hash.new; end
+  def Aji.conf; @conf_hash ||= Hash.new; end
 
   # Handles initialization and preprocessing of application settings be they
   # from Heroku's Environment or a local settings.yml.
-  require 'config/setup.rb'
+  require_relative 'config/setup.rb'
 
   # Establish Redis connection.
   def Aji.redis; @redis ||= Redis.new conf['REDIS']; end
