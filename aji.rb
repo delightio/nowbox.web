@@ -49,16 +49,13 @@ module Aji
   # by a subclass.
   class InterfaceMethodNotImplemented < Aji::Error; end
   class API < Grape::API
-    version '1'
-    get do
-      "API Version 1 up and running!"
+    namespace '1' do
+      get do
+        "API Version 1 up and running!"
+      end
     end
   end
 end
-
-# HACK: % heroku config => shows Ruby 1.9.1
-# The deployed app actually works as expected. However, %heroku run console
-# does not know anything about Aji::* objects.
 
 Dir.glob("models/*.rb").each { |r| require_relative r }
 # Must load channel subtypes after other models for dependency reasons.
