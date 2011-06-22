@@ -4,7 +4,7 @@ module Aji
       [:subscribe, :unsubscribe, :arrange]
     end
   end
-  
+
   # ## User Schema
   # - id: Integer
   # - email: String
@@ -17,7 +17,7 @@ module Aji
     validates_presence_of :email, :first_name
     validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
     after_create :subscribe_default_channels
-    
+
     include Redis::Objects
     sorted_set :shared_zset
     sorted_set :liked_zset # upvoted or shared
@@ -25,7 +25,7 @@ module Aji
     sorted_set :viewed_zset
     sorted_set :queued_zset
     list :subscribed_list # User's Subscribed channels.
-    
+
     def subscribe channel, args={}
       subscribed_list << channel.id
       subscribed_list.include? channel.id.to_s
@@ -51,34 +51,34 @@ module Aji
       Channel.default_listing.each { |c| subscribe c }
       # TODO: we are pulling in the whole channel object but we really only care about Channel#id
     end
-    
+
     def cache_event event
       at_time = event.created_at.to_i
       video_id = event.video_id
-      
+
       case event.event_type
       when :view
         viewed_zset[video_id] = at_time
-        
+
       when :share
         viewed_zset[video_id] = at_time
         liked_zset[video_id] = at_time
         shared_zset[video_id] = at_time
-        
+
       when :upvote
         viewed_zset[video_id] = at_time
         liked_zset[video_id] = at_time
-        
+
       when :downvote
         viewed_zset[video_id] = at_time
         downvoted_zset[video_id] = at_time
-        
+
       when :enqueue
         queued_zset[video_id] = at_time
-        
+
       when :dequeue
         queued_zset.delete video_id
-        
+
       end
     end
 
@@ -93,13 +93,13 @@ module Aji
       # Channel.find(subscribed_list.values) # TODO: Is AR caching this query? My list came out the same after User#arrange
       subscribed_list.map { |cid| Channel.find cid }
     end
-    
+
     def serializable_hash options={}
       Hash["id" => id,
            "first_name" => first_name,
            "last_name" => last_name,
            "subscribed_channel_ids" => subscribed_list.values]
     end
-    
+
   end
 end

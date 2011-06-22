@@ -2,9 +2,9 @@
 config/settings.yml
 config/database.yml
 config/redis.yml
+config/resque_schedule.yml
 .bundle
 db/*.sqlite3
 log/*.log
 tmp/
-doc/*
 docs/*

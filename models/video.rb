@@ -16,7 +16,7 @@ module Aji
     # Symbolize source attribute.
     def source; read_attribute(:source).to_sym; end
     def source= value; write_attribute(:source, value.to_sym); end
-    
+
     def thumbnail_uri
       path = case source
              when :youtube then "http://img.youtube.com/vi/#{self.external_id}/0.jpg"
@@ -24,7 +24,7 @@ module Aji
              end
       path
     end
-    
+
     def serializable_hash options={}
       author = external_account # TODO: 1. asusme only 1 EA per video and 2. overloading EA#id
       author_hash = {}
@@ -40,6 +40,6 @@ module Aji
            "author" => author_hash,
            "thumbnail_uri" => thumbnail_uri]
     end
-    
+
   end
 end

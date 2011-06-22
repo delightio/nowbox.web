@@ -4,13 +4,13 @@ require 'json'
 module Aji
   module Channels
     class Trending < Channel
-      
+
       def serializable_hash options={}
         h = super
         h["title"] = "Trending"
         h
       end
-      
+
       def populate args={}
         url = args[:url] || "nowmov.com"
         path = args[:path] || "/live/videos"
@@ -23,7 +23,7 @@ module Aji
         video_hashes.each_with_index do |video_hash, index|
           youtube_account = Aji::ExternalAccounts::Youtube.find_or_create_by_uid(
             video_hash["author_username"], :provider => "youtube")
-            
+
           video = Aji::Video.find_or_create_by_external_id(
             video_hash["service_external_id"],
             :external_account => youtube_account,

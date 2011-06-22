@@ -16,10 +16,10 @@ module Aji
         :foreign_key => :account_id, :association_foreign_key => :channel_id
 
       def own_videos limit=-1; content_video_ids(limit).map { |vid| Video.find vid }; end
-      
+
       def username; uid; end
       def profile_uri; "http://www.youtube.com/user/#{uid}"; end
-      
+
     end
   end
 end

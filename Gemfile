@@ -1,19 +1,26 @@
 source 'http://rubygems.org'
 
+# Application Frameworks and Utilities
 gem 'rake'
 gem 'thor' # Better command line utility than rake.
+gem 'foreman' # Local process monitor.
 gem 'grape'
+gem 'sinatra', :require => 'sinatra/base'
+gem 'thin' # Heroku recommends the Thin web server.
+gem 'resque'
 
 # Data persistence and related.
 gem 'redis'
 gem 'redis-objects', :require => 'redis/objects'
 gem 'pg'
-gem 'activerecord', ">=3.1.0rc2", :require => 'active_record'
+gem 'activerecord', '=3.0.4', :require => 'active_record'
 
 # Literate comments, generating lovely documentation HTML.
 gem 'rocco'
 
 # Libraries used by the backend.
+gem 'resque-scheduler', '~>2.0.0.d',
+  :require => ['resque_scheduler', 'resque/scheduler']
 gem 'omniauth'
 gem 'youtube_it'
 

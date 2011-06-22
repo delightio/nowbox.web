@@ -14,7 +14,7 @@ module Aji
     version '1'
     # `http://API_HOST/1/channels`
     resource :channels do
-      
+
       # ## GET channels/:channel_id
       # __Returns__ the channel with the specified id and HTTP Status Code 200 or 404
       #
@@ -23,7 +23,7 @@ module Aji
       get '/:channel_id' do
         find_channel_by_id_or_error params[:channel_id]
       end
-      
+
       # ## GET channels/
       # __Returns__ the default list of channels
       #
@@ -32,11 +32,11 @@ module Aji
       get do
         Channel.default_listing
       end
-      
+
       post do
-        channel = Channel.create(params) or creation_error!(params)
+        channel = Channel.create$1
       end
-      
+
       # ## PUT channels/:channel_id
       # __Returns__ succeed or not on the given channel action and HTTP Status Code 200, 400 or 404
       #
@@ -50,7 +50,7 @@ module Aji
         succeeded = user.send params[:channel_action], channel, params[:channel_action_params]
         error!("User[#{user.id}] cannot #{params[:channel_action]} Channel[#{channel.id}] with params: #{params[:channel_action_params].inspect}", 400) if !succeeded
       end
-      
+
       # ## GET channels/:channel_id/videos
       # __Returns__ all the videos of given channel and HTTP Status Code 200 or 404
       #
