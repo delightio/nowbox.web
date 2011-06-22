@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require 'bundler'
 Bundler.require
 
@@ -35,7 +37,7 @@ class Aji < Thor
 
   desc "server", "Run Aji webserver"
   def server env="development"
-    exec "bin/rackup -E #{env}"
+    exec "bin/foreman start web"
   end
 
   desc "docs", "generate Rocco documentation"
@@ -49,3 +51,5 @@ class Aji < Thor
   end
 
 end
+
+Aji.start
