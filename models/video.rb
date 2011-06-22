@@ -11,7 +11,10 @@ module Aji
   # - updated_at: DateTime
   class Video < ActiveRecord::Base
     has_many :events
-    belongs_to :external_account, :class_name => 'ExternalAccounts::Youtube'
+    belongs_to :external_account
+
+    # Future mentioner/tweeter/poster relationship.
+    # has_many :posters, :through...
 
     # Symbolize source attribute.
     def source; read_attribute(:source).to_sym; end
