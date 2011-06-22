@@ -14,6 +14,8 @@ Quick Tricks and Tips
 - Run local full stack: `bin/foreman start -c resque=3`
 - Get Heroku process status: `heroku ps`
 - Change Heroku worker count: `heroku scale web=x resque=y`
+- Create database migration template: `bin/aji migration [migration_file_name]`
+- Generate fresh documentation `bin/aji docs`
 
 Technology Stack
 ----------------
