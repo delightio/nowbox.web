@@ -4,15 +4,14 @@
 development:
   CONSUMER_KEY: "XDYm9fcC4Xb3XYvJpMNw"
   CONSUMER_SECRET: "XDYm9fcC4Xb3XYvJpMNw"
-  base_uri: "localhost"
-
-production:
-  CONSUMER_KEY: "XDYm9fcC4Xb3XYvJpMNw"
-  CONSUMER_SECRET: "XDYm9fcC4Xb3XYvJpMNw"
-  base_uri: "aji.heroku.com"
+  BASE_URI: "localhost"
+  REDISTOGO_URL: "redis://localhost/7"
+  DATABASE_URL: "postgres://localhost/aji_dev"
 
 test:
   CONSUMER_KEY: ""
   CONSUMER_SECRET: ""
-  base_uri: "localhost"
-  
+  BASE_URI: "localhost"
+  REDISTOGO_URL: "redis://localhost/9"
+  DATABASE_URL: "postgres://localhost/aji_test"
+
