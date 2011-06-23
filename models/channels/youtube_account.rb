@@ -8,6 +8,8 @@ module Aji
 
       def serializable_hash options={}
         h = super
+        # TODO: Use a before_create hook to create the title. We should do the
+        # same for Keywords as well.
         h["title"] = accounts.map(&:uid).join ", "
         h
       end
