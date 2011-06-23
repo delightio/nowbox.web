@@ -6,7 +6,7 @@ module Aji
 
   describe API do
     describe "resource: #{resource}" do
-      
+
       describe "get #{resource_uri}" do
         it "should return all default channels" do
           channels = []
@@ -23,13 +23,13 @@ module Aji
           returned_channels.should include channels[default.last].serializable_hash
         end
       end
-      
+
       describe "get #{resource_uri}/:id" do
         it "should return 404 if not found" do
           get "#{resource_uri}/#{rand(100)}"
           last_response.status.should == 404
         end
-        
+
         it "should channel info if found" do
           channel = Factory :channel_with_videos
           get "#{resource_uri}/#{channel.id}"
@@ -38,11 +38,11 @@ module Aji
           body_hash.should == channel.serializable_hash
         end
       end
-      
+
       describe "post #{resource_uri}/:id" do
         it "should create new channel"
       end
-      
+
       describe "put #{resource_uri}/:id" do
         it "should only respond to known commands" do
           channel = Factory :channel_with_videos
@@ -51,7 +51,7 @@ module Aji
           put "#{resource_uri}/#{channel.id}", params
           last_response.status.should == 400
         end
-        
+
         it "should allow subscribing" do
           channel = Factory :channel_with_videos
           user = Factory :user
@@ -59,7 +59,7 @@ module Aji
           put "#{resource_uri}/#{channel.id}", params
           last_response.status.should == 200
         end
-        
+
         it "should allow unsubscribing" do
           channel = Factory :channel_with_videos
           user = Factory :user
@@ -69,7 +69,7 @@ module Aji
           last_response.status.should == 200
           user.subscribed_channels.should_not include channel
         end
-        
+
         it "should allow channel arrangment" do
           user = Factory :user
           channels = []
@@ -86,7 +86,7 @@ module Aji
           user.subscribed_channels[new_position] = channel
         end
       end
-      
+
       describe "get #{resource_uri}/:id/videos" do
         it "should respect limit params" do
           limit = 3
@@ -113,7 +113,7 @@ module Aji
           video_ids.should_not include viewed_video.id
         end
       end
-      
+
     end
   end
 end
