@@ -31,8 +31,12 @@ class Aji < Thor
   end
 
   desc "spec", "Run application spec tests"
-  def spec
-    exec "bin/rspec spec"
+  def spec test=nil
+    if test
+      exec "bin/rspec #{test}"
+    else
+      exec "bin/rspec spec"
+    end
   end
 
   desc "server", "Run Aji webserver"
