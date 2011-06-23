@@ -39,13 +39,6 @@ module Aji
       end
     end
   end
-
-  # A queue superclass to handle reconnection to ActiveRecord after forking.
-  class Queue
-    def self.perform
-      ActiveRecord::Base.establish_connection conf['DATABASE']
-    end
-  end
 end
 
 Dir.glob("models/*.rb").each { |r| require_relative r }
