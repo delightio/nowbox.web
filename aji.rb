@@ -13,7 +13,7 @@ module Aji
   def Aji.conf; @conf_hash ||= Hash.new; end
 
   # Handles initialization and preprocessing of application settings be they
-  # from Heroku's Environment or a local settings.yml.
+  # from Heroku's Environment or a local `settings.yml`.
   require_relative 'config/setup.rb'
 
   # Establish Redis connection.
