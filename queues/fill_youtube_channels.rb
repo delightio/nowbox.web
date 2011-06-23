@@ -5,11 +5,12 @@ module Aji
     # only pick up new videos. It should run every week or so at first since
     # it is not short circuiting. Once it is we can check for new videos more
     # often.
-    class FillYoutubeChannels
+    class FillYoutubeChannels < Queue
       # Specify a class attribute `queue` which resque uses for job control.
       @queue = :fill_youtube_channels
 
       def self.perform
+        super
         channels = {
           "TED" => %w{ TEDxTalks tedtalksdirector },
           "sports" => %w{ nba nhlvideo CBSSports foxsports ESPN } ,
