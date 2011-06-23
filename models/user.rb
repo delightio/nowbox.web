@@ -43,7 +43,8 @@ module Aji
         subscribed_list << channel.id
       else
         channel_id_at_new_position = subscribed_list[new_position]
-        REDIS.linsert subscribed_list.key, "BEFORE", channel_id_at_new_position, channel.id
+        # TODO: Use Redis::Objects facility for this.
+        Aji.redis.linsert subscribed_list.key, "BEFORE", channel_id_at_new_position, channel.id
       end
       subscribed_list.include? channel.id.to_s
     end

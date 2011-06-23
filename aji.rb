@@ -10,37 +10,20 @@ module Aji
   # Set Rack environment if not specified.
   RACK_ENV = ENV['RACK_ENV'] || "development"
 
-  def Aji.conf
-    @conf_hash ||= YAML.load_file("config/settings.yml")[RACK_ENV].merge ENV
-  end
-  BASE_URL = Aji.conf['BASE_URL'] || 'localhost'
+  def Aji.conf; @conf_hash ||= Hash.new; end
+
+  # Handles initialization and preprocessing of application settings be they
+  # from Heroku's Environment or a local settings.yml.
+  require_relative 'config/setup.rb'
 
   # Establish Redis connection.
-  redis_url = Aji.conf['REDISTOGO_URL']
-  REDIS = Redis.connect :url=>redis_url
-  Resque.redis = REDIS
-  Redis::Objects.redis = REDIS
-  Resque.schedule = YAML.load_file 'config/resque_schedule.yml'
+  def Aji.redis; @redis ||= Redis.new conf['REDIS']; end
+  Resque.redis = redis
+  Redis::Objects.redis = redis
+  Resque.schedule = conf['RESQUE_SCHEDULE']
 
-  # HACK: Heroku returns a ERB version of config/database.yml.
-  # I had to manually do the following for deployment.
-  if ENV['DATABASE_URL']
-    uri = URI.parse ENV['DATABASE_URL']
-    adapter = uri.scheme
-    adapter = "postgresql" if adapter == "postgres"
-    database = (uri.path || "").split("/")[1]
-    dbconfig = { :adapter => adapter,
-                 :database => database,
-                 :host => uri.host,
-                 :port => uri.port,
-                 :username => uri.user,
-                 :password => uri.password,
-                 :params => CGI.parse(uri.query || "") }
-  else
-    dbconfig = YAML.load_file('config/database.yml')[RACK_ENV]
-  end
-  # Establish ActiveRecord conneciton and run all necessary migration
-  ActiveRecord::Base.establish_connection dbconfig
+  # Establish ActiveRecord conneciton and run all necessary migrations.
+  ActiveRecord::Base.establish_connection conf['DATABASE']
   ActiveRecord::Migrator.migrate("db/migrate/")
 
   # An application specific error class.
@@ -48,6 +31,7 @@ module Aji
   # An error to raise when a required interface method has not been overridden
   # by a subclass.
   class InterfaceMethodNotImplemented < Aji::Error; end
+
   class API < Grape::API
     namespace '1' do
       get do

@@ -10,7 +10,8 @@ gem 'thin' # Heroku recommends the Thin web server.
 gem 'resque'
 
 # Data persistence and related.
-gem 'redis'
+gem 'hiredis' # Fast C Interface to Redis.
+gem 'redis', :require => [ 'redis/connection/hiredis', 'redis' ]
 gem 'redis-objects', :require => 'redis/objects'
 gem 'pg'
 gem 'activerecord', '=3.0.4', :require => 'active_record'
