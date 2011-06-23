@@ -8,7 +8,7 @@ module Aji
     describe "resource: #{resource}" do
       
       describe "post #{resource}/" do
-        it "should create event object on post with default channel listing" do
+        it "should create event object on post" do
           user = Factory :user
           channel = Factory :channel_with_videos
           video = channel.content_videos.sample
