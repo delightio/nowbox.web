@@ -21,8 +21,9 @@ module Aji
         response = Net::HTTP.get url, path
         video_hashes = JSON.parse response
         video_hashes.each_with_index do |video_hash, index|
-          youtube_account = Aji::ExternalAccounts::Youtube.find_or_create_by_uid(
-            video_hash["author_username"], :provider => "youtube")
+          youtube_account =
+						Aji::ExternalAccounts::Youtube.find_or_create_by_provider_and_uid(
+							:youtube, video_hash["author_username"])
 
           video = Aji::Video.find_or_create_by_external_id(
             video_hash["service_external_id"],
