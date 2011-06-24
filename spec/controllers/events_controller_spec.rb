@@ -6,7 +6,7 @@ module Aji
 
   describe API do
     describe "resource: #{resource}" do
-      
+
       describe "post #{resource}/" do
         it "should create event object on post" do
           user = Factory :user
@@ -19,6 +19,7 @@ module Aji
           last_response.status.should ==201
           user.viewed_videos.should include video
         end
+
         it "should return 400 if missing parameters" do
           user = Factory :user
           channel = Factory :channel_with_videos
@@ -28,7 +29,6 @@ module Aji
           last_response.status.should == 400
         end
       end
-      
     end
   end
 end

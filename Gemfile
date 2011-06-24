@@ -17,6 +17,7 @@ gem 'pg'
 gem 'activerecord', '=3.0.4', :require => 'active_record'
 
 # Literate comments, generating lovely documentation HTML.
+gem 'rdiscount' # Required for Rocco.
 gem 'rocco'
 
 # Libraries used by the backend.
