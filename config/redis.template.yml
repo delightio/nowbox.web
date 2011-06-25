@@ -1,8 +1,0 @@
-development:
-  REDISTOGO_URL: redis://localhost/0
-  
-test:
-  REDISTOGO_URL: redis://localhost/3
-  
-production:
-  REDISTOGO_URL: redis://localhost/5
