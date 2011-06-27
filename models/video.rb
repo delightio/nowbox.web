@@ -11,6 +11,9 @@ module Aji
   # - title: String
   # - description: Text
   # - viewable_mobile: Boolean
+  # - duration: Double
+  # - view_count: Integer
+  # - published_at: DateTime
   # - created_at: DateTime
   # - updated_at: DateTime
   class Video < ActiveRecord::Base
@@ -34,7 +37,10 @@ module Aji
         :description => v.description,
         :external_account => external_account,
         :source => :youtube,
-        :viewable_mobile => v.noembed)
+        :viewable_mobile => v.noembed,
+        :duration => v.duration,
+        :view_count => v.view_count,
+        :published_at => v.published_at)
     end
     
     def thumbnail_uri
@@ -57,8 +63,10 @@ module Aji
            "thumbnail_uri" => thumbnail_uri,
            "source" => source,
            "external_id" => external_id,
-           "author" => author_hash,
-           "thumbnail_uri" => thumbnail_uri]
+           "duration" => duration,
+           "view_count" => view_count,
+           "published_at" => published_at,
+           "author" => author_hash]
     end
 
   end

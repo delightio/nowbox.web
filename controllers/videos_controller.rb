@@ -8,6 +8,9 @@
 # `thumbnail_uri`:"http://img.youtube.com/vi/cRBcP6MmE8g/0.jpg",
 # `source`:"youtube",
 # `external_id`:"cRBcP6MmE8g",
+# `duration`:123,
+# `view_count`:1328051,
+# `published_at`:"2011-06-12T13:20:27-07:00",
 # `author`:
 # {`username`:"espo633",
 # `profile_uri`:"http://www.youtube.com/user/espo633",
