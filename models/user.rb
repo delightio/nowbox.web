@@ -23,14 +23,17 @@ module Aji
     sorted_set :viewed_zset
     sorted_set :queued_zset
     list :subscribed_list # User's Subscribed channels.
-
+    
+    def subscribed? channel
+      subscribed_list.include? channel.id.to_s
+    end
     def subscribe channel, args={}
       subscribed_list << channel.id
-      subscribed_list.include? channel.id.to_s
+      subscribed? channel
     end
     def unsubscribe channel, args={}
       subscribed_list.delete channel.id
-      !subscribed_list.include? channel.id.to_s
+      !subscribed?(channel)
     end
     def arrange channel, args={}
       new_position = (args[:new_position] || args["new_position"]).to_i
@@ -44,7 +47,7 @@ module Aji
         # TODO: Use Redis::Objects facility for this.
         Aji.redis.linsert subscribed_list.key, "BEFORE", channel_id_at_new_position, channel.id
       end
-      subscribed_list.include? channel.id.to_s
+      subscribed? channel
     end
     def subscribe_default_channels
       Channel.default_listing.each { |c| subscribe c }
