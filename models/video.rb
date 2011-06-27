@@ -65,7 +65,7 @@ module Aji
            "external_id" => external_id,
            "duration" => duration,
            "view_count" => view_count,
-           "published_at" => published_at,
+           "published_at" => published_at.to_i,
            "author" => author_hash]
     end
 
