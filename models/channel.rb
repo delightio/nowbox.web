@@ -30,10 +30,11 @@ module Aji
     def content_video_ids limit=-1
       content_zset.revrange 0, limit
     end
-
     def content_videos limit=-1
       content_video_ids(limit).map { |vid| Video.find vid }
     end
+    
+    def self.blacklisted_video_ids_key; "Aji::Channel.blacklisted_video_ids"; end
 
     def serializable_hash options={}
       thumbnail_uri = ""
@@ -63,6 +64,7 @@ module Aji
       # TODO: use Redis for this..
       viewed_video_ids = Set.new user.viewed_zset.range(0,-1)
       content_video_ids.each do |channel_video_id|
+        next if Aji.redis.sismember Channel.blacklisted_video_ids_key, channel_video_id
         new_video_ids << channel_video_id if !viewed_video_ids.member? channel_video_id
         break if new_video_ids.count >= limit
       end
