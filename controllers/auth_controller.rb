@@ -1,7 +1,7 @@
 module Aji
   class API
     namespace :auth do
-      post '/:provider/callback' do
+      get '/:provider/callback' do
         auth_hash = request.env['omniauth.auth']
 
         case params[:provider]
