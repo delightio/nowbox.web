@@ -1,8 +1,6 @@
 module Aji
   class Supported
-    def self.channel_actions
-      [:subscribe, :unsubscribe, :arrange]
-    end
+    def self.channel_actions; [:subscribe, :unsubscribe, :arrange]; end
   end
 
   # ## User Schema
