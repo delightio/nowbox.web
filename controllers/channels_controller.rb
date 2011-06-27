@@ -90,7 +90,7 @@ module Aji
       # for given channel
       put '/:channel_id' do
         channel = find_channel_by_id_or_error params[:channel_id]
-        error!("Unknown channel action: #{params[:channel_action]}", 400) if !Supported.channel_actions.include? params[:channel_action].to_sym
+        error!("Unknown channel action: #{params[:channel_action]}", 400) if !Supported.channel_actions.include? params[:channel_action].try(:to_sym)
         user = find_user_by_id_or_error params[:user_id]
         succeeded = user.send params[:channel_action], channel, params[:channel_action_params]
         error!("User[#{user.id}] cannot #{params[:channel_action]} Channel[#{channel.id}] with params: #{params[:channel_action_params].inspect}", 400) if !succeeded
