@@ -23,7 +23,20 @@ module Aji
     # Symbolize source attribute.
     def source; read_attribute(:source).to_sym; end
     def source= value; write_attribute(:source, value.to_sym); end
-
+    
+    def self.find_or_create_from_youtubeit_video v
+      external_account =
+        ExternalAccounts::Youtube.find_or_create_by_uid(
+          v.author.name, :provider => "youtube")
+      Video.find_or_create_by_external_id(
+        v.video_id.split(':').last,
+        :title => v.title,
+        :description => v.description,
+        :external_account => external_account,
+        :source => :youtube,
+        :viewable_mobile => v.noembed)
+    end
+    
     def thumbnail_uri
       path = case source
              when :youtube then "http://img.youtube.com/vi/#{self.external_id}/0.jpg"

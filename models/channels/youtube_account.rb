@@ -20,15 +20,9 @@ module Aji
           if a.own_zset.members.count == 0
             yt_videos = YouTubeIt::Client.new.videos_by(
               :user => "#{a.uid}", :order_by => 'published').videos
-              yt_videos.each_with_index do |v, n|
-                a.own_zset[Video.find_or_create_by_external_id(
-                  v.video_id.split(':').last,
-                  :title => v.title,
-                  :description => v.description,
-                  :external_account => a,
-                  :source => :youtube,
-                  :viewable_mobile => v.noembed).id] = v.published_at.to_i
-              end
+            yt_videos.each_with_index do |v, n|
+              a.own_zset[Video.find_or_create_from_youtubeit_video(v).id] = v.published_at.to_i
+            end
           end
 
           a.own_zset.members.each_with_index do |v, k|
