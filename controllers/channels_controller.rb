@@ -42,7 +42,7 @@ module Aji
       get do
         case params[:type]
         when 'keyword'
-          kc = Channels::Keyword.find_by_keywords(params[:keywords])
+          kc = Channels::Keyword.find_by_keywords(params[:keywords].split(","))
           if kc.nil?
             kc = Channels::Keyword.create(:keywords => params[:keywords])
             kc.populate
