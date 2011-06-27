@@ -43,50 +43,6 @@ module Aji
         it "should create new channel"
       end
 
-      describe "put #{resource_uri}/:id" do
-        it "should only respond to known commands" do
-          channel = Factory :channel_with_videos
-          user = Factory :user
-          params = {:user_id => user.id, :channel_action => random_string}
-          put "#{resource_uri}/#{channel.id}", params
-          last_response.status.should == 400
-        end
-
-        it "should allow subscribing" do
-          channel = Factory :channel_with_videos
-          user = Factory :user
-          params = {:user_id => user.id, :channel_action => :subscribe}
-          put "#{resource_uri}/#{channel.id}", params
-          last_response.status.should == 200
-        end
-
-        it "should allow unsubscribing" do
-          channel = Factory :channel_with_videos
-          user = Factory :user
-          user.subscribe channel
-          params = {:user_id => user.id, :channel_action => :unsubscribe}
-          put "#{resource_uri}/#{channel.id}", params
-          last_response.status.should == 200
-          user.subscribed_channels.should_not include channel
-        end
-
-        it "should allow channel arrangment" do
-          user = Factory :user
-          channels = []
-          5.times do |n|
-            channels << Factory(:channel)
-            user.subscribe channels.last
-          end
-          old_position = 3
-          new_position = 1
-          channel = channels[old_position]
-          params = {:user_id => user.id, :channel_action => :arrange, :channel_action_params=>{:new_position=>new_position}}
-          put "#{resource_uri}/#{channel.id}", params
-          last_response.status.should == 200
-          user.subscribed_channels[new_position] = channel
-        end
-      end
-
       describe "get #{resource_uri}/:id/videos" do
         it "should respect limit params" do
           limit = 3
