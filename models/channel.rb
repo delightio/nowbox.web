@@ -33,7 +33,7 @@ module Aji
     def content_videos limit=-1
       content_video_ids(limit).map { |vid| Video.find vid }
     end
-    
+
     def self.blacklisted_video_ids_key; "Aji::Channel.blacklisted_video_ids"; end
 
     def serializable_hash options={}
