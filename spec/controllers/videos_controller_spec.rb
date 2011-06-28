@@ -12,7 +12,13 @@ module Aji
           last_response.status.should == 404
         end
         
-        it "should return video info if found"
+        it "should return video info if found" do
+          video = Factory :video
+          get "#{resource_uri}/#{video.id}"
+          last_response.status.should == 200
+          body_hash = JSON.parse last_response.body
+          body_hash.should == video.serializable_hash
+        end
       end
     end
   end

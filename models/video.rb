@@ -61,7 +61,7 @@ module Aji
            "title" => title,
            "description" => description,
            "thumbnail_uri" => thumbnail_uri,
-           "source" => source,
+           "source" => source.to_s,
            "external_id" => external_id,
            "duration" => duration,
            "view_count" => view_count,
