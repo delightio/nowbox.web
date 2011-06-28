@@ -42,12 +42,14 @@ module Aji
       get do
         case params[:type]
         when 'keyword'
-          kc = Channels::Keyword.find_by_keywords(params[:keywords].split(","))
+          kc = Channels::Keyword.find_by_keywords(
+            params[:keywords].split(','))
           if kc.nil?
-            kc = Channels::Keyword.create(:keywords => params[:keywords])
+            kc = Channels::Keyword.create(
+              :keywords => params[:keywords].split(','))
             kc.populate
           end
-          return kc
+          kc
 
         when 'youtube'
           accounts = params[:accounts].map do |a|
@@ -58,14 +60,14 @@ module Aji
           if yc.nil?
             yc = Channels::YoutubeAccount.create(:accounts => accounts)
             yc.populate
-            return yc
+            yc
           end
 
         when 'trending'
-          return Channels::Trending.first
+          Channels::Trending.first
 
         when 'default'
-          return Channel.default_listing
+          Channel.default_listing
 
         else
           Channel.all
