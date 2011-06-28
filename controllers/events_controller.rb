@@ -14,7 +14,7 @@ module Aji
       # __Required params__ `video_id` unique id of the video being acted on  
       # __Required params__ `video_elapsed` time in seconds when the event is triggered  
       # __Required params__ `channel_id` unique id of the channel being acted on  
-      # __Required params__ `event_type` type of event being triggered: `view`, `share`, `upvote`, `downvote`, `enqueue`, `dequeue`  
+      # __Required params__ `event_type` type of event being triggered: `view`, `share`, `upvote`, `downvote`, `enqueue`, `dequeue`, `examine`  
       # __Optional params__ none
       post do
         p = params.delete_if {|k| k=="version" || k==:version}

@@ -1,6 +1,6 @@
 module Aji
   class Supported
-    def self.event_types; [ :view, :share, :upvote, :downvote, :enqueue, :dequeue ]; end
+    def self.event_types; [ :view, :share, :upvote, :downvote, :enqueue, :dequeue, :examine ]; end
   end
 
   # ## Event Schema
@@ -16,7 +16,7 @@ module Aji
     belongs_to :user
     belongs_to :video
     belongs_to :channel
-    after_create :cache_for_user
+    after_create :cache_for_user, :examine_video
 
     validates_inclusion_of :event_type, :in => Aji::Supported.event_types
     def event_type; read_attribute(:event_type).to_sym; end
@@ -25,6 +25,10 @@ module Aji
     private
       def cache_for_user
         self.user.cache_event self
+      end
+      
+      def examine_video
+        Resque.enqueue Aji::Queues::ExamineVideo, video.id
       end
   end
 end

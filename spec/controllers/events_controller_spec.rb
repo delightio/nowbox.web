@@ -28,6 +28,24 @@ module Aji
           post "#{resource_uri}/", params
           last_response.status.should == 400
         end
+
+        it "should never return given video id again" do
+          channel = Factory :channel_with_videos
+          user = Factory :user
+          bad_video = channel.content_videos.sample
+          channel.personalized_content_videos(:user=>user,:limit=>channel.content_videos.count).should include bad_video
+          Aji::Queues::ExamineVideo.perform bad_video.id # TODO/HACK: how do rspec w/ resque queue?
+          channel.personalized_content_videos(:user=>user,:limit=>channel.content_videos.count).should_not include bad_video
+        end
+
+        it "should queue the given video id in examine video queue" do
+          user = Factory :user
+          channel = Factory :channel_with_videos
+          video = channel.content_videos.sample
+          params = { :user_id=>user.id, :video_id=>video.id, :channel_id=>channel.id, :video_elapsed=>rand(10), :event_type=>'examine'}
+          post "#{resource_uri}/", params
+          Resque.size(:examine_video).should == 1
+        end
       end
     end
   end
