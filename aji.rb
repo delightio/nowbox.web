@@ -5,7 +5,7 @@ Bundler.require
 # This is the initilization file for the Aji API. All set up, library
 # loading and application level settings are done here.
 module Aji
-  def Aji.root; Dir.pwd; end
+  def Aji.root; File.expand_path('..', __FILE__); end
 
   # Set Rack environment if not specified.
   RACK_ENV = ENV['RACK_ENV'] || "development"
