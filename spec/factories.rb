@@ -73,6 +73,7 @@ Factory.define :video, :class => 'Aji::Video' do |a|
   a.source { random_video_source }
   a.title { random_string }
   a.description { random_string(50) }
+  a.duration { rand(100) }
   a.viewable_mobile true
   a.association :external_account
 end
