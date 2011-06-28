@@ -2,16 +2,16 @@
 #
 # Aji Beta Twitter keys.
 development:
-  CONSUMER_KEY: "XDYm9fcC4Xb3XYvJpMNw"
-  CONSUMER_SECRET: "93ChiN5zfB1o04cvZgNoP6mmanVnKRfEKUY6vX03A"
-  BASE_URI: "localhost"
+  CONSUMER_KEY: "Hh1MA1vXVZaN8sjIX2tkjA"
+  CONSUMER_SECRET: "s8b7fghL0JbHfK3lBDV6nTF61TtglgMonkgAL8y790"
+  BASE_URI: "smackaho.st"
   REDISTOGO_URL: "redis://localhost/7"
   DATABASE_URL: "postgres://localhost/aji_dev"
 
 test:
   CONSUMER_KEY: ""
   CONSUMER_SECRET: ""
-  BASE_URI: "localhost"
+  BASE_URI: "smackaho.st"
   REDISTOGO_URL: "redis://localhost/9"
   DATABASE_URL: "postgres://localhost/aji_test"
 
