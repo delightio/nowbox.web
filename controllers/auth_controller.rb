@@ -1,7 +1,7 @@
 module Aji
   class API
     namespace :auth do
-      version ''
+      version '1'
       get '/:provider/callback' do
         auth_hash = request.env['omniauth.auth']
 
