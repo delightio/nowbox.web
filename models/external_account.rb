@@ -10,7 +10,8 @@ module Aji
     include Redis::Objects
     serialize :user_info
     serialize :credentials
-    
+    belongs_to :user
+
     validates_presence_of :provider, :uid
   end
 end

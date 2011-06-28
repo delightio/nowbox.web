@@ -11,10 +11,12 @@ module Aji
   # - created_at: DateTime
   # - updated_at: DateTime
   class User < ActiveRecord::Base
-    has_many :events
     validates_presence_of :email, :first_name
     validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
     after_create :subscribe_default_channels
+
+    has_many :events
+    has_many :external_accounts
 
     include Redis::Objects
     sorted_set :shared_zset
