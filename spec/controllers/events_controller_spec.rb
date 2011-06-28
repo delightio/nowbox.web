@@ -14,7 +14,9 @@ module Aji
           video = channel.content_videos.sample
           event_type = Aji::Supported.event_types.delete_if{|t| t==:enqueue||t==:dequeue}.sample
           user.viewed_videos.should_not include video
-          params = { :user_id=>user.id, :video_id=>video.id, :channel_id=>channel.id, :video_elapsed=>rand(10), :event_type=>event_type}
+          params = { :user_id=>user.id, :channel_id=>channel.id,
+            :video_id=>video.id, :video_start=>video.duration/10, :video_elapsed=>video.duration/5,
+            :event_type=>event_type}
           post "#{resource_uri}/", params
           last_response.status.should ==201
           user.viewed_videos.should include video

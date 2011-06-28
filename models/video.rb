@@ -63,7 +63,7 @@ module Aji
            "thumbnail_uri" => thumbnail_uri,
            "source" => source.to_s,
            "external_id" => external_id,
-           "duration" => duration,
+           "duration" => duration.to_f,
            "view_count" => view_count,
            "published_at" => published_at.to_i,
            "author" => author_hash]
