@@ -1,11 +1,12 @@
 module Aji
   class API
     namespace :auth do
+      version ''
       get '/:provider/callback' do
         auth_hash = request.env['omniauth.auth']
 
         case params[:provider]
-        when :twitter
+        when 'twitter'
           t = ExternalAccounts::Twitter.find_or_create_by_provider_and_uid(
             auth_hash['provider'], auth_hash['uid'],
             :user_info => auth_hash['user_info'],
