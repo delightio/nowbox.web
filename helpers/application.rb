@@ -11,11 +11,16 @@ module Aji
       def find_channel_by_id_or_error id
         Aji::Channel.find_by_id(id) or not_found_error!(Channel, id)
       end
+
+      def find_share_by_id_or_error id
+        Aji::Share.find_by_id(id) or not_found_error!(Share, id)
+      end
+
       def find_user_by_id_or_error id
         Aji::User.find_by_id(id) or not_found_error!(User, id)
       end
       def find_video_by_id_or_error id
-        Aji::Video.find_by_id(id) or not_found_error!(User, id)
+        Aji::Video.find_by_id(id) or not_found_error!(Video, id)
       end
     end
   end
