@@ -33,10 +33,10 @@ module Aji
   class InterfaceMethodNotImplemented < Aji::Error; end
 
   class API < Grape::API
-    namespace '1' do
-      get do
-        "API Version 1 up and running!"
-      end
+    error_format :json
+    version '1'
+    get do
+      "API Version 1 up and running!"
     end
   end
 end
