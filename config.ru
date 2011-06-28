@@ -12,7 +12,7 @@ end
 
 map '/resque' do
   use Rack::Auth::Basic do |username, password|
-    [ username, password ] == ["resque", "mellon" ]
+    [ username, password ] == [ "resque", "mellon" ]
   end
   run Resque::Server
 end
