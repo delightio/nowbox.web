@@ -11,7 +11,7 @@ use OmniAuth::Builder do
 end
 
 map '/auth' do
-  run Aji::AuthHandler
+  run Aji::AuthController
 end
 
 map '/resque' do
