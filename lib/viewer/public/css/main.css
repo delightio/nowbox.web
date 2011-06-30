@@ -76,7 +76,7 @@ ul.section { list-style: none; }
 		#tour .intro p{ font-size: 16px; line-height: 2; text-shadow: 0px 1px 1px #FFF; }
 		
 /* VIDEO */
-#video #embed { background: rgba(0, 0, 0, 0.8); margin: 10px 0px; padding: 10px; box-shadow: inset 0px 0px 10px #000; text-align: center; }
+#video #embed {  margin: 10px 0px; padding: 0px; text-align: center; }
 	#video #embed iframe{ margin: auto; }
 	
 /* SHARER */
