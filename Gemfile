@@ -26,6 +26,7 @@ gem 'resque-scheduler', '~>2.0.0.d',
 gem 'omniauth'
 gem 'youtube_it'
 gem 'erubis'
+gem 'yajl-ruby'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators

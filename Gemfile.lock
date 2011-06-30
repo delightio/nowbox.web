@@ -145,6 +145,7 @@ GEM
     tzinfo (0.3.28)
     vegas (0.1.8)
       rack (>= 1.0.0)
+    yajl-ruby (0.8.2)
     youtube_it (1.4.3)
       builder
       oauth (>= 0.4.4)
@@ -173,4 +174,5 @@ DEPENDENCIES
   sinatra
   thin
   thor
+  yajl-ruby
   youtube_it
