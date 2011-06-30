@@ -29,8 +29,8 @@ module Aji
 		end
 										
     get '/:share_id' do
-      @share = Share.find params[:share_id]
-      erb :play_share
+      #@share = Share.find params[:share_id]
+      erb :video
     end
   end
 end
