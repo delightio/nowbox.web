@@ -1,9 +1,22 @@
-<div id="video">
-	<div id="sharer" style="display: none;">Hi, #share.user.first_name is sharing a video with you.</div>
-
-	<%= erb :_call_to_action_download %>
+<div id="video">	
+	<div id="sharer" class="round-corners-5">
+		<div class="image">
+			<a href="http://twitter.com/nowmov" target="_blank"><img src="./images/graphics/no_profile_r2d2.jpg" height="48px" /></a>
+		</div>
+		<div class="blurb">
+			<p style="font-size: 16px; color: #777;"><b>Your friend</b> shared this video with you</p>
+			<p style="font-size: 12px; color: #999;">Your friend is using the <a href="./download">Nowmov iPad app</a> to watch the best videos from the web. <a href="./tour">Find out more.</a></p>
+		</div>
+		<div id="share_buttons">
+			
+		</div>
+		<div class="clearfix"></div>
+	</div>
 
   <div id="embed">
 		<iframe width="600" height="375" src="http://www.youtube.com/embed/lebW9zBtYnM?rel=0&hd=1&modestbranding=1&autohide=1&controls=1" frameborder="0" allowfullscreen></iframe>
   </div>
+
+	<%= erb :_call_to_action_download %>
+
 </div>
