@@ -29,5 +29,9 @@ module Aji
         :user_id => user_id
       }
     end
+
+    def is_user?
+      user_id ? true : false
+    end
   end
 end
