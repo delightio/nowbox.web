@@ -72,7 +72,8 @@ ul.section { list-style: none; }
 		#about .email{ color: #AAA; }
 
 /* JOBS */
-#jobs li{ list-style: bullet;}
+#jobs li{ list-style-type: disc;
+margin-left: 20px;}
 
 /* TOUR */
 #tour .ipad-chrome{ margin: auto;}
