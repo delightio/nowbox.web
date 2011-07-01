@@ -70,8 +70,8 @@ module Aji
           Channel.default_listing
 
         else
-          Channel.all
-
+          user = User.find_by_id params[:user_id] # FIXME: should be in User controller
+          if user then user.subscribed_channels else Channel.all end
         end
       end
 

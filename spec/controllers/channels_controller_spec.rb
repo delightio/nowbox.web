@@ -22,6 +22,18 @@ module Aji
           returned_channels.should include channels[default.first].serializable_hash
           returned_channels.should include channels[default.last].serializable_hash
         end
+        
+        it "should return subscribed channels if given user id" do
+          user = Factory :user
+          channel = Factory :channel_with_videos
+          user.subscribe channel
+          params = { :user_id => user.id }
+          get "#{resource_uri}", params
+          last_response.status.should == 200
+          body_hash = JSON.parse last_response.body
+          returned_channels = body_hash.map {|h| h["channel"]}
+          returned_channels.should include channel.serializable_hash
+        end
       end
 
       describe "get #{resource_uri}/:id" do
