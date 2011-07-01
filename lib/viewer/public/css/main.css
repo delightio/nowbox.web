@@ -6,10 +6,16 @@ header { padding: 15px 20px 5px; line-height: 30px; text-align: left;}
 	#logo{ display: block; float: left; height: 30px; margin: 0px;}
 		#logo img{ }
 	header .fblike{ float: right; }
+	header ul{ float: right; list-style: none; padding: 0px; margin: 0px auto; }
+		header ul li { float: right; display: block; padding: 2px 5px;}
+			header ul a, header ul a:active, header ul a:visited{ color: #AAA;}
+				header ul a:hover { color: #444;}
 
 footer { padding: 20px 20px;}	
-footer ul{ float: right; list-style: none; padding: 0px; margin: 0px auto; width: 250px;}
+footer ul{ float: right; list-style: none; padding: 0px; margin: 0px auto; }
 	footer ul li { float: right; display: block; padding: 2px 5px;}
+		footer ul a, footer ul a:active, footer ul a:visited{ color: #AAA;}
+		footer ul a:hover { color: #444;}
 footer .tweet, footer .fblike { float: left; }
 	
 #main { padding: 0px 20px; }
