@@ -2,7 +2,7 @@ module Aji
   class Supported
     def self.video_actions; [:examine]; end
   end
-  
+
   # ## Video Schema
   # - id: Integer
   # - account_id: Integer (Foreign Key)
@@ -19,6 +19,7 @@ module Aji
   class Video < ActiveRecord::Base
     has_many :events
     belongs_to :external_account
+    has_and_belongs_to_many :mentions
 
     # Future mentioner/tweeter/poster relationship.
     # has_many :posters, :through...
@@ -26,7 +27,9 @@ module Aji
     # Symbolize source attribute.
     def source; read_attribute(:source).to_sym; end
     def source= value; write_attribute(:source, value.to_sym); end
-    
+
+    # TODO: Deprecate in favor of a generic `Video::fetch(source:Symbol,
+    # external_id:String)`
     def self.find_or_create_from_youtubeit_video v
       external_account =
         ExternalAccounts::Youtube.find_or_create_by_uid(
@@ -42,7 +45,7 @@ module Aji
         :view_count => v.view_count,
         :published_at => v.published_at)
     end
-    
+
     def thumbnail_uri
       path = case source
              when :youtube then "http://img.youtube.com/vi/#{self.external_id}/0.jpg"
