@@ -71,9 +71,7 @@ module Aji
 
         else
           user = User.find_by_id params[:user_id] # FIXME: should be in User controller
-          user.subscribed_channels if user
-          Channel.all if user.nil?
-
+          if user then user.subscribed_channels else Channel.all end
         end
       end
 
