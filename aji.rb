@@ -5,18 +5,25 @@ Bundler.require
 # This is the initilization file for the Aji API. All set up, library
 # loading and application level settings are done here.
 module Aji
+  # Set the application root directory.
   def Aji.root; File.expand_path('..', __FILE__); end
+
+  # Simple logging interface for local development and heroku. May grow in
+  # complexity later, hence methodizing it.
+  def Aji.log message; $STDOUT.puts message; end
 
   # Set Rack environment if not specified.
   RACK_ENV = ENV['RACK_ENV'] || "development"
 
+  # Accessor for the configuration hash. If none has been created a new hash is
+  # yielded. This hash is made immutable at the end of `config/setup.rb`.
   def Aji.conf; @conf_hash ||= Hash.new; end
 
   # Handles initialization and preprocessing of application settings be they
   # from Heroku's Environment or a local `settings.yml`.
   require_relative 'config/setup.rb'
 
-  # Establish Redis connection.
+  # Establish Redis connection and initialize Redis-backed utilities.
   def Aji.redis; @redis ||= Redis.new conf['REDIS']; end
   Resque.redis = redis
   Redis::Objects.redis = redis
