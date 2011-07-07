@@ -54,6 +54,7 @@ Dir.glob("models/external_accounts/*.rb").each { |r| require_relative r }
 Dir.glob("helpers/*.rb").each { |r| require_relative r }
 Dir.glob("controllers/*_controller.rb").each { |r| require_relative r }
 Dir.glob("queues/*.rb").each { |r| require_relative r }
+Dir.glob("queues/mention/*.rb").each { |r| require_relative r }
 
 # Add Sinatra web viewer.
 require_relative "lib/viewer/viewer.rb"
