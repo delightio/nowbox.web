@@ -9,8 +9,8 @@ module Aji
         :external_id => tweet_hash['uid'],
         :body => tweet_hash['text'],
         :unparsed_data => json,
-        :author => ExternalAccount::Twitter.find_or_create_by_provider_uid(
-          'twitter', tweet_hash['user']['id']))
+        :author => ExternalAccounts::Twitter.find_or_create_by_provider_and_uid(
+          'twitter', tweet_hash['user']['id'].to_s))
     end
   end
 end
