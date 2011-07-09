@@ -18,7 +18,7 @@ gem 'activerecord', '=3.0.4', :require => 'active_record'
 
 # Literate comments, generating lovely documentation HTML.
 gem 'rdiscount' # Required for Rocco.
-gem 'rocco'
+gem 'rocco', :group => :development
 
 # Libraries used by the backend.
 gem 'resque-scheduler', '~>2.0.0.d',
@@ -36,8 +36,10 @@ gem 'yajl-ruby'
 # end
 
 # Testing gems.
-gem 'rack-test'
-gem 'rspec'
-gem 'fabrication'
-gem 'factory_girl'
-gem 'simplecov', :require => false
+group :test do
+  gem 'rack-test'
+  gem 'rspec'
+  gem 'fabrication'
+  gem 'factory_girl'
+  gem 'simplecov', :require => false
+end
