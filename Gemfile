@@ -38,4 +38,6 @@ gem 'yajl-ruby'
 # Testing gems.
 gem 'rack-test'
 gem 'rspec'
-gem 'factory_girl', :git => 'https://github.com/thoughtbot/factory_girl.git'
+gem 'fabrication'
+gem 'factory_girl'
+gem 'simplecov', :require => false

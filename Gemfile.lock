@@ -1,9 +1,3 @@
-GIT
-  remote: https://github.com/thoughtbot/factory_girl.git
-  revision: c59981de1b2eb831dfd47a5df95e3ab71912c63b
-  specs:
-    factory_girl (2.0.0.beta2)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -24,6 +18,8 @@ GEM
     diff-lcs (1.1.2)
     erubis (2.7.0)
     eventmachine (0.12.10)
+    fabrication (1.0.1)
+    factory_girl (1.3.3)
     faraday (0.6.1)
       addressable (~> 2.2.4)
       multipart-post (~> 1.1.0)
@@ -132,6 +128,9 @@ GEM
     rubyntlm (0.1.1)
     rufus-scheduler (2.0.9)
       tzinfo (>= 0.3.23)
+    simplecov (0.4.2)
+      simplecov-html (~> 0.4.4)
+    simplecov-html (0.4.5)
     sinatra (1.2.6)
       rack (~> 1.1)
       tilt (>= 1.2.2, < 2.0)
@@ -156,7 +155,8 @@ PLATFORMS
 DEPENDENCIES
   activerecord (= 3.0.4)
   erubis
-  factory_girl!
+  fabrication
+  factory_girl
   foreman
   grape
   hiredis
@@ -171,6 +171,7 @@ DEPENDENCIES
   resque-scheduler (~> 2.0.0.d)
   rocco
   rspec
+  simplecov
   sinatra
   thin
   thor
