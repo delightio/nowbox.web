@@ -25,7 +25,7 @@ module Aji
     sorted_set :viewed_zset
     sorted_set :queued_zset
     list :subscribed_list # User's Subscribed channels.
-    
+
     def subscribed? channel
       subscribed_list.include? channel.id.to_s
     end
@@ -59,11 +59,11 @@ module Aji
     def cache_event event
       at_time = event.created_at.to_i
       video_id = event.video_id
-      
+
       case event.event_type
       when :view
         viewed_zset[video_id] = at_time
-        
+
       when :share
         viewed_zset[video_id] = at_time
         liked_zset[video_id] = at_time
@@ -74,15 +74,15 @@ module Aji
       when :downvote
         viewed_zset[video_id] = at_time
         downvoted_zset[video_id] = at_time
-        
+
       when :enqueue
         queued_zset[video_id] = at_time
       when :dequeue
         queued_zset.delete video_id
-        
+
       when :examine
         viewed_zset[video_id] = at_time 
-        
+
       end
     end
 

@@ -1,7 +1,7 @@
 require File.expand_path("../../spec_helper", __FILE__)
 
 describe Aji::User do
-  
+
   describe "#cache_event" do
     it "should cache video id in viewed regardless of event type except :enqueue and :dequeue" do
       user = Factory :user
@@ -28,16 +28,16 @@ describe Aji::User do
       user.cache_event event
       user.queued_videos.should_not include event.video
     end
-    
+
     it "should not mark a video viewed when queuing" do
       user = Factory :user
       event = Factory :event, :event_type => :enqueue
       user.cache_event event
       user.viewed_videos.should_not include event.video
     end
-    
+
   end
-  
+
   describe "video_collections" do
     context "when accessing a video collection" do
       it "should return a list of video objects" do
@@ -49,7 +49,7 @@ describe Aji::User do
       end
     end
   end
-  
+
   context "channel subscription management" do
     it "should add and remove channel accordingly" do
       user = Factory :user
@@ -80,7 +80,7 @@ describe Aji::User do
       user.subscribed_channels[args[:new_position]].should == channels[old_position]
     end
   end
-  
+
   describe "#serializable_hash" do
     it "should include a list subscribed channel ids" do
       user = Factory :user
@@ -93,5 +93,5 @@ describe Aji::User do
       user.serializable_hash["subscribed_channel_ids"].should == user.subscribed_list.values
     end
   end
-  
+
 end

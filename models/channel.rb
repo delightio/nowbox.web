@@ -27,6 +27,9 @@ module Aji
 
     include Redis::Objects
     sorted_set :content_zset
+
+    # TODO: This isn't a particularly robust interface. I'm writing my own Redis
+    # object library so when that's finished we'll use it.
     def content_video_ids limit=-1
       content_zset.revrange 0, limit
     end
