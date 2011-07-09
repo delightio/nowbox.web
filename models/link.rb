@@ -5,11 +5,11 @@ module Aji
   # decided yet I just want a fucking Link object.
   class Link < String
       @@youtube_id = %r<([-_\w]{11})>
-      @@youtube_regexps = Array.new(
+      @@youtube_regexps = [
       @@youtube_url_1 = %r<https?://(?:www\.)?youtube(?:-nocookie)?\.com/v/#{@@youtube_id}["?]?>,
       @@youtube_url_2 = %r<https?://(?:www\.)?youtube(?:-nocookie)?\.com/watch\?(?:\S&)?v=#{@@youtube_id}[&"]?>,
-      @@youtube_url_3 = %r<https?://(?:youtu|y2u)\.be/#{@@youtube_id}>,
-      @@vimeo_url = %r<https?://(?:www\.)?vimeo\.com/(\d+)>)
+      @@youtube_url_3 = %r<https?://(?:youtu|y2u)\.be/#{@@youtube_id}>]
+      @@vimeo_url = %r<https?://(?:www\.)?vimeo\.com/(\d+)>
 
     def is_youtube_video?
       # Check if string matches any youtube urls and memoize the result.
