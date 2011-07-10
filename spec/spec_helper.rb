@@ -1,5 +1,7 @@
 ENV["RACK_ENV"] ||= 'test'
-require 'simplecov'
+Bundler.require :test
+
+
 SimpleCov.start
 
 require 'rspec'
