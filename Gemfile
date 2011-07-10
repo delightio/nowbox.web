@@ -41,5 +41,5 @@ group :test do
   gem 'rspec'
   gem 'fabrication'
   gem 'factory_girl'
-  gem 'simplecov', :require => false
+  gem 'simplecov'
 end
