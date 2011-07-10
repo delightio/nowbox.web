@@ -11,7 +11,7 @@ module Aji
         Video.find tweeted_zset.members
       end
 
-      def publish
+      def publish share
         Twitter.configure do |c|
           c.consumer_key = Aji.conf['CONSUMER_KEY']
           c.consumer_secret = Aji.conf['CONSUMER_SECRET']

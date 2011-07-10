@@ -16,7 +16,7 @@ module Aji
 
     # The publish interface is called by background tasks to publish a video
     # share to an external service.
-    def publish
+    def publish share
       raise InterfaceMethodNotImplemented.new(
         "#{self.class} must override ExternalAccount#publish.")
     end
