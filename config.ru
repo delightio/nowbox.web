@@ -2,6 +2,7 @@
 
 require "#{File.expand_path(".")}/aji"
 
+use Rack::Deflater
 use Rack::Session::Cookie
 use OmniAuth::Builder do
   provider :twitter, Aji.conf['CONSUMER_KEY'], Aji.conf['CONSUMER_SECRET']
