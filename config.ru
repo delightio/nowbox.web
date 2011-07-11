@@ -26,4 +26,6 @@ map "http://api.#{Aji.conf['TLD']}/" do
   run Aji::API
 end
 
-run Aji::Viewer
+map '/' do
+  run Aji::Viewer
+end
