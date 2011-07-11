@@ -22,10 +22,8 @@ map "http://resque.#{Aji.conf['TLD']}/" do
   run Resque::Server
 end
 
-map "http://#{Aji.conf['TLD']}/" do
-  run Aji::Viewer
-end
-
 map "http://api.#{Aji.conf['TLD']}/" do
   run Aji::API
 end
+
+run Aji::Viewer
