@@ -4,14 +4,14 @@
 development:
   CONSUMER_KEY: "Hh1MA1vXVZaN8sjIX2tkjA"
   CONSUMER_SECRET: "s8b7fghL0JbHfK3lBDV6nTF61TtglgMonkgAL8y790"
-  BASE_URI: "smackaho.st"
+  TLD: "smackaho.st"
   REDISTOGO_URL: "redis://localhost/7"
   DATABASE_URL: "postgres://localhost/aji_dev"
 
 test:
   CONSUMER_KEY: ""
   CONSUMER_SECRET: ""
-  BASE_URI: "smackaho.st"
+  TLD: "smackaho.st"
   REDISTOGO_URL: "redis://localhost/9"
   DATABASE_URL: "postgres://localhost/aji_test"
 

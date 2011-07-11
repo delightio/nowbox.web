@@ -15,17 +15,17 @@ map '/auth' do
   run Aji::AuthController
 end
 
-map '/resque' do
+map "http://resque.#{Aji.conf['TLD']}/" do
   use Rack::Auth::Basic do |username, password|
     [ username, password ] == [ "resque", "mellon" ]
   end
   run Resque::Server
 end
 
-map '/v' do
+map "http://#{Aji.conf['TLD']}/" do
   run Aji::Viewer
 end
 
-map '/' do
+map "http://api.#{Aji.conf['TLD']}/" do
   run Aji::API
 end
