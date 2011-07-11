@@ -4,30 +4,31 @@ module Aji
   class Viewer < Sinatra::Base
     # Use Erubis for template generation. Essentially a faster ERB.
     Tilt.register :erb, Tilt[:erubis]
-    # Need to explicitly set the template directory http://stackoverflow.com/questions/3742486/sinatra-cannot-find-views-on-ruby-1-9-2-p0
-		set :views, File.dirname(__FILE__) + "/views"
-		set :public, File.dirname(__FILE__) + "/public"
-		
-		get '/' do 
-			erb :index
-		end
+    # Need to explicitly set the template directory:
+    # http://stackoverflow.com/questions/3742486/sinatra-cannot-find-views-on-ruby-1-9-2-p0
+    set :views, File.dirname(__FILE__) + "/views"
+    set :public, File.dirname(__FILE__) + "/public"
 
-		get '/about' do 
-			erb :about
-		end
-		
-		get '/jobs' do 
-			erb :jobs
-		end
+    get '/' do
+      erb :index
+    end
 
-		get '/tour' do 
-			erb :tour
-		end
+    get '/about' do
+      erb :about
+    end
 
-		get '/download' do 
-			erb :download
-		end
-										
+    get '/jobs' do
+      erb :jobs
+    end
+
+    get '/tour' do
+      erb :tour
+    end
+
+    get '/download' do
+      erb :download
+    end
+
     get '/:share_id' do
       #@share = Share.find params[:share_id]
       erb :video

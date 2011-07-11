@@ -26,7 +26,7 @@ module Aji
       def cache_for_user
         self.user.cache_event self
       end
-      
+
       def examine_video
         Resque.enqueue Aji::Queues::ExamineVideo, video.id
       end

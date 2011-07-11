@@ -55,7 +55,7 @@ module Aji
     end
 
     def serializable_hash options={}
-      author = external_account # TODO: 1. asusme only 1 EA per video and 2. overloading EA#id
+      author = external_account # TODO: 1. assume only 1 EA per video and 2. overloading EA#id
       author_hash = {}
       author_hash["username"] = author.username
       author_hash["profile_uri"] = author.profile_uri
