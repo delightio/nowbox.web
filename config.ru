@@ -11,6 +11,10 @@ use OmniAuth::Builder do
   #provider :identica, Aji.conf['identica_key'], Aji.conf['identica_secret']
 end
 
+map "http://beta.#{Aji.conf['TLD']}/" do
+  run Aji::Viewer
+end
+
 map '/auth' do
   run Aji::AuthController
 end
@@ -24,8 +28,4 @@ end
 
 map "http://api.#{Aji.conf['TLD']}/" do
   run Aji::API
-end
-
-map '/' do
-  run Aji::Viewer
 end
