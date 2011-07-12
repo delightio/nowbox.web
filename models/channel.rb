@@ -65,14 +65,14 @@ module Aji
       limit = (args[:limit] || 20).to_i
       new_video_ids = []
       # TODO: use Redis for this..
-      viewed_video_ids = Set.new user.viewed_zset.range(0,-1)
+      viewed_video_ids = Set.new user.viewed_video_ids
       content_video_ids.each do |channel_video_id|
         next if Aji.redis.sismember Channel.blacklisted_video_ids_key, channel_video_id
         new_video_ids << channel_video_id if !viewed_video_ids.member? channel_video_id
         break if new_video_ids.count >= limit
       end
       # new_video_ids = content_zset - user.viewed_zset # TODO: zdiff not found?
-      new_video_ids.map { |vid| Video.find vid }
+      new_video_ids.map{ |vid| Video.find_by_id vid }.compact
     end
 
     def self.default_listing
