@@ -7,22 +7,24 @@ describe Aji::Channel do
       expect { c.populate }.to raise_error Aji::InterfaceMethodNotImplemented
     end
   end
-  
+
   describe "#personalized_content_videos" do
     it "should return unviewed videos" do
       channel = Factory :channel_with_videos
-      user = Factory :user
-      viewed_videos = []
-      channel.content_videos.sample(10).each do |video|
-        event = Factory :event, :event_type => :view, :user => user, :video => video
-        viewed_videos << event.video
-      end
-      personalized_videos = channel.personalized_content_videos :user=>user
-      viewed_videos.each do | viewed_video |
-        personalized_videos.should_not include viewed_video
+      viewed_video_ids = channel.content_videos.sample(channel.content_videos.length / 2).map(&:id)
+
+
+      user = mock("user")
+      # We #dup the viewed_video_ids object since RSpec decided to count object
+      user.should_receive(:viewed_video_ids).at_least(1).and_return(
+        viewed_video_ids)
+      personalized_video_ids = channel.personalized_content_videos(
+        :user => user).map(&:id)
+      viewed_video_ids.each do | id |
+        personalized_video_ids.should_not include id
       end
     end
-    
+
     it "should return videos according to descending order on score" do
       channel = Factory :trending_channel
       user = Factory :user
@@ -42,13 +44,13 @@ describe Aji::Channel do
       event = Factory :event, :event_type => :view, :user => user, :video => viewed_video
       personalized_videos = channel.personalized_content_videos :user=>user
       personalized_videos.should_not include viewed_video
-      
+
       top_video_score = channel.content_zset.score personalized_videos.first.id
       last_video_score= channel.content_zset.score personalized_videos.last.id
       top_video_score.should >= last_video_score
     end
   end
-  
+
   describe ".default_listing" do
     it "should return all channels marked as default" do
       n = 5
@@ -63,5 +65,5 @@ describe Aji::Channel do
       Aji::Channel.default_listing.should include default_channel
     end
   end
-  
+
 end

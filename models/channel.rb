@@ -31,10 +31,15 @@ module Aji
     # TODO: This isn't a particularly robust interface. I'm writing my own Redis
     # object library so when that's finished we'll use it.
     def content_video_ids limit=-1
-      content_zset.revrange 0, limit
+      (content_zset.revrange 0, limit).map(&:to_i)
     end
     def content_videos limit=-1
       content_video_ids(limit).map { |vid| Video.find vid }
+    end
+
+    # Push a video into the channel's content.
+    def push video
+      content_zset[video.id] = Time.now.to_i
     end
 
     def self.blacklisted_video_ids_key; "Aji::Channel.blacklisted_video_ids"; end
@@ -65,10 +70,12 @@ module Aji
       limit = (args[:limit] || 20).to_i
       new_video_ids = []
       # TODO: use Redis for this..
-      viewed_video_ids = Set.new user.viewed_video_ids
+     a = user.viewed_video_ids
+      viewed_video_ids = user.viewed_video_ids
       content_video_ids.each do |channel_video_id|
         next if Aji.redis.sismember Channel.blacklisted_video_ids_key, channel_video_id
         new_video_ids << channel_video_id if !viewed_video_ids.member? channel_video_id
+
         break if new_video_ids.count >= limit
       end
       # new_video_ids = content_zset - user.viewed_zset # TODO: zdiff not found?
