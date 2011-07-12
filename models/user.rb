@@ -87,9 +87,15 @@ module Aji
     end
 
     %w(shared_zset liked_zset downvoted_zset viewed_zset queued_zset).each do |zset|
+      # Define direct video accessor for all sets.
       action = zset.split('_').first
       define_method :"#{action}_videos" do
         Video.find(send(zset.to_sym).members)
+      end
+
+      # Define video id accessor for all sets.
+      define_method :"#{action}_video_ids" do
+        Set.new send(zset.to_sym).members
       end
     end
 
