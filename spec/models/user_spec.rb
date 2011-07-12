@@ -41,11 +41,8 @@ describe Aji::User do
   describe "video_collections" do
     context "when accessing a video collection" do
       it "should return a list of video objects" do
-        user = Factory :user
-        5.times do
-          user.queued_zset[Factory(:video).id] = Time.now.to_i
-        end
-        user.queued_videos.first.class.should == Aji::Video
+        user = Factory :user_with_viewed_videos
+        user.viewed_videos.first.class.should == Aji::Video
       end
     end
   end

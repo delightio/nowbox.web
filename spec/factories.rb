@@ -42,6 +42,15 @@ Factory.define :user_with_channels, :parent =>:user do |a|
   end
 end
 
+Factory.define :user_with_viewed_videos, :parent => :user do |a|
+  a.after_create do |u|
+    c = Factory :channel_with_videos
+    c.content_videos.sample(10).each do |v|
+      e = Factory :event, :video=>v, :channel=>c, :user=>u
+    end
+  end
+end
+
 Factory.define :event, :class => 'Aji::Event' do |a|
   a.association :user
   a.association :video

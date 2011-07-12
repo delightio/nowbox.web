@@ -36,10 +36,13 @@ module Aji
     def content_videos limit=-1
       content_video_ids(limit).map { |vid| Video.find vid }
     end
+    def relevance_of video
+      content_zset.score video.id
+    end
 
     # Push a video into the channel's content.
-    def push video
-      content_zset[video.id] = Time.now.to_i
+    def push video, relevance=Time.now.to_i
+      content_zset[video.id] = relevance
     end
 
     def self.blacklisted_video_ids_key; "Aji::Channel.blacklisted_video_ids"; end

@@ -27,27 +27,24 @@ describe Aji::Channel do
 
     it "should return videos according to descending order on score" do
       channel = Factory :trending_channel
-      user = Factory :user
-      videos_with_insertion_time = []
       10.times do |n|
-        h = { :vid=>Factory(:video).id, :rel=>rand(1000) }
-        videos_with_insertion_time << h
-        channel.content_zset[h[:vid]] = h[:rel]
+        channel.push Factory(:video), rand(1000)
       end
-      top_video_id = channel.content_zset.last
-      last_video_id= channel.content_zset.first
-      top_video_score = channel.content_zset.score top_video_id
-      last_video_score= channel.content_zset.score last_video_id
-      top_video_score.should >= last_video_score
+      top_video  = channel.content_videos.first
+      last_video = channel.content_videos.last
+      top_video_relevance = channel.relevance_of top_video
+      last_video_relevance= channel.relevance_of last_video
+      top_video_relevance.should >= last_video_relevance
 
       viewed_video = channel.content_videos.sample
+      user = Factory :user
       event = Factory :event, :event_type => :view, :user => user, :video => viewed_video
       personalized_videos = channel.personalized_content_videos :user=>user
       personalized_videos.should_not include viewed_video
 
-      top_video_score = channel.content_zset.score personalized_videos.first.id
-      last_video_score= channel.content_zset.score personalized_videos.last.id
-      top_video_score.should >= last_video_score
+      top_video_relevance = channel.relevance_of personalized_videos.first
+      last_video_relevance= channel.relevance_of personalized_videos.last
+      top_video_relevance.should >= last_video_relevance
     end
   end
 
