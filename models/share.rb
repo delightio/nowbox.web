@@ -13,7 +13,7 @@ module Aji
     attr_accessor :publish_to
 
     def link
-      "http://#{Aji.conf['BASE_URI']}/#{id}"
+      "http://#{Aji.conf['TLD']}/#{id}"
     end
 
     def queue_publishing
