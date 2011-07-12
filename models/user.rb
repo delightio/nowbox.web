@@ -55,6 +55,10 @@ module Aji
       Channel.default_listing.each { |c| subscribe c }
       # TODO: we are pulling in the whole channel object but we really only care about Channel#id
     end
+    def subscribed_channels
+      # Channel.find(subscribed_list.values) # TODO: Is AR caching this query? My list came out the same after User#arrange
+      subscribed_list.map { |cid| Channel.find cid }
+    end
 
     def cache_event event
       at_time = event.created_at.to_i
@@ -98,11 +102,6 @@ module Aji
       define_method :"#{action}_video_ids" do
         Set.new send(zset.to_sym).members.map(&:to_i)
       end
-    end
-
-    def subscribed_channels
-      # Channel.find(subscribed_list.values) # TODO: Is AR caching this query? My list came out the same after User#arrange
-      subscribed_list.map { |cid| Channel.find cid }
     end
 
     def serializable_hash options={}
