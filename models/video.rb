@@ -60,7 +60,7 @@ module Aji
              end
       path
     end
-    
+
     def is_populated?; populated_at!=nil; end
     def populate
       raise "Aji::Video#populate: missing external id for Aji::Video[#{id}]" if external_id.nil?
@@ -77,7 +77,7 @@ module Aji
       self.view_count = v.view_count
       self.published_at = v.published_at
     end
-    
+
     # Since Video#relevance is usually used when calculating a large collection
     # of videos, we request the input parameter to be an integer to save
     # unnecessary .to_i conversion on the time object
@@ -91,9 +91,10 @@ module Aji
       end
       Integer Decay.exponentially time_diffs
     end
-    
+
     def serializable_hash options={}
-      return Hash["id" => id, "external_id" => external_id, "source" => source.to_s ] if !is_populated?
+      # unless is more idiomatic than `if !`
+      return Hash["id" => id, "external_id" => external_id, "source" => source.to_s ] unless is_populated?
       author = external_account # TODO: 1. assume only 1 EA per video and 2. overloading EA#id
       author_hash = {}
       author_hash["username"] = author.username
@@ -110,6 +111,5 @@ module Aji
            "published_at" => published_at.to_i,
            "author" => author_hash]
     end
-
   end
 end
