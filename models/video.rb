@@ -44,7 +44,8 @@ module Aji
         :viewable_mobile => v.noembed,
         :duration => v.duration,
         :view_count => v.view_count,
-        :published_at => v.published_at)
+        :published_at => v.published_at,
+        :populated_at => Time.now)
     end
 
     def thumbnail_uri
