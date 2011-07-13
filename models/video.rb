@@ -74,6 +74,7 @@ module Aji
     end
     
     def serializable_hash options={}
+      return Hash["id" => id, "external_id" => external_id, "source" => source.to_s ] if !is_populated?
       author = external_account # TODO: 1. assume only 1 EA per video and 2. overloading EA#id
       author_hash = {}
       author_hash["username"] = author.username

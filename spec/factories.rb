@@ -79,7 +79,6 @@ end
 Factory.define :video, :class => 'Aji::Video' do |a|
   a.external_id { random_string }
   a.source { random_video_source }
-  a.association :external_account
 end
 
 Factory.define :populated_video, :parent => :video do |a|
