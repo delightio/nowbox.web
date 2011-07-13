@@ -30,7 +30,7 @@ class Aji < Thor
     exec irb_command
   end
 
-  desc "spec", "Run application spec tests"
+  desc "spec [spec_file:line]", "Run application spec tests"
   def spec test=nil
     if test
       exec "bin/rspec #{test}"
