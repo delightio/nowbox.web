@@ -54,20 +54,23 @@ module Aji
     end
 
     def thumbnail_uri
-      path = case source
-             when :youtube then "http://img.youtube.com/vi/#{self.external_id}/0.jpg"
-             else ""
-             end
-      path
+      # Case is an expression and will return the value previously set to
+      # path.
+      case source
+      when :youtube then "http://img.youtube.com/vi/#{self.external_id}/0.jpg"
+      else ""
+      end
     end
 
-    def is_populated?; populated_at!=nil; end
+    def is_populated?; not populated_at.nil?; end
+
     def populate
       raise "Aji::Video#populate: missing external id for Aji::Video[#{id}]" if external_id.nil?
       send "populate_from_#{source}"
       self.populated_at = Time.now
       save
     end
+
     def populate_from_youtube
       v = YouTubeIt::Client.new.video_by external_id # TODO: global YouTubeIt client
       self.title = v.title
