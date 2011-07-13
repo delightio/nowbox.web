@@ -1,3 +1,3 @@
 Fabricate :channel do
-  content_videos
+  title { sequence { |i| "Channel ##{i}" } }
 end
