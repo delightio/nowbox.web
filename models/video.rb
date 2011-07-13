@@ -16,6 +16,7 @@ module Aji
   # - published_at: DateTime
   # - created_at: DateTime
   # - updated_at: DateTime
+  # - populated_at: DateTime
   class Video < ActiveRecord::Base
     has_many :events
     belongs_to :external_account
@@ -53,7 +54,24 @@ module Aji
              end
       path
     end
-
+    
+    def is_populated?; populated_at!=nil; end
+    def populate
+      raise "Aji::Video#populate: missing external id for Aji::Video[#{id}]" if external_id.nil?
+      send "populate_from_#{source}"
+      self.populated_at = Time.now
+      save
+    end
+    def populate_from_youtube
+      v = YouTubeIt::Client.new.video_by external_id # TODO: global YouTubeIt client
+      self.title = v.title
+      self.description = v.description
+      self.viewable_mobile = v.noembed
+      self.duration = v.duration
+      self.view_count = v.view_count
+      self.published_at = v.published_at
+    end
+    
     def serializable_hash options={}
       author = external_account # TODO: 1. assume only 1 EA per video and 2. overloading EA#id
       author_hash = {}
