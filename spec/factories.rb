@@ -68,7 +68,7 @@ end
 Factory.define :channel_with_videos, :parent => :channel do |a|
   a.after_create do |c|
     50.times do |n|
-      c.push Factory :video
+      c.push Factory :populated_video
     end
   end
 end
