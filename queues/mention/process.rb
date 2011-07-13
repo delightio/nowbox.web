@@ -12,13 +12,10 @@ module Aji
           until mention.links.empty?
             # Link is a subclass of URI
             link = Link.new mention.links.unshift
-            case link.type
-            when :youtube
-              video = Video.fetch_from :youtube, link.youtube_id
-              mention.videos << video
-              mention.save or Aji.log(
-                "Couldn't save #{mention.inspect} for #{mention.errors.inspect}")
-            end
+            video = Aji::Video.find_or_create_by_external_id_and_source link.youtube_id, link.type
+            mention.videos << video
+            mention.save or Aji.log(
+              "Couldn't save #{mention.inspect} for #{mention.errors.inspect}")
           end
         end
       end
