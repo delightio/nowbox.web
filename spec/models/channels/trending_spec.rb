@@ -2,17 +2,9 @@ require File.expand_path("../../../spec_helper", __FILE__)
 
 describe Aji::Channels::Trending do
   describe "#populate" do
-    it "fetches some videos from nowmov.com" do
-      pending
-      n = 5
-      trending = Aji::Channels::Trending.create :title => "Trending channel from spec test"
-      trending.content_videos.should be_empty
-      Aji::Video.count.should == 0
-      trending.populate :limit=>n
-      Aji::Video.count.should > 0
-      trending.content_videos.count.should == Aji::Video.count
-    end
-
+    it "should remove out dated videos"
+    it "should populate videos if they make it to the list"
+    it "should only keep a max n videos in flight"
   end
 end
 
