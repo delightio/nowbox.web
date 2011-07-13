@@ -17,7 +17,6 @@ describe Aji::Video do
       video.populate
       Aji::Video.find(video.id).is_populated?.should == true
       Aji::Video.find(video.id).title.should_not be_nil
-      
     end
   end
   
