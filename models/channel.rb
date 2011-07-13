@@ -56,7 +56,7 @@ module Aji
            "category" => category.to_s,
            "title" => title,
            "thumbnail_uri" => thumbnail_uri,
-           "resource_uri" => "http://#{Aji.conf['BASE_URL']}/#{Aji::API.version.first}/channels/#{self.id}"]
+           "resource_uri" => "http://api.#{Aji.conf['TLD']}/#{Aji::API.version.first}/channels/#{self.id}"]
     end
 
     # The populate interface method is called by background tasks to fill the
