@@ -5,6 +5,7 @@ module Aji
   module Channels
     class Trending < Channel
 
+      include Redis::Objects
       sorted_set :recent_zset
       def recent_video_ids limit=-1
         (recent_zset.revrange 0, limit).map(&:to_i)
@@ -23,7 +24,7 @@ module Aji
         recent_video_ids_at_time.each do |vid|
           video = Aji::Video.find_by_id vid
           next if video.nil?
-          in_flight << { :vid => vid, :relevance => video.relevance at_time_i}
+          in_flight << { :vid => vid, :relevance => video.relevance(at_time_i) }
         end
         Aji.log "Collected #{in_flight.count} recent videos in #{Time.now-start} s."
         
