@@ -7,6 +7,8 @@ development:
   TLD: "smackaho.st"
   REDISTOGO_URL: "redis://localhost/7"
   DATABASE_URL: "postgres://localhost/aji_dev"
+  MAX_RECENT_VIDEO_IDS_IN_TRENDING: 1000
+  MAX_VIDEOS_IN_TRENDING: 100
 
 test:
   CONSUMER_KEY: ""
@@ -14,4 +16,5 @@ test:
   TLD: "smackaho.st"
   REDISTOGO_URL: "redis://localhost/9"
   DATABASE_URL: "postgres://localhost/aji_test"
-
+  MAX_RECENT_VIDEO_IDS_IN_TRENDING: 1000
+  MAX_VIDEOS_IN_TRENDING: 100

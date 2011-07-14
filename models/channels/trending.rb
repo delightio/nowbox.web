@@ -12,7 +12,8 @@ module Aji
       end
       def push_recent video, relevance=Time.now.to_i
         recent_zset[video.id] = relevance
-        Aji.redis.zremrangebyrank recent_zset.key, 0, -10001 # keep the latest 10000
+        n = 1 + Aji.conf['MAX_RECENT_VIDEO_IDS_IN_TRENDING']
+        Aji.redis.zremrangebyrank recent_zset.key, 0, -n
       end
 
       def populate args={}
@@ -30,10 +31,10 @@ module Aji
         
         start = Time.now
         in_flight.sort!{ |x,y| y[:relevance] <=> x[:relevance] }
-        Aji.log "Sorted #{in_flight.count} videos in #{Time.now-start} s."
+        Aji.log "Sorted #{in_flight.count} videos in #{Time.now-start} s. #{in_flight.inspect}"
         
         start = Time.now; populated_count = 0
-        max_in_flight = 2000
+        max_in_flight = Aji.conf['MAX_VIDEOS_IN_TRENDING']
         in_flight.first(max_in_flight).each do |h|
           video = Aji::Video.find_by_id h[:vid]
           next if video.nil?
@@ -43,7 +44,7 @@ module Aji
           end
           push video, h[:relevance]
         end
-        Aji.log "Replace #{min(max_in_flight,in_flight.count)} (#{populated_count} populated) content videos in #{Time.now-start} s."
+        Aji.log "Replace #{[max_in_flight,in_flight.count].min} (#{populated_count} populated) content videos in #{Time.now-start} s."
       end
 
       def serializable_hash options={}
