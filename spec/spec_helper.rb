@@ -22,7 +22,7 @@ end
 
 EphemeralResponse.configure do |config|
   config.fixture_directory = "spec/fixtures/ephemeral_response"
-  config.expiration = lambda { one_day * 7 }
+  config.expiration = 604800 # 7 days.
 end
 
 RSpec.configure do |config|
