@@ -21,7 +21,8 @@ module Aji
             yt_videos = YouTubeIt::Client.new.videos_by(
               :user => "#{a.uid}", :order_by => 'published').videos
             yt_videos.each_with_index do |v, n|
-              a.own_zset[Video.find_or_create_from_youtubeit_video(v).id] = v.published_at.to_i
+              a.own_zset[Video.find_or_create_from_youtubeit_video(v).id] =
+                v.published_at.to_i
             end
           end
 
@@ -36,17 +37,14 @@ module Aji
 
       def self.find_by_accounts accounts
         #[ first_account, *accounts ] = accounts
-        account_channel_ids = accounts.map do |a|
-          # No #channel_ids method for habtm relationships. T_T
-          ExternalAccount::Youtube.find_by_uid(a).channel.map(&:id)
-        end
+        account_channel_ids = accounts.map{ |a| a.channels.map(&:id) }
         # Perform an intersection on the account channel ids
-        # using Ruby's awesome Array#inject.'
+        # using Ruby's awesome Array#inject.
         matching_channels = account_channel_ids.inject(&:&)
         matching_channels.find_all {|ar| ar.length == accounts.length}
         # Return the first (and hopefully only) matching channel or nil when
         # none is found.
-        ExternalAccount::YoutubeAccount.find_by_id(account_channel_ids.first)
+        ExternalAccounts::Youtube.find_by_id(account_channel_ids.first)
       end
     end
   end
