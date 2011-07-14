@@ -31,7 +31,7 @@ module Aji
         
         start = Time.now
         in_flight.sort!{ |x,y| y[:relevance] <=> x[:relevance] }
-        Aji.log "Sorted #{in_flight.count} videos in #{Time.now-start} s. #{in_flight.inspect}"
+        Aji.log "Sorted #{in_flight.count} videos in #{Time.now-start} s. Top 5: #{in_flight.first(5).inspect}"
         
         start = Time.now; populated_count = 0
         max_in_flight = Aji.conf['MAX_VIDEOS_IN_TRENDING']
