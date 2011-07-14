@@ -29,5 +29,20 @@ describe Aji::Video do
     end
   end
   
+  describe "#relevance" do
+    it "should return higher relevance for newer mentions given the same number of mentions" do
+      at_time_i = Time.now.to_i
+      video = Factory :video_with_mentions
+      old_relevance = video.relevance at_time_i
+      
+      # make video's mentions more recent
+      video.mentions.each do |mention|
+        mention.published_at = mention.published_at + rand(100).seconds
+        mention.published_at = Time.now if (mention.published_at.to_i-Time.now.to_i>0)
+        mention.save
+      end
+      video.relevance(at_time_i).should > old_relevance
+    end
+  end
 end
 

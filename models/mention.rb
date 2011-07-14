@@ -5,6 +5,7 @@ module Aji
   # - body: Text
   # - external_id: Integer?
   # - unparsed_data: Text
+  # - published_at: DateTime
   class Mention < ActiveRecord::Base
     belongs_to :author, :class_name => 'ExternalAccount'
     has_and_belongs_to_many :videos

@@ -92,6 +92,24 @@ Factory.define :populated_video, :parent => :video do |a|
   a.populated_at { Time.now }
 end
 
+Factory.define :video_with_mentions, :parent => :video do |a|
+  a.after_create do |v|
+    10.times do |n|
+      m = Factory :mention
+      m.videos << v
+    end
+  end
+end
+
+Factory.define :populated_video_with_mentions, :parent => :populated_video do |a|
+  a.after_create do |v|
+    10.times do |n|
+      m = Factory :mention
+      m.videos << v
+    end
+  end
+end
+
 Factory.define :youtubeit_video, :class => 'YouTubeIt::Model::Video' do |a|
   a.width { rand(100) }
   a.height { rand(100) }
@@ -108,3 +126,8 @@ Factory.define :external_account,
     a.uid { random_string }
     a.provider { random_video_source }
   end
+  
+Factory.define :mention, :class => 'Aji::Mention' do |a|
+  a.published_at { rand(10000).seconds.ago }
+  a.association :author, :factory => :external_account
+end

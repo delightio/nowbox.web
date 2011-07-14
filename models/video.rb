@@ -1,3 +1,4 @@
+require 'decay.rb'
 module Aji
   class Supported
     def self.video_actions; [:examine]; end
@@ -73,8 +74,17 @@ module Aji
       self.published_at = v.published_at
     end
     
+    # Since Video#relevance is usually used when calculating a large collection
+    # of videos, we request the input parameter to be an integer to save
+    # unnecessary .to_i conversion on the time object
     def relevance at_time_i=Time.now.to_i
-      at_time_i # TODO
+      time_diffs = []
+      mentions.order("published_at DESC").limit(50).each do |mention|
+        diff = at_time_i - mention.published_at.to_i
+        next if diff < 0
+        time_diffs << diff
+      end
+      Integer Aji::Decay.exponentially time_diffs
     end
     
     def serializable_hash options={}

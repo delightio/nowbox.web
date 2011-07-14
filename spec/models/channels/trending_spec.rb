@@ -12,29 +12,40 @@ describe Aji::Channels::Trending do
   end
 
   describe "#populate" do
-    it "should populate videos (if not already) and only keep a max number of videos in content" do
-      real_youtube_video_ids = %w[l4qv4Ca1h94 716O3L-Xnfs Wx7c7nHXqKg Zzi-5CO4-G0 xs-rgXUu448 BoTvCgJtcJU ]
-      max_recent_videos = real_youtube_video_ids.count
-      max_videos_in_trending = max_recent_videos / 2
-      Aji.stub(:conf).and_return(
-        { 'MAX_RECENT_VIDEO_IDS_IN_TRENDING'=>max_recent_videos,
-          'MAX_VIDEOS_IN_TRENDING' => max_videos_in_trending})
-      
+    
+    it "should populate videos in trending channel" do
       trending = Factory :trending_channel
-      tests_populated_videos = []
-      # random insertion time
-      max_recent_videos.times{ |k| trending.push_recent(
-        (Factory :video, :source => :youtube, :external_id => real_youtube_video_ids[k]),
-        rand(1000)) } 
-      max_recent_videos.times{ |k| trending.push_recent((Factory :populated_video), rand(1000)) }
       
-      trending.content_videos.should be_empty
-      trending.recent_video_ids.count.should == max_recent_videos
+      real_youtube_video_ids = %w[ l4qv4Ca1h94 Wx7c7nHXqKg BoTvCgJtcJU ]
+      real_youtube_video_ids.each{ |yt_id| 
+        trending.push_recent( Factory :video_with_mentions,
+                                        :source => :youtube,
+                                        :external_id => yt_id) }
+      
+      # Create an video with very old mentions
+      old_video = Factory :video_with_mentions
+      old_video.mentions.each {|m| m.published_at = 1.years.ago; m.save }
+      trending.push_recent old_video
+      
+      Aji.stub(:conf).and_return(
+        { 'MAX_RECENT_VIDEO_IDS_IN_TRENDING'=>real_youtube_video_ids.count*2,
+          'MAX_VIDEOS_IN_TRENDING' => real_youtube_video_ids.count})
       
       trending.populate
+      
+      # All videos in content_videos should be populated
+      trending.content_videos.each { |v| v.is_populated?.should be_true }
+      
+      # Not all recent videos are populated
+      trending.recent_video_ids.should include old_video.id
+      old_video.is_populated?.should be_false
+    end
+    
+    it "should return videos in descending order of relevance" do
+      trending = Factory :trending_channel
+      10.times.each { |n| trending.push_recent(Factory :populated_video_with_mentions) }
+      trending.populate
       trending_videos = trending.content_videos
-      trending_videos.count.should == max_videos_in_trending
-      trending_videos.each { |v| v.is_populated?.should be_true }
       trending.relevance_of(trending_videos.first).should >= trending.relevance_of(trending_videos.last)
     end
   end
