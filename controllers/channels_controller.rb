@@ -8,7 +8,7 @@
 #  `category`:"undefined",
 #  `title`:"Trending",
 #  `thumbnail_uri`:"http://img.youtube.com/vi/cRBcP6MmE8g/0.jpg",
-#  `resource_uri`:""http://aji.herokuapp.com/1/channels/1""}
+#  `resource_uri`:""http://api.nowmov.com/1/channels/1""}
 module Aji
   class API
     version '1'
@@ -53,15 +53,13 @@ module Aji
 
         when 'youtube'
           accounts = params[:accounts].split(',').map do |a|
-            ExternalAccounts::Youtube.find_or_create_by_provider_and_uid(
-              'youtube', a)
+            ExternalAccounts::Youtube.find_or_create_by_uid a
           end
+
           yc = Channels::YoutubeAccount.find_by_accounts accounts
-          if yc.nil?
-            yc = Channels::YoutubeAccount.create(:accounts => accounts)
+            yc = Channels::YoutubeAccount.create :accounts => accounts
             yc.populate
             yc
-          end
 
         when 'trending'
           Channels::Trending.first
@@ -70,7 +68,8 @@ module Aji
           Channel.default_listing
 
         else
-          user = User.find_by_id params[:user_id] # FIXME: should be in User controller
+          # FIXME: should be in User controller
+          user = User.find_by_id params[:user_id]
           if user then user.subscribed_channels else Channel.all end
         end
       end

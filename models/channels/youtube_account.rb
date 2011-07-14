@@ -36,12 +36,11 @@ module Aji
       end
 
       def self.find_by_accounts accounts
-        #[ first_account, *accounts ] = accounts
         account_channel_ids = accounts.map{ |a| a.channels.map(&:id) }
         # Perform an intersection on the account channel ids
         # using Ruby's awesome Array#inject.
         matching_channels = account_channel_ids.inject(&:&)
-        matching_channels.find_all {|ar| ar.length == accounts.length}
+        matching_channels.find_all {|ar| Array(ar).length == accounts.length}
         # Return the first (and hopefully only) matching channel or nil when
         # none is found.
         ExternalAccounts::Youtube.find_by_id(account_channel_ids.first)
