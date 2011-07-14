@@ -52,11 +52,11 @@ module Aji
           kc
 
         when 'youtube'
-          accounts = params[:accounts].map do |a|
+          accounts = Array(params[:accounts]).map do |a|
             ExternalAccounts::Youtube.find_or_create_by_provider_and_uid(
               'youtube', a)
           end
-          yc = Channels::YoutubeAccount.find_by_accounts(accounts)
+          yc = Channels::YoutubeAccount.find_by_account_ids(accounts.map(&:id))
           if yc.nil?
             yc = Channels::YoutubeAccount.create(:accounts => accounts)
             yc.populate

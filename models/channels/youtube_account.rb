@@ -32,6 +32,22 @@ module Aji
             content_zset[v] = "#{i + 1}#{k + 1}".to_i
           end
         end
+        end
+
+        def self.find_by_accounts accounts
+          #[ first_account, *accounts ] = accounts
+          account_channel_ids = accounts.map do |a|
+            # No #channel_ids method for habtm relationships. T_T
+            ExternalAccount::Youtube.find_by_uid(a).channel.map(&:id)
+          end
+          # Perform an intersection on the account channel ids
+          # using Ruby's awesome Array#inject.'
+          matching_channels = account_channel_ids.inject(&:&)
+          matching_channels.find_all {|ar| ar.length == accounts.length}
+          # Return the first (and hopefully only) matching channel or nil when
+          # none is found.
+          ExternalAccount::YoutubeAccount.find_by_id(account_channel_ids.first)
+        end
       end
     end
   end

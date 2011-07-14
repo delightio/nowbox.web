@@ -44,7 +44,7 @@ module Aji
     def push video, relevance=Time.now.to_i
       content_zset[video.id] = relevance
     end
-    
+
     def serializable_hash options={}
       thumbnail_uri = ""
       thumbnail_uri = Video.find(content_video_ids(1).first).thumbnail_uri if content_video_ids.count > 0
