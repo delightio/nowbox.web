@@ -16,9 +16,9 @@ GEM
     builder (2.1.2)
     daemons (1.1.4)
     diff-lcs (1.1.2)
+    ephemeral_response (0.4.0)
     erubis (2.7.0)
     eventmachine (0.12.10)
-    fabrication (1.0.1)
     factory_girl (1.3.3)
     faraday (0.6.1)
       addressable (~> 2.2.4)
@@ -154,8 +154,8 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord (= 3.0.4)
+  ephemeral_response
   erubis
-  fabrication
   factory_girl
   foreman
   grape

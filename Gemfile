@@ -39,7 +39,8 @@ gem 'yajl-ruby'
 group :test do
   gem 'rack-test'
   gem 'rspec'
-  gem 'fabrication'
+  # HTTP Request caching for offline testing and increased suite speed.
+  gem 'ephemeral_response'
   gem 'factory_girl'
   gem 'simplecov'
 end

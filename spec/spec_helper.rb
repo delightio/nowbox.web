@@ -14,10 +14,15 @@ require_relative 'factories'
 Dir.glob("#{Aji.root}/spec/support/**/*.rb").each {|r| require_relative r}
 
 module TestMixin
-	include Rack::Test::Methods
-	def app
-		Aji::API
-	end
+  include Rack::Test::Methods
+  def app
+    Aji::API
+  end
+end
+
+EphemeralResponse.configure do |config|
+  config.fixture_directory = "spec/fixtures/ephemeral_response"
+  config.expiration = lambda { one_day * 7 }
 end
 
 RSpec.configure do |config|
@@ -29,9 +34,15 @@ RSpec.configure do |config|
   # config.mock_with :flexmock
   # config.mock_with :rr
   config.mock_with :rspec
+
+  # Use ephemeral response for HTTP caching.
+  config.before(:suite){ EphemeralResponse.activate }
+  config.before(:suite){ EphemeralResponse.deactivate }
+
   config.include TestMixin
   config.before(:each) do
     Aji.redis.flushdb
-    [Aji::User, Aji::Channel, Aji::Event, Aji::ExternalAccount, Aji::Video].map{|c| c.all.each{|obj| obj.delete} }
+    [Aji::User, Aji::Channel, Aji::Event, Aji::ExternalAccount,
+      Aji::Video].map{|c| c.all.each{|obj| obj.delete} }
   end
 end
