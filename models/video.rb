@@ -1,4 +1,3 @@
-require 'decay.rb'
 module Aji
   class Supported
     def self.video_actions; [:examine]; end
