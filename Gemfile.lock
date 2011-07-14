@@ -20,7 +20,7 @@ GEM
     ephemeral_response (0.4.0)
     erubis (2.7.0)
     eventmachine (0.12.10)
-    factory_girl (1.3.3)
+    factory_girl (2.0.0.rc4)
     faraday (0.6.1)
       addressable (~> 2.2.4)
       multipart-post (~> 1.1.0)
@@ -166,7 +166,7 @@ DEPENDENCIES
   activerecord (= 3.0.4)
   ephemeral_response
   erubis
-  factory_girl
+  factory_girl (~> 2.0.0.rc4)
   foreman
   grape
   hiredis

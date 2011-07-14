@@ -41,6 +41,6 @@ group :test do
   gem 'rspec'
   # HTTP Request caching for offline testing and increased suite speed.
   gem 'ephemeral_response'
-  gem 'factory_girl'
+  gem 'factory_girl', '~> 2.0.0.rc4'
   gem 'simplecov'
 end
