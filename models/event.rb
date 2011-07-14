@@ -1,4 +1,5 @@
 module Aji
+  # TODO: This should be `Event.types` not use some proxy class.
   class Supported
     def self.event_types; [ :view, :share, :upvote, :downvote, :enqueue, :dequeue, :examine ]; end
   end

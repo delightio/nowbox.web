@@ -1,4 +1,5 @@
 module Aji
+  # TODO: yeah, I don't like this `Supported` thing and actions are SOAPy. ew.
   class Supported
     def self.video_actions; [:examine]; end
   end
@@ -114,5 +115,8 @@ module Aji
            "published_at" => published_at.to_i,
            "author" => author_hash]
     end
+
+    # ## The Future Home of All Class Methods
+    def Video.sources; [ :youtube, :vimeo ]; end
   end
 end
