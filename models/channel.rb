@@ -44,9 +44,7 @@ module Aji
     def push video, relevance=Time.now.to_i
       content_zset[video.id] = relevance
     end
-
-    def self.blacklisted_video_ids_key; "Aji::Channel.blacklisted_video_ids"; end
-
+    
     def serializable_hash options={}
       thumbnail_uri = ""
       thumbnail_uri = Video.find(content_video_ids(1).first).thumbnail_uri if content_video_ids.count > 0
@@ -76,7 +74,7 @@ module Aji
      a = user.viewed_video_ids
       viewed_video_ids = user.viewed_video_ids
       content_video_ids.each do |channel_video_id|
-        next if Aji.redis.sismember Channel.blacklisted_video_ids_key, channel_video_id
+        next if Video.blacklisted_ids.include? channel_video_id
         new_video_ids << channel_video_id if !viewed_video_ids.member? channel_video_id
 
         break if new_video_ids.count >= limit

@@ -24,7 +24,7 @@ module Aji
         recent_video_ids_at_time = recent_video_ids
         recent_video_ids_at_time.each do |vid|
           video = Aji::Video.find_by_id vid
-          next if video.nil?
+          next if video.nil? || video.is_blacklisted?
           in_flight << { :vid => vid, :relevance => video.relevance(at_time_i) }
         end
         Aji.log "Collected #{in_flight.count} recent videos in #{Time.now-start} s."

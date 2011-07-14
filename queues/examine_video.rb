@@ -5,8 +5,7 @@ module Aji
       @queue = :examine_video
 
       def self.perform video_id
-        # TODO: put it in blacklist right the way
-        Aji.redis.sadd Channel.blacklisted_video_ids_key, video_id
+        Video.blacklist_id video_id  # TODO
       end
     end
   end

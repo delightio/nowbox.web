@@ -46,6 +46,16 @@ describe Aji::Channel do
       last_video_relevance= channel.relevance_of personalized_videos.last
       top_video_relevance.should >= last_video_relevance
     end
+    
+    it "should not return blacklisted videos" do
+      channel = Factory :channel_with_videos
+      user = Factory :user
+      video = channel.content_videos.sample
+      Aji::Video.blacklist_id video.id
+      channel.personalized_content_videos(:user=>user,
+        :limit=>channel.content_videos.count).should_not include video
+    end
+    
   end
 
   describe ".default_listing" do

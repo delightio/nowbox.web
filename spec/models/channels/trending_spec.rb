@@ -48,5 +48,15 @@ describe Aji::Channels::Trending do
       trending_videos = trending.content_videos
       trending.relevance_of(trending_videos.first).should >= trending.relevance_of(trending_videos.last)
     end
+    
+    it "should not include blacklisted videos" do
+      trending = Factory :trending_channel
+      video = Factory :populated_video_with_mentions
+      trending.push_recent video
+      Aji::Video.blacklist_id video.id
+      
+      trending.populate
+      trending.content_videos.count.should == 0
+    end
   end
 end

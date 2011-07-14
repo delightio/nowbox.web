@@ -43,6 +43,15 @@ describe Aji::Video do
       end
       video.relevance(at_time_i).should > old_relevance
     end
+    
+    it "should not consider blacklisted author" do
+      at_time_i = Time.now.to_i
+      video = Factory :video_with_mentions
+      old_relevance = video.relevance at_time_i
+
+      Aji::ExternalAccount.blacklist_id video.mentions.sample.author.id
+      video.relevance(at_time_i).should < old_relevance
+    end
   end
 end
 
