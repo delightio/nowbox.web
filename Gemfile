@@ -25,6 +25,7 @@ gem 'resque-scheduler', '~>2.0.0.d',
   :require => ['resque_scheduler', 'resque/scheduler']
 gem 'omniauth'
 gem 'youtube_it'
+gem 'vimeo'
 gem 'erubis'
 gem 'yajl-ruby'
 
@@ -34,7 +35,6 @@ gem 'yajl-ruby'
 # group :development, :test do
 #   gem 'webrat'
 # end
-
 # Testing gems.
 group :test do
   gem 'rack-test'

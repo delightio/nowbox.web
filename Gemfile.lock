@@ -14,6 +14,7 @@ GEM
     addressable (2.2.4)
     arel (2.0.10)
     builder (2.1.2)
+    crack (0.1.8)
     daemons (1.1.4)
     diff-lcs (1.1.2)
     ephemeral_response (0.4.0)
@@ -34,6 +35,9 @@ GEM
       rack-jsonp
       rack-mount
     hiredis (0.3.2)
+    httparty (0.7.8)
+      crack (= 0.1.8)
+    httpclient (2.2.1)
     i18n (0.6.0)
     json (1.5.3)
     mime-types (1.16)
@@ -144,6 +148,12 @@ GEM
     tzinfo (0.3.28)
     vegas (0.1.8)
       rack (>= 1.0.0)
+    vimeo (1.4.1)
+      httparty (>= 0.4.5)
+      httpclient (>= 2.1.5.2)
+      json (>= 1.1.9)
+      multipart-post (>= 1.0.1)
+      oauth (>= 0.4.3)
     yajl-ruby (0.8.2)
     youtube_it (1.4.3)
       builder
@@ -175,5 +185,6 @@ DEPENDENCIES
   sinatra
   thin
   thor
+  vimeo
   yajl-ruby
   youtube_it
