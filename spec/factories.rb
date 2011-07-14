@@ -79,6 +79,7 @@ end
 Factory.define :video, :class => 'Aji::Video' do |a|
   a.external_id { random_string }
   a.source { random_video_source }
+  a.association :external_account
 end
 
 Factory.define :populated_video, :parent => :video do |a|
@@ -89,7 +90,6 @@ Factory.define :populated_video, :parent => :video do |a|
   a.view_count { rand(1000) }
   a.published_at { Time.now - rand(10).days }
   a.populated_at { Time.now }
-  a.association :external_account
 end
 
 Factory.define :youtubeit_video, :class => 'YouTubeIt::Model::Video' do |a|
