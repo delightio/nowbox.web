@@ -3,19 +3,23 @@ require File.expand_path("../../spec_helper", __FILE__)
 describe Aji::Channel do
   describe "#populate" do
     it "raises an exception unless overridden." do
-      c = Aji::Channel.new(:title => "foo")
+      c = Factory :channel
       expect { c.populate }.to raise_error Aji::InterfaceMethodNotImplemented
     end
   end
 
   describe "#personalized_content_videos" do
     it "should return unviewed videos" do
-      channel = Factory :channel_with_videos
-      viewed_video_ids = channel.content_videos.sample(channel.content_videos.length / 2).map(&:id)
+      channel = create :channel
+      viewed_video_ids = []
 
+      # Create 10 videos for the channel, assume mock user has seen even ones.
+      create_list(:youtube_video, 10).each_with_index do |v, i|
+        channel.push v
+        viewed_video_ids.push v.id if i % 2 == 0
+      end
 
       user = mock("user")
-      # We #dup the viewed_video_ids object since RSpec decided to count object
       user.should_receive(:viewed_video_ids).at_least(1).and_return(
         viewed_video_ids)
       personalized_video_ids = channel.personalized_content_videos(
@@ -25,6 +29,7 @@ describe Aji::Channel do
       end
     end
 
+    # TODO: This is Redis::Objects behavior and may not need testing... maybe.
     it "should return videos according to descending order on score" do
       channel = Factory :trending_channel
       10.times do |n|
@@ -46,7 +51,7 @@ describe Aji::Channel do
       last_video_relevance= channel.relevance_of personalized_videos.last
       top_video_relevance.should >= last_video_relevance
     end
-    
+
     it "should not return blacklisted videos" do
       channel = Factory :channel_with_videos
       user = Factory :user
@@ -55,7 +60,7 @@ describe Aji::Channel do
       channel.personalized_content_videos(:user=>user,
         :limit=>channel.content_videos.count).should_not include video
     end
-    
+
   end
 
   describe ".default_listing" do

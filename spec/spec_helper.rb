@@ -30,8 +30,8 @@ RSpec.configure do |config|
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
   #
-  # config.mock_with :mocha
   # config.mock_with :flexmock
+  # config.mock_with :mocha
   # config.mock_with :rr
   config.mock_with :rspec
 
@@ -40,6 +40,8 @@ RSpec.configure do |config|
   config.before(:suite){ EphemeralResponse.deactivate }
 
   config.include TestMixin
+  config.include Factory::Syntax::Methods
+
   config.before(:each) do
     Aji.redis.flushdb
     [Aji::User, Aji::Channel, Aji::Event, Aji::ExternalAccount,

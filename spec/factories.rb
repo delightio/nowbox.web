@@ -2,9 +2,6 @@ FactoryGirl.define do
   sequence(:first_name) { |n| "Person##{n}" }
   sequence(:last_name) { |n| "Surname##{n}" }
   sequence(:title) { |n| "Video##{n}" }
-  sequence(:category) { |n| "Category##{n}" }
-  sequence(:youtube_id) { |n| "123456asdf#{n}" }
-  sequence(:vimeo_id) { |n| "#{n}" }
 
   factory :user, :class => 'Aji::User' do
     first_name
@@ -43,7 +40,7 @@ FactoryGirl.define do
   factory :channel, :class => 'Aji::Channel' do
     title
     default_listing { [true, false].sample }
-    category
+    category { Aji::Supported.categories.sample }
   end
 
   # TODO: I believe this to be unnecessary. Will not remove until proven.
@@ -55,10 +52,14 @@ FactoryGirl.define do
     end
   end
 
-  factory :video, :class => 'Aji::Video' do
-    source { Video.sources.sample }
-    # TODO: Watch out for this if more sources are added.
-    external_id { if source == :youtube then youtube_id else vimeo_id end }
+  factory :youtube_video, :class => 'Aji::Video' do
+    source :youtube
+    sequence(:external_id) { |n| "123456asdf#{n}" }
+  end
+
+  factory :vimeo_video, :class => 'Aji::Video' do
+    source :vimeo
+    sequence(:external_id) { |n| n.to_s }
   end
 
 #factory :populated_video, :parent => :video do |a|
