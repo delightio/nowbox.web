@@ -1,36 +1,12 @@
-def random_string length = 10
-  letters = ('a'..'z').to_a
-  (0...length).map { letters[rand 26] }.join
+FactoryGirl.define do
+    sequence(:first_name) { |n| "Person##{n}" }
+    sequence(:last_name) { |n| "Surname##{n}" }
 end
 
-def random_float
-  rand(100).to_f/(1+rand(100))
-end
-
-def random_email
-  "#{random_string}@#{random_string(8)}.#{random_string(5)}.#{random_string(3)}"
-end
-
-def random_event_type
-  Aji::Supported.event_types.sample
-end
-
-def random_video_source
-  [:youtube].sample
-end
-
-def random_boolean
-  [true, false].sample
-end
-
-def random_category
-  Aji::Supported.categories.sample
-end
-
-Factory.define :user, :class => 'Aji::User' do |a|
-  a.email { random_email }
-  a.first_name { random_string }
-  a.last_name { random_string }
+Factory.define :user, :class => 'Aji::User' do
+  first_name
+  last_name
+  email { "#{first_name}@#{last_name}.com" }
 end
 
 Factory.define :user_with_channels, :parent =>:user do |a|
