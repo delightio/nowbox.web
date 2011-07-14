@@ -16,7 +16,8 @@ module Aji
     resource :channels do
 
       # ## GET channels/:channel_id
-      # __Returns__ the channel with the specified id and HTTP Status Code 200 or 404
+      # __Returns__ the channel with the specified id and HTTP Status Code 200
+      # or 404
       #
       # __Required params__ `channel_id` unique id of the channel  
       # __Optional params__ none
@@ -53,7 +54,8 @@ module Aji
 
         when 'youtube'
           accounts = params[:accounts].split(',').map do |a|
-            ExternalAccounts::Youtube.find_or_create_by_uid a
+            ExternalAccounts::Youtube.find_or_create_by_provider_and_uid(
+             'youtube', a)
           end
 
           yc = Channels::YoutubeAccount.find_by_accounts accounts
