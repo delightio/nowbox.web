@@ -35,7 +35,7 @@ module Aji
                     :last_name => params[:last_name]) or
           creation_error!(User, params)
       end
-      
+
       # ## GET users/:user_id
       # __Returns__ succeed or not on the given channel action and HTTP Status
       # Code 200, 400 or 404  
@@ -50,7 +50,7 @@ module Aji
         succeeded = user.send params[:channel_action], channel, params[:channel_action_params]
         error!("User[#{user.id}] cannot #{params[:channel_action]} Channel[#{channel.id}] with params: #{params[:channel_action_params].inspect}", 400) if !succeeded
       end
-      
+
     end
   end
 end

@@ -22,7 +22,7 @@ module Aji
           returned_channels.should include channels[default.first].serializable_hash
           returned_channels.should include channels[default.last].serializable_hash
         end
-        
+
         it "should return subscribed channels if given user id" do
           user = Factory :user
           channel = Factory :channel_with_videos
@@ -67,7 +67,7 @@ module Aji
           body_hash = JSON.parse last_response.body
           body_hash.count.should == limit
         end
-        
+
         it "should not returned viewed videos" do
           channel = Factory :channel_with_videos
           viewed_video = channel.content_videos.sample
