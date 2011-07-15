@@ -17,8 +17,10 @@ module Aji
             mention = Parsers::Tweet.parse data
           end
 
-          # Enqueue iff the mention has a valid link.
-          Resque.enqueue Queues::Mention::Process, mention if mention.has_link?
+          # Enqueue iff the mention has a valid link and is not from a spammer
+          if mention.has_link? && !mention.author.is_blacklisted?
+            Resque.enqueue Queues::Mention::Process, mention
+          end
         end
       end
     end
