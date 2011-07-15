@@ -9,9 +9,12 @@ module Aji
         @link = double("link", :youtube_id => :anything,
                                :type => :anything)
         @links = Array.new(@links_count_in_mention, @link)
+        @author = ExternalAccount.new
         @mention = double("mention", :videos => Array.new,
-                                    :links => @links,
-                                    :save => true)
+                                     :links => @links,
+                                     :save => true,
+                                     :author => @author,
+                                     :spam? => false)
         Aji::Mention.stub(:new).and_return(@mention)
         Aji::Link.stub(:new).and_return(@link)
         
@@ -36,6 +39,26 @@ module Aji
         @trending.should_receive(:push_recent).never
         subject.perform :anything
       end
+      
+      it "blacklists author who mentions a blacklisted video" do
+        bad_author = ExternalAccount.new
+        @mention.stub(:author).and_return(bad_author)
+        blacklisted_video = double("blacklisted video", :blacklisted? => true)
+        Aji::Video.stub(:find_or_create_by_external_id_and_source).and_return(blacklisted_video)
+        @trending.should_receive(:push_recent).never
+        subject.perform :anything
+        bad_author.should be_blacklisted
+      end
+      
+      it "blacklists author who mentions same set of video multiple times" do
+        @mention.stub(:spam?).and_return(true)
+        video = double("video", :blacklisted? => false)
+        Aji::Video.stub(:find_or_create_by_external_id_and_source).and_return(video)
+        @trending.should_receive(:push_recent).never
+        subject.perform :anything
+        @mention.author.should be_blacklisted
+      end
+      
     end
   end
 end
