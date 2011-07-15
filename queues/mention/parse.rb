@@ -18,7 +18,7 @@ module Aji
           end
 
           # Enqueue iff the mention has a valid link.
-          Resque.enqueue Queues::Mention::Process mention if mention.has_link?
+          Resque.enqueue Queues::Mention::Process, mention if mention.has_link?
         end
       end
     end
