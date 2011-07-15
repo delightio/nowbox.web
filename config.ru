@@ -30,7 +30,7 @@ map "http://api.#{Aji.conf['TLD']}/" do
   run Aji::API
 end
 
-map "http://docs.#{Aji.conf['TLD']}/" do
+map "http://apidoc.#{Aji.conf['TLD']}/" do
   use Rack::Auth::Basic do |username, password|
     [ username, password ] == [ "docs", "water" ]
   end
