@@ -36,6 +36,7 @@ class Aji < Thor
       exec "bin/rspec #{test}"
     else
       exec "bin/rspec spec"
+      exec "bin/aji docs"
     end
   end
 

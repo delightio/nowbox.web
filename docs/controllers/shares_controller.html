@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>shares_controller.rb</title>
+  <link rel="stylesheet" href="http://jashkenas.github.com/docco/resources/docco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div id="jump_to">
+    Jump To &hellip;
+    <div id="jump_wrapper">
+      <div id="jump_page">
+          <a class="source" href="../aji.html">aji.rb</a>
+          <a class="source" href="auth_controller.html">auth_controller.rb</a>
+          <a class="source" href="channels_controller.html">channels_controller.rb</a>
+          <a class="source" href="events_controller.html">events_controller.rb</a>
+          <a class="source" href="shares_controller.html">shares_controller.rb</a>
+          <a class="source" href="users_controller.html">users_controller.rb</a>
+          <a class="source" href="videos_controller.html">videos_controller.rb</a>
+      </div>
+    </div>
+  </div>
+  <table cellspacing=0 cellpadding=0>
+  <thead>
+    <tr>
+      <th class=docs><h1>shares_controller.rb</h1></th>
+      <th class=code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr id='section-Shares_Controller'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Shares_Controller">&#182;</a>
+        </div>
+        <h1>Shares Controller</h1>
+
+<p>Share object json:</p>
+
+<p>{<code>id</code>:1,
+ <code>user_id</code>: 12
+ <code>video_id</code>:1
+ <code>message</code>: &ldquo;This is the funniest cat evar ZOMG!!!ONE~&lt;3&rdquo;
+}</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="k">module</span> <span class="nn">Aji</span>
+  <span class="k">class</span> <span class="nc">API</span>
+    <span class="n">version</span> <span class="s1">&#39;1&#39;</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-2'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-2">&#182;</a>
+        </div>
+        <p><code>http://API_HOST/1/shares</code></p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="n">resource</span> <span class="ss">:shares</span> <span class="k">do</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-GET_shares/:share_id'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-GET_shares/:share_id">&#182;</a>
+        </div>
+        <h2>GET shares/:share_id</h2>
+
+<p><strong>Returns</strong> the share with the specified id and HTTP Status Code 200 or
+404</p>
+
+<p><strong>Required params</strong> <code>share_id</code> unique id of the share<br/>
+<strong>Optional params</strong> none</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      <span class="n">get</span> <span class="s1">&#39;/:share_id&#39;</span> <span class="k">do</span>
+        <span class="n">find_share_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:share_id</span><span class="o">]</span>
+      <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-POST_shares'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-POST_shares">&#182;</a>
+        </div>
+        <h2>POST shares</h2>
+
+<p><strong>Creates</strong> a share object with the specified parameters.<br/>
+<strong>Returns</strong> the created user and HTTP Status Code 201 if successful or
+a JSON encoded error message if not.</p>
+
+<p><strong>Required params</strong>
+&ndash; <code>user_id</code>: unique id of the current user
+&ndash; <code>video_id</code>: unique id of the shared video</p>
+
+<p><strong>Optional params</strong>
+&ndash; <code>message</code>: Text of the share message.
+&ndash; <code>publish_to</code>: list of services to publish the share to. Can be
+  <code>twitter</code> currently. <code>facebook</code> and others coming later. Default is
+  all services for which the user is associated.</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      <span class="n">post</span> <span class="k">do</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">find_user_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
+        <span class="n">video</span> <span class="o">=</span> <span class="n">find_video_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:video_id</span><span class="o">]</span>
+        <span class="n">share</span> <span class="o">=</span> <span class="no">Share</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="p">,</span> <span class="ss">:video</span> <span class="o">=&gt;</span> <span class="n">video</span><span class="p">,</span>
+                     <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:message</span><span class="o">]</span><span class="p">,</span>
+                     <span class="ss">:publish_to</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:publish_to</span><span class="o">]</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">share</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">empty?</span>
+          <span class="n">share</span>
+        <span class="k">else</span>
+          <span class="n">creation_error</span> <span class="no">Share</span><span class="p">,</span> <span class="n">params</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></pre></div>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>

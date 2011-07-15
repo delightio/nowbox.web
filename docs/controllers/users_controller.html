@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>users_controller.rb</title>
+  <link rel="stylesheet" href="http://jashkenas.github.com/docco/resources/docco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div id="jump_to">
+    Jump To &hellip;
+    <div id="jump_wrapper">
+      <div id="jump_page">
+          <a class="source" href="../aji.html">aji.rb</a>
+          <a class="source" href="auth_controller.html">auth_controller.rb</a>
+          <a class="source" href="channels_controller.html">channels_controller.rb</a>
+          <a class="source" href="events_controller.html">events_controller.rb</a>
+          <a class="source" href="shares_controller.html">shares_controller.rb</a>
+          <a class="source" href="users_controller.html">users_controller.rb</a>
+          <a class="source" href="videos_controller.html">videos_controller.rb</a>
+      </div>
+    </div>
+  </div>
+  <table cellspacing=0 cellpadding=0>
+  <thead>
+    <tr>
+      <th class=docs><h1>users_controller.rb</h1></th>
+      <th class=code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr id='section-Users_Controller'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Users_Controller">&#182;</a>
+        </div>
+        <h1>Users Controller</h1>
+
+<p>User object json:</p>
+
+<p>{<code>id</code>:1,
+ <code>first_name</code>:&ldquo;thomas&rdquo;,
+ <code>last_name</code>:null,
+ <code>subscribed_chanel_ids</code>:[&ldquo;1&rdquo;,&ldquo;2&rdquo;,&ldquo;3&rdquo;,&ldquo;4&rdquo;,&ldquo;5&rdquo;,&ldquo;6&rdquo;]}</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="k">module</span> <span class="nn">Aji</span>
+  <span class="k">class</span> <span class="nc">API</span>
+    <span class="n">version</span> <span class="s1">&#39;1&#39;</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-2'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-2">&#182;</a>
+        </div>
+        <p><code>http://API_HOST/1/users</code></p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="n">resource</span> <span class="ss">:users</span> <span class="k">do</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-GET_users/:user_id'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-GET_users/:user_id">&#182;</a>
+        </div>
+        <h2>GET users/:user_id</h2>
+
+<p><strong>Returns</strong> the user with the specified id and HTTP Status Code 200 or 404</p>
+
+<p><strong>Required params</strong> <code>user_id</code> unique id of the user<br/>
+<strong>Optional params</strong> none</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      <span class="n">get</span> <span class="s1">&#39;/:user_id&#39;</span> <span class="k">do</span>
+        <span class="n">find_user_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
+      <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-POST_users'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-POST_users">&#182;</a>
+        </div>
+        <h2>POST users</h2>
+
+<p><strong>Creates</strong> a user with the specified parameters.<br/>
+<strong>Returns</strong> the created user and HTTP Status Code 201 if successful or
+a JSON encoded error message if not.</p>
+
+<p><strong>Required params</strong> <code>email</code> email address of the user<br/>
+<strong>Required params</strong> <code>first_name</code> first name of the user<br/>
+<strong>Optional params</strong> <code>last_name</code> last name of the user</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      <span class="n">post</span> <span class="k">do</span>
+        <span class="no">User</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:email</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span><span class="p">,</span>
+                    <span class="ss">:first_name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:first_name</span><span class="o">]</span><span class="p">,</span>
+                    <span class="ss">:last_name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:last_name</span><span class="o">]</span><span class="p">)</span> <span class="ow">or</span>
+          <span class="n">creation_error!</span><span class="p">(</span><span class="no">User</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+      <span class="k">end</span>
+      </pre></div>
+      </td>
+    </tr>
+    <tr id='section-GET_users/:user_id'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-GET_users/:user_id">&#182;</a>
+        </div>
+        <h2>GET users/:user_id</h2>
+
+<p><strong>Returns</strong> succeed or not on the given channel action and HTTP Status
+Code 200, 400 or 404<br/>
+<strong>Required params</strong> <code>channel_id</code> unique id of the channel<br/>
+<strong>Required params</strong> <code>channel_action</code> subscribe, unsubscribe, arrange<br/>
+<strong>Optional params</strong> <code>channel_action_params[new_position]</code> new position
+for given channel</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      <span class="n">put</span> <span class="s1">&#39;/:user_id&#39;</span> <span class="k">do</span>
+        <span class="n">channel</span> <span class="o">=</span> <span class="n">find_channel_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:channel_id</span><span class="o">]</span>
+        <span class="n">error!</span><span class="p">(</span><span class="s2">&quot;Unknown channel action: </span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:channel_action</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span> <span class="k">if</span> <span class="o">!</span><span class="no">Supported</span><span class="o">.</span><span class="n">channel_actions</span><span class="o">.</span><span class="n">include?</span> <span class="n">params</span><span class="o">[</span><span class="ss">:channel_action</span><span class="o">].</span><span class="n">try</span><span class="p">(</span><span class="ss">:to_sym</span><span class="p">)</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">find_user_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
+        <span class="n">succeeded</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">send</span> <span class="n">params</span><span class="o">[</span><span class="ss">:channel_action</span><span class="o">]</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:channel_action_params</span><span class="o">]</span>
+        <span class="n">error!</span><span class="p">(</span><span class="s2">&quot;User[</span><span class="si">#{</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">] cannot </span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:channel_action</span><span class="o">]</span><span class="si">}</span><span class="s2"> Channel[</span><span class="si">#{</span><span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">] with params: </span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:channel_action_params</span><span class="o">].</span><span class="n">inspect</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span> <span class="k">if</span> <span class="o">!</span><span class="n">succeeded</span>
+      <span class="k">end</span>
+      
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></pre></div>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>

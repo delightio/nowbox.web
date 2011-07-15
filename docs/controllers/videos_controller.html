@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>videos_controller.rb</title>
+  <link rel="stylesheet" href="http://jashkenas.github.com/docco/resources/docco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div id="jump_to">
+    Jump To &hellip;
+    <div id="jump_wrapper">
+      <div id="jump_page">
+          <a class="source" href="../aji.html">aji.rb</a>
+          <a class="source" href="auth_controller.html">auth_controller.rb</a>
+          <a class="source" href="channels_controller.html">channels_controller.rb</a>
+          <a class="source" href="events_controller.html">events_controller.rb</a>
+          <a class="source" href="shares_controller.html">shares_controller.rb</a>
+          <a class="source" href="users_controller.html">users_controller.rb</a>
+          <a class="source" href="videos_controller.html">videos_controller.rb</a>
+      </div>
+    </div>
+  </div>
+  <table cellspacing=0 cellpadding=0>
+  <thead>
+    <tr>
+      <th class=docs><h1>videos_controller.rb</h1></th>
+      <th class=code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr id='section-Videos_Controller'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Videos_Controller">&#182;</a>
+        </div>
+        <h1>Videos Controller</h1>
+
+<p>Video object json:</p>
+
+<p>{<code>id</code>:1,
+<code>title</code>:&ldquo;Did you hear a click?&rdquo;,
+<code>description</code>:&ldquo;Rita and Frank try to take a still photo to email&hellip;&rdquo;,
+<code>thumbnail_uri</code>:&ldquo;http://img.youtube.com/vi/cRBcP6MmE8g/0.jpg&rdquo;,
+<code>source</code>:&ldquo;youtube&rdquo;,
+<code>external_id</code>:&ldquo;cRBcP6MmE8g&rdquo;,
+<code>duration</code>:123,
+<code>view_count</code>:1328051,
+<code>published_at</code>:&ldquo;2011-06-12T13:20:27-07:00&rdquo;,
+<code>author</code>:
+{<code>username</code>:&ldquo;espo633&rdquo;,
+<code>profile_uri</code>:&ldquo;http://www.youtube.com/user/espo633&rdquo;,
+<code>external_account_id</code>:1}
+}</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="k">module</span> <span class="nn">Aji</span>
+  <span class="k">class</span> <span class="nc">API</span>
+    <span class="n">version</span> <span class="s1">&#39;1&#39;</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-2'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-2">&#182;</a>
+        </div>
+        <p><code>http://API_HOST/1/videos</code></p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="n">resource</span> <span class="ss">:videos</span> <span class="k">do</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-GET_videos/:video_id'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-GET_videos/:video_id">&#182;</a>
+        </div>
+        <h2>GET videos/:video_id</h2>
+
+<p><strong>Returns</strong> the video with the specified id and HTTP Status Code 200 or 404</p>
+
+<p><strong>Required params</strong> <code>video_id</code> unique id of the video<br/>
+<strong>Optional params</strong> none</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      <span class="n">get</span> <span class="s1">&#39;/:video_id&#39;</span> <span class="k">do</span>
+        <span class="n">find_video_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:video_id</span><span class="o">]</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></pre></div>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
