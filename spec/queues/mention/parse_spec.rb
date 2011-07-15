@@ -7,8 +7,8 @@ module Aji
     describe "#perform" do
       before(:each) do
         @data = mock "raw data"
-        @author = double("author", :blacklisted? => false)
-        @mention = double("parsed data", :has_link? => true,
+        @author = double("author", :is_blacklisted? => false)
+        @mention = double("mention", :has_links? => true,
                                          :author => @author)
         Parsers::Tweet.stub(:parse).and_return(@mention)
       end
@@ -19,7 +19,7 @@ module Aji
       end
 
       it "rejects given mention if there is no link" do
-        @mention.stub(:has_link?).and_return(false)
+        @mention.stub(:has_links?).and_return(false)
         Resque.should_receive(:enqueue).with(Queues::Mention::Process, @mention).never
         subject.perform "twitter", @data
       end
