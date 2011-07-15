@@ -12,10 +12,10 @@ describe Aji::Video do
   describe "#populate" do
     it "should not be populated unless explicitly asked" do
       video = Factory :video, :source => :youtube, :external_id => 'OzVPDiy4P9I'
-      video.is_populated?.should == false
+      video.should_not be_populated
       video.title.should be_nil
       video.populate
-      Aji::Video.find(video.id).is_populated?.should == true
+      Aji::Video.find(video.id).should be_populated
       Aji::Video.find(video.id).title.should_not be_nil
     end
   end
@@ -24,7 +24,7 @@ describe Aji::Video do
     it "should mark the video populated" do
       yt_video = YouTubeIt::Client.new.video_by 'OzVPDiy4P9I'
       video = Aji::Video.find_or_create_from_youtubeit_video yt_video
-      Aji::Video.find(video.id).is_populated?.should == true
+      Aji::Video.find(video.id).should be_populated
       Aji::Video.find(video.id).title.should_not be_nil
     end
   end

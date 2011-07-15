@@ -34,11 +34,11 @@ describe Aji::Channels::Trending do
       trending.populate
       
       # All videos in content_videos should be populated
-      trending.content_videos.each { |v| v.is_populated?.should be_true }
+      trending.content_videos.each { |v| v.should be_populated }
       
       # Not all recent videos are populated
       trending.recent_video_ids.should include old_video.id
-      old_video.is_populated?.should be_false
+      old_video.should_not be_populated
     end
     
     it "should return videos in descending order of relevance" do

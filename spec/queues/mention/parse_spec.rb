@@ -7,7 +7,7 @@ module Aji
     describe "#perform" do
       before(:each) do
         @data = mock "raw data"
-        @author = double("author", :is_blacklisted? => false)
+        @author = double("author", :blacklisted? => false)
         @mention = double("parsed data", :has_link? => true,
                                          :author => @author)
         Parsers::Tweet.stub(:parse).and_return(@mention)
@@ -25,7 +25,7 @@ module Aji
       end
 
       it "rejects given mention if author is blacklisted" do
-        @author.stub(:is_blacklisted?).and_return(true)
+        @author.stub(:blacklisted?).and_return(true)
         Resque.should_receive(:enqueue).with(Queues::Mention::Process, @mention).never
         subject.perform "twitter", @data
       end

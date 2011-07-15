@@ -13,7 +13,7 @@ module Aji
             # Link is a subclass of URI
             link = Link.new mention.links.shift
             video = Aji::Video.find_or_create_by_external_id_and_source link.youtube_id, link.type
-            next if video.is_blacklisted?
+            next if video.blacklisted?
             mention.videos << video
             mention.save or Aji.log(
               "Couldn't save #{mention.inspect} for #{mention.errors.inspect}")

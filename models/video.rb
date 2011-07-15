@@ -22,7 +22,7 @@ module Aji
     belongs_to :external_account
     has_and_belongs_to_many :mentions
 
-    def is_blacklisted?; Aji.redis.sismember Video.blacklisted_ids_key, self.id; end
+    def blacklisted?; Aji.redis.sismember Video.blacklisted_ids_key, self.id; end
     def self.blacklist_id id; Aji.redis.sadd self.blacklisted_ids_key, id; end
     def self.blacklisted_ids; (Aji.redis.smembers self.blacklisted_ids_key).map(&:to_i); end
     def self.blacklisted_ids_key; "#{self.to_s}.blacklisted_ids"; end
@@ -61,7 +61,7 @@ module Aji
       path
     end
     
-    def is_populated?; populated_at!=nil; end
+    def populated?; populated_at!=nil; end
     def populate
       raise "Aji::Video#populate: missing external id for Aji::Video[#{id}]" if external_id.nil?
       send "populate_from_#{source}"
@@ -82,18 +82,18 @@ module Aji
     # of videos, we request the input parameter to be an integer to save
     # unnecessary .to_i conversion on the time object
     def relevance at_time_i=Time.now.to_i
-      return 0 if is_blacklisted?
+      return 0 if blacklisted?
       time_diffs = []
       mentions.order("published_at DESC").limit(50).each do |mention|
         diff = at_time_i - mention.published_at.to_i
-        next if diff < 0 || mention.author.is_blacklisted?
+        next if diff < 0 || mention.author.blacklisted?
         time_diffs << diff
       end
       Integer Decay.exponentially time_diffs
     end
     
     def serializable_hash options={}
-      return Hash["id" => id, "external_id" => external_id, "source" => source.to_s ] if !is_populated?
+      return Hash["id" => id, "external_id" => external_id, "source" => source.to_s ] if !populated?
       author = external_account # TODO: 1. assume only 1 EA per video and 2. overloading EA#id
       author_hash = {}
       author_hash["username"] = author.username

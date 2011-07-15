@@ -14,7 +14,7 @@ module Aji
 
     validates_presence_of :provider, :uid
 
-    def is_blacklisted?; Aji.redis.sismember ExternalAccount.blacklisted_ids_key, self.id; end
+    def blacklisted?; Aji.redis.sismember ExternalAccount.blacklisted_ids_key, self.id; end
     def self.blacklist_id id; Aji.redis.sadd self.blacklisted_ids_key, id; end
     def self.blacklisted_ids; (Aji.redis.smembers self.blacklisted_ids_key).map(&:to_i); end
     def self.blacklisted_ids_key; "#{self.to_s}.blacklisted_ids"; end
@@ -34,9 +34,6 @@ module Aji
         :user_id => user_id
       }
     end
-
-    def is_user?
-      user_id ? true : false
-    end
+    
   end
 end

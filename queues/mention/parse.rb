@@ -18,7 +18,7 @@ module Aji
           end
 
           # Enqueue iff the mention has a valid link and is not from a spammer
-          if mention.has_link? && !mention.author.is_blacklisted?
+          if mention.has_link? && !mention.author.blacklisted?
             Resque.enqueue Queues::Mention::Process, mention
           end
         end

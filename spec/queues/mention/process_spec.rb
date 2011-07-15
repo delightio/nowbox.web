@@ -20,7 +20,7 @@ module Aji
       end
       
       it "pushes all videos mentioned into trending channel" do
-        video = double("video", :is_blacklisted? => false)
+        video = double("video", :blacklisted? => false)
         Aji::Video.should_receive(:find_or_create_by_external_id_and_source)
           .exactly(@links_count_in_mention).times
           .and_return(video)
@@ -29,7 +29,7 @@ module Aji
       end
       
       it "only pushes non-blackisted videos into trending channel" do
-        blacklisted_video = double("blacklisted video", :is_blacklisted? => true)
+        blacklisted_video = double("blacklisted video", :blacklisted? => true)
         Aji::Video.should_receive(:find_or_create_by_external_id_and_source)
           .exactly(@links_count_in_mention).times
           .and_return(blacklisted_video)

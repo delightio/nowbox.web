@@ -11,7 +11,7 @@ module Aji
       @@youtube_url_3 = %r<https?://(?:youtu|y2u)\.be/#{@@youtube_id}>]
       @@vimeo_url = %r<https?://(?:www\.)?vimeo\.com/(\d+)>
 
-    def is_youtube_video?
+    def youtube_video?
       # Check if string matches any youtube urls and memoize the result.
       # TODO: Make link string of Link objects immutable.
       @youtube_match ||= @@youtube_regexps.map do |r|
@@ -19,12 +19,12 @@ module Aji
       end.inject { |acc, el| acc ||= el }
     end
 
-    def is_vimeo_video?
+    def vimeo_video?
       @vimeo_match ||= self =~ @@vimeo_url ? true : false
     end
 
     # TODO: Implement this. (No shit sherlock)
-    def is_shortened?
+    def shortened?
       false
     end
   end
