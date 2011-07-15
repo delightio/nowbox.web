@@ -4,23 +4,40 @@ module Aji
   # NOTE: I might back it by a Redis hash, or even the database. I haven't
   # decided yet I just want a fucking Link object.
   class Link < String
-      @@youtube_id = %r<([-_\w]{11})>
-      @@youtube_regexps = [
-      @@youtube_url_1 = %r<https?://(?:www\.)?youtube(?:-nocookie)?\.com/v/#{@@youtube_id}["?]?>,
-      @@youtube_url_2 = %r<https?://(?:www\.)?youtube(?:-nocookie)?\.com/watch\?(?:\S&)?v=#{@@youtube_id}[&"]?>,
-      @@youtube_url_3 = %r<https?://(?:youtu|y2u)\.be/#{@@youtube_id}>]
-      @@vimeo_url = %r<https?://(?:www\.)?vimeo\.com/(\d+)>
+    attr_accessor :external_id, :type
+    def initialize
+      super
+      match_videos
+    end
+    @youtube_id_regexp = %r<([-_\w]{11})>
+    @vimeo_id_regexp = /\d+/
+    @youtube_regexps = [
+      %r<https?://(?:www\.)?youtube(?:-nocookie)?\.com/v/#{@youtube_id}["?]?>,
+      %r<https?://(?:www\.)?youtube(?:-nocookie)?\.com/watch\?(?:\S&)?v=#{@youtube_id}[&"]?>,
+      %r<https?://(?:youtu|y2u)\.be/#{@youtube_id}>
+    ]
+    @vimeo_regexp = %r<https?://(?:www\.)?vimeo\.com/(#{@vimeo_id_regexp})>
 
-    def youtube_video?
-      # Check if string matches any youtube urls and memoize the result.
-      # TODO: Make link string of Link objects immutable.
-      @youtube_match ||= @@youtube_regexps.map do |r|
-        self =~ r ? true : false
+
+    private
+    def match_videos
+      youtube_match = @youtube_urls.map do |r|
+        self.match r || false
       end.inject { |acc, el| acc ||= el }
+      vimeo_match = self.match @vimeo_regexp
+      if youtube_match
+        @external_id = youtube_match[1]
+        @type = 'youtube'
+      else
+        if vimeo_match
+          @external_id = vimeo_match[1]
+          @type = 'vimeo'
+        end
+      end
     end
 
-    def vimeo_video?
-      @vimeo_match ||= self =~ @@vimeo_url ? true : false
+    def video?
+      (@external_id && @@type) ? true : false
     end
 
     # TODO: Implement this. (No shit sherlock)
