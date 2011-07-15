@@ -61,13 +61,15 @@ module Aji
       path
     end
 
-    def populated?; populated_at!=nil; end
+    def populated?; !populated_at.nil?; end
 
     def populate
-      raise "Aji::Video#populate: missing external id for Aji::Video[#{id}]" if external_id.nil?
+      if external_id.nil?
+        raise "Aji::Video#populate: missing external id for Aji::Video[#{id}]"
+      end
+
       send "populate_from_#{source}"
-      populated_at = Time.now
-      save
+      update_attribute :populated_at, Time.now
     end
 
     def populate_from_youtube
