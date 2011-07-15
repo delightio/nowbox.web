@@ -7,26 +7,29 @@ module Aji
     describe "#perform" do
       before(:each) do
         @data = mock "raw data"
-        @author = double("author", :is_blacklisted? => false)
+        @author = double("author", :blacklisted? => false)
         @mention = double("mention", :has_links? => true,
                                          :author => @author)
         Parsers::Tweet.stub(:parse).and_return(@mention)
       end
 
       it "enqueues to Queues::Mention::Process if mention has links" do
-        Resque.should_receive(:enqueue).with(Queues::Mention::Process, @mention)
+        Resque.should_receive(:enqueue).
+          with(Queues::Mention::Process, @mention)
         subject.perform "twitter", @data
       end
 
       it "rejects given mention if there is no link" do
         @mention.stub(:has_links?).and_return(false)
-        Resque.should_receive(:enqueue).with(Queues::Mention::Process, @mention).never
+        Resque.should_receive(:enqueue).
+          with(Queues::Mention::Process, @mention).never
         subject.perform "twitter", @data
       end
 
       it "rejects given mention if author is blacklisted" do
         @author.stub(:blacklisted?).and_return(true)
-        Resque.should_receive(:enqueue).with(Queues::Mention::Process, @mention).never
+        Resque.should_receive(:enqueue).
+          with(Queues::Mention::Process, @mention).never
         subject.perform "twitter", @data
       end
     end
