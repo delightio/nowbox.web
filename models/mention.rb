@@ -24,5 +24,9 @@ module Aji
       write_attribute(:links, value.join('||'))
     end
 
+    def has_links?
+      links.length > 0
+    end
+
   end
 end
