@@ -32,7 +32,7 @@ end
 
 map "http://apidoc.#{Aji.conf['TLD']}/" do
   use Rack::Auth::Basic do |username, password|
-    [ username, password ] == [ "docs", "water" ]
+    [ username, password ] == [ "apidoc", "water" ]
   end
   use Rack::Static, :urls => { '/' => 'aji.html' }, :root => 'docs'
   run Rack::Directory.new('docs')
