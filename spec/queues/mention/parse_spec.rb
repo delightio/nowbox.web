@@ -25,7 +25,7 @@ module Aji
       end
 
       it "rejects given mention if author is blacklisted" do
-        @author.stub(:is_blacklisted?).and_return(true) # TODO: isn't this all I need?
+        @author.stub(:is_blacklisted?).and_return(true)
         Resque.should_receive(:enqueue).with(Queues::Mention::Process, @mention).never
         subject.perform "twitter", @data
       end

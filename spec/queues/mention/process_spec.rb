@@ -5,7 +5,6 @@ module Aji
     subject { Queues::Mention::Process }
     describe "#perform" do
       it "pushes all videos mentioned into trending channel" do
-        #pending "#unshift has no effect on mention.links"
         links_count_in_mention = rand 10
         link = double("link", :youtube_id => :anything,
                               :type => :anything)
