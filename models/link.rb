@@ -5,8 +5,8 @@ module Aji
   # decided yet I just want a fucking Link object.
   class Link < String
     attr_accessor :external_id, :type
-    def initialize
-      super
+    def initialize str
+      super str
       match_videos
     end
     @youtube_id_regexp = %r<([-_\w]{11})>
