@@ -7,11 +7,11 @@ module Aji
 
         def self.perform mention
           # Reinstantiate the mention object.
-          mention = Mention.new mention
+          mention = Aji::Mention.new mention
 
           until mention.links.empty?
             # Link is a subclass of URI
-            link = Link.new mention.links.unshift
+            link = Link.new mention.links.shift
             video = Aji::Video.find_or_create_by_external_id_and_source link.youtube_id, link.type
             mention.videos << video
             mention.save or Aji.log(
