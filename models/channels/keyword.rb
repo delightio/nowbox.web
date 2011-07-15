@@ -12,12 +12,9 @@ module Aji
       end
 
       def populate
-        (1..3).each do |page|
-          vids = YouTubeIt::Client.new.videos_by(:query => keywords.join(' '),
-                                                 :page => page).videos
-          vids.each_with_index do |v, i|
-            content_zset[Video.find_or_create_from_youtubeit_video(v).id] = "#{page}#{i}".to_i
-          end
+        videos = VideoSource::Youtube.search keywords
+        videos.each_with_index do |v, i|
+          push v, i
         end
       end
     end
