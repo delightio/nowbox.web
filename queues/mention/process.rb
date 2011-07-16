@@ -5,9 +5,9 @@ module Aji
 
         @queue = :mention
 
-        def self.perform mention
+        def self.perform mention_hash
           # Reinstantiate the mention object.
-          mention = Aji::Mention.new mention
+          mention = Aji::Mention.new mention_hash['mention']
 
           mention.links.each do |link|
             video = Aji::Video.find_or_create_by_external_id_and_source(

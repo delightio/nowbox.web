@@ -28,9 +28,11 @@ module Aji
           .and_return(video)
         @trending.should_receive(:push_recent).
           exactly(@links_count_in_mention).times
-        subject.perform mock('mention hash')
+        mention_hash = mock('mention hash')
+        mention_hash.should_receive(:"[]").and_return(mock('mention params'))
+        subject.perform mention_hash
       end
-      
+
       it "blacklists author who mentions a blacklisted video" do
         bad_author = ExternalAccount.new
         @mention.stub(:author).and_return(bad_author)
@@ -40,7 +42,7 @@ module Aji
         subject.perform :anything
         bad_author.should be_blacklisted
       end
-      
+
       it "blacklists author who mentions same set of video multiple times" do
         @mention.stub(:spam?).and_return(true)
         video = double("video", :blacklisted? => false)
@@ -49,7 +51,7 @@ module Aji
         subject.perform :anything
         @mention.author.should be_blacklisted
       end
-      
+
     end
   end
 end
