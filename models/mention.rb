@@ -12,21 +12,24 @@ module Aji
     has_and_belongs_to_many :videos
 
     def links
-      link_text = read_attribute(:links)
-      if link_text
-        link_text.split('||').map{|l| Link.new l}
-      else
-        []
-      end
+      @links ||= if self[:links]
+                   self[:links].split('||').map{|l| Link.new l}
+                 else
+                   []
+                 end
     end
 
     def links= value
-      write_attribute(:links, value.join('||'))
+      @links = value
+      self[:links] = value.join('||')
     end
 
     def has_links?
       links.length > 0
     end
 
+    def spam?
+      false
+    end
   end
 end
