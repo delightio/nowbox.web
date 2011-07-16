@@ -64,7 +64,7 @@ module Aji
             yc
 
         when 'trending'
-          Channels::Trending.first
+          Channel.trending
 
         when 'default'
           Channel.default_listing

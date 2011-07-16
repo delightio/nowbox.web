@@ -1,7 +1,20 @@
 require File.expand_path("../../../spec_helper", __FILE__)
 
 describe Aji::Channels::Trending do
-  describe "push_recent" do
+  describe "singleton" do
+    it "creates a new singleton when none exists" do
+      expect { Aji::Channels::Trending.singleton }.
+        to change(Aji::Channels::Trending, :count).from(0).to(1)
+    end
+
+    it "doesn't create if one already exists" do
+      Aji::Channels::Trending.singleton
+      expect { Aji::Channels::Trending.singleton }.
+        not_to change(Aji::Channels::Trending, :count)
+    end
+  end
+
+  describe "#push_recent" do
     it "should only keep given number of mentioned videos" do
       trending = Factory :trending_channel
       n = 2
@@ -18,7 +31,7 @@ describe Aji::Channels::Trending do
       trending = Factory :trending_channel
 
       real_youtube_video_ids = %w[ l4qv4Ca1h94 Wx7c7nHXqKg BoTvCgJtcJU ]
-      real_youtube_video_ids.each{ |yt_id| 
+      real_youtube_video_ids.each{ |yt_id|
         trending.push_recent( Factory :video_with_mentions,
                                         :source => :youtube,
                                         :external_id => yt_id) }

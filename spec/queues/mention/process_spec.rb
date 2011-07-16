@@ -15,10 +15,10 @@ module Aji
                                      :save => true,
                                      :author => @author,
                                      :spam? => false)
+        @trending = mock("trending singleton")
         Aji::Mention.stub(:new).and_return(@mention)
         Aji::Link.stub(:new).and_return(@link)
-        @trending = mock "trending channel"
-        Aji::Channels::Trending.stub(:first).and_return(@trending)
+        Aji::Channel.stub(:trending).and_return(@trending)
       end
 
       it "pushes all videos mentioned into trending channel" do

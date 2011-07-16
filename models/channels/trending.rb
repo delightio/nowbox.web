@@ -10,6 +10,7 @@ module Aji
       def recent_video_ids limit=-1
         (recent_zset.revrange 0, limit).map(&:to_i)
       end
+
       def push_recent video, relevance=Time.now.to_i
         recent_zset[video.id] = relevance
         n = 1 + Aji.conf['MAX_RECENT_VIDEO_IDS_IN_TRENDING']
@@ -19,7 +20,7 @@ module Aji
       def populate args={}
         in_flight = []
         at_time_i = Time.now.to_i
-        
+
         start = Time.now
         recent_video_ids_at_time = recent_video_ids
         recent_video_ids_at_time.each do |vid|
@@ -28,11 +29,11 @@ module Aji
           in_flight << { :vid => vid, :relevance => video.relevance(at_time_i) }
         end
         Aji.log "Collected #{in_flight.count} recent videos in #{Time.now-start} s."
-        
+
         start = Time.now
         in_flight.sort!{ |x,y| y[:relevance] <=> x[:relevance] }
         Aji.log "Sorted #{in_flight.count} videos in #{Time.now-start} s. Top 5: #{in_flight.first(5).inspect}"
-        
+
         start = Time.now; populated_count = 0
         max_in_flight = Aji.conf['MAX_VIDEOS_IN_TRENDING']
         in_flight.first(max_in_flight).each do |h|
@@ -53,6 +54,9 @@ module Aji
         h
       end
 
+      def self.singleton
+        Trending.first || Trending.create!(:title => "Trending")
+      end
     end
   end
 end

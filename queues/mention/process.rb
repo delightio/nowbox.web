@@ -19,7 +19,7 @@ module Aji
             mention.videos << video
             mention.save or Aji.log(
               "Couldn't save #{mention.inspect} for #{mention.errors.inspect}")
-            Aji::Channels::Trending.first.push_recent video
+            Aji::Channel.trending.push_recent video
           end
         end
       end
