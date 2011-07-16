@@ -7,5 +7,13 @@ describe Aji::ExternalAccount do
       expect { ea.publish nil }.to
        raise_error Aji::InterfaceMethodNotImplemented
     end
+
+    describe ".blacklist_id" do
+      it "should blacklist an account" do
+        bad_account = Aji::ExternalAccount.create
+        Aji::ExternalAccount.blacklist_id bad_account.id
+        bad_account.should be_blacklisted
+      end
+    end
   end
 end
