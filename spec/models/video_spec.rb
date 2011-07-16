@@ -56,5 +56,19 @@ describe Aji::Video do
       video.relevance(at_time_i).should < old_relevance
     end
   end
+  
+  describe "#latest_mentions" do
+    it "returns the latest N mentions" do
+      video = Factory :video
+      mentions =[]
+      mentions << Factory(:mention, :published_at => 5.minutes.ago)
+      mentions << Factory(:mention, :published_at => Time.now)
+      mentions << Factory(:mention, :published_at => 10.minutes.ago)
+      mentions.each { |m| m.videos << video }
+      oldest_mention = mentions.sort_by(&:published_at).first
+      video.mentions.count.should == 3
+      video.latest_mentions(2).should_not include oldest_mention
+    end
+  end
 end
 

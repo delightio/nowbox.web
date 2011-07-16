@@ -33,7 +33,11 @@ module Aji
     # Symbolize source attribute.
     def source; read_attribute(:source).to_sym; end
     def source= value; write_attribute(:source, value.to_sym); end
-
+    
+    def latest_mentions n=10
+      mentions.order("published_at DESC").limit(n)
+    end
+    
     # TODO: Deprecate in favor of a generic `Video::fetch(source:Symbol,
     # external_id:String)`
     def self.find_or_create_from_youtubeit_video v
@@ -88,7 +92,7 @@ module Aji
     def relevance at_time_i=Time.now.to_i
       return 0 if blacklisted?
       time_diffs = []
-      mentions.order("published_at DESC").limit(50).each do |mention|
+      latest_mentions(50).each do |mention|
         diff = at_time_i - mention.published_at.to_i
         next if diff < 0 || mention.author.blacklisted?
         time_diffs << diff
