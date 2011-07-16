@@ -26,7 +26,7 @@ describe Aji::Channel do
     end
 
     it "should return videos according to descending order on score" do
-      channel = Factory :trending_channel
+      channel = Factory :channel
       10.times do |n|
         channel.push Factory(:video), rand(1000)
       end
