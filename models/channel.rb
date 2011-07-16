@@ -82,8 +82,13 @@ module Aji
       new_video_ids.map{ |vid| Video.find_by_id vid }.compact
     end
 
+    # ## Class Methods
     def self.default_listing
       find_all_by_default_listing true
+    end
+
+    def self.trending
+      Channels::Trending.singleton
     end
 
   end
