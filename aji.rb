@@ -12,11 +12,17 @@ module Aji
   # complexity later, hence methodizing it.
   def Aji.log level=:INFO, message
     case level
-    when :ERROR, :WARN, :FATAL
+    when :ERROR, :WARN, :FATAL, :error, :warn, :fatal
       $stderr.puts message
-    when :DEBUG
+    when :DEBUG, :debug
       $stdout.puts '----------DEBUG----------', message,
         '----------DEBUG----------'
+    when :WTF, :wtf
+      puts "!!!!!!!!!!!!!!!!!!!! LOOOK AT ME DAMMIT !!!!!!!!!!!!!!!!!!!!",
+           "!!!!!!!!!!!!!!!!!!!! I AM NOT RIGHT MAN !!!!!!!!!!!!!!!!!!!!",
+           message,
+           "!!!!!!!!!!!!!!!!!!!!   FOR FUCK'S SAKE   !!!!!!!!!!!!!!!!!!!",
+           "!!!!!!!!!!!!!!!!!!!! JUST LOOK UP PLEASE !!!!!!!!!!!!!!!!!!!"
     else
       $stdout.puts message
     end
