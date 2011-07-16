@@ -71,7 +71,6 @@ module Aji
       limit = (args[:limit] || 20).to_i
       new_video_ids = []
       # TODO: use Redis for this..
-     a = user.viewed_video_ids
       viewed_video_ids = user.viewed_video_ids
       content_video_ids.each do |channel_video_id|
         next if Video.blacklisted_ids.include? channel_video_id
