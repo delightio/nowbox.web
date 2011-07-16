@@ -10,7 +10,17 @@ module Aji
 
   # Simple logging interface for local development and heroku. May grow in
   # complexity later, hence methodizing it.
-  def Aji.log message; puts message; end
+  def Aji.log level=:INFO, message
+    case level
+    when :ERROR, :WARN, :FATAL
+      $stderr.puts message
+    when :DEBUG
+      $stdout.puts '----------DEBUG----------', message,
+        '----------DEBUG----------'
+    else
+      $stdout.puts message
+    end
+  end
 
   # Set Rack environment if not specified.
   RACK_ENV = ENV['RACK_ENV'] || "development"
