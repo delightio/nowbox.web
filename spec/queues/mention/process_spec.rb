@@ -5,7 +5,7 @@ module Aji
     subject { Queues::Mention::Process }
     describe "#perform" do
       before(:each) do
-        @links_count_in_mention = rand 10
+        @links_count_in_mention = 6
         @link = double("link", :external_id => 'someID12345',
                                :type => 'youtube')
         @links = Array.new(@links_count_in_mention, @link)
@@ -34,13 +34,17 @@ module Aji
       end
 
       it "blacklists author who mentions a blacklisted video" do
-        bad_author = ExternalAccount.new
+        bad_author = mock("bad author")
+        bad_author.stub(:id).and_return(5)
         @mention.stub(:author).and_return(bad_author)
         blacklisted_video = double("blacklisted video", :blacklisted? => true)
-        Aji::Video.stub(:find_or_create_by_external_id_and_source).and_return(blacklisted_video)
+        Aji::Video.stub(:find_or_create_by_external_id_and_source).
+          and_return(blacklisted_video)
+        Aji::ExternalAccount.should_receive(:blacklist_id).with(5).at_least(1)
         @trending.should_receive(:push_recent).never
-        subject.perform :anything
-        bad_author.should be_blacklisted
+        mention_hash = mock("mention hash")
+        mention_hash.stub(:[])
+        subject.perform mention_hash
       end
 
       it "blacklists author who mentions same set of video multiple times" do
