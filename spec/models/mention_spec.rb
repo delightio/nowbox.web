@@ -15,7 +15,7 @@ describe Aji::Mention do
     end
 
     it "identifies spam" do
-      spammy_mention = Mention.new(
+      spammy_mention = Aji::Mention.new(
         :body => "Win a free iPad for selling ur soul")
       spammy_mention.should be_spam
     end
