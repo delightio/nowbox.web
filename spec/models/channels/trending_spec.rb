@@ -1,7 +1,7 @@
 require File.expand_path("../../../spec_helper", __FILE__)
 
 describe Aji::Channels::Trending do
-  describe "push_recent" do
+  describe "#push_recent" do
     it "should only keep given number of mentioned videos" do
       trending = Factory :trending_channel
       n = 2
