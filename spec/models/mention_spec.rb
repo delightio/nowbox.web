@@ -26,10 +26,6 @@ describe Aji::Mention do
       Aji::Mention.find(subject.id).links.should include link
     end
 
-    it "identifies spam" do
-      spammy_mention = Aji::Mention.new(
-        :body => "Win a free iPad for selling ur soul")
-      spammy_mention.should be_spam
-    end
+    it "identifies spam"
   end
 end
