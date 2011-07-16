@@ -55,7 +55,7 @@ module Aji
       end
 
       def self.singleton
-        Trending.first || Trending.create(:title => "Trending")
+        Trending.first || Trending.create!(:title => "Trending")
       end
     end
   end
