@@ -20,6 +20,7 @@ describe Aji::Video do
       subject.populate
       Aji::Video.find(subject.id).should be_populated
       Aji::Video.find(subject.id).title.should_not be_nil
+      Aji::Video.find(subject.id).author.uid.should == "nowmov"
     end
   end
 

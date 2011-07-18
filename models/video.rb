@@ -76,6 +76,8 @@ module Aji
 
     def populate_from_youtube
       v = YouTubeIt::Client.new.video_by external_id # TODO: global YouTubeIt client
+      self.author = ExternalAccounts::Youtube.find_or_create_by_uid(
+        v.author.name, :provider => "youtube")
       self.title = v.title
       self.description = v.description
       self.viewable_mobile = v.noembed
