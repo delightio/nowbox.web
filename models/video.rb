@@ -22,10 +22,8 @@ module Aji
     belongs_to :external_account
     has_and_belongs_to_many :mentions
 
-    def blacklisted?; Aji.redis.sismember Video.blacklisted_ids_key, self.id; end
-    def self.blacklist_id id; Aji.redis.sadd self.blacklisted_ids_key, id; end
-    def self.blacklisted_ids; (Aji.redis.smembers self.blacklisted_ids_key).map(&:to_i); end
-    def self.blacklisted_ids_key; "#{self.to_s}.blacklisted_ids"; end
+    def blacklist; self.blacklisted_at = Time.now; save; end
+    def blacklisted?; !blacklisted_at.nil?; end
 
     # Future mentioner/tweeter/poster relationship.
     # has_many :posters, :through...

@@ -69,17 +69,16 @@ module Aji
       raise ArgumentError, "User missing for Channel[#{self.id}].personalized #{args.inspect}" if user.nil?
       # TODO: just take out viewed videos
       limit = (args[:limit] || 20).to_i
-      new_video_ids = []
-      # TODO: use Redis for this..
+      new_videos = []
+      # TODO: use Redis for this.. zdiff not found?
       viewed_video_ids = user.viewed_video_ids
       content_video_ids.each do |channel_video_id|
-        next if Video.blacklisted_ids.include? channel_video_id
-        new_video_ids << channel_video_id if !viewed_video_ids.member? channel_video_id
-
-        break if new_video_ids.count >= limit
+        video = Video.find_by_id channel_video_id
+        next if video.blacklisted?
+        new_videos << video if !viewed_video_ids.member? channel_video_id
+        break if new_videos.count >= limit
       end
-      # new_video_ids = content_zset - user.viewed_zset # TODO: zdiff not found?
-      new_video_ids.map{ |vid| Video.find_by_id vid }.compact
+      new_videos
     end
 
     # ## Class Methods

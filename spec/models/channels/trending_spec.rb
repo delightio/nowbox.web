@@ -62,7 +62,7 @@ describe Aji::Channels::Trending do
     it "should not include blacklisted videos" do
       video = Factory :populated_video_with_mentions
       subject.push_recent video
-      Aji::Video.blacklist_id video.id
+      video.blacklist
 
       subject.populate
       subject.content_videos.count.should == 0

@@ -51,7 +51,7 @@ describe Aji::Channel do
       channel = Factory :channel_with_videos
       user = Factory :user
       video = channel.content_videos.sample
-      Aji::Video.blacklist_id video.id
+      video.blacklist
       channel.personalized_content_videos(:user=>user,
         :limit=>channel.content_videos.count).should_not include video
     end
