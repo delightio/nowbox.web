@@ -32,8 +32,11 @@ module Aji
     def source; read_attribute(:source).to_sym; end
     def source= value; write_attribute(:source, value.to_sym); end
     
-    def latest_mentions n=10
+    def latest_mentions n=50
       mentions.order("published_at DESC").limit(n)
+    end
+    def latest_mentioners limit=50
+      latest_mentions(limit).map(&:author)
     end
     
     # TODO: Deprecate in favor of a generic `Video::fetch(source:Symbol,

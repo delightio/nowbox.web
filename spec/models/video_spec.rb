@@ -71,5 +71,13 @@ describe Aji::Video do
       video.latest_mentions(2).should_not include oldest_mention
     end
   end
+  
+  describe "#latest_mentioners" do
+    it "returns the latest external accounts who mentioned about the video" do
+      video = Factory :video_with_mentions
+      mentioners = video.mentions.map(&:author)
+      Set.new(video.latest_mentioners).should == Set.new(mentioners)
+    end
+  end
 end
 
