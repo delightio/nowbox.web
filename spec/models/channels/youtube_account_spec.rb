@@ -4,8 +4,7 @@ describe Aji::Channels::YoutubeAccount do
   describe "#populate" do
     it "fetches videos from youtube" do
       youtube_username = "nicnicolecole"
-      nicole = Aji::ExternalAccounts::Youtube.create :provider => "youtube",
-                                                     :uid => youtube_username
+      nicole = Aji::ExternalAccounts::Youtube.create :uid => youtube_username
       yc = Aji::Channels::YoutubeAccount.create(:accounts => Array(nicole),
                                                 :title => "#{youtube_username}'s channel")
       yc.populate

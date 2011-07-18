@@ -5,8 +5,8 @@ module Aji
     # existing one representing the author of the mention.
     def self.parse json
       tweet_hash = MultiJson.decode json
-      author = ExternalAccounts::Twitter.find_or_create_by_provider_and_uid(
-        'twitter', tweet_hash['user']['id'].to_s)
+      author = ExternalAccounts::Twitter.find_or_create_by_uid(
+        tweet_hash['user']['id'].to_s)
       links = tweet_hash['entities']['urls'].map do |url|
         Link.new(url['expanded_url'] || url['url'])
       end

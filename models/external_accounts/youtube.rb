@@ -9,8 +9,6 @@ module Aji
     class Youtube < ExternalAccount
       include Redis::Objects
 
-      before_create :set_provider
-
       sorted_set :own_zset
       has_and_belongs_to_many :channels,
         :class_name => 'Channels::YoutubeAccount',
@@ -21,10 +19,6 @@ module Aji
 
       def username; uid; end
       def profile_uri; "http://www.youtube.com/user/#{uid}"; end
-
-      def set_provider
-        provider = 'youtube'
-      end
 
     end
   end
