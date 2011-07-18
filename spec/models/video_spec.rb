@@ -52,7 +52,7 @@ describe Aji::Video do
       video = Factory :video_with_mentions
       old_relevance = video.relevance at_time_i
 
-      Aji::ExternalAccount.blacklist_id video.mentions.sample.author.id
+      video.mentions.sample.author.blacklist
       video.relevance(at_time_i).should < old_relevance
     end
   end

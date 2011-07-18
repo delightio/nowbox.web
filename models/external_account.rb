@@ -6,6 +6,7 @@ module Aji
   # - uid: String non-nil
   # - created_at: DateTime
   # - updated_at: DateTime
+  # - blacklisted_at: DateTime
   class ExternalAccount < ActiveRecord::Base
     include Redis::Objects
     serialize :user_info
@@ -13,12 +14,10 @@ module Aji
     belongs_to :user
 
     validates_presence_of :provider, :uid
-
-    def blacklisted?; Aji.redis.sismember ExternalAccount.blacklisted_ids_key, self.id; end
-    def self.blacklist_id id; Aji.redis.sadd self.blacklisted_ids_key, id; end
-    def self.blacklisted_ids; (Aji.redis.smembers self.blacklisted_ids_key).map(&:to_i); end
-    def self.blacklisted_ids_key; "#{self.to_s}.blacklisted_ids"; end
-
+    
+    def blacklist; self.blacklisted_at = Time.now; save; end
+    def blacklisted?; !blacklisted_at.nil?; end
+    
     # The publish interface is called by background tasks to publish a video
     # share to an external service.
     def publish share

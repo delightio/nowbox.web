@@ -35,12 +35,11 @@ module Aji
 
       it "blacklists author who mentions a blacklisted video" do
         bad_author = mock("bad author")
-        bad_author.stub(:id).and_return(5)
         @mention.stub(:author).and_return(bad_author)
         blacklisted_video = double("blacklisted video", :blacklisted? => true)
         Aji::Video.stub(:find_or_create_by_external_id_and_source).
           and_return(blacklisted_video)
-        Aji::ExternalAccount.should_receive(:blacklist_id).with(5).at_least(1)
+        bad_author.should_receive(:blacklist).at_least(1)
         @trending.should_receive(:push_recent).never
         mention_hash = mock("mention hash")
         mention_hash.stub(:[])

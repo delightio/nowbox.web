@@ -13,7 +13,7 @@ module Aji
             video = Aji::Video.find_or_create_by_external_id_and_source(
               link.external_id, link.type)
             if video.blacklisted? || mention.spam?
-              Aji::ExternalAccount.blacklist_id mention.author.id
+              mention.author.blacklist
               next
             end
             mention.videos << video

@@ -8,10 +8,10 @@ describe Aji::ExternalAccount do
        raise_error Aji::InterfaceMethodNotImplemented
     end
 
-    describe ".blacklist_id" do
+    describe ".blacklist" do
       it "should blacklist an account" do
         bad_account = Aji::ExternalAccount.create
-        Aji::ExternalAccount.blacklist_id bad_account.id
+        bad_account.blacklist
         bad_account.should be_blacklisted
       end
     end
