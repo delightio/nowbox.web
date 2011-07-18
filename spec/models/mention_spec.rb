@@ -13,6 +13,7 @@ describe Aji::Mention do
       end
     end
   end
+  
   describe "links collection" do
     it "defaults to an empty array" do
       subject.links.class.should == Array
@@ -25,7 +26,31 @@ describe Aji::Mention do
       subject.save
       Aji::Mention.find(subject.id).links.should include link
     end
-
-    it "identifies spam"
   end
+  
+  describe "#spam?" do
+    it "identifies spam if mention's author has already mentioned the given video within the mention" do
+      video = Factory :video_with_mentions
+      mention = video.mentions.sample
+      spammy_mention = Factory :mention,
+        :author => mention.author,
+        :videos => [video]
+      spammy_mention.should be_spam
+    end
+    it "returns false for non spam " do
+      video = Factory :video_with_mentions,
+        :external_id => "OzVPDiy4P9I", :source => "youtube"
+      mention = Factory :mention, :links => ["http://youtu.be/#{video.external_id}"]
+      mention.should_not be_spam
+    end
+    it "caches result" do
+      spammy_mention = Factory :mention,
+        :author => (Factory :external_account),
+        :videos => [(Factory :video)]
+      spammy_mention.author.blacklist
+      spammy_mention.author.should_receive(:blacklist).never
+      spammy_mention.should be_spam
+    end
+  end
+  
 end

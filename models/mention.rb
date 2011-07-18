@@ -39,6 +39,14 @@ module Aji
     end
 
     def spam?
+      return true if author.blacklisted?
+      videos.each do |video|
+        mentioners = video.latest_mentioners
+        if mentioners.include? author
+          author.blacklist
+          return true
+        end
+      end
       false
     end
   end
