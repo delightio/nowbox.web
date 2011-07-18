@@ -53,8 +53,8 @@
 
       <span class="k">case</span> <span class="n">params</span><span class="o">[</span><span class="s1">&#39;provider&#39;</span><span class="o">]</span>
       <span class="k">when</span> <span class="s1">&#39;twitter&#39;</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="no">ExternalAccounts</span><span class="o">::</span><span class="no">Twitter</span><span class="o">.</span><span class="n">find_or_create_by_provider_and_uid</span><span class="p">(</span>
-          <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;provider&#39;</span><span class="o">]</span><span class="p">,</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;uid&#39;</span><span class="o">]</span><span class="p">,</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="no">ExternalAccounts</span><span class="o">::</span><span class="no">Twitter</span><span class="o">.</span><span class="n">find_or_create_by_uid</span><span class="p">(</span>
+          <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;uid&#39;</span><span class="o">]</span><span class="p">,</span>
           <span class="ss">:credentials</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;credentials&#39;</span><span class="o">]</span><span class="p">,</span>
           <span class="ss">:user_info</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;user_info&#39;</span><span class="o">]</span><span class="p">)</span>
         <span class="n">t</span><span class="o">.</span><span class="n">serializable_hash</span><span class="o">.</span><span class="n">inspect</span>

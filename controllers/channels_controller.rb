@@ -38,7 +38,7 @@ module Aji
       #   is the standard list of channels for non-logged-in users.
       # - `keywords`: a comma separated list of keywords accompanying the
       #   `keyword` channel type.
-      # - `accounts`: a comma separated list of youtube usernames for use with
+      # - `usernames`: a comma separated list of youtube usernames for use with
       #   the `youtube` channel type.
       get do
         case params[:type]
@@ -53,15 +53,13 @@ module Aji
           kc
 
         when 'youtube'
-          accounts = params[:accounts].split(',').map do |a|
-            ExternalAccounts::Youtube.find_or_create_by_provider_and_uid(
-             'youtube', a)
-          end
-
-          yc = Channels::YoutubeAccount.find_by_accounts accounts
-            yc = Channels::YoutubeAccount.create :accounts => accounts
+          usernames = params[:usernames].split(',')
+          yc = Channels::YoutubeAccount.find_by_usernames usernames
+          if !yc
+            yc = Channels::YoutubeAccount.create_by_usernames :usernames
             yc.populate
-            yc
+          end
+          yc
 
         when 'trending'
           Channel.trending
