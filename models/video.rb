@@ -5,7 +5,7 @@ module Aji
 
   # ## Video Schema
   # - id: Integer
-  # - account_id: Integer (Foreign Key)
+  # - author_id: Integer (Foreign Key)
   # - external_id: String
   # - source: String
   # - title: String
@@ -19,8 +19,8 @@ module Aji
   # - populated_at: DateTime
   class Video < ActiveRecord::Base
     has_many :events
-    belongs_to :external_account
     has_and_belongs_to_many :mentions
+    belongs_to :author, :class_name => 'ExternalAccount'
 
     def blacklist; self.blacklisted_at = Time.now; save; end
     def blacklisted?; !blacklisted_at.nil?; end
@@ -39,14 +39,14 @@ module Aji
     # TODO: Deprecate in favor of a generic `Video::fetch(source:Symbol,
     # external_id:String)`
     def self.find_or_create_from_youtubeit_video v
-      external_account =
+      author =
         ExternalAccounts::Youtube.find_or_create_by_uid(
           v.author.name, :provider => "youtube")
       Video.find_or_create_by_external_id(
         v.video_id.split(':').last,
         :title => v.title,
         :description => v.description,
-        :external_account => external_account,
+        :author => author,
         :source => :youtube,
         :viewable_mobile => v.noembed,
         :duration => v.duration,
@@ -100,7 +100,6 @@ module Aji
 
     def serializable_hash options={}
       return Hash["id" => id, "external_id" => external_id, "source" => source.to_s ] if !populated?
-      author = external_account # TODO: 1. assume only 1 EA per video and 2. overloading EA#id
       author_hash = {}
       author_hash["username"] = author.username
       author_hash["profile_uri"] = author.profile_uri
