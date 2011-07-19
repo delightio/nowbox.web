@@ -20,6 +20,7 @@ module Aji
           end
         end
         self.populated_at = Time.now
+        save
       end
     end
   end

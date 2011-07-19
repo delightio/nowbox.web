@@ -47,7 +47,7 @@ module Aji
         @usernames.delete @usernames.sample
         new_channel = Channels::YoutubeAccount.find_or_create_by_usernames @usernames,
           :populate_if_new => true
-        new_channel.should be_populated
+        Channel.find(new_channel.id).should be_populated
       end
       
       it "returns a channel with given title" do

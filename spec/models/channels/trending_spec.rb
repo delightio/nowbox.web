@@ -28,7 +28,7 @@ describe Aji::Channels::Trending do
   describe "#populate" do
     it "should be populated afterward" do
       subject.populate
-      subject.should be_populated
+      Aji::Channel.find(subject.id).should be_populated
     end
     
     it "should populate videos in trending channel" do

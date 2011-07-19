@@ -9,7 +9,7 @@ describe Aji::Channels::Keyword do
       uke.content_videos.should be_empty
       uke.populate
       uke.content_videos.should_not be_empty
-      uke.should be_populated
+      Aji::Channel.find(uke.id).should be_populated
     end
 
   end
