@@ -54,12 +54,8 @@ module Aji
 
         when 'youtube'
           usernames = params[:usernames].split(',')
-          yc = Channels::YoutubeAccount.find_by_usernames usernames
-          if !yc
-            yc = Channels::YoutubeAccount.create_by_usernames :usernames
-            yc.populate
-          end
-          yc
+          Channels::YoutubeAccount.find_or_create_by_usernames usernames,
+            :populate_if_new => true
 
         when 'trending'
           Channel.trending
