@@ -57,6 +57,12 @@ module Aji
           :title => test_title
         Channel.find(new_channel.id).title.should == test_title
       end
+      
+      it "works with external account which never has a channel on our system" do
+        usernames = [ random_string ]
+        new_channel = Channels::YoutubeAccount.find_or_create_by_usernames usernames
+        new_channel.should_not be_nil
+      end
     end
   
     describe ".find_by_accounts" do

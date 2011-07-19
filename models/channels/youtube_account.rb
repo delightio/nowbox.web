@@ -37,19 +37,19 @@ module Aji
         save
       end
 
-      def self.find_by_accounts accounts
+      def self.find_all_by_accounts accounts
         accounts_channels = accounts.map{ |a| a.channels }
         # Perform an intersection on all the channels from given accounts
         # using Ruby's awesome Array#inject.
         matching_channels = accounts_channels.inject(&:&)
-        matching_channels.find{ |c| c.accounts.length == accounts.length }
+        matching_channels.find_all { |c| c.accounts.length == accounts.length }
       end
       
       def self.find_or_create_by_usernames usernames, args={}
         accounts = usernames.map { |n| 
           ExternalAccounts::Youtube.find_or_create_by_uid :uid => n }
-        found = self.find_by_accounts accounts
-        return found if found
+        found = self.find_all_by_accounts accounts
+        return found.first if !found.empty?
         
         channel = self.create :accounts => accounts, :title => args[:title]
         channel.populate if args[:populate_if_new]
