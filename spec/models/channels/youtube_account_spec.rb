@@ -40,15 +40,13 @@ module Aji
       end
       
       it "returns un-populated channel by default" do
-        pending "no populated_at yet"
         subject.should_not be_populated
       end
       
       it "populates new channel when asked" do
-        pending "no populated_at yet"
         @usernames.delete @usernames.sample
         new_channel = Channels::YoutubeAccount.find_or_create_by_usernames @usernames,
-          :poulate_if_new => true
+          :populate_if_new => true
         new_channel.should be_populated
       end
       

@@ -33,6 +33,7 @@ module Aji
             content_zset[v] = "#{i + 1}#{k + 1}".to_i
           end
         end
+        self.populated_at = Time.now
       end
 
       def self.find_by_accounts accounts

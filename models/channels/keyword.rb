@@ -19,6 +19,7 @@ module Aji
             content_zset[Video.find_or_create_from_youtubeit_video(v).id] = "#{page}#{i}".to_i
           end
         end
+        self.populated_at = Time.now
       end
     end
   end
