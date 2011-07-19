@@ -7,7 +7,7 @@ module Aji
 
       def serializable_hash options={}
         h = super
-        h["title"] = keywords.join ", "
+        h["title"] = title || keywords.join(", ")
         h
       end
 

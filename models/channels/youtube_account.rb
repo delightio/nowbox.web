@@ -10,7 +10,7 @@ module Aji
         h = super
         # TODO: Use a before_create hook to create the title. We should do the
         # same for Keywords as well.
-        h["title"] = accounts.map(&:uid).join ", "
+        h["title"] = title || (accounts.map(&:uid).join ", ")
         h
       end
 

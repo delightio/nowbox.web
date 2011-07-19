@@ -50,12 +50,6 @@ module Aji
         save
       end
 
-      def serializable_hash options={}
-        h = super
-        h["title"] = "Trending"
-        h
-      end
-
       def self.singleton
         Trending.first || Trending.create!(:title => "Trending")
       end
