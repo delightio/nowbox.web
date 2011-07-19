@@ -1,0 +1,17 @@
+[
+
+  { "title": "NowComedy",
+    "type": "youtube",
+    "usernames": ["funnyordie", "collegehumor", "BREAK"]}
+  ,
+
+  { "title": "NowGaming",
+    "type": "youtube",
+    "usernames": ["day9tv", "G4TV", "machinima"]}
+  ,
+  
+  { "title": "NowCelebrity",
+    "type": "youtube",
+    "usernames": ["eentertainment", "TMZ", "enews"]}
+
+]
