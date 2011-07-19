@@ -6,8 +6,8 @@ class AddDuariontViewCountPublishedAtToVideos < ActiveRecord::Migration
   end
 
   def self.down
-    drop_colum :videos, :duartion
-    drop_colum :videos, :view_count
-    drop_colum :videos, :published_at
+    remove_column :videos, :duartion
+    remove_column :videos, :view_count
+    remove_column :videos, :published_at
   end
 end

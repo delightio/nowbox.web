@@ -4,6 +4,6 @@ class AddBlacklistedAtToExternalAccounts < ActiveRecord::Migration
   end
 
   def self.down
-    drop_colum :external_accounts, :blacklisted_at
+    remove_column :external_accounts, :blacklisted_at
   end
 end
