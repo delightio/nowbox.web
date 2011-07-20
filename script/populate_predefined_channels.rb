@@ -9,7 +9,10 @@ channels_json.each do |ch|
   start = Time.now
   channel = Aji::Channels::YoutubeAccount.find_or_create_by_usernames(
     ch["usernames"],
-    :title => ch["title"], :populate_if_new => true)
+    :title => ch["title"],
+    :category => ch["category"],
+    :default_listing => true,
+    :populate_if_new => true)
   puts "  => #{channel.inspect} in #{Time.now-start} s."
   puts
 end

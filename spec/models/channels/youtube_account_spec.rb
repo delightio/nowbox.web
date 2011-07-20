@@ -63,6 +63,16 @@ module Aji
         Channel.find(new_channel.id).title.should == test_title
       end
       
+      it "passes initial parameters to .create" do
+        test_title = random_string
+        test_category = Aji::Supported.categories.sample
+        h = {:title => test_title, :category => test_category, :default_listing => true}
+        ch = Channels::YoutubeAccount.find_or_create_by_usernames(@usernames, h)
+        Channel.find(ch.id).title.should == test_title
+        Channel.find(ch.id).category.should == test_category
+        Channel.find(ch.id).default_listing.should == true
+      end
+      
       it "works with external account which never has a channel on our system" do
         usernames = [ random_string ]
         new_channel = Channels::YoutubeAccount.find_or_create_by_usernames usernames
