@@ -2,6 +2,16 @@ require File.expand_path("../../../spec_helper", __FILE__)
 
 module Aji
   describe Channels::YoutubeAccount do
+    before(:each) do
+      @usernames = []
+      3.times { |n| @usernames << (Factory :external_account).uid }
+    end
+    subject { Channels::YoutubeAccount.find_or_create_by_usernames @usernames }
+    
+    it "should set title based on accounts if no title is given" do
+      subject.title.should == Channels::YoutubeAccount.to_title(subject.accounts)
+    end
+    
     describe "#populate" do
       it "fetches videos from youtube" do
         youtube_username = "nicnicolecole"
@@ -15,11 +25,6 @@ module Aji
     end
   
     describe ".find_or_create_by_usernames" do
-      before(:each) do
-        @usernames = []
-        3.times { |n| @usernames << (Factory :external_account).uid }
-      end
-      subject { Channels::YoutubeAccount.find_or_create_by_usernames @usernames }
       
       it "returns a new channel when there is no exact match" do
         subject = Channels::YoutubeAccount.find_or_create_by_usernames @usernames

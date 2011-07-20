@@ -6,13 +6,9 @@ module Aji
         :join_table => :youtube_youtube_channels, :foreign_key => :channel_id,
         :association_foreign_key => :account_id
 
-      def serializable_hash options={}
-        h = super
-        # TODO: Use a before_create hook to create the title. We should do the
-        # same for Keywords as well.
-        h["title"] = title || (accounts.map(&:uid).join ", ")
-        h
-      end
+      before_create :set_title
+      def self.to_title accounts; accounts.map(&:uid).join ", "; end
+      def set_title; self.title = title || self.class.to_title(accounts); end
 
       def populate
         accounts.each_with_index do |a, i|

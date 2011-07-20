@@ -4,12 +4,10 @@ module Aji
     # - keywords: Serialized array of strings
     class Keyword < Channel
       serialize :keywords
-
-      def serializable_hash options={}
-        h = super
-        h["title"] = title || keywords.join(", ")
-        h
-      end
+      
+      before_create :set_title
+      def self.to_title words; words.join ", "; end
+      def set_title; self.title = title || self.class.to_title(keywords); end
 
       def populate
         (1..3).each do |page|
