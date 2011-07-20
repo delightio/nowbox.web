@@ -63,6 +63,18 @@ module Aji
         new_channel = Channels::YoutubeAccount.find_or_create_by_usernames usernames
         new_channel.should_not be_nil
       end
+      
+      it "insert the videos into the channel of the given external accounts" do
+        usernames = [ "nowmov" ]
+        (ExternalAccounts::Youtube.find_by_uid "nowmov").should be_nil
+        new_channel = Channels::YoutubeAccount.find_or_create_by_usernames usernames,
+          :populate_if_new => true
+        new_channel.should_not be_nil
+        nowmov = ExternalAccounts::Youtube.find_by_uid "nowmov"
+        nowmov.should_not be_nil
+        channel = nowmov.channels.first
+        channel.content_videos.should_not be_empty
+      end
     end
   
     describe ".find_by_accounts" do
