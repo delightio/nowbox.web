@@ -6,8 +6,10 @@ channels_json.each do |ch|
   puts "Creating #{ch["title"]} channel with #{ch["usernames"].count} #{ch["type"]} accounts: #{ch["usernames"]}..."
   raise "Can't deal with type #{ch["type"]}" if ch["type"]!="youtube"
   
+  start = Time.now
   channel = Aji::Channels::YoutubeAccount.find_or_create_by_usernames(
     ch["usernames"],
     :title => ch["title"], :populate_if_new => true)
-  puts "  => #{channel.inspect}"
+  puts "  => #{channel.inspect} in #{Time.now-start} s."
+  puts
 end
