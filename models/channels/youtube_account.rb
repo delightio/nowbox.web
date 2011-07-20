@@ -19,18 +19,13 @@ module Aji
           # Fetch videos from specific sources.
           if a.own_zset.members.count == 0
             yt_videos = YouTubeIt::Client.new.videos_by(
-              :user => "#{a.uid}", :order_by => 'published').videos
+              :user => "#{a.uid}", :order_by => 'published').videos#TODO paging
             yt_videos.each_with_index do |v, n|
-              a.own_zset[Video.find_or_create_from_youtubeit_video(v).id] =
-                v.published_at.to_i
+              vid = Video.find_or_create_from_youtubeit_video(v).id
+              relevance = v.published_at.to_i
+              a.own_zset[vid] = relevance
+              content_zset[vid] = relevance
             end
-          end
-
-          a.own_zset.members.each_with_index do |v, k|
-            # Until I can write my own Redis-backed ZSet class or come up with
-            # a suitable interface to Redis::Objects::SortedSet, this is a
-            # clever trick to get unique ranks for each video into a channel.
-            content_zset[v] = "#{i + 1}#{k + 1}".to_i
           end
         end
         self.populated_at = Time.now
