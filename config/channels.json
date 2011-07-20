@@ -2,16 +2,45 @@
 
   { "title": "NowComedy",
     "type": "youtube",
-    "usernames": ["funnyordie", "collegehumor", "BREAK"]}
+    "usernames": ["funnyordie", "collegehumor", "BREAK", "hotandfluffycomedy", "thelaughfactory", "jimmykimmellive", "teamcoco", "thesoup", "georgelopezcomedy", "justforlaughsTV", "improveverywhere", "failblog", "raywilliamjohnson"]}
   ,
 
   { "title": "NowGaming",
     "type": "youtube",
-    "usernames": ["day9tv", "G4TV", "machinima"]}
+    "usernames": ["day9tv", "G4TV", "machinima", "attackoftheshow", "gamefrontdotcom", "TheGameStation", "CALLOFDUTY", "PlayStation", "pcgamer", "starcraft", "Nintendo3DS", "DTOID", "joystiq", "XboxViewTV", "gamespot", "ubisoft", "AssassinsCreed", "FragDolls", "Wii"]}
   ,
   
   { "title": "NowCelebrity",
     "type": "youtube",
-    "usernames": ["eentertainment", "TMZ", "enews"]}
-
+    "usernames": ["eentertainment", "TMZ", "enews", "tvguide", "hollywoodTV", "perezhilton"]}
+  ,
+  
+  { "title": "NowFilm",
+    "type": "youtube",
+    "usernames": ["warnerbrospictures", "HBOdocumentaryfilms", "cinemax", "SFF", "hollywoodstreams", "filmriot", "disneymovietrailers", "alliancefilms", "filmindependent", "turnerclassicmovies", "independentlens", "beyondthetrailer", "indymogul"]}
+  ,
+  
+  { "title": "NowNews",
+    "type": "youtube",
+    "usernames": ["CNN", "AssociatedPress", "CSPAN", "WGN", "CNBC", "foxnewschannel", "theweatherchannel", "russiatoday", "foxnewsinsider", "CBS", "aljazeeraenglish", "cnninternational"]}
+  ,
+  
+  { "title": "NowEntertainment",
+    "type": "youtube",
+    "usernames": ["HBO", "truTV", "currentTV", "foxbroadcasting", "tntweknowdrama", "aetv", "officialamc", "TLC", "animalplanettv", "historychannel", "biographychannel", "travelchanneltv"]}
+  ,
+  
+  { "title": "NowSports",
+    "type": "youtube",
+    "usernames": ["HBOsports", "ESPN", "nikegolf", "NBA", "NHLvideo", "WNBA", "MLB", "foxsports", "ussoccerdotcom", "nikesoccer", "nikefootball", "Adidasfootball", "CFLTV", "CBSsports", "FCBarcelona", "tnawrestling", "UFC"]}
+  ,
+  
+  { "title": "NowFamily",
+    "type": "youtube",
+    "usernames": ["disneychannel", "cartoonnetwork", "disneychannelUK", "pingu", "barneychannel", "thomasandfriends", "bobthebuilderchannel", "firemansamchannel", "smurfsmovie"]}
+  ,
+  
+  { "title": "NowMusic",
+    "type": "youtube",
+    "usernames": ["cctelevisionchannel", "fusevids", "portugalthemanband", "faniavideos", "linkinparktv", "rapuptv", "countrymusicassoc", "fearlessmusicshow", "electronicmusicTV", "karmincovers", "skeetv", "insomniacevents", "truecountrytv", "musicianswanted", "bonnaroomusicfest", "feddelegrand", "sxsw"]}
 ]
