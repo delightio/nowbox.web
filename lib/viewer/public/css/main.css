@@ -1,26 +1,29 @@
-body { background: url(/v/images/graphics/bg-white-grid.png) repeat; color: #090909; }
+body { background: url(/images/graphics/bg-offwhite-crosshatch-2.jpg) repeat; color: #090909; }
 
-#container { width: 900px; margin: auto;}
+#container { }
 
-header { padding: 15px 20px 5px; line-height: 30px; text-align: left;}
+header { padding: 25px 0px 25px; line-height: 30px; text-align: left;  font-size: 14px;}
+	header > .wrapper { width: 800px; margin: auto; }
 	#logo{ display: block; float: left; height: 30px; margin: 0px;}
 		#logo img{ }
 	header .fblike{ float: right; }
 	header ul{ float: right; list-style: none; padding: 0px; margin: 0px auto; }
 		header ul li { float: right; display: block; padding: 2px 5px;}
-			header ul a, header ul a:active, header ul a:visited{ color: #AAA;}
+			header ul a, header ul a:active, header ul a:visited{ color: #AAA;  font-weight: normal;}
 				header ul a:hover { color: #444;}
 
-footer { padding: 20px 20px;}	
+footer { padding: 20px 0px 20px; margin: 80px auto 0px; border-top: 1px dotted #666;  background: url(/images/graphics/aji-tiles-blue.jpg) repeat; font-size: 14px;}	
+	footer > .wrapper { width: 800px; margin: auto;}
 footer ul{ float: right; list-style: none; padding: 0px; margin: 0px auto; }
 	footer ul li { float: right; display: block; padding: 2px 5px;}
-		footer ul a, footer ul a:active, footer ul a:visited{ color: #AAA;}
-		footer ul a:hover { color: #444;}
-footer .tweet, footer .fblike { float: left; }
-	
-#main { padding: 0px 20px; }
+		footer ul a, footer ul a:active, footer ul a:visited{ color: #444; font-weight: normal;}
+		footer ul a:hover { color: #222;}
 
-.section{  margin: 0px 0px 10px; padding: 10px; background: rgba(0, 153, 204, 0.1); }
+footer .follow, footer .fblike, footer .tweet { float: left; }
+	
+#main { padding: 0px 0px; width: 800px; margin: auto; }
+
+.section{  margin: 0px 0px 1px; padding: 10px 0px; border-bottom: 1px dotted #DDD; border-top: 1px dotted #CCC; }
 .section.lite-blue{ background: rgba(0, 153, 204, 0.1); }
 .section.lite-gray{ background: rgba(0, 0, 0, 0.1); }
 
@@ -28,10 +31,89 @@ ul.section { list-style: none; }
 .section li{ margin: 10px 0px;  color: #444;}
 .section p{ margin: 10px 0px;}
 
-.ipad-chrome{ position: relative; height: 469px; width: 600px; background-repeat: no-repeat; background-image: url(/v/images/graphics/ipad-chrome.png); }
+.ipad-chrome{ position: relative; height: 469px; width: 600px; background-repeat: no-repeat; background-image: url(/images/graphics/ipad-chrome.png); }
 .ipad-chrome img{ position: absolute; top: 59px; left: 66px; width: 469px;}
 .ipad-chrome iframe{ position: absolute; top: 59px; left: 66px; }
 
+
+/* SPLASH */
+#launch{ 
+	top: 0px; bottom: 0px; left: 0px; right: 0px;
+	position: fixed;
+	z-index: 9999;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+
+#launch.photo1{
+	 background: url(/images/photos/89100011.jpg) no-repeat center center fixed; 
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100011.jpg', sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100011.jpg', sizingMethod='scale')";
+}
+
+#launch.photo2{
+	 background: url(/images/photos/89100009.png) no-repeat center center fixed; 
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100009.png', sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100009.png', sizingMethod='scale')";
+}
+
+#launch.photo3{
+	 background: url(/images/photos/89100017.jpg) no-repeat center center fixed; 
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100017.jpg', sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100017.jpg', sizingMethod='scale')";
+}
+
+#launch.photo4{
+	 background: url(/images/photos/89100022.png) no-repeat center center fixed; 
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100022.png', sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100022.png', sizingMethod='scale')";
+}
+
+#taglinebox { width: 600px; left: 50%; margin-left: -300px; top: 30px; text-shadow: 0px 0px 30px #000; position: absolute; text-align: center;  }
+	#taglinebox h1{ text-transform: lowercase; margin-top: 30px; color: #FFF; font: bolder 30px "helvetica neue", helvetica, arial, sans-serif;}
+	#taglinebox h2{ text-transform: lowercase; color: #FFF; font: lighter 20px "helvetica neue", helvetica, arial, sans-serif;}
+	#launch.photo3 #taglinebox h1, #launch.photo3 #taglinebox h2, #launch.photo4 #taglinebox h1, #launch.photo4 #taglinebox h2{ color: #222; text-shadow: 0px 0px 30px #FFF; } 
+
+#launchlogo{ text-align: center; background: rgba(0, 0, 0, 0.2); padding: 20px;
+  -webkit-box-shadow: 0px 0px 5px rgba(250,250,250,.2);
+     -moz-box-shadow: 0px 0px 5px rgba(250,250,250,.2);
+      -ms-box-shadow: 0px 0px 5px rgba(250,250,250,.2);
+       -o-box-shadow: 0px 0px 5px rgba(250,250,250,.2);
+          box-shadow: 0px 0px 5px rgba(250,250,250,.2);
+}
+	#launchlogo img { vertical-align: middle;}
+	#launchlogo:hover{ background: rgba(0, 0, 0, 0.8); }
+	
+#launchbox { 
+	position: fixed;
+	padding: 10px; width: 450px; margin-left: -225px; left: 50%; bottom: 50px;
+	background: rgba(0, 0, 0, 0.2); 
+  -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+     -moz-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+      -ms-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+       -o-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+          box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+}
+	#launchbox .wrapper{ padding: 10px; background: url(/images/graphics/aji-tiles-salmon.jpg) repeat; }
+	/*##launch.photo1 #launchbox{}
+	launch.photo2 #launchbox{ bottom: 100px; left: 50%; margin-left: -250px;}
+	#launch.photo3 #launchbox{ bottom: 100px; left: 100px; }
+	#launch.photo4 #launchbox{ top: 100px; right: 100px; }*/
+	#launchbox p{ font-weight: normal; font-size: 16px; color: #AAA; line-height: 2; color: #602324; margin-bottom: 10px;}
+	#launchbox .social{ margin: 20px 0px 0px;}
+		#launchbox .social .tweet, #launchbox .social .fblike, #launchbox .social .plusone { float: left; }
+
+#invite-email{ padding: 10px; border: 1px solid transparent; font-size: 21px; color: #444; display: block; float: left; width: 250px; }
+#invite-submit{ display: block; float: right;}
+	#invite-submit:hover{  }
+
+#post_invite{ display : none; margin-bottom: 10px; padding: 5px; background: rgba(0,0,0, 0.1); font-size: 16px; line-height: 1.5;}
+	#post_invite a, #post_invite a:active, #post_invite a:visited{ color: #EEE; }
+		#post_invite a:hover{ color: #FFF; text-decoration: underline;  }
+		
 /* CALL TO ACTIONS */
 #call_to_action_quote{ padding: 10px; background-color: #EFEFEF; background: rgba(0, 0, 0, 0.1); }
 	#call_to_action_quote .quoter_image{ float: left; display: block; margin-right: 10px; height: 48px; }
@@ -67,7 +149,7 @@ ul.section { list-style: none; }
 		#about .image img { width: 100px; }
 	#about .bio { float: left; width: 500px; padding: 0px 10px; line-height: 1.5; }
 		#about .identity{ font-weight: bold; font-size: 16px; color: #000; }
-			#about .identity .role{ margin-left: 5px; color: #AAA; }
+			#about .identity .role{ margin-left: 5px; color: #AAA; font-weight: normal;}
 		#about .description{ font-size: 14px;}
 		#about .email{ color: #AAA; }
 

@@ -1,0 +1,75 @@
+<div id="launch" class="photo<%= 1 + rand(4) %>">
+	<div id="taglinebox">
+		<a id="launchlogo" href="/"><img src="./images/logos/nowmov-logotype-white.png" height="30px"/></a>
+		<h1>Rethink video entertainment</h1>
+		<h2>personal. social. couch not required.</h2>
+	</div>
+	<div id="launchbox">
+		<div class="wrapper">
+			<p><span style="font-weight: bold;">Coming soon.</span> Be the first to try it out.</p>
+			<form id="invite-form" name="invite-form" action="http://208.72.154.212/widgetapi.0.1.php">
+				<input id="invite-email" name="email" class="email round-corners-5 rmv-dft-val" type="text" value="Your email"/>
+				<input type="hidden" name="IrDomain" value="nowmov.com">
+				<input type="hidden" name="apiKey" value="48d38c9924c6a7e6c0cc43844aab2569">
+				<input type="hidden" name="referralid" value="">
+				<input type="hidden" name="urlPrefix" value="">
+				<button id="invite-submit" type="submit" class="submit slick-black">Notify Me</button>
+				<div class="clearfix"></div>
+			</form>
+			<div id="post_invite">
+				<span style="font-weight: bold;">Thank you!</span><br/>Please spread the word and <a href="./home">learn more</a> about us.
+			</div>
+			<div class="social">
+				<div class="fblike">
+					<%= erb :_fblike %>
+				</div>
+				
+				<div class="tweet">
+					<%= erb :_tweet %>
+				</div>
+				
+				<div class="plusone">
+					<g:plusone size="medium"></g:plusone>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>		
+</div>
+<script>
+/*$(document).ready(function(){
+    LR.lrInstance = new LrInstance('LR-container',{
+
+        tagLine: "",
+        description: "",
+        refCodeUrl: "http://nowmov.com/?ref=",
+        lrDomain: "nowmov.com",
+        apiKey: "48d38c9924c6a7e6c0cc43844aab2569",
+        inviteList: ""
+    });        
+
+    // Handles events related to signup form, form validations
+    // and submitting the form to the server:
+    LR.signupForm = new SignupForm({
+        secondaryPostLocation: ""
+    });
+
+
+    // Handles rendering the post submit content:
+    LR.postSubmit = new PostSignupForm('pagesubmit',{
+        twitterHandle: "nowmov",
+        twitterMessage: "Nowmov for iPad and iPhone is launching soon and I'm one of the first in line! Join me. #launch",
+        newUserHeaderText: "",
+        newUserParagraphText: "",
+        newUserParagraphText3: "",
+        returningUserHeaderText: "",
+        returningUserParagraphText: "",
+        returningUserParagraphText3: "",
+        statsPreText: "Your live stats: ",
+        footerLinks: "<a href='http://twitter.com/nowmov'>Follow Us on Twitter</a> | <a href='http://nowmov'>Like Us on Facebook</a>"
+    });
+
+
+});*/
+
+    </script>

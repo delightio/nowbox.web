@@ -10,9 +10,13 @@ module Aji
     set :public, File.dirname(__FILE__) + "/public"
 
     get '/' do
-      erb :index
+      erb :launch, {:layout => :splash}
     end
 
+    get '/home' do
+      erb :home
+    end
+    
     get '/about' do
       erb :about
     end
@@ -29,6 +33,10 @@ module Aji
       erb :download
     end
 
+    get '/launch' do
+      erb :launch, {:layout => :splash}
+    end
+    
     get '/:share_id' do
       #@share = Share.find params[:share_id]
       erb :video
