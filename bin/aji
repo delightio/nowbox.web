@@ -35,9 +35,8 @@ class Aji < Thor
     if test
       exec "bin/rspec #{test}"
     else
-      exec "bin/rspec spec"
-      puts "Rebuilding documentation..."
-      exec "bin/aji docs"
+      system "bin/rspec spec"
+      invoke :docs if $?.exitstatus == 0
     end
   end
 
@@ -48,6 +47,7 @@ class Aji < Thor
 
   desc "docs", "generate Rocco documentation"
   def docs
+    puts "Rebuilding documentation..."
     exec "bin/rocco -o docs/ aji.rb controllers/*"
   end
 
