@@ -4,6 +4,6 @@ class AddPublishedAtToMentions < ActiveRecord::Migration
   end
 
   def self.down
-    drop_colum :mentions, :published_at
+    remove_column :mentions, :published_at
   end
 end

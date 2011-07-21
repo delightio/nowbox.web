@@ -12,8 +12,8 @@ module Aji
 
       case params['provider']
       when 'twitter'
-        t = ExternalAccounts::Twitter.find_or_create_by_provider_and_uid(
-          auth_hash['provider'], auth_hash['uid'],
+        t = ExternalAccounts::Twitter.find_or_create_by_uid(
+          auth_hash['uid'],
           :credentials => auth_hash['credentials'],
           :user_info => auth_hash['user_info'])
         t.serializable_hash.inspect

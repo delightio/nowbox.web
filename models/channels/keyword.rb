@@ -4,12 +4,10 @@ module Aji
     # - keywords: Serialized array of strings
     class Keyword < Channel
       serialize :keywords
-
-      def serializable_hash options={}
-        h = super
-        h["title"] = keywords.join ", "
-        h
-      end
+      
+      before_create :set_title
+      def self.to_title words; words.join ", "; end
+      def set_title; self.title = title || self.class.to_title(keywords); end
 
       def populate
         (1..3).each do |page|
@@ -19,6 +17,8 @@ module Aji
             content_zset[Video.find_or_create_from_youtubeit_video(v).id] = "#{page}#{i}".to_i
           end
         end
+        self.populated_at = Time.now
+        save
       end
     end
   end

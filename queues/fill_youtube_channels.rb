@@ -30,8 +30,7 @@ module Aji
           # Load or create Youtube account for each author.
           accounts = Array.new
           authors.each do |a|
-            accounts << ExternalAccounts::Youtube.
-              find_or_create_by_uid_and_provider(a, :youtube)
+            accounts << ExternalAccounts::Youtube.find_or_create_by_uid(a)
           end
           # Create Youtube account channel.
           channel = Channels::YoutubeAccount.find_or_create_by_title(name,

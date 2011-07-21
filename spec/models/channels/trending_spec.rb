@@ -26,6 +26,11 @@ describe Aji::Channels::Trending do
   end
 
   describe "#populate" do
+    it "should be populated afterward" do
+      subject.populate
+      Aji::Channel.find(subject.id).should be_populated
+    end
+    
     it "should populate videos in trending channel" do
       real_youtube_video_ids = %w[ l4qv4Ca1h94 Wx7c7nHXqKg BoTvCgJtcJU ]
       real_youtube_video_ids.each{ |yt_id|

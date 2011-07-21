@@ -34,6 +34,10 @@ module Aji
           returned_channels = body_hash.map {|h| h["channel"]}
           returned_channels.should include channel.serializable_hash
         end
+        
+        %w[keyword youtube trending default].each do |type|
+          it "returns requested channel of type '#{type}'"
+        end
       end
 
       describe "get #{resource_uri}/:id" do

@@ -4,6 +4,6 @@ class AddVideoStartToEvents < ActiveRecord::Migration
   end
 
   def self.down
-    drop_column :events, :video_start
+    remove_columnn :events, :video_start
   end
 end

@@ -4,6 +4,6 @@ class AddBlacklistedAtToVideos < ActiveRecord::Migration
   end
 
   def self.down
-    drop_colum :videos, :blacklisted_at
+    remove_column :videos, :blacklisted_at
   end
 end

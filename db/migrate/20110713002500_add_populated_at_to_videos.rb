@@ -4,6 +4,6 @@ class AddPopulatedAtToVideos < ActiveRecord::Migration
   end
 
   def self.down
-    drop_colum :videos, :populated_at
+    remove_column :videos, :populated_at
   end
 end

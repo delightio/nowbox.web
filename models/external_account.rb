@@ -2,7 +2,6 @@ module Aji
   # ## ExternalAccount Schema
   # - id: Integer
   # - user_info: Text (Serialized Hash)
-  # - provider: String non-nil
   # - uid: String non-nil
   # - created_at: DateTime
   # - updated_at: DateTime
@@ -13,7 +12,7 @@ module Aji
     serialize :credentials
     belongs_to :user
 
-    validates_presence_of :provider, :uid
+    validates_presence_of :uid
     
     def blacklist; self.blacklisted_at = Time.now; save; end
     def blacklisted?; !blacklisted_at.nil?; end
@@ -28,7 +27,7 @@ module Aji
     def serializable_hash
       {
         :id => id,
-        :provider => provider,
+        :provider => type.split('::').last.downcase,
         :uid => uid,
         :user_id => user_id
       }

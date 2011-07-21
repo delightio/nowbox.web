@@ -1,7 +1,9 @@
 module Aji
   class Supported
     def self.categories
-      [ :undefined, :news, :sports, :music, :science, :comedy, :cars, :kids, :trailers, :gaming, :ted, :funny ]
+      [ :undefined, :news, :sports, :music, :science, :comedy, :cars, :kids,
+        :trailers, :gaming, :ted, :comedy, :film, :entertainment, :celebrity,
+        :family]
     end
   end
 
@@ -63,6 +65,7 @@ module Aji
       raise InterfaceMethodNotImplemented.new(
         "#{self.class} must override Channel#populate.")
     end
+    def populated?; !populated_at.nil?; end
 
     def personalized_content_videos args
       user = args[:user]

@@ -46,12 +46,8 @@ module Aji
           push video, h[:relevance]
         end
         Aji.log "Replace #{[max_in_flight,in_flight.count].min} (#{populated_count} populated) content videos in #{Time.now-start} s."
-      end
-
-      def serializable_hash options={}
-        h = super
-        h["title"] = "Trending"
-        h
+        self.populated_at = Time.now
+        save
       end
 
       def self.singleton

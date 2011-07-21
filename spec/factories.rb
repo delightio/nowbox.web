@@ -121,7 +121,6 @@ end
 Factory.define :external_account,
   :class => 'Aji::ExternalAccounts::Youtube' do |a|
     a.uid { random_string }
-    a.provider { random_video_source }
   end
   
 Factory.define :mention, :class => 'Aji::Mention' do |a|

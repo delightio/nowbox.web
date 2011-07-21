@@ -42,9 +42,7 @@ module Aji
     # TODO: Deprecate in favor of a generic `Video::fetch(source:Symbol,
     # external_id:String)`
     def self.find_or_create_from_youtubeit_video v
-      author =
-        ExternalAccounts::Youtube.find_or_create_by_uid(
-          v.author.name, :provider => "youtube")
+      author = ExternalAccounts::Youtube.find_or_create_by_uid(v.author.name)
       Video.find_or_create_by_external_id(
         v.video_id.split(':').last,
         :title => v.title,
@@ -79,8 +77,7 @@ module Aji
 
     def populate_from_youtube
       v = YouTubeIt::Client.new.video_by external_id # TODO: global YouTubeIt client
-      self.author = ExternalAccounts::Youtube.find_or_create_by_uid(
-        v.author.name, :provider => "youtube")
+      self.author = ExternalAccounts::Youtube.find_or_create_by_uid(v.author.name)
       self.title = v.title
       self.description = v.description
       self.viewable_mobile = v.noembed
