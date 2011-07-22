@@ -1,4 +1,6 @@
-<div id="launch" class="photo<%= 1 + rand(4) %>">
+<% randnum = 1 + rand(4) %>
+
+<div id="launch" class="photo<%= randnum %>">
 	<div id="taglinebox">
 		<a id="launchlogo" href="/"><img src="./images/logos/nowmov-logotype-white.png" height="30px"/></a>
 		<h1>Rethink video entertainment</h1>
@@ -37,39 +39,6 @@
 	</div>		
 </div>
 <script>
-/*$(document).ready(function(){
-    LR.lrInstance = new LrInstance('LR-container',{
-
-        tagLine: "",
-        description: "",
-        refCodeUrl: "http://nowmov.com/?ref=",
-        lrDomain: "nowmov.com",
-        apiKey: "48d38c9924c6a7e6c0cc43844aab2569",
-        inviteList: ""
-    });        
-
-    // Handles events related to signup form, form validations
-    // and submitting the form to the server:
-    LR.signupForm = new SignupForm({
-        secondaryPostLocation: ""
-    });
-
-
-    // Handles rendering the post submit content:
-    LR.postSubmit = new PostSignupForm('pagesubmit',{
-        twitterHandle: "nowmov",
-        twitterMessage: "Nowmov for iPad and iPhone is launching soon and I'm one of the first in line! Join me. #launch",
-        newUserHeaderText: "",
-        newUserParagraphText: "",
-        newUserParagraphText3: "",
-        returningUserHeaderText: "",
-        returningUserParagraphText: "",
-        returningUserParagraphText3: "",
-        statsPreText: "Your live stats: ",
-        footerLinks: "<a href='http://twitter.com/nowmov'>Follow Us on Twitter</a> | <a href='http://nowmov'>Like Us on Facebook</a>"
-    });
-
-
-});*/
-
-    </script>
+	mpmetrics.register( { photo : <%= randnum %>} );
+	mpmetrics.track("View Launch Page");
+</script>

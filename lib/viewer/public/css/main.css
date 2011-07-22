@@ -1,35 +1,33 @@
-body { background: url(/images/graphics/bg-offwhite-crosshatch-2.jpg) repeat; color: #090909; }
+body { background: url(/images/graphics/aji-tiles-crosshatch-white.jpg) repeat; color: #090909; }
 
-#container { }
-
-header { padding: 25px 0px 25px; line-height: 30px; text-align: left;  font-size: 14px;}
+header { position: relative; padding: 25px 0px 25px; line-height: 30px; text-align: left;  font-size: 14px; z-index: 10;}
 	header > .wrapper { width: 800px; margin: auto; }
 	#logo{ display: block; float: left; height: 30px; margin: 0px;}
 		#logo img{ }
 	header .fblike{ float: right; }
-	header ul{ float: right; list-style: none; padding: 0px; margin: 0px auto; }
+	header ul{ float: right; list-style: none; padding: 0px; margin: 0px auto; background: rgba(0, 0, 0, 0.2); }
 		header ul li { float: right; display: block; padding: 2px 5px;}
-			header ul a, header ul a:active, header ul a:visited{ color: #AAA;  font-weight: normal;}
-				header ul a:hover { color: #444;}
+			header ul a, header ul a:active, header ul a:visited{ color: #EEE;  font-weight: normal;}
+				header ul a:hover { color: #FFF;}
 
-footer { padding: 20px 0px 20px; margin: 80px auto 0px; border-top: 1px dotted #666;  background: url(/images/graphics/aji-tiles-blue.jpg) repeat; font-size: 14px;}	
+footer {   background: url(/images/graphics/aji-tiles-black.jpg) repeat; position: relative; padding: 20px 0px 20px; margin: auto; font-size: 14px;}	
 	footer > .wrapper { width: 800px; margin: auto;}
 footer ul{ float: right; list-style: none; padding: 0px; margin: 0px auto; }
 	footer ul li { float: right; display: block; padding: 2px 5px;}
-		footer ul a, footer ul a:active, footer ul a:visited{ color: #444; font-weight: normal;}
-		footer ul a:hover { color: #222;}
+		footer ul a, footer ul a:active, footer ul a:visited{ color: #777; font-weight: normal;}
+		footer ul a:hover { color: #AAA;}
 
 footer .follow, footer .fblike, footer .tweet { float: left; }
 	
-#main { padding: 0px 0px; width: 800px; margin: auto; }
-
-.section{  margin: 0px 0px 1px; padding: 10px 0px; border-bottom: 1px dotted #DDD; border-top: 1px dotted #CCC; }
+#main {  position: relative;padding: 0px 0px; z-index: 1; }
+	#main .wrapper{ width: 800px; padding: 20px 0px; margin: auto; }
+.section{  margin: 0px 0px 20px; padding: 10px 10px; background: rgba(255, 255, 255, 0.5); box-shadow: 0px 0px 5px rgba(0, 0, 0, .2)}
 .section.lite-blue{ background: rgba(0, 153, 204, 0.1); }
 .section.lite-gray{ background: rgba(0, 0, 0, 0.1); }
 
 ul.section { list-style: none; }
 .section li{ margin: 10px 0px;  color: #444;}
-.section p{ margin: 10px 0px;}
+.section p{ margin: 10px 0px; font-size: 15px; line-height: 2;}
 
 .ipad-chrome{ position: relative; height: 469px; width: 600px; background-repeat: no-repeat; background-image: url(/images/graphics/ipad-chrome.png); }
 .ipad-chrome img{ position: absolute; top: 59px; left: 66px; width: 469px;}
@@ -49,9 +47,9 @@ ul.section { list-style: none; }
 }
 
 #launch.photo1{
-	 background: url(/images/photos/89100011.jpg) no-repeat center center fixed; 
-  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100011.jpg', sizingMethod='scale');
-	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100011.jpg', sizingMethod='scale')";
+	 background: url(/images/photos/89100014.jpg) no-repeat center center fixed; 
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100014.jpg', sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100014.jpg', sizingMethod='scale')";
 }
 
 #launch.photo2{
@@ -74,7 +72,7 @@ ul.section { list-style: none; }
 
 #taglinebox { width: 600px; left: 50%; margin-left: -300px; top: 30px; text-shadow: 0px 0px 30px #000; position: absolute; text-align: center;  }
 	#taglinebox h1{ text-transform: lowercase; margin-top: 30px; color: #FFF; font: bolder 30px "helvetica neue", helvetica, arial, sans-serif;}
-	#taglinebox h2{ text-transform: lowercase; color: #FFF; font: lighter 20px "helvetica neue", helvetica, arial, sans-serif;}
+	#taglinebox h2{ text-transform: lowercase; color: #FFF; font: 200 20px "helvetica neue", helvetica, arial, sans-serif;}
 	#launch.photo3 #taglinebox h1, #launch.photo3 #taglinebox h2, #launch.photo4 #taglinebox h1, #launch.photo4 #taglinebox h2{ color: #222; text-shadow: 0px 0px 30px #FFF; } 
 
 #launchlogo{ text-align: center; background: rgba(0, 0, 0, 0.2); padding: 20px;
@@ -130,8 +128,11 @@ ul.section { list-style: none; }
 		.call_to_action_download a.download.button:hover{ border-color: #FFF;}
 				
 /* INDEX */
-
-#tagline { font-size: 30px; display:block; line-height: 40px; color: #222; text-align: center; font-weight: bold;}
+#main_photo_wrapper{  height: 500px; width: 100%; margin: -100px auto 0px; position: relative;}
+#main_photo{ height: 500px; width: 100%;  margin: auto; overflow: hidden; }
+	#main_photo img{   }
+#tagline {  display:block; line-height: 40px; color: #FFF; text-align: left; font-weight: bold; position: absolute;  left: 50%;  bottom: 50px; width: 800px; margin-left: -400px; font: 100 50px "helvetica neue", helvetica, arial, sans-serif;
+}
 
 
 				
@@ -174,3 +175,7 @@ margin-left: 20px;}
 	#sharer .blurb{ float: left; display: block; line-height:  25px; text-shadow: 0px 1px 1px #FFF; }
 	#sharer a.download.button{ float: right; display: block; padding: 0px 20px; line-height: 40px; border: 5px solid #EFEFEF; background-color: #66CCFF; color: #F9F9F9; font-size: 18px; font-weight: bold;}
 		#sharer a.download.button:hover{ border-color: #FFF;}
+		
+/* EFFECTS */
+.divider{ height: 10px; width: 100%; margin:auto; }
+.bright-blue{ background: url(/images/graphics/aji-tiles-crosshatch-brightblue.jpg) repeat;  } 		
