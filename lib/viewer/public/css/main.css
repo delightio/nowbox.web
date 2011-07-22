@@ -1,37 +1,117 @@
-body { background: url(/v/images/graphics/bg-white-grid.png) repeat; color: #090909; }
+body { background: url(/images/graphics/aji-tiles-crosshatch-white.jpg) repeat; color: #090909; }
 
-#container { width: 900px; margin: auto;}
-
-header { padding: 15px 20px 5px; line-height: 30px; text-align: left;}
+header { position: relative; padding: 25px 0px 25px; line-height: 30px; text-align: left;  font-size: 14px; z-index: 10;}
+	header > .wrapper { width: 800px; margin: auto; }
 	#logo{ display: block; float: left; height: 30px; margin: 0px;}
 		#logo img{ }
 	header .fblike{ float: right; }
-	header ul{ float: right; list-style: none; padding: 0px; margin: 0px auto; }
+	header ul{ float: right; list-style: none; padding: 0px; margin: 0px auto; background: rgba(0, 0, 0, 0.2); }
 		header ul li { float: right; display: block; padding: 2px 5px;}
-			header ul a, header ul a:active, header ul a:visited{ color: #AAA;}
-				header ul a:hover { color: #444;}
+			header ul a, header ul a:active, header ul a:visited{ color: #EEE;  font-weight: normal;}
+				header ul a:hover { color: #FFF;}
 
-footer { padding: 20px 20px;}	
+footer {   background: url(/images/graphics/aji-tiles-black.jpg) repeat; position: relative; padding: 20px 0px 20px; margin: auto; font-size: 14px;}	
+	footer > .wrapper { width: 800px; margin: auto;}
 footer ul{ float: right; list-style: none; padding: 0px; margin: 0px auto; }
 	footer ul li { float: right; display: block; padding: 2px 5px;}
-		footer ul a, footer ul a:active, footer ul a:visited{ color: #AAA;}
-		footer ul a:hover { color: #444;}
-footer .tweet, footer .fblike { float: left; }
-	
-#main { padding: 0px 20px; }
+		footer ul a, footer ul a:active, footer ul a:visited{ color: #777; font-weight: normal;}
+		footer ul a:hover { color: #AAA;}
 
-.section{  margin: 0px 0px 10px; padding: 10px; background: rgba(0, 153, 204, 0.1); }
+footer .follow, footer .fblike, footer .tweet, footer .plusone { float: left; }
+	
+#main {  position: relative;padding: 0px 0px; z-index: 1; }
+	#main .wrapper{ width: 800px; padding: 20px 0px; margin: auto; }
+.section{  margin: 0px 0px 20px; padding: 10px 10px; background: rgba(255, 255, 255, 0.5); box-shadow: 0px 0px 5px rgba(0, 0, 0, .2)}
 .section.lite-blue{ background: rgba(0, 153, 204, 0.1); }
 .section.lite-gray{ background: rgba(0, 0, 0, 0.1); }
 
 ul.section { list-style: none; }
 .section li{ margin: 10px 0px;  color: #444;}
-.section p{ margin: 10px 0px;}
+.section p{ margin: 10px 0px; font-size: 15px; line-height: 2;}
 
-.ipad-chrome{ position: relative; height: 469px; width: 600px; background-repeat: no-repeat; background-image: url(/v/images/graphics/ipad-chrome.png); }
+.ipad-chrome{ position: relative; height: 469px; width: 600px; background-repeat: no-repeat; background-image: url(/images/graphics/ipad-chrome.png); }
 .ipad-chrome img{ position: absolute; top: 59px; left: 66px; width: 469px;}
 .ipad-chrome iframe{ position: absolute; top: 59px; left: 66px; }
 
+
+/* SPLASH */
+#launch{ 
+	top: 0px; bottom: 0px; left: 0px; right: 0px;
+	position: fixed;
+	z-index: 9999;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+
+#launch.photo1{
+	 background: url(/images/photos/89100014.jpg) no-repeat center center fixed; 
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100014.jpg', sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100014.jpg', sizingMethod='scale')";
+}
+
+#launch.photo2{
+	 background: url(/images/photos/89100009.jpg) no-repeat center center fixed; 
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100009.jpg', sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100009.jpg', sizingMethod='scale')";
+}
+
+#launch.photo3{
+	 background: url(/images/photos/89100017.jpg) no-repeat center center fixed; 
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100017.jpg', sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100017.jpg', sizingMethod='scale')";
+}
+
+#launch.photo4{
+	 background: url(/images/photos/89100022.jpg) no-repeat center center fixed; 
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100022.jpg', sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100022.jpg', sizingMethod='scale')";
+}
+
+#taglinebox { width: 600px; left: 50%; margin-left: -300px; top: 30px; text-shadow: 0px 0px 30px #000; position: absolute; text-align: center;  }
+	#taglinebox h1{ text-transform: lowercase; margin-top: 30px; color: #FFF; font: bolder 30px "helvetica neue", helvetica, arial, sans-serif;}
+	#taglinebox h2{ text-transform: lowercase; color: #FFF; font: 200 20px "helvetica neue", helvetica, arial, sans-serif;}
+	#launch.photo3 #taglinebox h1, #launch.photo3 #taglinebox h2, #launch.photo4 #taglinebox h1, #launch.photo4 #taglinebox h2{ color: #222; text-shadow: 0px 0px 30px #FFF; } 
+
+#launchlogo{ text-align: center; background: rgba(0, 0, 0, 0.2); padding: 20px;
+  -webkit-box-shadow: 0px 0px 5px rgba(250,250,250,.2);
+     -moz-box-shadow: 0px 0px 5px rgba(250,250,250,.2);
+      -ms-box-shadow: 0px 0px 5px rgba(250,250,250,.2);
+       -o-box-shadow: 0px 0px 5px rgba(250,250,250,.2);
+          box-shadow: 0px 0px 5px rgba(250,250,250,.2);
+}
+	#launchlogo img { vertical-align: middle;}
+	#launchlogo:hover{ background: rgba(0, 0, 0, 0.8); }
+	
+#launchbox { 
+	position: fixed;
+	padding: 10px; width: 450px; margin-left: -225px; margin-top: -100px; left: 50%; top: 50%;
+	background: rgba(0, 0, 0, 0.2); 
+  -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+     -moz-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+      -ms-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+       -o-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+          box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+}
+	#launchbox .wrapper{ padding: 10px; background: url(/images/graphics/aji-tiles-salmon.jpg) repeat; }
+	/*##launch.photo1 #launchbox{}
+	launch.photo2 #launchbox{ bottom: 100px; left: 50%; margin-left: -250px;}
+	#launch.photo3 #launchbox{ bottom: 100px; left: 100px; }
+	#launch.photo4 #launchbox{ top: 100px; right: 100px; }*/
+	#launchbox p{ font-weight: normal; font-size: 16px; color: #AAA; line-height: 2; color: #602324; margin-bottom: 10px;}
+	#launchbox .social{ margin: 20px 0px 0px;}
+		#launchbox .social .tweet, #launchbox .social .fblike, #launchbox .social .plusone { float: left; }
+
+#invite-email{ padding: 10px; border: 1px solid transparent; font-size: 21px; color: #444; display: block; float: left; width: 250px; }
+#invite-submit{ display: block; float: right;}
+	#invite-submit:hover{  }
+
+#post_invite{ display : none; margin-bottom: 10px; padding: 5px; background: rgba(0,0,0, 0.1); font-size: 16px; line-height: 1.5;}
+	#post_invite a, #post_invite a:active, #post_invite a:visited{ color: #EEE; }
+		#post_invite a:hover{ color: #FFF; text-decoration: underline;  }
+		
 /* CALL TO ACTIONS */
 #call_to_action_quote{ padding: 10px; background-color: #EFEFEF; background: rgba(0, 0, 0, 0.1); }
 	#call_to_action_quote .quoter_image{ float: left; display: block; margin-right: 10px; height: 48px; }
@@ -48,8 +128,10 @@ ul.section { list-style: none; }
 		.call_to_action_download a.download.button:hover{ border-color: #FFF;}
 				
 /* INDEX */
-
-#tagline { font-size: 30px; display:block; line-height: 40px; color: #222; text-align: center; font-weight: bold;}
+#main_photo_wrapper{  height: 500px; width: 100%; margin: -100px auto 0px; position: relative;}
+#main_photo{ height: 500px; width: 100%;  margin: auto; overflow: hidden; }
+	#main_photo img{   }
+#tagline {  display:block; line-height: 40px; color: #FFF; text-align: left; font-weight: bold; position: absolute;  left: 50%;  bottom: 50px; width: 800px; margin-left: -400px; font: 100 50px "helvetica neue", helvetica, arial, sans-serif; text-shadow: 0px 1px 5px #000;}
 
 
 				
@@ -67,7 +149,7 @@ ul.section { list-style: none; }
 		#about .image img { width: 100px; }
 	#about .bio { float: left; width: 500px; padding: 0px 10px; line-height: 1.5; }
 		#about .identity{ font-weight: bold; font-size: 16px; color: #000; }
-			#about .identity .role{ margin-left: 5px; color: #AAA; }
+			#about .identity .role{ margin-left: 5px; color: #AAA; font-weight: normal;}
 		#about .description{ font-size: 14px;}
 		#about .email{ color: #AAA; }
 
@@ -92,3 +174,7 @@ margin-left: 20px;}
 	#sharer .blurb{ float: left; display: block; line-height:  25px; text-shadow: 0px 1px 1px #FFF; }
 	#sharer a.download.button{ float: right; display: block; padding: 0px 20px; line-height: 40px; border: 5px solid #EFEFEF; background-color: #66CCFF; color: #F9F9F9; font-size: 18px; font-weight: bold;}
 		#sharer a.download.button:hover{ border-color: #FFF;}
+		
+/* EFFECTS */
+.divider{ height: 10px; width: 100%; margin:auto; }
+.bright-blue{ background: url(/images/graphics/aji-tiles-crosshatch-brightblue.jpg) repeat;  } 		

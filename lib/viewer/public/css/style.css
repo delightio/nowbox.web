@@ -75,7 +75,7 @@ button {  width: auto; overflow: visible; }
 body, select, input, textarea {  color: #444; }
 h1, h2, h3, h4, h5, h6 { font-weight: bold; }
 
-h1{ font-size: 22px; line-height: 50px; text-transform: uppercase; margin: 10px 0px 10px;}
+h1{ font: 100 30px 'helvetica neue', helvetica, arial serif;  line-height: 50px; margin: 10px 0px 10px;}
 h2{ font-size: 18px; line-height: 40px; color: #444; }
 h3{ font-size: 16px; }
 
@@ -155,4 +155,27 @@ body:before {
   @page { margin: 0.5cm; }
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3{ page-break-after: avoid; }
+}
+
+
+/*
+
+Sticky Footer by Ryan Fait
+http://ryanfait.com/
+
+*/
+* {
+	margin: 0;
+}
+html, body {
+	height: 100%;
+}
+.stickywrapper {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -150px; /* the bottom margin is the negative value of the footer's height */
+}
+footer, .push {
+	height: 150px; /* .push must be the same height as .footer */
 }

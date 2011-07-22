@@ -1,0 +1,44 @@
+<% randnum = 1 + rand(4) %>
+
+<div id="launch" class="photo<%= randnum %>">
+	<div id="taglinebox">
+		<a id="launchlogo" href="/"><img src="./images/logos/nowmov-logotype-white.png" height="30px"/></a>
+		<h1>Rethink video entertainment</h1>
+		<h2>personal. social. couch not required.</h2>
+	</div>
+	<div id="launchbox">
+		<div class="wrapper">
+			<p><span style="font-weight: bold;">Coming soon.</span> Be the first to try it out.</p>
+			<form id="invite-form" name="invite-form" action="http://208.72.154.212/widgetapi.0.1.php">
+				<input id="invite-email" name="email" class="email round-corners-5 rmv-dft-val" type="text" value="Your email"/>
+				<input type="hidden" name="lrDomain" value="nowmov.com">
+				<input type="hidden" name="apiKey" value="48d38c9924c6a7e6c0cc43844aab2569">
+				<input type="hidden" name="referralid" value="">
+				<input type="hidden" name="urlPrefix" value="http://nowmov.com/?ref=">
+				<button id="invite-submit" type="submit" class="submit slick-black">Notify Me</button>
+				<div class="clearfix"></div>
+			</form>
+			<div id="post_invite">
+				<span style="font-weight: bold;">Thank you!</span><br/>Please spread the word and <a href="./home">learn more</a> about us.
+			</div>
+			<div class="social">
+				<div class="fblike">
+					<%= erb :_fblike %>
+				</div>
+				
+				<div class="tweet">
+					<%= erb :_tweet %>
+				</div>
+				
+				<div class="plusone">
+					<g:plusone size="medium" href="http://nowmov.com"></g:plusone>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>		
+</div>
+<script>
+	mpmetrics.register( { photo : <%= randnum %>} );
+	mpmetrics.track("View Launch Page");
+</script>
