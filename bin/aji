@@ -40,6 +40,11 @@ class Aji < Thor
     end
   end
 
+  desc "readstream", "Read twitter stream for video links"
+  def readstream
+    exec "bin/rake readstream"
+  end
+
   desc "server", "Run Aji webserver"
   def server env="development"
     exec "bin/foreman start web"

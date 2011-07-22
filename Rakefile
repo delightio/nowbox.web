@@ -11,6 +11,10 @@ task :environment do
   require_relative 'aji'
 end
 
+task :readstream => :environment do
+  require_relative 'lib/read_stream'
+end
+
 namespace :resque do
   task :setup => :environment do
     Resque.after_fork do |job|
