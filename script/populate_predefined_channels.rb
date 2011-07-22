@@ -14,5 +14,8 @@ channels_json.each do |ch|
     :default_listing => true,
     :populate_if_new => true)
   puts "  => #{channel.inspect} in #{Time.now-start} s."
+  if channel.save != true
+    puts "*** error saving #{channel.title} because: #{channel.errors}"
+  end
   puts
 end
