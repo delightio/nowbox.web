@@ -17,7 +17,7 @@ footer ul{ float: right; list-style: none; padding: 0px; margin: 0px auto; }
 		footer ul a, footer ul a:active, footer ul a:visited{ color: #777; font-weight: normal;}
 		footer ul a:hover { color: #AAA;}
 
-footer .follow, footer .fblike, footer .tweet { float: left; }
+footer .follow, footer .fblike, footer .tweet, footer .plusone { float: left; }
 	
 #main {  position: relative;padding: 0px 0px; z-index: 1; }
 	#main .wrapper{ width: 800px; padding: 20px 0px; margin: auto; }
