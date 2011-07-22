@@ -10,10 +10,10 @@ module Aji
       def self.to_title accounts; accounts.map(&:uid).join ", "; end
       def set_title; self.title = title || self.class.to_title(accounts); end
 
-      def populate
+      def populate args={}
         accounts.each_with_index do |a, i|
           # Fetch videos from specific sources.
-          if a.own_zset.members.count == 0
+          if a.own_zset.members.count == 0 || args[:must_populate]
             yt_videos = YouTubeIt::Client.new.videos_by(
               :user => "#{a.uid}", :order_by => 'published').videos#TODO paging
             yt_videos.each_with_index do |v, n|
@@ -22,10 +22,10 @@ module Aji
               a.own_zset[vid] = relevance
               content_zset[vid] = relevance
             end
+            self.populated_at = Time.now
+            save
           end
         end
-        self.populated_at = Time.now
-        save
       end
 
       def self.find_all_by_accounts accounts
