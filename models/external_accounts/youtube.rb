@@ -15,6 +15,7 @@ module Aji
       def profile_uri; "http://www.youtube.com/user/#{uid}"; end
 
       def populate args={}
+        start = Time.now
         populating_lock.lock do
           return if recently_populated? && args[:must_populate].nil?
           if content_video_ids.count == 0 || args[:must_populate]
@@ -30,6 +31,7 @@ module Aji
           self.populated_at = Time.now
           save
         end
+        Aji.log :INFO, "ExternalAccounts::Youtube[#{id}, '#{self.username}' ]#populate #{args.inspect} took #{Time.now-start} s."
       end
       
     end

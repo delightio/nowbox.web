@@ -11,6 +11,7 @@ module Aji
       def set_title; self.title = title || self.class.to_title(accounts); end
 
       def populate args={}
+        start = Time.now
         populating_lock.lock do
           return if recently_populated? && args[:must_populate].nil?
           accounts_populated_at = []
@@ -21,6 +22,7 @@ module Aji
           self.populated_at = accounts_populated_at.sort.last # latest
           save
         end
+        Aji.log :INFO, "Channels::YoutubeAccount[#{id}, '#{title}', #{accounts.count} accounts]#populate #{args.inspect} took #{Time.now-start} s."
       end
       
       def content_video_ids limit=-1

@@ -1,5 +1,5 @@
-fill_youtube_channels:
-  class: Aji::Queues::FillYoutubeChannels
+populate_all_channels:
+  class: Aji::Queues::PopulateAllChannels
   cron: "* 1 * * *"
   args:
-  description: "Update preset Youtube channels."
+  description: "Update all channels."
