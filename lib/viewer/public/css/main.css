@@ -96,11 +96,9 @@ ul.section { list-style: none; }
           box-shadow: 0px 0px 5px rgba(0,0,0,.5);
 }
 	#launchbox .wrapper{ padding: 10px; background: url(/images/graphics/aji-tiles-salmon.jpg) repeat; }
-	/*##launch.photo1 #launchbox{}
-	launch.photo2 #launchbox{ bottom: 100px; left: 50%; margin-left: -250px;}
-	#launch.photo3 #launchbox{ bottom: 100px; left: 100px; }
-	#launch.photo4 #launchbox{ top: 100px; right: 100px; }*/
-	#launchbox p{ font-weight: normal; font-size: 16px; color: #AAA; line-height: 2; color: #602324; margin-bottom: 10px;}
+	#launchbox h1{  margin-top: 0px; color: #41191a; font: 200 30px "helvetica neue", helvetica, arial, sans-serif;}
+	#launchbox h2{  color: #7c2a2b; font: 100 20px "helvetica neue", helvetica, arial, sans-serif; border-bottom: 1px dotted #b54345;}
+	#launchbox p{ font-weight: normal; font-size: 16px; color: #AAA; line-height: 2; color: #b54345; margin-bottom: 10px;}
 	#launchbox .social{ margin: 20px 0px 0px;}
 		#launchbox .social .tweet, #launchbox .social .fblike, #launchbox .social .plusone { float: left; }
 
