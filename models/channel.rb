@@ -34,7 +34,10 @@ module Aji
 
     def serializable_hash options={}
       thumbnail_uri = ""
-      thumbnail_uri = Video.find(content_video_ids(1).first).thumbnail_uri if content_video_ids.count > 0
+      # TODO: HACK!
+      thumbnail_uri = "http://beta.#{Aji.conf['TLD']}/images/icons/icon-set_#{title.downcase}.png" if default_listing
+      thumbnail_uri = Video.find(content_video_ids(1).first).thumbnail_uri if content_video_ids.count > 0 || thumbnail_uri.empty?
+      
       Hash["id" => id,
            "type" => (type||"").split("::").last,
            "default_listing" => default_listing,
