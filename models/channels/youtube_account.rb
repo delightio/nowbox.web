@@ -31,7 +31,8 @@ module Aji
 
       def thumbnail_uri
         return "http://beta.#{Aji.conf['TLD']}/images/icons/icon-set_#{title.downcase}.png" if default_listing
-        accounts.sort_by(&:populated_at).last.thumbnail_uri
+        # accounts.sort_by(&:populated_at).last.thumbnail_uri
+        accounts.first.thumbnail_uri
       end
       
       def self.find_all_by_accounts accounts
