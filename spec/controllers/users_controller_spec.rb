@@ -27,7 +27,7 @@ module Aji
       describe "post #{resource_uri}/:id" do
         it "should create user object on post with default channel listing" do
           default_channels = []
-          5.times { |n| default_channels << Factory(:channel_with_videos, :default_listing=>true)}
+          5.times { |n| default_channels << Factory(:youtube_channel_with_videos, :default_listing=>true)}
           email = random_email
           first_name = random_string
           params = { :email => email, :first_name => first_name, :last_name => random_string }
@@ -45,7 +45,7 @@ module Aji
       
       describe "put #{resource_uri}/:id" do
         it "should only respond to known commands" do
-          channel = Factory :channel_with_videos
+          channel = Factory :youtube_channel_with_videos
           user = Factory :user
           params = {:channel_id => channel.id, :channel_action => random_string}
           put "#{resource_uri}/#{user.id}", params
@@ -53,7 +53,7 @@ module Aji
         end
 
         it "should allow subscribing" do
-          channel = Factory :channel_with_videos
+          channel = Factory :youtube_channel_with_videos
           user = Factory :user
           params = {:channel_id => channel.id, :channel_action => :subscribe}
           put "#{resource_uri}/#{user.id}", params
@@ -62,7 +62,7 @@ module Aji
         end
 
         it "should allow unsubscribing" do
-          channel = Factory :channel_with_videos
+          channel = Factory :youtube_channel_with_videos
           user = Factory :user
           user.subscribe channel
           params = {:channel_id => channel.id, :channel_action => :unsubscribe}

@@ -10,7 +10,7 @@ describe Aji::Channel do
 
   describe "#personalized_content_videos" do
     it "should return unviewed videos" do
-      channel = Factory :channel_with_videos
+      channel = Factory :youtube_channel_with_videos
       viewed_video_ids = channel.content_videos.sample(channel.content_videos.length / 2).map(&:id)
 
 
@@ -48,7 +48,7 @@ describe Aji::Channel do
     end
 
     it "should not return blacklisted videos" do
-      channel = Factory :channel_with_videos
+      channel = Factory :youtube_channel_with_videos
       user = Factory :user
       video = channel.content_videos.sample
       video.blacklist
@@ -63,7 +63,7 @@ describe Aji::Channel do
       n = 5
       channels = []
       n.times do |n|
-        channels << Factory(:channel_with_videos, :default_listing=>false)
+        channels << Factory(:youtube_channel_with_videos, :default_listing=>false)
       end
       Aji::Channel.default_listing.should be_empty
       default_channel = channels[rand(n-1)]

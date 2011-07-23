@@ -32,19 +32,15 @@ module Aji
     include Mixins::ContentVideos
     include Mixins::Populating
 
+    def thumbnail_uri; raise InterfaceMethodNotImplemented; end
     def serializable_hash options={}
-      thumbnail_uri = ""
-      # TODO: HACK!
-      thumbnail_uri = "http://beta.#{Aji.conf['TLD']}/images/icons/icon-set_#{title.downcase}.png" if default_listing
-      thumbnail_uri = Video.find(content_video_ids(1).first).thumbnail_uri if content_video_ids.count > 0 && thumbnail_uri.empty?
-      
-      Hash["id" => id,
-           "type" => (type||"").split("::").last,
-           "default_listing" => default_listing,
-           "category" => category.to_s,
-           "title" => title,
-           "thumbnail_uri" => thumbnail_uri,
-           "resource_uri" => "http://api.#{Aji.conf['TLD']}/#{Aji::API.version.first}/channels/#{self.id}"]
+      Hash[ "id" => id,
+            "type" => (type||"").split("::").last,
+            "default_listing" => default_listing,
+            "category" => category.to_s,
+            "title" => title,
+            "thumbnail_uri" => thumbnail_uri,
+            "resource_uri" => "http://api.#{Aji.conf['TLD']}/#{Aji::API.version.first}/channels/#{self.id}"]
     end
 
     def personalized_content_videos args

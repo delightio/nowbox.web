@@ -13,7 +13,10 @@ module Aji
         :foreign_key => :account_id, :association_foreign_key => :channel_id
 
       def username; uid; end
-      def profile_uri; "http://www.youtube.com/user/#{uid}"; end
+      def profile_uri; "http://www.youtube.com/user/#{username}"; end
+      def thumbnail_uri # LH #120
+        Video.find(content_video_ids(1).first).thumbnail_uri
+      end
 
     end
   end

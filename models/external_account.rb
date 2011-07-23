@@ -25,14 +25,18 @@ module Aji
       raise InterfaceMethodNotImplemented.new(
         "#{self.class} must override ExternalAccount#publish.")
     end
-
+    
+    def username; raise InterfaceMethodNotImplemented; end
+    def profile_uri; raise InterfaceMethodNotImplemented; end
+    def thumbnail_uri; raise InterfaceMethodNotImplemented; end
     def serializable_hash
-      {
-        :id => id,
-        :provider => type.split('::').last.downcase,
-        :uid => uid,
-        :user_id => user_id
-      }
+      Hash[ "id" => id,
+            "provider" => type.split('::').last.downcase,
+            "uid" => uid,
+            
+            "username" => username,
+            "profile_uri" => profile_uri,
+            "thumbnail_uri" => thumbnail_uri ]
     end
     
   end

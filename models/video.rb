@@ -100,10 +100,6 @@ module Aji
 
     def serializable_hash options={}
       return Hash["id" => id, "external_id" => external_id, "source" => source.to_s ] if !populated?
-      author_hash = {}
-      author_hash["username"] = author.username
-      author_hash["profile_uri"] = author.profile_uri
-      author_hash["external_account_id"] = author.id
       Hash["id" => id,
            "title" => title,
            "description" => description,
@@ -113,7 +109,7 @@ module Aji
            "duration" => duration.to_f,
            "view_count" => view_count,
            "published_at" => published_at.to_i,
-           "author" => author_hash]
+           "author" => author.serializable_hash]
     end
   end
 end

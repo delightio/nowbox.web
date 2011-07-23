@@ -11,27 +11,27 @@ module Aji
         it "should return all default channels" do
           channels = []
           total = 5
-          total.times {|n| channels << Factory(:channel_with_videos,:default_listing=>false) }
+          total.times {|n| channels << Factory(:youtube_channel_with_videos,:default_listing=>false) }
           default = [0,1,2,3,4].sample(2)
           channels[default.first].update_attributes :default_listing => true
           channels[default.last].update_attributes :default_listing => true
           get "#{resource_uri}"
           last_response.status.should == 200
           body_hash = JSON.parse last_response.body
-          returned_channels = body_hash.map {|h| h["channel"]}
+          returned_channels = body_hash.map {|h| h["youtube_account"]}
           returned_channels.should include channels[default.first].serializable_hash
           returned_channels.should include channels[default.last].serializable_hash
         end
         
         it "should return subscribed channels if given user id" do
           user = Factory :user
-          channel = Factory :channel_with_videos
+          channel = Factory :youtube_channel_with_videos
           user.subscribe channel
           params = { :user_id => user.id }
           get "#{resource_uri}", params
           last_response.status.should == 200
           body_hash = JSON.parse last_response.body
-          returned_channels = body_hash.map {|h| h["channel"]}
+          returned_channels = body_hash.map {|h| h["youtube_account"]}
           returned_channels.should include channel.serializable_hash
         end
         
@@ -46,8 +46,8 @@ module Aji
           last_response.status.should == 404
         end
 
-        it "should channel info if found" do
-          channel = Factory :channel_with_videos
+        it "should show channel info if found" do
+          channel = Factory :youtube_channel_with_videos
           get "#{resource_uri}/#{channel.id}"
           last_response.status.should == 200
           body_hash = JSON.parse last_response.body
@@ -62,7 +62,7 @@ module Aji
       describe "get #{resource_uri}/:id/videos" do
         it "should respect limit params" do
           limit = 3
-          channel = Factory :channel_with_videos
+          channel = Factory :youtube_channel_with_videos
           channel.content_videos.count.should > limit
           user = Factory :user
           params = {:user_id=>user.id, :limit=>3}
@@ -73,7 +73,7 @@ module Aji
         end
         
         it "should not returned viewed videos" do
-          channel = Factory :channel_with_videos
+          channel = Factory :youtube_channel_with_videos
           viewed_video = channel.content_videos.sample
           user = Factory :user
           event = Factory :event, :event_type => :view, :user => user, :video => viewed_video

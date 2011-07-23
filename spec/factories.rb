@@ -36,7 +36,7 @@ end
 Factory.define :user_with_channels, :parent =>:user do |a|
   a.after_create do |u|
     (2+rand(10)).times do |n|
-      c = Factory :channel_with_videos
+      c = Factory :youtube_channel_with_videos
       u.subscribe c
     end
   end
@@ -44,7 +44,7 @@ end
 
 Factory.define :user_with_viewed_videos, :parent => :user do |a|
   a.after_create do |u|
-    c = Factory :channel_with_videos
+    c = Factory :youtube_channel_with_videos
     c.content_videos.sample(10).each do |v|
       e = Factory :event, :video=>v, :channel=>c, :user=>u
     end
@@ -65,10 +65,18 @@ Factory.define :channel, :class => 'Aji::Channel' do |a|
   a.category { random_category }
 end
 
-Factory.define :channel_with_videos, :parent => :channel do |a|
+Factory.define :youtube_channel, :class => 'Aji::Channels::YoutubeAccount' do |a|
+  a.title { random_string }
+  a.default_listing { random_boolean }
+  a.category { random_category }
+end
+
+Factory.define :youtube_channel_with_videos, :parent => :youtube_channel do |a|
   a.after_create do |c|
-    50.times do |n|
-      c.push Factory :populated_video
+    5.times do |n|
+      video = Factory :populated_video
+      c.push video
+      c.accounts << video.author
     end
   end
 end
@@ -77,6 +85,9 @@ Factory.define :video, :class => 'Aji::Video' do |a|
   a.external_id { random_string }
   a.source { random_video_source }
   a.association :author, :factory => :external_account
+  a.after_create do |v|
+    v.author.push v
+  end
 end
 
 Factory.define :populated_video, :parent => :video do |a|
