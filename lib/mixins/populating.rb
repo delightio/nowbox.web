@@ -2,6 +2,8 @@ module Aji
   module Mixins
     module Populating
       
+      # Require a 'populated_at' DateTime database column
+      
       def populate
         raise InterfaceMethodNotImplemented
       end

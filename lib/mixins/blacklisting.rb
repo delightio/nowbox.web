@@ -2,6 +2,8 @@ module Aji
   module Mixins
     module Blacklisting
       
+      # Require a 'blacklisted_at' DateTime database column
+      
       def blacklist
         self.blacklisted_at = Time.now
         save
