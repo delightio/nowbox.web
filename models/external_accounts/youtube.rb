@@ -15,7 +15,9 @@ module Aji
       def username; uid; end
       def profile_uri; "http://www.youtube.com/user/#{username}"; end
       def thumbnail_uri # LH #120
-        Video.find(content_video_ids(1).first).thumbnail_uri
+        v = Video.find_by_id content_video_ids(1).first
+        return "" if v.nil?
+        v.thumbnail_uri
       end
 
     end
