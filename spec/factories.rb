@@ -76,7 +76,7 @@ end
 Factory.define :video, :class => 'Aji::Video' do |a|
   a.external_id { random_string }
   a.source { random_video_source }
-  a.association :author, :factory => :external_account
+  a.association :author, :factory => :external_youtube_account
 end
 
 Factory.define :populated_video, :parent => :video do |a|
@@ -121,6 +121,18 @@ end
 Factory.define :external_account,
   :class => 'Aji::ExternalAccounts::Youtube' do |a|
     a.uid { random_string }
+  end
+
+Factory.define :external_youtube_account,
+    :class => 'Aji::ExternalAccounts::Youtube' do |a|
+      a.uid { random_string }
+    end
+  
+Factory.define :external_youtube_account_with_videos,
+  :parent => :external_youtube_account do |a|
+    a.after_create do |ea|
+      ea.push(Factory :video)
+    end
   end
   
 Factory.define :mention, :class => 'Aji::Mention' do |a|

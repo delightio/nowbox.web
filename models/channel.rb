@@ -30,6 +30,7 @@ module Aji
     include Redis::Objects
     sorted_set :content_zset
     include Mixins::ContentVideos
+    lock :populating, :expiration => 10.minutes
     include Mixins::Populating
 
     def serializable_hash options={}

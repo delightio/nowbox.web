@@ -15,13 +15,31 @@ module Aji
     describe "#populate" do
       it "fetches videos from youtube" do
         youtube_username = "nicnicolecole"
-        nicole = ExternalAccounts::Youtube.create :uid => youtube_username
-        yc = Channels::YoutubeAccount.create(:accounts => Array(nicole),
-                                                  :title => "#{youtube_username}'s channel")
+        yc = Channels::YoutubeAccount.find_or_create_by_usernames [youtube_username]
         yc.populate
         h = JSON.parse yc.content_videos.first.to_json
         h["video"]["author"]["username"].should == youtube_username
       end
+      
+      it "does not re populate within short time" do
+        real_youtube_users = ["nowmov", "cnn", "freddiew"]
+        subject = Channels::YoutubeAccount.find_or_create_by_usernames real_youtube_users
+        subject.should_receive(:save).once
+        subject.populate
+        subject.should_not_receive(:save)
+        subject.populate
+      end
+      
+      it "allows forced population" do
+        real_youtube_users = ["nowmov", "cnn", "freddiew"]
+        subject = Channels::YoutubeAccount.find_or_create_by_usernames real_youtube_users
+        subject.should_receive(:save).once
+        subject.populate
+        subject.should_receive(:save)
+        subject.populate :must_populate=>true
+      end
+      
+      it "waits for the lock before populating"
     end
   
     describe ".find_or_create_by_usernames" do
@@ -91,7 +109,22 @@ module Aji
         channel.content_videos.should_not be_empty
       end
     end
-  
+    
+    describe "#content_video_ids" do
+      it "returns cached values when it can" do
+        accounts = [(Factory :external_youtube_account_with_videos),
+          (Factory :external_youtube_account_with_videos)]
+        subject = Channels::YoutubeAccount.create :accounts=>accounts
+        old_ids = subject.content_video_ids
+        old_ids.should_not be_empty
+        ea = ExternalAccounts::Youtube.create :uid => 'nowmov'
+        subject.accounts << ea
+        ea.populate :must_populate => true
+        ea.content_videos.should_not be_empty
+        subject.content_video_ids.should == old_ids
+      end
+    end
+    
     describe ".find_by_accounts" do
       it "returns nil when no accounts given"
       it "returns nil when there is no exact match"

@@ -17,6 +17,8 @@ module Aji
     include Redis::Objects
     sorted_set :content_zset
     include Mixins::ContentVideos
+    lock :populating, :expiration => 10.minutes
+    include Mixins::Populating
     include Mixins::Blacklisting
     
     # The publish interface is called by background tasks to publish a video

@@ -29,6 +29,8 @@ module Aji
         content_zset[video.id] = relevance
       end
       
+      def content_zset_ttl; 15.minutes; end
+      
     end
   end
 end

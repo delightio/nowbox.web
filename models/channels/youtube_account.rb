@@ -11,22 +11,25 @@ module Aji
       def set_title; self.title = title || self.class.to_title(accounts); end
 
       def populate args={}
-        accounts.each_with_index do |a, i|
-          # Fetch videos from specific sources.
-          if a.content_video_ids.count == 0 || args[:must_populate]
-            yt_videos = YouTubeIt::Client.new.videos_by(
-              :user => "#{a.uid}", :order_by => 'published').videos#TODO paging
-            yt_videos.each_with_index do |v, n|
-              video = Video.find_or_create_from_youtubeit_video v
-              vid = video.id
-              relevance = v.published_at.to_i
-              a.push video, relevance
-              content_zset[vid] = relevance
-            end
-            self.populated_at = Time.now
-            save
+        populating_lock.lock do
+          return if recently_populated? && args[:must_populate].nil?
+          accounts_populated_at = []
+          accounts.each do |account|
+            account.populate(args) if !account.recently_populated?
+            accounts_populated_at << account.populated_at
           end
+          self.populated_at = accounts_populated_at.sort.last # latest
+          save
         end
+      end
+      
+      def content_video_ids limit=-1
+        if Aji.redis.ttl(content_zset.key)==-1
+          keys = accounts.map{|a| a.content_zset.key}
+          Aji.redis.zunionstore content_zset.key, keys
+          Aji.redis.expire content_zset.key, content_zset_ttl
+        end
+        (content_zset.revrange 0, limit).map(&:to_i)
       end
 
       def self.find_all_by_accounts accounts
