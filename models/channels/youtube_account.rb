@@ -16,7 +16,7 @@ module Aji
           return if recently_populated? && args[:must_populate].nil?
           accounts_populated_at = []
           accounts.each do |account|
-            account.populate(args) if !account.recently_populated?
+            account.populate args
             accounts_populated_at << account.populated_at
           end
           self.populated_at = accounts_populated_at.sort.last # latest

@@ -33,9 +33,8 @@ module Aji
       it "allows forced population" do
         real_youtube_users = ["nowmov", "cnn", "freddiew"]
         subject = Channels::YoutubeAccount.find_or_create_by_usernames real_youtube_users
-        subject.should_receive(:save).once
         subject.populate
-        subject.should_receive(:save)
+        subject.accounts.each { |a| a.should_receive(:populate).once }
         subject.populate :must_populate=>true
       end
       
