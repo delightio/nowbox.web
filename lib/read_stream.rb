@@ -69,7 +69,7 @@ loop do
           begin
             tweet = Yajl::Parser.parse(line, :symbolize_keys => true)
           rescue => e
-            raise RuntimeException, "#{line} #{buffer}"
+            raise RuntimeError, "#{line} #{buffer}"
           end
           # tweets are delivered as hashes
           if tweet[:limit]
