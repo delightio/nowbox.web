@@ -63,6 +63,9 @@ module Aji
   end
 end
 
+module Mixins; end # Since models need them
+Dir.glob("lib/mixins/*.rb").each { |r| require_relative r }
+
 Dir.glob("models/*.rb").each { |r| require_relative r }
 # Must load channel subtypes after other models for dependency reasons.
 Dir.glob("models/channels/*.rb").each { |r| require_relative r }

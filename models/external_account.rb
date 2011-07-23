@@ -14,8 +14,10 @@ module Aji
 
     validates_presence_of :uid
     
-    def blacklist; self.blacklisted_at = Time.now; save; end
-    def blacklisted?; !blacklisted_at.nil?; end
+    include Redis::Objects
+    sorted_set :content_zset
+    include Mixins::ContentVideos
+    include Mixins::Blacklisting
     
     # The publish interface is called by background tasks to publish a video
     # share to an external service.

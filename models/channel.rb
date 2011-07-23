@@ -29,23 +29,8 @@ module Aji
 
     include Redis::Objects
     sorted_set :content_zset
-
-    # TODO: This isn't a particularly robust interface. I'm writing my own Redis
-    # object library so when that's finished we'll use it.
-    def content_video_ids limit=-1
-      (content_zset.revrange 0, limit).map(&:to_i)
-    end
-    def content_videos limit=-1
-      content_video_ids(limit).map { |vid| Video.find vid }
-    end
-    def relevance_of video
-      content_zset.score video.id
-    end
-
-    # Push a video into the channel's content.
-    def push video, relevance=Time.now.to_i
-      content_zset[video.id] = relevance
-    end
+    include Mixins::ContentVideos
+    include Mixins::Populating
 
     def serializable_hash options={}
       thumbnail_uri = ""
@@ -58,14 +43,6 @@ module Aji
            "thumbnail_uri" => thumbnail_uri,
            "resource_uri" => "http://api.#{Aji.conf['TLD']}/#{Aji::API.version.first}/channels/#{self.id}"]
     end
-
-    # The populate interface method is called by background tasks to fill the
-    # channel with videos based on the specific channel type.
-    def populate
-      raise InterfaceMethodNotImplemented.new(
-        "#{self.class} must override Channel#populate.")
-    end
-    def populated?; !populated_at.nil?; end
 
     def personalized_content_videos args
       user = args[:user]

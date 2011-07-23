@@ -21,9 +21,29 @@ module Aji
     has_many :events
     has_and_belongs_to_many :mentions
     belongs_to :author, :class_name => 'ExternalAccount'
+    
+    include Mixins::Blacklisting
+    include Mixins::Populating
+    
+    def populate
+      if external_id.nil?
+        raise "Aji::Video#populate: missing external id for Aji::Video[#{id}]"
+      end
 
-    def blacklist; self.blacklisted_at = Time.now; save; end
-    def blacklisted?; !blacklisted_at.nil?; end
+      send "populate_from_#{source}"
+      update_attribute :populated_at, Time.now
+    end
+
+    def populate_from_youtube
+      v = YouTubeIt::Client.new.video_by external_id # TODO: global YouTubeIt client
+      self.author = ExternalAccounts::Youtube.find_or_create_by_uid(v.author.name)
+      self.title = v.title
+      self.description = v.description
+      self.viewable_mobile = v.noembed
+      self.duration = v.duration
+      self.view_count = v.view_count
+      self.published_at = v.published_at
+    end
 
     # Future mentioner/tweeter/poster relationship.
     # has_many :posters, :through...
@@ -62,28 +82,6 @@ module Aji
              else ""
              end
       path
-    end
-
-    def populated?; !populated_at.nil?; end
-
-    def populate
-      if external_id.nil?
-        raise "Aji::Video#populate: missing external id for Aji::Video[#{id}]"
-      end
-
-      send "populate_from_#{source}"
-      update_attribute :populated_at, Time.now
-    end
-
-    def populate_from_youtube
-      v = YouTubeIt::Client.new.video_by external_id # TODO: global YouTubeIt client
-      self.author = ExternalAccounts::Youtube.find_or_create_by_uid(v.author.name)
-      self.title = v.title
-      self.description = v.description
-      self.viewable_mobile = v.noembed
-      self.duration = v.duration
-      self.view_count = v.view_count
-      self.published_at = v.published_at
     end
 
     # Since Video#relevance is usually used when calculating a large collection

@@ -13,13 +13,14 @@ module Aji
       def populate args={}
         accounts.each_with_index do |a, i|
           # Fetch videos from specific sources.
-          if a.own_zset.members.count == 0 || args[:must_populate]
+          if a.content_video_ids.count == 0 || args[:must_populate]
             yt_videos = YouTubeIt::Client.new.videos_by(
               :user => "#{a.uid}", :order_by => 'published').videos#TODO paging
             yt_videos.each_with_index do |v, n|
-              vid = Video.find_or_create_from_youtubeit_video(v).id
+              video = Video.find_or_create_from_youtubeit_video v
+              vid = video.id
               relevance = v.published_at.to_i
-              a.own_zset[vid] = relevance
+              a.push video, relevance
               content_zset[vid] = relevance
             end
             self.populated_at = Time.now
