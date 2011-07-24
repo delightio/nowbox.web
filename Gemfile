@@ -40,9 +40,10 @@ gem 'twitter_oauth'
 
 # Testing gems.
 group :test do
-  gem 'rack-test'
+  gem 'rack-test', :require => 'rack/test'
   gem 'rspec'
-  gem 'fabrication'
+  gem 'cucumber'
+  #gem 'capybara' # For viewer app.
   gem 'factory_girl'
   gem 'simplecov'
 end
