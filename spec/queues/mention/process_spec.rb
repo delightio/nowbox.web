@@ -9,7 +9,8 @@ module Aji
         @link = double("link", :external_id => 'someID12345',
                                :type => 'youtube')
         @links = Array.new(@links_count_in_mention, @link)
-        @author = ExternalAccount.new
+        # TODO: Don't use real author.
+        @author = ExternalAccount.new :uid => "someguy"
         @mention = double("mention", :videos => Array.new,
                                      :links => @links,
                                      :save => true,
