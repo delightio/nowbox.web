@@ -40,6 +40,25 @@ class Aji < Thor
     end
   end
 
+  desc "cuke", "Run application acceptance tests"
+  def cuke
+    exec "bin/cucumber"
+  end
+
+  desc "test", "Run full application tests (spec and acceptance)"
+  def test
+    system "bin/cucumber"
+    cuke_status = $?.exitstatus
+    system "bin/rspec spec"
+    rspec_status = $?.exitstatus
+    unless cuke_status != 0 or rspec_status != 0
+      kk
+      invoke :docs
+    else
+      exit cuke_status != 0 && cuke_status or rspec_status
+    end
+  end
+
   desc "readstream", "Read twitter stream for video links"
   def readstream
     exec "bin/rake readstream"
@@ -53,7 +72,7 @@ class Aji < Thor
   desc "docs", "generate Rocco documentation"
   def docs
     puts "Rebuilding documentation..."
-    exec "bin/rocco -o docs/ aji.rb controllers/*"
+    system "bin/rocco -o docs/ aji.rb controllers/*"
   end
 
   desc "docs_clean", "Remove all files from docs/ directory"
