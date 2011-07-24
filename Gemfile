@@ -23,6 +23,7 @@ gem 'rocco', :group => :development
 # Libraries used by the backend.
 gem 'resque-scheduler', '~>2.0.0.d',
   :require => ['resque_scheduler', 'resque/scheduler']
+gem 'httparty'
 gem 'omniauth'
 gem 'youtube_it'
 gem 'erubis'

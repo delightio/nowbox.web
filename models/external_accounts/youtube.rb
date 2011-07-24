@@ -14,10 +14,15 @@ module Aji
 
       def username; uid; end
       def profile_uri; "http://www.youtube.com/user/#{username}"; end
+
       def thumbnail_uri # LH #120
-        v = Video.find_by_id content_video_ids(1).first
-        return "" if v.nil?
-        v.thumbnail_uri
+        @thumbnail_uri ||=
+          begin
+            r = HTTParty.get(
+              "http://gdata.youtube.com/feeds/api/users/#{uid}?v=2")
+            match = r.body.match(/<media:thumbnail url='(.*)'/)
+            if match then match[1] else "" end
+          end
       end
 
     end
