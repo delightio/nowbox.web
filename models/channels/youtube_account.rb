@@ -34,6 +34,12 @@ module Aji
         (content_zset.revrange 0, limit).map(&:to_i)
       end
 
+      def thumbnail_uri
+        return "http://beta.#{Aji.conf['TLD']}/images/icons/icon-set_#{title.downcase}.png" if default_listing
+        # accounts.sort_by(&:populated_at).last.thumbnail_uri
+        accounts.first.thumbnail_uri
+      end
+      
       def self.find_all_by_accounts accounts
         accounts_channels = accounts.map{ |a| a.channels }
         # Perform an intersection on all the channels from given accounts

@@ -223,11 +223,13 @@ by a subclass.</p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-14">&#182;</a>
         </div>
-        <p>Add miscelaneous library code.</p>
+        <p>Add miscelaneous library code.
+Dir.glob(&ldquo;lib/*.rb&rdquo;).each { |r| require_relative r }</p>
 
       </td>
       <td class=code>
-        <div class='highlight'><pre><span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;lib/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span>
+        <div class='highlight'><pre><span class="n">require_relative</span> <span class="s1">&#39;lib/decay.rb&#39;</span>
+
 <span class="k">module</span> <span class="nn">Parsers</span><span class="p">;</span> <span class="k">end</span>
 <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;lib/parsers/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span></pre></div>
       </td>

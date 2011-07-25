@@ -50,7 +50,7 @@ describe Aji::User do
   context "channel subscription management" do
     it "should add and remove channel accordingly" do
       user = Factory :user
-      channel = Factory :channel_with_videos
+      channel = Factory :youtube_channel_with_videos
       user.subscribe channel
       user.subscribed_channels.should include channel
       user.unsubscribe channel
@@ -83,7 +83,7 @@ describe Aji::User do
       user = Factory :user
       channel_ids = Set.new
       5.times do |n|
-        channel = Factory :channel_with_videos
+        channel = Factory :youtube_channel_with_videos
         channel_ids << channel.id
         user.subscribe channel
       end

@@ -4,12 +4,15 @@ module Aji
     # - tweeted_zset: Redis::Objects::SortedSet
     class Twitter < ExternalAccount
       include Redis::Objects
-
       sorted_set :tweeted_zset
 
       def tweeted_videos
         Video.find tweeted_zset.members
       end
+
+      def username; uid; end
+      def profile_uri; "http://twitter.com/#{username}"; end
+      def thumbnail_uri; profile_uri; end
 
       def publish share
         Twitter.configure do |c|

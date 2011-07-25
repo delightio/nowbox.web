@@ -33,16 +33,15 @@ module Aji
     lock :populating, :expiration => 10.minutes
     include Mixins::Populating
 
+    def thumbnail_uri; raise InterfaceMethodNotImplemented; end
     def serializable_hash options={}
-      thumbnail_uri = ""
-      thumbnail_uri = Video.find(content_video_ids(1).first).thumbnail_uri if content_video_ids.count > 0
-      Hash["id" => id,
-           "type" => (type||"").split("::").last,
-           "default_listing" => default_listing,
-           "category" => category.to_s,
-           "title" => title,
-           "thumbnail_uri" => thumbnail_uri,
-           "resource_uri" => "http://api.#{Aji.conf['TLD']}/#{Aji::API.version.first}/channels/#{self.id}"]
+      Hash[ "id" => id,
+            "type" => (type||"").split("::").last,
+            "default_listing" => default_listing,
+            "category" => category.to_s,
+            "title" => title,
+            "thumbnail_uri" => thumbnail_uri,
+            "resource_uri" => "http://api.#{Aji.conf['TLD']}/#{Aji::API.version.first}/channels/#{self.id}"]
     end
 
     def personalized_content_videos args
