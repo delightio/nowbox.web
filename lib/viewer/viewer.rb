@@ -10,7 +10,8 @@ module Aji
     set :public, File.dirname(__FILE__) + "/public"
 
     get '/' do
-      erb :launch, {:layout => :splash}
+    	@ref = params[:ref] || ""
+      erb :launch, {:layout => :layout_splash}
     end
 
     get '/home' do
@@ -34,7 +35,7 @@ module Aji
     end
 
     get '/launch' do
-      erb :launch, {:layout => :splash}
+      erb :launch, {:layout => :layout_splash}
     end
     
     get '/:share_id' do

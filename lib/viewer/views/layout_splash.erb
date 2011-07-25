@@ -5,23 +5,14 @@
 <!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 <head>
-	<%= erb :_layout_head %>
+		<%= erb :_layout_head %>
 </head>
 <body>
-	<div class="stickywrapper">
-		<header>
-			<%= erb :_header %>
-		</header>
 
-		<div id="main" role="main">
-			<%= yield %>
-		</div>
-		<div class="push"></div>
+	<div id="splash" role="main">
+		<%= yield %>
 	</div>
-	<footer>
-		<%= erb :_footer %>
-	</footer>
 
-	<%= erb :_layout_scripts %>
+	<%= erb :_layout_scripts %>	
 </body>
 </html>

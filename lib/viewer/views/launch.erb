@@ -9,37 +9,55 @@
 		<div class="wrapper">
 			<h1>Rethink video entertainment</h1>
 			<h2>Personal. Social. Couch not required.</h2>
-			<p><span style="font-weight: bold;">Coming soon.</span> Be the first to try it out.</p>
+			<p><span style="font-weight: bold;">Coming soon.</span> Be the first to try it out. <a href="./home">Learn more</a></p>
 			<form id="invite-form" name="invite-form" action="http://208.72.154.212/widgetapi.0.1.php">
 				<input id="invite-email" name="email" class="email round-corners-5 rmv-dft-val" type="text" value="Your email"/>
 				<input type="hidden" name="lrDomain" value="nowmov.com">
 				<input type="hidden" name="apiKey" value="48d38c9924c6a7e6c0cc43844aab2569">
-				<input type="hidden" name="referralid" value="">
+				<input type="hidden" name="referralid" value="<%= @ref %>">
 				<input type="hidden" name="urlPrefix" value="http://nowmov.com/?ref=">
 				<button id="invite-submit" type="submit" class="submit slick-black">Notify Me</button>
 				<div class="clearfix"></div>
 			</form>
-			<div id="post_invite">
-				<span style="font-weight: bold;">Thank you!</span><br/>Please spread the word and <a href="./home">learn more</a> about us.
+			<div id="post_success" class="after_submit">
+				<span style="font-weight: bold;">Thanks! Want an early invitation and future perks?</span><br/>Use these referral share links to invite your friends!
+				<div id="ref_share">
+					<div class="fblike"></div>
+	
+					<div class="plusone"></div>
+									
+					<div class="tweet"></div>
+					
+					<div class="clearfix"></div>
+					<input id="referral_link" type="text" value="">
+				</div>
+			</div>
+			<div id="post_fail" class="after_submit">
+				<span style="font-weight: bold;">Sorry</span>, something went wrong.<br/>Please try entering you email address again or drop us a line at invite@nowmov.com
 			</div>
 			<div class="social">
 				<div class="fblike">
 					<%= erb :_fblike %>
 				</div>
-				
-				<div class="tweet">
-					<%= erb :_tweet %>
-				</div>
-				
+
 				<div class="plusone">
 					<g:plusone size="medium" href="http://nowmov.com"></g:plusone>
 				</div>
+								
+				<div class="follow">
+					<%= erb :_follow %>
+				</div>
+				
+
 				<div class="clearfix"></div>
 			</div>
 		</div>
 	</div>		
 </div>
+
 <script>
-	mpmetrics.register( { photo : <%= randnum %>} );
-	mpmetrics.track("View Launch Page");
+	$(function(){
+		mpmetrics.register( { photo : <%= randnum %>} );
+		mpmetrics.track("View Launch Page");
+	});
 </script>

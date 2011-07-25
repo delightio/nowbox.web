@@ -17,7 +17,7 @@ footer ul{ float: right; list-style: none; padding: 0px; margin: 0px auto; }
 		footer ul a, footer ul a:active, footer ul a:visited{ color: #777; font-weight: normal;}
 		footer ul a:hover { color: #AAA;}
 
-footer .follow, footer .fblike, footer .tweet, footer .plusone { float: left; }
+.follow, .fblike, .tweet, .plusone { float: left; }
 	
 #main {  position: relative;padding: 0px 0px; z-index: 1; }
 	#main .wrapper{ width: 800px; padding: 20px 0px; margin: auto; }
@@ -100,15 +100,18 @@ ul.section { list-style: none; }
 	#launchbox h2{  color: #7c2a2b; font: 100 20px "helvetica neue", helvetica, arial, sans-serif; border-bottom: 1px dotted #b54345;}
 	#launchbox p{ font-weight: normal; font-size: 16px; color: #AAA; line-height: 2; color: #b54345; margin-bottom: 10px;}
 	#launchbox .social{ margin: 20px 0px 0px;}
-		#launchbox .social .tweet, #launchbox .social .fblike, #launchbox .social .plusone { float: left; }
-
+	#launchbox a, #launchbox a:active, #launchbox a:visited{ color: #EEE; }
+		#launchbox a:hover{ color: #FFF; text-decoration: underline; }
+		
 #invite-email{ padding: 10px; border: 1px solid transparent; font-size: 21px; color: #444; display: block; float: left; width: 250px; }
 #invite-submit{ display: block; float: right;}
 	#invite-submit:hover{  }
 
-#post_invite{ display : none; margin-bottom: 10px; padding: 5px; background: rgba(0,0,0, 0.1); font-size: 16px; line-height: 1.5;}
-	#post_invite a, #post_invite a:active, #post_invite a:visited{ color: #EEE; }
-		#post_invite a:hover{ color: #FFF; text-decoration: underline;  }
+.after_submit{ display : none; margin-bottom: 10px; padding: 5px; background: rgba(0,0,0, 0.1); font-size: 16px; line-height: 1.5;}
+
+
+#ref_share{ margin: 20px 0px; }
+	#referral_link{ margin: 10px 0px 0px; padding: 10px; border: 1px solid transparent; font-size: 21px; color: #444; display: block;}
 		
 /* CALL TO ACTIONS */
 #call_to_action_quote{ padding: 10px; background-color: #EFEFEF; background: rgba(0, 0, 0, 0.1); }
