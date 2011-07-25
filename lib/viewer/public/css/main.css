@@ -108,11 +108,11 @@ ul.section { list-style: none; }
 #invite-submit{ display: block; float: right;}
 	#invite-submit:hover{  }
 
-.after_submit{ display : none; margin-bottom: 10px; padding: 5px; background: rgba(0,0,0, 0.1); font-size: 16px; line-height: 1.5;}
+.after_submit{ display: none; margin-bottom: 10px; padding: 10px; background: rgba(0,0,0, 0.1); font-size: 16px; line-height: 1.5;}
 
 
 #ref_share{ margin: 20px 0px; }
-	#referral_link{ margin: 10px 0px 0px; padding: 10px; border: 1px solid transparent; font-size: 21px; color: #444; display: block;}
+	#referral_link{ width: 350px; margin: 10px 0px 0px; padding: 10px; border: 1px solid transparent; font-size: 21px; color: #444; display: block;}
 		
 				
 /* INDEX */
