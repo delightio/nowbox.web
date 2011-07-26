@@ -100,8 +100,7 @@ a JSON encoded error message if not.</p>
                     <span class="ss">:first_name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:first_name</span><span class="o">]</span><span class="p">,</span>
                     <span class="ss">:last_name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:last_name</span><span class="o">]</span><span class="p">)</span> <span class="ow">or</span>
           <span class="n">creation_error!</span><span class="p">(</span><span class="no">User</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
-      <span class="k">end</span>
-      </pre></div>
+      <span class="k">end</span></pre></div>
       </td>
     </tr>
     <tr id='section-GET_users/:user_id'>
@@ -127,7 +126,7 @@ for given channel</p>
         <span class="n">succeeded</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">send</span> <span class="n">params</span><span class="o">[</span><span class="ss">:channel_action</span><span class="o">]</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:channel_action_params</span><span class="o">]</span>
         <span class="n">error!</span><span class="p">(</span><span class="s2">&quot;User[</span><span class="si">#{</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">] cannot </span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:channel_action</span><span class="o">]</span><span class="si">}</span><span class="s2"> Channel[</span><span class="si">#{</span><span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">] with params: </span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:channel_action_params</span><span class="o">].</span><span class="n">inspect</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span> <span class="k">if</span> <span class="o">!</span><span class="n">succeeded</span>
       <span class="k">end</span>
-      
+
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span></pre></div>
