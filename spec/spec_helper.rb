@@ -1,11 +1,9 @@
 ENV["RACK_ENV"] ||= 'test'
+require 'bundler'
 Bundler.require :test
 
 
 SimpleCov.start
-
-require 'rspec'
-require 'rack/test'
 require_relative '../aji'
 require_relative 'factories'
 
@@ -30,7 +28,7 @@ RSpec.configure do |config|
   # config.mock_with :rr
   config.mock_with :rspec
   config.include TestMixin
-  config.before(:each) do
+  config.before :each do
     Aji.redis.flushdb
     [Aji::User, Aji::Channel, Aji::Event, Aji::ExternalAccount, Aji::Video].map{|c| c.all.each{|obj| obj.delete} }
   end
