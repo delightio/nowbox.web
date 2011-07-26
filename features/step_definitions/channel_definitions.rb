@@ -3,7 +3,7 @@ Given /^I am logged in as a nowmov user$/ do
 end
 
 When /^I ask for a channel containing #{twitter_handle}'s videos$/ do |handle|
-  get "/1/channels?type=twitter&account=#{handle}?user_id=#{current_user[:id]}"
+  get "/1/channels?type=twitter&account=#{handle}&user_id=#{current_user[:id]}"
 
 end
 
