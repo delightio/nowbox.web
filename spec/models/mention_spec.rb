@@ -13,7 +13,7 @@ describe Aji::Mention do
       end
     end
   end
-  
+
   describe "links collection" do
     it "defaults to an empty array" do
       subject.links.class.should == Array
@@ -27,7 +27,7 @@ describe Aji::Mention do
       Aji::Mention.find(subject.id).links.should include link
     end
   end
-  
+
   describe "#spam?" do
     it "identifies spam if mention's author has already mentioned the given video within the mention" do
       video = Factory :video_with_mentions
@@ -52,5 +52,4 @@ describe Aji::Mention do
       spammy_mention.should be_spam
     end
   end
-  
 end
