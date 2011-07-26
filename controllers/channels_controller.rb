@@ -63,6 +63,10 @@ module Aji
         when 'default'
           Channel.default_listing
 
+        when 'twitter'
+          a = ExternalAccounts::Twitter.find_or_create_by_uid params[:account]
+          Channels::TwitterAccount.find_or_create_by_account a
+
         else
           # FIXME: should be in User controller
           user = User.find_by_id params[:user_id]
