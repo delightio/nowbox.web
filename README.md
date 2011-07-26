@@ -16,6 +16,8 @@ Quick Tricks and Tips
 - Change Heroku worker count: `heroku scale web=x resque=y`
 - Create database migration template: `bin/aji migration [migration_file_name]`
 - Generate fresh documentation `bin/aji docs`
+- Update resque\_schedule.yml:
+    ``heroku config:add RESQUE_SCHEDULE="`cat config/resque_schedule.yml`"``
 
 Technology Stack
 ----------------
