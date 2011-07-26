@@ -1,7 +1,6 @@
 * {
   float: none;
-  background: #fff;
-  color: #000;
 }
 
-body { font-size: 80%; }
+html > body { font-size: 80%; background: url(/images/graphics/aji-tiles-black.jpg) repeat  !important;  }
+#launch{ background: none  !important;}
