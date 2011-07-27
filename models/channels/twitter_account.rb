@@ -2,6 +2,7 @@ module Aji
   class Channels::TwitterAccount < Channel
     belongs_to :account, :class_name => 'Aji::ExternalAccounts::Twitter'
     before_create :set_default_title
+    after_create :populate
     TWITTER_API_URL =
       "http://api.twitter.com/1/statuses/user_timeline.json?count=200&include_entities=true"
 
