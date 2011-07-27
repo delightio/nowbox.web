@@ -64,7 +64,8 @@ module Aji
           Channel.default_listing
 
         when 'twitter'
-          a = ExternalAccounts::Twitter.find_or_create_by_uid params[:account]
+          a = ExternalAccounts::Twitter.find_or_create_by_username(
+            params[:account])
           Channels::TwitterAccount.find_or_create_by_account a
 
         else
