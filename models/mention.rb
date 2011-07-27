@@ -11,9 +11,8 @@ module Aji
 
     def initialize params={}
       super params
-      link_objs = []
-      links.each do |link|
-        link_objs << Link.new(link)
+      link_objs = links.map do |link|
+        Link.new(link)
       end
       self.links = link_objs
     end
