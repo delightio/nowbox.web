@@ -27,6 +27,10 @@ describe Aji::Link do
     link.external_id.should == '4937580'
   end
 
+  it "can tell videos apart from other links" do
+    Aji::Link.new("http://vimeo.com/4937580").should be_video
+  end
+
   it "detects invalid links" do
     Aji::Link.new("ht:/fhqwhgads").should be_invalid
   end

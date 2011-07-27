@@ -10,6 +10,7 @@ module Aji
           mention = Aji::Mention.new mention_hash['mention']
 
           mention.links.each do |link|
+            next unless link.video?
             video = Aji::Video.find_or_create_by_external_id_and_source(
               link.external_id, link.type)
             if video.blacklisted? || mention.spam?

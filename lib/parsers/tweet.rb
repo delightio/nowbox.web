@@ -4,9 +4,20 @@ module Aji
     # an un-authenticated `ExternalAccount::Twitter` object or retrieve an
     # existing one representing the author of the mention.
     def self.parse json
-      tweet_hash = MultiJson.decode json
+      # HACK: This is not the best way, there should be a Json parsing
+      # preprocessor which then calls the root parse method.
+      case json
+      when String
+        tweet_hash = MultiJson.decode json
+      when Hash
+        tweet_hash = json
+      else
+        raise ArgumentError.new(
+          "I don't want any #{json.class} only strings and hashes.")
+      end
       author = ExternalAccounts::Twitter.find_or_create_by_uid(
-        tweet_hash['user']['id'].to_s)
+        tweet_hash['user']['id'].to_s, :user_info => tweet_hash['user'],
+        :username => tweet_hash['user']['screen_name'])
       links = tweet_hash['entities']['urls'].map do |url|
         Link.new(url['expanded_url'] || url['url'])
       end
