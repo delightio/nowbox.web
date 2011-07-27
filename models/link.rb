@@ -19,6 +19,19 @@ module Aji
     ]
     @@vimeo_regexp = %r<https?://(?:www\.)?vimeo\.com/(#{@@vimeo_id_regexp})>
 
+    def video?
+      (@external_id && @type) ? true : false
+    end
+
+    def invalid?
+      uri = URI.parse self
+      uri.path.nil? || uri.host.nil? || !(uri.scheme =~ /https?/)
+    end
+
+    # TODO: Implement this. (No shit sherlock)
+    def shortened?
+      false
+    end
 
     private
     def match_videos
@@ -35,20 +48,6 @@ module Aji
           @type = 'vimeo'
         end
       end
-    end
-
-    def video?
-      (@external_id && @@type) ? true : false
-    end
-
-    def invalid?
-      uri = URI.parse self
-      uri.path.nil? || uri.host.nil? || !(uri.scheme =~ /https?/)
-    end
-
-    # TODO: Implement this. (No shit sherlock)
-    def shortened?
-      false
     end
   end
 end
