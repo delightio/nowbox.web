@@ -3,7 +3,7 @@ module Aji
     belongs_to :account, :class_name => 'Aji::ExternalAccounts::Twitter'
     before_create :set_default_title
     TWITTER_API_URL =
-      "http://api.twitter.com/1/statuses/user_timeline.json?count=50&include_entities=true"
+      "http://api.twitter.com/1/statuses/user_timeline.json?count=200&include_entities=true"
 
     def thumbnail_uri
       ""
