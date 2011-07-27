@@ -21,10 +21,10 @@ module Aji
     has_many :events
     has_and_belongs_to_many :mentions
     belongs_to :author, :class_name => 'ExternalAccount'
-    
+
     include Mixins::Blacklisting
     include Mixins::Populating
-    
+
     def populate
       if external_id.nil?
         raise "Aji::Video#populate: missing external id for Aji::Video[#{id}]"
@@ -51,14 +51,14 @@ module Aji
     # Symbolize source attribute.
     def source; read_attribute(:source).to_sym; end
     def source= value; write_attribute(:source, value.to_sym); end
-    
+
     def latest_mentions n=50
       mentions.order("published_at DESC").limit(n)
     end
     def latest_mentioners limit=50
       latest_mentions(limit).map(&:author)
     end
-    
+
     # TODO: Deprecate in favor of a generic `Video::fetch(source:Symbol,
     # external_id:String)`
     def self.find_or_create_from_youtubeit_video v
