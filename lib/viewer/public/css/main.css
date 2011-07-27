@@ -72,7 +72,10 @@ ul.section { list-style: none; }
 	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100022.jpg', sizingMethod='scale')";
 }
 
-#taglinebox { width: 600px; left: 50%; margin-left: -300px; top: 30px; text-shadow: 0px 0px 30px #000; position: absolute; text-align: center;  }
+#announcement{ background: url(/images/graphics/aji-tiles-black.jpg) repeat; color: #AAA; position: absolute; top: 0px; height: 30px; 	line-height: 30px; text-align: center; width: 100%; }
+	#announcement a{ color: #EEE; }
+		#announcement a:hover{ color: #FFF; text-decoration: underline;}
+#taglinebox { width: 600px; left: 50%; margin-left: -300px; top: 60px; text-shadow: 0px 0px 30px #000; position: absolute; text-align: center;  }
 	#taglinebox h1{ text-transform: lowercase; margin-top: 30px; color: #FFF; font: bolder 30px "helvetica neue", helvetica, arial, sans-serif;}
 	#taglinebox h2{ text-transform: lowercase; color: #FFF; font: 200 20px "helvetica neue", helvetica, arial, sans-serif;}
 	#launch.photo3 #taglinebox h1, #launch.photo3 #taglinebox h2, #launch.photo4 #taglinebox h1, #launch.photo4 #taglinebox h2{ color: #222; text-shadow: 0px 0px 30px #FFF; } 
