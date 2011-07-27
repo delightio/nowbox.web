@@ -47,7 +47,6 @@ module Aji
 
   # Establish ActiveRecord conneciton and run all necessary migrations.
   ActiveRecord::Base.establish_connection conf['DATABASE']
-  ActiveRecord::Migrator.migrate("db/migrate/")
 
   # An application specific error class.
   class Error < RuntimeError; end
@@ -70,6 +69,10 @@ Dir.glob("models/*.rb").each { |r| require_relative r }
 # Must load channel subtypes after other models for dependency reasons.
 Dir.glob("models/channels/*.rb").each { |r| require_relative r }
 Dir.glob("models/external_accounts/*.rb").each { |r| require_relative r }
+
+# Run migrations after models are loaded.
+ActiveRecord::Migrator.migrate("db/migrate/")
+
 Dir.glob("helpers/*.rb").each { |r| require_relative r }
 Dir.glob("controllers/*_controller.rb").each { |r| require_relative r }
 Dir.glob("queues/*.rb").each { |r| require_relative r }

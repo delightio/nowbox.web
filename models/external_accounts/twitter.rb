@@ -5,17 +5,20 @@ module Aji
     class Twitter < ExternalAccount
       include Redis::Objects
       sorted_set :tweeted_zset
+      has_one :channel, :class_name => 'Aji::Channels::TwitterAccount',
+        :foreign_key => :account_id
+      serialize :user_info, Hash
 
       def tweeted_videos
         Video.find tweeted_zset.members
       end
 
-      def username; uid; end
       def profile_uri; "http://twitter.com/#{username}"; end
+
       def thumbnail_uri; profile_uri; end
 
       def publish share
-        Twitter.configure do |c|
+        ::Twitter.configure do |c|
           c.consumer_key = Aji.conf['CONSUMER_KEY']
           c.consumer_secret = Aji.conf['CONSUMER_SECRET']
           c.oauth_token = credentials['oauth_token']
