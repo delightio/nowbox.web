@@ -19,17 +19,19 @@ module Aji
     # HACK: This is long, complex, and tightly coupled. A good later refactor
     # candidate.
     def populate
-      tweets_json = HTTParty.get(
+      puts account.username
+      resp = HTTParty.get(
         TWITTER_API_URL + "&screen_name=#{account.username}")
-      tweets = MultiJson.decode tweets_json.body
-      puts tweets.class, tweets.first.class
+      tweets = resp.parsed_response
+      puts "Tweets:#{tweets.class} => #{tweets.inspect}"
+      puts "Firsttweet:#{tweets.first.class} => #{tweets.first.inspect}"
       mentions = tweets.map { |tweet| Parsers::Tweet.parse tweet }
       mentions.map(&:save)
       mentions.each_with_index do |m, i|
-        mention.links.each do |link|
+        m.links.each do |link|
           next unless link.video?
           content_zset[Video.find_or_create_by_source_and_external_id(
-            link.source, link.external_id)] = i
+            link.type, link.external_id)] = i
         end
       end
     end
