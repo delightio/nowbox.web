@@ -1,8 +1,6 @@
 module Aji
   # The `Link` is a model that isn't backed by Postgres or Redis and
   # encapsulates all the properties of a hyperlink.
-  # NOTE: I might back it by a Redis hash, or even the database. I haven't
-  # decided yet I just want a fucking Link object.
   class Link < String
     attr_accessor :external_id, :type
     def initialize str
