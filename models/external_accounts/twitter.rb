@@ -7,6 +7,7 @@ module Aji
       sorted_set :tweeted_zset
       has_one :channel, :class_name => 'Aji::Channels::TwitterAccount',
         :foreign_key => :account_id
+      serialize :user_info, Hash
 
       def tweeted_videos
         Video.find tweeted_zset.members
