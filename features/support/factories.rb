@@ -51,6 +51,11 @@ Factory.define :user_with_viewed_videos, :parent => :user do |a|
   end
 end
 
+Factory.define :twitter_account, :class => 'Aji::ExternalAccounts::TWitter' do
+  uid { sequence { |n| n.to_S } }
+  username { sequence { |n| "TwitterUser#{n}" } }
+end
+
 Factory.define :event, :class => 'Aji::Event' do |a|
   a.association :user
   a.association :video
@@ -60,9 +65,10 @@ Factory.define :event, :class => 'Aji::Event' do |a|
 end
 
 Factory.define :channel, :class => 'Aji::Channel' do |a|
-  a.title { random_string }
-  a.default_listing { random_boolean }
-  a.category { random_category }
+end
+
+Factory.define :twitter_channel, :class => 'Aji::Channels::Twitter' do
+  account Factory :twitter_account
 end
 
 Factory.define :youtube_channel, :class => 'Aji::Channels::YoutubeAccount' do |a|
@@ -133,7 +139,7 @@ Factory.define :external_account,
   :class => 'Aji::ExternalAccounts::Youtube' do |a|
     a.uid { random_string }
   end
-  
+
 Factory.define :mention, :class => 'Aji::Mention' do |a|
   a.published_at { rand(10000).seconds.ago }
   a.association :author, :factory => :external_account
