@@ -19,9 +19,10 @@ module Aji
     # HACK: This is long, complex, and tightly coupled. A good later refactor
     # candidate.
     def populate
-      tweets_json= HTTParty.get(
+      tweets_json = HTTParty.get(
         TWITTER_API_URL + "&screen_name=#{account.username}")
-      tweets = MultiJson.decode tweets_json
+      tweets = MultiJson.decode tweets_json.body
+      puts tweets.class, tweets.first.class
       mentions = tweets.map { |tweet| Parsers::Tweet.parse tweet }
       mentions.map(&:save)
       mentions.each_with_index do |m, i|

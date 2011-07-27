@@ -6,7 +6,7 @@ module Aji
     def self.parse json
       # HACK: This is not the best way, there should be a Json parsing
       # preprocessor which then calls the root parse method.
-      case json.class
+      case json
       when String
         tweet_hash = MultiJson.decode json
       when Hash
