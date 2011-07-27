@@ -7,14 +7,13 @@ module Aji
       before(:each) do
         @links_count_in_mention = 6
         @link = double("link", :external_id => 'someID12345',
-                               :type => 'youtube')
+                       :type => 'youtube', :video? => true)
+
         @links = Array.new(@links_count_in_mention, @link)
         @author = ExternalAccount.new
-        @mention = double("mention", :videos => Array.new,
-                                     :links => @links,
-                                     :save => true,
-                                     :author => @author,
-                                     :spam? => false)
+        @mention = double("mention", :videos => Array.new, :links => @links,
+                          :save => true, :author => @author, :spam? => false)
+
         @trending = mock("trending singleton")
         Aji::Mention.stub(:new).and_return(@mention)
         Aji::Link.stub(:new).and_return(@link)
@@ -53,6 +52,10 @@ module Aji
         @trending.should_receive(:push_recent).never
         subject.perform :anything
         @mention.author.should be_blacklisted
+      end
+
+      context "when a link does not point to a video" do
+        it "does not try to create a video object"
       end
 
     end
