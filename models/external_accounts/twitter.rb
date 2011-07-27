@@ -13,8 +13,6 @@ module Aji
         Video.find tweeted_zset.members
       end
 
-      def handle; user_info[:nickname] || ""; end
-
       def profile_uri; "http://twitter.com/#{username}"; end
 
       def thumbnail_uri; profile_uri; end

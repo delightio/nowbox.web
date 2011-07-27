@@ -10,10 +10,14 @@ module Aji
         :account => account))
     end
 
+    def thumbnail_uri
+      ""
+    end
+
     # Private instance methods below.
     private
     def set_default_title
-      self.title ||= "@#{account.handle}'s Tweeted Videos"
+      self.title ||= "@#{account.username}'s Tweeted Videos"
     end
   end
 end

@@ -33,14 +33,20 @@ module Aji
     include Mixins::Populating
 
     def thumbnail_uri; raise InterfaceMethodNotImplemented; end
+
     def serializable_hash options={}
-      Hash[ "id" => id,
-            "type" => (type||"").split("::").last,
-            "default_listing" => default_listing,
-            "category" => category.to_s,
-            "title" => title,
-            "thumbnail_uri" => thumbnail_uri,
-            "resource_uri" => "http://api.#{Aji.conf['TLD']}/#{Aji::API.version.first}/channels/#{self.id}"]
+      {
+        "id" => id,
+        "type" => (type||"").split("::").last,
+        "default_listing" => default_listing,
+        "category" => category.to_s,
+        "title" => title,
+        "thumbnail_uri" => thumbnail_uri,
+        # TODO: Shouldn't just catch the first version since we may change
+        # this method in a version bump.
+        "resource_uri" => "http://api.#{Aji.conf['TLD']}/" +
+        "#{Aji::API.version.first}/channels/#{self.id}"
+      }
     end
 
     def personalized_content_videos args
