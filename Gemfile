@@ -27,6 +27,7 @@ gem 'omniauth'
 gem 'youtube_it'
 gem 'erubis'
 gem 'yajl-ruby'
+gem 'twitter'
 # Gem dependencies for read_stream.rb
 gem 'em-http-request'
 gem 'twitter_oauth'
