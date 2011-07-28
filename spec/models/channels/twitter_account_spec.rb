@@ -21,8 +21,8 @@ describe Aji::Channels::TwitterAccount do
 
     describe ".find_or_create_by_account" do
       before :each do
-        @twitter_user = Aji::ExternalAccounts::Twitter.create :uid => '71231',
-            :username => '_nuclearsammich'
+        @twitter_user = Aji::ExternalAccounts::Twitter.create :uid =>
+          '178492493', :username => '_nuclearsammich'
       end
 
       context "when the channel exists" do
@@ -40,7 +40,6 @@ describe Aji::Channels::TwitterAccount do
             Aji::Channels::TwitterAccount.
               find_or_create_by_account(@twitter_user)
           end.to change(Aji::Channels::TwitterAccount, :count).by(1)
-
         end
       end
     end
