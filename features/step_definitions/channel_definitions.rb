@@ -19,14 +19,15 @@ Then /^the title should be "([^"]*)"$/ do |channel_title|
 end
 
 
-Given /^the channel with id (\d+) is #{twitter_handle}'s twitter channel$/ do
-  |channel_id, handle|
-  account = Factory :twitter_account, :nickname => handle
-  Factory :twitter_channel, :account => account, :id => channel_id
+Given /^a Twitter channel associated with #{twitter_handle}'s twitter account$/ do
+  |handle|
+  pending # This scenario relies on outside library calls. Will mock with VCR.
+  account = Factory :twitter_account, :username => handle
+  Factory :twitter_channel, :account => account
 end
 
 Given /^@nowmov has tweeted videos recently$/ do
-  pending # express the regexp above with the code you wish you had
+  pending # somehow mock recently tweeted videos
 end
 
 When /^I get the channels videos$/ do
