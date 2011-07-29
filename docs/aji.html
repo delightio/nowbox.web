@@ -91,6 +91,10 @@ complexity later, hence methodizing it.</p>
     <span class="k">else</span>
       <span class="vg">$stdout</span><span class="o">.</span><span class="n">puts</span> <span class="n">message</span>
     <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nc">Aji</span><span class="o">.</span><span class="nf">youtube_client</span>
+    <span class="vi">@youtube_client</span> <span class="o">||=</span> <span class="no">YouTubeIt</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span>
   <span class="k">end</span></pre></div>
       </td>
     </tr>
