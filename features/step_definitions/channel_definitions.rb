@@ -4,7 +4,6 @@ end
 
 When /^I ask for a channel containing #{twitter_handle}'s videos$/ do |handle|
   get "/1/channels?type=twitter&account=#{handle}&user_id=#{current_user[:id]}"
-
 end
 
 Then /^I should get a channel for videos shared by #{twitter_handle}$/ do
