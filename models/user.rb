@@ -56,7 +56,8 @@ module Aji
       # TODO: we are pulling in the whole channel object but we really only care about Channel#id
     end
     def subscribed_channels
-      # Channel.find(subscribed_list.values) # TODO: Is AR caching this query? My list came out the same after User#arrange
+      # TODO: Is AR caching this query? My list came out the same after User#arrange
+      # Channel.find(subscribed_list.values)
       subscribed_list.map { |cid| Channel.find cid }
     end
 
