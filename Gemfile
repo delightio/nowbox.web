@@ -42,6 +42,8 @@ gem 'twitter_oauth'
 
 # Testing gems.
 group :test do
+  gem 'fakeweb'
+  gem 'vcr'
   gem 'rack-test', :require => 'rack/test'
   gem 'rspec'
   gem 'cucumber'
