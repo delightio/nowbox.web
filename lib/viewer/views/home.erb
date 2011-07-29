@@ -6,14 +6,20 @@
 		</div>
 		<div id="tagline">Rethink video entertainment</div>
 	</div>
-	<div class="divider bright-blue"></div>
-
+	<div class="divider brightblue-tile"></div>
+	<div id="home_launch_form" class="">
+		<div class="box">
+			<h2>Personal. Social. Couch not required.</h2>
+			<p><span style="font-weight: bold;">Coming soon.</span> Be the first to try it out.</p>
+			<%= erb :_launch_form %>
+		</div>
+	</div>
 	<div class="wrapper">	
 		<div class="bare section">
 			<h1>We are changing how people experience videos</h1>
 		
 					
-			<p>We are <b>launching soon</b>, so <a style="text-decoration: underline;" href="/">signup for an invite</a> and be the first to know when we hit the App Store!</p>
+			<p>We are <b>launching soon</b>, so signup for an invite and be the first to know when we hit the App Store!</p>
 			
 			
 			<div class="user_quote round-corners-5">
@@ -64,3 +70,11 @@
 	</div>	
 
 </div>
+
+
+<script>
+	$(function(){
+		mpmetrics.register( { photo : 3} );
+		mpmetrics.track("View Launch Page", {page:'home'});
+	});
+</script>

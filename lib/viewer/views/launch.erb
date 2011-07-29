@@ -59,6 +59,6 @@
 <script>
 	$(function(){
 		mpmetrics.register( { photo : <%= randnum %>} );
-		mpmetrics.track("View Launch Page");
+		mpmetrics.track("View Launch Page", {page:'launch'});
 	});
 </script>

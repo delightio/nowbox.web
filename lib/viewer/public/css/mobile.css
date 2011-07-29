@@ -1,0 +1,18 @@
+* {
+  float: none;
+}
+
+body { background: url(/images/graphics/aji-tiles-black.jpg) repeat;  }
+.clearfix{ clear:both; }
+
+.logo { text-align: center;}
+
+#video_title{ font: 100 20px "helvetica neue", helvetica, arial, sans-serif; text-align: center; line-height: 50px; color: #222; }
+
+#sharer{padding: 10px; font-size: 15px;}
+	#sharer .image{ float: left; }
+	#sharer .blurb{ float: left; margin-left: 10px; }
+	
+#embed{ text-align: center; height: 200px; width: 280px; margin: 0px auto; height: 200px; width: 300px;}
+	.landscape #embed{ height: 240px;  width: 450px;}
+	

@@ -1,0 +1,34 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+		<%= erb :_layout_head %>
+		<meta name="viewport" content="width=device-width, initial-scale=0.375">		
+		
+	  <meta property="title" content="<%= "title" %>" />
+	  <meta property="description" content="<%= "description" %>" />
+	  <link rel="image_src" href="http://img.youtube.com/vi/<%= "ag9fAN3YfyI" %>/0.jpg" />
+	  
+	  <meta property="og:url" content="http://nowmov.com/<%= params[:share_id] %>" />
+	  <meta property="og:title" content="<%= "title" %>" />
+		<meta property="og:type" content="article" />
+	  <meta property="og:description" content="<%= "description" %>" />
+	  <meta property="og:image" content="http://img.youtube.com/vi/<%= "ag9fAN3YfyI" %>/0.jpg" />
+	  
+	  <meta name="medium" content="video" />		
+		
+</head>
+<body id="video_layout">
+	<header>
+		<%= erb :_header %>
+	</header>
+	<div id="video_page" role="main">
+		<%= yield %>
+	</div>
+
+	<%= erb :_layout_scripts %>	
+</body>
+</html>
