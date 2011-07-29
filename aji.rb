@@ -28,6 +28,10 @@ module Aji
     end
   end
 
+  def Aji.youtube_client
+    @youtube_client ||= YouTubeIt::Client.new
+  end
+
   # Set Rack environment if not specified.
   RACK_ENV = ENV['RACK_ENV'] || "development"
 
