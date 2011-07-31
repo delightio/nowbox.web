@@ -67,7 +67,9 @@ module Aji
         when 'twitter'
           a = ExternalAccounts::Twitter.find_or_create_by_username(
             params[:account])
-          Channels::TwitterAccount.find_or_create_by_account a
+          channel = Channels::TwitterAccount.find_or_create_by_account a
+          channel.populate
+          channel
 
         else
           # FIXME: should be in User controller
