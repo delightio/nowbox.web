@@ -40,7 +40,7 @@ module Aji
         v.author.name)
       self.title = v.title
       self.description = v.description
-      self.viewable_mobile = v.noembed
+      self.viewable_mobile = !v.noembed
       self.duration = v.duration
       self.view_count = v.view_count
       self.published_at = v.published_at
