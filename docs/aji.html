@@ -71,8 +71,13 @@ loading and application level settings are done here.</p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-4">&#182;</a>
         </div>
-        <p>Simple logging interface for local development and heroku. May grow in
-complexity later, hence methodizing it.</p>
+        <p>Logging interface for local development and heroku.
+There are four internal Log levels aliased to the standard SYSLOG levels.
+The INFO level is used if no level is specified. Other options are <code>:DEBUG</code>,
+for DEBUG and <code>:WARN</code>, <code>:FATAL</code>, <code>:ERROR</code> for ERROR as well as a <code>:WTF</code>
+option for Really Bad Things. downcased versions of these work as well.
+DEBUG logs are not logged in production environments so conditional logging
+should not be used.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>  <span class="k">def</span> <span class="nc">Aji</span><span class="o">.</span><span class="nf">log</span> <span class="n">level</span><span class="o">=</span><span class="ss">:INFO</span><span class="p">,</span> <span class="n">message</span>
@@ -80,10 +85,11 @@ complexity later, hence methodizing it.</p>
     <span class="k">when</span> <span class="ss">:ERROR</span><span class="p">,</span> <span class="ss">:WARN</span><span class="p">,</span> <span class="ss">:FATAL</span><span class="p">,</span> <span class="ss">:error</span><span class="p">,</span> <span class="ss">:warn</span><span class="p">,</span> <span class="ss">:fatal</span>
       <span class="vg">$stderr</span><span class="o">.</span><span class="n">puts</span> <span class="n">message</span>
     <span class="k">when</span> <span class="ss">:DEBUG</span><span class="p">,</span> <span class="ss">:debug</span>
+      <span class="k">return</span> <span class="k">if</span> <span class="no">RACK_ENV</span> <span class="o">==</span> <span class="s1">&#39;production&#39;</span>
       <span class="vg">$stdout</span><span class="o">.</span><span class="n">puts</span> <span class="s1">&#39;----------DEBUG----------&#39;</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span>
         <span class="s1">&#39;----------DEBUG----------&#39;</span>
     <span class="k">when</span> <span class="ss">:WTF</span><span class="p">,</span> <span class="ss">:wtf</span>
-      <span class="nb">puts</span> <span class="s2">&quot;!!!!!!!!!!!!!!!!!!!! LOOOK AT ME DAMMIT !!!!!!!!!!!!!!!!!!!!&quot;</span><span class="p">,</span>
+      <span class="vg">$stderr</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;!!!!!!!!!!!!!!!!!!!! LOOOK AT ME DAMMIT !!!!!!!!!!!!!!!!!!!!&quot;</span><span class="p">,</span>
            <span class="s2">&quot;!!!!!!!!!!!!!!!!!!!! I AM NOT RIGHT MAN !!!!!!!!!!!!!!!!!!!!&quot;</span><span class="p">,</span>
            <span class="n">message</span><span class="p">,</span>
            <span class="s2">&quot;!!!!!!!!!!!!!!!!!!!!   FOR FUCK&#39;S SAKE   !!!!!!!!!!!!!!!!!!!&quot;</span><span class="p">,</span>
