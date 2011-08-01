@@ -35,7 +35,8 @@ module Aji
   end
 
   def Aji.youtube_client
-    @youtube_client ||= YouTubeIt::Client.new
+    # Pass an empty hash to avoid deprecation warning.
+    @youtube_client ||= YouTubeIt::Client.new {}
   end
 
   # Set Rack environment if not specified.
@@ -57,6 +58,7 @@ module Aji
 
   # Establish ActiveRecord conneciton and run all necessary migrations.
   ActiveRecord::Base.establish_connection conf['DATABASE']
+  ActiveRecord::Base.default_timezone = :utc
 
   # An application specific error class.
   class Error < RuntimeError; end
