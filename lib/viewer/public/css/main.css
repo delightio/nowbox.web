@@ -40,7 +40,7 @@ ul.section { list-style: none; }
 #splash{ position: relative; height: 100%; width: 100%;}
 #launch{ 
 	top: 0px; bottom: 0px; left: 0px; right: 0px;
-	position: absolute;
+	position: fixed;
 	z-index: 9999;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -109,7 +109,7 @@ ul.section { list-style: none; }
 	#launchbox a, #launchbox a:active, #launchbox a:visited{ color: #EEE; }
 		#launchbox a:hover{ color: #FFF; text-decoration: underline; }
 		
-#invite-email{ padding: 10px; border: 1px solid transparent; font-size: 21px; color: #444; display: block; float: left; width: 250px; }
+#invite-email{ padding: 10px; border: 1px solid transparent; font-size: 21px; color: #666; display: block; float: left; width: 250px; }
 #invite-submit{ display: block; float: right;}
 	#invite-submit:hover{  }
 
@@ -125,7 +125,7 @@ ul.section { list-style: none; }
 #main_photo{ height: 500px; width: 100%;  margin: auto; overflow: hidden; }
 	#main_photo img{   }
 #tagline {  display:block; line-height: 40px; color: #FFF; text-align: left; font-weight: bold; position: absolute;  left: 50%;  bottom: 50px; width: 800px; margin-left: -400px; font: 100 50px "helvetica neue", helvetica, arial, sans-serif; text-shadow: 0px 1px 5px #000;}
-
+.taglinebox{ position: absolute; bottom: 0px; width: 100%; height: 200px; }
 
 				
 #video_tour{ margin: 20px auto 20px;}
@@ -136,11 +136,19 @@ ul.section { list-style: none; }
 
 /* HOME */
 
-#home_launch_form{ padding: 20px; margin: 0px auto; background: rgba(0, 0, 0, 0.1);}
-	#home_launch_form .box{ width: 450px; margin: auto;  }
+#home_launch_form{ padding: 20px; margin: 0px auto;
+  -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,1);
+     -moz-box-shadow: 0px 0px 5px rgba(0,0,0,1);
+      -ms-box-shadow: 0px 0px 5px rgba(0,0,0,1);
+       -o-box-shadow: 0px 0px 5px rgba(0,0,0,1);
+          box-shadow: 0px 0px 5px rgba(0,0,0,1);
+ }
+	#home_launch_form .box{ width: 550px; margin: auto;  }
 	#home_launch_form .social{ margin: 20px 0px 0px;}
-	#home_launch_form h2{  border-bottom-color: #1c2b3d;  color: #22354d; font: 200 20px "helvetica neue", helvetica, arial, sans-serif; border-bottom: 1px dotted;}
+	#home_launch_form h2{  border-bottom-color: #1c2b3d;  color: #22354d; font: 200 20px "helvetica neue", helvetica, arial, sans-serif; }
 	#home_launch_form p{ font-weight: normal; font-size: 14px; color: #AAA; line-height: 2; color: #758b99; margin-bottom: 10px;}	
+	#home_launch_form form { margin: 15px auto;}
+		#home_launch_form #invite-email{ width: 350px; }
 	
 /* ABOUT */
 
@@ -154,6 +162,10 @@ ul.section { list-style: none; }
 		#about .description{ font-size: 14px;}
 		#about .email{ color: #AAA; }
 
+#investors li{ display: inline; }
+	#investors li:after{ content: ", "; }
+	#investors li:last-child:after{ content: "";}
+	
 /* JOBS */
 #jobs li{ list-style-type: disc;
 margin-left: 20px;}
@@ -183,6 +195,8 @@ margin-left: 20px;}
 .brightblue-tile{ background: url(/images/graphics/aji-tiles-crosshatch-brightblue.jpg) repeat;  } 		
 .darkdarkblue-tile{ background: url(/images/graphics/aji-tiles-darkdarkblue.jpg) repeat;  } 		
 .black-tile{ background: url(/images/graphics/aji-tiles-black.jpg) repeat;  } 		
+
+.gradient{ background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.9)));       }
 
 /* CALL TO ACTIONS */
 #call_to_action_quote{ padding: 10px; background-color: #EFEFEF; background: rgba(0, 0, 0, 0.1); }

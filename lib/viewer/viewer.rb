@@ -32,10 +32,12 @@ module Aji
     end
 
     get '/download' do
-      erb :download
+    	@ref = params[:ref] || ""
+      erb :launch, {:layout => :layout_splash}
     end
 
     get '/launch' do
+    	@ref = params[:ref] || ""
       erb :launch, {:layout => :layout_splash}
     end
     
