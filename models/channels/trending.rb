@@ -50,6 +50,10 @@ module Aji
         save
       end
 
+      def thumbnail_uri
+        ""
+      end
+
       def self.singleton
         Trending.first || Trending.create!(:title => "Trending")
       end

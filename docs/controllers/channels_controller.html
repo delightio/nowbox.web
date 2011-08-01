@@ -133,7 +133,9 @@ channels if no parameters are specified.<br/>
         <span class="k">when</span> <span class="s1">&#39;twitter&#39;</span>
           <span class="n">a</span> <span class="o">=</span> <span class="no">ExternalAccounts</span><span class="o">::</span><span class="no">Twitter</span><span class="o">.</span><span class="n">find_or_create_by_username</span><span class="p">(</span>
             <span class="n">params</span><span class="o">[</span><span class="ss">:account</span><span class="o">]</span><span class="p">)</span>
-          <span class="no">Channels</span><span class="o">::</span><span class="no">TwitterAccount</span><span class="o">.</span><span class="n">find_or_create_by_account</span> <span class="n">a</span>
+          <span class="n">channel</span> <span class="o">=</span> <span class="no">Channels</span><span class="o">::</span><span class="no">TwitterAccount</span><span class="o">.</span><span class="n">find_or_create_by_account</span> <span class="n">a</span>
+          <span class="n">channel</span><span class="o">.</span><span class="n">populate</span>
+          <span class="n">channel</span>
 
         <span class="k">else</span></pre></div>
       </td>

@@ -9,6 +9,7 @@ development:
   DATABASE_URL: "postgres://localhost/aji_dev"
   MAX_RECENT_VIDEO_IDS_IN_TRENDING: 1000
   MAX_VIDEOS_IN_TRENDING: 100
+  TZ: "UTC"
 
 test:
   CONSUMER_KEY: ""
@@ -18,3 +19,4 @@ test:
   DATABASE_URL: "postgres://localhost/aji_test"
   MAX_RECENT_VIDEO_IDS_IN_TRENDING: 1000
   MAX_VIDEOS_IN_TRENDING: 100
+  TZ: "UTC"

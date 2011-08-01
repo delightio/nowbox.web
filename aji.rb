@@ -8,17 +8,23 @@ module Aji
   # Set the application root directory.
   def Aji.root; File.expand_path('..', __FILE__); end
 
-  # Simple logging interface for local development and heroku. May grow in
-  # complexity later, hence methodizing it.
+  # Logging interface for local development and heroku.
+  # There are four internal Log levels aliased to the standard SYSLOG levels.
+  # The INFO level is used if no level is specified. Other options are `:DEBUG`,
+  # for DEBUG and `:WARN`, `:FATAL`, `:ERROR` for ERROR as well as a `:WTF`
+  # option for Really Bad Things. downcased versions of these work as well.
+  # DEBUG logs are not logged in production environments so conditional logging
+  # should not be used.
   def Aji.log level=:INFO, message
     case level
     when :ERROR, :WARN, :FATAL, :error, :warn, :fatal
       $stderr.puts message
     when :DEBUG, :debug
+      return if RACK_ENV == 'production'
       $stdout.puts '----------DEBUG----------', message,
         '----------DEBUG----------'
     when :WTF, :wtf
-      puts "!!!!!!!!!!!!!!!!!!!! LOOOK AT ME DAMMIT !!!!!!!!!!!!!!!!!!!!",
+      $stderr.puts "!!!!!!!!!!!!!!!!!!!! LOOOK AT ME DAMMIT !!!!!!!!!!!!!!!!!!!!",
            "!!!!!!!!!!!!!!!!!!!! I AM NOT RIGHT MAN !!!!!!!!!!!!!!!!!!!!",
            message,
            "!!!!!!!!!!!!!!!!!!!!   FOR FUCK'S SAKE   !!!!!!!!!!!!!!!!!!!",
@@ -26,6 +32,11 @@ module Aji
     else
       $stdout.puts message
     end
+  end
+
+  def Aji.youtube_client
+    # Pass an empty hash to avoid deprecation warning.
+    @youtube_client ||= YouTubeIt::Client.new {}
   end
 
   # Set Rack environment if not specified.
@@ -47,6 +58,7 @@ module Aji
 
   # Establish ActiveRecord conneciton and run all necessary migrations.
   ActiveRecord::Base.establish_connection conf['DATABASE']
+  ActiveRecord::Base.default_timezone = :utc
 
   # An application specific error class.
   class Error < RuntimeError; end

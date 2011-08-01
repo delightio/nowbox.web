@@ -28,6 +28,8 @@ describe Aji::Link do
   end
 
   it "can tell videos apart from other links" do
+    Aji::Link.new("http://www.youtube.com/watch?v=-iAUwamHTM4&feature=youtu.be").
+      should be_video
     Aji::Link.new("http://vimeo.com/4937580").should be_video
   end
 

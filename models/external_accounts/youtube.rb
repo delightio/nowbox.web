@@ -25,7 +25,7 @@ module Aji
         populating_lock.lock do
           return if recently_populated? && args[:must_populate].nil?
           if content_video_ids.count == 0 || args[:must_populate]
-            yt_videos = YouTubeIt::Client.new.videos_by(
+            yt_videos = Aji.youtube_client.videos_by(
                           :user => "#{uid}",
                           :order_by => 'published').videos#TODO paging
             yt_videos.each do |v|
@@ -37,9 +37,9 @@ module Aji
           self.populated_at = Time.now
           save
         end
-        Aji.log :INFO, "ExternalAccounts::Youtube[#{id}, '#{self.username}' ]#populate #{args.inspect} took #{Time.now-start} s."
+        Aji.log :INFO,
+          "ExternalAccounts::Youtube[#{id}, '#{username}' ]#populate #{args.inspect} took #{Time.now-start} s."
       end
-      
     end
   end
 end

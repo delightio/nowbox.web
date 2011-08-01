@@ -10,7 +10,7 @@ Feature: Twitter account based Channels
     And the title should be "@nowmov's Tweeted Videos"
 
   Scenario: Viewing a twitter channel's videos
-    Given the channel with id 5 is @nowmov's twitter channel
+    Given a Twitter channel associated with @nowmov's twitter account
     And @nowmov has tweeted videos recently
     When I get the channels videos
     Then I should see a list of recently tweeted videos
