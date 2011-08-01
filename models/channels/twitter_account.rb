@@ -5,8 +5,7 @@ module Aji
       before_create :set_default_title
       #after_create :populate
 
-      TWITTER_API_URL =
-        "http://api.twitter.com/1/statuses/user_timeline.json?count=200&include_entities=true"
+      USER_TIMELINE_URL = "http://api.twitter.com/1/statuses/user_timeline.json"
 
       def thumbnail_uri
         ""
@@ -15,22 +14,24 @@ module Aji
       # HACK: This is long, complex, blocking, and tightly coupled. A good
       # candidate for refactoring later.
       def populate
-        resp = HTTParty.get(
-          TWITTER_API_URL + "&screen_name=#{account.username}")
-          tweets = resp.parsed_response
-          mentions = tweets.map { |tweet| Parsers::Tweet.parse tweet }
-          mentions.map(&:save)
-          mentions.each_with_index do |m, i|
-            m.links.each do |link|
-              next unless link.video?
-              push Video.find_or_create_by_source_and_external_id(
-                link.type, link.external_id)
-            end
+        tweets = HTTParty.get(USER_TIMELINE_URL, :query => { :count => 200,
+            :screen_name => account.username, :include_entities => true },
+            :parser => Proc.new{|body| MultiJson.decode body}).parsed_response
+        mentions = tweets.map { |tweet| Parsers::Tweet.parse tweet }
+        mentions.map(&:save)
+        mentions.each do |m|
+          m.links.each do |link|
+            next unless link.video?
+            video = Video.find_or_create_by_source_and_external_id(link.type,
+              link.external_id)
+            puts video.inspect
+            push video
           end
+        end
 
-          # Since we want to use the videos right away we will autopopulate them.
-          content_videos.map(&:populate)
-          update_attribute :populated_at, Time.now
+        # Since we want to use the videos right away we will autopopulate them.
+        content_videos.map(&:populate)
+        update_attribute :populated_at, Time.now
       end
 
       # Class methods below
