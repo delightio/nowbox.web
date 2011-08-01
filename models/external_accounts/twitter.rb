@@ -15,7 +15,8 @@ module Aji
 
       def profile_uri; "http://twitter.com/#{username}"; end
 
-      def thumbnail_uri; profile_uri; end
+      # TODO: LH 205
+      def thumbnail_uri; "http://api.twitter.com/1/users/profile_image/#{uid}.json"; end
 
       def publish share
         ::Twitter.configure do |c|

@@ -7,9 +7,7 @@ module Aji
       TWITTER_API_URL =
         "http://api.twitter.com/1/statuses/user_timeline.json?count=200&include_entities=true"
 
-      def thumbnail_uri
-        ""
-      end
+      def thumbnail_uri; account.thumbnail_uri; end
 
       # HACK: This is long, complex, blocking, and tightly coupled. A good
       # candidate for refactoring later.
