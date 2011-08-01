@@ -1,1 +1,3 @@
--c -fd
+--color
+--format progress
+--fail-fast

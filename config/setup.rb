@@ -5,6 +5,11 @@ else
   Aji.conf.merge!(ENV)
 end
 
+integral_convars = %w{MAX_RECENT_VIDEO_IDS_IN_TRENDING MAX_VIDEOS_IN_TRENDIN}
+integral_convars.each do |convar|
+  Aji.conf[convar] = Aji.conf[convar].to_i
+end
+
 db = URI Aji.conf['DATABASE_URL']
 redis = URI Aji.conf['REDISTOGO_URL']
 

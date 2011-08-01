@@ -29,9 +29,6 @@ gem 'youtube_it'
 gem 'erubis'
 gem 'yajl-ruby'
 gem 'twitter'
-# Gem dependencies for read_stream.rb
-gem 'em-http-request'
-gem 'twitter_oauth'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
@@ -42,6 +39,8 @@ gem 'twitter_oauth'
 
 # Testing gems.
 group :test do
+#  gem 'fakeweb'
+#  gem 'vcr'
   gem 'rack-test', :require => 'rack/test'
   gem 'rspec'
   gem 'cucumber'

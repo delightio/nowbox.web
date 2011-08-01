@@ -26,7 +26,7 @@ describe Aji::Video do
 
   describe ".find_or_create_from_youtubeit_video" do
     it "should mark the video populated" do
-      yt_video = YouTubeIt::Client.new.video_by 'OzVPDiy4P9I'
+      yt_video = Aji.youtube_client.video_by 'OzVPDiy4P9I'
       video = Aji::Video.find_or_create_from_youtubeit_video yt_video
       Aji::Video.find(video.id).should be_populated
       Aji::Video.find(video.id).title.should_not be_nil
