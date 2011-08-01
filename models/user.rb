@@ -15,8 +15,8 @@ module Aji
     validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
     after_create :subscribe_default_channels
 
+    belongs_to :identity
     has_many :events
-    has_many :external_accounts
 
     include Redis::Objects
     sorted_set :shared_zset
