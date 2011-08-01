@@ -1,6 +1,7 @@
 require 'sinatra/base'
 
 module Aji
+
   class Viewer < Sinatra::Base
     # Use Erubis for template generation. Essentially a faster ERB.
     Tilt.register :erb, Tilt[:erubis]
@@ -11,12 +12,12 @@ module Aji
 
     get '/' do
     	@ref = params[:ref] || ""
-      erb :launch, {:layout => :layout_splash}
+      erb :home # , {:layout => :layout_splash}
     end
 
-    get '/home' do
-      erb :home
-    end
+#     get '/home' do
+#       erb :home
+#     end
     
     get '/about' do
       erb :about
@@ -40,7 +41,11 @@ module Aji
     
     get '/:share_id' do
       #@share = Share.find params[:share_id]
-      erb :video
+      if(params[:mobile] == 'true')
+      	erb :mobile_video, {:layout => :layout_mobile}
+      else
+	      erb :video, {:layout => :layout_video}
+	    end
     end
   end
 end

@@ -1,22 +1,33 @@
-<div id="video">	
-	<div id="sharer" class="round-corners-5">
+<div id="video">
+	<div class="wrapper" style="padding-top: 0px;">
+		<%= erb :_call_to_action_download %>
+	</div>	
+
+
+  <div id="embed">
+		<iframe width="800" height="400" src="http://www.youtube.com/embed/lebW9zBtYnM?rel=0&hd=1&modestbranding=1&autohide=1&showinfo=0&fs=1" frameborder="0" allowfullscreen></iframe>
+  </div>
+ 
+	<div id="sharer" class="round-corners-5 wrapper">
 		<div class="image">
 			<a href="http://twitter.com/nowmov" target="_blank"><img src="./images/graphics/no_profile_r2d2.jpg" height="48px" /></a>
 		</div>
 		<div class="blurb">
-			<p style="font-size: 16px; color: #777;"><b>Your friend</b> shared this video with you</p>
-			<p style="font-size: 12px; color: #999;">Your friend is using the <a href="./download">Nowmov iPad app</a> to watch the best videos from the web. <a href="./tour">Find out more.</a></p>
+			<p style="font-size: 16px; color: #EEE;"><span id="video_title">This is the video title</span></p>
+			<p style="font-size: 12px; color: #AAA;"><b>Your friend</b> shared this video with you</p>
 		</div>
 		<div id="share_buttons">
-			
+			<div class="fblike">
+				<iframe src="http://www.facebook.com/plugins/like.php?app_id=196334653750817&amp;href=http%3A%2F%2Fnowmov.com/<%= params[:share_id]%>&amp;send=false&amp;layout=box_count&amp;width=90&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:60px; height:70px;" allowTransparency="true"></iframe>				
+			</div>
+			<div class="plusone" style="width: 60px; height: 70px;">
+				<g:plusone size="tall" href="http://nowmov.com/<%= params[:share_id] %>"></g:plusone>
+			</div>
+			<div class="tweet">
+				<iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url=http://nowmov.com/<%= params[:share_id] %>&count=vertical&via=nowmov&related=fahdoo:Nowmov UX Engineer&text=<%= "Watch this video now!" %>" style="width:60px; height:70px;"></iframe>
+			</div>
 		</div>
 		<div class="clearfix"></div>
-	</div>
-
-  <div id="embed">
-		<iframe width="860" height="400" src="http://www.youtube.com/embed/lebW9zBtYnM?rel=0&hd=1&modestbranding=1&autohide=1&showinfo=0&fs=1" frameborder="0" allowfullscreen></iframe>
-  </div>
-
-	<%= erb :_call_to_action_download %>
+	</div>		
 
 </div>
