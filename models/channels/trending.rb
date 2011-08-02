@@ -51,7 +51,7 @@ module Aji
       end
 
       def thumbnail_uri
-        ""
+        "http://beta.#{Aji.conf['TLD']}/images/icons/icon-set_nowtrending.png"
       end
 
       def self.singleton
