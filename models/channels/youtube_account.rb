@@ -54,8 +54,7 @@ module Aji
         found = self.find_all_by_accounts accounts
         return found.first if !found.empty?
 
-        populate_if_new = args[:populate_if_new]
-        args.delete :populate_if_new
+        populate_if_new = args.delete :populate_if_new
         args.merge! :accounts => accounts
         channel = self.create args
         channel.populate if populate_if_new
