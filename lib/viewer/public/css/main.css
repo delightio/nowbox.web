@@ -1,5 +1,5 @@
 body { background: url(/images/graphics/aji-tiles-crosshatch-white.jpg) repeat; color: #090909; }
-body#video_layout { background: url(/images/graphics/aji-tiles-darkdarkblue.jpg) repeat; color: #090909; }
+body#video_layout { background: url(/images/graphics/aji-tiles-darkgray.jpg) repeat; color: #090909; }
 
 header { position: relative; padding: 25px 0px 25px; line-height: 30px; text-align: left;  font-size: 14px; z-index: 10;}
 	header > .wrapper { padding: 0px; }
@@ -178,7 +178,7 @@ margin-left: 20px;}
 		#tour .intro p{ font-size: 16px; line-height: 2; text-shadow: 0px 1px 1px #FFF; }
 		
 /* VIDEO */
-#video #embed {  height: 400px; margin: 0px 0px; padding: 0px; text-align: center; background-color: #EEE; background: rgba(0, 0, 0, 0.3);}
+#video #embed {  height: 400px; margin: 0px 0px; padding: 0px; text-align: center; background-color: #EEE; background: rgba(0, 0, 0, 0.5);}
 	#video #embed iframe{ margin: auto; }
 	
 	#share_buttons{ float: right; height: 70px; }
