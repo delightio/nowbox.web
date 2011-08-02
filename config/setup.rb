@@ -5,9 +5,11 @@ else
   Aji.conf.merge!(ENV)
 end
 
-integral_convars = %w{MAX_RECENT_VIDEO_IDS_IN_TRENDING MAX_VIDEOS_IN_TRENDIN}
-integral_convars.each do |convar|
-  Aji.conf[convar] = Aji.conf[convar].to_i
+# Convert integral config values to integers if they aren't already.
+Aji.conf.dup.each do |convar, value|
+  if value.respond_to?(:to_i) && value.to_i.to_s == value
+    Aji.conf[convar] = value.to_i
+  end
 end
 
 db = URI Aji.conf['DATABASE_URL']
