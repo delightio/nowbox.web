@@ -11,6 +11,7 @@ module Aji
         # expansion will be necessary in many cases (fskcing overzealos t.co use by
         # Twitter)
         def self.perform source, data
+          start = Time.now
           # Parse incoming data from various sources.
           case source
           when 'twitter'
@@ -21,6 +22,7 @@ module Aji
           if mention.has_links? and !mention.author.blacklisted?
             Resque.enqueue Queues::Mention::Process, mention
           end
+          Aji.log "Finished processing #{mention.inspect} in #{Time.now - start} seconds."
         end
       end
     end
