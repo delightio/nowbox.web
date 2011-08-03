@@ -8,13 +8,17 @@ module Aji
         def self.perform source, data
           start = Time.now
           mention = self.parse source, data
+          Aji.log "TIMING:parse:#{Time.now - start} seconds"
 
           # TODO: Refactor into Mention#{unsuitable,unfit,invalid}
+          start = Time.now
           if mention.nil? || mention.author.blacklisted? || !mention.has_links?
             Aji.log "Mention #{mention.inspect} was not suitable for proccessing."
             return
           end
+          Aji.log "TIMING:blacklist_check:#{Time.now - start} seconds"
 
+          start = Time.now
           mention.links.each do |link|
             # TODO: Update to include all valid link types.
             next unless link.video? && link.type == 'youtube'
@@ -30,7 +34,7 @@ module Aji
                 "Couldn't save #{mention.inspect} for #{mention.errors.inspect}")
                 Aji::Channel.trending.push_recent video
           end
-          Aji.log "Processing Mention#{mention.id} took #{Time.now - start} seconds."
+          Aji.log "TIMING:link_processing:#{Time.now - start} seconds"
         end
 
         # Handles incoming parse requests from various social feeds. If the mention
