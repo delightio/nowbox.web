@@ -17,9 +17,9 @@ end
 
 namespace :resque do
   task :setup => :environment do
-#    Resque.after_fork do |job|
-#      ActiveRecord::Base.establish_connection Aji.conf['DATABASE']
-#    end
+    Resque.after_fork do |job|
+      ActiveRecord::Base.establish_connection Aji.conf['DATABASE']
+    end
 
     # If your schedule already has +queue+ set for each job, you don't
     # need to require your jobs.  This can be an advantage since it's
