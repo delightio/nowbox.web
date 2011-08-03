@@ -8,7 +8,6 @@ module Aji
         def self.perform source, data
           start = Time.now
           mention = self.parse source, data
-          Aji.log "TIMING:parse:#{Time.now - start} seconds"
 
           # TODO: Refactor into Mention#{unsuitable,unfit,invalid}
           start = Time.now
@@ -16,7 +15,6 @@ module Aji
             Aji.log "Mention #{mention.inspect} was not suitable for proccessing."
             return
           end
-          Aji.log "TIMING:blacklist_check:#{Time.now - start} seconds"
 
           start = Time.now
           mention.links.each do |link|
@@ -34,7 +32,6 @@ module Aji
                 "Couldn't save #{mention.inspect} for #{mention.errors.inspect}")
                 Aji::Channel.trending.push_recent video
           end
-          Aji.log "TIMING:link_processing:#{Time.now - start} seconds"
         end
 
         # Handles incoming parse requests from various social feeds. If the mention
@@ -43,16 +40,16 @@ module Aji
         # expansion will be necessary in many cases (fskcing overzealos t.co use by
         # Twitter)
         def self.parse source, data
-          start = Time.now
           case source
           when 'twitter'
+            start = Time.now
             mention = Parsers::Tweet.parse data
+            Aji.log "TIMING:total_parse: #{Time.now - start} s."
+            mention
           else
             Aji.log :WARN, "Attempt to process #{data} from #{source}. Unknown"
             # TODO: Add benign return value here.
           end
-          Aji.log "Parse of #{mention.inspect} took #{Time.now - start} seconds." if false
-          mention
         end
       end
     end
