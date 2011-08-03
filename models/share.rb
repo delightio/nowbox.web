@@ -8,7 +8,7 @@ module Aji
     belongs_to :user
     belongs_to :video
     has_many :external_accounts
-    after_create :queue_publishing
+    #after_create :queue_publishing
 
     attr_accessor :publish_to
 
@@ -17,7 +17,7 @@ module Aji
     end
 
     def queue_publishing
-      unless publish_to.ni? || publish_to.empty?
+      unless publish_to.nil? || publish_to.empty?
         pub_accounts = user.external_accounts.find_all do |acc|
           publish_to.include? acc.provider
         end

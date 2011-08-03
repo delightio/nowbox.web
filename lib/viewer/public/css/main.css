@@ -182,13 +182,22 @@ margin-left: 20px;}
 	#video #embed iframe{ margin: auto; }
 	
 	#share_buttons{ float: right; height: 70px; }
+
+	#video_info{ float: left; display: block; text-shadow: 0px 1px 1px #000; width: 520px; text-overflow: ellipsis; overflow: hidden;  line-height:  25px;}
+		#video_info .title{ font-size: 16px; color: #EEE; }
+		#video_info .description { font-size: 12px; color: #AAA; line-height:  20px; text-shadow: 0px 1px 1px #222;}
+
 	
 /* SHARER */
-#sharer{  }
+#sharer{ text-align: center; padding-top: 0px; }
 	#sharer .image{ float: left; display: block; margin-right: 10px; height: 48px; }
 	#sharer .blurb{ float: left; display: block; line-height:  25px; text-shadow: 0px 1px 1px #000; width: 520px; text-overflow: ellipsis; overflow: hidden;}
 	#sharer a.download.button{ float: right; display: block; padding: 0px 20px; line-height: 40px; border: 5px solid #EFEFEF; background-color: #66CCFF; color: #F9F9F9; font-size: 18px; font-weight: bold;}
 		#sharer a.download.button:hover{ border-color: #FFF;}
+
+	#sharer .message{ font-size: 16px; font-style: italic; font-family: Georgia, "Times New Roman", Times, serif; color: #AAA; }
+	#sharer .message_sharer { color: #777; }
+	#sharer .quotes{ font-size: 24px; color: #555;}
 		
 /* EFFECTS */
 .divider{ height: 10px; width: 100%; margin:auto; }
@@ -213,6 +222,7 @@ margin-left: 20px;}
 	.call_to_action_download a.download.button{ float: right; display: block; padding: 0px 20px; line-height: 40px; border: 5px solid #0e141a; background-color: #5bb8ea; background: url(/images/graphics/aji-tiles-crosshatch-brightblue.jpg) repeat; color: #F9F9F9; font-size: 18px; font-weight: bold;}
 		.call_to_action_download a.download.button:hover{  background-color: #66CCFF; border-color: #FFF;}
 
+	.social_sharer{ font-weight: bold; color: #FFF; }
 /* USER QUOTES */
 .user_quote{ padding: 10px; margin-bottom: 10px; }
 	.user_quote:last-child{ margin-bottom: 0px;}

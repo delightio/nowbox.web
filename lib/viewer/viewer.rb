@@ -42,7 +42,10 @@ module Aji
     end
     
     get '/:share_id' do
-      #@share = Share.find params[:share_id]
+      @share = Share.find params[:share_id]
+      @user = @share.user
+      @video = @share.video
+      
       if(params[:mobile] == 'true')
       	erb :mobile_video, {:layout => :layout_mobile}
       else
