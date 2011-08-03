@@ -17,7 +17,7 @@ module Aji
     end
 
     def queue_publishing
-      unless publish_to.empty?
+      unless publish_to.ni? || publish_to.empty?
         pub_accounts = user.external_accounts.find_all do |acc|
           publish_to.include? acc.provider
         end
