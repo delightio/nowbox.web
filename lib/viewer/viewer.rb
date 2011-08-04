@@ -46,6 +46,8 @@ module Aji
       @user = @share.user
       @video = @share.video
       
+      @user_shares = Share.where("user_id = ? AND id <> ?", @user.id, @share.id).limit(18)
+      
       if(params[:mobile] == 'true')
       	erb :mobile_video, {:layout => :layout_mobile}
       else

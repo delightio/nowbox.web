@@ -186,8 +186,37 @@ margin-left: 20px;}
 	#video_info{ float: left; display: block; text-shadow: 0px 1px 1px #000; width: 520px; text-overflow: ellipsis; overflow: hidden;  line-height:  25px;}
 		#video_info .title{ font-size: 16px; color: #EEE; }
 		#video_info .description { font-size: 12px; color: #AAA; line-height:  20px; text-shadow: 0px 1px 1px #222;}
+			#video_info .description a{ color: #666; font-style: italic;}
+			#video_info .description a:hover{ color: #0099CC; }
+	ul#user_videos { list-style: none;}
+		ul#user_videos li { float: left; display: block; width: 250px; height: 195px; margin: 8px; }
+			ul#user_videos li .image{ height: 125px; overflow: hidden; position: relative;}
+				ul#user_videos li img{ width: 100%; margin-top: -25px; 
+															-webkit-transition: all 1s ease-in-out;
+														  -moz-transition: all 1s ease-in-out;
+														  -o-transition: all 1s ease-in-out;
 
+														 }
+					ul#user_videos li:hover img{ 
+														  				 -webkit-transform: scale(1.2);
+																				-moz-transform: scale(2);
+																				-o-transform: scale(2);
+																		 }
+				ul#user_videos li .viewcount{ position: absolute; top: 10px; right: 10px; padding: 5px; background-color: #000; background: rgba(0, 0, 0, 0.5); color: #EEE; text-shadow: 0px 1px 1px #000; font-size: 10px; }
+			ul#user_videos li a{ display: block; padding: 10px; background: rgba(0, 0, 0, 0.1); }
+/*
+				ul#user_videos li a:hover{ background: rgba(0, 0, 0, 0.15);
+				  -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+				     -moz-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+				      -ms-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+				       -o-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+				          box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+ 				 }
+*/
+			ul#user_videos li a .title{ overflow: hidden; text-overflow: ellipsis; line-height: 20px; color: #777; text-shadow: 0px 1px 1px #222; width: 100%; height: 40px; margin-top: 10px; }
+				ul#user_videos li a:hover .title{ color: #AAA; }
 	
+	#video h2{ text-transform: uppercase; color: #AAA; border-top: 1px dotted #777; font-weight: normal; text-shadow: 0px 1px 1px #000; }	
 /* SHARER */
 #sharer{ text-align: center; padding-top: 0px; }
 	#sharer .image{ float: left; display: block; margin-right: 10px; height: 48px; }
@@ -207,6 +236,16 @@ margin-left: 20px;}
 
 .gradient{ background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.9)));       }
 
+.inset_shadow{ position: absolute; z-index: 10; left: 0; top: 0; bottom: 0; right: 0; border: 1px solid #AAA;
+				  -webkit-box-shadow: inset 0px 0px 5px rgba(0,0,0,1);
+				     -moz-box-shadow: inset 0px 0px 5px rgba(0,0,0,1);
+				      -ms-box-shadow: inset 0px 0px 5px rgba(0,0,0,1);
+				       -o-box-shadow: inset 0px 0px 5px rgba(0,0,0,1);
+				          box-shadow: inset 0px 0px 5px rgba(0,0,0,1);
+}
+
+a:hover .inset_shadow{  border: 1px solid #EEE; box-shadow: none;}
+
 /* CALL TO ACTIONS */
 #call_to_action_quote{ padding: 10px; background-color: #EFEFEF; background: rgba(0, 0, 0, 0.1); }
 	#call_to_action_quote .quoter_image{ float: left; display: block; margin-right: 10px; height: 48px; }
@@ -219,7 +258,7 @@ margin-left: 20px;}
 .call_to_action_download{ padding: 10px; background-color: #EFEFEF; box-shadow: inset 0px 0px 5px #000;}
 	.call_to_action_download .image{ float: left; display: block; margin-right: 10px; height: 48px; }
 	.call_to_action_download .blurb{ float: left; display: block; line-height:  25px; color: #333; text-shadow: 0px 1px 1px #222; }
-	.call_to_action_download a.download.button{ float: right; display: block; padding: 0px 20px; line-height: 40px; border: 5px solid #0e141a; background-color: #5bb8ea; background: url(/images/graphics/aji-tiles-crosshatch-brightblue.jpg) repeat; color: #F9F9F9; font-size: 18px; font-weight: bold;}
+	.call_to_action_download a.download.button{ float: right; display: block; padding: 0px 20px; line-height: 40px; border: 5px solid transparent; background-color: #5bb8ea; background: url(/images/graphics/aji-tiles-crosshatch-brightblue.jpg) repeat; color: #F9F9F9; font-size: 18px; font-weight: bold;}
 		.call_to_action_download a.download.button:hover{  background-color: #66CCFF; border-color: #FFF;}
 
 	.social_sharer{ font-weight: bold; color: #FFF; }

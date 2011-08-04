@@ -21,7 +21,7 @@
 	<div id="info" class="wrapper">
 		<div id="video_info">
 			<div class="title"><%= @video.title %></div>
-			<div class="description"><%= @video.description %></div>		
+			<div class="description truncateme"><%= @video.description %></div>		
 		</div>
 		<div id="share_buttons">
 			<div class="fblike">
@@ -36,5 +36,23 @@
 		</div>
 		<div class="clearfix"></div>
 	</div>
-		
+
+	<% if @user_shares.count > 0 %>
+	<ul id="user_videos" class="wrapper">
+		<h2>Suggested videos</h2>
+		<% @user_shares.each do |user_share| %>
+			<li>
+				<a href="/<%= user_share.id %>">
+					<div class="image">
+						<div class="inset_shadow"></div>
+						<img src="<%= user_share.video.thumbnail_uri %>" />
+						<div class="viewcount round-corners-3"><%= user_share.video.view_count %> views</div>
+					</div>
+					<div class="title"><%= user_share.video.title %></div>
+				</a>
+			</li>
+		<% end %>
+		<div class="clearfix"></div>
+	</ul>		
+	<% end %>
 </div>
