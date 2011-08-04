@@ -7,7 +7,10 @@ module Aji
 
         def self.perform source, data
           start = Time.now
-          mention = self.parse source, data
+          # Short circuit parser to return nil if the tweet has no urls.
+          mention = self.parse source, data do |tweet_hash|
+            !tweet_hash['entities']['urls'].empty?
+          end
 
           # TODO: Refactor into Mention#{unsuitable,unfit,invalid}
           start = Time.now
