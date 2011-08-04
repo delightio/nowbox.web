@@ -2,6 +2,15 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 describe Aji::Video do
 
+  it "only allows unique video object to be created" do
+    src = random_video_source
+    eid = random_string
+    v1 = Aji::Video.create :external_id => eid, :source => src
+    v1.save.should be_true
+    v2 = Aji::Video.find_or_create_by_external_id_and_source(eid, src)
+    v2.id.should == v1.id
+  end
+
   describe "#thumbnail_uri" do
     it "should always have a uri if source is youtube" do
       video = Factory :video, :source=>:youtube

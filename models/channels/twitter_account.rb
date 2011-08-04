@@ -18,8 +18,8 @@ module Aji
         mentions.each do |m|
           m.links.each do |link|
             next unless link.video?
-            video = Video.find_or_create_by_source_and_external_id(link.type,
-              link.external_id)
+            video = Video.find_or_create_by_external_id_and_source(
+              link.external_id, link.type)
             puts video.inspect
             push video
           end
