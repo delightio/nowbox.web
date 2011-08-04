@@ -24,7 +24,7 @@ module Aji
         end
         Aji.log :INFO, "Channels::YoutubeAccount[#{id}, '#{title}', #{accounts.count} accounts]#populate #{args.inspect} took #{Time.now-start} s."
       end
-      
+
       def content_video_ids limit=-1
         if Aji.redis.ttl(content_zset.key)==-1
           keys = accounts.map{|a| a.content_zset.key}
@@ -39,7 +39,7 @@ module Aji
         # accounts.sort_by(&:populated_at).last.thumbnail_uri
         accounts.first.thumbnail_uri
       end
-      
+
       def self.find_all_by_accounts accounts
         accounts_channels = accounts.map{ |a| a.channels }
         # Perform an intersection on all the channels from given accounts
@@ -47,21 +47,20 @@ module Aji
         matching_channels = accounts_channels.inject(&:&)
         matching_channels.find_all { |c| c.accounts.length == accounts.length }
       end
-      
+
       def self.find_or_create_by_usernames usernames, args={}
         accounts = usernames.map { |n| 
           ExternalAccounts::Youtube.find_or_create_by_uid :uid => n }
         found = self.find_all_by_accounts accounts
         return found.first if !found.empty?
-        
-        populate_if_new = args[:populate_if_new]
-        args.delete :populate_if_new
+
+        populate_if_new = args.delete :populate_if_new
         args.merge! :accounts => accounts
         channel = self.create args
         channel.populate if populate_if_new
         channel
       end
-      
+
     end
   end
 end

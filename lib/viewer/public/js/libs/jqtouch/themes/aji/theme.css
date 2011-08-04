@@ -374,6 +374,12 @@ body {
     -webkit-box-shadow: rgba(0,0,0,.2) 1px 1px 3px;
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E9E9E9), to(#E0E0E0));
 }
+
+#jqt ul.individual li.blue{
+    background-color: #97bdd7;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b6e2ff), to(#97bdd7));
+}
+
 #jqt ul.individual li + li {
     float: right;
 }

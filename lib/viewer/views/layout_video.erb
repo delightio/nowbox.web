@@ -5,18 +5,19 @@
 <!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 <head>
+		<title>nowmov | <%= @video.title %></title>
 		<%= erb :_layout_head %>
 		<meta name="viewport" content="width=device-width, initial-scale=0.375">		
 		
-	  <meta property="title" content="<%= "title" %>" />
-	  <meta property="description" content="<%= "description" %>" />
-	  <link rel="image_src" href="http://img.youtube.com/vi/<%= "ag9fAN3YfyI" %>/0.jpg" />
+	  <meta property="title" content="<%= @video.title %>" />
+	  <meta property="description" content="<%= @video.description %>" />
+	  <link rel="image_src" href="<%=  @video.thumbnail_uri %>" />
 	  
 	  <meta property="og:url" content="http://nowmov.com/<%= params[:share_id] %>" />
-	  <meta property="og:title" content="<%= "title" %>" />
+	  <meta property="og:title" content="<%= @video.title %>" />
 		<meta property="og:type" content="article" />
-	  <meta property="og:description" content="<%= "description" %>" />
-	  <meta property="og:image" content="http://img.youtube.com/vi/<%= "ag9fAN3YfyI" %>/0.jpg" />
+	  <meta property="og:description" content="<%= @video.description %>" />
+	  <meta property="og:image" content="<%= @video.thumbnail_uri %>" />
 	  
 	  <meta name="medium" content="video" />		
 		
@@ -28,7 +29,9 @@
 	<div id="video_page" role="main">
 		<%= yield %>
 	</div>
-
+	<footer>
+		<%= erb :_footer %>
+	</footer>
 	<%= erb :_layout_scripts %>	
 </body>
 </html>

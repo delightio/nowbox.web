@@ -40,7 +40,7 @@ module Aji
     def populate_from_youtube
       v = Aji.youtube_client.video_by external_id
       self.author = ExternalAccounts::Youtube.find_or_create_by_uid(
-        v.author.name)
+        v.author.name, :username => v.author.name)
       self.title = v.title
       self.description = v.description
       self.viewable_mobile = v.noembed
