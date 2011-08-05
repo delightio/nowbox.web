@@ -41,18 +41,26 @@ module Aji
       erb :launch, {:layout => :layout_splash}
     end
     
-    get '/:share_id' do
-      @share = Share.find params[:share_id]
-      @user = @share.user
-      @video = @share.video
-      
-      @user_shares = Share.where("user_id = ? AND id <> ?", @user.id, @share.id).limit(18)
-      
-      if(params[:mobile] == 'true')
-      	erb :mobile_video, {:layout => :layout_mobile}
-      else
-	      erb :video, {:layout => :layout_video}
-	    end
+    ['/random', '/:share_id'].each do |path|
+    	get path do
+	     	if(path != '/random')
+	      	@share = Share.find params[:share_id]
+	      else
+	      	@share =  Share.offset(rand(Share.count)).first
+	      end
+	      
+	      @user = @share.user
+	      @video = @share.video
+	
+	      
+	      @user_shares = Share.where("user_id = ? AND id <> ?", @user.id, @share.id).limit(18)
+	      
+	      if(params[:mobile] == 'true')
+	      	erb :mobile_video, {:layout => :layout_mobile}
+	      else
+		      erb :video, {:layout => :layout_video}
+		    end   	
+    	end
     end
   end
 end
