@@ -82,7 +82,7 @@ Dir.glob("models/channels/*.rb").each { |r| require_relative r }
 Dir.glob("models/external_accounts/*.rb").each { |r| require_relative r }
 
 # Run migrations after models are loaded.
-ActiveRecord::Migrator.migrate("db/migrate/")
+# ActiveRecord::Migrator.migrate("db/migrate/")
 
 Dir.glob("helpers/*.rb").each { |r| require_relative r }
 Dir.glob("controllers/*_controller.rb").each { |r| require_relative r }
