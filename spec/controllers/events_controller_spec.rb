@@ -7,7 +7,7 @@ module Aji
   describe API do
     describe "resource: #{resource}" do
 
-      describe "post #{resource}/" do
+      describe "post #{resource_uri}/" do
         it "should create event object on post" do
           user = Factory :user
           channel = Factory :youtube_channel_with_videos
