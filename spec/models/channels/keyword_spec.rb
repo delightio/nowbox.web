@@ -12,7 +12,7 @@ describe Aji::Channels::Keyword do
       Aji::Channel.find(uke.id).should be_populated
     end
   end
-  
+
   it "should set title based on keywords if no title is given" do
     keywords = %w[ukulele nowmov]
     ch = Aji::Channels::Keyword.create :keywords => keywords

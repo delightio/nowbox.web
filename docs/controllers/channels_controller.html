@@ -45,7 +45,7 @@
  <code>category</code>:&ldquo;undefined&rdquo;,
  <code>title</code>:&ldquo;Trending&rdquo;,
  <code>thumbnail_uri</code>:&ldquo;http://img.youtube.com/vi/cRBcP6MmE8g/0.jpg&rdquo;,
- <code>resource_uri</code>:&ldquo;"http://api.nowmov.com/1/channels/1&rdquo;&ldquo;}</p>
+ <code>resource_uri</code>:&ldquo;&quot;http://api.nowmov.com/1/channels/1&rdquo;&ldquo;}</p>
       </td>
       <td class=code>
         <div class='highlight'><pre><span class="k">module</span> <span class="nn">Aji</span>
@@ -74,7 +74,7 @@
 <p><strong>Returns</strong> the channel with the specified id and HTTP Status Code 200
 or 404</p>
 
-<p><strong>Required params</strong> <code>channel_id</code> unique id of the channel<br/>
+<p><strong>Required params</strong> <code>channel_id</code> unique id of the channel<br>
 <strong>Optional params</strong> none</p>
       </td>
       <td class=code>
@@ -91,8 +91,8 @@ or 404</p>
         <h2>GET channels/</h2>
 
 <p><strong>Returns</strong> a list of channels matching the request parameters or all
-channels if no parameters are specified.<br/>
-<strong>Required params</strong> none<br/>
+channels if no parameters are specified.<br>
+<strong>Required params</strong> none<br>
 <strong>Optional params</strong>
 &ndash; <code>type</code>: The type of channel, can be <code>keyword</code>, <code>youtube</code>, <code>trending</code>,
   <code>default</code>, or <code>twitter</code>
@@ -166,9 +166,9 @@ channels if no parameters are specified.<br/>
         <h2>GET channels/:channel_id/videos</h2>
 
 <p><strong>Returns</strong> all the videos of given channel and HTTP Status Code 200 or
-404<br/>
-<strong>Required params</strong> <code>channel_id</code> unique id of the channel<br/>
-<strong>Required params</strong> <code>user_id</code> unique id of the user<br/>
+404<br>
+<strong>Required params</strong> <code>channel_id</code> unique id of the channel<br>
+<strong>Required params</strong> <code>user_id</code> unique id of the user<br>
 <strong>Optional params</strong> <code>limit</code> max. number of videos to return</p>
 
       </td>

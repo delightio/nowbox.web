@@ -13,6 +13,7 @@ module Aji
     belongs_to :identity
 
     validates_presence_of :uid
+    validates_uniqueness_of :uid, :scope => :type
 
     include Redis::Objects
     sorted_set :content_zset

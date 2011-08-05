@@ -6,17 +6,16 @@ module Aji
         @queue = :mention
 
         def self.perform source, data
-          start = Time.now
+          # Short circuit parser to return nil if the tweet has no urls.
           mention = self.parse source, data
 
           # TODO: Refactor into Mention#{unsuitable,unfit,invalid}
-          start = Time.now
           if mention.nil? || mention.author.blacklisted? || !mention.has_links?
-            Aji.log "Mention #{mention.inspect} was not suitable for proccessing."
+            Aji.log "#{data} passed filter with no links." if
+              mention && !mention.has_links?
             return
           end
 
-          start = Time.now
           mention.links.each do |link|
             # TODO: Update to include all valid link types.
             next unless link.video? && link.type == 'youtube'
@@ -42,14 +41,23 @@ module Aji
         def self.parse source, data
           case source
           when 'twitter'
-            start = Time.now
-            mention = Parsers::Tweet.parse data
-            Aji.log "TIMING:total_parse: #{Time.now - start} s."
-            mention
+            mention = Parsers::Tweet.parse data do |tweet_hash|
+              self.video_in_links? tweet_hash
+            end
           else
             Aji.log :WARN, "Attempt to process #{data} from #{source}. Unknown"
             # TODO: Add benign return value here.
           end
+        end
+
+        # Extracts links (if any) from the tweet and determines if they contain
+        # videos. Returns true if it does, otherwise false.
+        def self.video_in_links? tweet_hash
+          return false if tweet_hash['entities']['urls'].empty?
+
+          tweet_hash['entities']['urls'].map do |url|
+            Link.new(url['expanded_url'] || url['url']).video?
+          end.inject do |acc, bool| acc ||= bool end
         end
       end
     end

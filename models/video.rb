@@ -21,6 +21,9 @@ module Aji
     has_many :events
     has_and_belongs_to_many :mentions
     belongs_to :author, :class_name => 'ExternalAccount'
+    
+    validates_presence_of :external_id
+    validates_uniqueness_of :external_id, :scope => :source
 
     include Mixins::Blacklisting
     include Mixins::Populating

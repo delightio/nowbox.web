@@ -25,5 +25,12 @@ module Aji
       
       it "waits for the lock before populating"
     end
+    
+    describe "#thumbnail_uri" do
+      it "returns a uri from Youtube API"
+      it "replaces default blue ghost with first video" do
+        pending "Check for default pic url and replace with our own or vid thumb"
+      end
+    end
   end
 end
