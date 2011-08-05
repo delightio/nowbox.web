@@ -34,8 +34,7 @@ module Aji
               push video, relevance
             end
           end
-          self.populated_at = Time.now
-          save
+          update_attribute :populated_at, Time.now
         end
         Aji.log :INFO,
           "ExternalAccounts::Youtube[#{id}, '#{username}' ]#populate #{args.inspect} took #{Time.now-start} s."

@@ -19,8 +19,7 @@ module Aji
             account.populate args
             accounts_populated_at << account.populated_at
           end
-          self.populated_at = accounts_populated_at.sort.last # latest
-          save
+          update_attribute :populated_at, accounts_populated_at.sort.last # latest
         end
         Aji.log :INFO, "Channels::YoutubeAccount[#{id}, '#{title}', #{accounts.count} accounts]#populate #{args.inspect} took #{Time.now-start} s."
       end
