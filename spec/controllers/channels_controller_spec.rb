@@ -24,30 +24,24 @@ module Aji
       
       describe "get #{resource_uri}" do
         it "always create keyword channel based on query" do
-          pending
           query = random_string
           params = { :query => query, :user_id => (Factory :user).id }
           expect { get "#{resource_uri}", params }.to change { Channel.count }.by(1)
         end
-      end
-      
-      describe "get #{resource_uri}" do
-        it "should return all default channels" do
-          channels = []
-          total = 5
-          total.times {|n| channels << Factory(:youtube_channel_with_videos,:default_listing=>false) }
-          default = [0,1,2,3,4].sample(2)
-          channels[default.first].update_attributes :default_listing => true
-          channels[default.last].update_attributes :default_listing => true
+        
+        it "searches existing channels and returns matched channels"
+        
+        it "returns all channels if no user id given" do
+          total = 10
+          total.times {|n| Factory :youtube_channel_with_videos }
           get "#{resource_uri}"
           last_response.status.should == 200
           body_hash = JSON.parse last_response.body
           returned_channels = body_hash.map {|h| h["youtube_account"]}
-          returned_channels.should include channels[default.first].serializable_hash
-          returned_channels.should include channels[default.last].serializable_hash
+          returned_channels.should have(total).channels
         end
         
-        it "should return subscribed channels if given user id" do
+        it "returns subscribed channels if given user id" do
           user = Factory :user
           channel = Factory :youtube_channel_with_videos
           user.subscribe channel
@@ -57,10 +51,6 @@ module Aji
           body_hash = JSON.parse last_response.body
           returned_channels = body_hash.map {|h| h["youtube_account"]}
           returned_channels.should include channel.serializable_hash
-        end
-        
-        %w[keyword youtube trending default].each do |type|
-          it "returns requested channel of type '#{type}'"
         end
       end
 
@@ -78,11 +68,7 @@ module Aji
           body_hash.should == channel.serializable_hash
         end
       end
-
-      describe "post #{resource_uri}/:id" do
-        it "should create new channel"
-      end
-
+      
       describe "get #{resource_uri}/:id/videos" do
         it "requires a user_id" do
           channel = Factory :youtube_channel_with_videos

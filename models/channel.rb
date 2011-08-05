@@ -66,8 +66,18 @@ module Aji
       end
       new_videos
     end
-
+    
     # ## Class Methods
+    def self.search query, separator=','
+      result = []
+      query = query.downcase
+      query.split(separator).each do |q|
+        result += self.find(:all,
+          :conditions => ["lower(title) LIKE ?", q])
+      end
+      result
+    end
+    
     def self.default_listing
       find_all_by_default_listing true
     end

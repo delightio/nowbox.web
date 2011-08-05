@@ -8,6 +8,8 @@ module Aji
       before_create :set_title
       def self.to_title words; words.join ", "; end
       def set_title; self.title = title || self.class.to_title(keywords); end
+      # LH 225
+      def thumbnail_uri; "http://beta.#{Aji.conf['TLD']}/images/icons/icon-set_nowtrending.png"; end
 
       def populate
         (1..3).each do |page|

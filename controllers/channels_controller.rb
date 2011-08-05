@@ -41,45 +41,28 @@ module Aji
       # - `usernames`: a comma separated list of youtube usernames for use with
       #   the `youtube` channel type.
       # - `account`: a twitter screen name for use with the twitter type.
+      
       get do
-        case params[:type]
-        when 'keyword'
-          kc = Channels::Keyword.find_by_keywords(
-            params[:keywords].split(','))
-          if kc.nil?
-            kc = Channels::Keyword.create(
-              :keywords => params[:keywords].split(','))
-            kc.populate
-          end
-          kc
-
-        when 'youtube'
-          usernames = params[:usernames].split(',')
-          Channels::YoutubeAccount.find_or_create_by_usernames usernames,
-            :populate_if_new => true
-
-        when 'trending'
-          Channel.trending
-
-        when 'default'
-          Channel.default_listing
-
-        when 'twitter'
-          a = ExternalAccounts::Twitter.find_or_create_by_username(
-            params[:account])
-          channel = Channels::TwitterAccount.find_or_create_by_account a
-          channel.populate
-          channel
-
+        user = User.find_by_id params[:user_id]
+        channels = []
+        if !params[:query]
+          channels =
+            if user
+              then user.subscribed_channels
+              else Channel.all
+            end
         else
-          # FIXME: should be in User controller
-          user = User.find_by_id params[:user_id]
-          if user then user.subscribed_channels else Channel.all end
+          query = params[:query]
+          separator = ','
+          channels += Channel.search query, separator
+          keywords = query.split separator
+          keyword_based = Channels::Keyword.find_or_create_by_keywords keywords
+          unless channels.include? keyword_based
+            keyword_based.populate
+            channels << keyword_based
+          end
         end
-      end
-
-      post do
-        channel = Channel.create(params) or creation_error!(params)
+        channels
       end
 
       # ## GET channels/:channel_id/videos
