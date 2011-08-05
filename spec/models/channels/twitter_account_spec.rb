@@ -6,12 +6,37 @@ describe Aji::Channels::TwitterAccount do
       :uid => '178492493',
       :username => '_nuclearsammich')
   end
+  subject { Aji::Channels::TwitterAccount.create :account => @twitter_account }
+  
   it 'sets a title' do
     Aji::Channels::TwitterAccount.create(:account =>
         @twitter_account).title.should == "@_nuclearsammich's Tweeted Videos"
   end
-
+  
+  describe "#find_or_create_by_username" do
+    it "returns un-populated channel by default" do
+      subject.should_not be_populated
+    end
+    
+    it "populates new channel when asked" do
+      new_channel = Aji::Channels::TwitterAccount.find_or_create_by_account @twitter_account,
+        :populate_if_new => true
+      Aji::Channel.find(new_channel.id).should be_populated
+    end
+  end
+  
   describe "#populate" do
+    
+    it "does not re populate within short time" do
+      subject.populate
+      expect { subject.populate }.to_not change { subject.populated_at }
+    end
+    
+    it "allows forced population" do
+      subject.populate
+      expect { subject.populate(:must_populate=>true) }.to change { subject.populated_at }
+    end
+    
     it "adds videos recently shared" do
         channel = Aji::Channels::TwitterAccount.create(
          :account => @twitter_account)

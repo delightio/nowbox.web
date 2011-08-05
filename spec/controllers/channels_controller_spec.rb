@@ -7,6 +7,30 @@ module Aji
   describe API do
     describe "resource: #{resource}" do
 
+      describe "get #{resource_uri}/:id" do
+        it "returns 404 if not found" do
+          cid = rand(100)
+          Channel.find_by_id(cid).should be_nil
+          get "#{resource_uri}/#{cid}"
+          last_response.status.should == 404
+        end
+        
+        it 'returns channel object if found' do
+          c = Factory :youtube_channel_with_videos
+          get "#{resource_uri}/#{c.id}"
+          last_response.status.should == 200
+        end
+      end
+      
+      describe "get #{resource_uri}" do
+        it "always create keyword channel based on query" do
+          pending
+          query = random_string
+          params = { :query => query, :user_id => (Factory :user).id }
+          expect { get "#{resource_uri}", params }.to change { Channel.count }.by(1)
+        end
+      end
+      
       describe "get #{resource_uri}" do
         it "should return all default channels" do
           channels = []
@@ -60,12 +84,17 @@ module Aji
       end
 
       describe "get #{resource_uri}/:id/videos" do
-        it "should respect limit params" do
+        it "requires a user_id" do
+          channel = Factory :youtube_channel_with_videos
+          get "#{resource_uri}/#{channel.id}/videos", {}
+          last_response.status.should == 404
+        end
+        
+        it "respects limit params" do
           limit = 3
           channel = Factory :youtube_channel_with_videos
           channel.content_videos.count.should > limit
-          user = Factory :user
-          params = {:user_id=>user.id, :limit=>3}
+          params = {:user_id=>(Factory :user).id, :limit=>3}
           get "#{resource_uri}/#{channel.id}/videos", params
           last_response.status.should == 200
           body_hash = JSON.parse last_response.body
