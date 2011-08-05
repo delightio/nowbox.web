@@ -29,15 +29,16 @@ module Aji
       # __Returns__ a list of channels matching the request parameters or all
       # channels if no parameters are specified.  
       # __Required params__ none  
-      # __Optional params__
+      # __Optional params__  
       # - `query`:  comma separated list of search term. Server returns all
-      #   channels regardless of type.
-      # - `user_id`: user id
+      #   channels regardless of type.  
+      # - `user_id`: user id. If supplied without `query`, server returns
+      #   given user's subscribed channels.
       
       get do
-        user = User.find_by_id params[:user_id]
         channels = []
         if !params[:query]
+          user = User.find_by_id params[:user_id]
           channels =
             if user
               then user.subscribed_channels
