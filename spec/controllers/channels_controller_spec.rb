@@ -23,6 +23,19 @@ module Aji
       end
       
       describe "get #{resource_uri}" do
+        it "only lists all channel if a passcode is passed in" do
+          get "#{resource_uri}"
+          last_response.status.should == 404
+          
+          total = 10
+          total.times {|n| Factory :youtube_channel_with_videos }
+          get "#{resource_uri}", :debug => 'BOzET83g'
+          last_response.status.should == 200
+          body_hash = JSON.parse last_response.body
+          returned_channels = body_hash.map {|h| h["youtube_account"]}
+          returned_channels.should have(total).channels
+        end
+        
         it "always create keyword channel based on query" do
           query = random_string
           params = { :query => query, :user_id => (Factory :user).id }
@@ -30,16 +43,6 @@ module Aji
         end
         
         it "searches existing channels and returns matched channels"
-        
-        it "returns all channels if no user id given" do
-          total = 10
-          total.times {|n| Factory :youtube_channel_with_videos }
-          get "#{resource_uri}"
-          last_response.status.should == 200
-          body_hash = JSON.parse last_response.body
-          returned_channels = body_hash.map {|h| h["youtube_account"]}
-          returned_channels.should have(total).channels
-        end
         
         it "returns subscribed channels if given user id" do
           user = Factory :user
