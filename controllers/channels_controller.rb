@@ -37,23 +37,15 @@ module Aji
       
       get do
         channels = []
-        if !params[:query]
+        if params[:query]
+          channels += Channel.search params[:query]
+        else
           user = User.find_by_id params[:user_id]
           channels =
             if user
               then user.subscribed_channels
               else Channel.all
             end
-        else
-          query = params[:query]
-          separator = ','
-          channels += Channel.search query, separator
-          keywords = query.split separator
-          keyword_based = Channels::Keyword.find_or_create_by_keywords keywords
-          unless channels.include? keyword_based
-            keyword_based.populate
-            channels << keyword_based
-          end
         end
         channels
       end

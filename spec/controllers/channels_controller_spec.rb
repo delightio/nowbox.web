@@ -24,6 +24,7 @@ module Aji
       
       describe "get #{resource_uri}" do
         it "always create keyword channel based on query" do
+          pending "need Channels::Keyword.search_helper"
           query = random_string
           params = { :query => query, :user_id => (Factory :user).id }
           expect { get "#{resource_uri}", params }.to change { Channel.count }.by(1)

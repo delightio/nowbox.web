@@ -68,14 +68,20 @@ module Aji
     end
     
     # ## Class Methods
-    def self.search query, separator=','
-      result = []
-      query = query.downcase
-      query.split(separator).each do |q|
-        result += self.find(:all,
-          :conditions => ["lower(title) LIKE ?", q])
+    def self.search query
+      results = []
+      self.descendants.each do | descendant |
+        results += descendant.send :search_helper, query
       end
-      result
+      results
+    end
+    
+    def self.search_helper query
+      results = []
+      query.tokenize.each do | q |
+        results += self.where("lower(title) LIKE ?", "%#{q}%")
+      end
+      results
     end
     
     def self.default_listing
