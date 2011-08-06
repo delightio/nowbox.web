@@ -37,7 +37,7 @@ module Aji
           update_attribute :populated_at, Time.now
         end
         Aji.log :INFO,
-          "ExternalAccounts::Youtube[#{id}, '#{username}' ]#populate #{args.inspect} took #{Time.now-start} s."
+          "ExternalAccounts::Youtube[#{id}, '#{username}']#populate #{args.inspect} took #{Time.now-start} s."
       end
     end
   end
