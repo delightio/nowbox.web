@@ -6,7 +6,7 @@ module Aji
       serialize :keywords
 
       before_create :set_title, :sort_keywords
-      def self.to_title words; words.join ", "; end
+      def self.to_title words; words.sort.join ", "; end
       def set_title; self.title = title || self.class.to_title(keywords); end
       def sort_keywords; self.keywords = keywords.sort; end
       

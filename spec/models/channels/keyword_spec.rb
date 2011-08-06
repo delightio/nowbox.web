@@ -4,8 +4,7 @@ describe Aji::Channels::Keyword do
   describe "#create" do
     it "sorts keywords before saving" do
       keywords = %w[ a b c d e f ]
-      shuffled = keywords.shuffle
-      c = Aji::Channels::Keyword.create :keywords => shuffled
+      c = Aji::Channels::Keyword.create :keywords => keywords.shuffle
       Aji::Channels::Keyword.find(c.id).keywords.should == keywords
     end
   end
@@ -34,7 +33,7 @@ describe Aji::Channels::Keyword do
     end
     
     it "returns at least one keyword channel" do
-      pending "need Channels::Keyword.search_helper"
+      pending "need to create channel if it doesn't exist"
       results = Aji::Channel.search @query
       results.map(&:class).should include Aji::Channels::Keyword
     end
@@ -42,7 +41,6 @@ describe Aji::Channels::Keyword do
     it "returns existing keyword channel if previously existed regardless of query order" do
       old_keyword_channel = Aji::Channels::Keyword.create(
         :keywords => @query.split(',').shuffle)
-      Aji::Channels::Keyword.should_not_receive(:create)
       results = Aji::Channel.search @query
       results.should include old_keyword_channel
     end
