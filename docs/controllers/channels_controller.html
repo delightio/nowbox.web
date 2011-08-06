@@ -94,17 +94,31 @@ or 404</p>
 channels if no parameters are specified.<br>
 <strong>Required params</strong> none<br>
 <strong>Optional params</strong><br>
+&ndash; <code>user_id</code>:  user id. If supplied without <code>query</code>, server returns
+  given user&rsquo;s subscribed channels.<br>
 &ndash; <code>query</code>:  comma separated list of search term. Server returns all
   channels regardless of type.<br>
-&ndash; <code>user_id</code>: user id. If supplied without <code>query</code>, server returns
-  given user&rsquo;s subscribed channels.</p>
+<strong>Optional DEBUG params</strong><br>
+&ndash; <code>debug_min_count</code>:  integer. If present and used with <code>query</code>, server
+  will ensure the number of search result is at least <code>debug_min_count</code>.</p>
       </td>
       <td class=code>
-        <div class='highlight'><pre>      
-      <span class="n">get</span> <span class="k">do</span>
+        <div class='highlight'><pre>      <span class="n">get</span> <span class="k">do</span>
         <span class="n">channels</span> <span class="o">=</span> <span class="o">[]</span>
         <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:query</span><span class="o">]</span>
           <span class="n">channels</span> <span class="o">+=</span> <span class="no">Channel</span><span class="o">.</span><span class="n">search</span> <span class="n">params</span><span class="o">[</span><span class="ss">:query</span><span class="o">]</span>
+          <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:debug_min_count</span><span class="o">]</span> <span class="c1"># TODO debug only</span>
+            <span class="n">min_count</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:debug_min_count</span><span class="o">].</span><span class="n">to_i</span>
+            <span class="k">if</span> <span class="n">min_count</span><span class="o">.</span><span class="n">to_s</span> <span class="o">!=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:debug_min_count</span><span class="o">]</span>
+              <span class="n">error!</span> <span class="s2">&quot;debug_min_count needs to be an integer&quot;</span><span class="p">,</span> <span class="mi">500</span>
+            <span class="k">end</span>
+            <span class="k">if</span> <span class="no">Channel</span><span class="o">.</span><span class="n">count</span> <span class="o">&gt;</span> <span class="n">min_count</span>
+              <span class="k">while</span> <span class="n">channels</span><span class="o">.</span><span class="n">count</span> <span class="o">&lt;</span> <span class="n">min_count</span>
+                <span class="n">channels</span> <span class="o">&lt;&lt;</span> <span class="no">Channel</span><span class="o">.</span><span class="n">first</span><span class="p">(</span><span class="ss">:offset</span> <span class="o">=&gt;</span> <span class="nb">rand</span><span class="p">(</span><span class="no">Channel</span><span class="o">.</span><span class="n">count</span><span class="p">))</span>
+                <span class="n">channels</span><span class="o">.</span><span class="n">uniq!</span>
+              <span class="k">end</span>
+            <span class="k">end</span>
+          <span class="k">end</span>
         <span class="k">else</span>
           <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_id</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
           <span class="n">channels</span> <span class="o">=</span>

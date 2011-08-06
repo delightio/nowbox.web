@@ -53,6 +53,23 @@ module Aji
           returned_channels = body_hash.map {|h| h["youtube_account"]}
           returned_channels.should include channel.serializable_hash
         end
+        
+        it "retures min number of results if debug mode is turned on" do
+          min_count = 10
+          (min_count*2).times {|n| Factory :youtube_channel_with_videos }
+          params = { :query => random_string, :debug_min_count => min_count }
+          get "#{resource_uri}", params
+          last_response.status.should == 200
+          body_hash = JSON.parse last_response.body
+          returned_channels = body_hash.map {|h| h["youtube_account"]}
+          returned_channels.should have(min_count).channels
+        end
+        
+        it "returns error if debug_min_count is not a number" do
+          params = { :query => random_string, :debug_min_count => random_string }
+          get "#{resource_uri}", params
+          last_response.status.should_not == 200
+        end
       end
 
       describe "get #{resource_uri}/:id" do
