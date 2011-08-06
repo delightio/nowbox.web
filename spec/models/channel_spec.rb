@@ -84,25 +84,9 @@ describe Aji::Channel do
       @query = Array.new(3){ |n| random_string }.join(",")
     end
     
-    it "returns at least one keyword channel" do
-      pending "need Channels::Keyword.search_helper"
-      results = Aji::Channel.search @query
-      results.map(&:class).should include Aji::Channels::Keyword
-    end
-    
-    it "returns existing keyword channel if previously existed" do
-      old_keyword_channel = Aji::Channels::Keyword.create :keywords=>@query.split(',')
-      Aji::Channels::Keyword.should_not_receive(:create)
-      results = Aji::Channel.search @query
-      results.should include old_keyword_channel
-    end
-    
-    it "returns youtube channels"
-    it "returns twitter channels"
-    
     it "searches thru all sub classes" do
-      pending "*** not sure why it's throwing an error wtih this spec test"
       Aji::Channel.descendants.each do | descendant |
+        descendant.stub(:search_helper).and_return([])
         descendant.should_receive(:search_helper).with(@query)
       end
       Aji::Channel.search @query

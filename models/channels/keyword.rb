@@ -5,9 +5,11 @@ module Aji
     class Keyword < Channel
       serialize :keywords
 
-      before_create :set_title
+      before_create :set_title, :sort_keywords
       def self.to_title words; words.join ", "; end
       def set_title; self.title = title || self.class.to_title(keywords); end
+      def sort_keywords; self.keywords = keywords.sort; end
+      
       # LH 225
       def thumbnail_uri; "http://beta.#{Aji.conf['TLD']}/images/icons/icon-set_nowtrending.png"; end
 
@@ -23,6 +25,7 @@ module Aji
         self.populated_at = Time.now
         save
       end
+      
     end
   end
 end
