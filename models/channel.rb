@@ -71,19 +71,24 @@ module Aji
     def self.search query
       results = []
       self.descendants.each do | descendant |
+        next if descendant.searchable_columns.empty?
         results += descendant.send :search_helper, query
       end
       results
     end
-    
+
+    def self.searchable_columns; []; end
     def self.search_helper query
+      sql_string = searchable_columns.map {|c| "lower(#{c}) LIKE ?" }.join(' OR ')
       results = []
       query.tokenize.each do | q |
-        results += self.where("lower(title) LIKE ?", "%#{q}%")
+        sql = [ sql_string ]
+        searchable_columns.count.times { |n| sql << "%#{q}%"}
+        results += self.where sql
       end
       results
     end
-    
+
     def self.default_listing
       find_all_by_default_listing true
     end

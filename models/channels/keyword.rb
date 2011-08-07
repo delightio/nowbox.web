@@ -26,6 +26,7 @@ module Aji
         save
       end
       
+      def self.searchable_columns; [:title]; end
     end
   end
 end

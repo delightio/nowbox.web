@@ -84,8 +84,9 @@ describe Aji::Channel do
       @query = Array.new(3){ |n| random_string }.join(",")
     end
     
-    it "searches thru all sub classes" do
+    it "searches thru all sub classes that have a searchable_columns" do
       Aji::Channel.descendants.each do | descendant |
+        next if descendant.searchable_columns.empty?
         descendant.stub(:search_helper).and_return([])
         descendant.should_receive(:search_helper).with(@query)
       end

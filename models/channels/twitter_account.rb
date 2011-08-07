@@ -47,9 +47,11 @@ module Aji
       end
       
       def self.find_or_create_by_username username, args={}
-        account = ExternalAccounts::TwitterAccount.find_or_create_by_username username
+        account = ExternalAccounts::Twitter.find_or_create_by_username username
         self.find_or_create_by_account account args
       end
+      
+      def self.searchable_columns; [:title]; end
       
       # Private instance methods below.
       private

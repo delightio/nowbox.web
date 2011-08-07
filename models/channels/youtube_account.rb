@@ -60,6 +60,8 @@ module Aji
         channel
       end
 
+      def self.searchable_columns; [:title]; end
+
     end
   end
 end
