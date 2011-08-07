@@ -6,6 +6,7 @@ module Aji
         :class_name => 'Channels::YoutubeAccount',
         :join_table => :youtube_youtube_channels,
         :foreign_key => :account_id, :association_foreign_key => :channel_id
+      after_create :set_uid_as_username
 
       def username; uid; end
       def profile_uri; "http://www.youtube.com/user/#{username}"; end
@@ -39,6 +40,12 @@ module Aji
         end
         Aji.log :INFO,
           "ExternalAccounts::Youtube[#{id}, '#{username}' ]#populate #{args.inspect} took #{Time.now-start} s."
+      end
+      private
+      # A Youtube Account's uid is it's username. Let's set uid elsewhere and
+      # set the username to be equal within the method.
+      def set_uid_as_username
+        update_attribute :username, self.uid
       end
     end
   end
