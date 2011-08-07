@@ -139,7 +139,7 @@ body {
 }
 #jqt ul {
     color: #aaa;
-    border: 1px solid #000000;
+/*     border: 1px solid #000000; */
     font: bold 18px "Helvetica Neue", Helvetica;
     padding: 0;
     margin: 15px 10px 17px 10px;
@@ -375,10 +375,6 @@ body {
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E9E9E9), to(#E0E0E0));
 }
 
-#jqt ul.individual li.blue{
-    background-color: #97bdd7;
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b6e2ff), to(#97bdd7));
-}
 
 #jqt ul.individual li + li {
     float: right;
@@ -393,6 +389,21 @@ body {
 
 #jqt ul.individual li a.active { background-color: #F0F0F0;}
 /* @end */
+
+#jqt ul li.blue, #jqt ul.individual li.blue{
+    background-color: #97bdd7;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b6e2ff), to(#97bdd7));
+    border: 1px solid #AAAAAA;
+}
+
+#jqt ul li.blue.arrow, #jqt ul.individual li.blue.arrow{
+    background: url(img/chevron.png), -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b6e2ff), to(#97bdd7));
+}
+
+#jqt ul li.blue a, #jqt ul.individual li.blue a{
+    color: #333;
+}
+
 /* @group Toggle */
 #jqt .toggle {
     width: 94px;

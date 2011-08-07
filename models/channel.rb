@@ -66,8 +66,24 @@ module Aji
       end
       new_videos
     end
-
+    
     # ## Class Methods
+    def self.search query
+      results = []
+      self.descendants.each do | descendant |
+        results += descendant.send :search_helper, query
+      end
+      results
+    end
+    
+    def self.search_helper query
+      results = []
+      query.tokenize.each do | q |
+        results += self.where("lower(title) LIKE ?", "%#{q}%")
+      end
+      results
+    end
+    
     def self.default_listing
       find_all_by_default_listing true
     end

@@ -13,7 +13,7 @@
 	  <meta property="description" content="<%= @video.description %>" />
 	  <link rel="image_src" href="<%=  @video.thumbnail_uri %>" />
 	  
-	  <meta property="og:url" content="http://nowmov.com/<%= params[:share_id] %>" />
+	  <meta property="og:url" content="http://nowmov.com/<%= @share.id %>" />
 	  <meta property="og:title" content="<%= @video.title %>" />
 		<meta property="og:type" content="article" />
 	  <meta property="og:description" content="<%= @video.description %>" />
@@ -29,9 +29,6 @@
 	<div id="video_page" role="main">
 		<%= yield %>
 	</div>
-	<footer>
-		<%= erb :_footer %>
-	</footer>
 	<%= erb :_layout_scripts %>	
 </body>
 </html>

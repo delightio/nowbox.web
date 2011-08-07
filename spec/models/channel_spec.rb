@@ -79,4 +79,18 @@ describe Aji::Channel do
     end
   end
 
+  describe "search" do
+    before(:each) do
+      @query = Array.new(3){ |n| random_string }.join(",")
+    end
+    
+    it "searches thru all sub classes" do
+      Aji::Channel.descendants.each do | descendant |
+        descendant.stub(:search_helper).and_return([])
+        descendant.should_receive(:search_helper).with(@query)
+      end
+      Aji::Channel.search @query
+    end
+    
+  end
 end
