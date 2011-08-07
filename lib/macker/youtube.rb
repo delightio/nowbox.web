@@ -12,6 +12,9 @@ module Aji
           :published_at => video.published_at,
           :author_username => video.author.name
         }
+      rescue NoMethodError => e
+        raise unless e.message =~ /undefined method `elements' for nil:NilClass/
+        throw :network_failure
       end
 
       private

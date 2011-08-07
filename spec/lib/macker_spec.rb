@@ -2,9 +2,16 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 describe Aji::Macker do
   describe ".fetch" do
-    pending "Figure out how to VCR YoutubeIt or tell it to fuck off."
+
+    context "when the network fails" do
+      it "throws an error symbol" do
+        expect { subject.fetch :youtube, 'cRBcP6MmE8' }.to
+        throw_symbol :network_failure
+      end
+    end
+
     it "returns a nested hash of a video's attributes" do
-      video_hash = subject.fetch :youtube, 'cRBcP6MmE8'
+      video_hash = subject.fetch :youtube, 'EzT5iKpxjFA'
       [ :title, :description, :duration, :viewable_mobile, :view_count,
         :published_at, :author_username ].each do |key|
         video_hash.should have_key key
