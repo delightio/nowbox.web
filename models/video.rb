@@ -34,16 +34,14 @@ module Aji
       update_attribute :populated_at, Time.now
     end
 
+    # TODO: Merge this into Video#populate and use Macker for videos.
     def populate_from_youtube
-      v = Aji.youtube_client.video_by external_id
+      vhash = Macker.fetch :youtube, external_id
       self.author = ExternalAccounts::Youtube.find_or_create_by_uid(
-        v.author.name)
-      self.title = v.title
-      self.description = v.description
-      self.viewable_mobile = !v.noembed
-      self.duration = v.duration
-      self.view_count = v.view_count
-      self.published_at = v.published_at
+        vhash.delete :author_username)
+      vhash.map do |attribute, value|
+        self[attribute] = value
+      end
     end
 
     # Future mentioner/tweeter/poster relationship.
