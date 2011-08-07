@@ -3,10 +3,10 @@ require File.expand_path("../../spec_helper", __FILE__)
 describe Aji::Macker do
   describe ".fetch" do
 
-    context "when the network fails" do
-      it "throws an error symbol" do
+    context "given a bad external id" do
+      it "raises an exception" do
         expect { subject.fetch :youtube, 'cRBcP6MmE8' }.to
-        throw_symbol :network_failure
+        raise_exception Aji::Macker::FetchError
       end
     end
 
@@ -16,7 +16,6 @@ describe Aji::Macker do
         :published_at, :author_username ].each do |key|
         video_hash.should have_key key
       end
-      video_hash[:author].should have_key :username
     end
   end
 end

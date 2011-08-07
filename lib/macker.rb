@@ -13,5 +13,13 @@ module Aji
     def Macker.sources
       @sources ||= { :youtube => Youtube }
     end
+
+    class FetchError < RuntimeError
+      attr_accessor :source, :source_id
+      def intialize message, source, source_id
+        @source = source
+        @source_id = source_id
+      end
+    end
   end
 end
