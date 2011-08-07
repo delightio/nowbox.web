@@ -93,5 +93,15 @@ describe Aji::Channel do
       Aji::Channel.search @query
     end
     
+    it "enqueues all search results for population" do
+      channels = []
+      5.times { |n| channels << Factory(:youtube_channel) }
+      # 5 + 1 times since we always create a keyword base channel
+      Resque.should_receive(:enqueue).with(Aji::Queues::PopulateChannel, anything()).exactly(5+1).times
+      q = channels.map(&:title).join ","
+      results = Aji::Channel.search q
+    end
+    
+    it "returns unique output"
   end
 end

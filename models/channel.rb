@@ -74,6 +74,7 @@ module Aji
         next if descendant.searchable_columns.empty?
         results += descendant.send :search_helper, query
       end
+      results.each { |ch| Resque.enqueue Queues::PopulateChannel, ch.id }
       results
     end
 
@@ -86,7 +87,7 @@ module Aji
         searchable_columns.count.times { |n| sql << "%#{q}%"}
         results += self.where sql
       end
-      results
+      results.uniq # since we search per each keyword
     end
 
     def self.default_listing

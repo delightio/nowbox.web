@@ -27,6 +27,11 @@ module Aji
       end
       
       def self.searchable_columns; [:title]; end
+      def self.search_helper query
+        results = super
+        results << self.create(:keywords => query.tokenize.sort) if results.empty?
+        results
+      end
     end
   end
 end

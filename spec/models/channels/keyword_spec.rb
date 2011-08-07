@@ -32,16 +32,16 @@ describe Aji::Channels::Keyword do
       @query = Array.new(3){ |n| random_string }.join(",")
     end
     
-    it "returns at least one keyword channel" do
-      pending "need to create channel if it doesn't exist"
-      results = Aji::Channel.search @query
+    it "returns at least one populated keyword channel" do
+      results = Aji::Channels::Keyword.search_helper @query
       results.map(&:class).should include Aji::Channels::Keyword
     end
     
     it "returns existing keyword channel if previously existed regardless of query order" do
       old_keyword_channel = Aji::Channels::Keyword.create(
         :keywords => @query.split(',').shuffle)
-      results = Aji::Channel.search @query
+      results = Aji::Channels::Keyword.search_helper @query
+      results.should have(1).channel
       results.should include old_keyword_channel
     end
   end
