@@ -10,17 +10,14 @@ module Aji
       def set_title; self.title = title || self.class.to_title(keywords); end
 
       def populate
-        (1..3).each do |page|
-          vids = Aji.youtube_client.videos_by(:query => keywords.join(' '),
-                                              :page => page).videos
-          vids.each_with_index do |v, i|
-            content_zset[Video.find_or_create_from_youtubeit_video(v).id] =
-              "#{page}#{i}".to_i
-          end
+        videos = Macker::Search.new(:keywords => keywords).search
+        videos.each_with_index do |v, i|
+          content_zset[Video.find_or_create_by_external_id(
+            video[:external_id], video).id] = i
         end
-        self.populated_at = Time.now
-        save
+        update_attribute :populated_at, Time.now
       end
     end
   end
 end
+

@@ -58,23 +58,6 @@ module Aji
       latest_mentions(limit).map(&:author)
     end
 
-    # TODO: Deprecate in favor of a generic `Video::fetch(source:Symbol,
-    # external_id:String)`
-    def self.find_or_create_from_youtubeit_video v
-      author = ExternalAccounts::Youtube.find_or_create_by_uid(v.author.name)
-      Video.find_or_create_by_external_id(
-        v.video_id.split(':').last,
-        :title => v.title,
-        :description => v.description,
-        :author => author,
-        :source => :youtube,
-        :viewable_mobile => v.noembed,
-        :duration => v.duration,
-        :view_count => v.view_count,
-        :published_at => v.published_at,
-        :populated_at => Time.now)
-    end
-
     def thumbnail_uri
       path = case source
              when :youtube then "http://img.youtube.com/vi/#{self.external_id}/0.jpg"
