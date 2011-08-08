@@ -11,7 +11,9 @@ module Aji
 
       def populate
         videos = Macker::Search.new(:keywords => keywords).search
-        videos.each_with_index do |v, i|
+        videos.each_with_index do |video, i|
+          video[:author] = ExternalAccounts::Youtube.find_or_create_by_uid(
+            video.delete :author_username)
           content_zset[Video.find_or_create_by_external_id(
             video[:external_id], video).id] = i
         end

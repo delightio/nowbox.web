@@ -16,9 +16,11 @@ module Aji
       it "fetches videos from youtube" do
         youtube_username = "nicnicolecole"
         yc = Channels::YoutubeAccount.find_or_create_by_usernames [youtube_username]
-        yc.populate
-        h = JSON.parse yc.content_videos.first.to_json
-        h["video"]["author"]["username"].should == youtube_username
+        expect { yc.populate }.to change(yc, :content_video_ids).from([])
+
+        ## @tpun What is this?????
+        #h = JSON.parse yc.content_videos.first.to_json
+        #h["video"]["author"]["username"].should == youtube_username
       end
 
       it "does not re populate within short time" do

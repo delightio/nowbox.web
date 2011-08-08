@@ -27,8 +27,10 @@ module Aji
           if content_video_ids.count == 0 || args[:must_populate]
             videos = Macker::Search.new(:author => username).search
             videos.each do |v|
+              v[:author] = self
+              v.delete :author_username
               video = Video.find_or_create_by_external_id v[:external_id], v
-              relevance = v.published_at.to_i
+              relevance = v[:published_at].to_i
               push video, relevance
             end
           end
