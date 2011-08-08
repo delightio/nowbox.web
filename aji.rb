@@ -33,11 +33,6 @@ module Aji
     end
   end
 
-  def Aji.youtube_client
-    # Pass an empty hash to avoid deprecation warning.
-    @youtube_client ||= YouTubeIt::Client.new {}
-  end
-
   # Set Rack environment if not specified.
   RACK_ENV = ENV['RACK_ENV'] || "development"
 
@@ -90,12 +85,14 @@ Dir.glob("queues/*.rb").each { |r| require_relative r }
 Dir.glob("queues/mention/*.rb").each { |r| require_relative r }
 
 # Add Sinatra web viewer.
-require_relative "lib/viewer/viewer.rb"
+require_relative "lib/viewer/viewer"
 
 # Add miscelaneous library code.
 # Dir.glob("lib/*.rb").each { |r| require_relative r }
 require_relative 'lib/decay.rb'
-require_relative 'lib/tokenizer.rb'
+require_relative 'lib/decay'
+require_relative 'lib/macker'
+require_relative 'lib/tokenizer'
 
 module Parsers; end
 Dir.glob("lib/parsers/*.rb").each { |r| require_relative r }

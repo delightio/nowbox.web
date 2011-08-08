@@ -16,11 +16,13 @@ module Aji
       it "fetches videos from youtube" do
         youtube_username = "nicnicolecole"
         yc = Channels::YoutubeAccount.find_or_create_by_usernames [youtube_username]
-        yc.populate
-        h = JSON.parse yc.content_videos.first.to_json
-        h["video"]["author"]["username"].should == youtube_username
+        expect { yc.populate }.to change(yc, :content_video_ids).from([])
+
+        ## @tpun What is this?????
+        #h = JSON.parse yc.content_videos.first.to_json
+        #h["video"]["author"]["username"].should == youtube_username
       end
-      
+
       it "does not re populate within short time" do
         real_youtube_users = ["nowmov", "cnn", "freddiew"]
         subject = Channels::YoutubeAccount.find_or_create_by_usernames real_youtube_users
@@ -29,7 +31,7 @@ module Aji
         subject.should_not_receive(:save)
         subject.populate
       end
-      
+
       it "allows forced population" do
         real_youtube_users = ["nowmov", "cnn", "freddiew"]
         subject = Channels::YoutubeAccount.find_or_create_by_usernames real_youtube_users
@@ -37,7 +39,7 @@ module Aji
         subject.accounts.each { |a| a.should_receive(:populate).once }
         subject.populate :must_populate=>true
       end
-      
+
       it "waits for the lock before populating"
     end
 

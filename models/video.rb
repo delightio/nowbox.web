@@ -21,7 +21,7 @@ module Aji
     has_many :events
     has_and_belongs_to_many :mentions
     belongs_to :author, :class_name => 'ExternalAccount'
-    
+
     validates_presence_of :external_id
     validates_uniqueness_of :external_id, :scope => :source
 
@@ -37,16 +37,14 @@ module Aji
       update_attribute :populated_at, Time.now
     end
 
+    # TODO: Merge this into Video#populate and use Macker for videos.
     def populate_from_youtube
-      v = Aji.youtube_client.video_by external_id
+      vhash = Macker.fetch :youtube, external_id
       self.author = ExternalAccounts::Youtube.find_or_create_by_uid(
-        v.author.name, :username => v.author.name)
-      self.title = v.title
-      self.description = v.description
-      self.viewable_mobile = v.noembed
-      self.duration = v.duration
-      self.view_count = v.view_count
-      self.published_at = v.published_at
+        vhash.delete :author_username)
+      vhash.map do |attribute, value|
+        self[attribute] = value
+      end
     end
 
     # Future mentioner/tweeter/poster relationship.
@@ -61,23 +59,6 @@ module Aji
     end
     def latest_mentioners limit=50
       latest_mentions(limit).map(&:author)
-    end
-
-    # TODO: Deprecate in favor of a generic `Video::fetch(source:Symbol,
-    # external_id:String)`
-    def self.find_or_create_from_youtubeit_video v
-      author = ExternalAccounts::Youtube.find_or_create_by_uid(v.author.name)
-      Video.find_or_create_by_external_id(
-        v.video_id.split(':').last,
-        :title => v.title,
-        :description => v.description,
-        :author => author,
-        :source => :youtube,
-        :viewable_mobile => v.noembed,
-        :duration => v.duration,
-        :view_count => v.view_count,
-        :published_at => v.published_at,
-        :populated_at => Time.now)
     end
 
     def thumbnail_uri

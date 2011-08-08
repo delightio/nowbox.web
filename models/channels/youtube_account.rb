@@ -48,12 +48,14 @@ module Aji
       end
 
       def self.find_or_create_by_usernames usernames, args={}
-        accounts = usernames.map { |n| 
-          ExternalAccounts::Youtube.find_or_create_by_uid :uid => n }
+        accounts = usernames.map do |n|
+          ExternalAccounts::Youtube.find_or_create_by_uid :uid => n
+        end
         found = self.find_all_by_accounts accounts
         return found.first if !found.empty?
 
-        populate_if_new = args.delete :populate_if_new
+        populate_if_new = args[:populate_if_new]
+        args.delete :populate_if_new
         args.merge! :accounts => accounts
         channel = self.create args
         channel.populate if populate_if_new

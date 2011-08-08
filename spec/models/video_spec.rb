@@ -33,15 +33,6 @@ describe Aji::Video do
     end
   end
 
-  describe ".find_or_create_from_youtubeit_video" do
-    it "should mark the video populated" do
-      yt_video = Aji.youtube_client.video_by 'OzVPDiy4P9I'
-      video = Aji::Video.find_or_create_from_youtubeit_video yt_video
-      Aji::Video.find(video.id).should be_populated
-      Aji::Video.find(video.id).title.should_not be_nil
-    end
-  end
-
   describe "#relevance" do
     it "should return higher relevance for newer mentions given the same number of mentions" do
       at_time_i = Time.now.to_i
