@@ -2,7 +2,7 @@ module Aji
   module Channels
     class YoutubeAccount < Channel
       has_and_belongs_to_many :accounts,
-        :class_name => 'Aji::ExternalAccounts::Youtube',
+        :class_name => 'Aji::Account::Youtube',
         :join_table => :youtube_youtube_channels, :foreign_key => :channel_id,
         :association_foreign_key => :account_id
 
@@ -49,7 +49,7 @@ module Aji
 
       def self.find_or_create_by_usernames usernames, args={}
         accounts = usernames.map do |n|
-          ExternalAccounts::Youtube.find_or_create_by_uid :uid => n
+          Account::Youtube.find_or_create_by_uid :uid => n
         end
         found = self.find_all_by_accounts accounts
         return found.first if !found.empty?

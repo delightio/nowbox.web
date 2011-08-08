@@ -1,7 +1,7 @@
 module Aji
   module Channels
     class TwitterAccount < Channel
-      belongs_to :account, :class_name => 'Aji::ExternalAccounts::Twitter'
+      belongs_to :account, :class_name => 'Aji::Account::Twitter'
       before_create :set_default_title
       #after_create :populate
 
@@ -45,12 +45,12 @@ module Aji
         account.channel.populate if populate_if_new
         account.channel
       end
-      
+
       def self.find_or_create_by_username username, args={}
-        account = ExternalAccounts::Twitter.find_or_create_by_username username
+        account = Account::Twitter.find_or_create_by_username username
         self.find_or_create_by_account account args
       end
-      
+
       def self.searchable_columns; [:title]; end
       
       # Private instance methods below.
