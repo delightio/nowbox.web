@@ -1,4 +1,4 @@
-# Channels Controller
+# Events Controller
 # =================
 module Aji
   class API
