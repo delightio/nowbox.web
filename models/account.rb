@@ -1,5 +1,5 @@
 module Aji
-  # ## ExternalAccount Schema
+  # ## Account Schema
   # - id: Integer
   # - user_info: Text (Serialized Hash)
   # - uid: String non-nil
@@ -26,7 +26,7 @@ module Aji
     # share to an external service.
     def publish share
       raise InterfaceMethodNotImplemented.new(
-        "#{self.class} must override ExternalAccount#publish.")
+        "#{self.class} must override Account#publish.")
     end
 
     def profile_uri; raise InterfaceMethodNotImplemented; end

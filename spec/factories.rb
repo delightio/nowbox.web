@@ -91,7 +91,7 @@ end
 Factory.define :video, :class => 'Aji::Video' do |a|
   a.external_id { random_string }
   a.source { random_video_source }
-  a.association :author, :factory => :external_youtube_account
+  a.association :author, :factory => :youtube_account
   a.after_create do |v|
     v.author.push v
   end
@@ -125,35 +125,24 @@ Factory.define :populated_video_with_mentions, :parent => :populated_video do |a
   end
 end
 
-Factory.define :youtubeit_video, :class => 'YouTubeIt::Model::Video' do |a|
-  a.width { rand(100) }
-  a.height { rand(100) }
-  a.title { random_string }
-  a.description { random_string(50) }
-  a.duration { rand(100) }
-  a.noembed { random_boolean }
-  a.view_count { rand(1000) }
-  a.published_at { Time.now.to_s }
-end
-
-Factory.define :external_account,
-  :class => 'Aji::ExternalAccounts::Youtube' do |a|
+Factory.define :account,
+  :class => 'Aji::Account' do |a|
     a.uid { random_string }
   end
 
-Factory.define :external_youtube_account,
-    :class => 'Aji::ExternalAccounts::Youtube' do |a|
+Factory.define :youtube_account,
+    :class => 'Aji::Account::Youtube' do |a|
       a.uid { random_string }
     end
-  
-Factory.define :external_youtube_account_with_videos,
-  :parent => :external_youtube_account do |a|
+
+Factory.define :youtube_account_with_videos,
+  :parent => :_youtube_account do |a|
     a.after_create do |ea|
       ea.push(Factory :video)
     end
   end
-  
+
 Factory.define :mention, :class => 'Aji::Mention' do |a|
   a.published_at { rand(10000).seconds.ago }
-  a.association :author, :factory => :external_account
+  a.association :author, :factory => :account
 end
