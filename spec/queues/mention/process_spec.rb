@@ -39,7 +39,7 @@ module Aji
 
         @links = Array.new(@links_count_in_mention, @link)
         # TODO: Don't use real author.
-        @author = ExternalAccount.new :uid => "someguy"
+        @author = Account.new :uid => "someguy"
         @mention = double("mention", :videos => Array.new, :links => @links,
                           :save => true, :has_links? => true,
                           :author => @author, :spam? => false)

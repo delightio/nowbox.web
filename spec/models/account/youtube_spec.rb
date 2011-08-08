@@ -1,8 +1,8 @@
 require File.expand_path("../../../spec_helper", __FILE__)
 module Aji
-  describe ExternalAccounts::Youtube do
+  describe Account::Youtube do
     describe "#populate" do
-      subject { ExternalAccounts::Youtube.find_or_create_by_uid "nowmov" }
+      subject { Account::Youtube.find_or_create_by_uid "nowmov" }
 
       it "populates new account" do
         subject.content_videos.should be_empty
@@ -25,7 +25,7 @@ module Aji
 
       it "waits for the lock before populating"
     end
-    
+
     describe "#thumbnail_uri" do
       it "returns a uri from Youtube API"
       it "replaces default blue ghost with first video" do
