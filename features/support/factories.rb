@@ -5,7 +5,7 @@ FactoryGirl.define do
     email { "#{first_name}@#{last_name}.com".downcase }
   end
 
-  factory :twitter_account, :class => Aji::ExternalAccounts::Twitter do
+  factory :twitter_account, :class => Aji::Account::Twitter do
     sequence(:uid) { |n| n.to_s }
     sequence(:username) { |n| "TwitterUser#{n}" }
   end
