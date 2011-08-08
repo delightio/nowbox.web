@@ -6,7 +6,7 @@ module Aji
   # - created_at: DateTime
   # - updated_at: DateTime
   # - blacklisted_at: DateTime
-  class ExternalAccount < ActiveRecord::Base
+  class Account < ActiveRecord::Base
     include Redis::Objects
     serialize :user_info
     serialize :credentials
