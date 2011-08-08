@@ -3,6 +3,8 @@ require 'sinatra/base'
 module Aji
 
   class Viewer < Sinatra::Base
+    set :raise_errors, false 
+    set :show_exceptions, true if development? 
     # Use Erubis for template generation. Essentially a faster ERB.
     Tilt.register :erb, Tilt[:erubis]
     # Need to explicitly set the template directory:
@@ -10,14 +12,25 @@ module Aji
     set :views, File.dirname(__FILE__) + "/views"
     set :public, File.dirname(__FILE__) + "/public"
 
+		before do
+#				Use the following to debug params
+# 		  puts '[Params]'
+# 		  p params
+		end
+
+
+ 		not_found do
+ 			erb :'404'
+ 		end
+
+ 		error do
+ 		  erb :'500'
+ 		end 
+		
     get '/' do
     	@ref = params[:ref] || ""
-      erb :home # , {:layout => :layout_splash}
+      erb :home
     end
-
-#     get '/home' do
-#       erb :home
-#     end
     
     get '/about' do
       erb :about
@@ -41,15 +54,15 @@ module Aji
       erb :launch, {:layout => :layout_splash}
     end
     
-    ['/random', '/:share_id'].each do |path|
-    	get path do
-	     	if(path != '/random')
-	      	@share = Share.find params[:share_id]
-	      else
-	      	@share =  Share.offset(rand(Share.count)).first
-	      end
-	      
-	      @user = @share.user
+    get '/random' do 
+    	random =  Share.offset(rand(Share.count)).first.id
+    	redirect to('/'+random.to_s)
+    end
+    
+  	get '/:share_id' do
+      begin
+      	@share = Share.find(params[:share_id])
+      	@user = @share.user
 	      @video = @share.video
 	
 	      
@@ -59,8 +72,10 @@ module Aji
 	      	erb :mobile_video, {:layout => :layout_mobile}
 	      else
 		      erb :video, {:layout => :layout_video}
-		    end   	
-    	end
-    end
+		    end   
+      rescue
+      		erb :'404'
+      end
+  	end	  	
   end
 end
