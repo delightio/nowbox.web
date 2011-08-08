@@ -15,11 +15,6 @@ describe Aji::Account do
       bad_account.should be_blacklisted
     end
   end
-
-    a3 = Aji::Account::Youtube.create :uid => uid
-    a3.save.should be_true
-    a3.id.should_not == a1.id
-  end
 end
 
 describe Aji::Account::Youtube do

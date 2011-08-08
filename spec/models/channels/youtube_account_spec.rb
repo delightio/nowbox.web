@@ -4,7 +4,7 @@ module Aji
   describe Channels::YoutubeAccount do
     before(:each) do
       @usernames = []
-      3.times { |n| @usernames << (Factory :external_account).uid }
+      3.times { |n| @usernames << (Factory :account).uid }
     end
     subject { Channels::YoutubeAccount.find_or_create_by_usernames @usernames }
 
@@ -92,13 +92,13 @@ module Aji
         Channel.find(ch.id).default_listing.should == true
       end
 
-      it "works with external account which never has a channel on our system" do
+      it "works with account which never has a channel on our system" do
         usernames = [ random_string ]
         new_channel = Channels::YoutubeAccount.find_or_create_by_usernames usernames
         new_channel.should_not be_nil
       end
 
-      it "insert the videos into the channel of the given external accounts" do
+      it "insert the videos into the channel of the given accounts" do
         usernames = [ "nowmov" ]
         (Account::Youtube.find_by_uid "nowmov").should be_nil
         new_channel = Channels::YoutubeAccount.find_or_create_by_usernames usernames,
@@ -113,8 +113,8 @@ module Aji
 
     describe "#content_video_ids" do
       it "returns cached values when it can" do
-        accounts = [(Factory :external_youtube_account_with_videos),
-          (Factory :external_youtube_account_with_videos)]
+        accounts = [(Factory :youtube_account_with_videos),
+          (Factory :youtube_account_with_videos)]
         subject = Channels::YoutubeAccount.create :accounts=>accounts
         old_ids = subject.content_video_ids
         old_ids.should_not be_empty

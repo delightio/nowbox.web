@@ -136,7 +136,7 @@ Factory.define :youtube_account,
     end
 
 Factory.define :youtube_account_with_videos,
-  :parent => :_youtube_account do |a|
+  :parent => :youtube_account do |a|
     a.after_create do |ea|
       ea.push(Factory :video)
     end
