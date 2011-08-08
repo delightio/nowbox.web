@@ -71,6 +71,13 @@ Factory.define :youtube_channel, :class => 'Aji::Channels::YoutubeAccount' do |a
   a.category { random_category }
 end
 
+Factory.define :keyword_channel, :class => 'Aji::Channels::Keyword' do |a|
+  a.keywords { Array.new(5){|n| random_string} }
+  a.default_listing { random_boolean }
+  a.category { random_category }
+end
+
+
 Factory.define :youtube_channel_with_videos, :parent => :youtube_channel do |a|
   a.after_create do |c|
     5.times do |n|

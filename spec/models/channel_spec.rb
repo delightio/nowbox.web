@@ -102,6 +102,11 @@ describe Aji::Channel do
       results = Aji::Channel.search q
     end
     
-    it "returns unique output"
+    it "returns unique output" do
+      keywords = Array.new(3) {|n| random_string }
+      c = Factory :keyword_channel, :title => keywords.join(',')
+      results = Aji::Channel.search keywords.shuffle.first(2).join(',')
+      results.should have(1).channel
+    end
   end
 end
