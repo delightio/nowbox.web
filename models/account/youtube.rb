@@ -37,7 +37,7 @@ module Aji
       end
 
       Aji.log(
-        "ExternalAccounts::Youtube[#{id}, '#{username}' ]#populate #{args.inspect} took #{Time.now-start} s.")
+        "Account::Youtube[#{id}, '#{username}' ]#populate #{args.inspect} took #{Time.now-start} s.")
     end
 
     private
