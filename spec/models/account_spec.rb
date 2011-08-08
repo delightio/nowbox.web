@@ -16,17 +16,9 @@ describe Aji::Account do
     end
   end
 
-  it "only allows unique external account to be created" do
-    # FLAG: This test is smelly cause it just test activerecord. REMOVEIT
-    uid = random_string
-    a1 = Aji::Account.create :uid => uid
-    a1.save.should be_true
-    a2 = Aji::Account.find_by_uid uid
-    a2.should_not be_nil
-
     a3 = Aji::Account::Youtube.create :uid => uid
     a3.save.should be_true
-    a3.id.should_not == ea1.id
+    a3.id.should_not == a1.id
   end
 end
 
