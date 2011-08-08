@@ -20,7 +20,7 @@ module Aji
   class Video < ActiveRecord::Base
     has_many :events
     has_and_belongs_to_many :mentions
-    belongs_to :author, :class_name => 'ExternalAccount'
+    belongs_to :author, :class_name => 'Account'
 
     validates_presence_of :external_id
     validates_uniqueness_of :external_id, :scope => :source
@@ -44,7 +44,7 @@ module Aji
     # TODO: Merge this into Video#populate and use Macker for videos.
     def populate_from_youtube
       vhash = Macker.fetch :youtube, external_id
-      self.author = ExternalAccounts::Youtube.find_or_create_by_uid(
+      self.author = Account::Youtube.find_or_create_by_uid(
         vhash.delete :author_username)
       vhash.map do |attribute, value|
         self[attribute] = value

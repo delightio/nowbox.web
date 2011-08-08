@@ -1,7 +1,7 @@
 module Aji
   # Mention Schema
   # - id: Integer
-  # - author_id: Integer (Foreign Key: ExternalAccount)
+  # - author_id: Integer (Foreign Key: Account)
   # - body: Text
   # - external_id: Integer?
   # - unparsed_data: Text
@@ -17,7 +17,7 @@ module Aji
       self.links = link_objs
     end
 
-    belongs_to :author, :class_name => 'ExternalAccount'
+    belongs_to :author, :class_name => 'Account'
     has_and_belongs_to_many :videos
 
     def links
