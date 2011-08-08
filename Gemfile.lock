@@ -124,7 +124,7 @@ GEM
       rufus-scheduler
     rest-client (1.6.3)
       mime-types (>= 1.16)
-    rocco (0.8.1)
+    rocco (0.8)
       mustache
       redcarpet
     rspec (2.6.0)
@@ -191,7 +191,7 @@ DEPENDENCIES
   redis-objects
   resque
   resque-scheduler (~> 2.0.0.d)
-  rocco
+  rocco (= 0.8)
   rspec
   simplecov
   sinatra
