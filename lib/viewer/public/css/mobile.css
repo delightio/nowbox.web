@@ -2,7 +2,7 @@
   float: none;
 }
 
-body { background: url(/images/textures/aji-tiles-black.jpg) repeat;  }
+body { background: url(/images/textures/aji-tiles-crosshatch-white.jpg) repeat;  }
 .clearfix{ clear:both; }
 
 .logo { text-align: center;}
