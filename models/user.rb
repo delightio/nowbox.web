@@ -13,7 +13,7 @@ module Aji
   class User < ActiveRecord::Base
     validates_presence_of :email, :first_name
     validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
-    after_create :subscribe_default_channels
+    after_create :create_identity, :subscribe_default_channels
 
     belongs_to :identity
     has_many :events
@@ -112,5 +112,10 @@ module Aji
            "subscribed_channel_ids" => subscribed_list.values]
     end
 
+    private
+    def create_identity
+      update_attribute :identity_id, Identity.create.id if self.identity.nil?
+    end
   end
 end
+
