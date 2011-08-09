@@ -20,11 +20,11 @@ module Aji
 
 
  		not_found do
- 			erb :'404'
+ 			erb :'404', {:layout => :layout_error} 
  		end
 
  		error do
- 		  erb :'500'
+ 		  erb :'404', {:layout => :layout_error}
  		end 
 		
     get '/' do
@@ -74,7 +74,7 @@ module Aji
 		      erb :video, {:layout => :layout_video}
 		    end   
       rescue
-      		erb :'404'
+ 				erb :'404', {:layout => :layout_error} 
       end
   	end	  	
   end
