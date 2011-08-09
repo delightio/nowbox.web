@@ -80,6 +80,12 @@ class Aji < Thor
     exec "rm -r docs/*"
   end
 
+  desc "frakdb", "Drop and recreate the local dev and test environments"
+  def frakdb
+    system "dropdb aji_test && createdb aji_test"
+    exec "dropdb aji_dev && createdb aji_dev && redis-cli flushall"
+  end
+
 end
 
 Aji.start
