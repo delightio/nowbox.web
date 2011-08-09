@@ -34,6 +34,10 @@ module Aji
       end
 
       send "populate_from_#{source}"
+    rescue Macker::FetchError
+      failed
+      blacklist if failures >= MAX_FAILED_ATTEMPTS
+    else
       update_attribute :populated_at, Time.now
     end
 
@@ -46,9 +50,6 @@ module Aji
         self[attribute] = value
       end
     end
-
-    # Future mentioner/tweeter/poster relationship.
-    # has_many :posters, :through...
 
     # Symbolize source attribute.
     def source; read_attribute(:source).to_sym; end
@@ -95,6 +96,21 @@ module Aji
            "view_count" => view_count,
            "published_at" => published_at.to_i,
            "author" => author.serializable_hash]
+    end
+
+    private
+    MAX_FAILED_ATTEMPTS = 10
+
+    def failures_key
+      "video:#{id}:failures"
+    end
+
+    def failures
+      Aji.redis.get(failures_key).to_i
+    end
+
+    def failed
+      Aji.redis.set failures_key, failures+1
     end
   end
 end

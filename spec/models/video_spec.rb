@@ -31,21 +31,40 @@ describe Aji::Video do
       Aji::Video.find(subject.id).title.should_not be_nil
       Aji::Video.find(subject.id).author.uid.should == "nowmov"
     end
+
+    context "when a video id is invalid" do
+      subject do
+       Aji::Video.new :id => 666, :external_id => 'adudosucvdd', :source => 'youtube'
+      end
+
+      it "marks a failure" do
+        subject.should_receive :failed
+        subject.populate
+      end
+
+      it "blacklists the video when failures reach the max" do
+        9.times { subject.send :failed }
+        subject.should_receive :blacklist
+        subject.populate
+      end
+    end
   end
 
   describe "#relevance" do
-    it "should return higher relevance for newer mentions given the same number of mentions" do
-      at_time_i = Time.now.to_i
-      video = Factory :video_with_mentions
-      old_relevance = video.relevance at_time_i
-
-      # make video's mentions more recent
-      video.mentions.each do |mention|
-        mention.published_at = mention.published_at + rand(100).seconds
-        mention.published_at = Time.now if (mention.published_at.to_i-Time.now.to_i>0)
-        mention.save
+    context "when videos have an equal number of mentions" do
+      it "should return higher relevance for newer mentions" do
+        at_time_i = Time.now.to_i
+        video = Factory :video_with_mentions
+        old_relevance = video.relevance at_time_i
+        # make video's mentions more recent
+        video.mentions.each do |mention|
+          mention.published_at = mention.published_at + rand(100).seconds
+          mention.published_at = Time.now if
+            (mention.published_at.to_i-Time.now.to_i>0)
+          mention.save
+        end
+        video.relevance(at_time_i).should > old_relevance
       end
-      video.relevance(at_time_i).should > old_relevance
     end
 
     it "should not consider blacklisted author" do
@@ -57,7 +76,7 @@ describe Aji::Video do
       video.relevance(at_time_i).should < old_relevance
     end
   end
-  
+
   describe "#latest_mentions" do
     it "returns the latest N mentions" do
       video = Factory :video
@@ -71,12 +90,19 @@ describe Aji::Video do
       video.latest_mentions(2).should_not include oldest_mention
     end
   end
-  
+
   describe "#latest_mentioners" do
     it "returns the latest external accounts who mentioned about the video" do
       video = Factory :video_with_mentions
       mentioners = video.mentions.map(&:author)
       Set.new(video.latest_mentioners).should == Set.new(mentioners)
+    end
+  end
+
+  describe "#failed" do
+    it "increases the number of failures by one" do
+      subject { Video.new(:id => 777) }
+      expect { subject.send :failed }.to change(subject, :failures).by(1)
     end
   end
 end
