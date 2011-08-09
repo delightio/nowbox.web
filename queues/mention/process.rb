@@ -5,7 +5,8 @@ module Aji
 
         @queue = :mention
 
-        def self.perform source, data
+        def self.perform source, data#, destination_channel_id
+          #channel = Channel.find destination_channel_id
           # Short circuit parser to return nil if the tweet has no urls.
           mention = self.parse source, data
 

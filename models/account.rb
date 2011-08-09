@@ -29,6 +29,16 @@ module Aji
         "#{self.class} must override Account#publish.")
     end
 
+    def refresh_consumable_content
+      raise InterfaceMethodNotImplemented.new(
+        "#{self.class} must override Account#refresh_consumable_content.")
+    end
+
+    def refresh_generated_content
+      raise InterfaceMethodNotImplemented.new(
+        "#{self.class} must override Account#refresh_generated_content.")
+    end
+
     def profile_uri; raise InterfaceMethodNotImplemented; end
     def thumbnail_uri; raise InterfaceMethodNotImplemented; end
     def serializable_hash
