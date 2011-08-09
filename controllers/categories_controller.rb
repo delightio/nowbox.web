@@ -21,7 +21,7 @@ module Aji
         categories = Category.all.sample(10)
         if categories.count < 10
           (10-categories.count).times do |n|
-            categories << (Category.create :title => String.random)
+            categories << (Category.create :title => ::String.random)
           end
         end
         categories

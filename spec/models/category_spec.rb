@@ -1,7 +1,7 @@
 require File.expand_path("../../spec_helper", __FILE__)
 
 describe Aji::Category do
-  subject { Aji::Category.create :title => Aji::Category.random_string_ }
+  subject { Aji::Category.create :title => ::String.random }
   it "has an id, title and a list of associated channels" do
     20.times { |n| Factory :youtube_channel }
     subject.id.should be_a_kind_of(Numeric)

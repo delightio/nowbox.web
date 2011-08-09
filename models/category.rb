@@ -9,14 +9,21 @@ module Aji
     def serializable_hash options={}
       {
         "id" => 1+rand(10),
-        "title" => self.class.random_string_,
+        "title" => ::String.random,
         "channel_ids" => channel_ids
       }
     end
     
-    def self.random_string_ length = 10
-      letters = ('a'..'z').to_a
-      (0...length).map { letters[rand 26] }.join
-    end
+    # def self.random_string_ length = 10
+    #   letters = ('a'..'z').to_a
+    #   (0...length).map { letters[rand 26] }.join
+    # end
+  end
+end
+
+class String
+  def self.random length = 10
+    letters = ('a'..'z').to_a
+    (0...length).map { letters[rand 26] }.join
   end
 end
