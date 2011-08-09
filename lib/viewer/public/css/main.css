@@ -18,6 +18,7 @@ footer ul{ float: right; list-style: none; padding: 0px; margin: 0px auto; }
 		footer ul a, footer ul a:active, footer ul a:visited{ color: #777; font-weight: normal;}
 		footer ul a:hover { color: #AAA;}
 
+	#mixpanel { float: right; margin: 10px 0px;}
 .follow, .fblike, .tweet, .plusone { float: left; }
 	
 #main {  position: relative;padding: 0px 0px; z-index: 1; }
@@ -278,6 +279,7 @@ a.opacity_transition{
 		.call_to_action_download a.download.button:hover{  background-color: #66CCFF; border-color: #FFF;}
 
 	.social_sharer{ font-weight: bold; color: #FFF; }
+	
 /* USER QUOTES */
 .user_quote{ padding: 10px; margin-bottom: 10px; }
 	.user_quote:last-child{ margin-bottom: 0px;}
