@@ -3,21 +3,79 @@ require 'sinatra/base'
 module Aji
 
   class Viewer < Sinatra::Base
+    set :raise_errors, false 
+    set :show_exceptions, true if development? 
+    
     # Use Erubis for template generation. Essentially a faster ERB.
     Tilt.register :erb, Tilt[:erubis]
+    
     # Need to explicitly set the template directory:
     # http://stackoverflow.com/questions/3742486/sinatra-cannot-find-views-on-ruby-1-9-2-p0
     set :views, File.dirname(__FILE__) + "/views"
     set :public, File.dirname(__FILE__) + "/public"
+		  
+ 		not_found do
+ 			erb :'404', {:layout => :layout_error} 
+ 		end
+
+ 		error do
+ 		  erb :'404', {:layout => :layout_error}
+ 		end 
+ 
+  		
+		#########
+		# MOBILE
+		#########
+ 
+		helpers do
+		  
+		  # Regexes to match identifying portions of UA strings from iPhone and Android
+		  def mobile_user_agent_patterns
+		    [
+		      /AppleWebKit.*Mobile/,
+		      /Android.*AppleWebKit/
+		    ]
+		  end
+		  
+		  # Compares User Agent string against regexes of designated mobile devices
+		  def mobile_request? 
+		    mobile_user_agent_patterns.any? {|r| request.env['HTTP_USER_AGENT'] =~ r}
+		  end
+		  
+		  # If there is a mobile version of the view, use that. Otherwise revert to normal view
+		  def mobile_file(name)
+		    mobile_file = "#{options.views}/#{name}#{@mobile}.erb"
+		    if File.exist? mobile_file
+		      view = "#{name}#{@mobile}"
+		    else
+		      view = "#{name}"
+		    end
+		  end
+		  
+		  # Set up rendering for partials
+		  def partial(name)
+		    erb mobile_file("_#{name}").to_sym, :layout => false
+		  end
+		  
+		  # Render appropriate file, with mobile layout if needed
+		  def deliver(name, layout)
+		    erb mobile_file(name).to_sym, :layout => :"#{layout}#{@mobile}"
+		  end
+		end
+		
+		# Before responding to each request, verify if it came from a designated mobile device and set @mobile appropriately
+		before do
+		  mobile_request? ? @mobile = ".mobile" : @mobile = ""
+		end
+ 		
+		#########
+		# ROUTES
+		#########
 
     get '/' do
     	@ref = params[:ref] || ""
-      erb :home # , {:layout => :layout_splash}
+      erb :home
     end
-
-#     get '/home' do
-#       erb :home
-#     end
     
     get '/about' do
       erb :about
@@ -41,26 +99,24 @@ module Aji
       erb :launch, {:layout => :layout_splash}
     end
     
-    ['/random', '/:share_id'].each do |path|
-    	get path do
-	     	if(path != '/random')
-	      	@share = Share.find params[:share_id]
-	      else
-	      	@share =  Share.offset(rand(Share.count)).first
-	      end
-	      
-	      @user = @share.user
+    get '/random' do 
+    	random =  Share.offset(rand(Share.count)).first.id
+    	redirect to('/'+random.to_s)
+    end
+    
+  	get '/:share_id' do
+      begin
+      	@share = Share.find(params[:share_id])
+      	@user = @share.user
 	      @video = @share.video
 	
 	      
 	      @user_shares = Share.where("user_id = ? AND id <> ?", @user.id, @share.id).limit(18)
 	      
-	      if(params[:mobile] == 'true')
-	      	erb :mobile_video, {:layout => :layout_mobile}
-	      else
-		      erb :video, {:layout => :layout_video}
-		    end   	
-    	end
-    end
+		    deliver('video', 'layout_video')
+      rescue
+ 				erb :'404', {:layout => :layout_error} 
+      end
+  	end	  	
   end
 end

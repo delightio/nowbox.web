@@ -14,6 +14,7 @@
       <div id="jump_page">
           <a class="source" href="../aji.html">aji.rb</a>
           <a class="source" href="auth_controller.html">auth_controller.rb</a>
+          <a class="source" href="categories_controller.html">categories_controller.rb</a>
           <a class="source" href="channels_controller.html">channels_controller.rb</a>
           <a class="source" href="events_controller.html">events_controller.rb</a>
           <a class="source" href="shares_controller.html">shares_controller.rb</a>
@@ -121,11 +122,7 @@ channels if no parameters are specified.<br/>
           <span class="k">end</span>
         <span class="k">else</span>
           <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_id</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
-          <span class="n">channels</span> <span class="o">=</span>
-            <span class="k">if</span> <span class="n">user</span>
-              <span class="k">then</span> <span class="n">user</span><span class="o">.</span><span class="n">subscribed_channels</span>
-              <span class="k">else</span> <span class="no">Channel</span><span class="o">.</span><span class="n">all</span>
-            <span class="k">end</span>
+          <span class="n">channels</span> <span class="o">=</span> <span class="k">if</span> <span class="n">user</span> <span class="k">then</span> <span class="n">user</span><span class="o">.</span><span class="n">subscribed_channels</span> <span class="k">else</span> <span class="no">Channel</span><span class="o">.</span><span class="n">all</span> <span class="k">end</span>
         <span class="k">end</span>
         <span class="n">channels</span>
       <span class="k">end</span></pre></div>
