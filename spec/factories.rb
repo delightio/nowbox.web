@@ -23,9 +23,9 @@ def random_boolean
   [true, false].sample
 end
 
-def random_category
-  Aji::Supported.categories.sample
-end
+# def random_category
+#   Aji::Supported.categories.sample
+# end
 
 Factory.define :user, :class => 'Aji::User' do |a|
   a.email { random_email }
@@ -62,19 +62,19 @@ end
 Factory.define :channel, :class => 'Aji::Channel' do |a|
   a.title { random_string }
   a.default_listing { random_boolean }
-  a.category { random_category }
+  # a.category { random_category }
 end
 
 Factory.define :youtube_channel, :class => 'Aji::Channels::YoutubeAccount' do |a|
   a.title { random_string }
   a.default_listing { random_boolean }
-  a.category { random_category }
+  # a.category { random_category }
 end
 
 Factory.define :keyword_channel, :class => 'Aji::Channels::Keyword' do |a|
   a.keywords { Array.new(5){|n| random_string} }
   a.default_listing { random_boolean }
-  a.category { random_category }
+  # a.category { random_category }
 end
 
 
@@ -84,6 +84,7 @@ Factory.define :youtube_channel_with_videos, :parent => :youtube_channel do |a|
       video = Factory :populated_video
       c.push video
       c.accounts << video.author
+      c.update_relevance_in_categories [video]
     end
   end
 end

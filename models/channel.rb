@@ -1,12 +1,4 @@
 module Aji
-  class Supported
-    def self.categories
-      [ :undefined, :news, :sports, :music, :science, :comedy, :cars, :kids,
-        :trailers, :gaming, :ted, :comedy, :film, :entertainment, :celebrity,
-        :family]
-    end
-  end
-
   # This is an interface class. Only actions and fields common to all Channel
   # types are included here. Required methods are defined and documented here
   # and raise an exception until overriden in a subclass.
@@ -16,22 +8,25 @@ module Aji
   # - title: String
   # - type: String (ActiveRecord Column: ACCESS ONLY, DO NOT CHANGE)
   # - default_listing: Boolean
-  # - category: String
   # - content_zset: Redis::Objects::SortedSet
   # - created_at: DateTime
   # - updated_at: DateTime
   class Channel < ActiveRecord::Base
     has_many :events
 
-    validates_inclusion_of :category, :in => Aji::Supported.categories
-    def category; read_attribute(:category).to_s.to_sym; end
-    def category= value; write_attribute(:category, value.to_s); end
-
     include Redis::Objects
     sorted_set :content_zset
     include Mixins::ContentVideos
     lock :populating, :expiration => 10.minutes
     include Mixins::Populating
+    sorted_set :category_id_zset
+    sorted_set :channel_id_zset
+    def category_ids limit=-1
+      (category_id_zset.revrange 0, limit).map(&:to_i)
+    end
+    def categories limit=-1
+      category_ids(limit).map { |cid| Category.find cid }
+    end
 
     def thumbnail_uri; raise InterfaceMethodNotImplemented; end
 
@@ -40,7 +35,7 @@ module Aji
         "id" => id,
         "type" => (type||"").split("::").last,
         "default_listing" => default_listing,
-        "category" => category.to_s,
+        "category_ids" => category_ids,
         "title" => title,
         "thumbnail_uri" => thumbnail_uri,
         # TODO: Shouldn't just catch the first version since we may change
@@ -72,6 +67,7 @@ module Aji
         cid = h.first; count = h.last.count # category_id => array of occurance
         category = Category.find cid
         category.update_channel_relevance self, count
+        category_id_zset[cid] += count
       end
     end
 

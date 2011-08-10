@@ -5,7 +5,7 @@
 # {`id`:1,
 #  `type`:"Trending",
 #  `default_listing`:true,
-#  `category`:"undefined",
+#  `category_ids`: [1,2,3],
 #  `title`:"Trending",
 #  `thumbnail_uri`:"http://img.youtube.com/vi/cRBcP6MmE8g/0.jpg",
 #  `resource_uri`:""http://api.nowmov.com/1/channels/1""}
