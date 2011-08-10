@@ -20,7 +20,6 @@ module Aji
     lock :populating, :expiration => 10.minutes
     include Mixins::Populating
     sorted_set :category_id_zset
-    sorted_set :channel_id_zset
     def category_ids limit=-1
       (category_id_zset.revrange 0, limit).map(&:to_i)
     end
