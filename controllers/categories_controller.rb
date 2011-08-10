@@ -19,11 +19,6 @@ module Aji
         error!("Missing/Invalid parameter: type != featured", 404) if params[:type]!="featured"
         error!("Missing parameter: user_id", 404) if params[:user_id].nil?
         categories = Category.all.sample(10)
-        if categories.count < 10
-          (10-categories.count).times do |n|
-            categories << (Category.create :raw_title => ::String.random)
-          end
-        end
         categories
       end
 
