@@ -5,8 +5,8 @@ module Aji
 
         @queue = :mention
 
-        def self.perform source, data#, destination_channel_id
-          #channel = Channel.find destination_channel_id
+        def self.perform source, data, destination_channel_id
+          channel = Channel.find destination_channel_id
           # Short circuit parser to return nil if the tweet has no urls.
           mention = self.parse source, data
 
@@ -30,7 +30,7 @@ module Aji
               mention.videos << video
               mention.save or Aji.log(
                 "Couldn't save #{mention.inspect} for #{mention.errors.inspect}")
-                Aji::Channel.trending.push_recent video
+                channel.push_recent video
           end
         end
 
