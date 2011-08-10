@@ -4,6 +4,7 @@ require 'json'
 module Aji
   module Channels
     class Trending < Channel
+      include Redis::Objects
 
       sorted_set :recent_zset
       def recent_video_ids limit=-1
