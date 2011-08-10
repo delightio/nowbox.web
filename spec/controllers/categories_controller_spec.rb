@@ -6,14 +6,11 @@ module Aji
 
   describe API do
     describe "resource: #{resource}" do
-      before(:each) do
-        20.times { |n| Factory :youtube_channel_with_videos }
-      end
+      subject { Aji::Category.find_or_create_by_raw_title random_string}
       
       describe "get #{resource_uri}/:id" do
         it "returns given category resource" do # TODO
-          c = Factory :category
-          get "#{resource_uri}/#{c.id}"
+          get "#{resource_uri}/#{subject.id}"
           last_response.status.should == 200
         end
       end
@@ -28,7 +25,7 @@ module Aji
           last_response.status.should == 404
         end
 
-        it "returns all featured categories when ?type=featured&user_id=:uid are given" do
+        it "returns all featured categories when ?type=featured&user_id=UID are given" do
           params = { :user_id => (Factory :user).id, :type => "featured" }
           get "#{resource_uri}", params
           last_response.status.should == 200
@@ -43,17 +40,16 @@ module Aji
       
       describe "get #{resource_uri}/:id/channels" do
         it "fails if missing user_id" do
-          get "#{resource_uri}/#{1+rand(10)}/channels"
+          get "#{resource_uri}/#{rand(10)}/channels"
           last_response.status.should == 404
         end
         
-        it "returns all featured channels when ?type=featured&user_id=:uid are given" do
+        it "returns all featured channels when ?type=featured&user_id=UID are given" do
           params = { :user_id => (Factory :user).id, :type => "featured" }
-          get "#{resource_uri}/#{1+rand(10)}/channels", params
+          get "#{resource_uri}/#{subject.id}/channels", params
           last_response.status.should == 200
           channels = JSON.parse last_response.body
           channels.should be_a_kind_of(::Array)
-          channels.count.should > 1
         end
       end
     end

@@ -66,7 +66,15 @@ module Aji
       end
       new_videos
     end
-    
+
+    def update_relevance_in_categories new_videos
+      new_videos.map(&:category_id).group_by{|g| g}.each do |h|
+        cid = h.first; count = h.last.count # category_id => array of occurance
+        category = Category.find cid
+        category.update_channel_relevance self, count
+      end
+    end
+
     # ## Class Methods
     def self.search query
       results = []

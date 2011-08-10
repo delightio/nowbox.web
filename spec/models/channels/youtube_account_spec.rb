@@ -12,20 +12,14 @@ module Aji
       subject.title.should == Channels::YoutubeAccount.to_title(subject.accounts)
     end
 
-    describe "#populate" do
-      it "fetches videos from youtube" do
-        youtube_username = "nicnicolecole"
-        yc = Channels::YoutubeAccount.find_or_create_by_usernames [youtube_username]
-        expect { yc.populate }.to change(yc, :content_video_ids).from([])
+    describe "#populate", :network=>true do
+      subject { Channels::YoutubeAccount.find_or_create_by_usernames ["nowmov", "cnn"] }
 
-        ## @tpun What is this?????
-        #h = JSON.parse yc.content_videos.first.to_json
-        #h["video"]["author"]["username"].should == youtube_username
+      it "fetches videos from youtube" do
+        expect { subject.populate }.to change(subject, :content_video_ids).from([])
       end
 
       it "does not re populate within short time" do
-        real_youtube_users = ["nowmov", "cnn", "freddiew"]
-        subject = Channels::YoutubeAccount.find_or_create_by_usernames real_youtube_users
         subject.should_receive(:save).once
         subject.populate
         subject.should_not_receive(:save)
@@ -33,10 +27,9 @@ module Aji
       end
 
       it "allows forced population" do
-        real_youtube_users = ["nowmov", "cnn", "freddiew"]
-        subject = Channels::YoutubeAccount.find_or_create_by_usernames real_youtube_users
         subject.populate
-        subject.accounts.each { |a| a.should_receive(:populate).once }
+        subject.accounts.each { |a| a.should_receive(:populate).
+          with(:must_populate=>true).once.and_return([]) }
         subject.populate :must_populate=>true
       end
 

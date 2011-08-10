@@ -21,7 +21,7 @@ module Aji
         categories = Category.all.sample(10)
         if categories.count < 10
           (10-categories.count).times do |n|
-            categories << (Category.create :title => ::String.random)
+            categories << (Category.create :raw_title => ::String.random)
           end
         end
         categories
@@ -37,7 +37,8 @@ module Aji
         error!("Missing parameter: category_id", 404) if params[:category_id].nil?
         error!("Missing/Invalid parameter: type != featured", 404) if params[:type]!="featured"
         error!("Missing parameter: user_id", 404) if params[:user_id].nil?
-        Channel.all.sample(1+rand(10))
+        c = Category.find_by_id params[:category_id]
+        c.channels if c
       end
 
       # ## GET categories/:category_id
@@ -47,7 +48,7 @@ module Aji
       # __Optional params__ none
       get '/:category_id' do
         error!("Missing parameter: category_id", 404) if params[:category_id].nil?
-        Category.new
+        Category.find_by_id params[:category_id]
       end
     end
   end

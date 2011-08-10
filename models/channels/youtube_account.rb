@@ -12,16 +12,19 @@ module Aji
 
       def populate args={}
         start = Time.now
+        new_videos = []
         populating_lock.lock do
-          return if recently_populated? && args[:must_populate].nil?
+          return new_videos if recently_populated? && args[:must_populate].nil?
           accounts_populated_at = []
           accounts.each do |account|
-            account.populate args
+            new_videos += account.populate args
             accounts_populated_at << account.populated_at
           end
           update_attribute :populated_at, accounts_populated_at.sort.last # latest
         end
         Aji.log :INFO, "Channels::YoutubeAccount[#{id}, '#{title}', #{accounts.count} accounts]#populate #{args.inspect} took #{Time.now-start} s."
+        update_relevance_in_categories new_videos
+        new_videos
       end
 
       def content_video_ids limit=-1
