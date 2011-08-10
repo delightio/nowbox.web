@@ -5,7 +5,6 @@ module Aji
   module Channels
     class Trending < Channel
 
-      include Redis::Objects
       sorted_set :recent_zset
       def recent_video_ids limit=-1
         (recent_zset.revrange 0, limit).map(&:to_i)
@@ -46,8 +45,7 @@ module Aji
           push video, h[:relevance]
         end
         Aji.log "Replace #{[max_in_flight,in_flight.count].min} (#{populated_count} populated) content videos in #{Time.now-start} s."
-        self.populated_at = Time.now
-        save
+        update_attribute :populated_at, Time.now
       end
 
       def thumbnail_uri
