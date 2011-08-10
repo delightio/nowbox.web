@@ -88,6 +88,11 @@ Factory.define :youtube_channel_with_videos, :parent => :youtube_channel do |a|
   end
 end
 
+Factory.define :category, :class => 'Aji::Category' do |a|
+  a.title { random_string }
+  a.raw_title { random_string }
+end
+
 Factory.define :video, :class => 'Aji::Video' do |a|
   a.external_id { random_string }
   a.source { random_video_source }
@@ -103,6 +108,7 @@ Factory.define :populated_video, :parent => :video do |a|
   a.duration { rand(100) }
   a.viewable_mobile true
   a.view_count { rand(1000) }
+  a.association :category, :factory => :category
   a.published_at { Time.now - rand(10).days }
   a.populated_at { Time.now }
 end

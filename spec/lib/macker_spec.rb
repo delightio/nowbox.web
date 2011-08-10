@@ -13,7 +13,7 @@ describe Aji::Macker do
     it "returns a nested hash of a video's attributes" do
       video_hash = subject.fetch :youtube, 'EzT5iKpxjFA'
       [ :title, :description, :duration, :viewable_mobile, :view_count,
-        :published_at, :author_username ].each do |key|
+        :published_at, :author_id, :category_id ].each do |key|
         video_hash.should have_key key
       end
     end

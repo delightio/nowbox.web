@@ -17,10 +17,12 @@ module Aji
   # - created_at: DateTime
   # - updated_at: DateTime
   # - populated_at: DateTime
+  # - category_id: Integer
   class Video < ActiveRecord::Base
     has_many :events
     has_and_belongs_to_many :mentions
     belongs_to :author, :class_name => 'Account'
+    belongs_to :category
 
     validates_presence_of :external_id
     validates_uniqueness_of :external_id, :scope => :source
@@ -44,10 +46,8 @@ module Aji
     # TODO: Merge this into Video#populate and use Macker for videos.
     def populate_from_youtube
       vhash = Macker.fetch :youtube, external_id
-      self.author = Account::Youtube.find_or_create_by_uid(
-        vhash.delete :author_username)
-      vhash.map do |attribute, value|
-        self[attribute] = value
+      vhash.each do |attribute, value|
+        self[attribute] = value if self.has_attribute? attribute
       end
     end
 
@@ -90,6 +90,7 @@ module Aji
            "title" => title,
            "description" => description,
            "thumbnail_uri" => thumbnail_uri,
+           "category" => category.serializable_hash,
            "source" => source.to_s,
            "external_id" => external_id,
            "duration" => duration.to_f,

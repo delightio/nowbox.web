@@ -11,8 +11,9 @@ module Aji
       end
       
       describe "get #{resource_uri}/:id" do
-        it "never fails with any given category id" do # TODO
-          get "#{resource_uri}/#{1+rand(10)}"
+        it "returns given category resource" do # TODO
+          c = Factory :category
+          get "#{resource_uri}/#{c.id}"
           last_response.status.should == 200
         end
       end

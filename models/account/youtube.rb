@@ -24,12 +24,10 @@ module Aji
       populating_lock.lock do
         return if recently_populated? && args[:must_populate].nil?
         if content_video_ids.count == 0 || args[:must_populate]
-          videos = Macker::Search.new(:author => username).search
-          videos.each do |v|
-            v[:author] = self
-            v.delete :author_username
-            video = Video.find_or_create_by_external_id v[:external_id], v
-            relevance = v[:published_at].to_i
+          vhashes = Macker::Search.new(:author => username).search
+          vhashes.each do |vhash|
+            video = Video.find_or_create_by_external_id vhash[:external_id], vhash
+            relevance = video[:published_at].to_i
             push video, relevance
           end
         end

@@ -16,12 +16,11 @@ module Aji
       end
 
       def populate
-        videos = Macker::Search.new(:keywords => keywords).search
-        videos.each_with_index do |video, i|
-          video[:author] = Account::Youtube.find_or_create_by_uid(
-            video.delete :author_username)
-          content_zset[Video.find_or_create_by_external_id(
-            video[:external_id], video).id] = i
+        vhashes = Macker::Search.new(:keywords => keywords).search
+        vhashes.each_with_index do |vhash, i|
+          video = Video.find_or_create_by_external_id(
+            vhash[:external_id], vhash)
+          content_zset[video.id] = i
         end
         update_attribute :populated_at, Time.now
       end
