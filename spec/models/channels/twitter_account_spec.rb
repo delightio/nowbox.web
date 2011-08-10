@@ -18,14 +18,14 @@ describe Aji::Channels::TwitterAccount do
       subject.should_not be_populated
     end
 
-    it "populates new channel when asked" do
-      new_channel = Aji::Channels::TwitterAccount.find_or_create_by_account @twitter_account,
-        :populate_if_new => true
+    it "populates new channel when asked", :network => true do
+      new_channel = Aji::Channels::TwitterAccount.find_or_create_by_account(
+      @twitter_account, :populate_if_new => true)
       Aji::Channel.find(new_channel.id).should be_populated
     end
   end
 
-  describe "#populate" do
+  describe "#populate", :network => true do
 
     it "does not re populate within short time" do
       subject.populate
@@ -34,7 +34,8 @@ describe Aji::Channels::TwitterAccount do
 
     it "allows forced population" do
       subject.populate
-      expect { subject.populate(:must_populate=>true) }.to change { subject.populated_at }
+      expect { subject.populate(:must_populate=>true) }.to(
+        change { subject.populated_at })
     end
 
     it "adds videos recently shared" do

@@ -5,14 +5,13 @@ module Aji
 
       belongs_to :account, :class_name => 'Aji::Account::Twitter'
       before_create :set_default_title
-      after_create :populate
       sorted_set :recent_zset
 
       USER_TIMELINE_URL = "http://api.twitter.com/1/statuses/user_timeline.json"
 
       def populate args={}
         populating_lock.lock do
-          return if_recently_populated?
+          return if recently_populated? && args[:must_populate].nil?
 
           harvest_tweets
 
@@ -53,12 +52,13 @@ module Aji
         # FIXME: THIS HASH IN ORDER TO HAVE A NAMED UNDOCUMENTED ARGUMENT
         # PISSES ME OFF SO MUCH I NEED TO ENGAGE THE CAPSLOCK KEY TO EXPRESS
         # IT.
-        return if recently_populated? && args[:must_populate].nil?
-        HTTParty.get(USER_TIMELINE_URL, :query => { :count => 200,
+
+        tweets = HTTParty.get(USER_TIMELINE_URL, :query => { :count => 200,
           :screen_name => account.username, :include_entities => true },
-          :parser => Proc.new do |body|
-            Queues::Mention::Process.perform 'twitter', body, self.id
-          end)
+          :parser => Proc.new { |body| MultiJson.decode body })
+        tweets.each do |tweet|
+          Queues::Mention::Process.perform 'twitter', tweet, self.id
+        end
       end
 
       def thumbnail_uri
