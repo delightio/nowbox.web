@@ -15,7 +15,6 @@ module Aji
     validates_presence_of :uid
     validates_uniqueness_of :uid, :scope => :type
 
-    include Redis::Objects
     sorted_set :content_zset
     include Mixins::ContentVideos
     lock :populating, :expiration => 10.minutes
@@ -41,6 +40,7 @@ module Aji
 
     def profile_uri; raise InterfaceMethodNotImplemented; end
     def thumbnail_uri; raise InterfaceMethodNotImplemented; end
+    def refresh_content; raise InterfaceMethodNotImplemented; end
     def serializable_hash
       Hash[ "id" => id,
             "provider" => type.split('::').last.downcase,
