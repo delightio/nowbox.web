@@ -12,6 +12,9 @@ module Aji
       def populate args={}
         start = Time.now
         populating_lock.lock do 
+          # FIXME: THIS HASH IN ORDER TO HAVE A NAMED UNDOCUMENTED ARGUMENT
+          # PISSES ME OFF SO MUCH I NEED TO ENGAGE THE CAPSLOCK KEY TO EXPRESS
+          # IT.
           return if recently_populated? && args[:must_populate].nil?
           tweets = HTTParty.get(USER_TIMELINE_URL, :query => { :count => 200,
               :screen_name => account.username, :include_entities => true },
@@ -52,7 +55,7 @@ module Aji
       end
 
       def self.searchable_columns; [:title]; end
-      
+
       # Private instance methods below.
       private
       def set_default_title
