@@ -22,6 +22,11 @@ module Aji
         subject.should_receive(:save).once
         subject.populate :must_populate=>true
       end
+      
+      it "mark videos populated" do
+        subject.populate
+        subject.content_videos.each {|v| v.should be_populated }
+      end
 
       it "waits for the lock before populating"
     end
