@@ -15,7 +15,7 @@ module Aji
         "http://beta.#{Aji.conf['TLD']}/images/icons/icon-set_nowtrending.png"
       end
 
-      def populate
+      def refresh_content force=false
         vhashes = Macker::Search.new(:keywords => keywords).search
         vhashes.each_with_index do |vhash, i|
           video = Video.find_or_create_by_external_id(

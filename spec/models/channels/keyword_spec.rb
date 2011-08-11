@@ -8,14 +8,13 @@ describe Aji::Channels::Keyword do
       Aji::Channels::Keyword.find(c.id).keywords.should == keywords
     end
   end
-  
-  describe "#populate" do
-    it "fetches videos from youtube and become populated" do
+
+  describe "#refresh_content" do
+    it "fetches videos from youtube and becomes populated" do
       uke = Aji::Channels::Keyword.create(:keywords => %w[ukulele],
                                 :title => "ukukele channel")
-      uke.save
       uke.content_videos.should be_empty
-      uke.populate
+      uke.refresh_content
       uke.content_videos.should_not be_empty
       Aji::Channel.find(uke.id).should be_populated
     end
@@ -26,17 +25,17 @@ describe Aji::Channels::Keyword do
     ch = Aji::Channels::Keyword.create :keywords => keywords
     ch.title.should == Aji::Channels::Keyword.to_title(keywords)
   end
-  
+
   describe "#search_helper" do
     before(:each) do
       @query = Array.new(3){ |n| random_string }.join(",")
     end
-    
+
     it "returns at least one populated keyword channel" do
       results = Aji::Channels::Keyword.search_helper @query
       results.map(&:class).should include Aji::Channels::Keyword
     end
-    
+
     it "returns existing keyword channel if previously existed regardless of query order" do
       old_keyword_channel = Aji::Channels::Keyword.create(
         :keywords => @query.split(',').shuffle)
