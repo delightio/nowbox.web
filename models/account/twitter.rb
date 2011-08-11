@@ -2,15 +2,9 @@ module Aji
   # ## Account::Twitter Schema Extensions
   # - tweeted_zset: Redis::Objects::SortedSet
   class Account::Twitter < Account
-    include Redis::Objects
-    sorted_set :tweeted_zset
     has_one :channel, :class_name => 'Aji::Channels::TwitterAccount',
       :foreign_key => :account_id
     serialize :user_info, Hash
-
-    def tweeted_videos
-      Video.find tweeted_zset.members
-    end
 
     def profile_uri; "http://twitter.com/#{username}"; end
 
