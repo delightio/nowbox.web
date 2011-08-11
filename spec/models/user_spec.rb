@@ -5,8 +5,8 @@ describe Aji::User do
   describe "#cache_event" do
     it "should cache video id in viewed regardless of event type except :enqueue and :dequeue" do
       user = Factory :user
-      Aji::Supported.event_types.delete_if{|t| t==:enqueue||t==:dequeue}.each do |event_type|
-        event = Factory :event, :event_type => event_type
+      Aji::Event.video_actions.delete_if{|t| t==:enqueue||t==:dequeue}.each do |action|
+        event = Factory :event, :action => action
         user.cache_event event
         user.viewed_videos.should include event.video
       end
@@ -14,24 +14,24 @@ describe Aji::User do
 
     it "should never fail dequeuing a video" do
       user = Factory :user
-      event = Factory :event, :event_type => :dequeue
+      event = Factory :event, :action => :dequeue
       lambda { user.cache_event event }.should_not raise_error
       user.queued_videos.should_not include event.video
     end
 
     it "should dequeue enqueued video" do
       user = Factory :user
-      event = Factory :event, :event_type => :enqueue
+      event = Factory :event, :action => :enqueue
       user.cache_event event
       user.queued_videos.should include event.video
-      event.event_type = :dequeue
+      event.action = :dequeue
       user.cache_event event
       user.queued_videos.should_not include event.video
     end
 
     it "should not mark a video viewed when queuing" do
       user = Factory :user
-      event = Factory :event, :event_type => :enqueue
+      event = Factory :event, :action => :enqueue
       user.cache_event event
       user.viewed_videos.should_not include event.video
     end

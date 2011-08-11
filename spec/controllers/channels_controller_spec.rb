@@ -109,7 +109,7 @@ module Aji
           channel = Factory :youtube_channel_with_videos
           viewed_video = channel.content_videos.sample
           user = Factory :user
-          event = Factory :event, :event_type => :view, :user => user, :video => viewed_video
+          event = Factory :event, :action => :view, :user => user, :video => viewed_video
           params = {:user_id => user.id }
           get "#{resource_uri}/#{channel.id}/videos", params
           last_response.status.should == 200

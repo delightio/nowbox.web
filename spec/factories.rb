@@ -11,8 +11,8 @@ def random_email
   "#{random_string}@#{random_string(8)}.#{random_string(5)}.#{random_string(3)}"
 end
 
-def random_event_type
-  Aji::Supported.event_types.sample
+def random_video_action
+  Aji::Event.video_actions.sample
 end
 
 def random_video_source
@@ -22,10 +22,6 @@ end
 def random_boolean
   [true, false].sample
 end
-
-# def random_category
-#   Aji::Supported.categories.sample
-# end
 
 Factory.define :user, :class => 'Aji::User' do |a|
   a.email { random_email }
@@ -56,7 +52,7 @@ Factory.define :event, :class => 'Aji::Event' do |a|
   a.association :video
   a.association :channel
   a.video_elapsed { random_float }
-  a.event_type { random_event_type }
+  a.action { random_video_action }
 end
 
 Factory.define :channel, :class => 'Aji::Channel' do |a|

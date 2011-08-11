@@ -69,7 +69,7 @@ describe Aji::Channel do
 
       viewed_video = channel.content_videos.sample
       user = Factory :user
-      event = Factory :event, :event_type => :view, :user => user, :video => viewed_video
+      event = Factory :event, :action => :view, :user => user, :video => viewed_video
       personalized_videos = channel.personalized_content_videos :user=>user
       personalized_videos.should_not include viewed_video
 

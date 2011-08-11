@@ -1,34 +1,31 @@
 module Aji
-  class Supported
-    def self.event_types; [ :view, :share, :upvote, :downvote, :enqueue, :dequeue, :examine ]; end
-  end
-
   # ## Event Schema
   # - id: Integer
+  # - type: Video or Channel
   # - user_id: Integer (Foreign Key) non-nil
-  # - video_id: Integer (Foreign Key) non-nil
   # - channel_id: Integer (Foreign Key) non-nil
+  # - video_id: Integer (Foreign Key) non-nil
+  # - video_start: Double
   # - video_elapsed: Double
-  # - event_type: Symbol as enum (String in db)
   # - created_at: DateTime
   # - updated_at: DateTime
   class Event < ActiveRecord::Base
     belongs_to :user
     belongs_to :video
     belongs_to :channel
-    after_create :cache_for_user, :examine_video
+    after_create :process
 
-    validates_inclusion_of :event_type, :in => Aji::Supported.event_types
-    def event_type; read_attribute(:event_type).to_sym; end
-    def event_type= value; write_attribute(:event_type, value.to_s); end
+    def self.video_actions; [ :view, :share, :upvote, :downvote, :enqueue, :dequeue, :examine ]; end
+    def self.channel_actions; [ :subscribe, :unsubscribe ]; end
+    
+    validates_inclusion_of :action, :in => (Event.video_actions + Event.channel_actions)
+    def action; read_attribute(:action).to_sym; end
+    def action= value; write_attribute(:action, value.to_s); end
 
     private
-      def cache_for_user
+      def process
         self.user.cache_event self
-      end
-
-      def examine_video
-        Resque.enqueue Aji::Queues::ExamineVideo, video.id
+        Resque.enqueue Aji::Queues::ExamineVideo, video.id if action==:examine
       end
   end
 end

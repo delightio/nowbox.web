@@ -12,11 +12,11 @@ module Aji
           user = Factory :user
           channel = Factory :youtube_channel_with_videos
           video = channel.content_videos.sample
-          event_type = Aji::Supported.event_types.delete_if{|t| t==:enqueue||t==:dequeue}.sample
+          action = Aji::Supported.video_actions.delete_if{|t| t==:enqueue||t==:dequeue}.sample
           user.viewed_videos.should_not include video
           params = { :user_id=>user.id, :channel_id=>channel.id,
             :video_id=>video.id, :video_start=>video.duration/10, :video_elapsed=>video.duration/5,
-            :event_type=>event_type}
+            :action=>action}
           post "#{resource_uri}/", params
           last_response.status.should ==201
           user.viewed_videos.should include video
@@ -25,8 +25,8 @@ module Aji
         it "should return 400 if missing parameters" do
           user = Factory :user
           channel = Factory :youtube_channel_with_videos
-          event_type = Aji::Supported.event_types.sample
-          params = { :user_id=>user.id, :channel_id=>channel.id, :video_elapsed=>rand(10), :event_type=>event_type }
+          action = Aji::Supported.video_actions.sample
+          params = { :user_id=>user.id, :channel_id=>channel.id, :video_elapsed=>rand(10), :action=>action }
           post "#{resource_uri}/", params
           last_response.status.should == 400
         end
@@ -44,7 +44,7 @@ module Aji
           user = Factory :user
           channel = Factory :youtube_channel_with_videos
           video = channel.content_videos.sample
-          params = { :user_id=>user.id, :video_id=>video.id, :channel_id=>channel.id, :video_elapsed=>rand(10), :event_type=>'examine'}
+          params = { :user_id=>user.id, :video_id=>video.id, :channel_id=>channel.id, :video_elapsed=>rand(10), :action=>'examine'}
           post "#{resource_uri}/", params
           Resque.size(:examine_video).should == 1
         end

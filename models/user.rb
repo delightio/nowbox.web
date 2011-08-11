@@ -65,7 +65,7 @@ module Aji
       at_time = event.created_at.to_i
       video_id = event.video_id
 
-      case event.event_type
+      case event.action
       when :view
         viewed_zset[video_id] = at_time
 

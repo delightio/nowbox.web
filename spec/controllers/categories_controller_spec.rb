@@ -31,8 +31,7 @@ module Aji
           last_response.status.should == 200
           body_hash = JSON.parse last_response.body
           returned_categories = body_hash.map {|h| h["category"]}
-          returned_categories.should have(10).categories
-          returned_categories
+          returned_categories.should have_at_most(10).categories
         end
         
         it "returns all categories if no parameter is given"
