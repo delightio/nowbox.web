@@ -30,7 +30,7 @@ module Aji
     include Redis::Objects
     sorted_set :content_zset
     include Mixins::ContentVideos
-    lock :populating, :expiration => 10.minutes
+    lock :refresh, :expiration => 10.minutes
     include Mixins::Populating
 
     def thumbnail_uri; raise InterfaceMethodNotImplemented; end
@@ -50,6 +50,10 @@ module Aji
       }
     end
 
+    # TODO: Refactor to take a list of video ids and a limit parameter instead
+    # of hash. This will reduce coupling and allow us to do more sophisticated
+    # things than just removing a users viewed videos with less coupling and
+    # thus less code.
     def personalized_content_videos args
       user = args[:user]
       raise ArgumentError, "User missing for Channel[#{self.id}].personalized #{args.inspect}" if user.nil?
@@ -66,7 +70,12 @@ module Aji
       end
       new_videos
     end
-    
+
+    def refresh_content force=false
+      raise InterfaceMethodNotImplemented,
+        "#{self.class} must implement #refresh_content(force) method"
+    end
+
     # ## Class Methods
     def self.search query
       results = []
