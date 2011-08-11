@@ -17,7 +17,7 @@ module Aji
         Aji.redis.zremrangebyrank recent_zset.key, 0, -n
       end
 
-      def populate args={}
+      def refresh_content force=false
         in_flight = []
         at_time_i = Time.now.to_i
 
