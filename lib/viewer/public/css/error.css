@@ -14,7 +14,7 @@
 	#error_reason p{ color: #666; font-size: 20px; text-shadow: 0px 1px 1px #FFF; text-align: center; line-height: 1.5; margin-bottom: 20px;}
 		#error_reason p:first-child{ color: #333; }
 ul#error_outcome{ padding: 0px; margin: 40px 0px; }
-	ul#error_outcome li { padding: 0px; margin: 0px 20px; list-style: none; float: left; text-align: center;}
+	ul#error_outcome li { padding: 0px; margin: 0px 40px; list-style: none; float: left; text-align: center;}
 	ul#error_outcome a{  padding: 10px; width: 200px; display: block;}
 		ul#error_outcome a:hover{ background: rgba(255, 255, 255, 0.2); }
 		ul#error_outcome a.image{ }

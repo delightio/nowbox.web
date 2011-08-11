@@ -32,7 +32,8 @@ module Aji
 		  # Regexes to match identifying portions of UA strings from iPhone and Android
 		  def mobile_user_agent_patterns
 		    [
-		      /AppleWebKit.*Mobile/,
+		      #/AppleWebKit.*Mobile/,
+		      /iPhone.*Mobile/,
 		      /Android.*AppleWebKit/
 		    ]
 		  end

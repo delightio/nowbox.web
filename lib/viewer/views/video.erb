@@ -1,9 +1,10 @@
 <div id="video">
-	<div class="wrapper" style="padding-top: 0px;">
+	<div class="wrapper">
 		<%= erb :_call_to_action_social %>
 	</div>	
 	
-	<% if @share.message %>
+	
+	<% if @share.message && false %>
 	<div id="sharer" class="wrapper">
 		<div class="message">
 			<span class="quotes">&#8220;</span><%= @share.message %><span class="quotes">&#8221;</span><span class="message_sharer"> - <%= @user.first_name %></span>
@@ -13,20 +14,18 @@
 	
   <div id="embed">
   	<% if @video.source == :youtube %>
-			<iframe width="800" height="400" src="http://www.youtube.com/embed/<%= @video.external_id %>?rel=0&hd=1&modestbranding=1&autohide=1&showinfo=0&fs=1&autoplay=1" frameborder="0" allowfullscreen></iframe>
+			<iframe width="900" height="510" src="http://www.youtube.com/embed/<%= @video.external_id %>?rel=0&hd=1&modestbranding=1&autohide=1&showinfo=0&fs=1&autoplay=1" frameborder="0" allowfullscreen></iframe>
 		<% end %>
-		
-		<div id="next_button">
-			<a href="/random" class="opacity_transition">
-				<img src="/images/graphics/aji-icons_shuffle.png" width="100px">
-			</a>
-		</div>
   </div>
  
 	<div id="info" class="wrapper">
 		<div id="video_info">
 			<div class="title"><%= @video.title %></div>
 			<div class="description truncateme"><%= @video.description %></div>		
+		</div>
+		
+		<div id="share_button">
+			<button onclick="$(this).hide(); $('#share_buttons').show();" class="minimal">Share</button>
 		</div>
 		<div id="share_buttons">
 			<div class="fblike">
@@ -39,16 +38,22 @@
 				<iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url=http://nowmov.com/<%= @share.id %>&count=vertical&via=nowmov&related=fahdoo:Nowmov UX Engineer&text=<%= "Watch this video now! '" + @video.title + "'" %>" style="width:60px; height:70px;"></iframe>
 			</div>
 		</div>
+
 		<div class="clearfix"></div>
 	</div>
 
-	<div class="wrapper" style="">
+	<div class="wrapper" style="display: none;">
 		<%= erb :_appstore %>
 	</div>	
 	
 	<% if @user_shares.count > 0 %>
 	<ul id="user_videos" class="wrapper">
 		<h2>Suggested videos</h2>
+		<div id="next_button">
+			<a href="/random" class="opacity_transition">
+				<img src="/images/graphics/aji-icons_shuffle.png" width="50px">
+			</a>
+		</div>	
 		<% @user_shares.each do |user_share| %>
 			<li>
 				<a href="/<%= user_share.id %>">
@@ -64,4 +69,11 @@
 		<div class="clearfix"></div>
 	</ul>		
 	<% end %>
+	
+
+	<div class="wrapper">
+		<a id="logo" href="./">
+			<img src="./images/logos/nowmov-logotype-white.png" height="30px"/>
+		</a>
+	</div>		
 </div>

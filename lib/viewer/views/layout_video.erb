@@ -7,7 +7,6 @@
 <head>
 		<title>nowmov | <%= @video.title %></title>
 		<%= erb :_layout_head %>
-		<meta name="viewport" content="width=device-width, initial-scale=0.375">		
 		
 	  <meta property="title" content="<%= @video.title %>" />
 	  <meta property="description" content="<%= @video.description %>" />
@@ -19,13 +18,12 @@
 	  <meta property="og:description" content="<%= @video.description %>" />
 	  <meta property="og:image" content="<%= @video.thumbnail_uri %>" />
 	  
-	  <meta name="medium" content="video" />		
+	  <meta name="medium" content="video" />	
+	  	
+		<meta name="viewport" content="width=960">
 		
 </head>
 <body id="video_layout">
-	<header>
-		<%= erb :_header %>
-	</header>
 	<div id="video_page" role="main">
 		<%= yield %>
 	</div>

@@ -1,5 +1,5 @@
 body { background: url(/images/textures/aji-tiles-crosshatch-white.jpg) repeat; color: #090909; }
-body#video_layout { background: url(/images/textures/aji-tiles-darkgray.jpg) repeat; color: #090909; }
+body#video_layout { background-color: #333; background: url(/images/textures/aji-tiles-darkgray.jpg) repeat; color: #090909; }
 
 header { position: relative; padding: 25px 0px 25px; line-height: 30px; text-align: left;  font-size: 14px; z-index: 10;}
 	header > .wrapper { padding: 0px; }
@@ -22,14 +22,14 @@ footer ul{ float: right; list-style: none; padding: 0px; margin: 0px auto; }
 .follow, .fblike, .tweet, .plusone { float: left; }
 	
 #main {  position: relative;padding: 0px 0px; z-index: 1; }
-.wrapper{ width: 800px; padding: 20px 0px; margin: auto; }
-.section{  margin: 0px 0px 20px; padding: 10px 10px; background: rgba(255, 255, 255, 0.5); box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);}
+.wrapper{ width: 900px; padding: 20px 0px; margin: auto; position: relative;}
+.section{  margin: 0px 0px 20px; padding: 20px; background: rgba(255, 255, 255, 0.5); box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);}
 .bare.section{  background: transparent; box-shadow: none; }
 .section.lite-blue{ background: rgba(0, 153, 204, 0.1); }
 .section.lite-gray{ background: rgba(0, 0, 0, 0.1); }
 
 ul.section { list-style: none; }
-.section li{ margin: 10px 0px;  color: #444;}
+.section li{ margin: 10px;  color: #444;}
 .section p{ margin: 10px 0px; font-size: 15px; line-height: 2;}
 
 .ipad-chrome{ position: relative; height: 469px; width: 600px; background-repeat: no-repeat; background-image: url(/images/graphics/ipad-chrome.png); }
@@ -125,7 +125,7 @@ ul.section { list-style: none; }
 #main_photo_wrapper{  height: 500px; width: 100%; margin: -100px auto 0px; position: relative;}
 #main_photo{ height: 500px; width: 100%;  margin: auto; overflow: hidden; }
 	#main_photo img{   }
-#tagline {  display:block; line-height: 40px; color: #FFF; text-align: left; font-weight: bold; position: absolute;  left: 50%;  bottom: 50px; width: 800px; margin-left: -400px; font: 100 50px "helvetica neue", helvetica, arial, sans-serif; text-shadow: 0px 1px 5px #000;}
+#tagline {  display:block; line-height: 40px; color: #FFF; text-align: left; font-weight: bold; position: absolute;  left: 50%;  bottom: 50px; width: 900px; margin-left: -450px; font: 100 50px "helvetica neue", helvetica, arial, sans-serif; text-shadow: 0px 1px 5px #000;}
 .taglinebox{ position: absolute; bottom: 0px; width: 100%; height: 200px; }
 
 				
@@ -157,13 +157,13 @@ ul.section { list-style: none; }
 	#about .image { float: left; width: 100px; }
 		#about .image a{ display: block; }
 		#about .image img { width: 100px; }
-	#about .bio { float: left; width: 500px; padding: 0px 10px; line-height: 1.5; }
+	#about .bio { float: left; width: 600px; padding: 0px 20px; line-height: 1.5; }
 		#about .identity{ font-weight: bold; font-size: 16px; color: #000; }
 			#about .identity .role{ margin-left: 5px; color: #AAA; font-weight: normal;}
 		#about .description{ font-size: 14px;}
 		#about .email{ color: #AAA; }
 
-#investors li{ display: inline; }
+#investors li{ display: inline; margin: 0px; }
 	#investors li:after{ content: ", "; }
 	#investors li:last-child:after{ content: "";}
 	
@@ -179,18 +179,22 @@ margin-left: 20px;}
 		#tour .intro p{ font-size: 16px; line-height: 2; text-shadow: 0px 1px 1px #FFF; }
 		
 /* VIDEO */
-#video #embed { position: relative; height: 400px; margin: 0px 0px; padding: 0px; text-align: center; background-color: #EEE; background: rgba(0, 0, 0, 0.5);}
+#video #logo{ height: 50px; width: 300px; margin: 20px auto 10px; text-align: center; float: none;}
+#video .call_to_action_social{ }
+#video #embed { position: relative; height: 510px; margin: 0px 0px; padding: 0px; text-align: center; background-color: #111; background: rgba(0, 0, 0, 0.8);}
 	#video #embed iframe{ margin: auto; }
 	
-	#share_buttons{ float: right; height: 70px; }
+	#share_button{ float: right; }	
+	#share_buttons{ float: right; height: 70px; display: none;}
 
+	#info{ margin-top: 10px;}
 	#video_info{ float: left; display: block; text-shadow: 0px 1px 1px #000; width: 520px; text-overflow: ellipsis; overflow: hidden;  line-height:  25px;}
 		#video_info .title{ font-size: 16px; color: #EEE; }
 		#video_info .description { font-size: 12px; color: #AAA; line-height:  20px; text-shadow: 0px 1px 1px #222;}
 			#video_info .description a{ color: #666; font-style: italic;}
 			#video_info .description a:hover{ color: #0099CC; }
-	ul#user_videos { list-style: none; padding: 0px; padding-bottom: 50px; }
-		ul#user_videos li { float: left; display: block; width: 250px; height: 195px; margin: 8px; }
+	ul#user_videos { list-style: none; padding: 0px; padding-bottom: 20px; border-top: 1px dotted #777; border-bottom: 1px dotted #777; }
+		ul#user_videos li { float: left; display: block; width: 284px; height: 195px; margin: 8px; }
 			ul#user_videos li .image{ height: 125px; overflow: hidden; position: relative;}
 				ul#user_videos li img{ width: 100%; margin-top: -25px; 
 															-webkit-transition: all 3s ease-in-out;
@@ -217,14 +221,16 @@ margin-left: 20px;}
 			ul#user_videos li a .title{ overflow: hidden; text-overflow: ellipsis; line-height: 20px; color: #777; text-shadow: 0px 1px 1px #222; width: 100%; height: 40px; margin-top: 10px; }
 				ul#user_videos li a:hover .title{ color: #AAA; }
 	
-	#video h2{ text-transform: uppercase; color: #AAA; border-top: 1px dotted #777;  text-shadow: 0px 1px 1px #000; text-align: center; padding: 10px 0px; }	
+	#video h2{ text-transform: uppercase; color: #AAA; text-shadow: 0px 1px 1px #000; text-align: center; padding: 10px 0px; }	
 	
-	#next_button{ position: absolute; top: 0; bottom: 0px; width: 120px; right: 0px; }
+	#next_button{ position: absolute; right: 0px; top: 15px;}
 		#next_button a{ font-size: 20px; text-transform: uppercase; color: #EEE;
 				display: block; height: 100%; width: 100%; opacity: 0.3; 
 		 }
-		#next_button a img{ position: absolute; top: 50%; margin-top: -35px; height: 70px; width: 100px; margin-right: 10px; }
+		#next_button a img{ }
 		 	#next_button a:hover{ opacity: 1;}
+
+
 	
 /* SHARER */
 #sharer{ text-align: center; padding-top: 0px; }
@@ -272,11 +278,19 @@ a.opacity_transition{
 	#call_to_action_quote a.download.button{ float: right; display: block; padding: 0px 20px; line-height: 40px; border: 5px solid #EFEFEF; background-color: #66CCFF; color: #F9F9F9; font-size: 18px; font-weight: bold;}
 		#call_to_action_quote a.download.button:hover{ border-color: #FFF;}
 		
-.call_to_action_download{ padding: 10px; background-color: #EFEFEF; box-shadow: inset 0px 0px 5px #000;}
+.call_to_action_download{ padding: 10px; background-color: #000; box-shadow: inset 0px 0px 5px #000;}
 	.call_to_action_download .image{ float: left; display: block; margin-right: 10px; height: 48px; }
 	.call_to_action_download .blurb{ float: left; display: block; line-height:  25px; color: #333; text-shadow: 0px 1px 1px #222; width: 525px;}
 	.call_to_action_download a.download.button{ float: right; display: block; padding: 0px 20px; line-height: 40px; border: 5px solid transparent; background-color: #5bb8ea; background: url(/images/textures/aji-tiles-crosshatch-brightblue.jpg) repeat; color: #F9F9F9; font-size: 18px; font-weight: bold;}
 		.call_to_action_download a.download.button:hover{  background-color: #66CCFF; border-color: #FFF;}
+
+
+.call_to_action_social{ padding: 10px; background-color: #000; box-shadow: inset 0px 0px 5px #000;}
+	.call_to_action_social .image{ float: left; display: block; margin-right: 10px; height: 48px; }
+	.call_to_action_social .blurb{ float: left; display: block; line-height:  25px; color: #333; text-shadow: 0px 1px 1px #222; width: 500 px;}
+	.call_to_action_social a.download.button{ float: right; display: block; padding: 0px 20px; line-height: 40px; border: 5px solid transparent; background-color: #5bb8ea; background: url(/images/textures/aji-tiles-crosshatch-brightblue.jpg) repeat; color: #F9F9F9; font-size: 18px; font-weight: bold;}
+		.call_to_action_social a.download.button:hover{  background-color: #66CCFF; border-color: #FFF;}
+
 
 	.social_sharer{ font-weight: bold; color: #FFF; }
 	
