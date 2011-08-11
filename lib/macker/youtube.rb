@@ -34,10 +34,13 @@ module Aji
       end
 
       def self.youtube_it_to_hash video
-        category_from_youtube = video.categories.first ||
-          Category.find_or_create_by_raw_title("*** undefined ***")
-        category = Category.find_or_create_by_raw_title(
-          category_from_youtube.label, :title => category_from_youtube.term)
+        category_from_youtube = video.categories.first
+        if category_from_youtube
+          category = Category.find_or_create_by_raw_title(
+            category_from_youtube.label, :title => category_from_youtube.term)
+        else
+          category = Category.find_or_create_by_raw_title "*** undefined ***"
+        end
         author = Account::Youtube.find_or_create_by_uid(video.author.name)
         {
           :title => video.title,
