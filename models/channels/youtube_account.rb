@@ -10,18 +10,21 @@ module Aji
       def self.to_title accounts; accounts.map(&:uid).join ", "; end
       def set_title; self.title = title || self.class.to_title(accounts); end
 
-      def populate args={}
+      def refresh_content force=false
         start = Time.now
-        populating_lock.lock do
-          return if recently_populated? && args[:must_populate].nil?
+        refresh_lock.lock do
+          return if recently_populated? && content_video_ids.count > 0 && !force
           accounts_populated_at = []
           accounts.each do |account|
-            account.populate args
+            account.refresh_content force
             accounts_populated_at << account.populated_at
           end
+          # TODO: Steven! thinks this should either be the current time or the
+          # oldest time since it will indicate the staleness of the channel
+          # better.
           update_attribute :populated_at, accounts_populated_at.sort.last # latest
         end
-        Aji.log :INFO, "Channels::YoutubeAccount[#{id}, '#{title}', #{accounts.count} accounts]#populate #{args.inspect} took #{Time.now-start} s."
+        Aji.log :INFO, "Channels::YoutubeAccount[#{id}, '#{title}', #{accounts.count} accounts]#refresh_content(force:#{force}) took #{Time.now-start} s."
       end
 
       def content_video_ids limit=-1
@@ -47,23 +50,23 @@ module Aji
         matching_channels.find_all { |c| c.accounts.length == accounts.length }
       end
 
-      def self.find_or_create_by_usernames usernames, args={}
+      def self.find_or_create_by_usernames usernames, params={}
         accounts = usernames.map do |n|
           Account::Youtube.find_or_create_by_uid :uid => n
         end
         found = self.find_all_by_accounts accounts
         return found.first if !found.empty?
 
-        populate_if_new = args[:populate_if_new]
-        args.delete :populate_if_new
-        args.merge! :accounts => accounts
-        channel = self.create args
-        channel.populate if populate_if_new
+        populate_if_new = params[:populate_if_new]
+        params.delete :populate_if_new
+        params.merge! :accounts => accounts
+        channel = Channels::YoutubeAccount.create params
+        channel.refresh_content if populate_if_new
         channel
       end
 
       def self.searchable_columns; [:title]; end
-
     end
   end
 end
+

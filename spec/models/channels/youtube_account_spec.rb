@@ -12,32 +12,32 @@ module Aji
       subject.title.should == Channels::YoutubeAccount.to_title(subject.accounts)
     end
 
-    describe "#populate" do
+    describe "#refresh_content" do
       it "fetches videos from youtube" do
         youtube_username = "nicnicolecole"
         yc = Channels::YoutubeAccount.find_or_create_by_usernames [youtube_username]
-        expect { yc.populate }.to change(yc, :content_video_ids).from([])
+        expect { yc.refresh_content }.to change(yc, :content_video_ids).from([])
 
         ## @tpun What is this?????
         #h = JSON.parse yc.content_videos.first.to_json
         #h["video"]["author"]["username"].should == youtube_username
       end
 
-      it "does not re populate within short time" do
+      it "does not refresh within short time" do
         real_youtube_users = ["nowmov", "cnn", "freddiew"]
         subject = Channels::YoutubeAccount.find_or_create_by_usernames real_youtube_users
         subject.should_receive(:save).once
-        subject.populate
+        subject.refresh_content
         subject.should_not_receive(:save)
-        subject.populate
+        subject.refresh_content
       end
 
-      it "allows forced population" do
+      it "allows forced refresh" do
         real_youtube_users = ["nowmov", "cnn", "freddiew"]
         subject = Channels::YoutubeAccount.find_or_create_by_usernames real_youtube_users
-        subject.populate
-        subject.accounts.each { |a| a.should_receive(:populate).once }
-        subject.populate :must_populate=>true
+        subject.refresh_content
+        subject.accounts.each { |a| a.should_receive(:refresh_content).once }
+        subject.refresh_content true
       end
 
       it "waits for the lock before populating"
@@ -120,7 +120,7 @@ module Aji
         old_ids.should_not be_empty
         ea = Account::Youtube.create :uid => 'nowmov'
         subject.accounts << ea
-        ea.populate :must_populate => true
+        ea.refresh_content true
         ea.content_videos.should_not be_empty
         subject.content_video_ids.should == old_ids
       end
