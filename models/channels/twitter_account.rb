@@ -9,9 +9,9 @@ module Aji
 
       USER_TIMELINE_URL = "http://api.twitter.com/1/statuses/user_timeline.json"
 
-      def populate args={}
-        populating_lock.lock do
-          return if recently_populated? && args[:must_populate].nil?
+      def refresh_content force=false
+        refresh_lock.lock do
+        return if recently_populated? && content_video_ids.count > 0 && !force
 
           harvest_tweets
 
@@ -49,10 +49,6 @@ module Aji
       # HACK: This is long, complex, blocking, and tightly coupled. A good
       # candidate for refactoring later.
       def harvest_tweets
-        # FIXME: THIS HASH IN ORDER TO HAVE A NAMED UNDOCUMENTED ARGUMENT
-        # PISSES ME OFF SO MUCH I NEED TO ENGAGE THE CAPSLOCK KEY TO EXPRESS
-        # IT.
-
         tweets = HTTParty.get(USER_TIMELINE_URL, :query => { :count => 200,
           :screen_name => account.username, :include_entities => true },
           :parser => Proc.new { |body| MultiJson.decode body })
@@ -77,10 +73,11 @@ module Aji
 
       # Class methods below
       def self.find_or_create_by_account account, args={}
+        # TODO: I find this questionable.
         populate_if_new = args.delete :populate_if_new
         args.merge! :account => account
-        account.channel ||= self.create args
-        account.channel.populate if populate_if_new
+        account.channel ||= Channels::TwitterAccount.create args
+        account.channel.refresh_content if populate_if_new
         account.channel
       end
 
