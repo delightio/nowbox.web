@@ -15,11 +15,19 @@ describe Aji::Account do
     end
   end
 
-  describe ".blacklist" do
+  describe "#blacklist" do
     it "should blacklist an account" do
       bad_account = Aji::Account.create :uid => "someguy"
       bad_account.blacklist
       bad_account.should be_blacklisted
+    end
+  end
+
+  describe ".from_param" do
+    it "parses username and provider from a specialized param string" do
+      param_string = "nuclearsandwich@youtube"
+      Aji::Account.from_param(param_string).
+        should == [ "nuclearsandwich", "youtube" ]
     end
   end
 end
