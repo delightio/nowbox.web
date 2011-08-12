@@ -1,8 +1,4 @@
 module Aji
-  class Supported
-    def self.channel_actions; [:subscribe, :unsubscribe, :arrange]; end
-  end
-
   # ## User Schema
   # - id: Integer
   # - email: String
@@ -26,31 +22,6 @@ module Aji
     sorted_set :queued_zset
     list :subscribed_list # User's Subscribed channels.
 
-    def subscribed? channel
-      subscribed_list.include? channel.id.to_s
-    end
-    def subscribe channel, args={}
-      subscribed_list << channel.id
-      subscribed? channel
-    end
-    def unsubscribe channel, args={}
-      subscribed_list.delete channel.id
-      !subscribed?(channel)
-    end
-    def arrange channel, args={}
-      new_position = (args[:new_position] || args["new_position"]).to_i
-      return false if new_position.nil? || !subscribed_list.include?(channel.id.to_s)
-      return true if subscribed_list[new_position]==channel.id.to_s # below logic doesn't work for same pos
-      subscribed_list.delete channel.id.to_s
-      if subscribed_list.length <= new_position
-        subscribed_list << channel.id
-      else
-        channel_id_at_new_position = subscribed_list[new_position]
-        # TODO: Use Redis::Objects facility for this.
-        Aji.redis.linsert subscribed_list.key, "BEFORE", channel_id_at_new_position, channel.id
-      end
-      subscribed? channel
-    end
     def subscribe_default_channels
       Channel.default_listing.each { |c| subscribe c }
       # TODO: we are pulling in the whole channel object but we really only care about Channel#id
@@ -66,6 +37,12 @@ module Aji
       video_id = event.video_id
 
       case event.action
+      when :subscribe
+        subscribe event.channel
+
+      when :unsubscribe
+        unsubscribe event.channel
+
       when :view
         viewed_zset[video_id] = at_time
 
@@ -116,6 +93,19 @@ module Aji
     def create_identity
       update_attribute :identity_id, Identity.create.id if self.identity.nil?
     end
+
+    def subscribed? channel
+      subscribed_list.include? channel.id.to_s
+    end
+    def subscribe channel, args={}
+      subscribed_list << channel.id
+      subscribed? channel
+    end
+    def unsubscribe channel, args={}
+      subscribed_list.delete channel.id
+      !subscribed?(channel)
+    end
+
   end
 end
 

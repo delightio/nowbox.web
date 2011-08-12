@@ -1,8 +1,4 @@
 module Aji
-  class Supported
-    def self.video_actions; [:examine]; end
-  end
-
   # ## Video Schema
   # - id: Integer
   # - author_id: Integer (Foreign Key)

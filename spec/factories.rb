@@ -15,6 +15,10 @@ def random_video_action
   Aji::Event.video_actions.sample
 end
 
+def random_channel_action
+  Aji::Event.channel_actions.sample
+end
+
 def random_video_source
   [:youtube].sample
 end
@@ -32,8 +36,8 @@ end
 Factory.define :user_with_channels, :parent =>:user do |a|
   a.after_create do |u|
     (2+rand(10)).times do |n|
-      c = Factory :youtube_channel_with_videos
-      u.subscribe c
+      Factory :event, :user => u, :action => :subscribe,
+        :channel => (Factory :youtube_channel_with_videos)
     end
   end
 end
@@ -53,6 +57,12 @@ Factory.define :event, :class => 'Aji::Event' do |a|
   a.association :channel
   a.video_elapsed { random_float }
   a.action { random_video_action }
+end
+
+Factory.define :channel_event, :class => 'Aji::Event' do |a|
+  a.association :user
+  a.association :channel
+  a.action { random_channel_action }
 end
 
 Factory.define :channel, :class => 'Aji::Channel' do |a|

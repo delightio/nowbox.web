@@ -43,10 +43,9 @@ module Aji
         end
         
         it "returns subscribed channels if given user id" do
-          user = Factory :user
           channel = Factory :youtube_channel_with_videos
-          user.subscribe channel
-          params = { :user_id => user.id }
+          event = Factory :event, :channel => channel, :action => :subscribe
+          params = { :user_id => event.user.id }
           get "#{resource_uri}", params
           last_response.status.should == 200
           body_hash = JSON.parse last_response.body
