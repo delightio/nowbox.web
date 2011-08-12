@@ -5,12 +5,18 @@ module Aji
   # - uid: String non-nil
   # - created_at: DateTime
   # - updated_at: DateTime
+  # - auth_info: Text (Serialized Hash)
   # - blacklisted_at: DateTime
   class Account < ActiveRecord::Base
     include Redis::Objects
-    serialize :user_info
-    serialize :credentials
+    serialize :user_info, Hash
+    serialize :credentials, Hash
     belongs_to :identity
+
+    has_and_belongs_to_many :channels,
+      :class_name => 'Channel::Account',
+      :join_table => :accounts_channels,
+      :foreign_key => :account_id, :association_foreign_key => :channel_id
 
     validates_presence_of :uid
     validates_uniqueness_of :uid, :scope => :type
@@ -50,5 +56,19 @@ module Aji
             "thumbnail_uri" => thumbnail_uri ]
     end
 
+    # Class Methods follow
+    def Account.find_or_create_by_param string, params
+      username, provider = Account.from_param string
+      Account.find_or_create_by_provider_and_username provider, username, params
+    end
+
+    # Returns the `username` and `provider` of a given parameterized account.
+    def Account.from_param str
+      str.split("@")[0..1]
+    end
+
+    def Account.to_channel
+      Channel::Account.find_or_create_by_accounts Array(self)
+    end
   end
 end
