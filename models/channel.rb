@@ -104,7 +104,7 @@ module Aji
     end
 
     def self.trending
-      Channels::Trending.singleton
+      Channel::Trending.singleton
     end
 
   end

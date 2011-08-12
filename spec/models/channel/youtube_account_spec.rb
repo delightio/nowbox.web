@@ -1,21 +1,21 @@
 require File.expand_path("../../../spec_helper", __FILE__)
 
 module Aji
-  describe Channels::YoutubeAccount do
+  describe Channel::Account do
     before(:each) do
       @usernames = []
       3.times { |n| @usernames << (Factory :account).uid }
     end
-    subject { Channels::YoutubeAccount.find_or_create_by_usernames @usernames }
+    subject { Channel::Account.find_or_create_by_usernames @usernames }
 
     it "should set title based on accounts if no title is given" do
-      subject.title.should == Channels::YoutubeAccount.to_title(subject.accounts)
+      subject.title.should == Channel::Account.to_title(subject.accounts)
     end
 
     describe "#refresh_content" do
       it "fetches videos from youtube" do
         youtube_username = "nicnicolecole"
-        yc = Channels::YoutubeAccount.find_or_create_by_usernames [youtube_username]
+        yc = Channel::Account.find_or_create_by_usernames [youtube_username]
         expect { yc.refresh_content }.to change(yc, :content_video_ids).from([])
 
         ## @tpun What is this?????
@@ -25,7 +25,7 @@ module Aji
 
       it "does not refresh within short time" do
         real_youtube_users = ["nowmov", "cnn", "freddiew"]
-        subject = Channels::YoutubeAccount.find_or_create_by_usernames real_youtube_users
+        subject = Channel::Account.find_or_create_by_usernames real_youtube_users
         subject.should_receive(:save).once
         subject.refresh_content
         subject.should_not_receive(:save)
@@ -34,7 +34,7 @@ module Aji
 
       it "allows forced refresh" do
         real_youtube_users = ["nowmov", "cnn", "freddiew"]
-        subject = Channels::YoutubeAccount.find_or_create_by_usernames real_youtube_users
+        subject = Channel::Account.find_or_create_by_usernames real_youtube_users
         subject.refresh_content
         subject.accounts.each { |a| a.should_receive(:refresh_content).once }
         subject.refresh_content true
@@ -46,16 +46,16 @@ module Aji
     describe ".find_or_create_by_usernames" do
 
       it "returns a new channel when there is no exact match" do
-        subject = Channels::YoutubeAccount.find_or_create_by_usernames @usernames
+        subject = Channel::Account.find_or_create_by_usernames @usernames
         subject.should_not be_nil
         @usernames.delete @usernames.sample
-        new_channel = Channels::YoutubeAccount.find_or_create_by_usernames @usernames
+        new_channel = Channel::Account.find_or_create_by_usernames @usernames
         new_channel.should_not == subject
       end
 
       it "returns same channel when we find an existing channel with given usernames" do
-        new_channel = Channels::YoutubeAccount.find_or_create_by_usernames @usernames
-        old_channel = Channels::YoutubeAccount.find_or_create_by_usernames @usernames
+        new_channel = Channel::Account.find_or_create_by_usernames @usernames
+        old_channel = Channel::Account.find_or_create_by_usernames @usernames
         new_channel.should == old_channel
       end
 
@@ -69,7 +69,7 @@ module Aji
 
       it "populates new channel when asked" do
         @usernames.delete @usernames.sample
-        new_channel = Channels::YoutubeAccount.find_or_create_by_usernames @usernames,
+        new_channel = Channel::Account.find_or_create_by_usernames @usernames,
           :populate_if_new => true
         Channel.find(new_channel.id).should be_populated
       end
@@ -77,7 +77,7 @@ module Aji
       it "returns a channel with given title" do
         test_title = random_string
         @usernames.delete @usernames.sample
-        new_channel = Channels::YoutubeAccount.find_or_create_by_usernames @usernames,
+        new_channel = Channel::Account.find_or_create_by_usernames @usernames,
           :title => test_title
         Channel.find(new_channel.id).title.should == test_title
       end
@@ -86,7 +86,7 @@ module Aji
         test_title = random_string
         test_category = Aji::Supported.categories.sample
         h = {:title => test_title, :category => test_category, :default_listing => true}
-        ch = Channels::YoutubeAccount.find_or_create_by_usernames(@usernames, h)
+        ch = Channel::Account.find_or_create_by_usernames(@usernames, h)
         Channel.find(ch.id).title.should == test_title
         Channel.find(ch.id).category.should == test_category
         Channel.find(ch.id).default_listing.should == true
@@ -94,14 +94,14 @@ module Aji
 
       it "works with account which never has a channel on our system" do
         usernames = [ random_string ]
-        new_channel = Channels::YoutubeAccount.find_or_create_by_usernames usernames
+        new_channel = Channel::Account.find_or_create_by_usernames usernames
         new_channel.should_not be_nil
       end
 
       it "insert the videos into the channel of the given accounts" do
         usernames = [ "nowmov" ]
         (Account::Youtube.find_by_uid "nowmov").should be_nil
-        new_channel = Channels::YoutubeAccount.find_or_create_by_usernames usernames,
+        new_channel = Channel::Account.find_or_create_by_usernames usernames,
           :populate_if_new => true
         new_channel.should_not be_nil
         nowmov = Account::Youtube.find_by_uid "nowmov"
@@ -115,7 +115,7 @@ module Aji
       it "returns cached values when it can" do
         accounts = [(Factory :youtube_account_with_videos),
           (Factory :youtube_account_with_videos)]
-        subject = Channels::YoutubeAccount.create :accounts=>accounts
+        subject = Channel::Account.create :accounts=>accounts
         old_ids = subject.content_video_ids
         old_ids.should_not be_empty
         ea = Account::Youtube.create :uid => 'nowmov'

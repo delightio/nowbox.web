@@ -14,24 +14,24 @@ module Aji
           get "#{resource_uri}/#{cid}"
           last_response.status.should == 404
         end
-        
+
         it 'returns channel object if found' do
           c = Factory :youtube_channel_with_videos
           get "#{resource_uri}/#{c.id}"
           last_response.status.should == 200
         end
       end
-      
+
       describe "get #{resource_uri}" do
         it "always create keyword channel based on query" do
-          pending "need Channels::Keyword.search_helper"
+          pending "need Channel::Keyword.search_helper"
           query = random_string
           params = { :query => query, :user_id => (Factory :user).id }
           expect { get "#{resource_uri}", params }.to change { Channel.count }.by(1)
         end
-        
+
         it "searches existing channels and returns matched channels"
-        
+
         it "returns all channels if no user id given" do
           total = 10
           total.times {|n| Factory :youtube_channel_with_videos }
@@ -41,7 +41,7 @@ module Aji
           returned_channels = body_hash.map {|h| h["youtube_account"]}
           returned_channels.should have(total).channels
         end
-        
+
         it "returns subscribed channels if given user id" do
           user = Factory :user
           channel = Factory :youtube_channel_with_videos
@@ -53,7 +53,7 @@ module Aji
           returned_channels = body_hash.map {|h| h["youtube_account"]}
           returned_channels.should include channel.serializable_hash
         end
-        
+
         it "retures min number of results if debug mode is turned on" do
           min_count = 10
           (min_count*2).times {|n| Factory :youtube_channel_with_videos }
@@ -64,7 +64,7 @@ module Aji
           returned_channels = body_hash.map {|h| h["youtube_account"]}
           returned_channels.should have(min_count).channels
         end
-        
+
         it "returns error if debug_min_count is not a number" do
           params = { :query => random_string, :debug_min_count => random_string }
           get "#{resource_uri}", params
@@ -86,14 +86,14 @@ module Aji
           body_hash.should == channel.serializable_hash
         end
       end
-      
+
       describe "get #{resource_uri}/:id/videos" do
         it "requires a user_id" do
           channel = Factory :youtube_channel_with_videos
           get "#{resource_uri}/#{channel.id}/videos", {}
           last_response.status.should == 404
         end
-        
+
         it "respects limit params" do
           limit = 3
           channel = Factory :youtube_channel_with_videos
@@ -104,7 +104,7 @@ module Aji
           body_hash = JSON.parse last_response.body
           body_hash.count.should == limit
         end
-        
+
         it "should not returned viewed videos" do
           channel = Factory :youtube_channel_with_videos
           viewed_video = channel.content_videos.sample

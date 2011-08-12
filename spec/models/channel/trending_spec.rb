@@ -1,18 +1,18 @@
 require File.expand_path("../../../spec_helper", __FILE__)
 
-describe Aji::Channels::Trending do
+describe Aji::Channel::Trending do
   subject { Aji::Channel.trending }
   
   describe "singleton" do
     it "creates a new singleton when none exists" do
-      expect { Aji::Channels::Trending.singleton }.
-        to change(Aji::Channels::Trending, :count).from(0).to(1)
+      expect { Aji::Channel::Trending.singleton }.
+        to change(Aji::Channel::Trending, :count).from(0).to(1)
     end
 
     it "doesn't create if one already exists" do
-      Aji::Channels::Trending.singleton
-      expect { Aji::Channels::Trending.singleton }.
-        not_to change(Aji::Channels::Trending, :count)
+      Aji::Channel::Trending.singleton
+      expect { Aji::Channel::Trending.singleton }.
+        not_to change(Aji::Channel::Trending, :count)
     end
   end
 

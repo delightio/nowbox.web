@@ -9,7 +9,7 @@ channels_json.each do |ch|
   raise "Can't deal with type #{ch["type"]}" if ch["type"]!="youtube"
 
   start = Time.now
-  channel = Aji::Channels::YoutubeAccount.find_or_create_by_usernames(
+  channel = Aji::Channel::YoutubeAccount.find_or_create_by_usernames(
     ch["usernames"],
     :title => ch["title"],
     :category => ch["category"],

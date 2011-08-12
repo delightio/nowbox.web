@@ -75,7 +75,7 @@ describe Aji::Channel do
 
   describe "trending" do
     it "returns the singleton trending channel" do
-      Aji::Channel.trending.class.should == Aji::Channels::Trending
+      Aji::Channel.trending.class.should == Aji::Channel::Trending
     end
   end
 

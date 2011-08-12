@@ -21,7 +21,7 @@ module Aji
         # better.
         update_attribute :populated_at, accounts_populated_at.sort.last # latest
       end
-      Aji.log :INFO, "Channels::YoutubeAccount[#{id}, '#{title}', #{accounts.count} accounts]#refresh_content(force:#{force}) took #{Time.now-start} s."
+      Aji.log :INFO, "Channel::Account[#{id}, '#{title}', #{accounts.count} accounts]#refresh_content(force:#{force}) took #{Time.now-start} s."
     end
 
     def content_video_ids limit=-1
