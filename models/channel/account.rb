@@ -1,11 +1,12 @@
 module Aji
   class Channel::Account < Channel
+
     has_and_belongs_to_many :accounts,
       :class_name => 'Aji::Account',
       :join_table => :accounts_channels, :foreign_key => :channel_id,
       :association_foreign_key => :account_id
 
-    before_create :set_title
+    before_save :set_title
 
     def refresh_content force=false
       start = Time.now
@@ -39,7 +40,7 @@ module Aji
       accounts.first.thumbnail_uri
     end
 
-    def self.find_all_by_accounts accounts
+    def Account.find_all_by_accounts accounts
       accounts_channels = accounts.map{ |a| a.channels }
       # Perform an intersection on all the channels from given accounts
       # using Ruby's awesome Array#inject.
@@ -50,27 +51,22 @@ module Aji
     # TODO: Refactor to use accounts instead of usernames in order to reduce
     # coupling. You may wine but this is what Ruby is for. Listen to your tests.
     # Also, it this is broken by your removal of provider.
-    def self.find_or_create_by_usernames usernames, params={}, refresh=false
-      accounts = usernames.map do |n|
-        Account.find_or_create_by_uid :uid => n
-      end
-      found = self.find_all_by_accounts accounts
-      return found.first if !found.empty?
+    def Account.find_or_create_by_accounts accounts, params={}, refresh=false
+      found = Account.find_all_by_accounts accounts
+      return found.first unless found.empty?
 
-      populate_if_new = params[:populate_if_new]
-      params.delete :populate_if_new
-      params.merge! :accounts => accounts
+      # We have to create the channel
       channel = Channel::Account.create params
-      channel.refresh_content if populate_if_new
+      channel.update_attribute :accounts, accounts
+      channel.refresh_content if refresh
       channel
     end
 
-    def self.searchable_columns; [:title]; end
+    def Account.searchable_columns; [:title]; end
 
     private
     def set_title
-      update_attribute(:title,
-        "#{accounts.map(&:username).join("'s, ")} Videos") unless title
+      self.title = "#{accounts.map(&:username).join("'s, ")} Videos"
     end
   end
 end
