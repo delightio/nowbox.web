@@ -1,9 +1,5 @@
 module Aji
   class Account::Youtube < Account
-    has_and_belongs_to_many :channels,
-      :class_name => 'Channel::Account',
-      :join_table => :accounts_channels,
-      :foreign_key => :account_id, :association_foreign_key => :channel_id
     after_create :set_uid_as_username
 
     def profile_uri; "http://www.youtube.com/user/#{username}"; end

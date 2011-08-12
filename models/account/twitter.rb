@@ -80,6 +80,10 @@ module Aji
       Aji.redis.zremrangebyrank recent_zset.key, 0, -n
     end
 
+    def recent_video_ids limit=-1
+      (recent_zset.revrange 0, limit).map(&:to_i)
+    end
+
     # HACK: This is long, complex, blocking, and tightly coupled. A good
     # candidate for refactoring later.
     def harvest_tweets
