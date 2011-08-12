@@ -73,7 +73,7 @@ Dir.glob("lib/mixins/*.rb").each { |r| require_relative r }
 
 Dir.glob("models/*.rb").each { |r| require_relative r }
 # Must load channel subtypes after other models for dependency reasons.
-Dir.glob("models/channels/*.rb").each { |r| require_relative r }
+Dir.glob("models/channel/*.rb").each { |r| require_relative r }
 Dir.glob("models/account/*.rb").each { |r| require_relative r }
 
 # Run migrations after models are loaded.
