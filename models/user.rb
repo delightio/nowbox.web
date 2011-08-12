@@ -61,7 +61,7 @@ module Aji
       subscribed_list.map { |cid| Channel.find cid }
     end
 
-    def cache_event event
+    def process_event event
       at_time = event.created_at.to_i
       video_id = event.video_id
 

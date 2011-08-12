@@ -6,47 +6,31 @@ module Aji
 
   describe API do
     describe "resource: #{resource}" do
-
+      before(:each) do
+        @user = Factory :user
+        @channel = Factory :youtube_channel_with_videos
+        @video = @channel.content_videos.sample
+      end
+      
       describe "post #{resource_uri}/" do
-        it "should create event object on post" do
-          user = Factory :user
-          channel = Factory :youtube_channel_with_videos
-          video = channel.content_videos.sample
-          action = Aji::Supported.video_actions.delete_if{|t| t==:enqueue||t==:dequeue}.sample
-          user.viewed_videos.should_not include video
-          params = { :user_id=>user.id, :channel_id=>channel.id,
-            :video_id=>video.id, :video_start=>video.duration/10, :video_elapsed=>video.duration/5,
-            :action=>action}
-          post "#{resource_uri}/", params
-          last_response.status.should ==201
-          user.viewed_videos.should include video
+        it "creates event object" do
+          [:video_actions, :channel_actions].each do |actions|
+            params = { :user_id => @user.id, :channel_id => @channel.id }
+            if actions == :video_actions
+              params.merge!(:video_id => @video.id,
+                :video_start => 0, :video_elapsed=>rand(10))
+            end
+            Event.send(actions).each do |action|
+              params.merge! :action => action
+              expect { post("#{resource_uri}/", params) }.to change { Event.count }.by(1)
+              last_response.status.should == 201
+            end
+          end
         end
 
-        it "should return 400 if missing parameters" do
-          user = Factory :user
-          channel = Factory :youtube_channel_with_videos
-          action = Aji::Supported.video_actions.sample
-          params = { :user_id=>user.id, :channel_id=>channel.id, :video_elapsed=>rand(10), :action=>action }
-          post "#{resource_uri}/", params
+        it "returns 400 if missing parameters" do
+          post "#{resource_uri}/"
           last_response.status.should == 400
-        end
-
-        it "should never return given video id again" do
-          channel = Factory :youtube_channel_with_videos
-          user = Factory :user
-          bad_video = channel.content_videos.sample
-          channel.personalized_content_videos(:user=>user,:limit=>channel.content_videos.count).should include bad_video
-          Aji::Queues::ExamineVideo.perform bad_video.id # TODO/HACK: how do rspec w/ resque queue?
-          channel.personalized_content_videos(:user=>user,:limit=>channel.content_videos.count).should_not include bad_video
-        end
-
-        it "should queue the given video id in examine video queue" do
-          user = Factory :user
-          channel = Factory :youtube_channel_with_videos
-          video = channel.content_videos.sample
-          params = { :user_id=>user.id, :video_id=>video.id, :channel_id=>channel.id, :video_elapsed=>rand(10), :action=>'examine'}
-          post "#{resource_uri}/", params
-          Resque.size(:examine_video).should == 1
         end
       end
     end

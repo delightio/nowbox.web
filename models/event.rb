@@ -24,7 +24,7 @@ module Aji
 
     private
       def process
-        self.user.cache_event self
+        self.user.process_event self
         Resque.enqueue Aji::Queues::ExamineVideo, video.id if action==:examine
       end
   end
