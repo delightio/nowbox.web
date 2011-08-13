@@ -6,7 +6,7 @@ describe Aji::Channel do
       c = Aji::Channel.new(:title => "foo")
       expect { c.refresh_content }.to raise_error Aji::InterfaceMethodNotImplemented
     end
-    
+
     it "updates category relevance" do
       categories = Array.new(3) {|n| Factory :category}
       3.times do |n|
@@ -29,9 +29,9 @@ describe Aji::Channel do
             :category => categories[2])}
         end
         youtube_account = Factory :youtube_account
-        youtube_account.stub(:populate).and_return(populated_videos)
+        youtube_account.stub(:refresh_content).and_return(populated_videos)
         channel = Factory :youtube_channel, :accounts => [youtube_account]
-        channel.populate
+        channel.refresh_content
       end
       categories[0].channels.should have(3).channels
       categories[1].channels.should have(2).channels

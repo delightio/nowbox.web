@@ -39,7 +39,8 @@ module Aji
 
         subject = Channel::Account.find_or_create_by_accounts real_youtube_users
         subject.refresh_content
-        subject.accounts.each { |a| a.should_receive(:refresh_content).once }
+        subject.accounts.each{ |a| a.should_receive(:refresh_content).once.
+          and_return([]) }
         subject.refresh_content true
       end
 
@@ -81,10 +82,8 @@ module Aji
 
       it "passes initial parameters to .create" do
         test_title = random_string
-        test_category = Aji::Supported.categories.sample
-        h = {:title => test_title, :category => test_category, :default_listing => true}
+        h = {:default_listing => true}
         ch = Channel::Account.find_or_create_by_accounts(@accounts, h)
-        Channel.find(ch.id).category.should == test_category
         Channel.find(ch.id).default_listing.should == true
       end
 

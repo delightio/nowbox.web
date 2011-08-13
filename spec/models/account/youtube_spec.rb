@@ -22,9 +22,9 @@ module Aji
         subject.should_receive(:save).once
         subject.refresh_content true
       end
-      
-      it "mark videos populated" do
-        subject.populate
+
+      it "marks videos populated" do
+        subject.refresh_content
         subject.content_videos.each {|v| v.should be_populated }
       end
 

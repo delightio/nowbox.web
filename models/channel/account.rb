@@ -10,11 +10,12 @@ module Aji
 
     def refresh_content force=false
       start = Time.now
+      new_videos = []
       refresh_lock.lock do
         return if recently_populated? && content_video_ids.count > 0 && !force
         accounts_populated_at = []
         accounts.each do |account|
-          account.refresh_content force
+          new_videos += account.refresh_content force
           accounts_populated_at << account.populated_at
         end
         # NOTE: Steven! thinks this should either be the current time or the
@@ -23,6 +24,8 @@ module Aji
         update_attribute :populated_at, accounts_populated_at.sort.last # latest
       end
       Aji.log :INFO, "Channel::Account[#{id}, '#{title}', #{accounts.count} accounts]#refresh_content(force:#{force}) took #{Time.now-start} s."
+      update_relevance_in_categories new_videos
+      new_videos
     end
 
     def content_video_ids limit=-1
