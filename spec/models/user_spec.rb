@@ -29,9 +29,23 @@ describe Aji::User do
       event.user.viewed_videos.should_not include event.video
     end
 
-    it "subscribes given channel"
-    it "unsubscribes subscribed channel"
-    it "does not require video object when sending channel actions"
+    it "subscribes given channel" do
+      event = Factory :channel_event, :action => :subscribe
+      event.user.subscribed_channels.should include event.channel
+    end
+
+    it "unsubscribes subscribed channel" do
+      event = Factory :channel_event, :action => :subscribe
+      event.user.subscribed_channels.should include event.channel
+      event = Factory :channel_event, :action => :unsubscribe
+      event.user.subscribed_channels.should_not include event.channel
+    end
+
+    it "does not require video object when sending channel actions" do
+      event = Factory :channel_event
+      event.video.should be_nil
+      event.id.should_not be_nil
+    end
 
   end
 
