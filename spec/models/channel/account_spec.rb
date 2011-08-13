@@ -3,13 +3,15 @@ require File.expand_path("../../../spec_helper", __FILE__)
 module Aji
   describe Channel::Account do
     before(:each) do
-      @accounts = (0..2).map { Factory :account }
+      @accounts = (0..2).map { Factory :youtube_account }
     end
 
     subject { Channel::Account.find_or_create_by_accounts @accounts }
 
-    it "should set title based on accounts if no title is given" do
-      subject.title.should match /(?:{.*}'s) Videos/
+    it "should set title based on accounts" do
+      accounts = %w{foo bar baz}.map{|n| Account::Youtube.create uid: n}
+      subject = Channel::Account.create :accounts => accounts
+      subject.title.should == "foo's, bar's, baz's Videos"
     end
 
     describe "#refresh_content" do
@@ -46,7 +48,6 @@ module Aji
 
     # TODO: Refactor using context block to show Thomas
     describe ".find_or_create_by_accounts" do
-
       it "returns a new channel when there is no exact match" do
         subject = Channel::Account.find_or_create_by_accounts @accounts
         subject.should_not be_nil
@@ -56,9 +57,11 @@ module Aji
       end
 
       it "returns same channel when we find an existing channel with given usernames" do
-        new_channel = Channel::Account.find_or_create_by_accounts @accounts
-        old_channel = Channel::Account.find_or_create_by_accounts @accounts
-        new_channel.should == old_channel
+        accounts = %w(machinima freddegredde).map{|n| Account::Youtube.create(
+          :uid => n)}
+        channel = Channel::Account.create :accounts => accounts
+        found_channel = Channel::Account.find_or_create_by_accounts accounts
+        found_channel.should == channel
       end
 
       it "returns a channel with given youtube accounts" do
@@ -70,8 +73,8 @@ module Aji
       end
 
       it "populates new channel when asked" do
-        @accounts.delete @accounts.sample
-        new_channel = Channel::Account.find_or_create_by_accounts @accounts, {},
+        accounts = Array(Account::Youtube.create uid: "noexists")
+        new_channel = Channel::Account.find_or_create_by_accounts accounts, {},
           true
         new_channel.should be_populated
       end
@@ -80,8 +83,7 @@ module Aji
         test_title = random_string
         test_category = Aji::Supported.categories.sample
         h = {:title => test_title, :category => test_category, :default_listing => true}
-        ch = Channel::Account.find_or_create_by_usernames(@usernames, h)
-        Channel.find(ch.id).title.should == test_title
+        ch = Channel::Account.find_or_create_by_accounts(@accounts, h)
         Channel.find(ch.id).category.should == test_category
         Channel.find(ch.id).default_listing.should == true
       end
@@ -94,11 +96,10 @@ module Aji
 
       # FIXME: Test dependent on nowmov account having tweeted videos.
       it "inserts videos into the channel of the given accounts" do
-        Account::Youtube.find_by_uid("nomwov").delete
         accounts = Array(Account::Youtube.create :uid => "nowmov")
-        new_channel = Channel::Account.find_or_create_by_accounts accounts, {},
+        channel = Channel::Account.find_or_create_by_accounts accounts, {},
           true
-        new_channel.should_not be_nil
+        channel.should_not be_nil
         channel.content_videos.should_not be_empty
       end
     end
@@ -115,6 +116,27 @@ module Aji
         ea.refresh_content true
         ea.content_videos.should_not be_empty
         subject.content_video_ids.should == old_ids
+      end
+    end
+
+    describe ".find_all_by_accounts" do
+      before :each do
+        @accounts = %w(machinima freddegredde).map{|n| Account::Youtube.create(
+          :uid => n)}
+      end
+
+      context "when no channel exists" do
+        it "returns an empty array" do
+          Channel::Account.find_all_by_accounts(Array(@accounts)).should == []
+        end
+      end
+
+      context "when channels are present" do
+        it "returns all existing channels" do
+          channel = Channel::Account.create :accounts => @accounts
+          Channel::Account.find_all_by_accounts(Array(@accounts)).
+            should == [channel]
+        end
       end
     end
   end

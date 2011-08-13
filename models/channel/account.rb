@@ -40,7 +40,7 @@ module Aji
       accounts.first.thumbnail_uri
     end
 
-    def Account.find_all_by_accounts accounts
+    def self.find_all_by_accounts accounts
       accounts_channels = accounts.map{ |a| a.channels }
       # Perform an intersection on all the channels from given accounts
       # using Ruby's awesome Array#inject.
@@ -51,9 +51,9 @@ module Aji
     # TODO: Refactor to use accounts instead of usernames in order to reduce
     # coupling. You may wine but this is what Ruby is for. Listen to your tests.
     # Also, it this is broken by your removal of provider.
-    def Account.find_or_create_by_accounts accounts, params={}, refresh=false
-      found = Account.find_all_by_accounts accounts
-      return found.first unless found.empty?
+    def self.find_or_create_by_accounts accounts, params={}, refresh=false
+      result = Channel::Account.find_all_by_accounts accounts
+      return result.first unless result.empty?
 
       # We have to create the channel
       channel = Channel::Account.create params
@@ -62,11 +62,11 @@ module Aji
       channel
     end
 
-    def Account.searchable_columns; [:title]; end
+    def self.searchable_columns; [:title]; end
 
     private
     def set_title
-      self.title = "#{accounts.map(&:username).join("'s, ")} Videos"
+      self.title = "#{accounts.map(&:username).join("'s, ")}'s Videos"
     end
   end
 end
