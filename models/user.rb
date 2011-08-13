@@ -18,6 +18,7 @@ module Aji
     include Redis::Objects
     sorted_set :shared_zset
     sorted_set :liked_zset # upvoted or shared
+    sorted_set :downvoted_zset
     sorted_set :viewed_zset
     sorted_set :queued_zset
     list :subscribed_list # User's Subscribed channels.
@@ -108,8 +109,8 @@ module Aji
     private :create_identity
 
     def clean_redis_keys
-      [subscribed_list, shared_zset, liked_zset, queued_zset, viewed_zset
-      ].map { |col| col.key }.each do |key|
+      [ subscribed_list, shared_zset, liked_zset, queued_zset, viewed_zset,
+        downvoted_zset ].map { |col| col.key }.each do |key|
         Aji.redis.del key
       end
     end
