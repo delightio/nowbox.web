@@ -1,4 +1,8 @@
 module Aji
+  # NOTE: Since the AuthController is a Sinatra app and not part of our API
+  # class it lacks the helper methods. We can fix that by passing a module for
+  # helpers rather than the present method of injecting a block and instance
+  # eval-ing.
   class AuthController < Sinatra::Base
 
     # If there's an OAuth Failure log it and return an error message.
@@ -32,17 +36,18 @@ module Aji
     # *Should the oauthentication fail for any reason the service will redirect
     # to `http://api.nowmov.com/auth/failure`.*
     get '/:provider/callback' do
-      user = find_user_by_id_or_error params[:user_id]
+      user = Aji::User.find_by_id params[:user_id]
+      return { :error => "User[#{params[:user_id]}] does not exist." } if
+        user.nil?
       auth_hash = request.env['omniauth.auth']
-      auth_hash.inspect
 
       case params['provider']
       when 'twitter'
         t = Account::Twitter.find_or_create_by_uid(
           auth_hash['uid'], :identity => user.identity,
           :credentials => auth_hash['credentials'],
-          :user_info => auth_hash['user_info'])
-        t.serializable_hash.inspect
+          :auth_info => auth_hash['user_info'])
+        user.serializable_hash
       else
         "Unsupported provider #{auth_hash['provider']}"
       end
