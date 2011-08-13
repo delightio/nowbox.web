@@ -10,6 +10,7 @@ module Aji
     validates_presence_of :email, :first_name
     validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
     after_create :create_identity, :subscribe_default_channels
+    before_destroy :clean_redis_keys
 
     belongs_to :identity
     has_many :events
@@ -17,7 +18,6 @@ module Aji
     include Redis::Objects
     sorted_set :shared_zset
     sorted_set :liked_zset # upvoted or shared
-    sorted_set :downvoted_zset
     sorted_set :viewed_zset
     sorted_set :queued_zset
     list :subscribed_list # User's Subscribed channels.
@@ -26,6 +26,7 @@ module Aji
       Channel.default_listing.each { |c| subscribe c }
       # TODO: we are pulling in the whole channel object but we really only care about Channel#id
     end
+
     def subscribed_channels
       # TODO: Is AR caching this query? My list came out the same after User#arrange
       # Channel.find(subscribed_list.values)
@@ -89,11 +90,6 @@ module Aji
            "subscribed_channel_ids" => subscribed_list.values]
     end
 
-    private
-    def create_identity
-      update_attribute :identity_id, Identity.create.id if self.identity.nil?
-    end
-
     def subscribed? channel
       subscribed_list.include? channel.id.to_s
     end
@@ -106,6 +102,17 @@ module Aji
       !subscribed?(channel)
     end
 
+    def create_identity
+      update_attribute :identity_id, Identity.create.id if self.identity.nil?
+    end
+    private :create_identity
+
+    def clean_redis_keys
+      [subscribed_list, shared_zset, liked_zset, queued_zset, viewed_zset
+      ].map { |col| col.key }.each do |key|
+        Aji.redis.del key
+      end
+    end
   end
 end
 
