@@ -1,13 +1,16 @@
 module Aji
   # ## Account Schema
   # - id: Integer
-  # - user_info: Text (Serialized Hash)
+  # - info: Text (Serialized Hash)
   # - uid: String non-nil
+  # - username: String
   # - created_at: DateTime
   # - updated_at: DateTime
   # - auth_info: Text (Serialized Hash)
+  # - credentials: Text (Serialized Hash)
   # - blacklisted_at: DateTime
   class Account < ActiveRecord::Base
+    after_create :set_provider
     include Redis::Objects
     serialize :user_info, Hash
     serialize :credentials, Hash
@@ -26,6 +29,8 @@ module Aji
     lock :refresh, :expiration => 10.minutes
     include Mixins::Populating
     include Mixins::Blacklisting
+    # All of the accounts that this account receives content from.
+    set :influencer_set
 
     # The publish interface is called by background tasks to publish a video
     # share to an external service.
@@ -44,8 +49,18 @@ module Aji
         "#{self.class} must override Account#refresh_content.")
     end
 
+    def influencer_ids
+      influencer_set.members
+    end
+
+    def influencers
+      influencer_set.map { |id| Account.find_by_id id }
+    end
+
     def profile_uri; raise InterfaceMethodNotImplemented; end
+
     def thumbnail_uri; raise InterfaceMethodNotImplemented; end
+
     def serializable_hash
       Hash[ "id" => id,
             "provider" => type.split('::').last.downcase,
@@ -56,6 +71,15 @@ module Aji
             "thumbnail_uri" => thumbnail_uri ]
     end
 
+    def to_channel
+      Channel::Account.find_or_create_by_accounts Array(self)
+    end
+
+    def set_provider
+      update_attribute :provider, 'twitter'
+    end
+    private :set_provider
+
     # Class Methods follow
     def Account.find_or_create_by_param string, params
       username, provider = Account.from_param string
@@ -65,10 +89,6 @@ module Aji
     # Returns the `username` and `provider` of a given parameterized account.
     def Account.from_param str
       str.split("@")[0..1]
-    end
-
-    def Account.to_channel
-      Channel::Account.find_or_create_by_accounts Array(self)
     end
   end
 end
