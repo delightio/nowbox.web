@@ -52,7 +52,8 @@ module Aji
           :category_id => category.id,
           :author_id => author.id,
           :published_at => video.published_at,
-          :source => 'youtube'
+          :source => 'youtube',
+          :populated_at => Time.now
         }
       end
     end
