@@ -69,7 +69,7 @@ module Aji
 
     private
     def set_title
-      self.title = "#{accounts.map(&:username).join("'s, ")}'s Videos"
+      self.title ||= "#{accounts.map(&:username).join("'s, ")}'s Videos"
     end
   end
 end
