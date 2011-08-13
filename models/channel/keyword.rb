@@ -2,7 +2,7 @@ module Aji
   # ## Keyword Schema Additions
   # - keywords: Serialized array of strings
   class Channel::Keyword < Channel
-    serialize :keywords
+    serialize :keywords, Array
 
     before_create :set_title, :sort_keywords
     def self.to_title words; words.sort.join ", "; end
