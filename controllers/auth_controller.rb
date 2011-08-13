@@ -48,10 +48,11 @@ module Aji
           :credentials => auth_hash['credentials'],
           :auth_info => auth_hash['user_info'],
           :info => auth_hash['extra']['user_hash'])
-        user.serializable_hash
       else
         "Unsupported provider #{auth_hash['provider']}"
       end
+      user.subscribe user.identity.graph_channel
+      user.serializable_hash
     end
   end
 end
