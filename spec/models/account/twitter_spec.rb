@@ -27,9 +27,6 @@ describe Aji::Account::Twitter do
 
   describe "#refresh_influencers" do
     it "adds twitter followers as influencers" do
-      # NOTE: This doesn't change *all* that often but this test will break
-      # on occasion when I follow people.
-      follower_count = 288
       expect { subject.refresh_influencers }.to change(subject,
         :influencer_ids).from([])
     end
