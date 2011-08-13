@@ -5,7 +5,7 @@ describe Aji::Channel::Keyword do
     it "sorts keywords before saving" do
       keywords = %w[ a b c d e f ]
       c = Aji::Channel::Keyword.create :keywords => keywords.shuffle
-      Aji::Channel::Keyword.find(c.id).keywords.should == keywords
+      c.keywords == keywords
     end
   end
 
@@ -16,7 +16,7 @@ describe Aji::Channel::Keyword do
       uke.content_videos.should be_empty
       uke.refresh_content
       uke.content_videos.should_not be_empty
-      Aji::Channel.find(uke.id).should be_populated
+      uke.should be_populated
     end
   end
 
