@@ -10,7 +10,7 @@ FactoryGirl.define do
     sequence(:username) { |n| "TwitterUser#{n}" }
   end
 
-  factory :twitter_channel, :class => Aji::Channels::TwitterAccount do
+  factory :twitter_channel, :class => Aji::Channel::TwitterAccount do
     account Factory :twitter_account
   end
 end

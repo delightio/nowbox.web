@@ -71,13 +71,13 @@ Factory.define :channel, :class => 'Aji::Channel' do |a|
   # a.category { random_category }
 end
 
-Factory.define :youtube_channel, :class => 'Aji::Channels::YoutubeAccount' do |a|
+Factory.define :youtube_channel, :class => 'Aji::Channel::Account' do |a|
   a.title { random_string }
   a.default_listing { random_boolean }
   # a.category { random_category }
 end
 
-Factory.define :keyword_channel, :class => 'Aji::Channels::Keyword' do |a|
+Factory.define :keyword_channel, :class => 'Aji::Channel::Keyword' do |a|
   a.keywords { Array.new(5){|n| random_string} }
   a.default_listing { random_boolean }
   # a.category { random_category }

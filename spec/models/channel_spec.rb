@@ -1,10 +1,10 @@
 require File.expand_path("../../spec_helper", __FILE__)
 
 describe Aji::Channel do
-  describe "#populate" do
+  describe "#refresh_content" do
     it "raises an exception unless overridden." do
       c = Aji::Channel.new(:title => "foo")
-      expect { c.populate }.to raise_error Aji::InterfaceMethodNotImplemented
+      expect { c.refresh_content }.to raise_error Aji::InterfaceMethodNotImplemented
     end
     
     it "updates category relevance" do
@@ -106,7 +106,7 @@ describe Aji::Channel do
 
   describe "trending" do
     it "returns the singleton trending channel" do
-      Aji::Channel.trending.class.should == Aji::Channels::Trending
+      Aji::Channel.trending.class.should == Aji::Channel::Trending
     end
   end
 

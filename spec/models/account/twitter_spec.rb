@@ -1,12 +1,28 @@
 require File.expand_path("../../../spec_helper", __FILE__)
 
 describe Aji::Account::Twitter do
-  it "has a handle" do
-    pending "This will be invalidated by making handle a db column"
-    steven = Aji::Account::Twitter.new :uid => "178492493",
-      :user_info => { :nickname => '_nuclearsammich' }
-    steven.handle.should == '_nuclearsammich'
-  end
+  subject { Aji::Account::Twitter.create(:uid => '178492493',
+                                      :username => '_nuclearsammich') }
 
   describe "ALL THE OTHER METHODS"
+
+  describe "#refresh_content" do
+    it "adds videos recently shared" do
+      expect { subject.refresh_content }.to(
+        change(subject.content_zset, :members))
+      subject.should be_populated
+    end
+
+    it "does not refresh within a short time" do
+      subject.refresh_content
+      expect { subject.refresh_content }.to_not change { subject.populated_at }
+    end
+
+    it "allows forced refresh" do
+      subject.refresh_content
+      expect { subject.refresh_content true }.to(
+        change { subject.populated_at })
+    end
+  end
 end
+

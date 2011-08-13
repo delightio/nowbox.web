@@ -1,26 +1,26 @@
 require File.expand_path("../../../spec_helper", __FILE__)
 module Aji
   describe Account::Youtube do
-    describe "#populate" do
+    describe "#refresh_content" do
       subject { Account::Youtube.find_or_create_by_uid "nowmov" }
 
       it "populates new account" do
         subject.content_videos.should be_empty
-        subject.populate
+        subject.refresh_content
         subject.content_videos.should_not be_empty
       end
 
-      it "does not re populate within short time" do
+      it "does not refresh_content within short time" do
         subject.should_receive(:save).once
-        subject.populate
+        subject.refresh_content
         subject.should_not_receive(:save)
-        subject.populate
+        subject.refresh_content
       end
 
-      it "allows forced population" do
-        subject.populate
+      it "allows a forced refresh_content" do
+        subject.refresh_content
         subject.should_receive(:save).once
-        subject.populate :must_populate=>true
+        subject.refresh_content true
       end
       
       it "mark videos populated" do
