@@ -46,7 +46,8 @@ module Aji
         t = Account::Twitter.find_or_create_by_uid(
           auth_hash['uid'], :identity => user.identity,
           :credentials => auth_hash['credentials'],
-          :auth_info => auth_hash['user_info'])
+          :auth_info => auth_hash['user_info'],
+          :info => auth_hash['extra']['user_hash'])
         user.serializable_hash
       else
         "Unsupported provider #{auth_hash['provider']}"
