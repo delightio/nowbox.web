@@ -34,25 +34,10 @@ module Aji
       #   given user's subscribed channels.  
       # - `query`:  comma separated list of search term. Server returns all
       #   channels regardless of type.  
-      # __Optional DEBUG params__  
-      # - `debug_min_count`:  integer. If present and used with `query`, server
-      #   will ensure the number of search result is at least `debug_min_count`.
       get do
         channels = []
         if params[:query]
           channels += Channel.search params[:query]
-          if params[:debug_min_count] # TODO debug only
-            min_count = params[:debug_min_count].to_i
-            if min_count.to_s != params[:debug_min_count]
-              error! "debug_min_count needs to be an integer", 500
-            end
-            if Channel.count > min_count
-              while channels.count < min_count
-                channels << Channel.first(:offset => rand(Channel.count))
-                channels.uniq!
-              end
-            end
-          end
         else
           user = User.find_by_id params[:user_id]
           channels = if user then user.subscribed_channels else Channel.all end
