@@ -64,6 +64,9 @@ module Aji
       Hash["id" => id,
            "first_name" => first_name,
            "last_name" => last_name,
+           "queue_channel_id" => queue_channel_id,
+           "favorite_channel_id" => favorite_channel_id,
+           "history_channel_id" => history_channel_id,
            "subscribed_channel_ids" => subscribed_list.values]
     end
 
@@ -90,9 +93,9 @@ module Aji
     end
 
     def create_user_channels
-      self.queue_channel = Channel::User.create
-      self.history_channel = Channel::User.create
-      self.favorite_channel = Channel::User.create
+      self.queue_channel = Channel::User.create :title => 'Watch Later'
+      self.favorite_channel = Channel::User.create :title => 'Favorites'
+      self.history_channel = Channel::User.create :title => 'History'
     end
 
     private :create_identity, :clean_redis_keys, :create_user_channels

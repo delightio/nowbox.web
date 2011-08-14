@@ -21,6 +21,9 @@ module Aji
           body_hash = JSON.parse last_response.body
           body_hash.should == user.serializable_hash
           body_hash["subscribed_channel_ids"].should == user.subscribed_channels.map {|c| c.id.to_s}
+          [:queue_channel_id, :favorite_channel_id, :history_channel_id].each do |c|
+            body_hash[c.to_s].should == (user.send c)
+          end
         end
       end
       
