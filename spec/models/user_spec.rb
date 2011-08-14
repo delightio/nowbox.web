@@ -2,31 +2,37 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 describe Aji::User do
 
+  describe ".create" do
+    it "creates user channel" do
+      expect { Factory :user }.to change { Aji::Channel.count }.by(3)
+    end
+  end
+
   describe "#process_event" do
     it "caches video id in viewed regardless of event type except :enqueue and :dequeue" do
       Aji::Event.video_actions.delete_if{|t| t==:enqueue||t==:dequeue}.each do |action|
         event = Factory :event, :action => action
-        event.user.viewed_videos.should include event.video
+        event.user.history_channel.content_videos.should include event.video
       end
     end
 
     it "never fails dequeuing a video" do
       event = nil
       lambda { event = Factory :event, :action => :dequeue }.should_not raise_error
-      event.user.queued_videos.should_not include event.video
+      event.user.queue_channel.content_videos.should_not include event.video
     end
 
     it "dequeues enqueued video" do
       event = Factory :event, :action => :enqueue
-      event.user.queued_videos.should include event.video
+      event.user.queue_channel.content_videos.should include event.video
       dequeued_event = Factory :event, :action => :dequeue,
         :video => event.video, :user => event.user
-      event.user.queued_videos.should_not include event.video
+      event.user.queue_channel.content_videos.should_not include event.video
     end
 
     it "does not mark a video viewed when queuing" do
       event = Factory :event, :action => :enqueue
-      event.user.viewed_videos.should_not include event.video
+      event.user.history_channel.content_videos.should_not include event.video
     end
 
     it "subscribes given channel" do
@@ -47,15 +53,6 @@ describe Aji::User do
       event.id.should_not be_nil
     end
 
-  end
-
-  describe "video_collections" do
-    context "when accessing a video collection" do
-      it "should return a list of video objects" do
-        user = Factory :user_with_viewed_videos
-        user.viewed_videos.first.class.should == Aji::Video
-      end
-    end
   end
 
   describe "#serializable_hash" do

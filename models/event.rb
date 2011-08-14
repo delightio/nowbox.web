@@ -15,7 +15,7 @@ module Aji
     belongs_to :channel
     after_create :process
 
-    def self.video_actions; [ :view, :share, :upvote, :downvote, :enqueue, :dequeue, :examine ]; end
+    def self.video_actions; [ :view, :share, :enqueue, :dequeue, :examine ]; end
     def self.channel_actions; [ :subscribe, :unsubscribe ]; end
     
     validates_inclusion_of :action, :in => (Event.video_actions + Event.channel_actions)

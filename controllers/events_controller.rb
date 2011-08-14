@@ -14,7 +14,7 @@ module Aji
       # __Required params__ `channel_id` unique id of the channel being acted on  
       # __Required params__ `action` action being triggered:  
       # channel: `subscribe`, `unsubscribe`  
-      # video: `view`, `share`, `upvote`, `downvote`, `enqueue`, `dequeue`, `examine`  
+      # video: `view`, `share`, `enqueue`, `dequeue`, `examine`
       #   
       # When an video action is sent,  
       # __Required params__ `video_id` unique id of the video being acted on  

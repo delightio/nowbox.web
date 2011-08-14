@@ -46,9 +46,10 @@ describe Aji::Channel do
 
 
       user = mock("user")
-      # We #dup the viewed_video_ids object since RSpec decided to count object
-      user.should_receive(:viewed_video_ids).at_least(1).and_return(
+      history_channel = mock("channel")
+      history_channel.should_receive(:content_video_ids).at_least(1).and_return(
         viewed_video_ids)
+      user.stub(:history_channel).and_return(history_channel)
       personalized_video_ids = channel.personalized_content_videos(
         :user => user).map(&:id)
       viewed_video_ids.each do | id |
