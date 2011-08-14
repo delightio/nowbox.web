@@ -60,7 +60,7 @@ module Aji
       it "returns same channel when we find an existing channel with given usernames" do
         accounts = %w(machinima freddegredde).map{|n| Account::Youtube.create(
           :uid => n)}
-        channel = Channel::Account.create :accounts => accounts
+        channel = Channel::Account.find_or_create_by_accounts accounts
         found_channel = Channel::Account.find_or_create_by_accounts accounts
         found_channel.should == channel
       end
