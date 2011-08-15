@@ -44,7 +44,7 @@ module Aji
     end
 
     def self.find_all_by_accounts accounts
-      possible_channels = accounts.first.channels
+      possible_channels = accounts.first.channels :reload
       possible_channels.select do |c|
         c.accounts.length == accounts.length &&
           accounts.inject(true) do |bool, account|
@@ -56,9 +56,6 @@ module Aji
     def self.find_or_create_by_accounts accounts, params={}, refresh=false
       c = Channel::Account.find_all_by_accounts(accounts).first ||
         Channel::Account.create(params.merge! :accounts => accounts)
-     # accounts.each do |account|
-     #   account.channels << c unless account.channels.include? c
-     # end
       c.refresh_content if refresh
       c
     end
