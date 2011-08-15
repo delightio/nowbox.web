@@ -45,7 +45,7 @@ describe Aji::Mention do
     end
     it "caches result" do
       spammy_mention = Factory :mention,
-        :author => (Factory :external_account),
+        :author => (Factory :account),
         :videos => [(Factory :video)]
       spammy_mention.author.blacklist
       spammy_mention.author.should_receive(:blacklist).never

@@ -34,6 +34,14 @@ module Aji
       end
 
       def self.youtube_it_to_hash video
+        category_from_youtube = video.categories.first
+        if category_from_youtube
+          category = Category.find_or_create_by_raw_title(
+            category_from_youtube.label, :title => category_from_youtube.term)
+        else
+          category = Category.find_or_create_by_raw_title "*** undefined ***"
+        end
+        author = Account::Youtube.find_or_create_by_uid(video.author.name)
         {
           :title => video.title,
           :external_id => video.video_id.split(':').last,
@@ -41,9 +49,11 @@ module Aji
           :duration => video.duration,
           :viewable_mobile => (not video.noembed),
           :view_count => video.view_count,
+          :category_id => category.id,
+          :author_id => author.id,
           :published_at => video.published_at,
-          :author_username => video.author.name,
-          :source => 'youtube'
+          :source => 'youtube',
+          :populated_at => Time.now
         }
       end
     end

@@ -37,7 +37,7 @@ RSpec.configure do |config|
   # config.extend VCR::RSpec::Macros
   config.before :each do
     Aji.redis.flushdb
-    [Aji::User, Aji::Channel, Aji::Event, Aji::ExternalAccount, Aji::Video].
+    [Aji::User, Aji::Channel, Aji::Event, Aji::Account, Aji::Video].
       map { |c| c.all.each { |obj| obj.delete } }
   end
 end

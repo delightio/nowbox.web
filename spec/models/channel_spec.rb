@@ -1,10 +1,41 @@
 require File.expand_path("../../spec_helper", __FILE__)
 
 describe Aji::Channel do
-  describe "#populate" do
+  describe "#refresh_content" do
     it "raises an exception unless overridden." do
       c = Aji::Channel.new(:title => "foo")
-      expect { c.populate }.to raise_error Aji::InterfaceMethodNotImplemented
+      expect { c.refresh_content }.to raise_error Aji::InterfaceMethodNotImplemented
+    end
+
+    it "updates category relevance" do
+      categories = Array.new(3) {|n| Factory :category}
+      3.times do |n|
+        populated_videos = []
+        case n
+        when 0
+          populated_videos += Array.new(5){|k| (Factory :populated_video,
+            :category => categories[0])}
+        when 1
+          populated_videos += Array.new(5){|k| (Factory :populated_video,
+            :category => categories[0])}
+          populated_videos += Array.new(5){|k| (Factory :populated_video,
+            :category => categories[1])}
+        when 2
+          populated_videos += Array.new(5){|k| (Factory :populated_video,
+            :category => categories[0])}
+          populated_videos += Array.new(5){|k| (Factory :populated_video,
+            :category => categories[1])}
+          populated_videos += Array.new(5){|k| (Factory :populated_video,
+            :category => categories[2])}
+        end
+        youtube_account = Factory :youtube_account
+        youtube_account.stub(:refresh_content).and_return(populated_videos)
+        channel = Factory :youtube_channel, :accounts => [youtube_account]
+        channel.refresh_content
+      end
+      categories[0].channels.should have(3).channels
+      categories[1].channels.should have(2).channels
+      categories[2].channels.should have(1).channels
     end
   end
 
@@ -15,9 +46,10 @@ describe Aji::Channel do
 
 
       user = mock("user")
-      # We #dup the viewed_video_ids object since RSpec decided to count object
-      user.should_receive(:viewed_video_ids).at_least(1).and_return(
+      history_channel = mock("channel")
+      history_channel.should_receive(:content_video_ids).at_least(1).and_return(
         viewed_video_ids)
+      user.stub(:history_channel).and_return(history_channel)
       personalized_video_ids = channel.personalized_content_videos(
         :user => user).map(&:id)
       viewed_video_ids.each do | id |
@@ -38,7 +70,7 @@ describe Aji::Channel do
 
       viewed_video = channel.content_videos.sample
       user = Factory :user
-      event = Factory :event, :event_type => :view, :user => user, :video => viewed_video
+      event = Factory :event, :action => :view, :user => user, :video => viewed_video
       personalized_videos = channel.personalized_content_videos :user=>user
       personalized_videos.should_not include viewed_video
 
@@ -75,7 +107,7 @@ describe Aji::Channel do
 
   describe "trending" do
     it "returns the singleton trending channel" do
-      Aji::Channel.trending.class.should == Aji::Channels::Trending
+      Aji::Channel.trending.class.should == Aji::Channel::Trending
     end
   end
 

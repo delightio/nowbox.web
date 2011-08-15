@@ -1,18 +1,18 @@
 require File.expand_path("../../../spec_helper", __FILE__)
 
-describe Aji::Channels::Trending do
+describe Aji::Channel::Trending do
   subject { Aji::Channel.trending }
   
   describe "singleton" do
     it "creates a new singleton when none exists" do
-      expect { Aji::Channels::Trending.singleton }.
-        to change(Aji::Channels::Trending, :count).from(0).to(1)
+      expect { Aji::Channel::Trending.singleton }.
+        to change(Aji::Channel::Trending, :count).from(0).to(1)
     end
 
     it "doesn't create if one already exists" do
-      Aji::Channels::Trending.singleton
-      expect { Aji::Channels::Trending.singleton }.
-        not_to change(Aji::Channels::Trending, :count)
+      Aji::Channel::Trending.singleton
+      expect { Aji::Channel::Trending.singleton }.
+        not_to change(Aji::Channel::Trending, :count)
     end
   end
 
@@ -25,13 +25,13 @@ describe Aji::Channels::Trending do
     end
   end
 
-  describe "#populate" do
-    it "should be populated afterward" do
-      subject.populate
-      Aji::Channel.find(subject.id).should be_populated
+  describe "#refresh_content" do
+    it "is marked populated" do
+      subject.refresh_content
+      subject.should be_populated
     end
-    
-    it "should populate videos in trending channel" do
+
+    it "populates videos in trending channel" do
       real_youtube_video_ids = %w[ l4qv4Ca1h94 Wx7c7nHXqKg BoTvCgJtcJU ]
       real_youtube_video_ids.each{ |yt_id|
         subject.push_recent( Factory :video_with_mentions,
@@ -47,11 +47,15 @@ describe Aji::Channels::Trending do
         { 'MAX_RECENT_VIDEO_IDS_IN_TRENDING'=>real_youtube_video_ids.count*2,
           'MAX_VIDEOS_IN_TRENDING' => real_youtube_video_ids.count})
 
-      subject.populate
+      subject.refresh_content
 
+      # TODO: This test should be removed or replaced with one that insures each
+      # video is asked to be populated.
+      #
       # All videos in content_videos should be populated
       subject.content_videos.each { |v| v.should be_populated }
 
+      # TODO: This really belongs in its own spec test.
       # Not all recent videos are populated
       subject.recent_video_ids.should include old_video.id
       old_video.should_not be_populated
@@ -59,7 +63,7 @@ describe Aji::Channels::Trending do
 
     it "should return videos in descending order of relevance" do
       10.times.each { |n| subject.push_recent(Factory :populated_video_with_mentions) }
-      subject.populate
+      subject.refresh_content
       trending_videos = subject.content_videos
       subject.relevance_of(trending_videos.first).should >= subject.relevance_of(trending_videos.last)
     end
@@ -69,7 +73,7 @@ describe Aji::Channels::Trending do
       subject.push_recent video
       video.blacklist
 
-      subject.populate
+      subject.refresh_content
       subject.content_videos.count.should == 0
     end
   end

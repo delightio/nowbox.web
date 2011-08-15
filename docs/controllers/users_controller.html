@@ -94,6 +94,7 @@ a JSON encoded error message if not.</p>
 <p><strong>Required params</strong> <code>email</code> email address of the user<br/>
 <strong>Required params</strong> <code>first_name</code> first name of the user<br/>
 <strong>Optional params</strong> <code>last_name</code> last name of the user</p>
+
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">post</span> <span class="k">do</span>
@@ -101,31 +102,6 @@ a JSON encoded error message if not.</p>
                     <span class="ss">:first_name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:first_name</span><span class="o">]</span><span class="p">,</span>
                     <span class="ss">:last_name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:last_name</span><span class="o">]</span><span class="p">)</span> <span class="ow">or</span>
           <span class="n">creation_error!</span><span class="p">(</span><span class="no">User</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
-      <span class="k">end</span></pre></div>
-      </td>
-    </tr>
-    <tr id='section-GET_users/:user_id'>
-      <td class=docs>
-        <div class="pilwrap">
-          <a class="pilcrow" href="#section-GET_users/:user_id">&#182;</a>
-        </div>
-        <h2>GET users/:user_id</h2>
-
-<p><strong>Returns</strong> succeed or not on the given channel action and HTTP Status
-Code 200, 400 or 404<br/>
-<strong>Required params</strong> <code>channel_id</code> unique id of the channel<br/>
-<strong>Required params</strong> <code>channel_action</code> subscribe, unsubscribe, arrange<br/>
-<strong>Optional params</strong> <code>channel_action_params[new_position]</code> new position
-for given channel</p>
-
-      </td>
-      <td class=code>
-        <div class='highlight'><pre>      <span class="n">put</span> <span class="s1">&#39;/:user_id&#39;</span> <span class="k">do</span>
-        <span class="n">channel</span> <span class="o">=</span> <span class="n">find_channel_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:channel_id</span><span class="o">]</span>
-        <span class="n">error!</span><span class="p">(</span><span class="s2">&quot;Unknown channel action: </span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:channel_action</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span> <span class="k">if</span> <span class="o">!</span><span class="no">Supported</span><span class="o">.</span><span class="n">channel_actions</span><span class="o">.</span><span class="n">include?</span> <span class="n">params</span><span class="o">[</span><span class="ss">:channel_action</span><span class="o">].</span><span class="n">try</span><span class="p">(</span><span class="ss">:to_sym</span><span class="p">)</span>
-        <span class="n">user</span> <span class="o">=</span> <span class="n">find_user_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
-        <span class="n">succeeded</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">send</span> <span class="n">params</span><span class="o">[</span><span class="ss">:channel_action</span><span class="o">]</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:channel_action_params</span><span class="o">]</span>
-        <span class="n">error!</span><span class="p">(</span><span class="s2">&quot;User[</span><span class="si">#{</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">] cannot </span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:channel_action</span><span class="o">]</span><span class="si">}</span><span class="s2"> Channel[</span><span class="si">#{</span><span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">] with params: </span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:channel_action_params</span><span class="o">].</span><span class="n">inspect</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span> <span class="k">if</span> <span class="o">!</span><span class="n">succeeded</span>
       <span class="k">end</span>
 
     <span class="k">end</span>

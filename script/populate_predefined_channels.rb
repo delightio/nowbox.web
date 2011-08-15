@@ -8,13 +8,13 @@ channels_json.each do |ch|
   puts "Creating #{ch["title"]} channel with #{ch["usernames"].count} #{ch["type"]} accounts: #{ch["usernames"]}..."
   raise "Can't deal with type #{ch["type"]}" if ch["type"]!="youtube"
 
+  accounts = ch['usernames'].map do |u|
+    Aji::Account::Youtube.find_or_create_by_uid u
+  end
+
   start = Time.now
-  channel = Aji::Channels::YoutubeAccount.find_or_create_by_usernames(
-    ch["usernames"],
-    :title => ch["title"],
-    :category => ch["category"],
-    :default_listing => true,
-    :populate_if_new => true)
+  channel = Aji::Channel::Account.find_or_create_by_accounts(
+    accounts, { :title => ch["title"], :default_listing => true }, true)
   puts "  => #{channel.inspect} in #{Time.now-start} s."
   if channel.save != true
     puts "*** error saving #{channel.title} because: #{channel.errors}"

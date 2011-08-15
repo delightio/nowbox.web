@@ -37,31 +37,92 @@
           <a class="pilcrow" href="#section-1">&#182;</a>
         </div>
         
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="k">module</span> <span class="nn">Aji</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-2'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-2">&#182;</a>
+        </div>
+        <p>NOTE: Since the AuthController is a Sinatra app and not part of our API
+class it lacks the helper methods. We can fix that by passing a module for
+helpers rather than the present method of injecting a block and instance
+eval-ing.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="k">class</span> <span class="nc">AuthController</span> <span class="o">&lt;</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">Base</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-3'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-3">&#182;</a>
+        </div>
+        <p>If there&rsquo;s an OAuth Failure log it and return an error message.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="n">get</span> <span class="s1">&#39;/failure&#39;</span> <span class="k">do</span>
+      <span class="n">env_hash</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">dup</span>
+      <span class="no">Aji</span><span class="o">.</span><span class="n">log</span> <span class="ss">:WARN</span><span class="p">,</span> <span class="s2">&quot;OAuth failure: </span><span class="si">#{</span><span class="n">env_hash</span><span class="o">.</span><span class="n">inspect</span><span class="si">}</span><span class="s2">&quot;</span>
+      <span class="n">error</span> <span class="s2">&quot;OAuth authentication failed&quot;</span><span class="p">,</span> <span class="mi">500</span>
+    <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-4'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-4">&#182;</a>
+        </div>
+        <p>This is the entry point for OAuth'ing to other web services for Aji users.
+At the moment, the only supported provider is Twitter but Facebook is high
+priority and Youtube will probably follow shortly since there&rsquo;s a wealth
+of preexisting data we can use there.</p>
+
+<p>To initiate an OAuth request an Aji client must do the following. For this
+example we are assuming the target is iOS 4 and the provider is twitter.</p>
+
+<ol>
+<li>Open a webkitview pane and point it to
+<code>http://api.nowmov.com/auth/twitter</code></li>
+<li>The webkitview is redirected to the Twitter application authorization
+page with our application listed.</li>
+<li>The user must then log in and authorize our application (server-side)
+to access their account and tweet on their behalf.</li>
+<li>Pending successful authorization the view will then be redirected to
+<code>http://api.nowmov.com/auth/twitter/callback</code>. Ideally, <em>as soon as</em> this
+redirect is initiated, the webkit view would close or grey out but content
+from it must be captured by the iOS app.</li>
+<li><code>http://api.nowmov.com/auth/twitter/callback</code> will return an updated
+JSON blob to the webkitview containing the updated user model.</li>
+</ol>
+
+
+<p><em>Should the oauthentication fail for any reason the service will redirect
+to <code>http://api.nowmov.com/auth/failure</code>.</em></p>
 
       </td>
       <td class=code>
-        <div class='highlight'><pre><span class="k">module</span> <span class="nn">Aji</span>
-  <span class="k">class</span> <span class="nc">AuthController</span> <span class="o">&lt;</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">Base</span>
-
-    <span class="n">get</span> <span class="s1">&#39;/failure&#39;</span> <span class="k">do</span>
-      <span class="n">env_hash</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">dup</span>
-      <span class="n">env_hash</span><span class="o">.</span><span class="n">inspect</span>
-    <span class="k">end</span>
-
-    <span class="n">get</span> <span class="s1">&#39;/:provider/callback&#39;</span> <span class="k">do</span>
+        <div class='highlight'><pre>    <span class="n">get</span> <span class="s1">&#39;/:provider/callback&#39;</span> <span class="k">do</span>
+      <span class="n">user</span> <span class="o">=</span> <span class="no">Aji</span><span class="o">::</span><span class="no">User</span><span class="o">.</span><span class="n">find_by_id</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s2">&quot;User[</span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span><span class="si">}</span><span class="s2">] does not exist.&quot;</span> <span class="p">}</span> <span class="k">if</span>
+        <span class="n">user</span><span class="o">.</span><span class="n">nil?</span>
       <span class="n">auth_hash</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">&#39;omniauth.auth&#39;</span><span class="o">]</span>
-      <span class="n">auth_hash</span><span class="o">.</span><span class="n">inspect</span>
 
       <span class="k">case</span> <span class="n">params</span><span class="o">[</span><span class="s1">&#39;provider&#39;</span><span class="o">]</span>
       <span class="k">when</span> <span class="s1">&#39;twitter&#39;</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="no">ExternalAccounts</span><span class="o">::</span><span class="no">Twitter</span><span class="o">.</span><span class="n">find_or_create_by_uid</span><span class="p">(</span>
-          <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;uid&#39;</span><span class="o">]</span><span class="p">,</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="no">Account</span><span class="o">::</span><span class="no">Twitter</span><span class="o">.</span><span class="n">find_or_create_by_uid</span><span class="p">(</span>
+          <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;uid&#39;</span><span class="o">]</span><span class="p">,</span> <span class="ss">:identity</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="o">.</span><span class="n">identity</span><span class="p">,</span>
           <span class="ss">:credentials</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;credentials&#39;</span><span class="o">]</span><span class="p">,</span>
-          <span class="ss">:user_info</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;user_info&#39;</span><span class="o">]</span><span class="p">)</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">serializable_hash</span><span class="o">.</span><span class="n">inspect</span>
+          <span class="ss">:auth_info</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;user_info&#39;</span><span class="o">]</span><span class="p">,</span>
+          <span class="ss">:info</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;extra&#39;</span><span class="o">][</span><span class="s1">&#39;user_hash&#39;</span><span class="o">]</span><span class="p">)</span>
       <span class="k">else</span>
         <span class="s2">&quot;Unsupported provider </span><span class="si">#{</span><span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;provider&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
       <span class="k">end</span>
+      <span class="n">user</span><span class="o">.</span><span class="n">subscribe</span> <span class="n">user</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">graph_channel</span>
+      <span class="n">user</span><span class="o">.</span><span class="n">serializable_hash</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span></pre></div>

@@ -205,8 +205,8 @@ by a subclass.</p>
         <p>Must load channel subtypes after other models for dependency reasons.</p>
       </td>
       <td class=code>
-        <div class='highlight'><pre><span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;models/channels/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span>
-<span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;models/external_accounts/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span></pre></div>
+        <div class='highlight'><pre><span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;models/channel/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span>
+<span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;models/account/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span></pre></div>
       </td>
     </tr>
     <tr id='section-13'>

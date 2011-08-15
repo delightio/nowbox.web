@@ -1,31 +1,36 @@
 require File.expand_path("../../../spec_helper", __FILE__)
 module Aji
-  describe ExternalAccounts::Youtube do
-    describe "#populate" do
-      subject { ExternalAccounts::Youtube.find_or_create_by_uid "nowmov" }
+  describe Account::Youtube do
+    describe "#refresh_content" do
+      subject { Account::Youtube.find_or_create_by_uid "nowmov" }
 
       it "populates new account" do
         subject.content_videos.should be_empty
-        subject.populate
+        subject.refresh_content
         subject.content_videos.should_not be_empty
       end
 
-      it "does not re populate within short time" do
+      it "does not refresh_content within short time" do
         subject.should_receive(:save).once
-        subject.populate
+        subject.refresh_content
         subject.should_not_receive(:save)
-        subject.populate
+        subject.refresh_content
       end
 
-      it "allows forced population" do
-        subject.populate
+      it "allows a forced refresh_content" do
+        subject.refresh_content
         subject.should_receive(:save).once
-        subject.populate :must_populate=>true
+        subject.refresh_content true
+      end
+
+      it "marks videos populated" do
+        subject.refresh_content
+        subject.content_videos.each {|v| v.should be_populated }
       end
 
       it "waits for the lock before populating"
     end
-    
+
     describe "#thumbnail_uri" do
       it "returns a uri from Youtube API"
       it "replaces default blue ghost with first video" do

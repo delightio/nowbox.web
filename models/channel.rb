@@ -1,12 +1,4 @@
 module Aji
-  class Supported
-    def self.categories
-      [ :undefined, :news, :sports, :music, :science, :comedy, :cars, :kids,
-        :trailers, :gaming, :ted, :comedy, :film, :entertainment, :celebrity,
-        :family]
-    end
-  end
-
   # This is an interface class. Only actions and fields common to all Channel
   # types are included here. Required methods are defined and documented here
   # and raise an exception until overriden in a subclass.
@@ -16,22 +8,24 @@ module Aji
   # - title: String
   # - type: String (ActiveRecord Column: ACCESS ONLY, DO NOT CHANGE)
   # - default_listing: Boolean
-  # - category: String
   # - content_zset: Redis::Objects::SortedSet
   # - created_at: DateTime
   # - updated_at: DateTime
   class Channel < ActiveRecord::Base
     has_many :events
 
-    validates_inclusion_of :category, :in => Aji::Supported.categories
-    def category; read_attribute(:category).to_s.to_sym; end
-    def category= value; write_attribute(:category, value.to_s); end
-
     include Redis::Objects
     sorted_set :content_zset
     include Mixins::ContentVideos
-    lock :populating, :expiration => 10.minutes
+    lock :refresh, :expiration => 10.minutes
     include Mixins::Populating
+    sorted_set :category_id_zset
+    def category_ids limit=-1
+      (category_id_zset.revrange 0, limit).map(&:to_i)
+    end
+    def categories limit=-1
+      category_ids(limit).map { |cid| Category.find cid }
+    end
 
     def thumbnail_uri; raise InterfaceMethodNotImplemented; end
 
@@ -40,7 +34,7 @@ module Aji
         "id" => id,
         "type" => (type||"").split("::").last,
         "default_listing" => default_listing,
-        "category" => category.to_s,
+        "category_ids" => category_ids,
         "title" => title,
         "thumbnail_uri" => thumbnail_uri,
         # TODO: Shouldn't just catch the first version since we may change
@@ -50,23 +44,43 @@ module Aji
       }
     end
 
+    # TODO: Refactor to take a list of video ids and a limit parameter instead
+    # of hash. This will reduce coupling and allow us to do more sophisticated
+    # things than just removing a users viewed videos with less coupling and
+    # thus less code.
     def personalized_content_videos args
       user = args[:user]
       raise ArgumentError, "User missing for Channel[#{self.id}].personalized #{args.inspect}" if user.nil?
-      # TODO: just take out viewed videos
       limit = (args[:limit] || 20).to_i
+      page = (args[:page] || 1).to_i
+      total = limit * page
       new_videos = []
       # TODO: use Redis for this.. zdiff not found?
-      viewed_video_ids = user.viewed_video_ids
+      viewed_video_ids = user.history_channel.content_video_ids
       content_video_ids.each do |channel_video_id|
         video = Video.find_by_id channel_video_id
         next if video.blacklisted?
         new_videos << video if !viewed_video_ids.member? channel_video_id
-        break if new_videos.count >= limit
+        break if new_videos.count >= total
       end
-      new_videos
+      new_videos[(total-limit)...total].to_a
     end
-    
+
+
+    def update_relevance_in_categories new_videos
+      new_videos.map(&:category_id).group_by{|g| g}.each do |h|
+        cid = h.first; count = h.last.count # category_id => array of occurance
+        category = Category.find cid
+        category.update_channel_relevance self, count
+        category_id_zset[cid] += count
+      end
+    end
+
+    def refresh_content force=false
+      raise InterfaceMethodNotImplemented,
+        "#{self.class} must implement #refresh_content(force) method"
+    end
+
     # ## Class Methods
     def self.search query
       results = []
@@ -95,7 +109,7 @@ module Aji
     end
 
     def self.trending
-      Channels::Trending.singleton
+      Channel::Trending.singleton
     end
 
   end

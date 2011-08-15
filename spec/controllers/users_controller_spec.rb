@@ -21,6 +21,9 @@ module Aji
           body_hash = JSON.parse last_response.body
           body_hash.should == user.serializable_hash
           body_hash["subscribed_channel_ids"].should == user.subscribed_channels.map {|c| c.id.to_s}
+          [:queue_channel_id, :favorite_channel_id, :history_channel_id].each do |c|
+            body_hash[c.to_s].should == (user.send c)
+          end
         end
       end
       
@@ -40,51 +43,6 @@ module Aji
           default_channels.each do |c|
             u.subscribed_channels.should include c
           end
-        end
-      end
-      
-      describe "put #{resource_uri}/:id" do
-        it "should only respond to known commands" do
-          channel = Factory :youtube_channel_with_videos
-          user = Factory :user
-          params = {:channel_id => channel.id, :channel_action => random_string}
-          put "#{resource_uri}/#{user.id}", params
-          last_response.status.should == 400
-        end
-
-        it "should allow subscribing" do
-          channel = Factory :youtube_channel_with_videos
-          user = Factory :user
-          params = {:channel_id => channel.id, :channel_action => :subscribe}
-          put "#{resource_uri}/#{user.id}", params
-          last_response.status.should == 200
-          user.subscribed_channels.should include channel
-        end
-
-        it "should allow unsubscribing" do
-          channel = Factory :youtube_channel_with_videos
-          user = Factory :user
-          user.subscribe channel
-          params = {:channel_id => channel.id, :channel_action => :unsubscribe}
-          put "#{resource_uri}/#{user.id}", params
-          last_response.status.should == 200
-          user.subscribed_channels.should_not include channel
-        end
-
-        it "should allow channel arrangment" do
-          user = Factory :user
-          channels = []
-          5.times do |n|
-            channels << Factory(:channel)
-            user.subscribe channels.last
-          end
-          old_position = 3
-          new_position = 1
-          channel = channels[old_position]
-          params = {:channel_id => channel.id, :channel_action => :arrange, :channel_action_params=>{:new_position=>new_position}}
-          put "#{resource_uri}/#{user.id}", params
-          last_response.status.should == 200
-          user.subscribed_channels[new_position].should == channel
         end
       end
       

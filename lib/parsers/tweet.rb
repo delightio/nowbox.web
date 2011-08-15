@@ -1,7 +1,7 @@
 module Aji
   class Parsers::Tweet
     # Parses the JSON from Twitter and returns a `Mention`. It will also create
-    # an un-authenticated `ExternalAccount::Twitter` object or retrieve an
+    # an un-authenticated `Account::Twitter` object or retrieve an
     # existing one representing the author of the mention.
     # This method takes an optional block parameter. This block will have access
     # to the parsed tweet as a hash before it or its author are instantiated.
@@ -33,8 +33,8 @@ module Aji
       return nil unless filter
 
       # TODO: Is there a way to avoid saving this guy to DB?
-      author = ExternalAccounts::Twitter.find_or_create_by_uid(
-        tweet_hash['user']['id'].to_s, :user_info => tweet_hash['user'],
+      author = Account::Twitter.find_or_create_by_uid(
+        tweet_hash['user']['id'].to_s, :info => tweet_hash['user'],
         :username => tweet_hash['user']['screen_name'])
 
       links = tweet_hash['entities']['urls'].map do |url|

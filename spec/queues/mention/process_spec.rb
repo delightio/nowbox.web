@@ -39,15 +39,15 @@ module Aji
 
         @links = Array.new(@links_count_in_mention, @link)
         # TODO: Don't use real author.
-        @author = ExternalAccount.new :uid => "someguy"
+        @author = Account.new :uid => "someguy"
         @mention = double("mention", :videos => Array.new, :links => @links,
                           :save => true, :has_links? => true,
                           :author => @author, :spam? => false)
 
-        @trending = mock("trending singleton")
+        @channel = double("channel", :id => 5)
+        Aji::Channel.stub(:find).and_return(@channel)
         Aji::Queues::Mention::Process.stub(:parse).and_return(@mention)
         Aji::Link.stub(:new).and_return(@link)
-        Aji::Channel.stub(:trending).and_return(@trending)
       end
 
       it "pushes all videos mentioned into trending channel" do
@@ -55,9 +55,9 @@ module Aji
         Aji::Video.should_receive(:find_or_create_by_external_id_and_source)
           .exactly(@links_count_in_mention).times
           .and_return(video)
-        @trending.should_receive(:push_recent).
+        @channel.should_receive(:push_recent).
           exactly(@links_count_in_mention).times
-        subject.perform 'twitter', mock("tweet data")
+        subject.perform 'twitter', mock("tweet data"), @channel.id
       end
 
       it "blacklists author who mentions a blacklisted video" do
@@ -67,16 +67,16 @@ module Aji
         Aji::Video.stub(:find_or_create_by_external_id_and_source).
           and_return(blacklisted_video)
         bad_author.should_receive(:blacklist).at_least(1)
-        @trending.should_receive(:push_recent).never
-        subject.perform 'twitter', @data
+        @channel.should_receive(:push_recent).never
+        subject.perform 'twitter', @data, @channel.id
       end
 
       it "blacklists author who mentions same set of video multiple times" do
         @mention.stub(:spam?).and_return(true)
         video = double("video", :blacklisted? => false)
         Aji::Video.stub(:find_or_create_by_external_id_and_source).and_return(video)
-        @trending.should_receive(:push_recent).never
-        subject.perform 'twitter', @data
+        @channel.should_receive(:push_recent).never
+        subject.perform 'twitter', @data, @channel.id
         @mention.author.should be_blacklisted
       end
 
@@ -84,7 +84,7 @@ module Aji
         @mention.stub(:has_links?).and_return(false)
         Resque.should_receive(:enqueue).
           with(Queues::Mention::Process, @mention).never
-        subject.perform "twitter", @data
+        subject.perform "twitter", @data, @channel.id
       end
 
       context "when a link does not point to a video" do

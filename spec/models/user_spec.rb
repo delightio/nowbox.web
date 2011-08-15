@@ -2,90 +2,66 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 describe Aji::User do
 
-  describe "#cache_event" do
-    it "should cache video id in viewed regardless of event type except :enqueue and :dequeue" do
-      user = Factory :user
-      Aji::Supported.event_types.delete_if{|t| t==:enqueue||t==:dequeue}.each do |event_type|
-        event = Factory :event, :event_type => event_type
-        user.cache_event event
-        user.viewed_videos.should include event.video
-      end
-    end
-
-    it "should never fail dequeuing a video" do
-      user = Factory :user
-      event = Factory :event, :event_type => :dequeue
-      lambda { user.cache_event event }.should_not raise_error
-      user.queued_videos.should_not include event.video
-    end
-
-    it "should dequeue enqueued video" do
-      user = Factory :user
-      event = Factory :event, :event_type => :enqueue
-      user.cache_event event
-      user.queued_videos.should include event.video
-      event.event_type = :dequeue
-      user.cache_event event
-      user.queued_videos.should_not include event.video
-    end
-
-    it "should not mark a video viewed when queuing" do
-      user = Factory :user
-      event = Factory :event, :event_type => :enqueue
-      user.cache_event event
-      user.viewed_videos.should_not include event.video
-    end
-
-  end
-
-  describe "video_collections" do
-    context "when accessing a video collection" do
-      it "should return a list of video objects" do
-        user = Factory :user_with_viewed_videos
-        user.viewed_videos.first.class.should == Aji::Video
-      end
+  describe ".create" do
+    it "creates user channel" do
+      expect { Factory :user }.to change { Aji::Channel.count }.by(3)
     end
   end
 
-  context "channel subscription management" do
-    it "should add and remove channel accordingly" do
-      user = Factory :user
-      channel = Factory :youtube_channel_with_videos
-      user.subscribe channel
-      user.subscribed_channels.should include channel
-      user.unsubscribe channel
-      user.subscribed_channels.should_not include channel
-    end
-    it "should move given channel into corresponding position" do
-      n = 10
-      user = Factory :user
-      channels = []
-      n.times do |n|
-        channel = Factory :channel
-        channels << channel
-        user.subscribe channel
+  describe "#process_event" do
+    it "caches video id in viewed regardless of event type except :enqueue and :dequeue" do
+      Aji::Event.video_actions.delete_if{|t| t==:enqueue||t==:dequeue}.each do |action|
+        event = Factory :event, :action => action
+        event.user.history_channel.content_videos.should include event.video
       end
-      user.subscribed_channels.size.should == n
-      old_position = rand(n)
-      user.subscribed_channels[old_position].should == channels[old_position]
-      begin
-        args = {:new_position => rand(n)}
-      end while args[:new_position]==old_position
-      user.arrange channels[old_position], args
-      user.subscribed_channels.size.should == n
-      user.subscribed_channels[old_position].should_not == channels[old_position]
-      user.subscribed_channels[args[:new_position]].should == channels[old_position]
     end
+
+    it "never fails dequeuing a video" do
+      event = nil
+      lambda { event = Factory :event, :action => :dequeue }.should_not raise_error
+      event.user.queue_channel.content_videos.should_not include event.video
+    end
+
+    it "dequeues enqueued video" do
+      event = Factory :event, :action => :enqueue
+      event.user.queue_channel.content_videos.should include event.video
+      dequeued_event = Factory :event, :action => :dequeue,
+        :video => event.video, :user => event.user
+      event.user.queue_channel.content_videos.should_not include event.video
+    end
+
+    it "does not mark a video viewed when queuing" do
+      event = Factory :event, :action => :enqueue
+      event.user.history_channel.content_videos.should_not include event.video
+    end
+
+    it "subscribes given channel" do
+      event = Factory :channel_event, :action => :subscribe
+      event.user.subscribed_channels.should include event.channel
+    end
+
+    it "unsubscribes subscribed channel" do
+      event = Factory :channel_event, :action => :subscribe
+      event.user.subscribed_channels.should include event.channel
+      event = Factory :channel_event, :action => :unsubscribe
+      event.user.subscribed_channels.should_not include event.channel
+    end
+
+    it "does not require video object when sending channel actions" do
+      event = Factory :channel_event
+      event.video.should be_nil
+      event.id.should_not be_nil
+    end
+
   end
 
   describe "#serializable_hash" do
-    it "should include a list subscribed channel ids" do
+    it "should include a list of subscribed channel ids" do
       user = Factory :user
-      channel_ids = Set.new
       5.times do |n|
-        channel = Factory :youtube_channel_with_videos
-        channel_ids << channel.id
-        user.subscribe channel
+        channel = Factory :channel
+        event = Factory :channel_event, :action => :subscribe,
+          :user => user, :channel => channel
       end
       user.serializable_hash["subscribed_channel_ids"].should == user.subscribed_list.values
     end
