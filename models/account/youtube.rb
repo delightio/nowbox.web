@@ -34,11 +34,17 @@ module Aji
       new_videos
     end
 
-    private
     # A Youtube Account's uid is it's username. Let's set uid elsewhere and
     # set the username to be equal within the method.
     def set_uid_as_username
       update_attribute :username, self.uid
     end
+    private :set_uid_as_username
+
+    def set_provider
+      update_attribute :provider, 'youtube'
+    end
+    private :set_provider
+
   end
 end

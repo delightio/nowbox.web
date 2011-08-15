@@ -2,6 +2,8 @@ module Aji
   # ## Account::Twitter Schema Extensions
   # - recent_zset: Redis::Objects::SortedSet
   class Account::Twitter < Account
+    after_create :set_provider
+
     include Redis::Objects
     serialize :user_info, Hash
     sorted_set :recent_zset
@@ -113,6 +115,11 @@ module Aji
         Queues::Mention::Process.perform 'twitter', tweet, self
       end
     end
+
+    def set_provider
+      update_attribute :provider, 'youtube'
+    end
+    private :set_provider
 
   end
 end

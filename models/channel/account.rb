@@ -1,12 +1,11 @@
 module Aji
   class Channel::Account < Channel
+    before_save :set_title
 
     has_and_belongs_to_many :accounts,
-      :class_name => 'Aji::Account',
-      :join_table => :accounts_channels, :foreign_key => :channel_id,
-      :association_foreign_key => :account_id
+      :class_name => 'Aji::Account', :join_table => :accounts_channels,
+      :foreign_key => :channel_id, :association_foreign_key => :account_id
 
-    before_save :set_title
 
     def refresh_content force=false
       start = Time.now
@@ -44,11 +43,14 @@ module Aji
     end
 
     def self.find_all_by_accounts accounts
-      accounts_channels = accounts.map{ |a| a.channels }
-      # Perform an intersection on all the channels from given accounts
-      # using Ruby's awesome Array#inject.
-      matching_channels = accounts_channels.inject(&:&)
-      matching_channels.find_all { |c| c.accounts.length == accounts.length }
+      puts "Trying to find a channel with #{accounts.map(&:username)}"
+      possible_channels = accounts.first.channels
+      possible_channels.select do |c|
+        c.accounts.length == accounts.length &&
+          accounts.inject(true) do |bool, account|
+            bool &&= c.accounts.include? account
+          end
+      end
     end
 
     # TODO: Refactor to use accounts instead of usernames in order to reduce
@@ -59,10 +61,8 @@ module Aji
       return result.first unless result.empty?
 
       # We have to create the channel
-      channel = Channel::Account.create params
-      channel.update_attribute :accounts, accounts
-      channel.refresh_content if refresh
-      channel
+      params.merge! :accounts => accounts
+      Channel::Account.create params
     end
 
     def self.searchable_columns; [:title]; end
