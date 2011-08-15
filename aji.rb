@@ -51,7 +51,7 @@ module Aji
   Resque.schedule = conf['RESQUE_SCHEDULE']
 
   # Establish ActiveRecord conneciton and run all necessary migrations.
-  ActiveRecord::Base.establish_connection conf['DATABASE']
+  ActiveRecord::Base.establish_connection conf['DATABASE'].merge :reconnect => true
   ActiveRecord::Base.default_timezone = :utc
 
   # An application specific error class.
