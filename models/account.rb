@@ -18,7 +18,8 @@ module Aji
 
     has_and_belongs_to_many :channels,
       :class_name => 'Channel::Account', :join_table => :accounts_channels,
-      :foreign_key => :account_id, :association_foreign_key => :channel_id
+      :foreign_key => :account_id, :association_foreign_key => :channel_id,
+      :autosave => true
 
     validates_presence_of :uid
     validates_uniqueness_of :uid, :scope => :type
