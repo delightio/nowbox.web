@@ -4,7 +4,8 @@ module Aji
 
     has_and_belongs_to_many :accounts,
       :class_name => 'Aji::Account', :join_table => :accounts_channels,
-      :foreign_key => :channel_id, :association_foreign_key => :account_id
+      :foreign_key => :channel_id, :association_foreign_key => :account_id,
+      :autosave => true
 
 
     def refresh_content force=false
@@ -43,7 +44,6 @@ module Aji
     end
 
     def self.find_all_by_accounts accounts
-      puts "Trying to find a channel with #{accounts.map(&:username)}"
       possible_channels = accounts.first.channels
       possible_channels.select do |c|
         c.accounts.length == accounts.length &&
@@ -53,16 +53,14 @@ module Aji
       end
     end
 
-    # TODO: Refactor to use accounts instead of usernames in order to reduce
-    # coupling. You may wine but this is what Ruby is for. Listen to your tests.
-    # Also, it this is broken by your removal of provider.
     def self.find_or_create_by_accounts accounts, params={}, refresh=false
-      result = Channel::Account.find_all_by_accounts accounts
-      return result.first unless result.empty?
-
-      # We have to create the channel
-      params.merge! :accounts => accounts
-      Channel::Account.create params
+      c = Channel::Account.find_all_by_accounts(accounts).first ||
+        Channel::Account.create(params.merge! :accounts => accounts)
+     # accounts.each do |account|
+     #   account.channels << c unless account.channels.include? c
+     # end
+      c.refresh_content if refresh
+      c
     end
 
     def self.searchable_columns; [:title]; end
@@ -71,6 +69,7 @@ module Aji
     def set_title
       self.title ||= "#{accounts.map(&:username).join("'s, ")}'s Videos"
     end
+
   end
 end
 
