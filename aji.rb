@@ -47,11 +47,13 @@ module Aji
   # Establish Redis connection and initialize Redis-backed utilities.
   def Aji.redis; @redis ||= Redis.new conf['REDIS']; end
   Resque.redis = redis
+  Resque.before_fork = Proc.new { ActiveRecord::Base.establish_connection(
+    Aji.conf['DATABASE']) }
   Redis::Objects.redis = redis
   Resque.schedule = conf['RESQUE_SCHEDULE']
 
   # Establish ActiveRecord conneciton and run all necessary migrations.
-  ActiveRecord::Base.establish_connection conf['DATABASE'].merge :reconnect => true
+  ActiveRecord::Base.establish_connection conf['DATABASE']
   ActiveRecord::Base.default_timezone = :utc
 
   # An application specific error class.
