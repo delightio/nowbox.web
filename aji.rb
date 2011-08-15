@@ -1,6 +1,6 @@
-#require 'bundler'
-#Bundler.require
-#
+require 'bundler'
+Bundler.require
+
 # This is the initilization file for the Aji API. All set up, library
 # loading and application level settings are done here.
 module Aji
