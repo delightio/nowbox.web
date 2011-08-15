@@ -4,6 +4,7 @@ module Aji
   class Account::Twitter < Account
     after_create :set_provider
 
+    validates_presence_of :username
     include Redis::Objects
     serialize :user_info, Hash
     sorted_set :recent_zset

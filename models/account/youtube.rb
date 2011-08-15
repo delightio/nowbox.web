@@ -2,6 +2,8 @@ module Aji
   class Account::Youtube < Account
     after_create :set_uid_as_username
 
+    validates_presence_of :uid
+
     def profile_uri; "http://www.youtube.com/user/#{username}"; end
 
     def thumbnail_uri

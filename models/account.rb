@@ -21,7 +21,6 @@ module Aji
       :foreign_key => :account_id, :association_foreign_key => :channel_id,
       :autosave => true
 
-    validates_presence_of :uid
     validates_uniqueness_of :uid, :scope => :type
 
     sorted_set :content_zset
