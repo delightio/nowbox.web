@@ -7,7 +7,7 @@ module Aji
 
         def self.perform source, data, destination
           destination = case destination
-                        when Integer
+                        when String
                           Channel.find destination
                         else
                           destination
