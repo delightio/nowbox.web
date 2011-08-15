@@ -86,6 +86,34 @@ module Aji
             body_hash.count.should == limit
           end
 
+          it "does paging and returns new videos" do
+            channel = Factory :youtube_channel_with_videos
+            n = channel.content_video_ids.count
+            params = { :user_id => (Factory :user).id, :limit => n/2 }
+            get "#{resource_uri}/#{channel.id}/videos", params
+            last_response.status.should == 200
+            first_page = JSON.parse last_response.body
+            first_page.should have(params[:limit]).videos
+
+            params.merge!(:page=>2)
+            get "#{resource_uri}/#{channel.id}/videos", params
+            last_response.status.should == 200
+            second_page = JSON.parse last_response.body
+            second_page.should have(params[:limit]).videos
+
+            (first_page & second_page).should be_empty
+          end
+          
+          it "returns empty array when asked for more than given channel has" do
+            channel = Factory :youtube_channel_with_videos
+            n = channel.content_video_ids.count
+            params = { :user_id => (Factory :user).id, :limit => n, :page => 10 }
+            get "#{resource_uri}/#{channel.id}/videos", params
+            last_response.status.should == 200
+            results = JSON.parse last_response.body
+            results.should be_empty
+          end
+
           it "should not returned viewed videos" do
             channel = Factory :youtube_channel_with_videos
             viewed_video = channel.content_videos.sample

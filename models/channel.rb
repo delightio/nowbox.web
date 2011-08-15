@@ -51,8 +51,9 @@ module Aji
     def personalized_content_videos args
       user = args[:user]
       raise ArgumentError, "User missing for Channel[#{self.id}].personalized #{args.inspect}" if user.nil?
-      # TODO: just take out viewed videos
       limit = (args[:limit] || 20).to_i
+      page = (args[:page] || 1).to_i
+      total = limit * page
       new_videos = []
       # TODO: use Redis for this.. zdiff not found?
       viewed_video_ids = user.history_channel.content_video_ids
@@ -60,9 +61,9 @@ module Aji
         video = Video.find_by_id channel_video_id
         next if video.blacklisted?
         new_videos << video if !viewed_video_ids.member? channel_video_id
-        break if new_videos.count >= limit
+        break if new_videos.count >= total
       end
-      new_videos
+      new_videos[(total-limit)...total].to_a
     end
 
 
