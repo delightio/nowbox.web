@@ -1,5 +1,8 @@
 require_relative '../aji'
 
+# Create the trending channel by invoking the singleton.
+puts "Creating Trending Channel with ID:#{Channel.trending}"
+
 jsonfilename = "#{Aji.root}/config/channels.json"
 json = File.open jsonfilename
 channels_json = JSON.parse json.read
