@@ -1,6 +1,6 @@
-require 'bundler'
-Bundler.require
-
+#require 'bundler'
+#Bundler.require
+#
 # This is the initilization file for the Aji API. All set up, library
 # loading and application level settings are done here.
 module Aji
@@ -77,7 +77,7 @@ Dir.glob("models/channel/*.rb").each { |r| require_relative r }
 Dir.glob("models/account/*.rb").each { |r| require_relative r }
 
 # Run migrations after models are loaded.
-ActiveRecord::Migrator.migrate("db/migrate/")
+ActiveRecord::Migrator.migrate("db/migrate/") unless Aji.conf['NOMIGRATE']
 
 Dir.glob("helpers/*.rb").each { |r| require_relative r }
 Dir.glob("controllers/*_controller.rb").each { |r| require_relative r }
