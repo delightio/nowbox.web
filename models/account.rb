@@ -10,15 +10,14 @@ module Aji
   # - credentials: Text (Serialized Hash)
   # - blacklisted_at: DateTime
   class Account < ActiveRecord::Base
-    after_create :set_provider
+
     include Redis::Objects
     serialize :user_info, Hash
     serialize :credentials, Hash
     belongs_to :identity
 
     has_and_belongs_to_many :channels,
-      :class_name => 'Channel::Account',
-      :join_table => :accounts_channels,
+      :class_name => 'Channel::Account', :join_table => :accounts_channels,
       :foreign_key => :account_id, :association_foreign_key => :channel_id
 
     validates_presence_of :uid
@@ -74,11 +73,6 @@ module Aji
     def to_channel
       Channel::Account.find_or_create_by_accounts Array(self)
     end
-
-    def set_provider
-      update_attribute :provider, 'twitter'
-    end
-    private :set_provider
 
     # Class Methods follow
     def Account.find_or_create_by_param string, params
