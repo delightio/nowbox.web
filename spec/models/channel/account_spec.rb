@@ -17,7 +17,7 @@ module Aji
     describe "#refresh_content" do
       it "fetches videos from youtube" do
         youtube_account = Account::Youtube.create :uid => "nicnicolecole"
-        c = Channel::Account.find_or_create_by_accounts [youtube_account]
+        c = Channel::Account.create :accounts => [youtube_account]
         expect { c.refresh_content }.to change(c, :content_video_ids).from([])
       end
 
@@ -26,7 +26,7 @@ module Aji
           Account::Youtube.create :uid => uid
         end
 
-        subject = Channel::Account.find_or_create_by_accounts real_youtube_users
+        subject = Channel::Account.create :accounts => real_youtube_users
         subject.refresh_content
         subject.should_not_receive(:save)
         subject.refresh_content
@@ -37,7 +37,7 @@ module Aji
           Account::Youtube.create :uid => uid
         end
 
-        subject = Channel::Account.find_or_create_by_accounts real_youtube_users
+        subject = Channel::Account.create :accounts => real_youtube_users
         subject.refresh_content
         subject.accounts.each{ |a| a.should_receive(:refresh_content).once.
           and_return([]) }
@@ -51,9 +51,9 @@ module Aji
     describe ".find_or_create_by_accounts" do
       it "returns a new channel when there is no exact match" do
         subject = Channel::Account.find_or_create_by_accounts @accounts
-        subject.should_not be_nil
-        @accounts.delete @accounts.sample
-        new_channel = Channel::Account.find_or_create_by_accounts @accounts
+        subject.class.should == Channel::Account
+        accounts = @accounts -  Array(@accounts.sample)
+        new_channel = Channel::Account.find_or_create_by_accounts accounts
         new_channel.should_not == subject
       end
 
