@@ -217,7 +217,7 @@ by a subclass.</p>
         <p>Run migrations after models are loaded.</p>
       </td>
       <td class=code>
-        <div class='highlight'><pre><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migrator</span><span class="o">.</span><span class="n">migrate</span><span class="p">(</span><span class="s2">&quot;db/migrate/&quot;</span><span class="p">)</span>
+        <div class='highlight'><pre><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migrator</span><span class="o">.</span><span class="n">migrate</span><span class="p">(</span><span class="s2">&quot;db/migrate/&quot;</span><span class="p">)</span> <span class="k">unless</span> <span class="no">Aji</span><span class="o">.</span><span class="n">conf</span><span class="o">[</span><span class="s1">&#39;NOMIGRATE&#39;</span><span class="o">]</span>
 
 <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;helpers/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span>
 <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;controllers/*_controller.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span>
