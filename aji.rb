@@ -47,6 +47,8 @@ module Aji
   # Establish Redis connection and initialize Redis-backed utilities.
   def Aji.redis; @redis ||= Redis.new conf['REDIS']; end
   Resque.redis = redis
+  Resque.before_fork = Proc.new { ActiveRecord::Base.establish_connection(
+    Aji.conf['DATABASE']) }
   Redis::Objects.redis = redis
   Resque.schedule = conf['RESQUE_SCHEDULE']
 
