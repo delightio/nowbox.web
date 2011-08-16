@@ -6,16 +6,12 @@ module Aji
         @queue = :mention
 
         def self.perform source, data, destination
-          puts 'Doing nothing'
-          return
           destination = case destination
                         when String
                           Channel.find destination
                         else
                           destination
                         end
-          puts "Bailin'"
-          return
 
           # Short circuit parser to return nil if the tweet has no urls.
           mention = self.parse source, data
