@@ -6,6 +6,8 @@ module Aji
         @queue = :mention
 
         def self.perform source, data, destination
+          puts 'Doing nothing'
+          return
           destination = case destination
                         when String
                           Channel.find destination
