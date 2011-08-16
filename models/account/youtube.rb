@@ -3,6 +3,7 @@ module Aji
     after_create :set_uid_as_username
 
     validates_presence_of :uid
+    validates_uniqueness_of :uid
 
     def profile_uri; "http://www.youtube.com/user/#{username}"; end
 
