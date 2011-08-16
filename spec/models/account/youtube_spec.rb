@@ -23,6 +23,7 @@ module Aji
         subject.refresh_content(true).should be_a_kind_of(Array)
       end
 
+      it "returns an array of Video objects" # TODO should combine with below
       it "always returns an array" do
         subject.refresh_content.should be_a_kind_of(Array)
         subject.refresh_content(true).should be_a_kind_of(Array)
@@ -34,6 +35,7 @@ module Aji
         subject.content_videos.each {|v| v.should be_populated }
       end
 
+      it "refreshes only unpopulated accounts"
       it "waits for the lock before populating"
     end
 

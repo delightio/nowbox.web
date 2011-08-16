@@ -58,8 +58,9 @@ module Aji
     end
 
     def refresh_content force=false
+      new_videos = []
       refresh_lock.lock do
-        return if recently_populated? && content_video_ids.count > 0 && !force
+        return [] if recently_populated? && content_video_ids.count > 0 && !force
 
         harvest_tweets
 
@@ -90,10 +91,12 @@ module Aji
             populated_count += 1
           end
           push video, h[:relevance]
+          new_videos << video
         end
         Aji.log "Replace #{[max_in_flight,in_flight.count].min} (#{populated_count} populated) content videos in #{Time.now-start} s."
         update_attribute :populated_at, Time.now
       end
+      new_videos
     end
 
     def push_recent video, relevance=Time.now.to_i

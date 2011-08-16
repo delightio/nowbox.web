@@ -12,7 +12,6 @@ module Aji
       start = Time.now
       new_videos = []
       refresh_lock.lock do
-        return if recently_populated? && content_video_ids.count > 0 && !force
         accounts_populated_at = []
         accounts.each do |account|
           new_videos += account.refresh_content force
@@ -21,7 +20,9 @@ module Aji
         # NOTE: Steven! thinks this should either be the current time or the
         # oldest time since it will indicate the staleness of the channel
         # better.
-        update_attribute :populated_at, accounts_populated_at.sort.last # latest
+        unless new_videos.empty?
+          update_attribute :populated_at, accounts_populated_at.sort.last # latest
+        end
       end
       Aji.log :INFO, "Channel::Account[#{id}, '#{title}', #{accounts.count} accounts]#refresh_content(force:#{force}) took #{Time.now-start} s."
       update_relevance_in_categories new_videos
@@ -64,7 +65,7 @@ module Aji
 
     private
     def set_title
-      self.title ||= "#{accounts.map(&:username).join("'s, ")}'s Videos"
+      self.title ||= "#{accounts.map(&:username).join(", ")}"
     end
 
   end
