@@ -10,7 +10,7 @@
 #        account.refresh_generated_content
 #      end
 #
-#      Resque.enqueue Queues::PopulateChannel, identity.channel.id
+#      Resque.enqueue Queues::RefreshChannel, identity.channel.id
 #    end
 #  end
 #end

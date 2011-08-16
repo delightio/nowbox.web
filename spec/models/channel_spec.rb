@@ -46,10 +46,9 @@ describe Aji::Channel do
 
 
       user = mock("user")
-      history_channel = mock("channel")
-      history_channel.should_receive(:content_video_ids).at_least(1).and_return(
-        viewed_video_ids)
-      user.stub(:history_channel).and_return(history_channel)
+      history = mock("history")
+      user.stub(:history_channel).and_return(history)
+      history.stub(:content_video_ids).and_return(viewed_video_ids)
       personalized_video_ids = channel.personalized_content_videos(
         :user => user).map(&:id)
       viewed_video_ids.each do | id |
@@ -129,7 +128,7 @@ describe Aji::Channel do
       channels = []
       5.times { |n| channels << Factory(:youtube_channel) }
       # 5 + 1 times since we always create a keyword base channel
-      Resque.should_receive(:enqueue).with(Aji::Queues::PopulateChannel, anything()).exactly(5+1).times
+      Resque.should_receive(:enqueue).with(Aji::Queues::RefreshChannel, anything()).exactly(5+1).times
       q = channels.map(&:title).join ","
       results = Aji::Channel.search q
     end

@@ -88,7 +88,7 @@ module Aji
         next if descendant.searchable_columns.empty?
         results += descendant.send :search_helper, query
       end
-      results.each { |ch| Resque.enqueue Queues::PopulateChannel, ch.id }
+      results.each { |ch| Resque.enqueue Queues::RefreshChannel, ch.id }
       results
     end
 

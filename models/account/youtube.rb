@@ -20,7 +20,7 @@ module Aji
       start = Time.now
       new_videos = []
       refresh_lock.lock do
-        return if recently_populated? && content_video_ids.count > 0 && !force
+        return new_videos if recently_populated? && content_video_ids.count > 0 && !force
         vhashes = Macker::Search.new(:author => username).search
         vhashes.each do |vhash|
           video = Video.find_or_create_by_external_id vhash[:external_id], vhash

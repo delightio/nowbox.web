@@ -20,7 +20,13 @@ module Aji
       it "allows a forced refresh_content" do
         subject.refresh_content
         subject.should_receive(:save).once
-        subject.refresh_content true
+        subject.refresh_content(true).should be_a_kind_of(Array)
+      end
+
+      it "always returns an array" do
+        subject.refresh_content.should be_a_kind_of(Array)
+        subject.refresh_content(true).should be_a_kind_of(Array)
+        subject.refresh_content.should be_a_kind_of(Array)
       end
 
       it "marks videos populated" do
