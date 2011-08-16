@@ -6,7 +6,6 @@ module Aji
 
     validates_presence_of :username
     include Redis::Objects
-    serialize :user_info, Hash
     sorted_set :recent_zset
     USER_TIMELINE_URL = "http://api.twitter.com/1/statuses/user_timeline.json"
 
@@ -14,7 +13,7 @@ module Aji
 
     # TODO: LH 205
     def thumbnail_uri
-      "http://api.twitter.com/1/users/profile_image/#{uid}.json"
+      "http://api.twitter.com/1/users/profile_image/#{username}.json"
     end
 
     def publish share
