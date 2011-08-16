@@ -12,6 +12,8 @@ module Aji
                         else
                           destination
                         end
+          puts "Bailin'"
+          return
 
           # Short circuit parser to return nil if the tweet has no urls.
           mention = self.parse source, data
