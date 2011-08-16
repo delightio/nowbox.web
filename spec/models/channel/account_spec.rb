@@ -11,7 +11,7 @@ module Aji
     it "should set title based on accounts" do
       accounts = %w{foo bar baz}.map{|n| Account::Youtube.create uid: n}
       subject = Channel::Account.create :accounts => accounts
-      subject.title.should == "foo's, bar's, baz's Videos"
+      subject.title.should == "foo, bar, baz"
     end
 
     describe "#refresh_content" do
