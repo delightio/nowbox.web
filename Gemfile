@@ -43,6 +43,7 @@ group :test do
 #  gem 'vcr'
   gem 'rack-test', :require => 'rack/test'
   gem 'rspec'
+  gem 'database_cleaner'
   gem 'cucumber'
   #gem 'capybara' # For viewer app.
   gem 'factory_girl'
