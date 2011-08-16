@@ -50,7 +50,8 @@ module Aji
       # 404  
       # __Required params__ `channel_id` unique id of the channel  
       # __Required params__ `user_id` unique id of the user  
-      # __Optional params__ `limit` max. number of videos to return
+      # __Optional params__ `limit` max. number of videos to return  
+      # __Optional params__ `page` which page of videos to return
       get '/:channel_id/videos' do
         channel = find_channel_by_id_or_error params[:channel_id]
         user = find_user_by_id_or_error params[:user_id]
