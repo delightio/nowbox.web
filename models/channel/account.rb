@@ -45,7 +45,11 @@ module Aji
     end
 
     def self.find_all_by_accounts accounts
-      possible_channels = accounts.first.channels :reload
+      puts accounts.map{|a| a.channels}.inspect
+      # Take only the first accounts channels but reload all of them in order
+      # to use them for the channel search below.
+      possible_channels = accounts.map{|a| a.channels :reload}.first
+
       possible_channels.select do |c|
         c.accounts.length == accounts.length &&
           accounts.inject(true) do |bool, account|
