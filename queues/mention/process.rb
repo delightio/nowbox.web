@@ -2,6 +2,7 @@ module Aji
   module Queues
     module Mention
       class Process
+        extend WithDatabaseConnection
 
         @queue = :mention
 

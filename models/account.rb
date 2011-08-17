@@ -21,8 +21,6 @@ module Aji
       :foreign_key => :account_id, :association_foreign_key => :channel_id,
       :autosave => true
 
-    validates_uniqueness_of :uid, :scope => :type
-
     sorted_set :content_zset
     include Mixins::ContentVideos
     lock :refresh, :expiration => 10.minutes

@@ -35,9 +35,17 @@ RSpec.configure do |config|
   config.mock_with :rspec
   config.include TestMixin
   # config.extend VCR::RSpec::Macros
+#  config.before :suite do
+#    DatabaseCleaner.strategy = :transaction
+#    DatabaseCleaner.clean_with(:truncation)
+#  end
+
   config.before :each do
+    DatabaseCleaner.start
     Aji.redis.flushdb
-    [Aji::User, Aji::Channel, Aji::Event, Aji::Account, Aji::Video].
-      map { |c| c.all.each { |obj| obj.delete } }
+  end
+
+  config.after :each do
+    DatabaseCleaner.clean
   end
 end
