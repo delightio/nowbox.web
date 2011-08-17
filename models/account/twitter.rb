@@ -4,8 +4,8 @@ module Aji
   class Account::Twitter < Account
     after_create :set_provider
 
+    validates_presence_of :username
     include Redis::Objects
-    serialize :user_info, Hash
     sorted_set :recent_zset
     USER_TIMELINE_URL = "http://api.twitter.com/1/statuses/user_timeline.json"
 
@@ -13,7 +13,7 @@ module Aji
 
     # TODO: LH 205
     def thumbnail_uri
-      "http://api.twitter.com/1/users/profile_image/#{uid}.json"
+      "http://api.twitter.com/1/users/profile_image/#{username}.json"
     end
 
     def publish share
@@ -57,8 +57,9 @@ module Aji
     end
 
     def refresh_content force=false
+      new_videos = []
       refresh_lock.lock do
-        return if recently_populated? && content_video_ids.count > 0 && !force
+        return [] if recently_populated? && content_video_ids.count > 0 && !force
 
         harvest_tweets
 
@@ -89,10 +90,12 @@ module Aji
             populated_count += 1
           end
           push video, h[:relevance]
+          new_videos << video
         end
         Aji.log "Replace #{[max_in_flight,in_flight.count].min} (#{populated_count} populated) content videos in #{Time.now-start} s."
         update_attribute :populated_at, Time.now
       end
+      new_videos
     end
 
     def push_recent video, relevance=Time.now.to_i

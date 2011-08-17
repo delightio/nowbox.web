@@ -23,6 +23,14 @@ describe Aji::Account::Twitter do
       expect { subject.refresh_content true }.to(
         change { subject.populated_at })
     end
+
+    it "returns an array of Video objects" # TODO should combine with below
+    it "always returns an array" do
+      subject.refresh_content.should be_a_kind_of(Array)
+      subject.refresh_content(true).should be_a_kind_of(Array)
+      subject.refresh_content.should be_a_kind_of(Array)
+    end
+
   end
 
   describe "#refresh_influencers" do

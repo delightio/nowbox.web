@@ -47,6 +47,8 @@ module Aji
   # Establish Redis connection and initialize Redis-backed utilities.
   def Aji.redis; @redis ||= Redis.new conf['REDIS']; end
   Resque.redis = redis
+  Resque.before_fork = Proc.new { ActiveRecord::Base.establish_connection(
+    Aji.conf['DATABASE']) }
   Redis::Objects.redis = redis
   Resque.schedule = conf['RESQUE_SCHEDULE']
 
@@ -77,7 +79,7 @@ Dir.glob("models/channel/*.rb").each { |r| require_relative r }
 Dir.glob("models/account/*.rb").each { |r| require_relative r }
 
 # Run migrations after models are loaded.
-ActiveRecord::Migrator.migrate("db/migrate/")
+ActiveRecord::Migrator.migrate("db/migrate/") unless Aji.conf['NOMIGRATE']
 
 Dir.glob("helpers/*.rb").each { |r| require_relative r }
 Dir.glob("controllers/*_controller.rb").each { |r| require_relative r }
