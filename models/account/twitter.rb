@@ -5,6 +5,7 @@ module Aji
     after_create :set_provider
 
     validates_presence_of :username
+    validates_uniqueness_of :username
     include Redis::Objects
     sorted_set :recent_zset
     USER_TIMELINE_URL = "http://api.twitter.com/1/statuses/user_timeline.json"

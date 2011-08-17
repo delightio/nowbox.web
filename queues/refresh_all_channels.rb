@@ -1,6 +1,7 @@
 module Aji
   module Queues
     class RefreshAllChannels
+      extend WithDatabaseConnection
       @queue = :populate_channel
       def self.perform
         unless RefreshAllChannels.automatically?
