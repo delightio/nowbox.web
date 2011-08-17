@@ -9,7 +9,7 @@ header { position: relative; padding: 25px 0px 25px; line-height: 30px; text-ali
 	header ul{ float: right; list-style: none; padding: 0px 10px; margin: 0px auto; background: rgba(0, 0, 0, 0.4); }
 		header ul li { float: right; display: block; padding: 2px 5px;}
 			header ul a, header ul a:active, header ul a:visited{ color: #DDD;  font-weight: normal;}
-				header ul a:hover { color: #0099CC;}
+				header ul a:hover { color: #FF9900;}
 
 footer {   background: url(/images/textures/aji-tiles-black.jpg) repeat; position: relative; padding: 20px 0px 20px; margin: auto; font-size: 14px; }	
 	footer > .wrapper { padding: 0px;}
@@ -146,12 +146,12 @@ ul.section { list-style: none; }
        -o-box-shadow: 0px 0px 5px rgba(0,0,0,1);
           box-shadow: 0px 0px 5px rgba(0,0,0,1);
  }
-	#home_launch_form .box{ width: 550px; margin: auto;  }
+	#home_launch_form .box{ width: 600px; margin: auto;  }
 	#home_launch_form .social{ margin: 20px 0px 0px;}
-	#home_launch_form h2{  border-bottom-color: #1c2b3d;  color: #22354d; font: 200 20px "helvetica neue", helvetica, arial, sans-serif; }
+	#home_launch_form h2{  border-bottom-color: #1c2b3d;  color: #552403; font: 200 20px "helvetica neue", helvetica, arial, sans-serif; }
 	#home_launch_form p{ font-weight: normal; font-size: 14px; color: #AAA; line-height: 2; color: #758b99; margin-bottom: 10px;}	
 	#home_launch_form form { margin: 15px auto;}
-		#home_launch_form #invite-email{ width: 350px; }
+		#home_launch_form #invite-email{ width: 400px; }
 	
 /* ABOUT */
 
@@ -211,7 +211,7 @@ margin-left: 20px;}
 	ul.slides{ margin: 0px; padding: 10px; text-align: center; background-color: #F5F5F5; }
 		ul.slides li{ display: none; } 
 			ul.slides li.active{ display: block; }
-		ul.slides .intro{ font-size: 16px; color: #555; line-height: 2; text-align: left; width: 80%; margin: 0px auto 20px; padding: 20px 0px; border-bottom: 1px solid #CCC; }
+		ul.slides .intro{ font-size: 16px; color: #555; line-height: 2; text-align: left; width: 80%; margin: 0px auto 20px; padding: 0px 0px 20px; border-bottom: 1px solid #CCC; }
 		ul.slides .image{ width: 80%; margin: auto; }
 		ul.slides .description{ font-size: 14px; text-transform: uppercase; width: 80%; margin: 10px auto 50px; line-height: 2; color: #333; font-weight: bold; }
 		
@@ -230,7 +230,7 @@ margin-left: 20px;}
 		#video_info .title{ font-size: 16px; color: #EEE; }
 		#video_info .description { font-size: 12px; color: #AAA; line-height:  20px; text-shadow: 0px 1px 1px #222;}
 			#video_info .description a{ color: #666; font-style: italic;}
-			#video_info .description a:hover{ color: #0099CC; }
+			#video_info .description a:hover{ color: #FF9900; }
 	ul#user_videos { list-style: none; padding: 0px; padding-bottom: 20px; border-top: 1px dotted #777; border-bottom: 1px dotted #777; }
 		ul#user_videos li { float: left; display: block; width: 284px; height: 195px; margin: 8px; }
 			ul#user_videos li .image{ height: 125px; overflow: hidden; position: relative;}
@@ -286,6 +286,8 @@ margin-left: 20px;}
 .brightblue-tile{ background: url(/images/textures/aji-tiles-crosshatch-brightblue.jpg) repeat;  } 		
 .darkdarkblue-tile{ background: url(/images/textures/aji-tiles-darkdarkblue.jpg) repeat;  } 		
 .black-tile{ background: url(/images/textures/aji-tiles-black.jpg) repeat;  } 		
+.orange-tile{ background: url(/images/textures/aji-tiles-crosshatch-orange.jpg) repeat;  } 		
+.darkorange-tile{ background: url(/images/textures/aji-tiles-crosshatch-darkorange.jpg) repeat;  } 		
 
 .gradient{ background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.9)));       }
 
@@ -319,7 +321,7 @@ a.opacity_transition{
 .call_to_action_download{ padding: 10px; background-color: #000; box-shadow: inset 0px 0px 5px #000;}
 	.call_to_action_download .image{ float: left; display: block; margin-right: 10px; height: 48px; }
 	.call_to_action_download .blurb{ float: left; display: block; line-height:  25px; color: #333; text-shadow: 0px 1px 1px #222; width: 525px;}
-	.call_to_action_download a.download.button{ float: right; display: block; padding: 0px 20px; line-height: 40px; border: 5px solid transparent; background-color: #5bb8ea; background: url(/images/textures/aji-tiles-crosshatch-brightblue.jpg) repeat; color: #F9F9F9; font-size: 18px; font-weight: bold;}
+	.call_to_action_download a.download.button{ float: right; display: block; padding: 0px 20px; line-height: 40px; border: 5px solid transparent; background-color: #5bb8ea; background: url(/images/textures/aji-tiles-crosshatch-orange.jpg) repeat; color: #F9F9F9; font-size: 18px; font-weight: bold;}
 		.call_to_action_download a.download.button:hover{  background-color: #66CCFF; border-color: #FFF;}
 
 
@@ -327,12 +329,12 @@ a.opacity_transition{
 	.call_to_action_social .image{ float: left; display: block; margin-right: 10px; height: 48px; }
 	.call_to_action_social .blurb{ float: left; display: block; line-height:  25px; color: #333; text-shadow: 0px 1px 1px #222; width: 500 px;}
 			.call_to_action_social .blurb p:first-child{
-				font-size: 16px; color: #FF9900;
+				font-size: 16px; color: #ffdd81;
 			}
 			.call_to_action_social .blurb p:last-child{
 				font-size: 12px; color: #AAA;
 			}
-	.call_to_action_social a.download.button{ float: right; display: block; padding: 0px 20px; line-height: 40px; border: 5px solid transparent; background-color: #5bb8ea; background: url(/images/textures/aji-tiles-crosshatch-brightblue.jpg) repeat; color: #F9F9F9; font-size: 18px; font-weight: bold;}
+	.call_to_action_social a.download.button{ float: right; display: block; padding: 0px 20px; line-height: 40px; border: 5px solid transparent; background-color: #5bb8ea; background: url(/images/textures/aji-tiles-crosshatch-orange.jpg) repeat; color: #F9F9F9; font-size: 18px; font-weight: bold;}
 		.call_to_action_social a.download.button:hover{  background-color: #66CCFF; border-color: #FFF;}
 
 
