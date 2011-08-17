@@ -1,7 +1,7 @@
 module Aji
   module Queues
     module WithDatabaseConnection
-      def self.after_fork
+      def self.before_perform
         ActiveRecord::Base.establish_connection Aji.conf['DATABASE']
       end
 
