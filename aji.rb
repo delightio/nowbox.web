@@ -49,6 +49,8 @@ module Aji
   Resque.redis = redis
   Redis::Objects.redis = redis
   Resque.schedule = conf['RESQUE_SCHEDULE']
+  Resque.before_fork = Proc.new { ActiveRecord::Base.establish_connection(
+    Aji.conf['DATABASE']) }
 
   # Establish ActiveRecord conneciton and run all necessary migrations.
   ActiveRecord::Base.establish_connection conf['DATABASE']
