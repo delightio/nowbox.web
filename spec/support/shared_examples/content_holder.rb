@@ -1,5 +1,10 @@
 shared_examples_for "any content holder" do
-  describe "#refresh_content(force)" do
+  describe "refresh_content(force)" do
+    it "fetches videos" do
+      expect { subject.refresh_content }.
+        to change(subject, :content_video_ids).from([])
+    end
+
     it "does not refresh within a short time" do
       subject.refresh_content
       expect { subject.refresh_content }.to_not change { subject.populated_at }
@@ -20,6 +25,8 @@ shared_examples_for "any content holder" do
         videos.each do |video| video.should be_a_kind_of Aji::Video end
       end
     end
+
+    it "waits for the lock before populating"
 
   end
 end
