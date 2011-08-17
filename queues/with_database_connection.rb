@@ -1,11 +1,9 @@
 module Aji
   module Queues
     module WithDatabaseConnection
-      def self.before_perform
+      def self.around_perform
         ActiveRecord::Base.establish_connection Aji.conf['DATABASE']
-      end
-
-      def self.after_perform
+        yield
         ActiveRecord::Base.connection.disconnect!
       end
     end
