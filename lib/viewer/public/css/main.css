@@ -182,33 +182,38 @@ margin-left: 20px;}
 /* TOUR */
 #tour .ipad-chrome{ margin: auto;}
 	#tour ul{ list-style: none; }
-	ul.slidenav{ margin: 0px; padding: 10px; text-align: center; background-color: #DDD; border-bottom: 1px solid #CCC;}
-		ul.slidenav li{ float: left; display: block; width: 283px; margin: 0px 5px; padding: 0px; list-style: none; }
-			ul.slidenav li a{ display: block; padding: 10px;  z-index: 1;	
-												border-radius: 5px;  -moz-border-radius: 5px;  -webkit-border-radius: 5px;  
-				}	
-				ul.slidenav li a:hover{  color: #222; background-color: #E5E5E5; }
-					ul.slidenav li.active a{ background-color: #FFB800; 
-							background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFD727), to(#FFB800), color-stop(.6,#FFB800));
-						  -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
-						     -moz-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
-						      -ms-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
-						       -o-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
-						          box-shadow: 0px 0px 5px rgba(0,0,0,.5);	
-						          z-index: 10;				
+	ul.slidenav{ margin: 0px; padding: 10px; text-align: center; 	background-color: #EFEFEF; background: url(/images/textures/bg-offwhite-crosshatch-2.jpg) repeat; text-shadow: 0px 1px 1px #CCC; border-bottom: 1px solid #DDD;}
+		ul.slidenav li{ float: left; display: block; width: 280px; margin: 0px 5px; padding: 0px; list-style: none; }
+			ul.slidenav li a{ display: block; padding: 10px;  z-index: 1;
+				border-radius: 5px;  -moz-border-radius: 5px;  -webkit-border-radius: 5px; border: 1px solid transparent;
+			}	
+				ul.slidenav li a:hover{  color: #222; background: rgba(0, 0, 0, 0.1); }
+					ul.slidenav li.active a{  
+/* 							background-color: #FFB800; background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFD727), to(#FFB800), color-stop(.6,#FFB800)); */
+/* 							 background-color: #dbe5f3; background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dbe5f3), to(#d5dee9)); */
+							border-bottom: 1px solid #CCC;
+						  -webkit-box-shadow: inset 0px 0px 5px rgba(0,0,0,.5);
+						     -moz-box-shadow: inset 0px 0px 5px rgba(0,0,0,.5);
+						      -ms-box-shadow: inset 0px 0px 5px rgba(0,0,0,.5);
+						       -o-box-shadow: inset 0px 0px 5px rgba(0,0,0,.5);
+						          box-shadow: inset 0px 0px 5px rgba(0,0,0,.5);	
+						          z-index: 10;			
+						   background: rgba(0, 0, 0, 0.1);       	
 					}
-				ul.slidenav .image{ height:75px; width: 100%; }
+				ul.slidenav .image{ margin: 10px 0px; height:75px; width: 100%; }
 				ul.slidenav .title{ font-size: 20px; margin-top: 10px; color: #555;}
-					ul.slidenav li a:hover .title{ color: #222;}
-						ul.slidenav li.active a .title{ color: #990000; }
-				ul.slidenav .description{  font-size: 12px; color: #888; }
-					ul.slidenav li.active a .description{ color: #CC6633; }
+					ul.slidenav li a:hover .title{ color: #111;}
+					ul.slidenav li.active a .title{ color: #000000; }
+				ul.slidenav .description{  font-size: 12px; color: #666; }
+					ul.slidenav li a:hover .description{ color: #222;}
+					ul.slidenav li.active a .description{ color: #333333; }
 					
 	ul.slides{ margin: 0px; padding: 10px; text-align: center; background-color: #F5F5F5; }
 		ul.slides li{ display: none; } 
 			ul.slides li.active{ display: block; }
+		ul.slides .intro{ font-size: 16px; color: #555; line-height: 2; text-align: left; width: 80%; margin: 0px auto 20px; padding: 20px 0px; border-bottom: 1px solid #CCC; }
 		ul.slides .image{ width: 80%; margin: auto; }
-		ul.slides .description{ width: 450px; margin: 10px auto; line-height: 2; color: #888; }
+		ul.slides .description{ font-size: 14px; text-transform: uppercase; width: 80%; margin: 10px auto 50px; line-height: 2; color: #333; font-weight: bold; }
 		
 		
 /* VIDEO */
