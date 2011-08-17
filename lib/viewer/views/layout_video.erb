@@ -8,15 +8,15 @@
 		<title>nowmov | <%= @video.title %></title>
 		<%= erb :_layout_head %>
 		
-	  <meta property="title" content="<%= @video.title %>" />
-	  <meta property="description" content="<%= @video.description %>" />
-	  <link rel="image_src" href="<%=  @video.thumbnail_uri %>" />
+	  <meta property="title" content="<%= h @video.title %>" />
+	  <meta property="description" content="<%= h @video.description %>" />
+	  <link rel="image_src" href="<%= h @video.thumbnail_uri %>" />
 	  
 	  <meta property="og:url" content="http://nowmov.com/<%= @share.id %>" />
-	  <meta property="og:title" content="<%= @video.title %>" />
+	  <meta property="og:title" content="<%= h @video.title %>" />
 		<meta property="og:type" content="article" />
-	  <meta property="og:description" content="<%= @video.description %>" />
-	  <meta property="og:image" content="<%= @video.thumbnail_uri %>" />
+	  <meta property="og:description" content="<%= h @video.description %>" />
+	  <meta property="og:image" content="<%= h @video.thumbnail_uri %>" />
 	  
 	  <meta name="medium" content="video" />	
 	  	

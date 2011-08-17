@@ -22,13 +22,13 @@ module Aji
  		  erb :'404', {:layout => :layout_error}
  		end 
  
-  		
-		#########
-		# MOBILE
-		#########
  
 		helpers do
-		  
+		  include Rack::Utils
+  		alias_method :h, :escape_html
+
+			### MOBILE ###
+			
 		  # Regexes to match identifying portions of UA strings from iPhone and Android
 		  def mobile_user_agent_patterns
 		    [
@@ -106,7 +106,7 @@ module Aji
     end
     
   	get '/:share_id' do
-      begin
+       begin
       	@share = Share.find(params[:share_id])
       	@user = @share.user
 	      @video = @share.video
