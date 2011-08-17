@@ -2,7 +2,7 @@ require File.expand_path("../../../spec_helper", __FILE__)
 
 module Aji
   describe Channel::Account do
-    subject { Channel::Account.create :accounts =>  @accounts }
+    subject { Channel::Account.create accounts: @accounts }
     before(:each) do
       @accounts = %w{nowmov cnn freddiew}.map do |uid| Account::Youtube.create(
         :uid => uid)
@@ -18,14 +18,18 @@ module Aji
     # TODO: Refactor using context block to show Thomas
     describe ".find_or_create_by_accounts" do
       it "returns a new channel when there is no exact match" do
-        new_channel = Channel::Account.find_or_create_by_accounts @accounts[1..-1]
-        new_channel.class.should == Channel::Account
-        new_channel.should_not == subject
+        new = Channel::Account.find_or_create_by_accounts @accounts[1..-1]
+        new.class.should == Channel::Account
+        new.should_not == subject
       end
 
-      it "returns same channel when we find an existing channel with given usernames" do
-        found_channel = Channel::Account.find_or_create_by_accounts @accounts
-        found_channel.should == subject
+      context "when a channel with those accounts exists" do
+        it "returns the same channel even when accounts are disordered" do
+          Channel::Account.find_or_create_by_accounts(
+            subject.accounts).should == subject
+          Channel::Account.find_or_create_by_accounts(
+            subject.accounts.shuffle).should == subject
+        end
       end
 
       it "returns a channel with given youtube accounts" do
@@ -91,9 +95,9 @@ module Aji
 
       context "when channels are present" do
         it "returns all existing channels" do
-          @accounts.each do |a| puts (a.save || a.errors).inspect end
-          puts subject.accounts.inspect
-          Channel::Account.find_all_by_accounts(@accounts).
+          Channel::Account.find_all_by_accounts(subject.accounts).
+            should == [subject]
+          Channel::Account.find_all_by_accounts(subject.accounts.shuffle).
             should == [subject]
         end
       end
