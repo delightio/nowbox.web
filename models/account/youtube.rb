@@ -25,7 +25,8 @@ module Aji
         vhashes = Macker::Search.new(:author => username).search
         vhashes.each do |vhash|
           video = Video.find_or_create_by_external_id vhash[:external_id], vhash
-          relevance = video[:published_at].to_i
+          video.update_attributes vhash unless video.populated?
+          relevance = video.published_at.to_i
           push video, relevance
           new_videos << video
         end

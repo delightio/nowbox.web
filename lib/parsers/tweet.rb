@@ -33,9 +33,9 @@ module Aji
       return nil unless filter
 
       # TODO: Is there a way to avoid saving this guy to DB?
-      author = Account::Twitter.find_or_create_by_uid(
-        tweet_hash['user']['id'].to_s, :info => tweet_hash['user'],
-        :username => tweet_hash['user']['screen_name'])
+      author = Account::Twitter.find_or_create_by_username(
+        tweet_hash['user']['screen_name'].to_s, :info => tweet_hash['user'],
+        :uid => tweet_hash['user']['id'])
 
       links = tweet_hash['entities']['urls'].map do |url|
         Link.new(url['expanded_url'] || url['url'])
