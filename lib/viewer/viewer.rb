@@ -67,6 +67,8 @@ module Aji
 		# Before responding to each request, verify if it came from a designated mobile device and set @mobile appropriately
 		before do
 		  mobile_request? ? @mobile = ".mobile" : @mobile = ""
+		  @path = request.path_info
+		  @path.slice!(0)
 		end
  		
 		#########
@@ -75,37 +77,38 @@ module Aji
 
     get '/' do
     	@ref = params[:ref] || ""
+    	@path = "home"
       erb :home
     end
     
-    get '/about' do
+    get '/about/?' do
       erb :about
     end
 
-    get '/jobs' do
+    get '/jobs/?' do
       erb :jobs
     end
 
-    get '/tour' do
+    get '/tour/?' do
       erb :tour
     end
 
-    get '/download' do
+    get '/download/?' do
     	@ref = params[:ref] || ""
       erb :launch, {:layout => :layout_splash}
     end
 
-    get '/launch' do
+    get '/launch/?' do
     	@ref = params[:ref] || ""
       erb :launch, {:layout => :layout_splash}
     end
     
-    get '/random' do 
+    get '/random/?' do 
     	random =  Share.offset(rand(Share.count)).first.id
     	redirect to('/'+random.to_s)
     end
     
-  	get '/:share_id' do
+  	get '/:share_id/?' do
        begin
       	@share = Share.find(params[:share_id])
       	@user = @share.user

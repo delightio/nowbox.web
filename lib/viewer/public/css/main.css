@@ -1,7 +1,10 @@
 body { background: url(/images/textures/aji-tiles-crosshatch-white.jpg) repeat; color: #090909; }
 body#video_layout { background-color: #333; background: url(/images/textures/aji-tiles-darkgray.jpg) repeat; color: #090909; }
 
-header { position: relative; padding: 25px 0px 25px; line-height: 30px; text-align: left;  font-size: 14px; z-index: 10;}
+header { position: relative; padding: 25px 0px 25px; line-height: 30px; text-align: left;  font-size: 14px; z-index: 10;
+	background-color: #DD7924; background: url(/images/textures/aji-tiles-crosshatch-darkorange.jpg) repeat;
+}
+	.home header{ background-color: transparent; background: none;}
 	header > .wrapper { padding: 0px; }
 	#logo{ display: block; float: left; height: 30px; margin: 0px;}
 		#logo img{ vertical-align: middle;}
@@ -200,8 +203,8 @@ margin-left: 20px;}
 						          z-index: 10;			
 						   background: rgba(0, 0, 0, 0.1);       	
 					}
-				ul.slidenav .image{ margin: 10px 0px; height:75px; width: 100%; }
-				ul.slidenav .title{ font-size: 20px; margin-top: 10px; color: #555;}
+				ul.slidenav .image{ margin: 10px 0px; height:75px; width: 100%; display: none;}
+				ul.slidenav .title{ font-size: 20px; margin: 5px 0px; color: #555;}
 					ul.slidenav li a:hover .title{ color: #111;}
 					ul.slidenav li.active a .title{ color: #000000; }
 				ul.slidenav .description{  font-size: 12px; color: #666; }
@@ -214,6 +217,7 @@ margin-left: 20px;}
 		ul.slides .intro{ font-size: 16px; color: #555; line-height: 2; text-align: left; width: 80%; margin: 0px auto 20px; padding: 0px 0px 20px; border-bottom: 1px solid #CCC; }
 		ul.slides .image{ width: 80%; margin: auto; }
 		ul.slides .description{ font-size: 14px; text-transform: uppercase; width: 80%; margin: 10px auto 50px; line-height: 2; color: #333; font-weight: bold; }
+			ul.slides .description:last-child{ margin-bottom: 0px;}
 		
 		
 /* VIDEO */
@@ -288,6 +292,8 @@ margin-left: 20px;}
 .black-tile{ background: url(/images/textures/aji-tiles-black.jpg) repeat;  } 		
 .orange-tile{ background: url(/images/textures/aji-tiles-crosshatch-orange.jpg) repeat;  } 		
 .darkorange-tile{ background: url(/images/textures/aji-tiles-crosshatch-darkorange.jpg) repeat;  } 		
+.gray-tile{ background: url(/images/textures/bg-gray-crosshatch.jpg) repeat;  } 		
+.mistyblue-tile{  background: url(/images/textures/bg-blue-crosshatch.jpg) repeat; }
 
 .gradient{ background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.9)));       }
 
