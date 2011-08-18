@@ -16,8 +16,7 @@ module Aji
     def profile_uri; "http://twitter.com/#{username}"; end
 
     def thumbnail_uri
-      info['profile_image_url'] ||
-        "http://api.twitter.com/1/users/profile_image/#{username}.json"
+      "http://api.twitter.com/1/users/profile_image/#{username}.json"
     end
 
     def publish share
