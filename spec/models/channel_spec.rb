@@ -91,16 +91,10 @@ describe Aji::Channel do
 
   describe ".default_listing" do
     it "should return all channels marked as default" do
-      n = 5
-      channels = []
-      n.times do |n|
-        channels << Factory(:youtube_channel_with_videos, :default_listing=>false)
-      end
-      Aji::Channel.default_listing.should be_empty
-      default_channel = channels[rand(n-1)]
-      default_channel.default_listing = true
-      default_channel.save
-      Aji::Channel.default_listing.should include default_channel
+      expect { Factory(:youtube_channel_with_videos, :default_listing=>false) }.
+        to_not change {Aji::Channel.default_listing.count }
+      expect { Factory(:youtube_channel_with_videos, :default_listing=>true) }.
+        to change {Aji::Channel.default_listing.count }.by(1)
     end
   end
 
