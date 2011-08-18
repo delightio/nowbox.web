@@ -19,7 +19,7 @@ module Aji
     end
 
     def influencers
-      accounts.map{ |a| a.influencers }.flatten
+      accounts.map{ |a| a.influencers }.flatten.compact
     end
 
     # Identity is a model which associates multiple user accounts with the same
