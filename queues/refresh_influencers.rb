@@ -6,7 +6,7 @@ module Aji
       @queue = :graph_channel
 
       def self.perform identity_id
-        identity = Identity.find_by_id account_id
+        identity = Identity.find_by_id identity_id
         identity.accounts.each do |a|
           a.refresh_influencers if a.respond_to? :refresh_influencers
         end
