@@ -47,7 +47,6 @@ module Aji
           auth_hash['extra']['user_hash']['screen_name'],
           :identity => user.identity, :credentials => auth_hash['credentials'],
           :uid => auth_hash['uid'], :info => auth_hash['extra']['user_hash'])
-        t.refresh_influencers
       else
         "Unsupported provider #{auth_hash['provider']}"
       end
