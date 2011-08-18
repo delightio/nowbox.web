@@ -3,6 +3,8 @@ module Aji
     class UpdateGraphChannel
       extend WithDatabaseConnection
 
+      @queue = :graph_channel
+
       def self.perform identity_id
         identity = Identity.find_by_id account_id
         identity.accounts.each do |a|
