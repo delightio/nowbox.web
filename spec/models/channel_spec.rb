@@ -30,6 +30,7 @@ describe Aji::Channel do
         end
         youtube_account = Factory :youtube_account
         youtube_account.stub(:refresh_content).and_return(populated_videos)
+        youtube_account.stub(:populated_at).and_return(Time.now)
         channel = Factory :youtube_channel, :accounts => [youtube_account]
         channel.refresh_content
       end

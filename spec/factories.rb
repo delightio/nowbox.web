@@ -75,6 +75,22 @@ Factory.define :youtube_channel, :class => 'Aji::Channel::Account' do |a|
   a.title { random_string }
   a.default_listing { random_boolean }
   # a.category { random_category }
+  a.after_create do |c|
+    2.times do |n|
+      c.accounts << (Factory :youtube_account)
+    end
+  end
+end
+
+Factory.define :twitter_channel, :class => 'Aji::Channel::Account' do |a|
+  a.title { random_string }
+  a.default_listing { random_boolean }
+  # a.category { random_category }
+  a.after_create do |c|
+    2.times do |n|
+      c.accounts << (Factory :twitter_account)
+    end
+  end
 end
 
 Factory.define :keyword_channel, :class => 'Aji::Channel::Keyword' do |a|
@@ -144,9 +160,15 @@ Factory.define :account,
   end
 
 Factory.define :youtube_account,
-    :class => 'Aji::Account::Youtube' do |a|
-      a.uid { random_string }
-    end
+  :class => 'Aji::Account::Youtube' do |a|
+    a.uid { random_string }
+  end
+
+Factory.define :twitter_account,
+  :class => 'Aji::Account::Twitter' do |a|
+    a.uid { random_string }
+    a.username { random_string }
+  end
 
 Factory.define :youtube_account_with_videos,
   :parent => :youtube_account do |a|
