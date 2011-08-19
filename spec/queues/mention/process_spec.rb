@@ -82,8 +82,7 @@ module Aji
 
       it "rejects given mention if there is no link" do
         @mention.stub(:has_links?).and_return(false)
-        Resque.should_receive(:enqueue).
-          with(Queues::Mention::Process, @mention).never
+        @mention.should_receive(:links).never
         subject.perform "twitter", @data, @channel.id
       end
 
