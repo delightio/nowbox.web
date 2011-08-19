@@ -86,6 +86,14 @@ module Aji
         subject.perform "twitter", @data, @channel.id
       end
 
+      it "enqueues problematic mention to a different queue" do
+        subject.should_receive(:parse).and_raise("Some weird exceptions")
+        Resque.should_receive(:enqueue).with(
+          Queues::Mention::Examine, "twitter", @data, @channel.id).once
+        expect { subject.perform "twitter", @data, @channel.id }.
+          to_not raise_error
+      end
+
       context "when a link does not point to a video" do
         it "does not try to create a video object"
       end
