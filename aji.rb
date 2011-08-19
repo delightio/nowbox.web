@@ -95,7 +95,9 @@ require_relative "lib/viewer/viewer"
 require_relative 'lib/decay.rb'
 require_relative 'lib/decay'
 require_relative 'lib/macker'
-require_relative 'lib/tokenizer'
+
+# Wall of shame. Monkey patches here.
+require_relative 'lib/patches/string.rb'
 
 module Parsers; end
 Dir.glob("lib/parsers/*.rb").each { |r| require_relative r }

@@ -1,9 +1,11 @@
-class String
-  def self.random length = 10
+module Aji::RandomString
+  def random length = 10
     letters = ('a'..'z').to_a
     (0...length).map { letters[rand 26] }.join
   end
+end
 
+module Aji::StringTokenizer
   def tokenize separator=','
     tokens = Set.new self.downcase.split(separator).map(&:strip)
     (tokens - (tokens & @@stopwords)).to_a
@@ -74,3 +76,6 @@ class String
                          yourself yourselves youve z zero}
 
 end
+
+String.extend Aji::RandomString
+String.send :include, Aji::StringTokenizer
