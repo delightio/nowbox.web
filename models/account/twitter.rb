@@ -48,15 +48,15 @@ module Aji
       resp_struct = ::Twitter.friends username
       while resp_struct.users.length == 100
         resp_struct.users.each do |user|
-          influencer_set << Account::Twitter.find_or_create_by_uid(user.id.to_s,
-            :info => user.to_hash, :username => user.screen_name).id
+          influencer_set << Account::Twitter.find_or_create_by_username(
+            user.screen_name.to_s, :info => user.to_hash, :uid => user.id).id
         end
         resp_struct = ::Twitter.friends username,
           :cursor => resp_struct.next_cursor
       end
       resp_struct.users.each do |user|
-        influencer_set << Account::Twitter.find_or_create_by_uid(user.id.to_s,
-          :info => user.to_hash, :username => user.screen_name).id
+          influencer_set << Account::Twitter.find_or_create_by_username(
+            user.screen_name.to_s, :info => user.to_hash, :uid => user.id).id
       end
     end
 
