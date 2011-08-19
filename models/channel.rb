@@ -92,7 +92,10 @@ module Aji
       results
     end
 
-    def self.searchable_columns; []; end
+    def self.searchable_columns
+      []
+    end
+
     def self.search_helper query
       sql_string = searchable_columns.map {|c| "lower(#{c}) LIKE ?" }.join(' OR ')
       results = []
