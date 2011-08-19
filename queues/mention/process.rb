@@ -7,6 +7,14 @@ module Aji
         @queue = :mention
 
         def self.perform source, data, destination
+          # NOTE: What if, instead of providing a destination object, or channel
+          # id, we instead supply the key to a redis zset? This would replace
+          # the push_recent function of Trending videos and give us one fewer
+          # objects to instantiate as well as less magic and more flexibility
+          # when using this queue in Redis. For example, currently there is no
+          # way to enqueue this job to run with an account as destiniation, it
+          # must be run inline by calling Process.perform and supplying the
+          # destination object.
           destination = case destination
                         when String, Fixnum
                           Channel.find destination
@@ -25,16 +33,19 @@ module Aji
           end
 
           mention.links.each do |link|
+            mention.author.blacklist && next if mention.spam?
+
             # TODO: Update to include all valid link types.
             next unless link.video? && link.type == 'youtube'
             video = Aji::Video.find_or_create_by_external_id_and_source(
               link.external_id, link.type)
 
-              if video.blacklisted? || mention.spam?
-                mention.author.blacklist
-                next
-              end
+              # NOTE: Is this really necessary? Too harsh?
+              mention.author.blacklist && next if video.blacklisted?
+
               mention.videos << video
+              # TODO: Find out why RecordNotUnique is being raised instead of
+              # save failing with errors.
               mention.save or Aji.log(
                 "Couldn't save #{mention.inspect} for #{mention.errors.inspect}")
                 destination.push_recent video
