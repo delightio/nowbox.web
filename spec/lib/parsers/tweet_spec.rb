@@ -43,5 +43,11 @@ describe Parsers::Tweet do
       Parsers::Tweet.parse(MultiJson.decode(@valid_json)).class.
                            should == Aji::Mention
     end
+
+    it "creates author object if missing" do
+      expect { Parsers::Tweet.parse(MultiJson.decode(@valid_json)) }.to
+        change { Aji::Account::Twitter.find_by_uid(178492493)}.to(true)
+    end
+
   end
 end
