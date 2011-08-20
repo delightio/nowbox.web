@@ -7,13 +7,12 @@ module Aji
         @queue = :mention
 
         def self.perform source, data, destination
-          destination = case destination
-                        when String, Fixnum
-                          Channel.find destination
-                        else
-                          destination
-                        end
-
+          destination_channel = case destination
+                                when String, Fixnum
+                                  Channel.find destination
+                                else
+                                  destination
+                                end
           # Short circuit parser to return nil if the tweet has no urls.
           mention = self.parse source, data
 
@@ -37,8 +36,11 @@ module Aji
               mention.videos << video
               mention.save or Aji.log(
                 "Couldn't save #{mention.inspect} for #{mention.errors.inspect}")
-                destination.push_recent video
+              destination_channel.push_recent video
           end
+        rescue => e
+          Aji.log "Can't process mention: #{data.inspect}. Exception: #{e}"
+          Resque.enqueue Queues::Mention::Examine, source, data, destination
         end
 
         # Handles incoming parse requests from various social feeds. If the mention

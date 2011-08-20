@@ -4,7 +4,7 @@ module Aji
   describe Channel::Account do
     subject { Channel::Account.create accounts: @accounts }
     before(:each) do
-      @accounts = %w{nowmov cnn freddiew}.map do |uid| Account::Youtube.create(
+      @accounts = %w{nowmov cnn }.map do |uid| Account::Youtube.create(
         :uid => uid)
       end
     end
@@ -12,7 +12,16 @@ module Aji
     it_behaves_like "any content holder"
 
     it "should set title based on accounts" do
-      subject.title.should == "nowmov, cnn, freddiew"
+      subject.title.should == "nowmov, cnn"
+    end
+
+    describe "#serializable_hash" do
+      it "returns an hash of account types" do
+        youtube = Factory :youtube_channel
+        youtube.serializable_hash['type'].should == "Account::Youtube"
+        twitter = Factory :twitter_channel
+        twitter.serializable_hash['type'].should == "Account::Twitter"
+      end
     end
 
     # TODO: Refactor using context block to show Thomas

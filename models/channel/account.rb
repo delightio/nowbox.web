@@ -64,6 +64,11 @@ module Aji
       c
     end
 
+    def serializable_hash options={}
+      s = super options
+      s.merge! "type" => "Account::#{accounts.first.type.split('::').last}"
+    end
+
     def self.searchable_columns; [:title]; end
 
     private

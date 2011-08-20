@@ -9,11 +9,14 @@ module Aji
     include Redis::Objects
     sorted_set :recent_zset
     USER_TIMELINE_URL = "http://api.twitter.com/1/statuses/user_timeline.json"
+    serialize :info, Hash
+    serialize :auth_info, Hash
+    serialize :credentials, Hash
 
     def profile_uri; "http://twitter.com/#{username}"; end
 
-    # TODO: LH 205
     def thumbnail_uri
+      (info['profile_image_url'] rescue nil) ||
       "http://api.twitter.com/1/users/profile_image/#{username}.json"
     end
 
@@ -45,15 +48,15 @@ module Aji
       resp_struct = ::Twitter.friends username
       while resp_struct.users.length == 100
         resp_struct.users.each do |user|
-          influencer_set << Account::Twitter.find_or_create_by_uid(user.id.to_s,
-            :info => user.to_hash, :username => user.screen_name).id
+          influencer_set << Account::Twitter.find_or_create_by_username(
+            user.screen_name.to_s, :info => user.to_hash, :uid => user.id).id
         end
         resp_struct = ::Twitter.friends username,
           :cursor => resp_struct.next_cursor
       end
       resp_struct.users.each do |user|
-        influencer_set << Account::Twitter.find_or_create_by_uid(user.id.to_s,
-          :info => user.to_hash, :username => user.screen_name).id
+          influencer_set << Account::Twitter.find_or_create_by_username(
+            user.screen_name.to_s, :info => user.to_hash, :uid => user.id).id
       end
     end
 
@@ -121,7 +124,7 @@ module Aji
     end
 
     def set_provider
-      update_attribute :provider, 'youtube'
+      update_attribute :provider, 'twitter'
     end
     private :set_provider
 
