@@ -89,6 +89,7 @@ Dir.glob("queues/mention/*.rb").each { |r| require_relative r }
 
 # Add Sinatra web viewer.
 require_relative "lib/viewer/viewer"
+require_relative "lib/mailer/mailer"
 
 # Add miscelaneous library code.
 # Dir.glob("lib/*.rb").each { |r| require_relative r }
