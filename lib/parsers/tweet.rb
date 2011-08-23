@@ -29,6 +29,12 @@ module Aji
       # If the block returns false then return nil and leave the method.
       # This will allow us to avoid wasting time with tweets and authors we
       # don't care about such as those which don't contain links.
+      #
+      # IDEA: What if instead of only using the block as a filter, what if we
+      # completely yielded to the block so that it has complete control over
+      # what to do. I think this idea falls down because it means repetition of
+      # the mention instantiation code but there has to be a way to match this
+      # cleanly with minimal db interaction.
       filter = if block_given? then yield tweet_hash else true end
       return nil unless filter
 
