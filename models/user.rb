@@ -74,7 +74,7 @@ module Aji
       subscribed_list.include? channel.id.to_s
     end
     def subscribe channel, args={}
-      subscribed_list << channel.id
+      subscribed_list << channel.id if !subscribed? channel
       subscribed? channel
     end
     def unsubscribe channel, args={}
