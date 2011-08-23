@@ -18,7 +18,7 @@ module Aji
       get do
         error!("Missing/Invalid parameter: type != featured", 404) if params[:type]!="featured"
         error!("Missing parameter: user_id", 404) if params[:user_id].nil?
-        categories = Category.all.sample(10)
+        categories = Category.featured params
         categories
       end
 
@@ -33,7 +33,7 @@ module Aji
         error!("Missing/Invalid parameter: type != featured", 404) if params[:type]!="featured"
         error!("Missing parameter: user_id", 404) if params[:user_id].nil?
         c = Category.find_by_id params[:category_id]
-        c.channels if c
+        c.featured_channels params if c
       end
 
       # ## GET categories/:category_id
