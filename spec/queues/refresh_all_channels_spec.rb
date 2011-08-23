@@ -18,6 +18,13 @@ module Aji
         Resque.should_receive(:enqueue).never
         Queues::RefreshAllChannels.perform
       end
+
+      it "skips refreshing channels if more than half of the channels are still refreshing" do
+        Resque.stub(:size).with(Queues::RefreshAllChannels.queue).
+          and_return @channels.count
+        Resque.should_receive(:enqueue).never
+        Queues::RefreshAllChannels.perform
+      end
     end
 
     describe ".automatically?" do

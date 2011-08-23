@@ -33,6 +33,10 @@ gem 'twitter'
 # Gem for the Hire Fire Webservice
 gem 'hirefireapp'
 
+# Mail related
+#gem 'activeresource'
+gem 'pony'
+
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:

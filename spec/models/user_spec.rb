@@ -39,6 +39,20 @@ describe Aji::User do
       event = Factory :channel_event, :action => :subscribe
       event.user.subscribed_channels.should include event.channel
     end
+    describe "#subscribe" do
+      it "ignores already subscribed channels" do
+        user = Factory :user
+        channel = Factory :channel
+        event = Factory :channel_event, :action => :subscribe,
+          :channel => channel, :user => user
+        user.subscribed_channels.should include channel
+        expect { Factory :channel_event,
+                         :action => :subscribe,
+                         :channel => channel,
+                         :user => user }.
+          to_not change { user.subscribed_channels.count }
+      end
+    end
 
     it "unsubscribes subscribed channel" do
       event = Factory :channel_event, :action => :subscribe

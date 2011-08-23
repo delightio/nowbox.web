@@ -66,8 +66,7 @@ module Aji
 
     def serializable_hash options={}
       s = super options
-      s.merge!("account_types" =>
-        { accounts.first.type.split('::').last => accounts.count })
+      s.merge! "type" => "Account::#{accounts.first.type.split('::').last}"
     end
 
     def self.searchable_columns; [:title]; end

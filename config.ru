@@ -16,6 +16,10 @@ map "http://beta.#{Aji.conf['TLD']}/" do
   run Aji::Viewer
 end
 
+map "http://mailer.#{Aji.conf['TLD']}/" do
+  run Aji::Mailer
+end
+
 map '/auth' do
   run Aji::AuthController
 end

@@ -18,9 +18,9 @@ module Aji
     describe "#serializable_hash" do
       it "returns an hash of account types" do
         youtube = Factory :youtube_channel
-        youtube.serializable_hash['account_types'].first.first.should == "Youtube"
+        youtube.serializable_hash['type'].should == "Account::Youtube"
         twitter = Factory :twitter_channel
-        twitter.serializable_hash['account_types'].first.first.should == "Twitter"
+        twitter.serializable_hash['type'].should == "Account::Twitter"
       end
     end
 
