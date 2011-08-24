@@ -1,0 +1,33 @@
+<repeater>
+	<% if @user %>
+		<layout label="User">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td bgcolor="#FF9900" nowrap><img border="0" src="images/spacer.gif" width="5" height="1"></td>
+				<td width="100%" bgcolor="#ffffff">
+			
+					<table width="100%" cellpadding="20" cellspacing="0" border="0">
+					<tr>
+						<td bgcolor="#ffffff" class="contentblock">
+
+							<h2 class="secondary"><strong><singleline label="Title">Hello <%= @user.first_name %>!</singleline></strong></h2>
+							<multiline label="Description">
+								<p><b>Welcome to the nowmov community!</b></p>
+								<p>We look forward to delivering best video entertainment experience to you.</p>
+								<p>In the future, we may email you with notifications, updates and videos that you have missed out on; but we won't ever give your email away or spam you.</p>
+								<p>Now go watch some videos!</p>
+								<br/> 
+								<p><i>- team nowmov</i></p>
+							</multiline>
+
+						</td>
+					</tr>
+					</table>
+			
+				</td>
+			</tr>
+			</table>  
+			<img border="0" src="images/spacer.gif" width="1" height="30" class="divider"><br>
+			</layout>	
+	<% end %>
+</repeater>
