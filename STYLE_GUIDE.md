@@ -33,6 +33,8 @@ opportunity to do so arises.
   uglier and less desirable than two extra lines of code. This also encourages
   us not to be afraid of growing a method in complexity when necessary.
 
+- Multi-line chain statements should have '.' at the end of the line.
+
 - Regarding orthogonality, two things are said "It is the pinnacle of software
   design" and "Orthogonality is pretentious". Ruby gives us an impressive
   capacity for keeping our software components isolated from each other while
