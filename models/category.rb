@@ -45,8 +45,11 @@ module Aji
       results
     end
 
+    def self.featured_key; "Aji::Category::featured::ids"; end
     def self.featured args={}
-      self.all.sample(10) - [self.undefined] # TODO 
+      featured_ids = redis.lrange featured_key, 0, -1
+      return self.find featured_ids unless featured_ids.empty?
+      Category.all.sample(10) - [undefined]
     end
 
   end

@@ -26,10 +26,23 @@ describe Aji::Category do
   end
 
   describe ".featured" do
+    subject { Aji::Category.featured }
     it "does not return undefined category" do
-      Aji::Category.featured.should_not include Aji::Category.undefined
+      subject.should_not include Aji::Category.undefined
     end
-    it "returns predefined featured categories"
+    it "returns predefined featured categories" do
+      featured = (0..2).map { |n| Factory :category }
+      featured.each do | category |
+        Aji.redis.rpush Aji::Category.featured_key, category.id
+      end
+      5.times { Factory :category }
+      subject.should have(3).categories
+      featured.each { |cat| subject.should include cat }
+    end
+    it "returns some categories even before we set up the featured key" do
+      10.times { Factory :category }
+      subject.should have(10).categories
+    end
   end
 
 end
