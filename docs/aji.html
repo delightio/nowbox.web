@@ -219,7 +219,18 @@ by a subclass.</p>
         <p>Run migrations after models are loaded.</p>
       </td>
       <td class=code>
-        <div class='highlight'><pre><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migrator</span><span class="o">.</span><span class="n">migrate</span><span class="p">(</span><span class="s2">&quot;db/migrate/&quot;</span><span class="p">)</span> <span class="k">unless</span> <span class="no">Aji</span><span class="o">.</span><span class="n">conf</span><span class="o">[</span><span class="s1">&#39;NOMIGRATE&#39;</span><span class="o">]</span>
+        <div class='highlight'><pre><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migrator</span><span class="o">.</span><span class="n">migrate</span><span class="p">(</span><span class="s2">&quot;db/migrate/&quot;</span><span class="p">)</span> <span class="k">unless</span> <span class="no">Aji</span><span class="o">.</span><span class="n">conf</span><span class="o">[</span><span class="s1">&#39;NOMIGRATE&#39;</span><span class="o">]</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-14'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-14">&#182;</a>
+        </div>
+        <p>Wall of shame. Monkey patches here.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="n">require_relative</span> <span class="s1">&#39;lib/patches/string.rb&#39;</span>
 
 <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;helpers/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span>
 <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;controllers/*_controller.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span>
@@ -228,10 +239,10 @@ by a subclass.</p>
 <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;queues/mention/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span></pre></div>
       </td>
     </tr>
-    <tr id='section-14'>
+    <tr id='section-15'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-14">&#182;</a>
+          <a class="pilcrow" href="#section-15">&#182;</a>
         </div>
         <p>Add Sinatra web viewer.</p>
       </td>
@@ -240,10 +251,10 @@ by a subclass.</p>
 <span class="n">require_relative</span> <span class="s2">&quot;lib/mailer/mailer&quot;</span></pre></div>
       </td>
     </tr>
-    <tr id='section-15'>
+    <tr id='section-16'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-15">&#182;</a>
+          <a class="pilcrow" href="#section-16">&#182;</a>
         </div>
         <p>Add miscelaneous library code.
 Dir.glob(&ldquo;lib/*.rb&rdquo;).each { |r| require_relative r }</p>
@@ -253,10 +264,8 @@ Dir.glob(&ldquo;lib/*.rb&rdquo;).each { |r| require_relative r }</p>
         <div class='highlight'><pre><span class="n">require_relative</span> <span class="s1">&#39;lib/decay.rb&#39;</span>
 <span class="n">require_relative</span> <span class="s1">&#39;lib/decay&#39;</span>
 <span class="n">require_relative</span> <span class="s1">&#39;lib/macker&#39;</span>
-<span class="n">require_relative</span> <span class="s1">&#39;lib/tokenizer&#39;</span>
-
-<span class="k">module</span> <span class="nn">Parsers</span><span class="p">;</span> <span class="k">end</span>
-<span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;lib/parsers/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span></pre></div>
+<span class="n">require_relative</span> <span class="s1">&#39;lib/parsers&#39;</span>
+<span class="n">require_relative</span> <span class="s1">&#39;lib/mention/processor&#39;</span></pre></div>
       </td>
     </tr>
   </table>

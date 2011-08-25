@@ -21,6 +21,12 @@ module Aji
       (@external_id && @type) ? true : false
     end
 
+    def to_video
+      return nil unless video?
+      video = Video.find_by_external_id_and_source(@external_id, @type)
+      video ||= Video.new :external_id => @external_id, :source => @type
+    end
+
     def invalid?
       uri = URI.parse self
       uri.path.nil? || uri.host.nil? || !(uri.scheme =~ /https?/)
