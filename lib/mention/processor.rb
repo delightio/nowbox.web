@@ -1,5 +1,7 @@
 module Aji
   class Mention::Processor
+    attr_accessor :mention, :destination
+
     def initialize mention, destination
       @mention = mention
       @destination = destination
@@ -15,7 +17,7 @@ module Aji
 
       if @mention.spam?
         @mention.author.blacklist
-        @errors << "Mention: #{@mention.text} is Spammy"
+        @errors << "Mention: #{@mention.body} is Spammy"
         return
       end
 
