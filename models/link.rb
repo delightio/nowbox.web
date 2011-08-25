@@ -43,7 +43,7 @@ module Aji
         self.match r || false
       end.inject { |acc, el| acc ||= el }
       # TODO: Finish implementing vimeo support.
-      vimeo_match = self.match @@vimeo_regexp
+      vimeo_match = nil#self.match @@vimeo_regexp
       if youtube_match
         @external_id = youtube_match[1]
         @type = 'youtube'
