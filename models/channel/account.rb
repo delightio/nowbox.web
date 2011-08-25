@@ -9,7 +9,6 @@ module Aji
 
 
     def refresh_content force=false
-      start = Time.now
       new_videos = []
       refresh_lock.lock do
         accounts_populated_at = []
@@ -26,7 +25,6 @@ module Aji
           update_attribute :populated_at, accounts_populated_at.sort.last # latest
         end
       end
-      Aji.log :INFO, "Channel::Account[#{id}, '#{title}', #{accounts.count} accounts]#refresh_content(force:#{force}) took #{Time.now-start} s."
       update_relevance_in_categories new_videos
       new_videos
     end
