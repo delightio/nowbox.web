@@ -1,0 +1,187 @@
+<repeater>
+	<% if @user %>
+		<layout label="User">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td bgcolor="#FF9900" nowrap><img border="0" src="images/spacer.gif" width="5" height="1"></td>
+				<td width="100%" bgcolor="#ffffff">
+			
+					<table width="100%" cellpadding="20" cellspacing="0" border="0">
+					<tr>
+						<td bgcolor="#ffffff" class="contentblock">
+
+							<h2 class="secondary"><strong><singleline label="Title">Hello <%= @user.first_name %>!</singleline></strong></h2>
+							<multiline label="Description">
+								<p>Just a heads up - there's some awesome new videos on the nowmov iPad app that you should check out.</p>
+								<br/> 
+								<p><i>- team nowmov</i></p>
+							</multiline>
+
+						</td>
+					</tr>
+					</table>
+			
+				</td>
+			</tr>
+			</table>  
+			<img border="0" src="images/spacer.gif" width="1" height="30" class="divider"><br>
+			</layout>	
+	<% end %>
+	
+	<% if @shares %>
+	<layout label="Videos">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td width="100%" bgcolor="">
+			
+					<table width="100%" cellpadding="0" cellspacing="0" border="0">
+					<tr>
+						<td bgcolor="" class="contentblock">
+
+							<h2 class="secondary"><strong><singleline label="Title">Top <%= @shares.count %> New Videos For You</singleline></strong></h2>
+							<multiline label="Description" style="color:#888888;
+								font-size:13px;
+								line-height:19px;
+								font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+								margin-top:0;
+								margin-bottom:12px;
+								padding-top:0;
+								padding-bottom:0;
+								font-weight:normal;">
+								<p>Don't miss out on these cool videos!</p>
+							</multiline>
+						</td>
+					</tr>
+					</table>		
+				</td>
+			</tr>
+			<tr >
+				<td width="100%" bgcolor="#ffffff">
+				<% @shares.each do |share| %>
+					
+							<table width="100%" cellpadding="0" cellspacing="10" border="0" style="border-top: 1px solid #F5F5F5;">
+							<tr>
+								<td class="imageblock hide" width="150">
+									<a href="http://beta.nowmov.com/<%= share.id %>" target="_blank">
+										<img src="<%= share.video.thumbnail_uri %>" width="150" style="vertical-align: middle;"/>
+									</a>
+								</td>
+								<td bgcolor="#ffffff" class="contentblock">
+		
+									<h2 class="secondary"><strong><singleline label="Title">
+										<a href="http://beta.nowmov.com/<%= share.id %>" target="_blank" style="color: #444;"><%= share.video.title %></a>
+										</singleline></strong>
+									</h2>
+									<multiline label="Description">
+										<p>
+											<span>Shared by <strong><%= "#{share.user.first_name} #{share.user.last_name}" %></strong></span>
+											<span style="color: #AAA; float: right;"><%= share.video.view_count %> views</span>																				<div class="clearfix"></div>
+										</p>
+									</multiline>
+								</td>
+							</tr>
+							</table>
+					
+				<% end %>
+				</td>
+			</tr>
+		</table>  		
+	</layout>
+	<% end %>
+
+	<% if @channels %>
+	<img border="0" src="http://beta.<%= Aji.conf['TLD'] %>:5000/images/email/spacer.gif" width="1" height="30" class="divider"><br>
+	
+	<layout label="Gallery highlights">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td width="100%" bgcolor="">
+
+					<table width="100%" cellpadding="0" cellspacing="0" border="0">
+					<tr>
+						<td bgcolor="" class="contentblock">
+
+							<h2 class="secondary"><strong><singleline label="Gallery title">Recently Updated Channels</singleline></strong></h2>
+							<multiline label="Gallery description" style="color:#888888;
+								font-size:13px;
+								line-height:19px;
+								font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+								margin-top:0;
+								margin-bottom:12px;
+								padding-top:0;
+								padding-bottom:0;
+								font-weight:normal;">
+								<p>These subscriptions of yours have new videos!</p>
+							</multiline>
+
+						</td>
+					</tr>
+					</table>
+
+				</td>
+			</tr>
+		</table>
+
+		<table width="100%" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+
+				<td width="100%" bgcolor="">
+
+					<table cellpadding="5" cellspacing="0" border="0">
+
+					<tr>
+						<% @channels.each do |channel| %>
+						<td>
+							<img src="<%= channel.thumbnail_uri %>" width="50" height="50" class="galleryimage" label="<%= channel.title %>"></td>
+						<% end %>
+					</tr>
+					
+					</table>
+
+				</td>
+			</tr>
+		</table> 
+	</layout>
+	<% end %> 
+
+<!--
+	<img border="0" src="http://beta.:5000/images/email/spacer.gif" width="1" height="30" class="divider"><br>
+
+	<layout label="Article, tip or resource">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td width="100%" bgcolor="">
+
+					<table width="100%" cellpadding="0" cellspacing="0" border="0">
+					<tr>
+						<td bgcolor="" class="contentblock">
+
+							<h2 class="secondary"><strong><singleline label="Tip title">Tip</singleline></strong></h2>
+
+						</td>
+					</tr>
+					</table>
+
+				</td>
+			</tr>
+		</table>	
+		<table width="100%" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td bgcolor="#ef3101" nowrap><img border="0" src="http://beta.:5000/images/email/spacer.gif" width="5" height="1"></td>
+				<td width="100%" bgcolor="#F5F5F5">
+			
+					<table width="100%" cellpadding="20" cellspacing="0" border="0">
+					<tr>
+						<td bgcolor="" class="contentblock">
+							<multiline label="Description"><p>Description</p></multiline>
+						</td>
+					</tr>
+					</table>
+			
+				</td>
+			</tr>
+		</table>  
+	</layout>
+-->
+
+</repeater>      
