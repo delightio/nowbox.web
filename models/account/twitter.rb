@@ -98,7 +98,18 @@ module Aji
                             :screen_name => username, :include_entities => true },
                             :parser => Proc.new { |body| MultiJson.decode body })
       tweets.each do |tweet|
-        Queues::Mention::Process.perform 'twitter', tweet, self
+
+        mention = Parsers['twitter'].parse tweet do |tweet_hash|
+          Mention::Processor.video_filters['twitter'].call tweet_hash
+        end
+        next if mention.nil?
+
+        processor = Mention::Processor.new mention, self
+        processor.perform
+
+        if processor.failed?
+          Aji.log "Processing failed due to #{processor.errors}"
+        end
       end
     end
 
