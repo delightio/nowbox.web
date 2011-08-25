@@ -26,6 +26,11 @@ shared_examples_for "any content holder" do
       end
     end
 
+    it "marks videos populated" do
+      subject.refresh_content
+      subject.content_videos.each {|v| v.should be_populated }
+    end
+
     it "waits for the lock before populating"
 
   end

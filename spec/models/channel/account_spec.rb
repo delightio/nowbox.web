@@ -10,6 +10,16 @@ module Aji
     end
 
     it_behaves_like "any content holder"
+    describe "#refresh_content" do
+      it "skips blacklisted accounts" do
+        bad_author = Factory :youtube_account
+        
+        channel = Channel::Account.create accounts: (@accounts << bad_author)
+        bad_author.should_receive(:blacklisted?).and_return(true)
+        bad_author.should_not_receive(:refresh_content)
+        channel.refresh_content
+      end
+    end
 
     it "should set title based on accounts" do
       subject.title.should == "nowmov, cnn"

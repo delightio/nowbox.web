@@ -39,7 +39,7 @@ module Aji
           category = Category.find_or_create_by_raw_title(
             category_from_youtube.label, :title => category_from_youtube.term)
         else
-          category = Category.find_or_create_by_raw_title "*** undefined ***"
+          category = Category.undefined
         end
         author = Account::Youtube.find_or_create_by_uid(video.author.name)
         {

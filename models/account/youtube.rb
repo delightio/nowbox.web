@@ -18,7 +18,6 @@ module Aji
     end
 
     def refresh_content force=false
-      start = Time.now
       new_videos = []
       refresh_lock.lock do
         return [] if recently_populated? && content_video_ids.count > 0 && !force
@@ -32,9 +31,6 @@ module Aji
         end
         update_attribute :populated_at, Time.now
       end
-
-      Aji.log(
-        "Account::Youtube[#{id}, '#{username}' ]#refresh_content took #{Time.now-start} s.")
       new_videos
     end
 
