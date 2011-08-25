@@ -14,8 +14,10 @@ module Aji
       refresh_lock.lock do
         accounts_populated_at = []
         accounts.each do |account|
-          new_videos += account.refresh_content force
-          accounts_populated_at << account.populated_at
+          unless account.blacklisted?
+            new_videos += account.refresh_content(force)
+            accounts_populated_at << account.populated_at
+          end
         end
         # NOTE: Steven! thinks this should either be the current time or the
         # oldest time since it will indicate the staleness of the channel

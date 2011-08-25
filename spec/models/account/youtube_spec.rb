@@ -4,39 +4,8 @@ module Aji
     describe "#refresh_content" do
       subject { Account::Youtube.find_or_create_by_uid "nowmov" }
 
-      it "populates new account" do
-        subject.content_videos.should be_empty
-        subject.refresh_content
-        subject.content_videos.should_not be_empty
-      end
-
-      it "does not refresh_content within short time" do
-        subject.should_receive(:save).once
-        subject.refresh_content
-        subject.should_not_receive(:save)
-        subject.refresh_content
-      end
-
-      it "allows a forced refresh_content" do
-        subject.refresh_content
-        subject.should_receive(:save).once
-        subject.refresh_content(true).should be_a_kind_of(Array)
-      end
-
-      it "returns an array of Video objects" # TODO should combine with below
-      it "always returns an array" do
-        subject.refresh_content.should be_a_kind_of(Array)
-        subject.refresh_content(true).should be_a_kind_of(Array)
-        subject.refresh_content.should be_a_kind_of(Array)
-      end
-
-      it "marks videos populated" do
-        subject.refresh_content
-        subject.content_videos.each {|v| v.should be_populated }
-      end
-
+      it_behaves_like "any content holder"
       it "refreshes only unpopulated accounts"
-      it "waits for the lock before populating"
     end
 
     describe "#thumbnail_uri" do
