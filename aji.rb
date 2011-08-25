@@ -70,6 +70,9 @@ module Aji
   end
 end
 
+# Monkey Patching
+require_relative 'lib/patches/string'
+
 module Mixins; end # Since models need them
 Dir.glob("lib/mixins/*.rb").each { |r| require_relative r }
 
@@ -80,6 +83,9 @@ Dir.glob("models/account/*.rb").each { |r| require_relative r }
 
 # Run migrations after models are loaded.
 ActiveRecord::Migrator.migrate("db/migrate/") unless Aji.conf['NOMIGRATE']
+
+# Wall of shame. Monkey patches here.
+require_relative 'lib/patches/string.rb'
 
 Dir.glob("helpers/*.rb").each { |r| require_relative r }
 Dir.glob("controllers/*_controller.rb").each { |r| require_relative r }
@@ -93,13 +99,10 @@ require_relative "lib/mailer/mailer"
 
 # Add miscelaneous library code.
 # Dir.glob("lib/*.rb").each { |r| require_relative r }
-require_relative 'lib/decay.rb'
 require_relative 'lib/decay'
 require_relative 'lib/macker'
+require_relative 'lib/parsers'
+require_relative 'lib/mention/processor'
 
-# Wall of shame. Monkey patches here.
-require_relative 'lib/patches/string.rb'
 
-module Parsers; end
-Dir.glob("lib/parsers/*.rb").each { |r| require_relative r }
 
