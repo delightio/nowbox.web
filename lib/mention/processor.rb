@@ -41,7 +41,7 @@ module Aji
 
       return nil if !@errors.empty?
 
-      @mention.videos.each { |v| @destination.push_recent v } if @errors.empty
+      @mention.videos.each { |v| @destination.push_recent v } if @errors.empty?
     end
 
     def errors
