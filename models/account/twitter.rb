@@ -67,36 +67,15 @@ module Aji
 
         harvest_tweets
 
-        in_flight = []
-        at_time_i = Time.now.to_i
+        videos = recent_video_ids.map { |id| Aji::Video.find_by_id id }.
+          select { |v| not (v.nil? || v.blacklisted?) }
+        Aji.log "Found #{videos.count} videos in #{username}'s Twitter stream"
 
-        start = Time.now
-        recent_video_ids_at_time = recent_video_ids
-
-
-        recent_video_ids_at_time.each do |vid|
-          video = Aji::Video.find_by_id vid
-          next if video.nil? || video.blacklisted?
-          in_flight << { :vid => vid, :relevance => video.relevance(at_time_i) }
+        videos.each do |video|
+          video.populate unless video.populated?
+          push video and new_videos << video if video.populated?
         end
-        Aji.log "Collected #{in_flight.count} recent videos in #{Time.now-start} s."
 
-        start = Time.now
-        in_flight.sort!{ |x,y| y[:relevance] <=> x[:relevance] }
-        Aji.log "Sorted #{in_flight.count} videos in #{Time.now-start} s. Top 5: #{in_flight.first(5).inspect}"
-        start = Time.now; populated_count = 0
-        max_in_flight = Aji.conf['MAX_VIDEOS_IN_TRENDING']
-        in_flight.first(max_in_flight).each do |h|
-          video = Aji::Video.find_by_id h[:vid]
-          next if video.nil?
-          if !video.populated?
-            video.populate
-            populated_count += 1
-          end
-          push video, h[:relevance]
-          new_videos << video
-        end
-        Aji.log "Replace #{[max_in_flight,in_flight.count].min} (#{populated_count} populated) content videos in #{Time.now-start} s."
         update_attribute :populated_at, Time.now
       end
       new_videos
