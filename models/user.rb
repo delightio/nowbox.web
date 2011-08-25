@@ -19,7 +19,7 @@ module Aji
     belongs_to :queue_channel, :class_name => 'Channel::User'
     belongs_to :favorite_channel, :class_name => 'Channel::User'
     belongs_to :history_channel, :class_name => 'Channel::User'
-    
+
     include Redis::Objects
     list :subscribed_list # User's Subscribed channels.
 

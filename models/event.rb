@@ -17,7 +17,7 @@ module Aji
 
     def self.video_actions; [ :view, :share, :enqueue, :dequeue, :examine ]; end
     def self.channel_actions; [ :subscribe, :unsubscribe ]; end
-    
+
     validates_inclusion_of :action, :in => (Event.video_actions + Event.channel_actions)
     def action; read_attribute(:action).to_sym; end
     def action= value; write_attribute(:action, value.to_s); end
