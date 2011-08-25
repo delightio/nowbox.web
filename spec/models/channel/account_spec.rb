@@ -11,7 +11,6 @@ module Aji
 
     it_behaves_like "any content holder"
     describe "#refresh_content" do
-      it "refreshes only unpopulated accounts"
       it "skips blacklisted accounts" do
         bad_author = Factory :youtube_account
         

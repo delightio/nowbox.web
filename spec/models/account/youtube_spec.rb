@@ -5,7 +5,6 @@ module Aji
       subject { Account::Youtube.find_or_create_by_uid "nowmov" }
 
       it_behaves_like "any content holder"
-      it "refreshes only unpopulated accounts"
     end
 
     describe "#thumbnail_uri" do
