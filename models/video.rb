@@ -48,8 +48,13 @@ module Aji
     end
 
     # Symbolize source attribute.
-    def source; read_attribute(:source).to_sym; end
-    def source= value; write_attribute(:source, value.to_sym); end
+    def source
+      read_attribute(:source).to_sym
+    end
+
+    def source= value
+      write_attribute(:source, value.to_sym)
+    end
 
     def latest_mentions n=50
       mentions.order("published_at DESC").limit(n)
