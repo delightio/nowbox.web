@@ -10,7 +10,6 @@ use OmniAuth::Builder do
   #  { :scope => 'publish_stream,offline_access' }
   #provider :identica, Aji.conf['identica_key'], Aji.conf['identica_secret']
 end
-use HireFireApp::Middleware
 
 map "http://beta.#{Aji.conf['TLD']}/" do
   run Aji::Viewer

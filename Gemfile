@@ -30,9 +30,6 @@ gem 'erubis'
 gem 'yajl-ruby'
 gem 'twitter'
 
-# Gem for the Hire Fire Webservice
-gem 'hirefireapp'
-
 # Mail related
 #gem 'activeresource'
 gem 'pony'
