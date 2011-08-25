@@ -21,7 +21,7 @@ module Aji
         return
       end
 
-      @mention.links.map(&:to_video).each do |video|
+      @mention.links.map(&:to_video).compact.each do |video|
         if video.blacklisted?
           @errors << "Video[#{video.id} is blacklisted"
         else
