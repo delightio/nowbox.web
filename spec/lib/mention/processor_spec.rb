@@ -13,7 +13,7 @@ module Aji
         @author = mock("author", :blacklisted? => false, :save => true)
         @mention_videos = Array.new
         @mention = mock("mention", :author => @author, :spam? => false,
-          :links => @links, :videos => @mention_videos, :text => "",
+          :links => @links, :videos => @mention_videos, :body => "",
           :save => true)
       end
 
