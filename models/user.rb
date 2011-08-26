@@ -48,6 +48,8 @@ module Aji
       when :share
         favorite_channel.push video, event.created_at.to_i
         history_channel.push video, event.created_at.to_i
+      when :unfavorite
+        favorite_channel.pop video
 
       when :view, :examine
         history_channel.push video, event.created_at.to_i

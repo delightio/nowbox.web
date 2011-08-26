@@ -18,8 +18,9 @@ describe Aji::User do
   end
 
   describe "#process_event" do
-    it "caches video id in viewed regardless of event type except :enqueue and :dequeue" do
-      Aji::Event.video_actions.delete_if{|t| t==:enqueue||t==:dequeue}.each do |action|
+    it "caches video id in viewed regardless of event type except :unfavorite, :enqueue and :dequeue" do
+      Aji::Event.video_actions.delete_if{ |t|
+        t==:unfavorite || t==:enqueue || t==:dequeue }.each do |action|
         event = Factory :event, :action => action
         event.user.history_channel.content_videos.should include event.video
       end
@@ -42,6 +43,15 @@ describe Aji::User do
     it "does not mark a video viewed when queuing" do
       event = Factory :event, :action => :enqueue
       event.user.history_channel.content_videos.should_not include event.video
+    end
+
+    it "unfavorites shared videos" do
+      user = Factory :user
+      video = Factory :video
+      event = Factory :event, :action => :share, :user => user, :video => video
+      user.favorite_channel.content_videos.should include video
+      event = Factory :event, :action => :unfavorite, :user => user, :video => video
+      user.favorite_channel.content_videos.should_not include video
     end
 
     it "subscribes given channel" do
