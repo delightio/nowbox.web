@@ -9,9 +9,8 @@ module Aji
     def set_title; self.title = title || self.class.to_title(keywords); end
     def sort_keywords; self.keywords = keywords.sort; end
 
-    # LH 225
     def thumbnail_uri
-      "http://beta.#{Aji.conf['TLD']}/images/icons/icon-set_nowtrending.png"
+      "http://beta.#{Aji.conf['TLD']}/images/icons/tag.png"
     end
 
     def refresh_content force=false

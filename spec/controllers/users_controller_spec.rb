@@ -6,13 +6,13 @@ module Aji
 
   describe API do
     describe "resource: #{resource}" do
-      
+
       describe "get #{resource_uri}/:id" do
         it "should return 404 if not found" do
           get "#{resource_uri}/#{rand(100)}"
           last_response.status.should == 404
         end
-        
+
         it "should return user info if found" do
           user = Factory :user_with_channels
           channel_ids = user.subscribed_list
@@ -26,26 +26,21 @@ module Aji
           end
         end
       end
-      
+
       describe "post #{resource_uri}/:id" do
         it "should create user object on post with default channel listing" do
-          default_channels = []
-          5.times { |n| default_channels << Factory(:youtube_channel_with_videos, :default_listing=>true)}
-          email = random_email
-          first_name = random_string
-          params = { :email => email, :first_name => first_name, :last_name => random_string }
+          params = { :email => random_email,
+            :first_name => random_string, :last_name => random_string }
           post "#{resource_uri}/", params
           last_response.status.should ==201
           user_hash = JSON.parse last_response.body
-          user_hash["first_name"].should == first_name
-          u = User.find user_hash["id"] # ensure we can look up the user again
-          u.email.should == email
-          default_channels.each do |c|
-            u.subscribed_channels.should include c
+          user_hash.each_pair do |k, v|
+            next unless params.has_key? k
+            params[k.to_sym].should == v
           end
         end
       end
-      
+
     end
   end
 end
