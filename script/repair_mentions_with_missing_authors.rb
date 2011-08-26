@@ -12,7 +12,7 @@ nil_author_mentions.each do |m|
   account = Aji::Account::Twitter.find_by_username user['screen_name']
   unless account.nil?
     Aji.log :WARN, "#{account.username} existed in DB but wasn't linked to " +
-      m.id.to_s
+      "Mention[#{m.id}]"
   else
     Aji.log :WARN, "No account was created for #{user['screen_name']}."
     account = Aji::Account::Twitter.create :username => user['screen_name'],
@@ -21,8 +21,9 @@ nil_author_mentions.each do |m|
 
   m.author = account
   if m.save
-    Aji.log "Linked #{m.id} with #{account.id}"
+    Aji.log "Linked Mention[#{m.id}] with Account[#{account.id}]"
   else
-    Aji.log :WTF, "Unable to link #{m.id} with #{account.id} please check!"
+    Aji.log :WTF, "Unable to link Mention[#{m.id}] with " +
+      "Account[#{account.id}]. Please check!"
   end
 end
