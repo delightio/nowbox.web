@@ -111,8 +111,9 @@ module Aji
     # HACK: This is long, complex, blocking, and tightly coupled. A good
     # candidate for refactoring later.
     def harvest_tweets
-      ::Twitter.user_timeline(username, :count => 200).each do |tweet|
-        mention = Parsers['twitter'].parse tweet.to_hasht do |tweet_hash|
+      ::Twitter.user_timeline(username, :include_entities => true,
+        :count => 200).each do |tweet|
+        mention = Parsers['twitter'].parse tweet.to_hash do |tweet_hash|
           Mention::Processor.video_filters['twitter'].call tweet_hash
         end
         next if mention.nil?
