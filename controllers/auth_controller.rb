@@ -43,10 +43,23 @@ module Aji
 
       case params['provider']
       when 'twitter'
-        t = Account::Twitter.find_or_create_by_username(
-          auth_hash['extra']['user_hash']['screen_name'],
-          :identity => user.identity, :credentials => auth_hash['credentials'],
-          :uid => auth_hash['uid'], :info => auth_hash['extra']['user_hash'])
+        t = Account::Twitter.find_by_username(
+          auth_hash['extra']['user_hash']['screen_name'])
+        unless t.nil?
+          t.update_attributes(
+            :info => auth_hash['extra']['user_hash'],
+            :identity => user.identity,
+            :credentials => auth_hash['credentials'],
+            :info => auth_hash['extra']['user_hash'])
+        else
+          t ||= Account::Twitter.create(
+            :username => auth_hash['extra']['user_hash']['screen_name'],
+            :uid => auth_hash['uid'],
+            :identity => user.identity,
+            :credentials => auth_hash['credentials'],
+            :info => auth_hash['extra']['user_hash'])
+        end
+
       else
         "Unsupported provider #{auth_hash['provider']}"
       end
