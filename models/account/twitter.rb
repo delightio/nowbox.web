@@ -21,12 +21,7 @@ module Aji
     end
 
     def publish share
-      ::Twitter.configure do |c|
-        c.consumer_key = Aji.conf['CONSUMER_KEY']
-        c.consumer_secret = Aji.conf['CONSUMER_SECRET']
-        c.oauth_token = credentials['oauth_token']
-        c.oauth_token_secret = credentials['oauth_verifier']
-      end
+      authorize_with_twitter
       Twitter.update format_for_twitter(share.message, share.link)
       share.published_to << :twitter
       share.save || puts("Could not save #{share.inspect}")
@@ -93,6 +88,7 @@ module Aji
 
     # HACK: This is long, complex, blocking, and tightly coupled. A good
     # candidate for refactoring later.
+    private
     def harvest_tweets
       tweets = HTTParty.get(USER_TIMELINE_URL, :query => { :count => 200,
                             :screen_name => username, :include_entities => true },
@@ -119,10 +115,18 @@ module Aji
       end
     end
 
+    def authorize_with_twitter
+      ::Twitter.configure do |c|
+        c.consumer_key = Aji.conf['CONSUMER_KEY']
+        c.consumer_secret = Aji.conf['CONSUMER_SECRET']
+        c.oauth_token = credentials['oauth_token']
+        c.oauth_token_secret = credentials['oauth_verifier']
+      end
+    end
+
     def set_provider
       update_attribute :provider, 'twitter'
     end
-    private :set_provider
 
   end
 end
