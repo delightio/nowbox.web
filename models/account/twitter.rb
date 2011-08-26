@@ -96,7 +96,13 @@ module Aji
     def harvest_tweets
       tweets = HTTParty.get(USER_TIMELINE_URL, :query => { :count => 200,
                             :screen_name => username, :include_entities => true },
-                            :parser => Proc.new { |body| MultiJson.decode body })
+                            :parser => Proc.new do |body|
+                              begin
+                                 MultiJson.decode body
+                              rescue MultiJson::DecodeError => e
+                                nil
+                              end
+                          end)
       tweets.each do |tweet|
 
         mention = Parsers['twitter'].parse tweet do |tweet_hash|
