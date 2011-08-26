@@ -148,7 +148,10 @@ from Heroku&rsquo;s Environment or a local <code>settings.yml</code>.</p>
   <span class="no">Redis</span><span class="o">::</span><span class="no">Objects</span><span class="o">.</span><span class="n">redis</span> <span class="o">=</span> <span class="n">redis</span>
   <span class="no">Resque</span><span class="o">.</span><span class="n">schedule</span> <span class="o">=</span> <span class="n">conf</span><span class="o">[</span><span class="s1">&#39;RESQUE_SCHEDULE&#39;</span><span class="o">]</span>
   <span class="no">Resque</span><span class="o">.</span><span class="n">before_fork</span> <span class="o">=</span> <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">establish_connection</span><span class="p">(</span>
-    <span class="no">Aji</span><span class="o">.</span><span class="n">conf</span><span class="o">[</span><span class="s1">&#39;DATABASE&#39;</span><span class="o">]</span><span class="p">)</span> <span class="p">}</span></pre></div>
+    <span class="no">Aji</span><span class="o">.</span><span class="n">conf</span><span class="o">[</span><span class="s1">&#39;DATABASE&#39;</span><span class="o">]</span><span class="p">)</span> <span class="p">}</span>
+  <span class="no">Resque</span><span class="o">::</span><span class="no">Failure</span><span class="o">::</span><span class="no">MultipleWithRetrySuppression</span><span class="o">.</span><span class="n">classes</span> <span class="o">=</span>
+    <span class="o">[</span><span class="no">Resque</span><span class="o">::</span><span class="no">Failure</span><span class="o">::</span><span class="no">Redis</span><span class="o">]</span>
+  <span class="no">Resque</span><span class="o">::</span><span class="no">Failure</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="no">Resque</span><span class="o">::</span><span class="no">Failure</span><span class="o">::</span><span class="no">MultipleWithRetrySuppression</span></pre></div>
       </td>
     </tr>
     <tr id='section-9'>

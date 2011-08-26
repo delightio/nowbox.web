@@ -7,7 +7,7 @@ gem 'foreman' # Local process monitor.
 gem 'grape'
 gem 'sinatra', :require => 'sinatra/base'
 gem 'thin' # Heroku recommends the Thin web server.
-gem 'resque'
+gem 'resque', :require => [ 'resque', 'resque/failure/redis' ]
 
 # Data persistence and related.
 gem 'hiredis' # Fast C Interface to Redis.
@@ -23,6 +23,7 @@ gem 'rocco', '=0.8', :group => :development
 # Libraries used by the backend.
 gem 'resque-scheduler', '~>2.0.0.d',
   :require => ['resque_scheduler', 'resque/scheduler']
+gem 'resque-retry', :require => [ 'resque-retry', 'resque-retry/server' ]
 gem 'httparty'
 gem 'omniauth'
 gem 'youtube_it'

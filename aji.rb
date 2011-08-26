@@ -51,6 +51,9 @@ module Aji
   Resque.schedule = conf['RESQUE_SCHEDULE']
   Resque.before_fork = Proc.new { ActiveRecord::Base.establish_connection(
     Aji.conf['DATABASE']) }
+  Resque::Failure::MultipleWithRetrySuppression.classes =
+    [Resque::Failure::Redis]
+  Resque::Failure.backend = Resque::Failure::MultipleWithRetrySuppression
 
   # Establish ActiveRecord conneciton and run all necessary migrations.
   ActiveRecord::Base.establish_connection conf['DATABASE']

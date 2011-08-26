@@ -35,8 +35,13 @@ module Aji
       end
 
       unless @mention.save
-        @errors << "Unable to save #{@mention} due to " +
-          @mention.errors.inspect
+        begin
+          @errors << "Unable to save #{@mention} due to " +
+            @mention.errors.inspect
+        rescue PGError => e
+          raise unless e.message =~ /invalid byte sequence for encoding "UTF8"/
+            @errors << "Invalid Characters in #{@mention.body}"
+        end
       end
 
       return nil if !@errors.empty?

@@ -12,8 +12,9 @@ module Aji
   class Account < ActiveRecord::Base
 
     include Redis::Objects
-    serialize :user_info, Hash
+    serialize :info, Hash
     serialize :credentials, Hash
+    serialize :auth_info, Hash
     belongs_to :identity
 
     has_and_belongs_to_many :channels,
