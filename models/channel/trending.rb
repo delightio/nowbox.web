@@ -49,11 +49,11 @@ module Aji
     end
 
     def thumbnail_uri
-      "http://beta.#{Aji.conf['TLD']}/images/icons/icon-set_nowtrending.png"
+      "http://beta.#{Aji.conf['TLD']}/images/icons/nowpopular.png"
     end
 
     def self.singleton
-      Trending.first || Trending.create!(:title => "Trending")
+      Trending.first || Trending.create!(:title => "NowPopular")
     end
   end
 end
