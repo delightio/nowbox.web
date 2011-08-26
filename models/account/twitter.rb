@@ -103,7 +103,7 @@ module Aji
                                 nil
                               end
                           end)
-      tweets.compact.each do |tweet|
+      tweets.each do |tweet|
 
         mention = Parsers['twitter'].parse tweet do |tweet_hash|
           Mention::Processor.video_filters['twitter'].call tweet_hash
