@@ -61,13 +61,20 @@ module Aji
     end
 
     def serializable_hash options={}
-      Hash["id" => id,
+      hash = Hash["id" => id,
            "first_name" => first_name,
            "last_name" => last_name,
            "queue_channel_id" => queue_channel_id,
            "favorite_channel_id" => favorite_channel_id,
            "history_channel_id" => history_channel_id,
-           "subscribed_channel_ids" => subscribed_list.values]
+           "subscribed_channel_ids" => subscribed_list.values
+      ]
+      unless identity.graph_channel.nil?
+        hash.merge! "social_channel_id" => identity.graph_channel_id
+      else
+        hash
+      end
+
     end
 
     def subscribed? channel
