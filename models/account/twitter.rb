@@ -9,9 +9,6 @@ module Aji
     include Redis::Objects
     sorted_set :recent_zset
     USER_TIMELINE_URL = "http://api.twitter.com/1/statuses/user_timeline.json"
-    serialize :info, Hash
-    serialize :auth_info, Hash
-    serialize :credentials, Hash
 
     def profile_uri; "http://twitter.com/#{username}"; end
 
