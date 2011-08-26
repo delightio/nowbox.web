@@ -21,7 +21,7 @@ module Aji
     end
 
     def publish share
-      authorize_with_twitter
+      authorize_with_twitter!
       Twitter.update format_for_twitter(share.message, share.link)
       share.published_to << :twitter
       share.save || puts("Could not save #{share.inspect}")
@@ -86,22 +86,32 @@ module Aji
       (recent_zset.revrange 0, limit).map(&:to_i)
     end
 
+    # This method authorizes the global twitter account to act on behalf of this
+    # user. If the optional block is given then after running the block the
+    # client will be deauthorized. Otherwise this will modify the state of the
+    # global twitter client.
+    def authorize_with_twitter!
+      ::Twitter.configure do |c|
+        c.consumer_key = Aji.conf['CONSUMER_KEY']
+        c.consumer_secret = Aji.conf['CONSUMER_SECRET']
+        c.oauth_token = credentials['token']
+        c.oauth_token_secret = credentials['secret']
+      end
+      if block_given?
+        yield
+        ::Twitter.configure do |c|
+          c.oauth_token = nil
+          c.oauth_token_secret = nil
+        end
+      end
+    end
+
+    private
     # HACK: This is long, complex, blocking, and tightly coupled. A good
     # candidate for refactoring later.
-    private
     def harvest_tweets
-      tweets = HTTParty.get(USER_TIMELINE_URL, :query => { :count => 200,
-                            :screen_name => username, :include_entities => true },
-                            :parser => Proc.new do |body|
-                              begin
-                                 MultiJson.decode body
-                              rescue MultiJson::DecodeError => e
-                                nil
-                              end
-                          end)
-      tweets.each do |tweet|
-
-        mention = Parsers['twitter'].parse tweet do |tweet_hash|
+      ::Twitter.user_timeline(username, :count => 200).each do |tweet|
+        mention = Parsers['twitter'].parse tweet.to_hasht do |tweet_hash|
           Mention::Processor.video_filters['twitter'].call tweet_hash
         end
         next if mention.nil?
@@ -112,15 +122,6 @@ module Aji
         if processor.failed?
           Aji.log "Processing failed due to #{processor.errors}"
         end
-      end
-    end
-
-    def authorize_with_twitter
-      ::Twitter.configure do |c|
-        c.consumer_key = Aji.conf['CONSUMER_KEY']
-        c.consumer_secret = Aji.conf['CONSUMER_SECRET']
-        c.oauth_token = credentials['oauth_token']
-        c.oauth_token_secret = credentials['oauth_verifier']
       end
     end
 
