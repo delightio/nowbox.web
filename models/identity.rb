@@ -14,6 +14,8 @@ module Aji
           graph_channel.accounts << i unless graph_channel.accounts.include? i
         end
       end
+      graph_channel.accounts.map(&:refresh_content)
+      graph_channel.refresh_content
       save
       graph_channel
     end
