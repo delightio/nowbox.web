@@ -21,8 +21,9 @@ module Aji
       when Hash
         tweet_hash = json
       else
-        raise ArgumentError.new(
-          "I don't want any #{json.class} only strings and hashes.")
+        raise ArgumentError,
+          "I don't want any #{json.class} only strings and hashes. " +
+          json.inspect
       end
 
       # Run the optional block on the tweet hash before instantiation.
