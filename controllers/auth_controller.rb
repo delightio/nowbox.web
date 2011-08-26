@@ -50,7 +50,6 @@ module Aji
       else
         "Unsupported provider #{auth_hash['provider']}"
       end
-      user.subscribe user.identity.update_graph_channel
       Resque.enqueue Aji::Queues::UpdateGraphChannel, user.identity.id
       MultiJson.encode user.serializable_hash
     end
