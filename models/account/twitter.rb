@@ -21,10 +21,11 @@ module Aji
     end
 
     def publish share
-      authorize_with_twitter!
-      Twitter.update format_for_twitter(share.message, share.link)
-      share.published_to << :twitter
-      share.save || puts("Could not save #{share.inspect}")
+      authorize_with_twitter! do
+        Twitter.update format_for_twitter(share.message, share.link)
+        share.published_to << :twitter
+        share.save || puts("Could not save #{share.inspect}")
+      end
     end
 
     def format_for_twitter message, link
