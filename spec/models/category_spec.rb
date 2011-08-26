@@ -20,8 +20,8 @@ describe Aji::Category do
       subject.stub(:channel_ids).and_return([ch1.id, ch2.id])
 
       featured = subject.featured_channels
-      featured.should include ch1.id
-      featured.should_not include ch2.id
+      featured.should include ch1
+      featured.should_not include ch2
     end
   end
 

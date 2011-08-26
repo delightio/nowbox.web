@@ -39,7 +39,7 @@ module Aji
       channel_ids.first(10).each do |channel_id|
         channel = Channel.find channel_id
         if channel.category_ids.first(2).include? self.id
-          results << channel_id
+          results << channel
         end
       end
       results
