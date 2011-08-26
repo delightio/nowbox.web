@@ -49,7 +49,7 @@ module Aji
     def self.featured args={}
       featured_ids = redis.lrange featured_key, 0, -1
       return self.find featured_ids unless featured_ids.empty?
-      Category.all.sample(10) - [undefined]
+      Category.all.select{ |cat| !cat.featured_channels.empty? } - [undefined]
     end
 
   end

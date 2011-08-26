@@ -39,9 +39,17 @@ describe Aji::Category do
       subject.should have(3).categories
       featured.each { |cat| subject.should include cat }
     end
-    it "returns some categories even before we set up the featured key" do
-      10.times { Factory :category }
-      subject.should have(10).categories
+    it "returns categories w/ > 1 featured channel" do
+      categories = []
+      (0..4).each do
+        category = Factory :category
+        category.stub(:featured_channels).and_return([(Factory :channel)])
+        categories << category
+      end
+      Aji::Category.stub(:all).and_return(
+        categories + (0..9).map { Factory :category } )
+      subject.should have(categories.count).categories
+      (subject & categories).should == categories
     end
   end
 
