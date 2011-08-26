@@ -84,11 +84,16 @@ module Aji
       (recent_zset.revrange 0, limit).map(&:to_i)
     end
 
+    def authorized?
+      credentials.has_key? 'token' and credentials.has_key? 'secret'
+    end
+
     # This method authorizes the global twitter account to act on behalf of this
     # user. If the optional block is given then after running the block the
     # client will be deauthorized. Otherwise this will modify the state of the
     # global twitter client.
     def authorize_with_twitter!
+      fail "No credentials for #{username} (Account[#{id}])" unless authorized?
       ::Twitter.configure do |c|
         c.consumer_key = Aji.conf['CONSUMER_KEY']
         c.consumer_secret = Aji.conf['CONSUMER_SECRET']
