@@ -3,8 +3,17 @@ require File.expand_path("../../spec_helper", __FILE__)
 describe Aji::User do
 
   describe ".create" do
-    it "creates user channel" do
+    it "creates user channels" do
       expect { Factory :user }.to change { Aji::Channel.count }.by(3)
+    end
+  end
+
+  describe "#subscribe_default_channels" do
+    it "subscribes to default channels" do
+      defaults = (0..4).map { Factory :channel }
+      Aji::Channel.stub(:default_listing).and_return(defaults)
+      u = Factory :user
+      defaults.each { |c| u.subscribed?(c).should be_true }
     end
   end
 
