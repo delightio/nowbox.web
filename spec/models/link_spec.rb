@@ -23,6 +23,7 @@ module Aji
     end
 
     it "detects vimeo links" do
+      pending
       link = Link.new("http://vimeo.com/4937580")
       link.type.should == 'vimeo'
       link.external_id.should == '4937580'
@@ -31,6 +32,7 @@ module Aji
     it "can tell videos apart from other links" do
       Link.new("http://www.youtube.com/watch?v=-iAUwamHTM4&feature=youtu.be").
         should be_video
+      pending
       Link.new("http://vimeo.com/4937580").should be_video
     end
 
@@ -65,33 +67,35 @@ module Aji
       context "when the video is from vimeo" do
         subject { Link.new "http://vimeo.com/394564" }
         specify "external_id should be a valid vimeo id" do
+          pending
           subject.external_id.should =~ /\d+/
         end
 
         specify "it's type is 'vimeo'" do
+          pending
           subject.type.should == 'vimeo'
         end
+      end
+    end
 
-        describe "#to_video" do
-          it "returns a video object for video links" do
-            Link.new("https://www.youtube.com/watch?v=vPUE4Fo4RCc").to_video.
-              class.should == Video
-          end
+    describe "#to_video" do
+      it "returns a video object for video links" do
+        Link.new("https://www.youtube.com/watch?v=vPUE4Fo4RCc").to_video.
+          class.should == Video
+      end
 
-          it "returns a video from the database if a matching one exists" do
-            # Create the matching video
-            in_database_video = Video.create :external_id => "vPUE4Fo4RCc",
-              :source => 'youtube'
-            Link.new("https://www.youtube.com/watch?v=vPUE4Fo4RCc").to_video.
-              should == in_database_video
-          end
+      it "returns a video from the database if a matching one exists" do
+        # Create the matching video
+        in_database_video = Video.create :external_id => "vPUE4Fo4RCc",
+          :source => 'youtube'
+        Link.new("https://www.youtube.com/watch?v=vPUE4Fo4RCc").to_video.
+          should == in_database_video
+      end
 
-          it "does not save new videos to the database" do
-            expect { Link.new("https://www.youtube.com/watch?v=vPUE4Fo4RCc").
-              to_video }.to change(Video, :count).by(0)
+      it "does not save new videos to the database" do
+        expect { Link.new("https://www.youtube.com/watch?v=vPUE4Fo4RCc").
+          to_video }.to change(Video, :count).by(0)
 
-          end
-        end
       end
     end
   end
