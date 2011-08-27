@@ -11,10 +11,8 @@ count_hash.each do |username, count|
   duped_accounts = Aji::Account.find_all_by_username username
   keep_me = duped_accounts.first
   duped_accounts[1..-1].each do |dupe|
-    keep_me.mentions += dupe.mentions
     keep_me.save
     dupe.destroy
-    Aji.log "Deleted Account[#{dupe.id}] with #{dupe.mentions.count} mentions" +
-      " transfered to Account[#{keep_me.id}]"
+    Aji.log "Deleted Account[#{dupe.id}]"
   end
 end
