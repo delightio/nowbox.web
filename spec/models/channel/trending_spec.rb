@@ -26,49 +26,51 @@ describe Aji::Channel::Trending do
   end
 
   describe "#refresh_content" do
-    it "is marked populated" do
+    it "marks self populated" do
       subject.refresh_content
       subject.should be_populated
     end
 
-    it "populates videos in trending channel" do
-      real_youtube_video_ids = %w[ l4qv4Ca1h94 Wx7c7nHXqKg BoTvCgJtcJU ]
-      real_youtube_video_ids.each{ |yt_id|
-        subject.push_recent( Factory :video_with_mentions,
-                                     :source => :youtube,
-                                     :external_id => yt_id) }
+    context "after #refresh_content" do
+      before(:each) do
+        real_youtube_video_ids = %w[ l4qv4Ca1h94 Wx7c7nHXqKg BoTvCgJtcJU ]
+        real_youtube_video_ids.each{ |yt_id|
+          subject.push_recent( Factory :video_with_mentions,
+                                       :source => :youtube,
+                                       :external_id => yt_id) }
 
-      # Create an video with very old mentions
-      old_video = Factory :video_with_mentions
-      old_video.mentions.each {|m| m.published_at = 1.years.ago; m.save }
-      subject.push_recent old_video
+         old_video = Factory :video_with_mentions
+         old_video.mentions.each {|m| m.published_at = 1.years.ago; m.save }
+         subject.push_recent old_video
 
-      Aji.stub(:conf).and_return(
-        { 'MAX_RECENT_VIDEO_IDS_IN_TRENDING'=>real_youtube_video_ids.count*2,
-          'MAX_VIDEOS_IN_TRENDING' => real_youtube_video_ids.count})
+        Aji.stub(:conf).and_return(
+          { 'MAX_RECENT_VIDEO_IDS_IN_TRENDING'=>real_youtube_video_ids.count*2,
+            'MAX_VIDEOS_IN_TRENDING' => real_youtube_video_ids.count})
 
-      subject.refresh_content
+        subject.refresh_content
+      end
 
-      # TODO: This test should be removed or replaced with one that insures each
-      # video is asked to be populated.
-      #
-      # All videos in content_videos should be populated
-      subject.content_videos.each { |v| v.should be_populated }
+      specify "all content_videos are populated" do
+        subject.content_videos.each do |video|
+          video.should be_populated
+        end
+      end
 
-      # TODO: This really belongs in its own spec test.
-      # Not all recent videos are populated
-      subject.recent_video_ids.should include old_video.id
-      old_video.should_not be_populated
+      specify "not all recent_videos are populated" do
+        subject.recent_video_ids.select{ |vid|
+          !Aji::Video.find(vid).populated? }.
+            should have(1).video
+      end
     end
 
-    it "should return videos in descending order of relevance" do
+    it "returns videos in descending order of relevance" do
       10.times.each { |n| subject.push_recent(Factory :populated_video_with_mentions) }
       subject.refresh_content
       trending_videos = subject.content_videos
       subject.relevance_of(trending_videos.first).should >= subject.relevance_of(trending_videos.last)
     end
 
-    it "should not include blacklisted videos" do
+    it "does not include blacklisted videos" do
       video = Factory :populated_video_with_mentions
       subject.push_recent video
       video.blacklist
