@@ -33,6 +33,10 @@ module Aji
         content_zset.delete video.id
       end
 
+      def truncate limit
+        content_zset.remrangebyrank 0, -(1+limit)
+      end
+
       def content_zset_ttl; 15.minutes; end
 
     end

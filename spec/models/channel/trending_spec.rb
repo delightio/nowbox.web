@@ -39,28 +39,43 @@ describe Aji::Channel::Trending do
                                        :source => :youtube,
                                        :external_id => yt_id) }
 
-         old_video = Factory :video_with_mentions
-         old_video.mentions.each {|m| m.published_at = 1.years.ago; m.save }
-         subject.push_recent old_video
+        old_video = Factory :video_with_mentions
+        old_video.mentions.each {|m| m.update_attribute :published_at, 1.years.ago }
+        subject.push_recent old_video
 
         Aji.stub(:conf).and_return(
           { 'MAX_RECENT_VIDEO_IDS_IN_TRENDING'=>real_youtube_video_ids.count*2,
             'MAX_VIDEOS_IN_TRENDING' => real_youtube_video_ids.count})
-
-        subject.refresh_content
       end
 
       specify "all content_videos are populated" do
+        subject.refresh_content
         subject.content_videos.each do |video|
           video.should be_populated
         end
       end
 
       specify "not all recent_videos are populated" do
+        subject.refresh_content
         subject.recent_video_ids.select{ |vid|
           !Aji::Video.find(vid).populated? }.
             should have(1).video
       end
+
+      it "respects MAX_VIDEOS_IN_TRENDING" do
+        subject.refresh_content
+        subject.content_videos.should have(
+          Aji.conf['MAX_VIDEOS_IN_TRENDING']).videos
+
+        video = Factory :video_with_mentions
+        video.mentions.each {|m| m.update_attribute :published_at, Time.now }
+        subject.push_recent video
+        subject.refresh_content
+        subject.content_videos.should have(
+          Aji.conf['MAX_VIDEOS_IN_TRENDING']).videos
+        subject.content_videos.first.should == video
+      end
+
     end
 
     it "returns videos in descending order of relevance" do

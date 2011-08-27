@@ -44,6 +44,8 @@ module Aji
         end
         push video, h[:relevance]
       end
+      truncate max_in_flight
+
       Aji.log "Replace #{[max_in_flight,in_flight.count].min} (#{populated_count} populated) content videos in #{Time.now-start} s."
       update_attribute :populated_at, Time.now
     end
