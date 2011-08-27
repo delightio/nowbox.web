@@ -118,6 +118,7 @@ module Aji
         mention = Parsers['twitter'].parse tweet.to_hash do |tweet_hash|
           Mention::Processor.video_filters['twitter'].call tweet_hash
         end
+
         next if mention.nil?
 
         processor = Mention::Processor.new mention, self
@@ -127,6 +128,11 @@ module Aji
           Aji.log "Processing failed due to #{processor.errors}"
         end
       end
+
+
+    rescue ::Twitter::BadGateway, ::Twitter::InternalServerError,
+      ::Twitter::ServiceUnavailable => e
+      Aji.log :WARN, "#{e.class}: #{e.message}"
     end
 
     def set_provider
