@@ -90,16 +90,19 @@ module Aji
     end
 
     describe "#content_video_ids" do
-      # TODO: This test is smelly.
+      it "returns the union of all accounts' content_video_ids" do
+        channel = Factory :youtube_channel
+        ids = []
+        channel.accounts.each { |a| ids += a.content_video_ids }
+        Set.new(ids).should == Set.new(channel.content_video_ids)
+      end
+
       it "returns cached values when it can" do
-        subject.refresh_content
-        old_ids = subject.content_video_ids
-        old_ids.should_not be_empty
-        a = Account::Youtube.create :uid => 'nicnicolecole'
-        subject.accounts << a
-        a.refresh_content :force
-        a.content_videos.should_not be_empty
-        subject.content_video_ids.should == old_ids
+        channel = Factory :youtube_channel
+        cached_ids = channel.content_video_ids
+        channel.accounts << (Factory :youtube_account_with_videos)
+        channel.save
+        channel.content_video_ids.should == cached_ids
       end
     end
 

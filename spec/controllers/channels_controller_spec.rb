@@ -77,8 +77,8 @@ module Aji
 
           it "respects limit params" do
             limit = 3
-            channel = Factory :youtube_channel_with_videos
-            channel.content_videos.count.should > limit
+            channel = Factory :youtube_channel
+            channel.content_videos.count.should be > limit
             params = {:user_id=>(Factory :user).id, :limit=>3}
             get "#{resource_uri}/#{channel.id}/videos", params
             last_response.status.should == 200

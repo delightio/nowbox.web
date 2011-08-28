@@ -12,11 +12,11 @@ module Aji
 
       # TODO: This isn't a particularly robust interface. I'm writing my own Redis
       # object library so when that's finished we'll use it.
-      def content_video_ids limit=-1
-        (content_zset.revrange 0, limit).map(&:to_i)
+      def content_video_ids limit=0
+        (content_zset.revrange 0, (limit-1)).map(&:to_i)
       end
 
-      def content_videos limit=-1
+      def content_videos limit=0
         content_video_ids(limit).map { |vid| Video.find vid }
       end
 
