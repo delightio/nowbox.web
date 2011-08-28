@@ -41,53 +41,93 @@ describe Aji::Channel do
   end
 
   describe "#personalized_content_videos" do
-    it "should return unviewed videos" do
-      channel = Factory :youtube_channel_with_videos
-      viewed_video_ids = channel.content_videos.sample(channel.content_videos.length / 2).map(&:id)
+    context "when dealing with non user channels" do
+      it "returns unviewed videos" do
+        channel = Factory :youtube_channel_with_videos
+        viewed_video_ids = channel.content_videos.sample(channel.content_videos.length / 2).map(&:id)
 
 
-      user = mock("user")
-      history = mock("history")
-      user.stub(:history_channel).and_return(history)
-      history.stub(:content_video_ids).and_return(viewed_video_ids)
-      personalized_video_ids = channel.personalized_content_videos(
-        :user => user).map(&:id)
-      viewed_video_ids.each do | id |
-        personalized_video_ids.should_not include id
+        user = mock("user")
+        history = mock("history")
+        user.stub(:history_channel).and_return(history)
+        history.stub(:content_video_ids).and_return(viewed_video_ids)
+        personalized_video_ids = channel.personalized_content_videos(
+          :user => user).map(&:id)
+        viewed_video_ids.each do | id |
+          personalized_video_ids.should_not include id
+        end
+      end
+
+      it "returns videos according to descending order on score" do
+        channel = Factory :channel
+        10.times do |n|
+          channel.push Factory(:video), rand(1000)
+        end
+        top_video  = channel.content_videos.first
+        last_video = channel.content_videos.last
+        top_video_relevance = channel.relevance_of top_video
+        last_video_relevance= channel.relevance_of last_video
+        top_video_relevance.should >= last_video_relevance
+
+        viewed_video = channel.content_videos.sample
+        user = Factory :user
+        event = Factory :event, :action => :view, :user => user, :video => viewed_video
+        personalized_videos = channel.personalized_content_videos :user=>user
+        personalized_videos.should_not include viewed_video
+
+        top_video_relevance = channel.relevance_of personalized_videos.first
+        last_video_relevance= channel.relevance_of personalized_videos.last
+        top_video_relevance.should >= last_video_relevance
+      end
+
+      it "never returns blacklisted videos" do
+        channel = Factory :youtube_channel_with_videos
+        user = Factory :user
+        video = channel.content_videos.sample
+        video.blacklist
+        channel.personalized_content_videos(:user=>user,
+          :limit=>channel.content_videos.count).should_not include video
       end
     end
 
-    it "should return videos according to descending order on score" do
-      channel = Factory :channel
-      10.times do |n|
-        channel.push Factory(:video), rand(1000)
+    context "when dealing with user channels" do
+      before(:each) do
+        @user = Factory :user
+        @favorite_channel = @user.favorite_channel
       end
-      top_video  = channel.content_videos.first
-      last_video = channel.content_videos.last
-      top_video_relevance = channel.relevance_of top_video
-      last_video_relevance= channel.relevance_of last_video
-      top_video_relevance.should >= last_video_relevance
 
-      viewed_video = channel.content_videos.sample
-      user = Factory :user
-      event = Factory :event, :action => :view, :user => user, :video => viewed_video
-      personalized_videos = channel.personalized_content_videos :user=>user
-      personalized_videos.should_not include viewed_video
+      it "returns videos in ascending order" do
+        first_video = Factory :video
+        event = Factory :event, :user => @user,
+          :action => :share,  :video => first_video,
+          :created_at => 20.seconds.ago
+        second_video = Factory :video
+        event = Factory :event, :user => @user,
+          :action => :share,  :video => second_video,
+          :created_at => Time.now
+        @favorite_channel.personalized_content_videos(:user => @user).
+          first.should == first_video
+        @favorite_channel.personalized_content_videos(:user => @user).
+          last.should == second_video
+      end
 
-      top_video_relevance = channel.relevance_of personalized_videos.first
-      last_video_relevance= channel.relevance_of personalized_videos.last
-      top_video_relevance.should >= last_video_relevance
+      it "returns viewed videos" do
+        video = Factory :video
+        event = Factory :event, :user => @user,
+          :action => :share,  :video => video
+        @user.history_channel.content_videos.should include video
+        @favorite_channel.personalized_content_videos(:user => @user).
+          should include video
+      end
+
+      it "returns blacklisted videos" do
+        video = Factory :video, :blacklisted_at => Time.now
+        event = Factory :event, :user => @user,
+          :action => :share,  :video => video
+        @favorite_channel.personalized_content_videos(:user => @user).
+          should include video
+      end
     end
-
-    it "should not return blacklisted videos" do
-      channel = Factory :youtube_channel_with_videos
-      user = Factory :user
-      video = channel.content_videos.sample
-      video.blacklist
-      channel.personalized_content_videos(:user=>user,
-        :limit=>channel.content_videos.count).should_not include video
-    end
-
   end
 
   describe ".default_listing" do

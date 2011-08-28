@@ -20,6 +20,14 @@ module Aji
         content_video_ids(limit).map { |vid| Video.find vid }
       end
 
+      def content_video_ids_rev limit=0
+        (content_zset.range 0, (limit-1)).map(&:to_i)
+      end
+
+      def content_videos_rev limit=0
+        content_video_ids_rev(limit).map { |vid| Video.find vid }
+      end
+
       def relevance_of video
         content_zset.score video.id
       end

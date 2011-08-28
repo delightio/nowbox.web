@@ -3,29 +3,53 @@ require File.expand_path("../../../spec_helper", __FILE__)
 describe Aji::Mixins::ContentVideos do
   subject { Aji::Channel.create }
 
-  context "when a limit parameter is not passed in" do
+  context "when asking for content" do
     before(:each) do
       @total = 10
       @total.times { subject.push(Factory :video) }
+      @limit = 5
     end
-    [:content_video_ids, :content_videos].each do |m|
-      specify "##{m} returns all videos" do
-        subject.send(m).should have(@total).videos
+
+    describe "when a limit parameter is not passed in" do
+      [ :content_video_ids, :content_videos,
+        :content_video_ids_rev, :content_videos_rev].each do |m|
+        specify "##{m} returns all videos" do
+          subject.send(m).should have(@total).videos
+        end
+      end
+    end
+
+    context "when a limit parameter is passed in" do
+      [ :content_video_ids, :content_videos,
+        :content_video_ids_rev, :content_videos_rev].each do |m|
+        specify "##{m} respects the limit" do
+          subject.send(m, @limit).should have(@limit).videos
+        end
       end
     end
   end
 
-  context "when a limit parameter is passed in" do
-    before(:each) do
-      10.times { subject.push(Factory :video) }
-      @limit = 5
+  describe "#content_video_ids_rev" do
+    it "returns content in ascending order" do
+      5.times { |n| subject.push (Factory :video), n }
+      subject.relevance_of(
+        Aji::Video.find(subject.content_video_ids_rev.first)).
+        should == 0
+      subject.relevance_of(
+        Aji::Video.find(subject.content_video_ids_rev.last)).
+        should == 4
     end
-    specify "#content_video_ids respects the limit" do
-      subject.content_video_ids.should have(10).videos
-      subject.content_video_ids(@limit).should have(@limit).videos
-    end
-    specify "#content_videos respects the limit" do
-      subject.content_videos(@limit).should have(@limit).videos
+  end
+
+  describe "#content_video_ids" do
+    it "returns content in descending order" do
+      5.times { |n| subject.push (Factory :video), n }
+      subject.relevance_of(
+        Aji::Video.find(subject.content_video_ids.first)).
+        should == 4
+      subject.relevance_of(
+        Aji::Video.find(subject.content_video_ids.last)).
+        should == 0
     end
   end
 
