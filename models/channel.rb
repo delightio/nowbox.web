@@ -55,13 +55,23 @@ module Aji
       page = (args[:page] || 1).to_i
       total = limit * page
       new_videos = []
-      # TODO: use Redis for this.. zdiff not found?
-      viewed_video_ids = user.history_channel.content_video_ids
-      content_video_ids.each do |channel_video_id|
-        video = Video.find_by_id channel_video_id
-        next if video.blacklisted?
-        new_videos << video if !viewed_video_ids.member? channel_video_id
-        break if new_videos.count >= total
+      if self.class == Channel::User
+        # Always returns user channels in ascending order and
+        # ignores blacklisted or viewed
+        content_video_ids_rev.each do |channel_video_id|
+          video = Video.find_by_id channel_video_id
+          new_videos << video unless video.nil?
+          break if new_videos.count >= total
+        end
+      else
+        # TODO: use Redis for this.. zdiff not found?
+        viewed_video_ids = user.history_channel.content_video_ids
+        content_video_ids.each do |channel_video_id|
+          video = Video.find_by_id channel_video_id
+          next if video.blacklisted?
+          new_videos << video if !viewed_video_ids.member? channel_video_id
+          break if new_videos.count >= total
+        end
       end
       new_videos[(total-limit)...total].to_a
     end

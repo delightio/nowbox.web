@@ -29,13 +29,13 @@ module Aji
       new_videos
     end
 
-    def content_video_ids limit=-1
+    def content_video_ids limit=0
       if Aji.redis.ttl(content_zset.key)==-1
         keys = accounts.map{|a| a.content_zset.key}
         Aji.redis.zunionstore content_zset.key, keys
         Aji.redis.expire content_zset.key, content_zset_ttl
       end
-      (content_zset.revrange 0, limit).map(&:to_i)
+      (content_zset.revrange 0, (limit-1)).map(&:to_i)
     end
 
     def thumbnail_uri
