@@ -101,6 +101,7 @@ module Aji
       end
     end
 
+    def user_channels; [ queue_channel, favorite_channel ]; end
     def create_user_channels
       self.queue_channel = Channel::User.create :title => 'Watch Later'
       self.favorite_channel = Channel::User.create :title => 'Favorites'

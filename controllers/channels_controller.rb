@@ -40,7 +40,9 @@ module Aji
           channels += Channel.search params[:query]
         else
           user = User.find_by_id params[:user_id]
-          channels = if user then user.subscribed_channels else Channel.all end
+          channels = if user then
+                        user.subscribed_channels + user.user_channels else
+                        Channel.all end
         end
         channels
       end
