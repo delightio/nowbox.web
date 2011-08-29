@@ -15,10 +15,6 @@ OmniAuth.config.test_mode = true
 #  c.default_cassette_options = { :record => :new_episodes }
 #end
 
-# Requires supporting ruby files with custom matchers and macros, etc,
-# in spec/support/ and its subdirectories.
-Dir.glob("#{Aji.root}/spec/support/**/*.rb").each {|r| require_relative r}
-
 module TestMixin
   include Rack::Test::Methods
   def app
@@ -51,3 +47,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 end
+
+# Requires supporting ruby files with custom matchers and macros, etc,
+# in spec/support/ and its subdirectories.
+Dir.glob("#{Aji.root}/spec/support/**/*.rb").each {|r| require_relative r}
