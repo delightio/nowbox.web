@@ -41,7 +41,7 @@ module Aji
         else
           user = User.find_by_id params[:user_id]
           channels = if user then
-                        user.subscribed_channels + user.user_channels else
+                        user.user_channels + user.subscribed_channels else
                         Channel.all end
         end
         channels
