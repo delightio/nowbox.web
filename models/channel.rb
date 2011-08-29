@@ -50,7 +50,8 @@ module Aji
     # thus less code.
     def personalized_content_videos args
       user = args[:user]
-      raise ArgumentError, "User missing for Channel[#{self.id}].personalized #{args.inspect}" if user.nil?
+      raise ArgumentError, "User missing for Channel[#{self.id}].personalized" +
+        " #{args.inspect}" if user.nil?
       limit = (args[:limit] || 20).to_i
       page = (args[:page] || 1).to_i
       total = limit * page
