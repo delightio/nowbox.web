@@ -8,7 +8,8 @@ shared_examples_for "any redis object model" do
       redis_keys = subject.redis_keys
       subject.destroy
       redis_keys.each do |key|
-        Aji.redis.exists(key).should be_false
+        Aji.redis.exists(key).should be_false,
+          "#{key} exists in Redis when it shouldn't"
       end
     end
   end
