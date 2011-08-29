@@ -12,6 +12,8 @@ module Aji
   # - created_at: DateTime
   # - updated_at: DateTime
   class Channel < ActiveRecord::Base
+    before_destroy :delete_redis_keys
+
     has_many :events
 
     include Redis::Objects
@@ -20,6 +22,7 @@ module Aji
     lock :refresh, :expiration => 10.minutes
     include Mixins::Populating
     sorted_set :category_id_zset
+
     def category_ids limit=-1
       (category_id_zset.revrange 0, limit).map(&:to_i)
     end
@@ -90,6 +93,16 @@ module Aji
     def refresh_content force=false
       raise InterfaceMethodNotImplemented,
         "#{self.class} must implement #refresh_content(force) method"
+    end
+
+    def redis_keys
+      [ content_zset, category_id_zset ].map &:key
+    end
+
+    def delete_redis_keys
+      redis_keys.each do |key|
+        Redis::Objects.redis.del key
+      end
     end
 
     # ## Class Methods
