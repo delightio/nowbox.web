@@ -86,7 +86,8 @@ example we are assuming the target is iOS 4 and the provider is twitter.</p>
 
 <ol>
 <li>Open a webkitview pane and point it to
-<code>http://api.nowmov.com/auth/twitter</code></li>
+<code>http://api.nowmov.com/auth/twitter?user_id=USER_ID</code> with query parameter
+<code>user_id</code> specifying the internal user_id for the current Aji user.</li>
 <li>The webkitview is redirected to the Twitter application authorization
 page with our application listed.</li>
 <li>The user must then log in and authorize our application (server-side)
