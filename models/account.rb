@@ -15,6 +15,7 @@ module Aji
     serialize :info, Hash
     serialize :credentials, Hash
     serialize :auth_info, Hash
+    before_destroy :delete_redis_keys
     belongs_to :identity
 
     has_and_belongs_to_many :channels,
@@ -71,6 +72,16 @@ module Aji
 
     def to_channel
       Channel::Account.find_or_create_by_accounts Array(self)
+    end
+
+    def redis_keys
+      [ content_zset, influencer_set ].map &:key
+    end
+
+    def delete_redis_keys
+      redis_keys.each do |key|
+        Redis::Objects.redis.del key
+      end
     end
 
     # Class Methods follow
