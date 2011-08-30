@@ -11,7 +11,7 @@ module Aji
       end
     end
 
-    it_behaves_like "any account"
+    it_behaves_like "any redis object model"
 
     describe "#publish" do
       it "should raise an exception unless implemented" do
