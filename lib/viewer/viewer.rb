@@ -94,6 +94,10 @@ module Aji
       erb :tour
     end
 
+    get '/press/?' do
+      erb :press
+    end
+    
     get '/download/?' do
     	@ref = params[:ref] || ""
       erb :launch, {:layout => :layout_splash}
