@@ -17,6 +17,10 @@ module Aji
       "http://api.twitter.com/1/users/profile_image/#{username}.json"
     end
 
+    def description
+      info['description'] rescue "nil"
+    end
+
     def publish share
       authorize_with_twitter! do
         Twitter.update format_for_twitter(share.message, share.link)

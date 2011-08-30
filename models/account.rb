@@ -56,8 +56,8 @@ module Aji
     end
 
     def profile_uri; raise InterfaceMethodNotImplemented; end
-
     def thumbnail_uri; raise InterfaceMethodNotImplemented; end
+    def description; raise InterfaceMethodNotImplemented; end
 
     def serializable_hash
       Hash[ "id" => id,
@@ -66,7 +66,8 @@ module Aji
 
             "username" => username,
             "profile_uri" => profile_uri,
-            "thumbnail_uri" => thumbnail_uri ]
+            "thumbnail_uri" => thumbnail_uri,
+            "description" => description ]
     end
 
     def to_channel

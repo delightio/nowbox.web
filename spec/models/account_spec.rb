@@ -1,10 +1,19 @@
 require File.expand_path("../../spec_helper", __FILE__)
 
 describe Aji::Account do
+  describe "#profile_uri, #thumbnail_uri, #description" do
+    it "raise an exception unless implemented" do
+      [:profile_uri, :thumbnail_uri, :description].each do |m|
+        expect { subject.send m }.to(
+          raise_error Aji::InterfaceMethodNotImplemented)
+      end
+    end
+  end
+
   describe "#publish" do
-    it "should raise an exception unless implemented" do
-      expect { subject.publish nil }.to(
-        raise_error Aji::InterfaceMethodNotImplemented)
+    it "raises an exception unless implemented" do
+      expect { subject.publish nil }.to
+        raise_error Aji::InterfaceMethodNotImplemented
     end
   end
 

@@ -36,11 +36,12 @@ module Aji
         "default_listing" => default_listing,
         "category_ids" => category_ids,
         "title" => title,
+        "description" => "",
         "thumbnail_uri" => thumbnail_uri,
         # TODO: Shouldn't just catch the first version since we may change
         # this method in a version bump.
         "resource_uri" => "http://api.#{Aji.conf['TLD']}/" +
-        "#{Aji::API.version.first}/channels/#{self.id}"
+          "#{Aji::API.version.first}/channels/#{self.id}"
       }
       if options && options[:inline_videos].to_i > 0
         h.merge!(
