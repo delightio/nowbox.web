@@ -12,12 +12,9 @@ module Aji
 
     it_behaves_like "any redis object model"
 
+    # TODO: This should be removed or refactored as per
+    # https://pipely.lighthouseapp.com/projects/77614-aji/tickets/328
     describe "#refresh_content" do
-      it "raises an exception unless overridden." do
-        c = Aji::Channel.new(:title => "foo")
-        expect { c.refresh_content }.to raise_error Aji::InterfaceMethodNotImplemented
-      end
-
       it "updates category relevance" do
         categories = Array.new(3) {|n| Factory :category}
         3.times do |n|
