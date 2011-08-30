@@ -2,10 +2,16 @@ require File.expand_path("../../../spec_helper", __FILE__)
 
 describe Aji::Channel::Keyword do
   describe "#create" do
+    before(:each) do
+      @keywords = %w[ a b c d e f ]
+    end
+    subject { Aji::Channel::Keyword.create :keywords => @keywords.shuffle }
     it "sorts keywords before saving" do
-      keywords = %w[ a b c d e f ]
-      c = Aji::Channel::Keyword.create :keywords => keywords.shuffle
-      c.keywords == keywords
+      subject.keywords == @keywords
+    end
+    it "auto enqueues refresh channel" do
+      Resque.should_receive(:enqueue).with(
+        Aji::Queues::RefreshChannel, subject.id ).once
     end
   end
 
