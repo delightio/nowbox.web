@@ -364,7 +364,7 @@ a.opacity_transition{
 	.user_quote:last-child{ margin-bottom: 0px;}
 	.user_quote .quoter_image{ float: left; display: block; margin-right: 20px; height: 48px; }
 	.user_quote .blurb{ width: 690px; float: left; display: block; line-height:  25px; text-shadow: 0px 1px 1px #FFF;  }
-		.user_quote .quote{ color: #444; font-size: 24px;font-family: 'Georgia', 'Times New Roman', Times, serif; font-style: italic; text-shadow: 0px 1px 1px #FFF;}
+		.user_quote .quote{ color: #444; font-size: 24px;font-family: 'Georgia', 'Times New Roman', Times, serif; font-style: italic; text-shadow: 0px 1px 1px #FFF; line-height: 1.5;}
 		.user_quote .quoter{ color: #888; font-size: 14px; margin-top: 5px; }
 		
 /* MOBILE */
