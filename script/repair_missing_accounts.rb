@@ -27,3 +27,14 @@ nil_author_mentions.each do |m|
       "Account[#{account.id}]. Please check!"
   end
 end
+
+nil_author_videos = Aji::Video.where "author_id = NULL AND populated_at != NULL"
+
+Aji.log :WARN, "Found #{nil_author_videos.count} videos with nil authors."
+
+nil_author_videos.each do |v|
+  v.populate
+  Aji.log :WTF, "Error repopulating author of Video[#{v.id}]" if v.author.nil?
+
+  v.save or Aji.log :WARN, "Unable to save Video[#{v.id}]"
+end
