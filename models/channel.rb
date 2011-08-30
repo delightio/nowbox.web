@@ -30,7 +30,7 @@ module Aji
     def thumbnail_uri; raise InterfaceMethodNotImplemented; end
 
     def serializable_hash options={}
-      {
+      h = {
         "id" => id,
         "type" => (type||"").split("::").last,
         "default_listing" => default_listing,
@@ -42,6 +42,13 @@ module Aji
         "resource_uri" => "http://api.#{Aji.conf['TLD']}/" +
         "#{Aji::API.version.first}/channels/#{self.id}"
       }
+      if options && options[:inline_videos].to_i > 0
+        h.merge!(
+          "videos" => content_videos(options[:inline_videos]).
+                        map{ |v| {"video" => v.serializable_hash(options)}}
+        )
+      end
+      h
     end
 
     # TODO: Refactor to take a list of video ids and a limit parameter instead

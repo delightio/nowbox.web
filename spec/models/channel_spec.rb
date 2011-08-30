@@ -177,4 +177,15 @@ describe Aji::Channel do
       results.should have(1).channel
     end
   end
+
+  describe "serializable_hash" do
+    it "includes video hash if :inline_videos count is positive" do
+      channel = Factory :youtube_channel
+      args = { :inline_videos=>3 }
+      hash = channel.serializable_hash args
+      hash["videos"].should have(args[:inline_videos]).videos
+      hash["videos"].first["video"] ==
+        channel.content_videos.first.serializable_hash
+    end
+  end
 end

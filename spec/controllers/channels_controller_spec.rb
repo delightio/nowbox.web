@@ -79,6 +79,16 @@ module Aji
             body_hash = JSON.parse last_response.body
             body_hash.should == channel.serializable_hash
           end
+
+          it "respects inline_videos parameter" do
+            channel = Factory :youtube_channel_with_videos
+            params = { :inline_videos => 3 }
+            get "#{resource_uri}/#{channel.id}", params
+            last_response.status.should == 200
+            body_hash = JSON.parse last_response.body
+            body_hash.should == channel.serializable_hash(params)
+          end
+
         end
 
         describe "get #{resource_uri}/:id/videos" do

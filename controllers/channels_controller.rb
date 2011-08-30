@@ -20,9 +20,11 @@ module Aji
       # or 404
       #
       # __Required params__ `channel_id` unique id of the channel  
-      # __Optional params__ none
+      # __Optional params__ `inline_videos` integer, number of videos to include
       get '/:channel_id' do
-        find_channel_by_id_or_error params[:channel_id]
+        channel = find_channel_by_id_or_error params[:channel_id]
+        channel.serializable_hash(
+          :inline_videos => params[:inline_videos].to_i)
       end
 
       # ## GET channels/
