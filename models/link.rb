@@ -21,6 +21,12 @@ module Aji
       (@external_id && @type) ? true : false
     end
 
+    def to_video
+      return nil unless video?
+      video = Video.find_by_external_id_and_source(@external_id, @type)
+      video ||= Video.new :external_id => @external_id, :source => @type
+    end
+
     def invalid?
       uri = URI.parse self
       uri.path.nil? || uri.host.nil? || !(uri.scheme =~ /https?/)
@@ -37,7 +43,7 @@ module Aji
         self.match r || false
       end.inject { |acc, el| acc ||= el }
       # TODO: Finish implementing vimeo support.
-      vimeo_match = self.match @@vimeo_regexp
+      vimeo_match = nil#self.match @@vimeo_regexp
       if youtube_match
         @external_id = youtube_match[1]
         @type = 'youtube'

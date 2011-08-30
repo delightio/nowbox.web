@@ -57,11 +57,15 @@ module Aji
         end
         
         it "returns all featured channels when ?type=featured&user_id=UID are given" do
+          channel = Factory :youtube_channel
           params = { :user_id => (Factory :user).id, :type => "featured" }
-          subject.should_receive(:featured_channels).and_return([])
+          subject.should_receive(:featured_channels).and_return([channel])
           Category.stub(:find_by_id).with(subject.id.to_s).and_return(subject)
           get "#{resource_uri}/#{subject.id}/channels", params
           last_response.status.should == 200
+          returned_channels = JSON.parse last_response.body
+          returned_channels = returned_channels.map {|h| h["account"]}
+          returned_channels.should include channel.serializable_hash
         end
       end
     end

@@ -2,10 +2,16 @@ require File.expand_path("../../../spec_helper", __FILE__)
 
 describe Aji::Channel::Keyword do
   describe "#create" do
+    before(:each) do
+      @keywords = %w[ a b c d e f ]
+    end
+    subject { Aji::Channel::Keyword.create :keywords => @keywords.shuffle }
     it "sorts keywords before saving" do
-      keywords = %w[ a b c d e f ]
-      c = Aji::Channel::Keyword.create :keywords => keywords.shuffle
-      c.keywords == keywords
+      subject.keywords == @keywords
+    end
+    it "auto enqueues refresh channel" do
+      Resque.should_receive(:enqueue).with(
+        Aji::Queues::RefreshChannel, subject.id ).once
     end
   end
 
@@ -28,12 +34,31 @@ describe Aji::Channel::Keyword do
 
   describe "#search_helper" do
     before(:each) do
-      @query = Array.new(3){ |n| random_string }.join(",")
+      @count = 3
+      @query = Array.new(@count){ |n| random_string }.join(",")
     end
 
-    it "returns at least one populated keyword channel" do
+    it "does not create new channel" do
+      expect { Aji::Channel::Keyword.search_helper @query }.
+        to_not change { Aji::Channel.count }
+    end
+
+    it "returns a match even if partial match is shorter" do
+      q = @query.split(',').shuffle.sample(@count-1)
+      old_keyword_channel = Aji::Channel::Keyword.create(
+        :keywords => q)
       results = Aji::Channel::Keyword.search_helper @query
-      results.map(&:class).should include Aji::Channel::Keyword
+      results.should have(1).channel
+      results.should include old_keyword_channel
+    end
+
+    it "returns a match even if partial match is longer" do
+      q = @query.split(',').shuffle << random_string
+      old_keyword_channel = Aji::Channel::Keyword.create(
+        :keywords => q)
+      results = Aji::Channel::Keyword.search_helper @query
+      results.should have(1).channel
+      results.should include old_keyword_channel
     end
 
     it "returns existing keyword channel if previously existed regardless of query order" do

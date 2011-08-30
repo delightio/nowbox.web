@@ -44,16 +44,18 @@ module Aji
         end
         push video, h[:relevance]
       end
+      truncate max_in_flight
+
       Aji.log "Replace #{[max_in_flight,in_flight.count].min} (#{populated_count} populated) content videos in #{Time.now-start} s."
       update_attribute :populated_at, Time.now
     end
 
     def thumbnail_uri
-      "http://beta.#{Aji.conf['TLD']}/images/icons/icon-set_nowtrending.png"
+      "http://beta.#{Aji.conf['TLD']}/images/icons/nowpopular.png"
     end
 
     def self.singleton
-      Trending.first || Trending.create!(:title => "Trending")
+      Trending.first || Trending.create!(:title => "NowPopular")
     end
   end
 end

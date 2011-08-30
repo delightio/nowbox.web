@@ -19,7 +19,7 @@ module Aji
     belongs_to :queue_channel, :class_name => 'Channel::User'
     belongs_to :favorite_channel, :class_name => 'Channel::User'
     belongs_to :history_channel, :class_name => 'Channel::User'
-    
+
     include Redis::Objects
     list :subscribed_list # User's Subscribed channels.
 
@@ -48,6 +48,8 @@ module Aji
       when :share
         favorite_channel.push video, event.created_at.to_i
         history_channel.push video, event.created_at.to_i
+      when :unfavorite
+        favorite_channel.pop video
 
       when :view, :examine
         history_channel.push video, event.created_at.to_i
@@ -61,13 +63,20 @@ module Aji
     end
 
     def serializable_hash options={}
-      Hash["id" => id,
+      hash = Hash["id" => id,
            "first_name" => first_name,
            "last_name" => last_name,
            "queue_channel_id" => queue_channel_id,
            "favorite_channel_id" => favorite_channel_id,
            "history_channel_id" => history_channel_id,
-           "subscribed_channel_ids" => subscribed_list.values]
+           "subscribed_channel_ids" => subscribed_list.values
+      ]
+      unless identity.graph_channel.nil?
+        hash.merge! "social_channel_id" => identity.graph_channel_id
+      else
+        hash
+      end
+
     end
 
     def subscribed? channel
@@ -92,6 +101,7 @@ module Aji
       end
     end
 
+    def user_channels; [ queue_channel, favorite_channel ]; end
     def create_user_channels
       self.queue_channel = Channel::User.create :title => 'Watch Later'
       self.favorite_channel = Channel::User.create :title => 'Favorites'

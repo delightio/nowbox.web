@@ -51,6 +51,9 @@ module Aji
   Resque.schedule = conf['RESQUE_SCHEDULE']
   Resque.before_fork = Proc.new { ActiveRecord::Base.establish_connection(
     Aji.conf['DATABASE']) }
+  Resque::Failure::MultipleWithRetrySuppression.classes =
+    [Resque::Failure::Redis]
+  Resque::Failure.backend = Resque::Failure::MultipleWithRetrySuppression
 
   # Establish ActiveRecord conneciton and run all necessary migrations.
   ActiveRecord::Base.establish_connection conf['DATABASE']
@@ -70,6 +73,9 @@ module Aji
   end
 end
 
+# Monkey Patching
+require_relative 'lib/patches/string'
+
 module Mixins; end # Since models need them
 Dir.glob("lib/mixins/*.rb").each { |r| require_relative r }
 
@@ -80,6 +86,9 @@ Dir.glob("models/account/*.rb").each { |r| require_relative r }
 
 # Run migrations after models are loaded.
 ActiveRecord::Migrator.migrate("db/migrate/") unless Aji.conf['NOMIGRATE']
+
+# Wall of shame. Monkey patches here.
+require_relative 'lib/patches/string.rb'
 
 Dir.glob("helpers/*.rb").each { |r| require_relative r }
 Dir.glob("controllers/*_controller.rb").each { |r| require_relative r }
@@ -93,11 +102,10 @@ require_relative "lib/mailer/mailer"
 
 # Add miscelaneous library code.
 # Dir.glob("lib/*.rb").each { |r| require_relative r }
-require_relative 'lib/decay.rb'
 require_relative 'lib/decay'
 require_relative 'lib/macker'
-require_relative 'lib/tokenizer'
+require_relative 'lib/parsers'
+require_relative 'lib/mention/processor'
 
-module Parsers; end
-Dir.glob("lib/parsers/*.rb").each { |r| require_relative r }
+
 

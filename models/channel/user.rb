@@ -1,7 +1,14 @@
 module Aji
   class Channel::User < Channel
     def thumbnail_uri # LH 220
-      "http://beta.#{Aji.conf['TLD']}/images/icons/icon-set_nowtrending.png"
+      case title
+      when "Watch Later"
+        "http://beta.#{Aji.conf['TLD']}/images/icons/watch_later.png"
+      when "Favorites"
+        "http://beta.#{Aji.conf['TLD']}/images/icons/favorites.png"
+      when "History"
+        "http://beta.#{Aji.conf['TLD']}/images/icons/history.png"
+      end
     end
 
     def refresh_content force=false

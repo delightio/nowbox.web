@@ -9,13 +9,14 @@ module Aji
 
 
     def refresh_content force=false
-      start = Time.now
       new_videos = []
       refresh_lock.lock do
         accounts_populated_at = []
         accounts.each do |account|
-          new_videos += account.refresh_content force
-          accounts_populated_at << account.populated_at
+          unless account.blacklisted?
+            new_videos += account.refresh_content(force)
+            accounts_populated_at << account.populated_at
+          end
         end
         # NOTE: Steven! thinks this should either be the current time or the
         # oldest time since it will indicate the staleness of the channel
@@ -24,23 +25,21 @@ module Aji
           update_attribute :populated_at, accounts_populated_at.sort.last # latest
         end
       end
-      Aji.log :INFO, "Channel::Account[#{id}, '#{title}', #{accounts.count} accounts]#refresh_content(force:#{force}) took #{Time.now-start} s."
       update_relevance_in_categories new_videos
       new_videos
     end
 
-    def content_video_ids limit=-1
+    def content_video_ids limit=0
       if Aji.redis.ttl(content_zset.key)==-1
         keys = accounts.map{|a| a.content_zset.key}
         Aji.redis.zunionstore content_zset.key, keys
         Aji.redis.expire content_zset.key, content_zset_ttl
       end
-      (content_zset.revrange 0, limit).map(&:to_i)
+      (content_zset.revrange 0, (limit-1)).map(&:to_i)
     end
 
     def thumbnail_uri
-      return "http://beta.#{Aji.conf['TLD']}/images/icons/icon-set_#{title.downcase}.png" if default_listing
-      # accounts.sort_by(&:populated_at).last.thumbnail_uri
+      return "http://beta.#{Aji.conf['TLD']}/images/icons/#{title.downcase}.png" if default_listing
       accounts.first.thumbnail_uri
     end
 

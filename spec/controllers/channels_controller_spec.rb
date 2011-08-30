@@ -53,6 +53,19 @@ module Aji
           returned_channels.should include channel.serializable_hash
         end
 
+        it "returns user channels if given user id" do
+          user = Factory :user
+          params = { :user_id => user.id }
+          get "#{resource_uri}", params
+          last_response.status.should == 200
+          body_hash = JSON.parse last_response.body
+          returned_channels = body_hash.map{|h| h["user"]}.compact
+          returned_channels.should have(user.user_channels.count).channels
+          user.user_channels.each do | channel |
+            returned_channels.should include channel.serializable_hash
+          end
+        end
+
         describe "get #{resource_uri}/:id" do
           it "should return 404 if not found" do
             get "#{resource_uri}/#{rand(100)}"
@@ -77,8 +90,8 @@ module Aji
 
           it "respects limit params" do
             limit = 3
-            channel = Factory :youtube_channel_with_videos
-            channel.content_videos.count.should > limit
+            channel = Factory :youtube_channel
+            channel.content_videos.count.should be > limit
             params = {:user_id=>(Factory :user).id, :limit=>3}
             get "#{resource_uri}/#{channel.id}/videos", params
             last_response.status.should == 200
@@ -128,6 +141,28 @@ module Aji
           end
         end
       end
+
+      describe "post #{resource_uri}" do
+        before(:each) do
+          @query = Array.new(3){ random_string }.join(",")
+          @params = { :query => @query }
+        end
+        it "raises error when type != Keyword" do
+          post "#{resource_uri}", :query => @query
+          last_response.status.should_not == 201
+        end
+        it "raises error when missing query" do
+          post "#{resource_uri}", :type => 'Keyword'
+          last_response.status.should_not == 201
+        end
+        it "creates keyword channel based on query" do
+          post "#{resource_uri}", @params.merge(:type => 'Keyword')
+          last_response.status.should == 201
+          new_channel = JSON.parse last_response.body
+          Channel.search(@query).map(&:id).should include new_channel["id"]
+        end
+      end
+
     end
   end
 end

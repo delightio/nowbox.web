@@ -113,14 +113,26 @@ to <code>http://api.nowmov.com/auth/failure</code>.</em></p>
 
       <span class="k">case</span> <span class="n">params</span><span class="o">[</span><span class="s1">&#39;provider&#39;</span><span class="o">]</span>
       <span class="k">when</span> <span class="s1">&#39;twitter&#39;</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="no">Account</span><span class="o">::</span><span class="no">Twitter</span><span class="o">.</span><span class="n">find_or_create_by_username</span><span class="p">(</span>
-          <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;extra&#39;</span><span class="o">][</span><span class="s1">&#39;user_hash&#39;</span><span class="o">][</span><span class="s1">&#39;screen_name&#39;</span><span class="o">]</span><span class="p">,</span>
-          <span class="ss">:identity</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="o">.</span><span class="n">identity</span><span class="p">,</span> <span class="ss">:credentials</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;credentials&#39;</span><span class="o">]</span><span class="p">,</span>
-          <span class="ss">:uid</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;uid&#39;</span><span class="o">]</span><span class="p">,</span> <span class="ss">:info</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;extra&#39;</span><span class="o">][</span><span class="s1">&#39;user_hash&#39;</span><span class="o">]</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="no">Account</span><span class="o">::</span><span class="no">Twitter</span><span class="o">.</span><span class="n">find_by_username</span><span class="p">(</span>
+          <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;extra&#39;</span><span class="o">][</span><span class="s1">&#39;user_hash&#39;</span><span class="o">][</span><span class="s1">&#39;screen_name&#39;</span><span class="o">]</span><span class="p">)</span>
+        <span class="k">unless</span> <span class="n">t</span><span class="o">.</span><span class="n">nil?</span>
+          <span class="n">t</span><span class="o">.</span><span class="n">update_attributes</span><span class="p">(</span>
+            <span class="ss">:info</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;extra&#39;</span><span class="o">][</span><span class="s1">&#39;user_hash&#39;</span><span class="o">]</span><span class="p">,</span>
+            <span class="ss">:identity</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="o">.</span><span class="n">identity</span><span class="p">,</span>
+            <span class="ss">:credentials</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;credentials&#39;</span><span class="o">]</span><span class="p">,</span>
+            <span class="ss">:info</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;extra&#39;</span><span class="o">][</span><span class="s1">&#39;user_hash&#39;</span><span class="o">]</span><span class="p">)</span>
+        <span class="k">else</span>
+          <span class="n">t</span> <span class="o">||=</span> <span class="no">Account</span><span class="o">::</span><span class="no">Twitter</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="ss">:username</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;extra&#39;</span><span class="o">][</span><span class="s1">&#39;user_hash&#39;</span><span class="o">][</span><span class="s1">&#39;screen_name&#39;</span><span class="o">]</span><span class="p">,</span>
+            <span class="ss">:uid</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;uid&#39;</span><span class="o">]</span><span class="p">,</span>
+            <span class="ss">:identity</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="o">.</span><span class="n">identity</span><span class="p">,</span>
+            <span class="ss">:credentials</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;credentials&#39;</span><span class="o">]</span><span class="p">,</span>
+            <span class="ss">:info</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;extra&#39;</span><span class="o">][</span><span class="s1">&#39;user_hash&#39;</span><span class="o">]</span><span class="p">)</span>
+        <span class="k">end</span>
+
       <span class="k">else</span>
         <span class="s2">&quot;Unsupported provider </span><span class="si">#{</span><span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;provider&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
       <span class="k">end</span>
-      <span class="n">user</span><span class="o">.</span><span class="n">subscribe</span> <span class="n">user</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">update_graph_channel</span>
       <span class="no">Resque</span><span class="o">.</span><span class="n">enqueue</span> <span class="no">Aji</span><span class="o">::</span><span class="no">Queues</span><span class="o">::</span><span class="no">UpdateGraphChannel</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">id</span>
       <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span> <span class="n">user</span><span class="o">.</span><span class="n">serializable_hash</span>
     <span class="k">end</span>

@@ -9,9 +9,6 @@ module Aji
     include Redis::Objects
     sorted_set :recent_zset
     USER_TIMELINE_URL = "http://api.twitter.com/1/statuses/user_timeline.json"
-    serialize :info, Hash
-    serialize :auth_info, Hash
-    serialize :credentials, Hash
 
     def profile_uri; "http://twitter.com/#{username}"; end
 
@@ -21,15 +18,11 @@ module Aji
     end
 
     def publish share
-      ::Twitter.configure do |c|
-        c.consumer_key = Aji.conf['CONSUMER_KEY']
-        c.consumer_secret = Aji.conf['CONSUMER_SECRET']
-        c.oauth_token = credentials['oauth_token']
-        c.oauth_token_secret = credentials['oauth_verifier']
+      authorize_with_twitter! do
+        Twitter.update format_for_twitter(share.message, share.link)
+        share.published_to << :twitter
+        share.save || puts("Could not save #{share.inspect}")
       end
-      Twitter.update format_for_twitter(share.message, share.link)
-      share.published_to << :twitter
-      share.save || puts("Could not save #{share.inspect}")
     end
 
     def format_for_twitter message, link
@@ -67,36 +60,15 @@ module Aji
 
         harvest_tweets
 
-        in_flight = []
-        at_time_i = Time.now.to_i
+        videos = recent_video_ids.map { |id| Aji::Video.find_by_id id }.
+          select { |v| not (v.nil? || v.blacklisted?) }
+        Aji.log "Found #{videos.count} videos in #{username}'s Twitter stream"
 
-        start = Time.now
-        recent_video_ids_at_time = recent_video_ids
-
-
-        recent_video_ids_at_time.each do |vid|
-          video = Aji::Video.find_by_id vid
-          next if video.nil? || video.blacklisted?
-          in_flight << { :vid => vid, :relevance => video.relevance(at_time_i) }
+        videos.each do |video|
+          video.populate unless video.populated?
+          push video and new_videos << video if video.populated?
         end
-        Aji.log "Collected #{in_flight.count} recent videos in #{Time.now-start} s."
 
-        start = Time.now
-        in_flight.sort!{ |x,y| y[:relevance] <=> x[:relevance] }
-        Aji.log "Sorted #{in_flight.count} videos in #{Time.now-start} s. Top 5: #{in_flight.first(5).inspect}"
-        start = Time.now; populated_count = 0
-        max_in_flight = Aji.conf['MAX_VIDEOS_IN_TRENDING']
-        in_flight.first(max_in_flight).each do |h|
-          video = Aji::Video.find_by_id h[:vid]
-          next if video.nil?
-          if !video.populated?
-            video.populate
-            populated_count += 1
-          end
-          push video, h[:relevance]
-          new_videos << video
-        end
-        Aji.log "Replace #{[max_in_flight,in_flight.count].min} (#{populated_count} populated) content videos in #{Time.now-start} s."
         update_attribute :populated_at, Time.now
       end
       new_videos
@@ -112,21 +84,60 @@ module Aji
       (recent_zset.revrange 0, limit).map(&:to_i)
     end
 
+    def authorized?
+      credentials.has_key? 'token' and credentials.has_key? 'secret'
+    end
+
+    # This method authorizes the global twitter account to act on behalf of this
+    # user. If the optional block is given then after running the block the
+    # client will be deauthorized. Otherwise this will modify the state of the
+    # global twitter client.
+    def authorize_with_twitter!
+      fail "No credentials for #{username} (Account[#{id}])" unless authorized?
+      ::Twitter.configure do |c|
+        c.consumer_key = Aji.conf['CONSUMER_KEY']
+        c.consumer_secret = Aji.conf['CONSUMER_SECRET']
+        c.oauth_token = credentials['token']
+        c.oauth_token_secret = credentials['secret']
+      end
+      if block_given?
+        yield
+        ::Twitter.configure do |c|
+          c.oauth_token = nil
+          c.oauth_token_secret = nil
+        end
+      end
+    end
+
+    private
     # HACK: This is long, complex, blocking, and tightly coupled. A good
     # candidate for refactoring later.
     def harvest_tweets
-      tweets = HTTParty.get(USER_TIMELINE_URL, :query => { :count => 200,
-                            :screen_name => username, :include_entities => true },
-                            :parser => Proc.new { |body| MultiJson.decode body })
-      tweets.each do |tweet|
-        Queues::Mention::Process.perform 'twitter', tweet, self
+      ::Twitter.user_timeline(username, :include_entities => true,
+        :count => 200).each do |tweet|
+        mention = Parsers['twitter'].parse tweet.to_hash do |tweet_hash|
+          Mention::Processor.video_filters['twitter'].call tweet_hash
+        end
+
+        next if mention.nil?
+
+        processor = Mention::Processor.new mention, self
+        processor.perform
+
+        if processor.failed?
+          Aji.log "Processing failed due to #{processor.errors}"
+        end
       end
+
+
+    rescue ::Twitter::BadGateway, ::Twitter::InternalServerError,
+      ::Twitter::ServiceUnavailable => e
+      Aji.log :WARN, "#{e.class}: #{e.message}"
     end
 
     def set_provider
       update_attribute :provider, 'twitter'
     end
-    private :set_provider
 
   end
 end

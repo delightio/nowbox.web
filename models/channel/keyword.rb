@@ -5,13 +5,13 @@ module Aji
     serialize :keywords, Array
 
     before_create :set_title, :sort_keywords
+    after_create :queue_refresh_channel
     def self.to_title words; words.sort.join ", "; end
     def set_title; self.title = title || self.class.to_title(keywords); end
     def sort_keywords; self.keywords = keywords.sort; end
 
-    # LH 225
     def thumbnail_uri
-      "http://beta.#{Aji.conf['TLD']}/images/icons/icon-set_nowtrending.png"
+      "http://beta.#{Aji.conf['TLD']}/images/icons/tag.png"
     end
 
     def refresh_content force=false
@@ -24,12 +24,11 @@ module Aji
       update_attribute :populated_at, Time.now
     end
 
-    def self.searchable_columns; [:title]; end
-    def self.search_helper query
-      results = super
-      results << self.create(:keywords => query.tokenize.sort) if results.empty?
-      results
+    def queue_refresh_channel
+      Resque.enqueue Aji::Queues::RefreshChannel, self.id
     end
+
+    def self.searchable_columns; [:title]; end
   end
 end
 

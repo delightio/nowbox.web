@@ -5,6 +5,13 @@ module Aji
     belongs_to :graph_channel, :class_name => 'Aji::Channel'
 
     def update_graph_channel
+      accounts.each do |account|
+        account.refresh_influencers
+        account.authorize_with_twitter! do
+          account.influencers.map(&:refresh_content)
+        end
+      end
+
       if graph_channel.nil?
         graph_channel = Channel::Account.create(
           :title => "#{user.first_name}'s Social Channel",
@@ -14,12 +21,14 @@ module Aji
           graph_channel.accounts << i unless graph_channel.accounts.include? i
         end
       end
+
+      graph_channel.refresh_content
       save
       graph_channel
     end
 
     def influencers
-      accounts.map{ |a| a.influencers }.flatten.compact
+      accounts.map{ |a| a.influencers }.flatten
     end
 
     # Identity is a model which associates multiple user accounts with the same

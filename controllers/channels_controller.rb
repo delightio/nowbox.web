@@ -32,7 +32,7 @@ module Aji
       # __Optional params__  
       # - `user_id`:  user id. If supplied without `query`, server returns
       #   given user's subscribed channels.  
-      # - `query`:  comma separated list of search term. Server returns all
+      # - `query`:  comma separated list of search terms. Server returns all
       #   channels regardless of type.  
       get do
         channels = []
@@ -40,7 +40,9 @@ module Aji
           channels += Channel.search params[:query]
         else
           user = User.find_by_id params[:user_id]
-          channels = if user then user.subscribed_channels else Channel.all end
+          channels = if user then
+                        user.user_channels + user.subscribed_channels else
+                        Channel.all end
         end
         channels
       end
@@ -48,14 +50,30 @@ module Aji
       # ## GET channels/:channel_id/videos
       # __Returns__ all the videos of given channel and HTTP Status Code 200 or
       # 404  
-      # __Required params__ `channel_id` unique id of the channel  
-      # __Required params__ `user_id` unique id of the user  
-      # __Optional params__ `limit` max. number of videos to return  
-      # __Optional params__ `page` which page of videos to return
+      # __Required params__  
+      # - `channel_id` unique id of the channel  
+      # - `user_id` unique id of the user  
+      # __Optional params__  
+      # - `limit` max. number of videos to return  
+      # - `page` which page of videos to return
       get '/:channel_id/videos' do
         channel = find_channel_by_id_or_error params[:channel_id]
         user = find_user_by_id_or_error params[:user_id]
         channel.personalized_content_videos params.merge(:user=>user)
+      end
+
+      # ## POST channels/
+      # __Returns__ new keyword channel created by given parameters  
+      # __Required params__  
+      # - `type`: channel type. Currently support: `Keyword`  
+      # - `query`:  comma separated list of search terms
+      #
+      post do
+        creation_error!(Channel::Keyword, params) if params[:type] != 'Keyword'
+        not_found_error!(Channel::Keyword, params) if params[:query].nil?
+        new_channel = Channel::Keyword.find_or_create_by_keywords(
+          params[:query].split(','))
+        new_channel
       end
 
     end

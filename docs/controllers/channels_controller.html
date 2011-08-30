@@ -97,7 +97,7 @@ channels if no parameters are specified.<br/>
 <strong>Optional params</strong><br/>
 &ndash; <code>user_id</code>:  user id. If supplied without <code>query</code>, server returns
   given user&rsquo;s subscribed channels.<br/>
-&ndash; <code>query</code>:  comma separated list of search term. Server returns all
+&ndash; <code>query</code>:  comma separated list of search terms. Server returns all
   channels regardless of type.</p>
       </td>
       <td class=code>
@@ -107,7 +107,9 @@ channels if no parameters are specified.<br/>
           <span class="n">channels</span> <span class="o">+=</span> <span class="no">Channel</span><span class="o">.</span><span class="n">search</span> <span class="n">params</span><span class="o">[</span><span class="ss">:query</span><span class="o">]</span>
         <span class="k">else</span>
           <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_id</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
-          <span class="n">channels</span> <span class="o">=</span> <span class="k">if</span> <span class="n">user</span> <span class="k">then</span> <span class="n">user</span><span class="o">.</span><span class="n">subscribed_channels</span> <span class="k">else</span> <span class="no">Channel</span><span class="o">.</span><span class="n">all</span> <span class="k">end</span>
+          <span class="n">channels</span> <span class="o">=</span> <span class="k">if</span> <span class="n">user</span> <span class="k">then</span>
+                        <span class="n">user</span><span class="o">.</span><span class="n">user_channels</span> <span class="o">+</span> <span class="n">user</span><span class="o">.</span><span class="n">subscribed_channels</span> <span class="k">else</span>
+                        <span class="no">Channel</span><span class="o">.</span><span class="n">all</span> <span class="k">end</span>
         <span class="k">end</span>
         <span class="n">channels</span>
       <span class="k">end</span></pre></div>
@@ -122,17 +124,41 @@ channels if no parameters are specified.<br/>
 
 <p><strong>Returns</strong> all the videos of given channel and HTTP Status Code 200 or
 404<br/>
-<strong>Required params</strong> <code>channel_id</code> unique id of the channel<br/>
-<strong>Required params</strong> <code>user_id</code> unique id of the user<br/>
-<strong>Optional params</strong> <code>limit</code> max. number of videos to return<br/>
-<strong>Optional params</strong> <code>page</code> which page of videos to return</p>
-
+<strong>Required params</strong><br/>
+&ndash; <code>channel_id</code> unique id of the channel<br/>
+&ndash; <code>user_id</code> unique id of the user<br/>
+<strong>Optional params</strong><br/>
+&ndash; <code>limit</code> max. number of videos to return<br/>
+&ndash; <code>page</code> which page of videos to return</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">get</span> <span class="s1">&#39;/:channel_id/videos&#39;</span> <span class="k">do</span>
         <span class="n">channel</span> <span class="o">=</span> <span class="n">find_channel_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:channel_id</span><span class="o">]</span>
         <span class="n">user</span> <span class="o">=</span> <span class="n">find_user_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
         <span class="n">channel</span><span class="o">.</span><span class="n">personalized_content_videos</span> <span class="n">params</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">:user</span><span class="o">=&gt;</span><span class="n">user</span><span class="p">)</span>
+      <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-POST_channels/'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-POST_channels/">&#182;</a>
+        </div>
+        <h2>POST channels/</h2>
+
+<p><strong>Returns</strong> new keyword channel created by given parameters<br/>
+<strong>Required params</strong><br/>
+&ndash; <code>type</code>: channel type. Currently support: <code>Keyword</code><br/>
+&ndash; <code>query</code>:  comma separated list of search terms</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      <span class="n">post</span> <span class="k">do</span>
+        <span class="n">creation_error!</span><span class="p">(</span><span class="no">Channel</span><span class="o">::</span><span class="no">Keyword</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span> <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:type</span><span class="o">]</span> <span class="o">!=</span> <span class="s1">&#39;Keyword&#39;</span>
+        <span class="n">not_found_error!</span><span class="p">(</span><span class="no">Channel</span><span class="o">::</span><span class="no">Keyword</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span> <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:query</span><span class="o">].</span><span class="n">nil?</span>
+        <span class="n">new_channel</span> <span class="o">=</span> <span class="no">Channel</span><span class="o">::</span><span class="no">Keyword</span><span class="o">.</span><span class="n">find_or_create_by_keywords</span><span class="p">(</span>
+          <span class="n">params</span><span class="o">[</span><span class="ss">:query</span><span class="o">].</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">))</span>
+        <span class="n">new_channel</span>
       <span class="k">end</span>
 
     <span class="k">end</span>

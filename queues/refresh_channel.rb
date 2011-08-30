@@ -8,7 +8,9 @@ module Aji
       @queue = :refresh_channel
 
       def self.perform channel_id
+        start = Time.now
         Channel.find(channel_id).refresh_content
+        Aji.log :INFO, "Channel[#{channel_id}]#refresh_content took #{Time.now-start} s."
       end
     end
   end

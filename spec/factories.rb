@@ -74,10 +74,9 @@ end
 Factory.define :youtube_channel, :class => 'Aji::Channel::Account' do |a|
   a.title { random_string }
   a.default_listing { random_boolean }
-  # a.category { random_category }
   a.after_create do |c|
     2.times do |n|
-      c.accounts << (Factory :youtube_account)
+      c.accounts << (Factory :youtube_account_with_videos)
     end
   end
 end
@@ -101,14 +100,14 @@ end
 
 
 Factory.define :youtube_channel_with_videos, :parent => :youtube_channel do |a|
-  a.after_create do |c|
-    5.times do |n|
-      video = Factory :populated_video
-      c.push video
-      c.accounts << video.author
-      c.update_relevance_in_categories [video]
-    end
-  end
+  # a.after_create do |c|
+  #   5.times do |n|
+  #     video = Factory :populated_video
+  #     c.push video
+  #     c.accounts << video.author
+  #     c.update_relevance_in_categories [video]
+  #   end
+  # end
 end
 
 Factory.define :category, :class => 'Aji::Category' do |a|
@@ -173,7 +172,7 @@ Factory.define :twitter_account,
 Factory.define :youtube_account_with_videos,
   :parent => :youtube_account do |a|
     a.after_create do |ea|
-      ea.push(Factory :video)
+      3.times { ea.push(Factory :video) }
     end
   end
 

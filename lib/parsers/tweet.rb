@@ -21,26 +21,36 @@ module Aji
       when Hash
         tweet_hash = json
       else
-        raise ArgumentError.new(
-          "I don't want any #{json.class} only strings and hashes.")
+        raise ArgumentError,
+          "I don't want any #{json.class} only strings and hashes. " +
+          json.inspect
       end
 
       # Run the optional block on the tweet hash before instantiation.
       # If the block returns false then return nil and leave the method.
       # This will allow us to avoid wasting time with tweets and authors we
       # don't care about such as those which don't contain links.
+      #
+      # IDEA: What if instead of only using the block as a filter, what if we
+      # completely yielded to the block so that it has complete control over
+      # what to do. I think this idea falls down because it means repetition of
+      # the mention instantiation code but there has to be a way to match this
+      # cleanly with minimal db interaction.
       filter = if block_given? then yield tweet_hash else true end
       return nil unless filter
 
       # TODO: Is there a way to avoid saving this guy to DB?
-      author = Account::Twitter.find_or_create_by_uid(tweet_hash['user']['id'].to_s,
-        :username => tweet_hash['user']['screen_name'], :info => tweet_hash['user'])
+      author = Account::Twitter.find_by_username(
+        tweet_hash['user']['screen_name'])
+      author ||= Account::Twitter.create :uid => tweet_hash['user']['uid'],
+        :username => tweet_hash['user']['screen_name'],
+        :info => tweet_hash['user']
 
       links = tweet_hash['entities']['urls'].map do |url|
         Link.new(url['expanded_url'] || url['url'])
       end
 
-      Mention.new(
+      mention = Mention.new(
         :external_id => tweet_hash['uid'],
         :body => tweet_hash['text'],
         :published_at => tweet_hash['created_at'],

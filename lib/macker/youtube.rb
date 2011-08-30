@@ -41,7 +41,8 @@ module Aji
         else
           category = Category.undefined
         end
-        author = Account::Youtube.find_or_create_by_uid(video.author.name)
+        author = Account::Youtube.find_by_uid(video.author.name)
+        author ||= Account::Youtube.create :uid => video.author.name
         {
           :title => video.title,
           :external_id => video.video_id.split(':').last,
