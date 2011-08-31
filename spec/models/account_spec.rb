@@ -31,6 +31,14 @@ module Aji
   end
 
   describe "#refresh_content" do
+    subject do
+      # We tap the account to return it after pushing content to its Redis
+      # Objects so we can test the cleanup code.
+      Account.create(:username => "foobar", :uid => "1234").tap do |account|
+        account.content_zset[1] = 1
+        account.influencer_set << 1
+      end
+    end
     it "raises an exception unless implemented" do
       expect { subject.refresh_content }.to(
         raise_error Aji::InterfaceMethodNotImplemented)
