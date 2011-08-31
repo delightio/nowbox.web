@@ -76,6 +76,17 @@ describe Aji::Channel::Trending do
         subject.content_videos.first.should == video
       end
 
+      it "creates channels from author of top videos" do
+        pending "Why isn't this working?"
+        Aji::Account.any_instance.should_receive(:to_channel).
+          exactly(3).times.
+          and_return(Factory :channel)
+        Resque.should_receive(:enqueue).with(
+          Aji::Queues::RefreshChannel, an_instance_of(Fixnum)).
+          exactly(3).times
+        subject.refresh_content
+      end
+
     end
 
     it "returns videos in descending order of relevance" do
