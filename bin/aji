@@ -26,8 +26,7 @@ class Aji < Thor
   desc "console", "An application console for Aji"
   def console
     # Shell out to an irb session with the local environment loaded.
-    irb_command = "irb -r #{Dir.pwd}/aji.rb"
-    exec irb_command
+    exec 'rake console'
   end
 
   desc "spec [spec_file:line]", "Run application spec tests"
