@@ -17,7 +17,7 @@ module Aji
             processor.perform
 
             if processor.failed?
-              Aji.log "Processing of #{processor.mention.body} failed due to " +
+              Aji.log "Processing of Mention[#{processor.mention.id}], #{processor.mention.body}. failed due to " +
                 processor.errors
             end
           end
