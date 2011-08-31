@@ -21,7 +21,8 @@ module Aji
     # example we are assuming the target is iOS 4 and the provider is twitter.
     #
     # 1. Open a webkitview pane and point it to
-    # `http://api.nowmov.com/auth/twitter`
+    # `http://api.nowmov.com/auth/twitter?user_id=USER_ID` with query parameter
+    # `user_id` specifying the internal user_id for the current Aji user.
     # 2. The webkitview is redirected to the Twitter application authorization
     # page with our application listed.
     # 3. The user must then log in and authorize our application (server-side)

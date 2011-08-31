@@ -12,6 +12,8 @@ module Aji
   # - created_at: DateTime
   # - updated_at: DateTime
   class Channel < ActiveRecord::Base
+    before_destroy :delete_redis_keys
+
     has_many :events
 
     include Redis::Objects
@@ -20,6 +22,7 @@ module Aji
     lock :refresh, :expiration => 10.minutes
     include Mixins::Populating
     sorted_set :category_id_zset
+
     def category_ids limit=-1
       (category_id_zset.revrange 0, limit).map(&:to_i)
     end
@@ -58,7 +61,8 @@ module Aji
     # thus less code.
     def personalized_content_videos args
       user = args[:user]
-      raise ArgumentError, "User missing for Channel[#{self.id}].personalized #{args.inspect}" if user.nil?
+      raise ArgumentError, "User missing for Channel[#{self.id}].personalized" +
+        " #{args.inspect}" if user.nil?
       limit = (args[:limit] || 20).to_i
       page = (args[:page] || 1).to_i
       total = limit * page
@@ -94,9 +98,34 @@ module Aji
       end
     end
 
+    # The default refresh content method must 
     def refresh_content force=false
-      raise InterfaceMethodNotImplemented,
-        "#{self.class} must implement #refresh_content(force) method"
+      Array.new.tap do |new_videos|
+
+        refresh_lock.lock do
+          # While this break will only exit the lock block, the tap block ends
+          # directly after it and so it will exit from both of them.
+          break if recently_populated? && content_video_ids.count > 0 && !force
+
+          if block_given?
+            yield new_videos
+          else
+            new_videos.each { |v| push v }
+          end
+
+          update_attribute :populated_at, Time.now
+        end
+      end
+    end
+
+    def redis_keys
+      [ content_zset, category_id_zset ].map &:key
+    end
+
+    def delete_redis_keys
+      redis_keys.each do |key|
+        Redis::Objects.redis.del key
+      end
     end
 
     # ## Class Methods

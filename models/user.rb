@@ -11,11 +11,10 @@ module Aji
     validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
     before_create :create_user_channels
     after_create :create_identity, :subscribe_default_channels
-    before_destroy :clean_redis_keys
+    before_destroy :delete_redis_keys
 
-    belongs_to :identity
     has_many :events
-
+    belongs_to :identity
     belongs_to :queue_channel, :class_name => 'Channel::User'
     belongs_to :favorite_channel, :class_name => 'Channel::User'
     belongs_to :history_channel, :class_name => 'Channel::User'
@@ -95,8 +94,12 @@ module Aji
       update_attribute :identity_id, Identity.create.id if self.identity.nil?
     end
 
-    def clean_redis_keys
-      [ subscribed_list ].map { |col| col.key }.each do |key|
+    def redis_keys
+      [ subscribed_list ].map &:key
+    end
+
+    def delete_redis_keys
+      redis_keys.each do |key|
         Aji.redis.del key
       end
     end
@@ -108,7 +111,7 @@ module Aji
       self.history_channel = Channel::User.create :title => 'History'
     end
 
-    private :create_identity, :clean_redis_keys, :create_user_channels
+    private :create_identity, :create_user_channels
 
   end
 end
