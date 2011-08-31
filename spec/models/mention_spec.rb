@@ -43,12 +43,9 @@ describe Aji::Mention do
       mention = Factory :mention, :links => ["http://youtu.be/#{video.external_id}"]
       mention.should_not be_spam
     end
-    it "caches result" do
-      spammy_mention = Factory :mention,
-        :author => (Factory :account),
-        :videos => [(Factory :video)]
-      spammy_mention.author.blacklist
-      spammy_mention.author.should_receive(:blacklist).never
+    it "is true when mention is from a blacklisted author" do
+      spammer = Factory :account, :blacklisted_at => Time.now
+      spammy_mention = Factory :mention, :author => spammer
       spammy_mention.should be_spam
     end
   end

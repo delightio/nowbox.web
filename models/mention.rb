@@ -37,14 +37,12 @@ module Aji
       links.length > 0
     end
 
+    # Note: Client is responsible for dealing w/ spam mentions
     def spam?
       return true if author.blacklisted?
       videos.each do |video|
         mentioners = video.latest_mentioners
-        if mentioners.include? author
-          author.blacklist
-          return true
-        end
+        return true if mentioners.include? author
       end
       false
     end
