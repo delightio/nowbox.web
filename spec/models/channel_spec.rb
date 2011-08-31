@@ -128,14 +128,17 @@ describe Aji::Channel do
     end
     
     it "enqueues all search results for population" do
-      channels = []
-      5.times { |n| channels << Factory(:youtube_channel) }
-      q = channels.map(&:title).join ","
-      n = channels.count
+      channel = Factory :channel
+      Aji::Channel.descendants.each do |descendant|
+        next if descendant.searchable_columns.empty?
+        descendant.should_receive(:search_helper).
+          with(an_instance_of(String)).
+          and_return([channel])
+      end
       Resque.should_receive(:enqueue).
-        with(Aji::Queues::RefreshChannel, anything()).
-        exactly(n).times
-      results = Aji::Channel.search q
+        with(Aji::Queues::RefreshChannel, channel.id).
+        at_least(1)
+      Aji::Channel.search random_string
     end
     
     it "returns unique output" do
