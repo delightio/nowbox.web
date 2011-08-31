@@ -11,32 +11,32 @@ module Aji
     def perform
 
       if @mention.author.blacklisted?
-        @errors << "Author #{@mention.author} is blacklisted."
+        @errors << "Author[#{@mention.author.id}], #{@mention.author.username}, is blacklisted."
         return
       end
 
       if @mention.spam?
         @mention.author.blacklist
-        @errors << "Mention: #{@mention.body} is Spammy"
+        @errors << "Mention[#{@mention.id}], #{@mention.body}, is Spammy"
         return
       end
 
       @mention.links.map(&:to_video).compact.each do |video|
         if video.blacklisted?
-          @errors << "Video[#{video.id} is blacklisted"
+          @errors << "Video[#{video.id}] is blacklisted"
         else
           @mention.videos << video
         end
       end
 
       unless @mention.author.save
-        @errors << "Unable to save #{@mention.author} due to " +
+        @errors << "Unable to save #{@mention.author.username} due to " +
           @mention.author.errors.inspect
       end
 
       unless @mention.save
         begin
-          @errors << "Unable to save #{@mention} due to " +
+          @errors << "Unable to save #{@mention.inspect} due to " +
             @mention.errors.inspect
         rescue PGError => e
           raise unless e.message =~ /invalid byte sequence for encoding "UTF8"/

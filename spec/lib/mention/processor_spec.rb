@@ -10,11 +10,12 @@ module Aji
         @video = mock("video", :blacklisted? => false)
         @link = mock("video link", :to_video => @video)
         @links = Array.new(@link_count, @link)
-        @author = mock("author", :blacklisted? => false, :save => true)
+        @author = mock("author", :blacklisted? => false, :save => true,
+          :username => "blah", :id => 1)
         @mention_videos = Array.new
         @mention = mock("mention", :author => @author, :spam? => false,
           :links => @links, :videos => @mention_videos, :body => "",
-          :save => true)
+          :save => true, :id => 1)
       end
 
       subject { Mention::Processor.new @mention, @destination }
