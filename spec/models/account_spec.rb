@@ -9,47 +9,47 @@ module Aji
         account.content_zset[1] = 1
         account.influencer_set << 1
       end
-
-      it_behaves_like "any redis object model"
-
-      describe "#publish" do
-        it "raises an exception unless implemented" do
-          expect { subject.publish nil }.to
-          raise_error Aji::InterfaceMethodNotImplemented
-        end
-      end
-
-      describe "#profile_uri, #thumbnail_uri, #description" do
-        it "raise an exception unless implemented" do
-          [:profile_uri, :thumbnail_uri, :description].each do |m|
-            expect { subject.send m }.to(
-              raise_error Aji::InterfaceMethodNotImplemented)
-          end
-        end
-      end
     end
 
-    describe "#refresh_content" do
+    it_behaves_like "any redis object model"
+
+    describe "#publish" do
       it "raises an exception unless implemented" do
-        expect { subject.refresh_content }.to(
-          raise_error Aji::InterfaceMethodNotImplemented)
+        expect { subject.publish nil }.to
+        raise_error Aji::InterfaceMethodNotImplemented
       end
     end
 
-    describe "#blacklist" do
-      it "should blacklist an account" do
-        bad_account = Aji::Account.create :uid => "someguy"
-        bad_account.blacklist
-        bad_account.should be_blacklisted
+    describe "#profile_uri, #thumbnail_uri, #description" do
+      it "raise an exception unless implemented" do
+        [:profile_uri, :thumbnail_uri, :description].each do |m|
+          expect { subject.send m }.to(
+            raise_error Aji::InterfaceMethodNotImplemented)
+        end
       end
     end
+  end
 
-    describe ".from_param" do
-      it "parses username and provider from a specialized param string" do
-        param_string = "nuclearsandwich@youtube"
-        Aji::Account.from_param(param_string).
-          should == [ "nuclearsandwich", "youtube" ]
-      end
+  describe "#refresh_content" do
+    it "raises an exception unless implemented" do
+      expect { subject.refresh_content }.to(
+        raise_error Aji::InterfaceMethodNotImplemented)
+    end
+  end
+
+  describe "#blacklist" do
+    it "should blacklist an account" do
+      bad_account = Aji::Account.create :uid => "someguy"
+      bad_account.blacklist
+      bad_account.should be_blacklisted
+    end
+  end
+
+  describe ".from_param" do
+    it "parses username and provider from a specialized param string" do
+      param_string = "nuclearsandwich@youtube"
+      Aji::Account.from_param(param_string).
+        should == [ "nuclearsandwich", "youtube" ]
     end
   end
 end
