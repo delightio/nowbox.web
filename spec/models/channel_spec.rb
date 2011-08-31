@@ -6,38 +6,6 @@ describe Aji::Channel do
       c = Aji::Channel.new(:title => "foo")
       expect { c.refresh_content }.to raise_error Aji::InterfaceMethodNotImplemented
     end
-
-    it "updates category relevance" do
-      categories = Array.new(3) {|n| Factory :category}
-      3.times do |n|
-        populated_videos = []
-        case n
-        when 0
-          populated_videos += Array.new(5){|k| (Factory :populated_video,
-            :category => categories[0])}
-        when 1
-          populated_videos += Array.new(5){|k| (Factory :populated_video,
-            :category => categories[0])}
-          populated_videos += Array.new(5){|k| (Factory :populated_video,
-            :category => categories[1])}
-        when 2
-          populated_videos += Array.new(5){|k| (Factory :populated_video,
-            :category => categories[0])}
-          populated_videos += Array.new(5){|k| (Factory :populated_video,
-            :category => categories[1])}
-          populated_videos += Array.new(5){|k| (Factory :populated_video,
-            :category => categories[2])}
-        end
-        youtube_account = Factory :youtube_account
-        youtube_account.stub(:refresh_content).and_return(populated_videos)
-        youtube_account.stub(:populated_at).and_return(Time.now)
-        channel = Factory :youtube_channel, :accounts => [youtube_account]
-        channel.refresh_content
-      end
-      categories[0].channels.should have(3).channels
-      categories[1].channels.should have(2).channels
-      categories[2].channels.should have(1).channels
-    end
   end
 
   describe "#personalized_content_videos" do
