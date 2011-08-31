@@ -18,7 +18,7 @@ module Aji
     end
 
     def description
-      info['description'] rescue "nil"
+      info['description'] rescue ""
     end
 
     def publish share
