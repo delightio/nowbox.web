@@ -27,17 +27,22 @@ module Aji
         end
       end
 
-      describe "post #{resource_uri}/:id" do
+      describe "post #{resource_uri}" do
         it "should create user object on post with default channel listing" do
-          params = { :email => random_email,
-            :first_name => random_string, :last_name => random_string }
-          post "#{resource_uri}/", params
+          post "#{resource_uri}/"
           last_response.status.should ==201
           user_hash = JSON.parse last_response.body
-          user_hash.each_pair do |k, v|
-            next unless params.has_key? k
-            params[k.to_sym].should == v
-          end
+          User.find(user_hash["id"]).should_not be_nil
+        end
+      end
+
+      describe "put #{resource_uri}/:id" do
+        it "updates email parameter" do
+          user = Aji::User.create
+          email = random_email
+          put "#{resource_uri}/#{user.id}", :email => random_email
+          last_response.status.should == 200
+          User.find(user.id).email == email
         end
       end
 

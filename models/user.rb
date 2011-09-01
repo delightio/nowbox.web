@@ -7,8 +7,6 @@ module Aji
   # - created_at: DateTime
   # - updated_at: DateTime
   class User < ActiveRecord::Base
-    validates_presence_of :email, :first_name
-    validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
     before_create :create_user_channels
     after_create :create_identity, :subscribe_default_channels
     after_destroy :delete_redis_keys
