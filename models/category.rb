@@ -8,7 +8,7 @@ module Aji
   class Category < ActiveRecord::Base
     has_many :videos
     after_create :set_title
-    before_destroy :delete_redis_keys
+    after_destroy :delete_redis_keys
 
     include Redis::Objects
     sorted_set :channel_id_zset

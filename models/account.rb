@@ -15,7 +15,7 @@ module Aji
     serialize :info, Hash
     serialize :credentials, Hash
     serialize :auth_info, Hash
-    before_destroy :delete_redis_keys
+    after_destroy :delete_redis_keys
     belongs_to :identity
 
     has_and_belongs_to_many :channels,

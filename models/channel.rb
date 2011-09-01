@@ -12,7 +12,7 @@ module Aji
   # - created_at: DateTime
   # - updated_at: DateTime
   class Channel < ActiveRecord::Base
-    before_destroy :delete_redis_keys
+    after_destroy :delete_redis_keys
 
     has_many :events
 
