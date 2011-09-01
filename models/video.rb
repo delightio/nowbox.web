@@ -21,6 +21,7 @@ module Aji
     belongs_to :category
 
     validates_presence_of :external_id
+    validates_presence_of :external_id, :if => :populated?
     validates_uniqueness_of :external_id, :scope => :source
 
     include Mixins::Blacklisting
