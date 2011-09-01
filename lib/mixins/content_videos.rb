@@ -36,7 +36,7 @@ module Aji
       def push video, relevance=Time.now.to_i
         content_zset[video.id] = relevance
       end
-      
+
       def pop video
         content_zset.delete video.id
       end
