@@ -1,8 +1,10 @@
 require 'resque/tasks'
 require 'resque_scheduler/tasks'
-require 'rspec/core/rake_task'
 
-RSpec::Core::RakeTask.new(:spec)
+unless ENV['RACK_ENV'] == 'production'
+  require 'rspec/core/rake_task'
+  RSpec::Core::RakeTask.new(:spec)
+end
 
 # Load the Aji environment.
 task :environment do
