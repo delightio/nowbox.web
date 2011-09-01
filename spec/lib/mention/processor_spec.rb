@@ -32,11 +32,17 @@ module Aji
         subject.perform
       end
 
-      it "blacklists spamming authors" do
+      it "blacklists spamming authors and everything it touches" do
+        @video = Factory :video_with_mentions
+        @mention = @video.mentions.sample
         @mention.stub(:spam?).and_return(true)
-        video = double("video", :blacklisted? => false)
-        @destination.should_receive(:push_recent).never
-        @mention.author.should_receive :blacklist
+        @mention.videos.each do |v|
+          v.should_receive(:blacklist)
+          v.author.should_receive(:blacklist)
+          @destination.should_receive(:pop).with(v)
+          @destination.should_receive(:pop_recent).with(v)
+          @destination.should_receive(:push_recent).never
+        end
         subject.perform
       end
     end

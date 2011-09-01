@@ -16,15 +16,6 @@ describe Aji::Channel::Trending do
     end
   end
 
-  describe "#push_recent" do
-    it "should only keep given number of mentioned videos" do
-      n = 2
-      Aji.stub(:conf).and_return({'MAX_RECENT_VIDEO_IDS_IN_TRENDING'=>n})
-      (n*2).times {|k| subject.push_recent(Factory :video)}
-      subject.recent_video_ids.count.should == n
-    end
-  end
-
   describe "#refresh_content" do
     it "marks self populated" do
       subject.refresh_content

@@ -10,17 +10,6 @@ module Aji
 
     def perform
 
-      if @mention.author.blacklisted?
-        @errors << "Author[#{@mention.author.id}], #{@mention.author.username}, is blacklisted."
-        return
-      end
-
-      if @mention.spam?
-        @mention.author.blacklist
-        @errors << "Mention[#{@mention.id}], #{@mention.body}, is Spammy"
-        return
-      end
-
       @mention.links.map(&:to_video).compact.each do |video|
         if video.blacklisted?
           @errors << "Video[#{video.id}] is blacklisted"
@@ -28,10 +17,30 @@ module Aji
           @mention.videos << video
         end
       end
+      return if @mention.videos.empty?
+
+      if @mention.author.blacklisted?
+        @errors << "Author[#{@mention.author.id}], #{@mention.author.username}, is blacklisted."
+        return
+      end
+
+      if @mention.spam?
+        # Blacklist everything it touches & remove video from @destination
+        @mention.author.blacklist
+        @mention.videos.each do |video|
+          video.blacklist
+          video.author.blacklist
+          @destination.pop_recent video
+          @destination.pop video
+        end
+        @errors << "Mention[#{@mention.id}], #{@mention.body}, is Spammy"
+        return
+      end
 
       unless @mention.author.save
         @errors << "Unable to save #{@mention.author.username} due to " +
           @mention.author.errors.inspect
+        return
       end
 
       unless @mention.save
@@ -44,9 +53,9 @@ module Aji
         end
       end
 
-      return nil if !@errors.empty?
-
-      @mention.videos.each { |v| @destination.push_recent v } if @errors.empty?
+      unless failed?
+        @mention.videos.each { |v| @destination.push_recent v }
+      end
     end
 
     def errors

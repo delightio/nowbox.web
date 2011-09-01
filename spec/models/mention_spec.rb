@@ -29,26 +29,22 @@ describe Aji::Mention do
   end
 
   describe "#spam?" do
-    it "identifies spam if mention's author has already mentioned the given video within the mention" do
+    it "returns false if the auhtor only mentions the video once" do
       video = Factory :video_with_mentions
-      mention = video.mentions.sample
-      spammy_mention = Factory :mention,
-        :author => mention.author,
-        :videos => [video]
-      spammy_mention.should be_spam
+      video.mentions.sample.should_not be_spam
     end
-    it "returns false for non spam " do
-      video = Factory :video_with_mentions,
-        :external_id => "OzVPDiy4P9I", :source => "youtube"
-      mention = Factory :mention, :links => ["http://youtu.be/#{video.external_id}"]
-      mention.should_not be_spam
+    it "returns true if given mention's author mentioned the given video more than once" do
+      video = Factory :video_with_mentions
+      spammer = Factory :account
+      spammy_mentions = video.mentions.sample(2)
+      spammy_mentions.each do |m|
+        m.update_attribute :author_id, spammer.id
+      end
+      spammy_mentions.sample.should be_spam
     end
-    it "caches result" do
-      spammy_mention = Factory :mention,
-        :author => (Factory :account),
-        :videos => [(Factory :video)]
-      spammy_mention.author.blacklist
-      spammy_mention.author.should_receive(:blacklist).never
+    it "is true when mention is from a blacklisted author" do
+      spammer = Factory :account, :blacklisted_at => Time.now
+      spammy_mention = Factory :mention, :author => spammer
       spammy_mention.should be_spam
     end
   end
