@@ -41,8 +41,8 @@ module Aji
     def spam?
       return true if author.blacklisted?
       videos.each do |video|
-        mentioners = video.latest_mentioners
-        return true if mentioners.include? author
+        count = video.latest_mentioners.select{ |a| a==author }.count
+        return true if count > 1
       end
       false
     end
