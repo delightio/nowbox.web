@@ -9,41 +9,41 @@ module Aji
     end
 
     def perform
-
-      @mention.links.map(&:to_video).compact.each do |video|
-        if video.blacklisted?
-          @errors << "Video[#{video.id}] is blacklisted"
-        else
-          @mention.videos << video
+      begin
+        @mention.links.map(&:to_video).compact.each do |video|
+          if video.blacklisted?
+            @errors << "Video[#{video.id}] is blacklisted"
+          else
+            @mention.videos << video
+          end
         end
-      end
-      return if @mention.videos.empty?
+        return if @mention.videos.empty?
 
-      if @mention.author.blacklisted?
-        @errors << "Author[#{@mention.author.id}], #{@mention.author.username}, is blacklisted."
-        return
-      end
+        if @mention.author.blacklisted?
+          @errors << "Author[#{@mention.author.id}], #{@mention.author.username}, is blacklisted."
+          return
+        end
 
-      if @mention.spam?
-        @mention.mark_spam @destination
-        @errors << "Mention[#{@mention.id}], #{@mention.body}, is Spammy"
-        return
-      end
+        if @mention.spam?
+          @mention.mark_spam @destination
+          @errors << "Mention[#{@mention.id}], #{@mention.body}, is Spammy"
+          return
+        end
 
-      unless @mention.author.save
-        @errors << "Unable to save #{@mention.author.username} due to " +
-          @mention.author.errors.inspect
-        return
-      end
+        unless @mention.author.save
+          @errors << "Unable to save #{@mention.author.username} due to " +
+            @mention.author.errors.inspect
+          return
+        end
 
-      unless @mention.save
-        begin
+        unless @mention.save
           @errors << "Unable to save #{@mention.inspect} due to " +
             @mention.errors.inspect
-        rescue PGError => e
-          raise unless e.message =~ /invalid byte sequence for encoding "UTF8"/
-            @errors << "Invalid Characters in #{@mention.body}"
         end
+
+      rescue PGError => e
+        raise unless e.message =~ /invalid byte sequence for encoding "UTF8"/
+          @errors << "Invalid Characters in #{@mention.body}"
       end
 
       unless failed?
@@ -64,11 +64,11 @@ module Aji
     def self.video_filters
       {
         'twitter' => lambda do |tweet_hash|
-          return false if tweet_hash['entities']['urls'].empty?
+        return false if tweet_hash['entities']['urls'].empty?
 
-          tweet_hash['entities']['urls'].map do |url|
-            Link.new(url['expanded_url'] || url['url']).video?
-          end.inject do |acc, bool| acc ||= bool end
+        tweet_hash['entities']['urls'].map do |url|
+          Link.new(url['expanded_url'] || url['url']).video?
+        end.inject do |acc, bool| acc ||= bool end
         end
       }
     end
