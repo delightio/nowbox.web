@@ -48,4 +48,43 @@ describe Aji::Mention do
       spammy_mention.should be_spam
     end
   end
+
+  describe "#mark_spam" do
+    before(:each) do
+      @video = Factory :video_with_mentions
+      @spammy_mention = @video.mentions.sample
+      @spammy_mention.stub(:spam?).and_return(true)
+    end
+    subject { @spammy_mention }
+    it "blacklists its author" do
+      subject.author.should_receive(:blacklist)
+      subject.mark_spam
+    end
+    it "marks all videos mentioned spam" do
+      subject.videos.each do | video |
+        video.should_receive(:mark_spam)
+      end
+      subject.mark_spam
+    end
+    it "removes mentioned videos from destination channel" do
+      channel = mock("channel")
+      channel.stub(:respond_to?).with(:pop).and_return(true)
+      channel.stub(:respond_to?).with(:pop_recent).and_return(false)
+      subject.videos.each do | video |
+        channel.should_receive(:pop).with(video)
+      end
+      subject.mark_spam channel
+    end
+    it "removes mentioned videos from destination channel's recent set" do
+      channel = mock("channel")
+      channel.stub(:respond_to?).with(:pop).and_return(true)
+      channel.stub(:respond_to?).with(:pop_recent).and_return(true)
+      subject.videos.each do | video |
+        channel.should_receive(:pop).with(video)
+        channel.should_receive(:pop_recent).with(video)
+      end
+      subject.mark_spam channel
+    end
+  end
+
 end

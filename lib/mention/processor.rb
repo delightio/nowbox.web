@@ -25,14 +25,7 @@ module Aji
       end
 
       if @mention.spam?
-        # Blacklist everything it touches & remove video from @destination
-        @mention.author.blacklist
-        @mention.videos.each do |video|
-          video.blacklist
-          video.author.blacklist
-          @destination.pop_recent video
-          @destination.pop video
-        end
+        @mention.mark_spam @destination
         @errors << "Mention[#{@mention.id}], #{@mention.body}, is Spammy"
         return
       end

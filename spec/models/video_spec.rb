@@ -99,6 +99,16 @@ describe Aji::Video do
     end
   end
 
+  describe "#mark_spam" do
+    subject { Factory :video }
+    it "blacklists itself" do
+      subject.should_receive(:blacklist)
+      subject.author.should_not be_nil
+      subject.author.should_receive(:blacklist)
+      subject.mark_spam
+    end
+  end
+
   describe "#failed" do
     it "increases the number of failures by one" do
       subject { Video.new(:id => 777) }

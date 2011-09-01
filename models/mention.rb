@@ -46,5 +46,15 @@ module Aji
       end
       false
     end
+    def mark_spam channel=nil
+      author.blacklist
+      videos.each { |v| v.mark_spam }
+      if channel && channel.respond_to?(:pop)
+        videos.each { |v| channel.pop v }
+        if channel.respond_to? :pop_recent
+          videos.each { |v| channel.pop_recent v }
+        end
+      end
+    end
   end
 end

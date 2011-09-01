@@ -63,6 +63,11 @@ module Aji
       latest_mentions(limit).map(&:author)
     end
 
+    def mark_spam
+      blacklist
+      author.blacklist unless author.nil?
+    end
+
     def thumbnail_uri
       path = case source
              when :youtube then "http://img.youtube.com/vi/#{self.external_id}/0.jpg"
