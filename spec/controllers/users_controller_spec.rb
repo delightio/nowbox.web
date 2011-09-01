@@ -44,6 +44,10 @@ module Aji
           last_response.status.should == 200
           User.find(user.id).email == email
         end
+        it "returns error if missing email parameter" do
+          put "#{resource_uri}/#{Aji::User.create.id}"
+          last_response.status.should == 400
+        end
       end
 
     end
