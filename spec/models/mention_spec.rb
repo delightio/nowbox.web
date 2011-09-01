@@ -29,7 +29,7 @@ describe Aji::Mention do
   end
 
   describe "#spam?" do
-    it "returns false if the auhtor only mentions the video once" do
+    it "returns false if the author only mentions the video once" do
       video = Factory :video_with_mentions
       video.mentions.sample.should_not be_spam
     end
