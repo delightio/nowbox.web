@@ -13,7 +13,6 @@ task :environment do
 end
 
 task :console => :environment do
-  Bundler.require :development
   Pry.start Aji
 end
 
