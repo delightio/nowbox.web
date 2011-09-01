@@ -8,17 +8,11 @@ module Aji
   # - published_at: DateTime
   # - links: Text (serialized to array of Link models)
   class Mention < ActiveRecord::Base
-
-    def initialize params={}
-      super params
-      link_objs = links.map do |link|
-        Link.new(link)
-      end
-      self.links = link_objs
-    end
-
     belongs_to :author, :class_name => 'Account'
     has_and_belongs_to_many :videos
+    after_initialize :initialize_links
+
+    validates_presence_of :author
 
     def links
       @links ||= if self[:links]
@@ -45,6 +39,11 @@ module Aji
         return true if count > 1
       end
       false
+    end
+
+    private
+    def initialize_links
+      self.links= links.map { |link| Link.new(link) }
     end
   end
 end

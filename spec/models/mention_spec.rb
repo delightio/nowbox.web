@@ -23,7 +23,7 @@ describe Aji::Mention do
     it "saves and loads like ActiveRecord" do
       link = Aji::Link.new "http://google.com"
       subject.links = [link]
-      subject.save
+      subject.save :validate => false
       Aji::Mention.find(subject.id).links.should include link
     end
   end
