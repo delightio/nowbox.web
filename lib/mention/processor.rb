@@ -63,12 +63,11 @@ module Aji
     # determine if they contain videos. Returns true if it does, otherwise false
     def self.video_filters
       {
-        'twitter' => lambda do |tweet_hash|
-        return false if tweet_hash['entities']['urls'].empty?
-
-        tweet_hash['entities']['urls'].map do |url|
-          Link.new(url['expanded_url'] || url['url']).video?
-        end.inject do |acc, bool| acc ||= bool end
+        'twitter' => ->(tweet_hash) do
+          return false if tweet_hash['entities']['urls'].empty?
+          tweet_hash['entities']['urls'].any? do |url|
+            Link.new(url['expanded_url'] || url['url']).video?
+          end
         end
       }
     end
