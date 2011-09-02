@@ -51,29 +51,26 @@ describe Aji::Video do
   end
 
   describe "#relevance" do
+    subject { Aji::Video.new(:source => :youtube,
+      :external_id => random_string) }
+
     context "when videos have an equal number of mentions" do
       it "should return higher relevance for newer mentions" do
-        at_time_i = Time.now.to_i
-        video = Factory :video_with_mentions
-        old_relevance = video.relevance at_time_i
-        # make video's mentions more recent
-        video.mentions.each do |mention|
-          mention.published_at = mention.published_at + rand(100).seconds
-          mention.published_at = Time.now if
-            (mention.published_at.to_i-Time.now.to_i>0)
-          mention.save
-        end
-        video.relevance(at_time_i).should > old_relevance
+        mention = mock("mention")
+        mention.stub(:age).with(anything()).and_return 1000
+        subject.stub(:latest_mentions).and_return([mention])
+        current_relevance = subject.relevance
+
+        old_mention = mock("mention")
+        old_mention.stub(:age).with(anything()).and_return 5000
+        subject.stub(:latest_mentions).and_return([old_mention])
+        subject.relevance.should < current_relevance
       end
     end
 
-    it "should not consider blacklisted author" do
-      at_time_i = Time.now.to_i
-      video = Factory :video_with_mentions
-      old_relevance = video.relevance at_time_i
-
-      video.mentions.sample.author.blacklist
-      video.relevance(at_time_i).should < old_relevance
+    it "is 0 if video is blacklisted" do
+      subject.stub(:blacklisted?).and_return(true)
+      subject.relevance(Time.now.to_i).should == 0
     end
   end
 

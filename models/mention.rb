@@ -52,6 +52,13 @@ module Aji
       end
     end
 
+    # age from give time in seconds
+    def age from_time_i
+      diff = from_time_i - published_at.to_i
+      diff = 0 if diff < 0 || author.blacklisted?
+      diff
+    end
+
     private
     def initialize_links
       self.links= links.map { |link| Link.new(link) }

@@ -84,9 +84,7 @@ module Aji
       return 0 if blacklisted?
       time_diffs = []
       latest_mentions(50).each do |mention|
-        diff = at_time_i - mention.published_at.to_i
-        next if diff < 0 || mention.author.blacklisted?
-        time_diffs << diff
+        time_diffs << mention.age(at_time_i)
       end
       Integer Decay.exponentially time_diffs
     end
