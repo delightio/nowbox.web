@@ -2,7 +2,8 @@ class AddNameToUsers < ActiveRecord::Migration
   def self.up
     add_column :users, :name, :string
     Aji::User.all.each do |user|
-      user.update_attribute :name, user.first_name + " " + user.last_name
+      name = [user.first_name, user.last_name].join(" ")
+      user.update_attribute :name, name
     end
     remove_column :users, :first_name
     remove_column :users, :last_name
