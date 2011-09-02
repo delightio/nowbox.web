@@ -33,6 +33,7 @@ describe Aji::Mention do
       video = Factory :video_with_mentions
       video.mentions.sample.should_not be_spam
     end
+
     it "returns true if given mention's author mentioned the given video more than once" do
       video = Factory :video_with_mentions
       spammer = Factory :account
@@ -42,6 +43,7 @@ describe Aji::Mention do
       end
       spammy_mentions.sample.should be_spam
     end
+
     it "is true when mention is from a blacklisted author" do
       spammer = Factory :account, :blacklisted_at => Time.now
       spammy_mention = Factory :mention, :author => spammer
@@ -50,40 +52,16 @@ describe Aji::Mention do
   end
 
   describe "#mark_spam" do
-    before(:each) do
-      @video = Factory :video_with_mentions
-      @spammy_mention = @video.mentions.sample
-      @spammy_mention.stub(:spam?).and_return(true)
+    subject do
+      Aji::Mention.new.tap do |m|
+      end
     end
-    subject { @spammy_mention }
-    it "blacklists its author" do
-      subject.author.should_receive(:blacklist)
-      subject.mark_spam
-    end
+
     it "marks all videos mentioned spam" do
-      subject.videos.each do | video |
-        video.should_receive(:mark_spam)
-      end
+      video = mock "video"
+      video.should_receive :mark_spam
+      subject.stub(:videos).and_return([video])
       subject.mark_spam
-    end
-    it "removes mentioned videos from destination channel" do
-      channel = mock("channel")
-      channel.stub(:respond_to?).with(:pop).and_return(true)
-      channel.stub(:respond_to?).with(:pop_recent).and_return(false)
-      subject.videos.each do | video |
-        channel.should_receive(:pop).with(video)
-      end
-      subject.mark_spam channel
-    end
-    it "removes mentioned videos from destination channel's recent set" do
-      channel = mock("channel")
-      channel.stub(:respond_to?).with(:pop).and_return(true)
-      channel.stub(:respond_to?).with(:pop_recent).and_return(true)
-      subject.videos.each do | video |
-        channel.should_receive(:pop).with(video)
-        channel.should_receive(:pop_recent).with(video)
-      end
-      subject.mark_spam channel
     end
   end
 
