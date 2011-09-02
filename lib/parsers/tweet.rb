@@ -42,7 +42,7 @@ module Aji
       # TODO: Is there a way to avoid saving this guy to DB?
       author = Account::Twitter.find_by_username(
         tweet_hash['user']['screen_name'])
-      author ||= Account::Twitter.create :uid => tweet_hash['user']['uid'],
+      author ||= Account::Twitter.new :uid => tweet_hash['user']['uid'],
         :username => tweet_hash['user']['screen_name'],
         :info => tweet_hash['user']
 
