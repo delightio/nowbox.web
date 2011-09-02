@@ -21,6 +21,8 @@ module Aji
       end
 
       def content_video_id_count
+        # TODO LH #346 content_zset.size always returns 0
+        #   before any calls to content_video_ids
         content_video_ids.count
       end
 
