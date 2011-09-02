@@ -4,7 +4,7 @@ module Aji
   describe Aji::User do
 
     subject do
-      User.create(:first_name => "John", :last_name => "Doe",
+      User.create(:name => "John Doe",
         :email => "john@doe.com").tap do |user|
           user.subscribed_list << 1
         end

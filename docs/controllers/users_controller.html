@@ -41,8 +41,7 @@
 <p>User object json:</p>
 
 <p>{<code>id</code>:1,
- <code>first_name</code>:&ldquo;thomas&rdquo;,
- <code>last_name</code>:null,
+ <code>name</code>:&ldquo;thomas&rdquo;,
  <code>queue_channel_id</code>: 7,
  <code>favorite_channel_id</code>: 8,
  <code>history_channel_id</code>: 9,
@@ -95,15 +94,13 @@
 a JSON encoded error message if not.</p>
 
 <p><strong>Optional params</strong><br/>
-&ndash; <code>email</code> email address of the user<br/>
-&ndash; <code>first_name</code> first name of the user<br/>
-&ndash; <code>last_name</code> last name of the user</p>
+&ndash; <code>name</code> name of the user<br/>
+&ndash; <code>email</code> email address of the user</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">post</span> <span class="k">do</span>
         <span class="no">User</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:email</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span><span class="p">,</span>
-                    <span class="ss">:first_name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:first_name</span><span class="o">]</span><span class="p">,</span>
-                    <span class="ss">:last_name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:last_name</span><span class="o">]</span><span class="p">)</span> <span class="ow">or</span>
+                    <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span><span class="p">)</span> <span class="ow">or</span>
           <span class="n">creation_error!</span><span class="p">(</span><span class="no">User</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
       <span class="k">end</span></pre></div>
       </td>
@@ -117,16 +114,17 @@ a JSON encoded error message if not.</p>
 
 <p><strong>Updates</strong> given user&rsquo;s attributes<br/>
 <strong>Returns</strong> HTTP Status Code 200 if successful or a JSON encoded error message<br/>
-<strong>Required params</strong><br/>
+<strong>Required params</strong> (can have just 1 of the two)<br/>
+&ndash; <code>name</code> name of the user<br/>
 &ndash; <code>email</code> email address of the user</p>
 
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">put</span> <span class="s1">&#39;/:user_id&#39;</span> <span class="k">do</span>
-        <span class="n">user</span> <span class="o">=</span> <span class="n">find_user_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
-        <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">has_key?</span> <span class="ss">:email</span>
-          <span class="n">user</span><span class="o">.</span><span class="n">update_attribute</span> <span class="ss">:email</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span>
-        <span class="k">else</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">find_user_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
+        <span class="n">u</span><span class="o">.</span><span class="n">update_attribute</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span><span class="p">)</span> <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">has_key?</span> <span class="ss">:name</span>
+        <span class="n">u</span><span class="o">.</span><span class="n">update_attribute</span><span class="p">(</span><span class="ss">:email</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span><span class="p">)</span> <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">has_key?</span> <span class="ss">:email</span>
+        <span class="k">if</span> <span class="o">!</span><span class="n">params</span><span class="o">.</span><span class="n">has_key?</span><span class="p">(</span><span class="ss">:name</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">params</span><span class="o">.</span><span class="n">has_key?</span><span class="p">(</span><span class="ss">:email</span><span class="p">)</span>
           <span class="n">missing_params_error!</span> <span class="n">params</span><span class="p">,</span> <span class="o">[</span><span class="ss">:email</span><span class="o">]</span>
         <span class="k">end</span>
       <span class="k">end</span>
