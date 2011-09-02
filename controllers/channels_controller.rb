@@ -7,6 +7,7 @@
 #  `default_listing`:true,
 #  `category_ids`: [1,2,3],
 #  `title`:"Trending",
+#  `video_count`: 25,
 #  `thumbnail_uri`:"http://img.youtube.com/vi/cRBcP6MmE8g/0.jpg",
 #  `resource_uri`:""http://api.nowmov.com/1/channels/1""}
 module Aji

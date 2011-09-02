@@ -53,6 +53,13 @@ describe Aji::Mixins::ContentVideos do
     end
   end
 
+  describe "#content_video_id_count" do
+    it "returns the number of video ids in content_zset" do
+      expect { subject.push(mock("video",:id=>1)) }.
+        to change { subject.content_video_id_count }.by(1)
+    end
+  end
+
   describe "#push" do
     it "increments the number of content_videos" do
       expect { subject.push(Factory :video) }.to

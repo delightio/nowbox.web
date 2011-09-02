@@ -20,6 +20,10 @@ module Aji
         content_video_ids(limit).map { |vid| Video.find vid }
       end
 
+      def content_video_id_count
+        content_video_ids.count
+      end
+
       def content_video_ids_rev limit=0
         (content_zset.range 0, (limit-1)).map(&:to_i)
       end

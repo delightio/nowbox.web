@@ -41,6 +41,7 @@ module Aji
         "title" => title,
         "description" => "",
         "thumbnail_uri" => thumbnail_uri,
+        "video_count" => content_video_id_count,
         # TODO: Shouldn't just catch the first version since we may change
         # this method in a version bump.
         "resource_uri" => "http://api.#{Aji.conf['TLD']}/" +
