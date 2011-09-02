@@ -26,15 +26,10 @@ module Aji
         subject.perform
       end
 
-      it "doesn't use videos from blacklisted authors" do
-        @author.stub(:blacklisted?).and_return true
-        @destination.should_not_receive :push_recent
-        subject.perform
-      end
-
       it "blacklists spamming authors and everything it touches" do
         @mention.stub(:spam?).and_return(true)
-        @mention.should_receive(:mark_spam).with(@destination)
+        Resque.should_receive(:enqueue).with(Queues::RemoveSpammer,
+           @mention.author.id)
         subject.perform
       end
     end
