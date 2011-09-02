@@ -40,7 +40,7 @@ module Aji
       # ## PUT users/:user_id
       # __Updates__ given user's attributes  
       # __Returns__ HTTP Status Code 200 if successful or a JSON encoded error message  
-      # __Required params__ (need just one of the two)  
+      # __Required params__ (need just one of the two params)  
       # - `name` name of the user  
       # - `email` email address of the user
       put '/:user_id' do
