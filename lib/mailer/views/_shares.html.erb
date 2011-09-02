@@ -1,0 +1,49 @@
+<% if @shares %>
+<layout label="Videos">
+	<table width="100%" cellpadding="0" cellspacing="0" border="0">
+		<tr>
+			<td width="100%" bgcolor="">
+		
+				<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td bgcolor="" class="contentblock">
+
+						<h1 class="secondary"><strong><singleline label="Title">Top <%= @shares.count %> New Videos For You</singleline></strong></h1>
+					</td>
+				</tr>
+				</table>		
+			</td>
+		</tr>
+		<tr >
+			<td width="100%" bgcolor="#F4F4ED">
+			<% @shares.each do |share| %>
+				
+						<table width="100%" cellpadding="0" cellspacing="10" border="0" style="border-top: 1px solid #F5F5F5;">
+						<tr>
+							<td class="imageblock" width="100">
+								<a href="http://beta.<%= Aji.conf['TLD'] %>/video/<%= video.id %>/<%= share.id %>" target="_blank">
+									<img src="<%= share.video.thumbnail_uri %>" width="100" style="vertical-align: middle;"/>
+								</a>
+							</td>
+							<td bgcolor="#F4F4ED" class="contentblock">
+	
+								<h2 class="secondary"><strong><singleline label="Title">
+									<a href="http://beta.<%= Aji.conf['TLD'] %>/video/<%= video.id %>/<%= share.id %>" target="_blank"  class="h2" style="color:#F95133; font-size:18px; font-weight: bold;"><%= share.video.title %></a>
+									</singleline></strong>
+								</h2>
+								<multiline label="Description">
+									<p>
+										<span>Shared by <strong><%= "#{share.user.first_name} #{share.user.last_name}" %></strong></span>
+										<span style="color: #AAA; float: right;"><%= share.video.view_count %> views</span>																				<div class="clearfix"></div>
+									</p>
+								</multiline>
+							</td>
+						</tr>
+						</table>
+				
+			<% end %>
+			</td>
+		</tr>
+	</table>  		
+</layout>
+<% end %>

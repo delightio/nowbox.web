@@ -109,18 +109,38 @@ module Aji
     end
     
     get '/random/?' do 
-    	random =  Share.offset(rand(Share.count)).first.id
-    	redirect to('/'+random.to_s)
+    	random =  Share.offset(rand(Share.count)).first
+    	redirect to("/video/#{random.video.id}/#{random.id}")
     end
     
-  	get '/:share_id/?' do
+  	get '/video/:video_id/:share_id/?' do
+       begin
+      	@video = Video.find(params[:video_id])
+       	if(params[:video_id])
+       		@share = Share.find(params[:share_id])
+      		@user = @share.user
+      		@rec_videos = Share.where("user_id = ? AND id <> ?", @user.id, @share.id).limit(3 * 3)
+	     		@share_url = "http://nowmov.com/video/#{@video.id}/#{@share.id}";
+      	else
+	      	@rec_videos = Share.find(:all, :order => "id desc", :limit => 3 * 3)
+	      	@share_url = "http://nowmov.com/video/#{@video.id}";      	       	
+       	end
+
+		    deliver('video', 'layout_video')
+      rescue
+ 				erb :'404', {:layout => :layout_error} 
+      end
+  	end	
+  	    
+  	get '/share/:share_id/?' do
        begin
       	@share = Share.find(params[:share_id])
       	@user = @share.user
 	      @video = @share.video
-	
 	      
-	      @user_shares = Share.where("user_id = ? AND id <> ?", @user.id, @share.id).limit(18)
+	      @rec_videos = Share.where("user_id = ? AND id <> ?", @user.id, @share.id).limit(3 * 3)
+	      
+	      @share_url = "http://nowmov.com/share/#{@share.id}";
 	      
 		    deliver('video', 'layout_video')
       rescue
