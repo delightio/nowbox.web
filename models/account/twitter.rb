@@ -80,6 +80,13 @@ module Aji
       new_videos
     end
 
+    def mark_spammer
+      mentions.map do |v|
+        v.mark_spam
+        v.destroy
+      end
+    end
+
     def authorized?
       credentials.has_key? 'token' and credentials.has_key? 'secret'
     end
