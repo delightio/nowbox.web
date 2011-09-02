@@ -25,8 +25,7 @@ module Aji
     def serializable_hash options={}
       {
         "id" => id,
-        "title" => title,
-        "channel_ids" => channel_ids
+        "title" => title
       }
     end
 
