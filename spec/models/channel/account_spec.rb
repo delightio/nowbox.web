@@ -13,7 +13,7 @@ module Aji
     describe "#refresh_content" do
       it "skips blacklisted accounts" do
         bad_author = Factory :youtube_account
-        
+
         channel = Channel::Account.create accounts: (@accounts << bad_author)
         bad_author.should_receive(:blacklisted?).and_return(true)
         bad_author.should_not_receive(:refresh_content)

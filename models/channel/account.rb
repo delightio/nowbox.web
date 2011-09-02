@@ -50,9 +50,7 @@ module Aji
 
       possible_channels.select do |c|
         c.accounts.length == accounts.length &&
-          accounts.inject(true) do |bool, account|
-            bool &&= c.accounts.include? account
-          end
+          accounts.all? { |a| c.accounts.include? a }
       end
     end
 
