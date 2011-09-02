@@ -3,8 +3,7 @@
 # Category object json:
 #
 # {`id`:1,
-#  `title`:"News",
-#  `chanel_ids`:["1","2","3","4","5","6"]}
+#  `title`:"News"}
 module Aji
   class API
     version '1'
