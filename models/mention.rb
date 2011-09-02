@@ -41,15 +41,8 @@ module Aji
       false
     end
 
-    def mark_spam channel=nil
-      author.blacklist
-      videos.each { |v| v.mark_spam }
-      if channel && channel.respond_to?(:pop)
-        videos.each { |v| channel.pop v }
-        if channel.respond_to? :pop_recent
-          videos.each { |v| channel.pop_recent v }
-        end
-      end
+    def mark_spam
+      videos.map(&:mark_spam)
     end
 
     # age from give time in seconds
