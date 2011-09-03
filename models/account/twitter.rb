@@ -3,6 +3,7 @@ module Aji
   # - recent_zset: Redis::Objects::SortedSet
   class Account::Twitter < Account
     after_create :set_provider
+    has_many :mentions, :foreign_key => :author_id
 
     validates_presence_of :username
     validates_uniqueness_of :username
