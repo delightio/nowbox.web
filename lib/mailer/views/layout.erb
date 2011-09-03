@@ -8,6 +8,9 @@
 		a:hover {
 			text-decoration: underline !important;
 		}
+		table{ 
+			font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;		
+		}
 		td.promocell p { 
 			color:#e1d8c1;
 			font-size:16px;
@@ -23,9 +26,13 @@
 			padding: 10px;
 			overflow: hidden;
 		}
+		td.imageblock a{ 
+			display: block;
+		}
+
 		td.contentblock h1, .h1 {
 			color:#222222 !important;
-			font-size:22px;
+			font-size:24px;
 			line-height:24px;
 			font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
 			margin-top:30px;
@@ -40,7 +47,7 @@
 		}		
 		td.contentblock h2, .h2 {
 			color:#F95133 !important;
-			font-size:18px;
+			font-size:20px;
 			line-height:24px;
 			font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
 			margin-top:0px;
@@ -55,7 +62,7 @@
 		}
 		td.contentblock h3, .h3 {
 			color:#666666 !important;
-			font-size:14px;
+			font-size:16px;
 			line-height:20px;
 			font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
 			margin:0px;
@@ -68,7 +75,7 @@
 		}
 
 		td.contentblock p { 
-		  	color:#888888;
+			color:#888888;
 			font-size:14px;
 			line-height:19px;
 			font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -86,7 +93,6 @@
       border: 1px solid #BDBDA3;
 		}
 		.galleryimage{ 
-			border: 1px solid #CCC;
 		}
 		.ellipsis {
 			white-space: nowrap;
@@ -101,19 +107,19 @@
 		#channels td.imageblock{ padding: 1px; }
 
 		@media only screen and (max-device-width: 480px) {
-			.mobileonly{ display: block; }
-			.browseronly{ display: none; }
-		     div[class="header"] {
-		          font-size: 16px !important;
-		     }
-		     table[class="table"], td[class="cell"] {
-		          width: 300px !important;
-		     }
+			.mobileonly{ display: block !important; }
+			.browseronly{ display: none !important; }
+	     div[class="header"] {
+	          font-size: 16px !important;
+	     }
+	     table[class="table"], td[class="cell"] {
+	          width: 300px !important;
+	     }
 			table[class="promotable"], td[class="promocell"] {
 		          width: 325px !important;
 		     }
 			td[class="footershow"] {
-		          width: 300px !important;
+		          width: 325px !important;
 		     }
 			table[class="hide"], img[class="hide"], td[class="hide"] {
 		          display: none !important;
@@ -153,33 +159,32 @@
 		}
 		</style>
 	</head>
-	<body bgcolor="#BDBDA3" topmargin="0" leftmargin="0" marginheight="0" marginwidth="0" style="-webkit-font-smoothing: antialiased;width:100% !important;-webkit-text-size-adjust:none; background-color: #BDBDA3;">
-		<table width="100%" cellpadding="0" cellspacing="0" border="0" >
+	<body topmargin="0" leftmargin="0" marginheight="0" marginwidth="0" style="-webkit-font-smoothing: antialiased;width:100% !important;-webkit-text-size-adjust:none;">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" background="http://beta.<%= Aji.conf['TLD'] %>/images/textures/aji-tiles-crosshatch-white.jpg">
 		<tr>
 			<td width="100%">
 		
-			<table width="100%" cellpadding="0" cellspacing="0" border="0" align="center" class="table" style="border-bottom: 1px solid #AAA;">
+			<table  width="100%" cellpadding="0" cellspacing="0" border="0" style="border-bottom: 10px solid #F95133;" background="http://beta.<%= Aji.conf['TLD'] %>/images/textures/aji-tiles-crosshatch-redorange.jpg">				
 				<tr>
-					<td class="logocell" style="padding: 30px 0px;">
+					<td class="logocell" style="padding: 30px 0px 10px;">
 						<div style="text-align: center;">
 							<a href="http://beta.<%= Aji.conf['TLD'] %>">
-								<img src="http://beta.nowmov.com/images/logos/nowmov-logotype-white.png" width="187" height="28" alt="Nowmov" style="-ms-interpolation-mode:bicubic;">				
+								<img src="http://beta.<%= Aji.conf['TLD'] %>/images/logos/nowmov-logotype-white.png" width="187" height="28" alt="Nowmov" style="-ms-interpolation-mode:bicubic;">				
 							</a>		
 						</div>
-
 					</td>
 
 				</tr>
 			</table>
 		
-			<table width="100%" cellpadding="0" cellspacing="0" border="0" align="center" class="table" bgcolor="#E7E7D6">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0" align="center" class="table">
 				<tr>
 					<td>
-						<img border="0" src="http://beta.<%= Aji.conf['TLD'] %>:5000/images/email/spacer.gif" width="1" height="30" class="divider"><br>
+						<img border="0" src="http://beta.<%= Aji.conf['TLD'] %>:5000/images/email/spacer.gif" width="1" height="20" class="divider"><br>
 						<div style="width: 600px; margin: auto;">
 								<%= yield %>	
 						</div>
-						<img border="0" src="http://beta.<%= Aji.conf['TLD'] %>:5000/images/email/spacer.gif" width="1" height="30" class="divider"><br>			
+						<img border="0" src="http://beta.<%= Aji.conf['TLD'] %>:5000/images/email/spacer.gif" width="1" height="20" class="divider"><br>			
 					</td>
 				</tr>
 			</table>
@@ -201,9 +206,11 @@
 								
 									<img border="0" src="http://beta.<%= Aji.conf['TLD'] %>:5000/images/email/spacer.gif" width="1" height="8"><br>  
 								
-									<p style="color:#8E8E7F;font-size:12px;font-family:Helvetica,Arial,sans-serif;margin-top:0;margin-bottom:15px;padding-top:0;padding-bottom:0;line-height:18px;" class="reminder">You are receiving this email from <a href="http://www.nowmov.com/" style="color:#4A7698;text-decoration:underline;">nowmov</a>.</p>
+									<p style="color:#888;font-size:12px;font-family:Helvetica,Arial,sans-serif;margin-top:0;margin-bottom:15px;padding-top:0;padding-bottom:0;line-height:18px;" class="reminder">You are receiving this email from <a href="http://www.nowmov.com/" style="color:#4A7698;text-decoration:underline;">nowmov</a>.</p>
 									<p style="color:#c9c9c9;font-size:12px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
 										<a href="http://nowmov.com/download" style="color:#4A7698;text-decoration:none; font-weight: bold;">Download</a>
+										&nbsp;&nbsp;|&nbsp;&nbsp;
+										<a href="http://blog.nowmov.com/" style="color:#4A7698;text-decoration:none;">Blog</a>			
 										&nbsp;&nbsp;|&nbsp;&nbsp;
 										<a href="mailto: info@nowmov.com?subject=Hello" style="color:#4A7698;text-decoration:none;">Contact Us</a>
 										&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -211,7 +218,7 @@
 									</p>
 								
 								</td>
-								<td align="right" width="220" style="color:#8E8E7F;font-size:12px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;text-shadow: 0 1px 0 #F4F4ED;" valign="top" class="hide">
+								<td align="right" width="220" style="color:#8E8E7F;font-size:12px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;text-shadow: 0 1px 0 #F4F4ED;" valign="top" class="browseronly">
 								
 									<table cellpadding="0" cellspacing="0" border="0">
 									<tr>
@@ -220,7 +227,9 @@
 									</tr>
 									</table>
 								
-									<img border="0" src="http://beta.<%= Aji.conf['TLD'] %>:5000/images/email/spacer.gif" width="1" height="10"><br><p style="color:#8E8E7F;font-size:11px;line-height:15px;font-family:Helvetica,Arial,sans-serif;margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;font-weight:bold;">Nowmov</p><p style="color:#8E8E7F;font-size:11px;line-height:15px;font-family:Helvetica,Arial,sans-serif;margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;font-weight:normal;">Sent with love from San Francisco, USA</p></td>
+									<img border="0" src="http://beta.<%= Aji.conf['TLD'] %>:5000/images/email/spacer.gif" width="1" height="10"><br>
+									<p style="color:#888;font-size:11px;line-height:15px;font-family:Helvetica,Arial,sans-serif;margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;font-weight:bold;">Nowmov</p>
+									<p style="color:#888;font-size:11px;line-height:15px;font-family:Helvetica,Arial,sans-serif;margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;font-weight:normal;">Sent with love from San Francisco&#44; USA</p></td>
 							</tr>
 							</table>
 						

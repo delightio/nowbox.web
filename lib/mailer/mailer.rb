@@ -54,7 +54,7 @@ module Aji
 	    # Find the last 5 recently populated channels
 	    	# index_by: to remove duplicates
 	    	# sort_by: to get he most recent channels
-	    @channels = @user.subscribed_channels.index_by{|c| c.id}.values.sort_by{|c| - c.populated_at.to_i rescue nil}[0...10]
+# 	    @channels = @user.subscribed_channels.index_by{|c| c.id}.values.sort_by{|c| - c.populated_at.to_i rescue nil}[0...10]
 
 	    	    
 			if(!params[:test]) 

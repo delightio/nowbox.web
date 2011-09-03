@@ -21,14 +21,14 @@
 						<table width="100%" cellpadding="0" cellspacing="10" border="0" style="border-top: 1px solid #F5F5F5;">
 						<tr>
 							<td class="imageblock" width="100">
-								<a href="http://beta.<%= Aji.conf['TLD'] %>/video/<%= video.id %>/<%= share.id %>" target="_blank">
+								<a href="http://beta.<%= Aji.conf['TLD'] %>/video/<%= share.video.id %>/<%= share.id %>" target="_blank">
 									<img src="<%= share.video.thumbnail_uri %>" width="100" style="vertical-align: middle;"/>
 								</a>
 							</td>
 							<td bgcolor="#F4F4ED" class="contentblock">
 	
 								<h2 class="secondary"><strong><singleline label="Title">
-									<a href="http://beta.<%= Aji.conf['TLD'] %>/video/<%= video.id %>/<%= share.id %>" target="_blank"  class="h2" style="color:#F95133; font-size:18px; font-weight: bold;"><%= share.video.title %></a>
+									<a href="http://beta.<%= Aji.conf['TLD'] %>/video/<%= share.video.id %>/<%= share.id %>" target="_blank"  class="h2" style="color:#F95133; font-size:18px; font-weight: bold;"><%= share.video.title %></a>
 									</singleline></strong>
 								</h2>
 								<multiline label="Description">
