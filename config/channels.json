@@ -3,53 +3,53 @@
   { "title": "NowComedy",
     "category": "comedy",
     "type": "youtube",
-    "usernames": ["funnyordie", "collegehumor", "BREAK", "hotandfluffycomedy", "thelaughfactory", "jimmykimmellive", "teamcoco", "thesoup", "georgelopezcomedy", "justforlaughsTV", "improveverywhere", "failblog", "raywilliamjohnson"]}
+    "usernames": ["funnyordie", "collegehumor", "BREAK", "hotandfluffycomedy", "thelaughfactory", "jimmykimmellive", "teamcoco", "thesoup", "georgelopezcomedy", "justforlaughsTV", "improveverywhere", "failblog", "raywilliamjohnson", "nqtv", "jackvalefilms", "PetTubedotcom", "dayjoborchestra", "jonlajoie", "barelypolitical", "kassemg"]}
   ,
 
   { "title": "NowGaming",
     "category": "gaming",
     "type": "youtube",
-    "usernames": ["day9tv", "G4TV", "machinima", "attackoftheshow", "gamefrontdotcom", "TheGameStation", "CALLOFDUTY", "PlayStation", "pcgamer", "starcraft", "Nintendo3DS", "DTOID", "joystiq", "XboxViewTV", "gamespot", "ubisoft", "AssassinsCreed", "FragDolls", "Wii"]}
+    "usernames": ["day9tv", "G4TV", "machinima", "attackoftheshow", "gamefrontdotcom", "TheGameStation", "CALLOFDUTY", "PlayStation", "pcgamer", "starcraft", "Nintendo3DS", "DTOID", "joystiq", "XboxViewTV", "gamespot", "ubisoft", "AssassinsCreed", "FragDolls", "Wii", "JamesNintendoNerd", "MachinimaRealm", "MachinimaSports", "machinimarespawn", "MachinimaTrailer", "VISOGamer", "Games", "GamerSpawn"]}
   ,
   
   { "title": "NowCelebrity",
     "category": "celebrity",
     "type": "youtube",
-    "usernames": ["eentertainment", "TMZ", "enews", "tvguide", "hollywoodTV", "perezhilton"]}
+    "usernames": ["eentertainment", "TMZ", "enews", "tvguide", "hollywoodTV", "perezhilton", "chelsealately", "WatchTheSoup", "WATCHTHEDISH", "tedcasablancavideo", "MarcMalkinVideo", "UsWeekly", "OKMagazineTV", "younghollywood", "people", "itn"]}
   ,
   
   { "title": "NowFilm",
     "category": "film",
     "type": "youtube",
-    "usernames": ["warnerbrospictures", "HBOdocumentaryfilms", "cinemax", "SFF", "hollywoodstreams", "filmriot", "disneymovietrailers", "alliancefilms", "filmindependent", "turnerclassicmovies", "independentlens", "beyondthetrailer", "indymogul"]}
+    "usernames": ["warnerbrospictures", "HBOdocumentaryfilms", "cinemax", "SFF", "hollywoodstreams", "filmriot", "disneymovietrailers", "alliancefilms", "filmindependent", "turnerclassicmovies", "independentlens", "beyondthetrailer", "indymogul", "LionsgateLIVE", "LionsgateVOD", "RoadsideFlix", "trailers", "VISOCinema", "VISOCinema"]}
   ,
   
   { "title": "NowNews",
     "category": "news",
     "type": "youtube",
-    "usernames": ["CNN", "AssociatedPress", "CSPAN", "WGN", "CNBC", "foxnewschannel", "theweatherchannel", "russiatoday", "foxnewsinsider", "CBS", "aljazeeraenglish", "cnninternational"]}
+    "usernames": ["CNN", "AssociatedPress", "CSPAN", "WGN", "CNBC", "foxnewschannel", "theweatherchannel", "russiatoday", "foxnewsinsider", "CBS", "aljazeeraenglish", "cnninternational", "cbsnewsonline", "losangelestimes", "Euronews", "TheNewYorkTimes", "npr", "itnnews"]}
   ,
   
   { "title": "NowEntertainment",
     "category": "entertainment",
     "type": "youtube",
-    "usernames": ["HBO", "truTV", "currentTV", "foxbroadcasting", "tntweknowdrama", "aetv", "officialamc", "TLC", "animalplanettv", "historychannel", "biographychannel", "travelchanneltv"]}
+    "usernames": ["VisoTV", "HBO", "truTV", "currentTV", "foxbroadcasting", "tntweknowdrama", "aetv", "officialamc", "TLC", "animalplanettv", "historychannel", "biographychannel", "travelchanneltv"]}
   ,
   
   { "title": "NowSports",
     "category": "sports",
     "type": "youtube",
-    "usernames": ["HBOsports", "ESPN", "nikegolf", "NBA", "NHLvideo", "WNBA", "MLB", "foxsports", "ussoccerdotcom", "nikesoccer", "nikefootball", "Adidasfootball", "CFLTV", "CBSsports", "FCBarcelona", "tnawrestling", "UFC"]}
+    "usernames": ["VisoSports", "HBOsports", "ESPN", "nikegolf", "NBA", "NHLvideo", "WNBA", "MLB", "foxsports", "ussoccerdotcom", "nikesoccer", "nikefootball", "Adidasfootball", "CFLTV", "CBSsports", "FCBarcelona", "tnawrestling", "UFC", "ITNSportsNews", "ncaa"]}
   ,
   
   { "title": "NowFamily",
     "category": "family",
     "type": "youtube",
-    "usernames": ["disneychannel", "cartoonnetwork", "disneychannelUK", "pingu", "barneychannel", "thomasandfriends", "bobthebuilderchannel", "firemansamchannel", "smurfsmovie"]}
+    "usernames": ["disneychannel", "cartoonnetwork", "disneychannelUK", "pingu", "barneychannel", "thomasandfriends", "bobthebuilderchannel", "firemansamchannel", "smurfsmovie", "EricHermanMusic"]}
   ,
   
   { "title": "NowMusic",
     "category": "music",
     "type": "youtube",
-    "usernames": ["cctelevisionchannel", "fusevids", "portugalthemanband", "faniavideos", "linkinparktv", "rapuptv", "countrymusicassoc", "fearlessmusicshow", "electronicmusicTV", "karmincovers", "skeetv", "insomniacevents", "truecountrytv", "musicianswanted", "bonnaroomusicfest", "feddelegrand", "sxsw"]}
+    "usernames": ["artists", "cctelevisionchannel", "fusevids", "portugalthemanband", "faniavideos", "linkinparktv", "rapuptv", "countrymusicassoc", "fearlessmusicshow", "electronicmusicTV", "karmincovers", "skeetv", "insomniacevents", "truecountrytv", "musicianswanted", "bonnaroomusicfest", "feddelegrand", "sxsw", "nprmusic", "itnmusic"]}
 ]
