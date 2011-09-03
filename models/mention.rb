@@ -48,7 +48,7 @@ module Aji
     # age from give time in seconds
     def age from_time_i
       diff = from_time_i - published_at.to_i
-      diff = 0 if diff < 0 || author.blacklisted?
+      diff = 0 if diff < 0
       diff
     end
 
