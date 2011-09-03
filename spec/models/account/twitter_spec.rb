@@ -22,5 +22,9 @@ describe Aji::Account::Twitter do
       subject.stub(:mentions).and_return([mention])
       subject.mark_spammer
     end
+    it "blacklists self" do
+      subject.should_receive(:blacklist)
+      subject.mark_spammer
+    end
   end
 end

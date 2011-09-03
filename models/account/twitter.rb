@@ -82,10 +82,11 @@ module Aji
     end
 
     def mark_spammer
-      mentions.map do |v|
-        v.mark_spam
-        v.destroy
+      mentions.map do |m|
+        m.mark_spam
+        m.destroy
       end
+      blacklist
     end
 
     def authorized?
