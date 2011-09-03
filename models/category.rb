@@ -8,10 +8,7 @@ module Aji
   class Category < ActiveRecord::Base
     has_many :videos
     after_create :set_title
-    def set_title; update_attribute(:title, raw_title) if title.nil?; end
-    def self.undefined
-      self.find_or_create_by_raw_title "*** undefined ***"
-    end
+    after_destroy :delete_redis_keys
 
     include Redis::Objects
     sorted_set :channel_id_zset
@@ -28,8 +25,7 @@ module Aji
     def serializable_hash options={}
       {
         "id" => id,
-        "title" => title,
-        "channel_ids" => channel_ids
+        "title" => title
       }
     end
 
@@ -45,11 +41,32 @@ module Aji
       results
     end
 
-    def self.featured_key; "Aji::Category::featured::ids"; end
+    def redis_keys
+      [ channel_id_zset ].map &:key
+    end
+
+    def delete_redis_keys
+      redis_keys.each do |key|
+        Redis::Objects.redis.del key
+      end
+    end
+
+    def set_title
+      update_attribute(:title, raw_title) if title.nil?
+    end
+
+    def self.featured_key
+      "Aji::Category::featured::ids"
+    end
+
     def self.featured args={}
       featured_ids = redis.lrange featured_key, 0, -1
       return self.find featured_ids unless featured_ids.empty?
       Category.all.select{ |cat| !cat.featured_channels.empty? } - [undefined]
+    end
+
+    def self.undefined
+      self.find_or_create_by_raw_title "*** undefined ***"
     end
 
   end

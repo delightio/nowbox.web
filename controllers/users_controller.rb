@@ -3,8 +3,7 @@
 # User object json:
 #
 # {`id`:1,
-#  `first_name`:"thomas",
-#  `last_name`:null,
+#  `name`:"thomas",
 #  `queue_channel_id`: 7,
 #  `favorite_channel_id`: 8,
 #  `history_channel_id`: 9,
@@ -29,14 +28,28 @@ module Aji
       # __Returns__ the created user and HTTP Status Code 201 if successful or
       # a JSON encoded error message if not.
       #
-      # __Required params__ `email` email address of the user  
-      # __Required params__ `first_name` first name of the user  
-      # __Optional params__ `last_name` last name of the user
+      # __Optional params__  
+      # - `name` name of the user  
+      # - `email` email address of the user
       post do
         User.create(:email => params[:email],
-                    :first_name => params[:first_name],
-                    :last_name => params[:last_name]) or
+                    :name => params[:name]) or
           creation_error!(User, params)
+      end
+
+      # ## PUT users/:user_id
+      # __Updates__ given user's attributes  
+      # __Returns__ HTTP Status Code 200 if successful or a JSON encoded error message  
+      # __Required params__ (need just one of the two params)  
+      # - `name` name of the user  
+      # - `email` email address of the user
+      put '/:user_id' do
+        u = find_user_by_id_or_error params[:user_id]
+        u.update_attribute(:name, params[:name]) if params.has_key? :name
+        u.update_attribute(:email, params[:email]) if params.has_key? :email
+        if !params.has_key?(:name) && !params.has_key?(:email)
+          missing_params_error! params, [:email]
+        end
       end
 
     end

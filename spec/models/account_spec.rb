@@ -1,14 +1,44 @@
 require File.expand_path("../../spec_helper", __FILE__)
 
-describe Aji::Account do
-  describe "#publish" do
-    it "should raise an exception unless implemented" do
-      expect { subject.publish nil }.to(
-        raise_error Aji::InterfaceMethodNotImplemented)
+module Aji
+  describe Aji::Account do
+    subject do
+      # We tap the account to return it after pushing content to its Redis
+      # Objects so we can test the cleanup code.
+      Account.create(:username => "foobar", :uid => "1234").tap do |account|
+        account.content_zset[1] = 1
+        account.influencer_set << 1
+      end
+    end
+
+    it_behaves_like "any redis object model"
+
+    describe "#publish" do
+      it "raises an exception unless implemented" do
+        expect { subject.publish nil }.to
+        raise_error Aji::InterfaceMethodNotImplemented
+      end
+    end
+
+    describe "#profile_uri, #thumbnail_uri, #description" do
+      it "raise an exception unless implemented" do
+        [:profile_uri, :thumbnail_uri, :description].each do |m|
+          expect { subject.send m }.to(
+            raise_error Aji::InterfaceMethodNotImplemented)
+        end
+      end
     end
   end
 
   describe "#refresh_content" do
+    subject do
+      # We tap the account to return it after pushing content to its Redis
+      # Objects so we can test the cleanup code.
+      Account.create(:username => "foobar", :uid => "1234").tap do |account|
+        account.content_zset[1] = 1
+        account.influencer_set << 1
+      end
+    end
     it "raises an exception unless implemented" do
       expect { subject.refresh_content }.to(
         raise_error Aji::InterfaceMethodNotImplemented)
@@ -31,4 +61,3 @@ describe Aji::Account do
     end
   end
 end
-

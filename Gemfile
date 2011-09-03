@@ -18,7 +18,11 @@ gem 'activerecord', '~>3.0.9', :require => 'active_record'
 
 # Literate comments, generating lovely documentation HTML.
 gem 'rdiscount' # Required for Rocco.
-gem 'rocco', '=0.8', :group => :development
+
+  gem 'rocco', '=0.8', :group => :development
+gem 'awesome_print'
+gem 'pry'
+gem 'pry-doc'
 
 # Libraries used by the backend.
 gem 'resque-scheduler', '~>2.0.0.d',

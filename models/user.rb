@@ -7,15 +7,12 @@ module Aji
   # - created_at: DateTime
   # - updated_at: DateTime
   class User < ActiveRecord::Base
-    validates_presence_of :email, :first_name
-    validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
     before_create :create_user_channels
     after_create :create_identity, :subscribe_default_channels
-    before_destroy :clean_redis_keys
+    after_destroy :delete_redis_keys
 
-    belongs_to :identity
     has_many :events
-
+    belongs_to :identity
     belongs_to :queue_channel, :class_name => 'Channel::User'
     belongs_to :favorite_channel, :class_name => 'Channel::User'
     belongs_to :history_channel, :class_name => 'Channel::User'
@@ -63,14 +60,14 @@ module Aji
     end
 
     def serializable_hash options={}
-      hash = Hash["id" => id,
-           "first_name" => first_name,
-           "last_name" => last_name,
-           "queue_channel_id" => queue_channel_id,
-           "favorite_channel_id" => favorite_channel_id,
-           "history_channel_id" => history_channel_id,
-           "subscribed_channel_ids" => subscribed_list.values
-      ]
+      hash = {
+        "id" => id,
+         "name" => name,
+         "email" => email,
+         "queue_channel_id" => queue_channel_id,
+         "favorite_channel_id" => favorite_channel_id,
+         "history_channel_id" => history_channel_id,
+         "subscribed_channel_ids" => subscribed_list.values}
       unless identity.graph_channel.nil?
         hash.merge! "social_channel_id" => identity.graph_channel_id
       else
@@ -95,8 +92,12 @@ module Aji
       update_attribute :identity_id, Identity.create.id if self.identity.nil?
     end
 
-    def clean_redis_keys
-      [ subscribed_list ].map { |col| col.key }.each do |key|
+    def redis_keys
+      [ subscribed_list ].map &:key
+    end
+
+    def delete_redis_keys
+      redis_keys.each do |key|
         Aji.redis.del key
       end
     end
@@ -108,7 +109,7 @@ module Aji
       self.history_channel = Channel::User.create :title => 'History'
     end
 
-    private :create_identity, :clean_redis_keys, :create_user_channels
+    private :create_identity, :create_user_channels
 
   end
 end

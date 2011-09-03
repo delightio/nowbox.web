@@ -50,9 +50,7 @@ module Aji
 
       possible_channels.select do |c|
         c.accounts.length == accounts.length &&
-          accounts.inject(true) do |bool, account|
-            bool &&= c.accounts.include? account
-          end
+          accounts.all? { |a| c.accounts.include? a }
       end
     end
 
@@ -65,7 +63,11 @@ module Aji
 
     def serializable_hash options={}
       s = super options
-      s.merge! "type" => "Account::#{accounts.first.type.split('::').last}"
+      h = {
+        "type" => "Account::#{accounts.first.type.split('::').last}",
+        "description" => accounts.map(&:description).join('\n\n')
+      }
+      s.merge! h
     end
 
     def self.searchable_columns; [:title]; end

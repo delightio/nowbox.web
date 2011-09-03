@@ -29,8 +29,7 @@ end
 
 Factory.define :user, :class => 'Aji::User' do |a|
   a.email { random_email }
-  a.first_name { random_string }
-  a.last_name { random_string }
+  a.name { random_string }
 end
 
 Factory.define :user_with_channels, :parent =>:user do |a|

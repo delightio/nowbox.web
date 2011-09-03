@@ -13,7 +13,7 @@ module Aji
     describe "#refresh_content" do
       it "skips blacklisted accounts" do
         bad_author = Factory :youtube_account
-        
+
         channel = Channel::Account.create accounts: (@accounts << bad_author)
         bad_author.should_receive(:blacklisted?).and_return(true)
         bad_author.should_not_receive(:refresh_content)
@@ -124,5 +124,33 @@ module Aji
         end
       end
     end
+
+    describe "#update_relevance_in_categories" do
+      it "updates category relevance after #refresh_content" do
+        subject.should_receive(:update_relevance_in_categories).
+          with(an_instance_of(Array))
+        subject.refresh_content
+      end
+      it "orders categories according to occurance in videos" do
+        category1 = Factory :category
+        video = Factory :populated_video, :category => category1
+        expect {subject.update_relevance_in_categories [video] }.
+          to change { subject.categories.first }.to category1
+
+        # same category differnet video
+        video = Factory :populated_video, :category => category1
+        expect {subject.update_relevance_in_categories [video] }.
+          to_not change { subject.categories.count }
+
+        # 1 video in different category. 
+        # top category is still category1 since it was from 2 videos
+        category2 = Factory :category
+        video = Factory :populated_video, :category => category2
+        expect {subject.update_relevance_in_categories [video] }.
+          to change { subject.categories.count }.by 1
+        subject.categories.should == [category1, category2]
+      end
+    end
+
   end
 end

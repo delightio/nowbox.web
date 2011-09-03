@@ -9,6 +9,7 @@ module Aji
         c.category_id_zset[1] = 1
       end
     end
+<<<<<<< HEAD
 
     it_behaves_like "any redis object model"
 
@@ -47,6 +48,9 @@ module Aji
         categories[2].channels.should have(1).channels
       end
     end
+=======
+  end
+>>>>>>> 1a5fb083de90c5be96dece28f06c2369ead014fc
 
     describe "#personalized_content_videos" do
       context "when dealing with non user channels" do
@@ -167,17 +171,13 @@ module Aji
       end
 
       it "enqueues all search results for population" do
-        channel = Factory :channel
-        Aji::Channel.descendants.each do |descendant|
-          next if descendant.searchable_columns.empty?
-          descendant.should_receive(:search_helper).
-            with(an_instance_of(String)).
-            and_return([channel])
-        end
-        Resque.should_receive(:enqueue).
-          with(Aji::Queues::RefreshChannel, channel.id).
-          at_least(1)
-        Aji::Channel.search random_string
+        channels = []
+        5.times { |n| channels << Factory(:youtube_channel) }
+        # 5 + 1 times since we always create a keyword base channel
+        Resque.should_receive(:enqueue).with(
+          Aji::Queues::RefreshChannel, anything()).exactly(5+1).times
+        q = channels.map(&:title).join ","
+        results = Aji::Channel.search q
       end
 
       it "returns unique output" do

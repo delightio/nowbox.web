@@ -15,6 +15,7 @@ module Aji
     serialize :info, Hash
     serialize :credentials, Hash
     serialize :auth_info, Hash
+    after_destroy :delete_redis_keys
     belongs_to :identity
 
     has_and_belongs_to_many :channels,
@@ -56,8 +57,8 @@ module Aji
     end
 
     def profile_uri; raise InterfaceMethodNotImplemented; end
-
     def thumbnail_uri; raise InterfaceMethodNotImplemented; end
+    def description; raise InterfaceMethodNotImplemented; end
 
     def serializable_hash
       Hash[ "id" => id,
@@ -66,11 +67,22 @@ module Aji
 
             "username" => username,
             "profile_uri" => profile_uri,
-            "thumbnail_uri" => thumbnail_uri ]
+            "thumbnail_uri" => thumbnail_uri,
+            "description" => description ]
     end
 
     def to_channel
       Channel::Account.find_or_create_by_accounts Array(self)
+    end
+
+    def redis_keys
+      [ content_zset, influencer_set ].map &:key
+    end
+
+    def delete_redis_keys
+      redis_keys.each do |key|
+        Redis::Objects.redis.del key
+      end
     end
 
     # Class Methods follow

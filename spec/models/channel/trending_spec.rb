@@ -16,15 +16,6 @@ describe Aji::Channel::Trending do
     end
   end
 
-  describe "#push_recent" do
-    it "should only keep given number of mentioned videos" do
-      n = 2
-      Aji.stub(:conf).and_return({'MAX_RECENT_VIDEO_IDS_IN_TRENDING'=>n})
-      (n*2).times {|k| subject.push_recent(Factory :video)}
-      subject.recent_video_ids.count.should == n
-    end
-  end
-
   describe "#refresh_content" do
     it "marks self populated" do
       subject.refresh_content
@@ -74,6 +65,17 @@ describe Aji::Channel::Trending do
         subject.content_videos.should have(
           Aji.conf['MAX_VIDEOS_IN_TRENDING']).videos
         subject.content_videos.first.should == video
+      end
+
+      it "creates channels from author of top videos" do
+        pending "Why isn't this working?"
+        Aji::Account.any_instance.should_receive(:to_channel).
+          exactly(3).times.
+          and_return(Factory :channel)
+        Resque.should_receive(:enqueue).with(
+          Aji::Queues::RefreshChannel, an_instance_of(Fixnum)).
+          exactly(3).times
+        subject.refresh_content
       end
 
     end

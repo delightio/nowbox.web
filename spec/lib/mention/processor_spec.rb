@@ -10,11 +10,12 @@ module Aji
         @video = mock("video", :blacklisted? => false)
         @link = mock("video link", :to_video => @video)
         @links = Array.new(@link_count, @link)
-        @author = mock("author", :blacklisted? => false, :save => true)
+        @author = mock("author", :blacklisted? => false, :save => true,
+          :username => "blah", :id => 1)
         @mention_videos = Array.new
         @mention = mock("mention", :author => @author, :spam? => false,
           :links => @links, :videos => @mention_videos, :body => "",
-          :save => true)
+          :save => true, :id => 1)
       end
 
       subject { Mention::Processor.new @mention, @destination }
@@ -25,17 +26,10 @@ module Aji
         subject.perform
       end
 
-      it "doesn't use videos from blacklisted authors" do
-        @author.stub(:blacklisted?).and_return true
-        @destination.should_not_receive :push_recent
-        subject.perform
-      end
-
-      it "blacklists spamming authors" do
+      it "blacklists spamming authors and everything it touches" do
         @mention.stub(:spam?).and_return(true)
-        video = double("video", :blacklisted? => false)
-        @destination.should_receive(:push_recent).never
-        @mention.author.should_receive :blacklist
+        Resque.should_receive(:enqueue).with(Queues::RemoveSpammer,
+           @mention.author.id)
         subject.perform
       end
     end

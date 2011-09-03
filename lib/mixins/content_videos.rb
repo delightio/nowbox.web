@@ -20,6 +20,12 @@ module Aji
         content_video_ids(limit).map { |vid| Video.find vid }
       end
 
+      def content_video_id_count
+        # TODO LH #346 content_zset.size always returns 0
+        #   before any calls to content_video_ids
+        content_video_ids.count
+      end
+
       def content_video_ids_rev limit=0
         (content_zset.range 0, (limit-1)).map(&:to_i)
       end
@@ -36,7 +42,7 @@ module Aji
       def push video, relevance=Time.now.to_i
         content_zset[video.id] = relevance
       end
-      
+
       def pop video
         content_zset.delete video.id
       end

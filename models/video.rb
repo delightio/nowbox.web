@@ -21,6 +21,7 @@ module Aji
     belongs_to :category
 
     validates_presence_of :external_id
+    validates_presence_of :external_id, :if => :populated?
     validates_uniqueness_of :external_id, :scope => :source
 
     include Mixins::Blacklisting
@@ -63,6 +64,11 @@ module Aji
       latest_mentions(limit).map(&:author)
     end
 
+    def mark_spam
+      blacklist
+      author.blacklist unless author.nil?
+    end
+
     def thumbnail_uri
       path = case source
              when :youtube then "http://img.youtube.com/vi/#{self.external_id}/0.jpg"
@@ -78,9 +84,7 @@ module Aji
       return 0 if blacklisted?
       time_diffs = []
       latest_mentions(50).each do |mention|
-        diff = at_time_i - mention.published_at.to_i
-        next if diff < 0 || mention.author.blacklisted?
-        time_diffs << diff
+        time_diffs << mention.age(at_time_i)
       end
       Integer Decay.exponentially time_diffs
     end

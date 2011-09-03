@@ -1,14 +1,21 @@
 require 'resque/tasks'
 require 'resque_scheduler/tasks'
 
-# The Rakefile is here entirely for Resque and Resque Scheduler's benefit. For
-# all Aji tasks we should use Thor which sucks less.
-
+unless ENV['RACK_ENV'] == 'production'
+  require 'rspec/core/rake_task'
+  RSpec::Core::RakeTask.new(:spec)
+end
 
 # Load the Aji environment.
 task :environment do
   puts "Loading Aji environment."
   require_relative 'aji'
+end
+
+task :c => :console
+task :console => :environment do
+  Pry.config.print = proc { |output, value| output.puts value.ai }
+  Pry.start Aji
 end
 
 task :readstream => :environment do
@@ -19,3 +26,4 @@ namespace :resque do
   task :setup => :environment
 end
 
+task :default => :spec

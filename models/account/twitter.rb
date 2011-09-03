@@ -8,6 +8,8 @@ module Aji
     validates_uniqueness_of :username
     include Redis::Objects
     sorted_set :recent_zset
+    include Mixins::RecentVideos
+
     USER_TIMELINE_URL = "http://api.twitter.com/1/statuses/user_timeline.json"
 
     def profile_uri; "http://twitter.com/#{username}"; end
@@ -15,6 +17,10 @@ module Aji
     def thumbnail_uri
       (info['profile_image_url'] rescue nil) ||
       "http://api.twitter.com/1/users/profile_image/#{username}.json"
+    end
+
+    def description
+      info['description'] rescue ""
     end
 
     def publish share
@@ -74,14 +80,11 @@ module Aji
       new_videos
     end
 
-    def push_recent video, relevance=Time.now.to_i
-      recent_zset[video.id] = relevance
-      n = 1 + Aji.conf['MAX_RECENT_VIDEO_IDS_IN_TRENDING']
-      Aji.redis.zremrangebyrank recent_zset.key, 0, -n
-    end
-
-    def recent_video_ids limit=-1
-      (recent_zset.revrange 0, limit).map(&:to_i)
+    def mark_spammer
+      mentions.map do |v|
+        v.mark_spam
+        v.destroy
+      end
     end
 
     def authorized?

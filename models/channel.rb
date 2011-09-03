@@ -12,6 +12,8 @@ module Aji
   # - created_at: DateTime
   # - updated_at: DateTime
   class Channel < ActiveRecord::Base
+    after_destroy :delete_redis_keys
+
     has_many :events
 
     include Redis::Objects
@@ -20,6 +22,7 @@ module Aji
     lock :refresh, :expiration => 10.minutes
     include Mixins::Populating
     sorted_set :category_id_zset
+
     def category_ids limit=-1
       (category_id_zset.revrange 0, limit).map(&:to_i)
     end
@@ -30,18 +33,27 @@ module Aji
     def thumbnail_uri; raise InterfaceMethodNotImplemented; end
 
     def serializable_hash options={}
-      {
+      h = {
         "id" => id,
         "type" => (type||"").split("::").last,
         "default_listing" => default_listing,
         "category_ids" => category_ids,
         "title" => title,
+        "description" => "",
         "thumbnail_uri" => thumbnail_uri,
+        "video_count" => content_video_id_count,
         # TODO: Shouldn't just catch the first version since we may change
         # this method in a version bump.
         "resource_uri" => "http://api.#{Aji.conf['TLD']}/" +
-        "#{Aji::API.version.first}/channels/#{self.id}"
+          "#{Aji::API.version.first}/channels/#{self.id}"
       }
+      if options && options[:inline_videos].to_i > 0
+        h.merge!(
+          "videos" => content_videos(options[:inline_videos]).
+                        map{ |v| {"video" => v.serializable_hash(options)}}
+        )
+      end
+      h
     end
 
     # TODO: Refactor to take a list of video ids and a limit parameter instead
@@ -50,7 +62,8 @@ module Aji
     # thus less code.
     def personalized_content_videos args
       user = args[:user]
-      raise ArgumentError, "User missing for Channel[#{self.id}].personalized #{args.inspect}" if user.nil?
+      raise ArgumentError, "User missing for Channel[#{self.id}].personalized" +
+        " #{args.inspect}" if user.nil?
       limit = (args[:limit] || 20).to_i
       page = (args[:page] || 1).to_i
       total = limit * page
@@ -86,9 +99,34 @@ module Aji
       end
     end
 
+    # The default refresh content method must 
     def refresh_content force=false
-      raise InterfaceMethodNotImplemented,
-        "#{self.class} must implement #refresh_content(force) method"
+      Array.new.tap do |new_videos|
+
+        refresh_lock.lock do
+          # While this break will only exit the lock block, the tap block ends
+          # directly after it and so it will exit from both of them.
+          break if recently_populated? && content_video_ids.count > 0 && !force
+
+          if block_given?
+            yield new_videos
+          else
+            new_videos.each { |v| push v }
+          end
+
+          update_attribute :populated_at, Time.now
+        end
+      end
+    end
+
+    def redis_keys
+      [ content_zset, category_id_zset ].map &:key
+    end
+
+    def delete_redis_keys
+      redis_keys.each do |key|
+        Redis::Objects.redis.del key
+      end
     end
 
     # ## Class Methods

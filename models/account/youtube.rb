@@ -17,6 +17,11 @@ module Aji
         end
     end
 
+    def description
+      # TODO LH #329 We need to store the author info in database.
+      ""
+    end
+
     def refresh_content force=false
       new_videos = []
       refresh_lock.lock do

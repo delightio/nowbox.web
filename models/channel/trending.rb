@@ -6,15 +6,7 @@ module Aji
     include Redis::Objects
 
     sorted_set :recent_zset
-    def recent_video_ids limit=-1
-      (recent_zset.revrange 0, limit).map(&:to_i)
-    end
-
-    def push_recent video, relevance=Time.now.to_i
-      recent_zset[video.id] = relevance
-      n = 1 + Aji.conf['MAX_RECENT_VIDEO_IDS_IN_TRENDING']
-      Aji.redis.zremrangebyrank recent_zset.key, 0, -n
-    end
+    include Mixins::RecentVideos
 
     def refresh_content force=false
       in_flight = []
@@ -36,7 +28,7 @@ module Aji
       start = Time.now; populated_count = 0
       max_in_flight = Aji.conf['MAX_VIDEOS_IN_TRENDING']
       in_flight.first(max_in_flight).each do |h|
-        video = Aji::Video.find_by_id h[:vid]
+        video = Video.find_by_id h[:vid]
         next if video.nil?
         if !video.populated?
           video.populate
@@ -45,6 +37,12 @@ module Aji
         push video, h[:relevance]
       end
       truncate max_in_flight
+
+      # Create channels from authors of top videos for search
+      content_video_ids(50).each do |vid|
+        Resque.enqueue(
+          Queues::RefreshChannel, Video.find(vid).author.to_channel.id)
+      end
 
       Aji.log "Replace #{[max_in_flight,in_flight.count].min} (#{populated_count} populated) content videos in #{Time.now-start} s."
       update_attribute :populated_at, Time.now

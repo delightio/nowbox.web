@@ -7,6 +7,7 @@
 #  `default_listing`:true,
 #  `category_ids`: [1,2,3],
 #  `title`:"Trending",
+#  `video_count`: 25,
 #  `thumbnail_uri`:"http://img.youtube.com/vi/cRBcP6MmE8g/0.jpg",
 #  `resource_uri`:""http://api.nowmov.com/1/channels/1""}
 module Aji
@@ -20,9 +21,11 @@ module Aji
       # or 404
       #
       # __Required params__ `channel_id` unique id of the channel  
-      # __Optional params__ none
+      # __Optional params__ `inline_videos` integer, number of videos to include
       get '/:channel_id' do
-        find_channel_by_id_or_error params[:channel_id]
+        channel = find_channel_by_id_or_error params[:channel_id]
+        channel.serializable_hash(
+          :inline_videos => params[:inline_videos].to_i)
       end
 
       # ## GET channels/
