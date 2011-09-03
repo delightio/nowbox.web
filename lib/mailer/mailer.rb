@@ -47,6 +47,16 @@ module Aji
 
 		get '/welcome/:user_id/?' do
 	    @user = User.find(params[:user_id])
+	    
+			# TODO: Really awesome query that gives the most interesting not-seen-before videos
+	    @shares = Share.find(:all, :order => "id desc", :limit => 5)
+
+	    # Find the last 5 recently populated channels
+	    	# index_by: to remove duplicates
+	    	# sort_by: to get he most recent channels
+# 	    @channels = @user.subscribed_channels.index_by{|c| c.id}.values.sort_by{|c| - c.populated_at.to_i rescue nil}[0...10]
+
+	    	    
 			if(!params[:test]) 
 		  	Pony.mail(
 					:to=> @user.email,  
@@ -58,19 +68,32 @@ module Aji
 		  erb(:'welcome.html')		
 		end
 
-		get '/engager/:user_id/?' do
+		get '/channels/:user_id/?' do	  
 	    @user = User.find(params[:user_id])
-			if(!params[:test]) 
-			  Pony.mail(
-					:to=> @user.email,  
-					:headers 		=> {'Content-Type' => 'text/html', 'X-Campaign-Id' => 'engager', 'X-Mailgun-Tag' => 'engager'},
-	        :subject=> "We Miss You!",
-	        :body => erb(:'engager.html'),
-	       )
+
+	    # Find the last 5 recently populated channels
+	    	# index_by: to remove duplicates
+	    	# sort_by: to get he most recent channels
+	    user_channels = @user.subscribed_channels.index_by{|c| c.id}.values.sort_by{|c| - c.populated_at.to_i rescue nil}[0...3]
+
+			@channels = Array.new
+			user_channels.each do |channel|
+				videos = channel.personalized_content_videos(:user => @user).last(3)	    			
+				channel['videos'] = videos
+				@channels << channel
 			end
-		  erb(:'engager.html')		
-		end
-		
+
+			if(!params[:test]) 
+		  	Pony.mail(
+					:to=> @user.email,  
+					:headers 		=> {'Content-Type' => 'text/html', 'X-Campaign-Id' => 'channels', 'X-Mailgun-Tag' => 'channels'},
+	        :subject=> "Nowmov Weekly Channel Guide",
+	        :body => erb(:'channels.html'),
+	       )
+		  end
+		  erb(:'channels.html')		
+		end		
+				
 		get '/videos/:user_id/?' do	  
 	    @user = User.find(params[:user_id])
 	      
@@ -86,7 +109,7 @@ module Aji
 		  	Pony.mail(
 					:to=> @user.email,  
 					:headers 		=> {'Content-Type' => 'text/html', 'X-Campaign-Id' => 'videos', 'X-Mailgun-Tag' => 'videos'},
-	        :subject=> "Videos For You",
+	        :subject=> "Nowmov Weekly Videos Guide",
 	        :body => erb(:'videos.html'),
 	       )
 		  end

@@ -3,22 +3,28 @@
 		<layout label="User">
 			<table width="100%" cellpadding="0" cellspacing="0" border="0">
 			<tr>
-				<td bgcolor="#FF9900" nowrap><img border="0" src="images/spacer.gif" width="5" height="1"></td>
-				<td width="100%" bgcolor="#ffffff">
+				<td width="100%">
 			
-					<table width="100%" cellpadding="20" cellspacing="0" border="0">
+					<table width="100%" cellpadding="0" cellspacing="0" border="0">
 					<tr>
-						<td bgcolor="#ffffff" class="contentblock">
+						<td  class="contentblock" style="padding-left: 5px;">
 
-							<h2 class="secondary"><strong><singleline label="Title">Hello <%= @user.first_name %>!</singleline></strong></h2>
-							<multiline label="Description">
-								<p><b>We wanted to take a minute to welcome you to the nowmov community!</b></p>
-								<p>We look forward to delivering best video entertainment experience to you.</p>
-								<p>In the future we may email you with tips, notifications and updates of videos you might've missed, but we will never give out your email address or send you spam.</p>
-								<p>Now back to the videos.</p>
-								<p><i>- the nowmov team</i></p>
-							</multiline>
+							<h2 class="secondary" style="color:#F95133; font-size:20px; font-weight: bold;"><strong><singleline label="Title">Hello <%= @user.first_name %>!</singleline></strong></h2>
+								<p style="font-size: 16px; line-height: 1.5;">
+									<b>We wanted to take a minute to welcome you to the nowmov community!</b>
+								</p>
+								<p style="font-size: 16px; line-height: 1.5;">
+								We look forward to delivering best video entertainment experience to you.
+								</p>
+								<p style="font-size: 16px; line-height: 1.5;">
+								In the future we may email you with tips, notifications and updates of videos you might've missed, but we will never give out your email address or send you spam.
+								</p>
+								<p style="font-size: 16px; line-height: 1.5;">
+								Now back to the videos.
+								</p>
+								<p style="font-size: 16px; font-weight: bold; margin: 0px;"><i>- the nowmov team</i></p>
 
+								</p>
 						</td>
 					</tr>
 					</table>
@@ -26,7 +32,9 @@
 				</td>
 			</tr>
 			</table>  
-			<img border="0" src="images/spacer.gif" width="1" height="30" class="divider"><br>
+			<img border="0" src="images/spacer.gif" width="1" height="10" class="divider"><br>
 			</layout>	
 	<% end %>
+	
+	<%= erb :'_shares.html' %>	
 </repeater>

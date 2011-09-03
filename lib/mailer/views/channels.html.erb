@@ -1,0 +1,33 @@
+<repeater>
+	<% if @user %>
+		<layout label="User">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td width="100%" bgcolor="">
+			
+					<table width="100%" cellpadding="0" cellspacing="0" border="0">
+					<tr>
+						<td bgcolor="" class="contentblock" style="padding-left: 5px;">
+
+							<div class="h2 secondary" style="color:#F95133; font-size:20px; font-weight: bold;"><strong><singleline label="Title">Hello <%= @user.first_name %>!</singleline></strong></div>
+							<multiline label="Description">
+								<p style="font-size: 18px; line-height: 1.5; ">We know there's a lot to look at on nowmov, so we've been searching high and low for a few videos we think you'd really like.  Here's what we came up with.</p>
+								<p style="font-size: 16px; font-weight: bold; margin: 0px;"><i>- the nowmov team</i></p>
+							</multiline>
+
+						</td>
+					</tr>
+					</table>
+			
+				</td>
+			</tr>
+			</table>  
+			<img border="0" src="http://beta.nowmov.com/images/email/spacer.gif" width="1" height="30">
+			
+	</layout>	
+	<% end %>
+	
+	<%= erb :'_channelblocks.html' %>	
+
+
+</repeater>      
