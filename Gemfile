@@ -8,7 +8,6 @@ gem 'grape'
 gem 'sinatra', :require => 'sinatra/base'
 gem 'thin' # Heroku recommends the Thin web server.
 gem 'resque', :require => [ 'resque', 'resque/failure/redis' ]
-gem 'newrelic_rpm'
 
 # Data persistence and related.
 gem 'hiredis' # Fast C Interface to Redis.
