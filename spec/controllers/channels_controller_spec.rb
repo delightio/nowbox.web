@@ -157,16 +157,16 @@ module Aji
           @query = Array.new(3){ random_string }.join(",")
           @params = { :query => @query }
         end
-        it "raises error when type != Keyword" do
+        it "raises error when type != keyword" do
           post "#{resource_uri}", :query => @query
           last_response.status.should_not == 201
         end
         it "raises error when missing query" do
-          post "#{resource_uri}", :type => 'Keyword'
+          post "#{resource_uri}", :type => 'keyword'
           last_response.status.should_not == 201
         end
         it "creates keyword channel based on query" do
-          post "#{resource_uri}", @params.merge(:type => 'Keyword')
+          post "#{resource_uri}", @params.merge(:type => 'keyword')
           last_response.status.should == 201
           new_channel = JSON.parse last_response.body
           Channel.search(@query).map(&:id).should include new_channel["id"]
