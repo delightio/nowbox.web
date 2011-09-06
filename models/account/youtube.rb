@@ -34,6 +34,18 @@ module Aji
       new_videos
     end
 
+    # Fetch information from youtube, returns the new info hash upon success
+    # and false otherwise.
+    def get_info_from_youtube_api
+      youtube_data = MultiJson.decode(Faraday.get(
+        "http://gdata.youtube.com/feeds/api/users/#{uid}?alt=json&v=2").
+        body)['entry']
+      info['description'] = youtube_data['yt$aboutMe']['$t']
+      info['profile_uri'] = youtube_data['link'][2]['href']
+      info['thumbnail_uri'] = youtube_data['media$thumbnail']['url']
+      save && info
+    end
+
     # A Youtube Account's uid is it's username. Let's set uid elsewhere and
     # set the username to be equal within the method.
     def set_uid_as_username
