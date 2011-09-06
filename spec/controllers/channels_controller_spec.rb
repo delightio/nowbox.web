@@ -23,13 +23,6 @@ module Aji
       end
 
       describe "get #{resource_uri}" do
-        it "always create keyword channel based on query" do
-          pending "need Channel::Keyword.search_helper"
-          query = random_string
-          params = { :query => query, :user_id => (Factory :user).id }
-          expect { get "#{resource_uri}", params }.to change { Channel.count }.by(1)
-        end
-
         it "searches existing channels and returns matched channels"
 
         it "returns all channels if no user id given" do
@@ -170,6 +163,18 @@ module Aji
           last_response.status.should == 201
           new_channel = JSON.parse last_response.body
           Channel.search(@query).map(&:id).should include new_channel["id"]
+        end
+        it "returns existing channel if found" do
+          post "#{resource_uri}", @params.merge(:type => 'keyword')
+          last_response.status.should == 201
+          new_channel = JSON.parse last_response.body
+          Channel.search(@query).map(&:id).should include new_channel["id"]
+
+          # Re do the search
+          post "#{resource_uri}", @params.merge(:type => 'keyword')
+          last_response.status.should == 201
+          old_channel = JSON.parse last_response.body
+          old_channel.should == new_channel
         end
       end
 
