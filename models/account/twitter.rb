@@ -2,26 +2,45 @@ module Aji
   # ## Account::Twitter Schema Extensions
   # - recent_zset: Redis::Objects::SortedSet
   class Account::Twitter < Account
-    after_create :set_provider
-    has_many :mentions, :foreign_key => :author_id
-
-    validates_presence_of :username
-    validates_uniqueness_of :username
     include Redis::Objects
     sorted_set :recent_zset
     include Mixins::RecentVideos
 
-    USER_TIMELINE_URL = "http://api.twitter.com/1/statuses/user_timeline.json"
+    validates_presence_of :username
+    validates_uniqueness_of :username
 
-    def profile_uri; "http://twitter.com/#{username}"; end
+    has_many :mentions, :foreign_key => :author_id
+
+    after_create :set_provider
+
+    def profile_uri
+      "http://twitter.com/#{username}"
+    end
 
     def thumbnail_uri
-      (info['profile_image_url'] rescue nil) ||
+      info['profile_image_url'] ||
       "http://api.twitter.com/1/users/profile_image/#{username}.json"
     end
 
     def description
-      info['description'] rescue ""
+      info['description'] || ""
+    end
+
+    def refresh_content force=false
+      new_videos = []
+      refresh_lock.lock do
+        return [] if recently_populated? && content_video_ids.count > 0 && !force
+        harvest_tweets
+        videos = recent_video_ids.map { |id| Aji::Video.find_by_id id }.
+          select { |v| not (v.nil? || v.blacklisted?) }
+        Aji.log "Found #{videos.count} videos in #{username}'s Twitter stream"
+        videos.each do |video|
+          video.populate unless video.populated?
+          push video and new_videos << video if video.populated?
+        end
+        update_attribute :populated_at, Time.now
+      end
+      new_videos
     end
 
     def publish share
@@ -58,27 +77,6 @@ module Aji
           influencer_set << Account::Twitter.find_or_create_by_username(
             user.screen_name.to_s, :info => user.to_hash, :uid => user.id).id
       end
-    end
-
-    def refresh_content force=false
-      new_videos = []
-      refresh_lock.lock do
-        return [] if recently_populated? && content_video_ids.count > 0 && !force
-
-        harvest_tweets
-
-        videos = recent_video_ids.map { |id| Aji::Video.find_by_id id }.
-          select { |v| not (v.nil? || v.blacklisted?) }
-        Aji.log "Found #{videos.count} videos in #{username}'s Twitter stream"
-
-        videos.each do |video|
-          video.populate unless video.populated?
-          push video and new_videos << video if video.populated?
-        end
-
-        update_attribute :populated_at, Time.now
-      end
-      new_videos
     end
 
     def mark_spammer
@@ -118,7 +116,7 @@ module Aji
     # HACK: This is long, complex, blocking, and tightly coupled. A good
     # candidate for refactoring later.
     def harvest_tweets
-      ::Twitter.user_timeline(username, :include_entities => true,
+      ::Twitter.user_timeline(username || uid, :include_entities => true,
         :count => 200).each do |tweet|
         mention = Parsers['twitter'].parse tweet.to_hash do |tweet_hash|
           Mention::Processor.video_filters['twitter'].call tweet_hash
@@ -143,6 +141,6 @@ module Aji
     def set_provider
       update_attribute :provider, 'twitter'
     end
-
   end
 end
+

@@ -1,25 +1,20 @@
 module Aji
   class Account::Youtube < Account
-    after_create :set_uid_as_username
-
     validates_presence_of :uid
     validates_uniqueness_of :uid
 
-    def profile_uri; "http://www.youtube.com/user/#{username}"; end
+    after_create :set_uid_as_username
+
+    def profile_uri
+      "http://www.youtube.com/user/#{username}"
+    end
 
     def thumbnail_uri
-      @thumbnail_uri ||=
-        begin
-          r = HTTParty.get(
-            "http://gdata.youtube.com/feeds/api/users/#{uid}?v=2")
-            match = r.body.match(/<media:thumbnail url='(.*)'/)
-            if match then match[1] else "" end
-        end
+      info['thumbnail_uri'] || ""
     end
 
     def description
-      # TODO LH #329 We need to store the author info in database.
-      ""
+      info['description'] || ""
     end
 
     def refresh_content force=false
