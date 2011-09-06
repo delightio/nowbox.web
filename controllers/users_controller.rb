@@ -45,13 +45,16 @@ module Aji
       # - `email` email address of the user
       put '/:user_id' do
         u = find_user_by_id_or_error params[:user_id]
-        if !params.key?(:name) && !params.key?(:email)
-          must_supply_params_error! [ :email, :name ]
+        updatable_params = [ :name, :email ]
+        params_to_update = params.select do |key|
+          updatable_params.include? key.to_sym
         end
-        u.update_attribute(:name, params[:name]) if params.key? :name
-        u.update_attribute(:email, params[:email]) if params.key? :email
-      end
 
+        if params_to_update.empty?
+          must_supply_params_error! updatable_params
+        end
+        u.update_attributes(params_to_update)
+      end
     end
   end
 end
