@@ -4,7 +4,7 @@ source 'http://rubygems.org'
 gem 'rake'
 gem 'thor' # Better command line utility than rake.
 gem 'foreman' # Local process monitor.
-gem 'grape'
+gem 'grape', :git => 'git://github.com/intridea/grape.git'
 gem 'sinatra', :require => 'sinatra/base'
 gem 'thin' # Heroku recommends the Thin web server.
 gem 'resque', :require => [ 'resque', 'resque/failure/redis' ]
@@ -19,7 +19,7 @@ gem 'activerecord', '~>3.0.9', :require => 'active_record'
 # Literate comments, generating lovely documentation HTML.
 gem 'rdiscount' # Required for Rocco.
 
-  gem 'rocco', '=0.8', :group => :development
+  gem 'rocco', '~>0.8.2', :group => :development
 gem 'awesome_print'
 gem 'pry'
 gem 'pry-doc'
@@ -29,11 +29,11 @@ gem 'resque-scheduler', '~>2.0.0.d',
   :require => ['resque_scheduler', 'resque/scheduler']
 gem 'resque-retry', :require => [ 'resque-retry', 'resque-retry/server' ]
 gem 'httparty'
-gem 'omniauth'
-gem 'youtube_it'
+gem 'omniauth', :git => 'git://github.com/intridea/omniauth.git'
+gem 'youtube_it', '~>1.4.3'
 gem 'erubis'
 gem 'yajl-ruby'
-gem 'twitter'
+gem 'twitter', :git => 'https://github.com/jnunemaker/twitter.git'
 
 # Mail related
 #gem 'activeresource'
