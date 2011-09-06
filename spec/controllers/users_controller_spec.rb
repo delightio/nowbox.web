@@ -43,8 +43,9 @@ module Aji
           put "#{resource_uri}/#{user.id}", params
           ap last_response
           last_response.status.should == 200
-          user.name(:reload).should == "Thomas Pun"
-          user.email(:reload).should == "dapunster@gmail.com"
+          user.reload
+          user.name.should == "Thomas Pun"
+          user.email.should == "dapunster@gmail.com"
         end
 
         it "returns error if missing email parameter" do
