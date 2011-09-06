@@ -7,8 +7,6 @@ SimpleCov.start
 require_relative '../aji'
 require_relative 'factories'
 
-OmniAuth.config.test_mode = true
-
 #VCR.config do |c|
 #  c.cassette_library_dir = "fixtures/vcr_cassettes"
 #  c.stub_with :fakeweb
