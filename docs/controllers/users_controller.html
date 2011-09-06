@@ -73,7 +73,7 @@
 
 <p><strong>Returns</strong> the user with the specified id and HTTP Status Code 200 or 404</p>
 
-<p><strong>Required params</strong> <code>user_id</code> unique id of the user<br/>
+<p><strong>Required params</strong> <code>user_id</code> unique id of the user<br>
 <strong>Optional params</strong> none</p>
       </td>
       <td class=code>
@@ -89,12 +89,12 @@
         </div>
         <h2>POST users</h2>
 
-<p><strong>Creates</strong> a user with the specified parameters.<br/>
+<p><strong>Creates</strong> a user with the specified parameters.<br>
 <strong>Returns</strong> the created user and HTTP Status Code 201 if successful or
 a JSON encoded error message if not.</p>
 
-<p><strong>Optional params</strong><br/>
-&ndash; <code>name</code> name of the user<br/>
+<p><strong>Optional params</strong><br>
+&ndash; <code>name</code> name of the user<br>
 &ndash; <code>email</code> email address of the user</p>
       </td>
       <td class=code>
@@ -112,21 +112,21 @@ a JSON encoded error message if not.</p>
         </div>
         <h2>PUT users/:user_id</h2>
 
-<p><strong>Updates</strong> given user&rsquo;s attributes<br/>
-<strong>Returns</strong> HTTP Status Code 200 if successful or a JSON encoded error message<br/>
-<strong>Required params</strong> (need just one of the two params)<br/>
-&ndash; <code>name</code> name of the user<br/>
+<p><strong>Updates</strong> given user&rsquo;s attributes<br>
+<strong>Returns</strong> HTTP Status Code 200 if successful or a JSON encoded error message<br>
+<strong>Required params</strong> (need just one of the two params)<br>
+&ndash; <code>name</code> name of the user<br>
 &ndash; <code>email</code> email address of the user</p>
 
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">put</span> <span class="s1">&#39;/:user_id&#39;</span> <span class="k">do</span>
         <span class="n">u</span> <span class="o">=</span> <span class="n">find_user_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
-        <span class="n">u</span><span class="o">.</span><span class="n">update_attribute</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span><span class="p">)</span> <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">has_key?</span> <span class="ss">:name</span>
-        <span class="n">u</span><span class="o">.</span><span class="n">update_attribute</span><span class="p">(</span><span class="ss">:email</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span><span class="p">)</span> <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">has_key?</span> <span class="ss">:email</span>
-        <span class="k">if</span> <span class="o">!</span><span class="n">params</span><span class="o">.</span><span class="n">has_key?</span><span class="p">(</span><span class="ss">:name</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">params</span><span class="o">.</span><span class="n">has_key?</span><span class="p">(</span><span class="ss">:email</span><span class="p">)</span>
-          <span class="n">missing_params_error!</span> <span class="n">params</span><span class="p">,</span> <span class="o">[</span><span class="ss">:email</span><span class="o">]</span>
+        <span class="k">if</span> <span class="o">!</span><span class="n">params</span><span class="o">.</span><span class="n">key?</span><span class="p">(</span><span class="ss">:name</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">params</span><span class="o">.</span><span class="n">key?</span><span class="p">(</span><span class="ss">:email</span><span class="p">)</span>
+          <span class="n">must_supply_params_error!</span> <span class="o">[</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:name</span> <span class="o">]</span>
         <span class="k">end</span>
+        <span class="n">u</span><span class="o">.</span><span class="n">update_attribute</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span><span class="p">)</span> <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">key?</span> <span class="ss">:name</span>
+        <span class="n">u</span><span class="o">.</span><span class="n">update_attribute</span><span class="p">(</span><span class="ss">:email</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span><span class="p">)</span> <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">key?</span> <span class="ss">:email</span>
       <span class="k">end</span>
 
     <span class="k">end</span>
