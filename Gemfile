@@ -30,7 +30,7 @@ gem 'resque-scheduler', '~>2.0.0.d',
   :require => ['resque_scheduler', 'resque/scheduler']
 gem 'resque-retry', :require => [ 'resque-retry', 'resque-retry/server' ]
 gem 'httparty'
-gem 'omniauth', :git => 'git://github.com/intridea/omniauth.git'
+gem 'omniauth', '~>0.3.0.rc3', :require => 'oa-oauth'
 gem 'youtube_it', '~>1.4.3'
 gem 'erubis'
 gem 'yajl-ruby'
