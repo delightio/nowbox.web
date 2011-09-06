@@ -10,19 +10,7 @@ module Aji
   # - credentials: Text (Serialized Hash)
   # - blacklisted_at: DateTime
   class Account < ActiveRecord::Base
-
     include Redis::Objects
-    serialize :info, Hash
-    serialize :credentials, Hash
-    serialize :auth_info, Hash
-    after_destroy :delete_redis_keys
-    belongs_to :identity
-
-    has_and_belongs_to_many :channels,
-      :class_name => 'Channel::Account', :join_table => :accounts_channels,
-      :foreign_key => :account_id, :association_foreign_key => :channel_id,
-      :autosave => true
-
     sorted_set :content_zset
     include Mixins::ContentVideos
     lock :refresh, :expiration => 10.minutes
@@ -30,6 +18,31 @@ module Aji
     include Mixins::Blacklisting
     # All of the accounts that this account receives content from.
     set :influencer_set
+
+    serialize :info, Hash
+    serialize :credentials, Hash
+    serialize :auth_info, Hash
+
+    belongs_to :identity
+    has_and_belongs_to_many :channels,
+      :class_name => 'Channel::Account', :join_table => :accounts_channels,
+      :foreign_key => :account_id, :association_foreign_key => :channel_id,
+      :autosave => true
+
+    after_initialize :initialize_info_hashes
+    after_destroy :delete_redis_keys
+
+    def profile_uri
+      raise InterfaceMethodNotImplemented
+    end
+
+    def thumbnail_uri
+      raise InterfaceMethodNotImplemented
+    end
+
+    def description
+      raise InterfaceMethodNotImplemented
+    end
 
     # The publish interface is called by background tasks to publish a video
     # share to an external service.
@@ -56,10 +69,6 @@ module Aji
       influencer_set.map { |id| Account.find_by_id id }
     end
 
-    def profile_uri; raise InterfaceMethodNotImplemented; end
-    def thumbnail_uri; raise InterfaceMethodNotImplemented; end
-    def description; raise InterfaceMethodNotImplemented; end
-
     def serializable_hash
       Hash[ "id" => id,
             "provider" => type.split('::').last.downcase,
@@ -83,6 +92,14 @@ module Aji
       redis_keys.each do |key|
         Redis::Objects.redis.del key
       end
+    end
+
+    # Serialized Hash attributes are initialized to prevent nil checking
+    # throughout
+    def initialize_info_hashes
+      self.info         ||= Hash.new
+      self.auth_info    ||= Hash.new
+      self.credentials  ||= Hash.new
     end
 
     # Class Methods follow
