@@ -9,7 +9,7 @@ module Aji
       subject { Account::Youtube.new :uid => 'day9tv' }
       it "sets the info hash properly" do
         subject.get_info_from_youtube_api
-        subject.info.keys.should == %w(description profile_uri thumbnail_uri)
+        subject.info.keys.sort.should == %w(description profile_uri thumbnail_uri)
         subject.info['description'].should ==%(I grew up playing Starcraft with my brother, Nick (Tasteless). With the launch of Starcraft 2, I'm dedicated to helping the eSports movement grow in popularity around the world.
 
 Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
