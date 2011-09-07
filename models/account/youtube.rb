@@ -3,6 +3,7 @@ module Aji
     validates_presence_of :uid
     validates_uniqueness_of :uid
 
+    before_create :get_info_from_youtube_api
     after_create :set_uid_as_username
 
     def profile_uri
@@ -41,7 +42,6 @@ module Aji
       info['thumbnail_uri'] = youtube_data.thumbnail_uri
       info['profile_uri'] = youtube_data.profile_uri
       info['description'] = youtube_data.description
-      save && info
     end
 
     # A Youtube Account's uid is it's username. Let's set uid elsewhere and
