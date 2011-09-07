@@ -3,3 +3,9 @@ refresh_all_channels:
   cron: "0 * * * *"
   args:
   description: "Update all channels."
+
+populate_content:
+  class: Aji::Queues::PopulateYoutubeAuthorContent
+  cron: "30 * * * *"
+  args:
+  description: "Populate Youtube Authors"
