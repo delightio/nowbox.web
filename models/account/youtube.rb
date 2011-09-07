@@ -6,7 +6,7 @@ module Aji
     after_create :set_uid_as_username
 
     def profile_uri
-      "http://www.youtube.com/user/#{username}"
+      info['profile_uri']
     end
 
     def thumbnail_uri
@@ -37,12 +37,10 @@ module Aji
     # Fetch information from youtube, returns the new info hash upon success
     # and false otherwise.
     def get_info_from_youtube_api
-      youtube_data = MultiJson.decode(Faraday.get(
-        "http://gdata.youtube.com/feeds/api/users/#{uid}?alt=json&v=2").
-        body)['entry']
-      info['description'] = youtube_data['yt$aboutMe']['$t']
-      info['profile_uri'] = youtube_data['link'][2]['href']
-      info['thumbnail_uri'] = youtube_data['media$thumbnail']['url']
+      youtube_data = YoutubeDataGrabber.new uid
+      info['thumbnail_uri'] = youtube_data.thumbnail_uri
+      info['profile_uri'] = youtube_data.profile_uri
+      info['description'] = youtube_data.description
       save && info
     end
 
