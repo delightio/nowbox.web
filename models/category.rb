@@ -11,6 +11,7 @@ module Aji
     after_destroy :delete_redis_keys
 
     include Redis::Objects
+    include Mixins::Featuring
     sorted_set :channel_id_zset
     def channel_ids limit=-1
       (channel_id_zset.revrange 0, limit).map(&:to_i)

@@ -5,6 +5,7 @@ module Aji
     subject { Category.create.tap{|c| c.channel_id_zset[1]=1 } }
 
     it_behaves_like "any redis object model"
+    it_behaves_like "any featured model"
 
     it "sets title as raw_title after create" do
       c = Aji::Category.find_or_create_by_raw_title random_string
