@@ -10,6 +10,13 @@ module Aji
     def set_title; self.title = title || self.class.to_title(keywords); end
     def sort_keywords; self.keywords = keywords.sort; end
 
+    # TODO LH 355
+    def self.find_or_create_by_keywords words
+      c = self.search_helper words.join(',')
+      return c.first unless c.empty?
+      self.create :keywords => words
+    end
+
     def thumbnail_uri
       "http://beta.#{Aji.conf['TLD']}/images/icons/tag.png"
     end

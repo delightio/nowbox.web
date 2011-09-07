@@ -73,10 +73,6 @@ describe Aji::Mention do
     # end
     # subject { Aji::Mention.new :author => @author }
     subject { Factory :mention }
-    it "returns 0 if author is blacklisted" do
-      subject.author.should_receive(:blacklisted?).and_return(true)
-      subject.age(Time.now.to_i).should == 0
-    end
     it "returns 0 if an older time is passed in" do
       subject.age((subject.published_at-10.seconds).to_i).should == 0
     end

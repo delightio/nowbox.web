@@ -68,11 +68,11 @@ module Aji
       # ## POST channels/
       # __Returns__ new keyword channel created by given parameters  
       # __Required params__  
-      # - `type`: channel type. Currently support: `Keyword`  
+      # - `type`: channel type. Currently support: `keyword`  
       # - `query`:  comma separated list of search terms
       #
       post do
-        creation_error!(Channel::Keyword, params) if params[:type] != 'Keyword'
+        creation_error!(Channel::Keyword, params) if params[:type] != 'keyword'
         not_found_error!(Channel::Keyword, params) if params[:query].nil?
         new_channel = Channel::Keyword.find_or_create_by_keywords(
           params[:query].split(','))

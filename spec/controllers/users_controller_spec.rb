@@ -37,16 +37,17 @@ module Aji
       end
 
       describe "put #{resource_uri}/:id" do
-        it "updates given parameter" do
+        it "updates given parameters" do
           user = Aji::User.create
-          params = {}
-          [ :name, :email].each do |p|
-            params[p] = random_string
-            put "#{resource_uri}/#{user.id}", params
-            last_response.status.should == 200
-            User.find(user.id).send(p) == params[p]
-          end
+          params = { name: "Thomas Pun", email: "dapunster@gmail.com" }
+          put "#{resource_uri}/#{user.id}", params
+          ap last_response
+          last_response.status.should == 200
+          user.reload
+          user.name.should == "Thomas Pun"
+          user.email.should == "dapunster@gmail.com"
         end
+
         it "returns error if missing email parameter" do
           put "#{resource_uri}/#{Aji::User.create.id}"
           last_response.status.should == 400

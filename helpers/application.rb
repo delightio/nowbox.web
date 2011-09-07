@@ -7,8 +7,15 @@ module Aji
       def creation_error! a_class, params
         error! "Cannont create #{a_class} with #{params.inspect}", 500
       end
+
       def missing_params_error! params, required_params
-        error! "Missing params, #{required_params.inspect}, from #{params.inspect}", 400
+        error! "Missing params, #{required_params.inspect}, from " +
+          params.inspect, 400
+      end
+
+      def must_supply_params_error! possible_params
+        error! "No parameters given. Possible parameters are " +
+          possible_params * ', ', 400
       end
 
       def find_channel_by_id_or_error id

@@ -10,5 +10,17 @@ shared_examples_for "any account" do
     it "has many channels" do
       subject.should respond_to :channels, :channel_ids
     end
+
+    it "has a thumbnail_uri" do
+      subject.should respond_to :thumbnail_uri
+    end
+
+    it "has a description" do
+      subject.should respond_to :description
+    end
+
+    it "has a profile_uri" do
+      subject.should respond_to :profile_uri
+    end
   end
 end

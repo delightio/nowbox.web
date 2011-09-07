@@ -56,8 +56,21 @@ opportunity to do so arises.
   easier to logically separate implementation from application. But this will be
   a long and gradual task.
 
+- ActiveRecord Models should follow the format:
+  - Module opening
+  - Class comment with Schema declaration unless inherited
+  - Class opening
+  - Class constants
+  - Mixins and attribute declarations
+  - Validations
+  - Serializations
+  - Relations
+  - Hooks
+  - Instance methods
+  - Private instance methods
+  - Class methods
+
 [JN]: http://github.com/jnunemaker
 [AG]: http://avdi.org
-[PC]: http://????
-
+[PC]: http://peterc.org
 

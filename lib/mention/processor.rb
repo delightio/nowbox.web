@@ -32,11 +32,11 @@ module Aji
 
         if @mention.spam?
           Resque.enqueue Queues::RemoveSpammer, @mention.author.id
-          @errors << "Mention[#{@mention.id} is spammy"
+          @errors << "Mention is spammy"
           return
         end
 
-      rescue PGError => e
+      rescue ActiveRecord::StatementInvalid => e
         raise unless e.message =~ /invalid byte sequence for encoding "UTF8"/
           @errors << "Invalid Characters in #{@mention.body}"
       end
