@@ -11,19 +11,21 @@
 			<tr >
 				<td width="100%">
 				<% @channels.each do |channel| %>
-					<table class="channel" bgcolor="#FBFBFB" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; border: 5px solid #DDDDDD;" >
+					<table class="channel" bgcolor="#F2F2F2" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; border: 1px solid #D2D2D2; box-shadow: 0px 0px 10px rgba(50, 50, 50, 0.1);" >
 						<tr  bgcolor="">
 							<td>
 								<table width="100%">
 									<tr>
 										<td width="50" style="text-align: center; padding: 10px 10px;" >
-											<img src="<%= channel.thumbnail_uri %>" width="50" height="50" class="galleryimage" label="<%= channel.title %>">
+												<a href="http://beta.<%= Aji.conf['TLD'] %>/channel/<%= channel.id %>"
+													><img src="<%= channel.thumbnail_uri %>" width="50" height="50" class="galleryimage" label="<%= channel.title %>">	
+												</a>
 										</td>
 										<td  class="contentblock" style="">
-											<div class="h2" style="color:#F95133; font-size:20px; font-weight: bold;"><%= "#{channel.title}" %></div>
+											<a href="http://beta.<%= Aji.conf['TLD'] %>/channel/<%= channel.id %>" class="h2" style="color:#F95133; font-size:20px; font-weight: bold; text-decoration:none;"><%= "#{channel.title}" %></a>
 										</td>
-										<td style="">
-											<img class="browseronly" border="0" src="http://beta.nowmov.com/images/email/spacer.gif" width="150" height="50">
+										<td width="150" style="text-align: right;">
+											<a href="http://beta.<%= Aji.conf['TLD'] %>/channel/<%= channel.id %>" style="font-size: 20px; color: white; padding: 10px 10px; font-weight: bold; text-align: center; background-color:#F95133; text-decoration: none; text-align: right; margin: 0px 10px; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;">Subscribe</a>
 										</td>
 									</tr>
 								</table>
@@ -36,12 +38,12 @@
 								<tr>
 								<% channel.videos.each do |video| %>										
 
-										<td class="imageblock" width="200" style="padding: 0px 0px; vertical-align: top;">
-											<a href="http://beta.<%= Aji.conf['TLD'] %>/video/<%= video.id %>" target="_blank" style="display: block; padding: 2px 0px; background-color:#DDD; text-align: center; ">
-												<img src="<%= video.thumbnail_uri %>" width="200" style="vertical-align: middle; "/>
+										<td class="imageblock" width="190" style="padding: 0px 0px; vertical-align: top;">
+											<a href="http://beta.<%= Aji.conf['TLD'] %>/video/<%= video.id %>" target="_blank" style="display: block; padding: 5px 5px; text-align: center; background-color:#FFFFFF; border-top: 1px solid #E7E7E7; border-bottom: 1px solid #E7E7E7;">
+												<img src="<%= video.thumbnail_uri %>" width="190" style="vertical-align: middle; "/>
 											</a>
-											<div class="h3 secondary" style="padding: 10px 5px; width: 190px;">
-												<a href="http://beta.<%= Aji.conf['TLD'] %>/video/<%= video.id %>" target="_blank"  style="color: #4A7698; display: block; font-size: 14px; text-decoration: none; line-height: 1.3;"><%= video.title %></a>
+											<div class="h3 secondary" style="padding: 10px 5px; width: 180px;">
+												<a href="http://beta.<%= Aji.conf['TLD'] %>/video/<%= video.id %>" target="_blank"  style="color: #4A7698; display: block; font-size: 14px; text-decoration: none; line-height: 1.3;"><%= shorten(video.title, 45) %></a>
 												<p style="color: #AAAAAA; font-size: 12px; margin: 5px 0px; line-height: 1;"><%= video.view_count %> views</p>
 
 											</div>
@@ -51,33 +53,13 @@
 							</table>
 							</td>
 						</tr>
-						<% if false %>
-							<% channel.videos.each do |video| %>										
-								<tr>
-									<td width="50" style="padding: 10px auto;">
-	
-									</td>
-									<td class="contentblock" style="padding: 10px auto;">
-										<div class="h3 secondary">
-											<a href="http://beta.<%= Aji.conf['TLD'] %>/video/<%= video.id %>" target="_blank"  style="color: #4A7698; width: 330px; display: block; font-size: 16px;"><%= video.title %></a>
-										</div>
-										<p style="color: #AAAAAA; font-size: 12px; padding: 10px 0px;"><%= video.view_count %> views</p>
-									</td>
-									<td class="imageblock" width="150" style="padding: 10px 10px;">
-										<a href="http://beta.<%= Aji.conf['TLD'] %>/video/<%= video.id %>" target="_blank">
-											<img src="<%= video.thumbnail_uri %>" width="150" style="vertical-align: middle;"/>
-										</a>
-									</td>	
-								</tr>
-							<% end %>		
-						<% end %>
 						<tr class="browseronly">
 							<td></td>
 							<td></td>
 							<td></td>
 						</tr>						
 					</table>
-					<img class="browseronly" border="0" src="http://beta.nowmov.com/images/email/spacer.gif" width="1" height="20">
+					<img class="browseronly" border="0" src="http://beta.nowbox.com/images/email/spacer.gif" width="1" height="20">
 				<% end %>
 				</td>
 			</tr>

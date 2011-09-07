@@ -109,6 +109,14 @@ module Aji
       self.history_channel = Channel::User.create :title => 'History'
     end
 
+		def first_name
+			self.name.split(' ').first
+		end
+		
+		def last_name
+			self.name.split(' ').last
+		end		
+		
     private :create_identity, :create_user_channels
 
   end

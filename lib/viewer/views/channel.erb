@@ -1,0 +1,23 @@
+<div class="divider mistyblue-tile"></div>
+<div id="channel">
+	<div class="wrapper">
+		<h1><%= @channel['title'] %></h1>	
+	</div>
+	<% if @channel['videos'].count > 0 %>
+	<ul id="user_videos" class="wrapper">
+		<% @channel['videos'].each do |video| %>
+			<li>
+				<a href="<%= "/video/#{video['video']['id']}/" %>">
+					<div class="image">
+						<div class="inset_shadow"></div>
+						<img src="<%= video['video']['thumbnail_uri'] %>" />
+						<div class="viewcount round-corners-3"><%= video['video']['view_count'] %> views</div>
+					</div>
+					<div class="title"><%= video['video']['title'] %></div>
+				</a>
+			</li>
+		<% end %>
+		<div class="clearfix"></div>
+	</ul>		
+	<% end %>
+</div>

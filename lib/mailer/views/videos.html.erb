@@ -9,10 +9,9 @@
 					<tr>
 						<td class="contentblock" style="padding-left: 5px;">
 
-							<h2 class="secondary"><strong><singleline label="Title">Hello <%= @user.first_name %>!</singleline></strong></h2>
-							<multiline label="Description">
-								<p>We know there's a lot to look at on nowmov, so we've been searching high and low for a few videos we think you'd really like.  Here's what we came up with.</p>
-								<p style="font-size: 16px; font-weight: bold; margin: 0px;"><i>- the nowmov team</i></p>
+							<a href="http://beta.<%= Aji.conf['TLD'] %>/channel/<%= @user.favorite_channel_id %>" class="h2" style="color:#F95133; font-size:20px; font-weight: bold; text-decoration: none;">Hello <%= @user.first_name %>!</a>											<multiline label="Description">
+								<p style="font-size: 18px; line-height: 1.5;">We know there's a lot to look at on nowbox, so we've been searching high and low for a few videos we think you'd really like.  Here's what we came up with.</p>
+								<p style="font-size: 16px; font-weight: bold; margin: 0px;"><i>- the nowbox team</i></p>
 							</multiline>
 
 						</td>

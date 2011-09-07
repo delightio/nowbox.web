@@ -8,7 +8,7 @@
 				<tr>
 					<td bgcolor="" class="contentblock">
 
-						<h1 class="secondary"><strong><singleline label="Title">Top <%= @shares.count %> New Videos For You</singleline></strong></h1>
+						<h1 class="secondary"><strong><singleline label="Title">What's Playing Now</singleline></strong></h1>
 					</td>
 				</tr>
 				</table>		
@@ -33,7 +33,7 @@
 								</h2>
 								<multiline label="Description">
 									<p>
-										<span>Shared by <strong><%= "#{share.user.first_name} #{share.user.last_name}" %></strong></span>
+										<span>Shared by <strong><%= "#{share.user.name}" %></strong></span>
 										<span style="color: #AAA; float: right;"><%= share.video.view_count %> views</span>																				<div class="clearfix"></div>
 									</p>
 								</multiline>

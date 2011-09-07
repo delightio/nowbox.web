@@ -1,8 +1,8 @@
 body { background: url(/images/textures/aji-tiles-crosshatch-white.jpg) repeat; color: #090909; }
-body#video_layout { background-color: #333; background: url(/images/textures/aji-tiles-darkgray.jpg) repeat; color: #090909; }
+body#video_layout, body#channel_layout { background-color: #333; background: url(/images/textures/aji-tiles-darkgray.jpg) repeat; color: #090909; }
 
 header { position: relative; padding: 25px 0px 25px; line-height: 30px; text-align: left;  font-size: 14px; z-index: 10;
-	background-color: #DD7924; background: url(/images/textures/aji-tiles-crosshatch-darkorange.jpg) repeat;
+	background-color: #DD7924; background: url(/images/textures/aji-tiles-crosshatch-redorange.jpg) repeat;
 }
 	.home header{ background-color: transparent; background: none;}
 	header > .wrapper { padding: 0px; }
@@ -12,7 +12,7 @@ header { position: relative; padding: 25px 0px 25px; line-height: 30px; text-ali
 	header ul{ float: right; list-style: none; padding: 0px 10px; margin: 0px auto; background: rgba(0, 0, 0, 0.4); }
 		header ul li { float: right; display: block; padding: 2px 5px;}
 			header ul a, header ul a:active, header ul a:visited{ color: #DDD;  font-weight: normal;}
-				header ul a:hover { color: #FF9900;}
+				header ul a:hover { color: #00bfff;}
 
 footer {   background: url(/images/textures/aji-tiles-black.jpg) repeat; position: relative; padding: 20px 0px 20px; margin: auto; font-size: 14px; }	
 	footer > .wrapper { padding: 0px;}
@@ -26,6 +26,7 @@ footer ul{ float: right; list-style: none; padding: 0px; margin: 0px auto; }
 	
 #main {  position: relative;padding: 0px 0px; z-index: 1; }
 .wrapper{ width: 900px; padding: 20px 0px; margin: auto; position: relative;}
+	.narrow.wrapper{ width: 600px; }
 .section{  margin: 0px 0px 20px; padding: 20px; background: rgba(255, 255, 255, 0.5); box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);}
 .bare.section{  background: transparent; box-shadow: none; padding: 0px; }
 .section.lite-blue{ background: rgba(0, 153, 204, 0.1); }
@@ -221,7 +222,7 @@ margin-left: 20px;}
 		
 		
 /* VIDEO */
-#video #logo{ height: 50px; width: 300px; margin: 20px auto 10px; text-align: center; float: none;}
+#video_layout #logo{ height: 50px; width: 300px; margin: 20px auto 10px; text-align: center; float: none;}
 #video .call_to_action_social{ }
 #video #embed { position: relative; height: 510px; margin: 0px 0px; padding: 0px; text-align: center; background-color: #111; background: rgba(0, 0, 0, 0.4);}
 	#video #embed iframe{ margin: auto; }
@@ -272,7 +273,8 @@ margin-left: 20px;}
 		#next_button a img{ }
 		 	#next_button a:hover{ opacity: 1;}
 
-
+/*CHANNEL*/
+#channel_layout h1{ color: white; }
 	
 /* SHARER */
 #sharer{ text-align: center; padding-top: 0px; }
@@ -292,6 +294,7 @@ margin-left: 20px;}
 .black-tile{ background: url(/images/textures/aji-tiles-black.jpg) repeat;  } 		
 .orange-tile{ background: url(/images/textures/aji-tiles-crosshatch-orange.jpg) repeat;  } 		
 .darkorange-tile{ background: url(/images/textures/aji-tiles-crosshatch-darkorange.jpg) repeat;  } 		
+.redorange-tile{ background: url(/images/textures/aji-tiles-crosshatch-redorange.jpg) repeat;  } 		
 .gray-tile{ background: url(/images/textures/bg-gray-crosshatch.jpg) repeat;  } 		
 .mistyblue-tile{  background: url(/images/textures/bg-blue-crosshatch.jpg) repeat; }
 
@@ -340,7 +343,7 @@ a.opacity_transition{
 .call_to_action_download{ padding: 10px; background-color: #000; box-shadow: inset 0px 0px 5px #000;}
 	.call_to_action_download .image{ float: left; display: block; margin-right: 10px; height: 48px; }
 	.call_to_action_download .blurb{ float: left; display: block; line-height:  25px; color: #333; text-shadow: 0px 1px 1px #222; width: 525px;}
-	.call_to_action_download a.download.button{ float: right; display: block; padding: 0px 20px; line-height: 40px; border: 5px solid transparent; background-color: #5bb8ea; background: url(/images/textures/aji-tiles-crosshatch-orange.jpg) repeat; color: #F9F9F9; font-size: 18px; font-weight: bold;}
+	.call_to_action_download a.download.button{ float: right; display: block; padding: 0px 20px; line-height: 40px; border: 5px solid transparent; background-color: #5bb8ea; background: url(/images/textures/aji-tiles-crosshatch-redorange.jpg) repeat; color: #F9F9F9; font-size: 18px; font-weight: bold;}
 		.call_to_action_download a.download.button:hover{  background-color: #66CCFF; border-color: #FFF;}
 
 
@@ -353,7 +356,7 @@ a.opacity_transition{
 			.call_to_action_social .blurb p:last-child{
 				font-size: 12px; color: #AAA;
 			}
-	.call_to_action_social a.download.button{ float: right; display: block; padding: 0px 20px; line-height: 40px; border: 5px solid transparent; background-color: #5bb8ea; background: url(/images/textures/aji-tiles-crosshatch-orange.jpg) repeat; color: #F9F9F9; font-size: 18px; font-weight: bold;}
+	.call_to_action_social a.download.button{ float: right; display: block; padding: 0px 20px; line-height: 40px; border: 5px solid transparent; background-color: #5bb8ea; background: url(/images/textures/aji-tiles-crosshatch-redorange.jpg) repeat; color: #F9F9F9; font-size: 18px; font-weight: bold;}
 		.call_to_action_social a.download.button:hover{  background-color: #66CCFF; border-color: #FFF;}
 
 
@@ -363,8 +366,8 @@ a.opacity_transition{
 .user_quote{ padding: 10px; margin-bottom: 10px; }
 	.user_quote:last-child{ margin-bottom: 0px;}
 	.user_quote .quoter_image{ float: left; display: block; margin-right: 20px; height: 48px; }
-	.user_quote .blurb{ width: 690px; float: left; display: block; line-height:  25px; text-shadow: 0px 1px 1px #FFF;  }
-		.user_quote .quote{ color: #444; font-size: 24px;font-family: 'Georgia', 'Times New Roman', Times, serif; font-style: italic; text-shadow: 0px 1px 1px #FFF; line-height: 1.5;}
+	.user_quote .blurb{ width: 500px; float: left; display: block; line-height:  25px; text-shadow: 0px 1px 1px #FFF;  }
+		.user_quote .quote{ color: #444; font-size: 22px;font-family: 'Georgia', 'Times New Roman', Times, serif; font-style: italic; text-shadow: 0px 1px 1px #FFF; line-height: 1.5;}
 		.user_quote .quoter{ color: #888; font-size: 14px; margin-top: 5px; }
 		
 /* MOBILE */

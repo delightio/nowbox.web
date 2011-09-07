@@ -112,18 +112,28 @@ module Aji
     	random =  Share.offset(rand(Share.count)).first
     	redirect to("/video/#{random.video.id}/#{random.id}")
     end
-    
+ 
+   	get '/channel/:channel_id/?' do
+      # begin
+	      @channel = Channel.find(params[:channel_id]).serializable_hash(:inline_videos => 3 * 6)
+
+		    deliver('channel', 'layout_channel')
+#       rescue
+#  				erb :'404', {:layout => :layout_error} 
+#       end
+  	end	
+  	   
   	get '/video/:video_id/:share_id/?' do
        begin
       	@video = Video.find(params[:video_id])
-       	if(params[:video_id])
+       	if(params[:share_id])
        		@share = Share.find(params[:share_id])
       		@user = @share.user
       		@rec_videos = Share.where("user_id = ? AND id <> ?", @user.id, @share.id).limit(3 * 3)
-	     		@share_url = "http://nowmov.com/video/#{@video.id}/#{@share.id}";
+	     		@share_url = "http://nowbox.com/video/#{@video.id}/#{@share.id}";
       	else
 	      	@rec_videos = Share.find(:all, :order => "id desc", :limit => 3 * 3)
-	      	@share_url = "http://nowmov.com/video/#{@video.id}";      	       	
+	      	@share_url = "http://nowbox.com/video/#{@video.id}";      	       	
        	end
 
 		    deliver('video', 'layout_video')
@@ -140,7 +150,7 @@ module Aji
 	      
 	      @rec_videos = Share.where("user_id = ? AND id <> ?", @user.id, @share.id).limit(3 * 3)
 	      
-	      @share_url = "http://nowmov.com/share/#{@share.id}";
+	      @share_url = "http://nowbox.com/share/#{@share.id}";
 	      
 		    deliver('video', 'layout_video')
       rescue
