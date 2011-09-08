@@ -8,7 +8,7 @@ module Aji
   # - updated_at: DateTime
   class User < ActiveRecord::Base
     before_create :create_user_channels
-    after_create :create_identity, :subscribe_default_channels
+    after_create :create_identity, :subscribe_featured_channels
     after_destroy :delete_redis_keys
 
     has_many :events
@@ -20,8 +20,11 @@ module Aji
     include Redis::Objects
     list :subscribed_list # User's Subscribed channels.
 
-    def subscribe_default_channels
-      Channel.default_listing.each { |c| subscribe c }
+    def subscribe_featured_channels limit=4
+      featured_channels = Channel.featured
+      unless featured_channels.empty?
+        featured_channels.first(limit).each { |c| subscribe c }
+      end
       # TODO: we are pulling in the whole channel object but we really only care about Channel#id
     end
 

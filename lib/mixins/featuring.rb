@@ -18,7 +18,9 @@ module Aji
         end
 
         def featured
-          find featured_ids unless featured_ids.empty?
+          objs = []
+          objs = find(featured_ids) unless featured_ids.empty?
+          objs
         end
 
         def set_featured to_be_featured_by_title
