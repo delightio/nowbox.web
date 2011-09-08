@@ -2,7 +2,7 @@ require File.expand_path("../../../spec_helper", __FILE__)
 
 describe Aji::Channel::Trending do
   subject { Aji::Channel.trending }
-  
+
   describe "singleton" do
     it "creates a new singleton when none exists" do
       expect { Aji::Channel::Trending.singleton }.
@@ -31,7 +31,8 @@ describe Aji::Channel::Trending do
                                        :external_id => yt_id) }
 
         old_video = Factory :video_with_mentions
-        old_video.mentions.each {|m| m.update_attribute :published_at, 1.years.ago }
+        old_video.mentions.each { |m| m.update_attribute :published_at,
+          1.years.ago }
         subject.push_recent old_video
 
         Aji.stub(:conf).and_return(
@@ -42,7 +43,8 @@ describe Aji::Channel::Trending do
       specify "all content_videos are populated" do
         subject.refresh_content
         subject.content_videos.each do |video|
-          video.should be_populated
+          video.should be_populated, "expected video[#{video.id}].populated? " +
+            "to be populated but it was not"
         end
       end
 
