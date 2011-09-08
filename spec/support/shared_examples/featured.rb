@@ -25,10 +25,17 @@ shared_examples_for "any featured model" do
           to change { subject.class.featured_ids }.
           from([]).to([subject.id])
       end
+
+      it "does not add self to featured_ids if self is already added" do
+        subject.unfeature
+        subject.should_receive(:featured?).and_return(true)
+        expect { subject.feature }.
+          to_not change { subject.class.featured_ids }
+      end
     end
 
     describe "#unfeature" do
-      it "remoes object id from featured_ids" do
+      it "removes object id from featured_ids" do
         expect { subject.unfeature }.
           to change { subject.class.featured_ids }.
           from([subject.id]).to([])
