@@ -16,8 +16,14 @@ channels_json.each do |ch|
     Aji::Account::Youtube.find_or_create_by_uid u
   end
 
-  channel = Aji::Channel::Account.find_or_create_by_accounts(
-    accounts, { :title => ch["title"], :default_listing => true })
+  channel = Aji::Channel::Account.find_by_title ch["title"]
+  if channel
+    puts "Updating previous channel, #{ch["title"]}, with #{channel.accounts.count-accounts.count} more accounts"
+    channel.accounts = accounts
+  else
+    channel = Aji::Channel::Account.find_or_create_by_accounts(
+      accounts, { :title => ch["title"], :default_listing => true })
+  end
   puts "  => #{channel.inspect}"
   if channel.save != true
     puts "*** error saving #{channel.title} because: #{channel.errors}"
