@@ -9,7 +9,8 @@ module Aji
 
       module ClassMethods
         def featured_key
-          "#{self}::featured::ids"
+          klass = self.to_s.split("::").first(2).join("::") # TODO LH 364
+          "#{klass}::featured::ids"
         end
 
         def featured_ids
