@@ -70,6 +70,16 @@ opportunity to do so arises.
   - Private instance methods
   - Class methods
 
+- Programatically generated RSpec tests require custom matchers to explain the
+specific failure case. For example:
+
+```ruby
+subject.content_videos.each do |video|
+  video.should be_populated, "expected video[#{video.id}].populated? " +
+    "to be populated but it was not"
+end
+```
+
 [JN]: http://github.com/jnunemaker
 [AG]: http://avdi.org
 [PC]: http://peterc.org
