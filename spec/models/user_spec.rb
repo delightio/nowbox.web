@@ -18,12 +18,12 @@ module Aji
       end
     end
 
-    describe "#subscribe_default_channels" do
-      it "subscribes to default channels" do
-        defaults = (0..4).map { Factory :channel }
-        Aji::Channel.stub(:default_listing).and_return(defaults)
+    describe "#subscribe_featured_channels" do
+      it "subscribes to featured channels" do
+        featured = (0..2).map { Factory :channel }
+        Aji::Channel.should_receive(:featured).and_return(featured)
         u = Factory :user
-        defaults.each { |c| u.subscribed?(c).should be_true }
+        featured.each { |c| u.subscribed?(c).should be_true }
       end
     end
 

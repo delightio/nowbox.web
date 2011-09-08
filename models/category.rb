@@ -11,6 +11,7 @@ module Aji
     after_destroy :delete_redis_keys
 
     include Redis::Objects
+    include Mixins::Featuring
     sorted_set :channel_id_zset
     def channel_ids limit=-1
       (channel_id_zset.revrange 0, limit).map(&:to_i)
@@ -53,16 +54,6 @@ module Aji
 
     def set_title
       update_attribute(:title, raw_title) if title.nil?
-    end
-
-    def self.featured_key
-      "Aji::Category::featured::ids"
-    end
-
-    def self.featured args={}
-      featured_ids = redis.lrange featured_key, 0, -1
-      return self.find featured_ids unless featured_ids.empty?
-      Category.all.select{ |cat| !cat.featured_channels.empty? } - [undefined]
     end
 
     def self.undefined

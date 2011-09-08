@@ -5,6 +5,7 @@ module Aji
     subject { Category.create.tap{|c| c.channel_id_zset[1]=1 } }
 
     it_behaves_like "any redis object model"
+    it_behaves_like "any featured model"
 
     it "sets title as raw_title after create" do
       c = Aji::Category.find_or_create_by_raw_title random_string
@@ -26,34 +27,6 @@ module Aji
         featured = subject.featured_channels
         featured.should include ch1
         featured.should_not include ch2
-      end
-    end
-
-    describe ".featured" do
-      subject { Aji::Category.featured }
-      it "does not return undefined category" do
-        subject.should_not include Aji::Category.undefined
-      end
-      it "returns predefined featured categories" do
-        featured = (0..2).map { |n| Factory :category }
-        featured.each do | category |
-          Aji.redis.rpush Aji::Category.featured_key, category.id
-        end
-        5.times { Factory :category }
-        subject.should have(3).categories
-        featured.each { |cat| subject.should include cat }
-      end
-      it "returns categories w/ > 1 featured channel" do
-        categories = []
-        (0..4).each do
-          category = Factory :category
-          category.stub(:featured_channels).and_return([(Factory :channel)])
-          categories << category
-        end
-        Aji::Category.stub(:all).and_return(
-          categories + (0..9).map { Factory :category } )
-          subject.should have(categories.count).categories
-          (subject & categories).should == categories
       end
     end
   end

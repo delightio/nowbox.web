@@ -17,7 +17,7 @@ module Aji
       get do
         error!("Missing/Invalid parameter: type != featured", 404) if params[:type]!="featured"
         error!("Missing parameter: user_id", 404) if params[:user_id].nil?
-        categories = Category.featured params
+        categories = Category.featured
         categories
       end
 
