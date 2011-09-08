@@ -5,7 +5,6 @@ describe Aji::Account::Twitter do
                                       :username => '_nuclearsammich') }
 
   it_behaves_like "any account"
-  it_behaves_like "any content holder"
 
   describe "#refresh_influencers" do
     it "adds twitter followers as influencers" do

@@ -3,7 +3,6 @@ module Aji
   describe Account::Youtube do
     subject { Account::Youtube.create :uid => "nowmov" }
     it_behaves_like "any account"
-    it_behaves_like "any content holder"
 
     describe "#get_info_from_youtube_api" do
       subject { Account::Youtube.new :uid => 'day9tv' }
