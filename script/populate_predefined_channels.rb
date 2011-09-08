@@ -18,7 +18,7 @@ channels_json.each do |ch|
 
   channel = Aji::Channel::Account.find_by_title ch["title"]
   if channel
-    puts "Updating previous channel, #{ch["title"]}, with #{channel.accounts.count-accounts.count} more accounts"
+    puts "Updating previous channel, #{ch["title"]}, with #{accounts.count-channel.accounts.count} more accounts"
     channel.accounts = accounts
   else
     channel = Aji::Channel::Account.find_or_create_by_accounts(
@@ -36,7 +36,7 @@ channels_json.each do |ch|
   accounts.each do |account|
     channel = Aji::Channel::Account.find_or_create_by_accounts [account]
     channels << channel
-    puts "Created #{channel.accounts.first.username}'s channel: #{channel.inspect}"
+    puts "  Created #{channel.accounts.first.username}'s channel: #{channel.inspect}"
   end
   puts
 
