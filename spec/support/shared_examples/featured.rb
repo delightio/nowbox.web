@@ -18,6 +18,20 @@ shared_examples_for "any featured model" do
       end
     end
 
+    describe ".set_featured" do
+      before(:each) do
+        title = random_string
+        subject.update_attribute :title, title
+        subject.unfeature
+      end
+
+      it "set featured_ids by title" do
+        expect { subject.class.set_featured([subject.title]) }.
+          to change { subject.class.featured_ids }.
+          from([]).to([subject.id])
+      end
+    end
+
     describe "#feature" do
       it "adds object id into featured_ids" do
         subject.unfeature
