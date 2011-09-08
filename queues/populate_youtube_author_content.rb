@@ -13,9 +13,13 @@ module Aji
           end
           account.get_info_from_youtube_api
         end
+        account.save
       end
       Aji.log "Populated #{LIMIT} Youtube Accounts."
-      Aji.redis.set("populate_content:offset", offset+LIMIT)
+      if offset + LIMIT < Account::Youtube.count
+        Aji.redis.set("populate_content:offset", offset+LIMIT)
+        Resque.enqueue Queues::PopulateYoutubeAuthorContent
+      end
     end
   end
 end
