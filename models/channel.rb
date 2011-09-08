@@ -22,6 +22,7 @@ module Aji
     lock :refresh, :expiration => 10.minutes
     include Mixins::Populating
     sorted_set :category_id_zset
+    include Mixins::Featuring
 
     def category_ids limit=-1
       (category_id_zset.revrange 0, limit).map(&:to_i)

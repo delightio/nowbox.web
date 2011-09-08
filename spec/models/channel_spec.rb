@@ -11,6 +11,7 @@ module Aji
     end
 
     it_behaves_like "any redis object model"
+    it_behaves_like "any featured model"
 
     # TODO: This should be removed or refactored as per
     # https://pipely.lighthouseapp.com/projects/77614-aji/tickets/328
