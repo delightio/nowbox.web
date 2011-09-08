@@ -56,16 +56,6 @@ module Aji
       update_attribute(:title, raw_title) if title.nil?
     end
 
-    def self.featured_key
-      "Aji::Category::featured::ids"
-    end
-
-    def self.featured args={}
-      featured_ids = redis.lrange featured_key, 0, -1
-      return self.find featured_ids unless featured_ids.empty?
-      Category.all.select{ |cat| !cat.featured_channels.empty? } - [undefined]
-    end
-
     def self.undefined
       self.find_or_create_by_raw_title "*** undefined ***"
     end

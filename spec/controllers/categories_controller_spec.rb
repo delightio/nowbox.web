@@ -16,6 +16,14 @@ module Aji
       end
       
       describe "get #{resource_uri}/" do
+
+        before(:each) do
+          3.times do
+            cat = Factory :category
+            cat.feature
+          end
+        end
+
         it "fails if missing type or user_id" do
           get "#{resource_uri}"
           last_response.status.should == 404
@@ -31,7 +39,7 @@ module Aji
           last_response.status.should == 200
           body_hash = JSON.parse last_response.body
           returned_categories = body_hash.map {|h| h["category"]}
-          returned_categories.should have_at_most(10).categories
+          returned_categories.map{|h| h["id"]}.should == Aji::Category.featured_ids
         end
 
         it "does not return undefined category" do
@@ -48,6 +56,7 @@ module Aji
           params = { :user_id => (Factory :user).id, :type => "featured" }
           get "#{resource_uri}", params
         end
+
       end
       
       describe "get #{resource_uri}/:id/channels" do
