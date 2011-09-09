@@ -42,7 +42,9 @@ module Aji
       end
 
       unless failed?
-        @mention.videos.each { |v| @destination.push_recent v }
+        @mention.videos.each do |v|
+          @destination.push_recent v, @mention.published_at.to_i
+        end
       end
     end
 
@@ -60,6 +62,7 @@ module Aji
       {
         'twitter' => ->(tweet_hash) do
           return false if tweet_hash['entities']['urls'].empty?
+          return false if Mention.find_by_uid(tweet_hash['id'].to_s).select(:id)
           tweet_hash['entities']['urls'].any? do |url|
             Link.new(url['expanded_url'] || url['url']).video?
           end
