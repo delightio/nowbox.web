@@ -42,6 +42,8 @@ module Aji
     end
 
     def mark_spam
+      Aji.log "Mention[#{self.id}].mark_spam"
+      return
       videos.map(&:mark_spam)
     end
 
