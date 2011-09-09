@@ -29,14 +29,17 @@ module Aji
     def refresh_content force=false
       new_videos = []
       refresh_lock.lock do
-        return [] if recently_populated? && content_video_ids.count > 0 && !force
+        return [] if recently_populated? && content_video_ids.count > 0 &&
+          !force
         harvest_tweets
         videos = recent_video_ids.map { |id| Aji::Video.find_by_id id }.
           select { |v| not (v.nil? || v.blacklisted?) }
         Aji.log "Found #{videos.count} videos in #{username}'s Twitter stream"
         videos.each do |video|
+          mention = mentions.detect { |m| m.videos.include? video }
           video.populate unless video.populated?
-          push video and new_videos << video if video.populated?
+          push(video, mention.published_at.to_i) and
+            new_videos << video if video.populated?
         end
         update_attribute :populated_at, Time.now
       end
