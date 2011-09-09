@@ -101,10 +101,9 @@ require_relative "lib/viewer/viewer"
 require_relative "lib/mailer/mailer"
 
 # Add miscelaneous library code.
-# Dir.glob("lib/*.rb").each { |r| require_relative r }
-require_relative 'lib/decay'
-require_relative 'lib/macker'
-require_relative 'lib/parsers'
-require_relative 'lib/mention/processor'
+require './lib/decay'
+require './lib/macker'
+require './lib/parsers'
+require './lib/mention/processor'
 require './lib/youtube_data_grabber'
 
