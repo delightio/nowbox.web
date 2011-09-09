@@ -10,16 +10,21 @@ module Aji
       # __Returns__ the created event and HTTP Status Code 201 if successful or
       # a JSON encoded error message if not.
       #
-      # __Required params__ `user_id` unique id of the action (user)  
-      # __Required params__ `channel_id` unique id of the channel being acted on  
-      # __Required params__ `action` action being triggered:  
-      # channel: `subscribe`, `unsubscribe`  
-      # video: `view`, `share`, `enqueue`, `dequeue`, `examine`, `unfavorite`
+      # __Required params__  
+      # `user_id` unique id of the action (user)  
+      # `channel_id` unique id of the channel being acted on  
+      # `action` action being triggered:  
+      #   channel: `subscribe`, `unsubscribe`  
+      #   video: `view`, `share`, `enqueue`, `dequeue`, `examine`, `unfavorite`  
+      # __Optional params__  
+      # `reason` string containing the reason for examination
       #   
       # When an video action is sent,  
-      # __Required params__ `video_id` unique id of the video being acted on  
-      # __Required params__ `video_elapsed` time in seconds from `video_start` when the event is triggered  
-      # __Optional params__ `video_start` time in seconds when the event starts tracking (normally 0.0)
+      # __Required params__  
+      # `video_id` unique id of the video being acted on  
+      # `video_elapsed` time in seconds from `video_start` when the event is triggered  
+      # __Optional params__  
+      # `video_start` time in seconds when the event starts tracking (normally 0.0)
       post do
         p = params.delete_if {|k| k=="version" || k==:version}
         begin

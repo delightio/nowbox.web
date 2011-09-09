@@ -7,6 +7,7 @@ module Aji
   # - video_id: Integer (Foreign Key) non-nil
   # - video_start: Double
   # - video_elapsed: Double
+  # - reason: String
   # - created_at: DateTime
   # - updated_at: DateTime
   class Event < ActiveRecord::Base
@@ -29,7 +30,8 @@ module Aji
           Resque.enqueue Aji::Queues::ExamineVideo,
             { :user_id => user.id,
               :video_id => video.id,
-              :channel_id => channel.id }
+              :channel_id => channel.id,
+              :reason => reason }
         end
       end
   end

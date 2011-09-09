@@ -56,16 +56,21 @@
 <strong>Returns</strong> the created event and HTTP Status Code 201 if successful or
 a JSON encoded error message if not.</p>
 
-<p><strong>Required params</strong> <code>user_id</code> unique id of the action (user)<br>
-<strong>Required params</strong> <code>channel_id</code> unique id of the channel being acted on<br>
-<strong>Required params</strong> <code>action</code> action being triggered:<br>
-channel: <code>subscribe</code>, <code>unsubscribe</code><br>
-video: <code>view</code>, <code>share</code>, <code>enqueue</code>, <code>dequeue</code>, <code>examine</code>, <code>unfavorite</code></p>
+<p><strong>Required params</strong><br>
+<code>user_id</code> unique id of the action (user)<br>
+<code>channel_id</code> unique id of the channel being acted on<br>
+<code>action</code> action being triggered:<br>
+  channel: <code>subscribe</code>, <code>unsubscribe</code><br>
+  video: <code>view</code>, <code>share</code>, <code>enqueue</code>, <code>dequeue</code>, <code>examine</code>, <code>unfavorite</code><br>
+<strong>Optional params</strong><br>
+<code>reason</code> string containing the reason for examination</p>
 
 <p>When an video action is sent,<br>
-<strong>Required params</strong> <code>video_id</code> unique id of the video being acted on<br>
-<strong>Required params</strong> <code>video_elapsed</code> time in seconds from <code>video_start</code> when the event is triggered<br>
-<strong>Optional params</strong> <code>video_start</code> time in seconds when the event starts tracking (normally 0.0)</p>
+<strong>Required params</strong><br>
+<code>video_id</code> unique id of the video being acted on<br>
+<code>video_elapsed</code> time in seconds from <code>video_start</code> when the event is triggered<br>
+<strong>Optional params</strong><br>
+<code>video_start</code> time in seconds when the event starts tracking (normally 0.0)</p>
 
       </td>
       <td class=code>

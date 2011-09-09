@@ -12,8 +12,19 @@ describe Aji::Event do
       it "queues the given video in queue" do
         Resque.should_receive(:enqueue).with(
           Aji::Queues::ExamineVideo, an_instance_of(Hash))
-        event = Factory :event, :action => :examine
+        event = Factory :event, :action => :examine,
+          :reason => random_string
       end
+
+      it "saves the reason" do
+        reason = random_string
+        Resque.should_receive(:enqueue).with(
+          Aji::Queues::ExamineVideo, an_instance_of(Hash))
+        event = Factory :event, :action => :examine,
+          :reason => reason
+        Aji::Event.find(event.id).reason.should == reason
+      end
+
     end
   end
 end
