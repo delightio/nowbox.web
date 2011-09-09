@@ -80,6 +80,16 @@ module Aji
     end
 
     def mark_spammer
+      h = {}
+      mentions.each do |m|
+        h[:mid] = m.id
+        h[:uid] = m.external_id
+        h[:s] = m.spam?
+        h[:vids] = m.videos.map &:id
+      end
+      Aji.log :INFO, "* spammer * Account::Twitter[#{id}].mentions: [#{h.inspect}]"
+      return
+      
       mentions.map do |m|
         m.mark_spam
         m.destroy
