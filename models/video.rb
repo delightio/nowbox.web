@@ -37,7 +37,8 @@ module Aji
       failed
       blacklist if failures >= MAX_FAILED_ATTEMPTS
     else
-      update_attribute :populated_at, Time.now
+       self.populated_at = Time.now
+       save && populated_at
     end
 
     # TODO: Merge this into Video#populate and use Macker for videos.

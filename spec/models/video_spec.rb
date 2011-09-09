@@ -34,7 +34,8 @@ describe Aji::Video do
 
     context "when a video id is invalid" do
       subject do
-       Aji::Video.new :id => 666, :external_id => 'adudosucvdd', :source => 'youtube'
+       Aji::Video.new :id => 666, :external_id => 'adudosucvdd',
+         :source => 'youtube'
       end
 
       it "marks a failure" do

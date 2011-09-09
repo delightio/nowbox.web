@@ -6,7 +6,8 @@ module Aji
 
       rescue NoMethodError => e
         raise unless e.message =~ /undefined method `elements' for nil:NilClass/
-        fail Macker::FetchError, "unable to fetch youtube:#{source_id}"
+        fail Macker::FetchError, "unable to fetch youtube:#{source_id}",
+        e.backtrace
       end
 
       def self.search type, values
