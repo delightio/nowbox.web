@@ -1,7 +1,7 @@
 require File.expand_path("../../../spec_helper", __FILE__)
 module Aji
   describe Account::Youtube do
-    subject { Account::Youtube.create :uid => "nowmov" }
+    subject { Account::Youtube.create :uid => "nowbox" }
     it_behaves_like "any account"
 
     describe "#get_info_from_youtube_api" do

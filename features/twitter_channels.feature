@@ -4,13 +4,13 @@ Feature: Twitter account based Channels
   I want to see videos shared on Twitter
 
   Scenario: Fetching or creating a new twitter channel
-    Given I am logged in as a nowmov user
-    When I ask for a channel containing @nowmov's videos
-    Then I should get a channel for videos shared by @nowmov
-    And the title should be "@nowmov's Tweeted Videos"
+    Given I am logged in as a nowbox user
+    When I ask for a channel containing @nowbox's videos
+    Then I should get a channel for videos shared by @nowbox
+    And the title should be "@nowbox's Tweeted Videos"
 
   Scenario: Viewing a twitter channel's videos
-    Given a Twitter channel associated with @nowmov's twitter account
-    And @nowmov has tweeted videos recently
+    Given a Twitter channel associated with @nowbox's twitter account
+    And @nowbox has tweeted videos recently
     When I get the channels videos
     Then I should see a list of recently tweeted videos
