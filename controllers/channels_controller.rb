@@ -9,7 +9,7 @@
 #  `title`:"Trending",
 #  `video_count`: 25,
 #  `thumbnail_uri`:"http://img.youtube.com/vi/cRBcP6MmE8g/0.jpg",
-#  `resource_uri`:""http://api.nowmov.com/1/channels/1""}
+#  `resource_uri`:""http://api.nowbox.com/1/channels/1""}
 module Aji
   class API
     version '1'
