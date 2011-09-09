@@ -83,7 +83,6 @@ module Aji
       h = {}
       mentions.each do |m|
         h[:mid] = m.id
-        h[:uid] = m.external_id
         h[:s] = m.spam?
         h[:vids] = m.videos.map &:id
       end
