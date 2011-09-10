@@ -51,11 +51,12 @@ module Aji
       end
 
       mention = Mention.new(
-        :external_id => tweet_hash['uid'],
+        :uid => tweet_hash['uid'],
         :body => tweet_hash['text'],
         :published_at => tweet_hash['created_at'],
         :unparsed_data => json,
         :author => author,
+        :source => 'twitter',
         :links => links)
     end
   end
