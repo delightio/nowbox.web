@@ -8,8 +8,10 @@ module Aji
 
       def self.perform spammer_id
         spammer = Account.find spammer_id
+          Aji.redis.zincrby "spammers", 1, spammer.id
+          Aji.log "* Spammer: #{spammer.id}: m: #{spammer.mentions.map(&:id)}"
+          return
         spammer.mark_spammer
-        Aji.redis.zincrby "spammers", 1, spammer.id
       end
     end
   end
