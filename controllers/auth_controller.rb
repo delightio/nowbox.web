@@ -21,21 +21,21 @@ module Aji
     # example we are assuming the target is iOS 4 and the provider is twitter.
     #
     # 1. Open a webkitview pane and point it to
-    # `http://api.nowmov.com/auth/twitter?user_id=USER_ID` with query parameter
+    # `http://api.nowbox.com/auth/twitter?user_id=USER_ID` with query parameter
     # `user_id` specifying the internal user_id for the current Aji user.
     # 2. The webkitview is redirected to the Twitter application authorization
     # page with our application listed.
     # 3. The user must then log in and authorize our application (server-side)
     # to access their account and tweet on their behalf.
     # 4. Pending successful authorization the view will then be redirected to
-    # `http://api.nowmov.com/auth/twitter/callback`. Ideally, *as soon as* this
+    # `http://api.nowbox.com/auth/twitter/callback`. Ideally, *as soon as* this
     # redirect is initiated, the webkit view would close or grey out but content
     # from it must be captured by the iOS app.
-    # 5. `http://api.nowmov.com/auth/twitter/callback` will return an updated
+    # 5. `http://api.nowbox.com/auth/twitter/callback` will return an updated
     # JSON blob to the webkitview containing the updated user model.
     #
     # *Should the oauthentication fail for any reason the service will redirect
-    # to `http://api.nowmov.com/auth/failure`.*
+    # to `http://api.nowbox.com/auth/failure`.*
     get '/:provider/callback' do
       user = Aji::User.find_by_id params[:user_id]
       return { :error => "User[#{params[:user_id]}] does not exist." } if

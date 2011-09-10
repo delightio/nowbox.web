@@ -86,22 +86,22 @@ example we are assuming the target is iOS 4 and the provider is twitter.</p>
 
 <ol>
 <li>Open a webkitview pane and point it to
-<code>http://api.nowmov.com/auth/twitter?user_id=USER_ID</code> with query parameter
+<code>http://api.nowbox.com/auth/twitter?user_id=USER_ID</code> with query parameter
 <code>user_id</code> specifying the internal user_id for the current Aji user.</li>
 <li>The webkitview is redirected to the Twitter application authorization
 page with our application listed.</li>
 <li>The user must then log in and authorize our application (server-side)
 to access their account and tweet on their behalf.</li>
 <li>Pending successful authorization the view will then be redirected to
-<code>http://api.nowmov.com/auth/twitter/callback</code>. Ideally, <em>as soon as</em> this
+<code>http://api.nowbox.com/auth/twitter/callback</code>. Ideally, <em>as soon as</em> this
 redirect is initiated, the webkit view would close or grey out but content
 from it must be captured by the iOS app.</li>
-<li><code>http://api.nowmov.com/auth/twitter/callback</code> will return an updated
+<li><code>http://api.nowbox.com/auth/twitter/callback</code> will return an updated
 JSON blob to the webkitview containing the updated user model.</li>
 </ol>
 
 <p><em>Should the oauthentication fail for any reason the service will redirect
-to <code>http://api.nowmov.com/auth/failure</code>.</em></p>
+to <code>http://api.nowbox.com/auth/failure</code>.</em></p>
 
       </td>
       <td class=code>

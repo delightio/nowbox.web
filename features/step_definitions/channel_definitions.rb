@@ -1,4 +1,4 @@
-Given /^I am logged in as a nowmov user$/ do
+Given /^I am logged in as a nowbox user$/ do
   set_current_user Factory :user
 end
 
@@ -25,7 +25,7 @@ Given /^a Twitter channel associated with #{twitter_handle}'s twitter account$/ 
   Factory :twitter_channel, :account => account
 end
 
-Given /^@nowmov has tweeted videos recently$/ do
+Given /^@nowbox has tweeted videos recently$/ do
   pending # somehow mock recently tweeted videos
 end
 

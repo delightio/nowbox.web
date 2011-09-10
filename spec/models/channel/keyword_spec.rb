@@ -27,7 +27,7 @@ describe Aji::Channel::Keyword do
   end
 
   it "should set title based on keywords if no title is given" do
-    keywords = %w[ukulele nowmov]
+    keywords = %w[ukulele nowbox]
     ch = Aji::Channel::Keyword.create :keywords => keywords
     ch.title.should == Aji::Channel::Keyword.to_title(keywords)
   end

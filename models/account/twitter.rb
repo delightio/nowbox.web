@@ -55,7 +55,7 @@ module Aji
     end
 
     def format_for_twitter message, link
-      coda = " #{share.link} via @nowmov for iPad"
+      coda = " #{share.link} via @nowbox for iPad"
       if (message + coda).length > 140
         message[0..message.length - (3 + coda.length)] << "..." << coda
       else

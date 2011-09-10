@@ -4,7 +4,7 @@ module Aji
   describe Channel::Account do
     subject { Channel::Account.create accounts: @accounts }
     before(:each) do
-      @accounts = %w{nowmov cnn }.map do |uid| Account::Youtube.create(
+      @accounts = %w{nowbox cnn }.map do |uid| Account::Youtube.create(
         :uid => uid)
       end
     end
@@ -22,7 +22,7 @@ module Aji
     end
 
     it "should set title based on accounts" do
-      subject.title.should == "nowmov, cnn"
+      subject.title.should == "nowbox, cnn"
     end
 
     describe "#serializable_hash" do
@@ -79,7 +79,7 @@ module Aji
         new_channel.should_not be_nil
       end
 
-      # FIXME: Test dependent on nowmov account having tweeted videos.
+      # FIXME: Test dependent on nowbox account having tweeted videos.
       it "inserts videos into the channel of the given accounts" do
         accounts = Array(Account::Youtube.create :uid => "nicnicolecole")
         channel = Channel::Account.find_or_create_by_accounts accounts, {},
