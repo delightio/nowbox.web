@@ -72,6 +72,27 @@ module Aji
 
     def self.searchable_columns; [:title]; end
 
+    def self.search_helper query
+      individual_accounts = []
+      query.tokenize.map do |username|
+        accounts = Account.find_all_by_username username
+        individual_accounts += accounts
+        next unless accounts.empty?
+        accounts = Account.create_all_if_valid username
+        individual_accounts += accounts
+      end
+
+      combination = []
+      individual_accounts.count.times do |n|
+        individual_accounts.combination(n+1).to_a.each do |combo|
+          combination << find_or_create_by_accounts(combo)
+        end
+      end
+
+      results = super query
+      results + combination
+    end
+
     private
     def set_title
       self.title ||= "#{accounts.map(&:username).join(", ")}"

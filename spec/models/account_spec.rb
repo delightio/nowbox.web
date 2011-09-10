@@ -60,4 +60,33 @@ module Aji
         should == [ "nuclearsandwich", "youtube" ]
     end
   end
+
+  describe ".create_all_if_valid" do
+
+    it "returns empty array if given invalid username" do
+      bad_username = random_string
+      Account.stub(:exiting?).with(bad_username).
+        and_return(false)
+      new_accounts = Account.create_all_if_valid bad_username
+      new_accounts.should be_empty
+    end
+
+    it "returns new objects if given valid username" do
+      name = random_string
+
+      account = mock("account", :id => 1)
+      account.should_receive(:existing?).and_return(true)
+      account.should_receive(:save).and_return(true)
+
+      descendant = mock("Account Subtype")
+      descendant.should_receive(:new).with(:uid=>name).
+        and_return(account)
+      Account.should_receive(:descendants).and_return([descendant])
+
+      new_accounts = Account.create_all_if_valid name
+      new_accounts.should == [account]
+    end
+
+  end
+
 end
