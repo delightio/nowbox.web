@@ -15,7 +15,7 @@ module Aji
         @mention_videos = Array.new
         @mention = mock("mention", :author => @author, :spam? => false,
           :links => @links, :videos => @mention_videos, :body => "",
-          :save => true, :id => 1)
+          :published_at => Time.now, :save => true, :id => 1)
       end
 
       subject { Mention::Processor.new @mention, @destination }
