@@ -89,7 +89,8 @@ module Aji
     def mark_spammer
       mentions.map do |m|
         m.mark_spam
-        m.destroy
+        Aji.redis.sadd "mentions_to_delete", m.id
+        # m.destroy
       end
       blacklist
     end
