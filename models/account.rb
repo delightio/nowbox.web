@@ -32,6 +32,10 @@ module Aji
     after_initialize :initialize_info_hashes
     after_destroy :delete_redis_keys
 
+    def existing?
+      raise InterfaceMethodNotImplemented
+    end
+
     def profile_uri
       raise InterfaceMethodNotImplemented
     end
@@ -42,6 +46,16 @@ module Aji
 
     def description
       raise InterfaceMethodNotImplemented
+    end
+
+    def self.create_all_if_valid username
+      results = []
+      self.descendants.each do | descendant |
+        tmp = descendant.new :uid => username
+        next unless tmp.existing?
+        results << tmp if tmp.save
+      end
+      results
     end
 
     # The publish interface is called by background tasks to publish a video

@@ -22,5 +22,10 @@ shared_examples_for "any account" do
     it "has a profile_uri" do
       subject.should respond_to :profile_uri
     end
+
+    it "knows if self exists externally" do
+      subject.should respond_to :existing?
+    end
+
   end
 end

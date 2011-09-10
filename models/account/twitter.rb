@@ -13,6 +13,10 @@ module Aji
 
     after_create :set_provider
 
+    def existing?
+      false
+    end
+
     def profile_uri
       "http://twitter.com/#{username}"
     end

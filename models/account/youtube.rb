@@ -35,6 +35,14 @@ module Aji
       new_videos
     end
 
+    # If a username is a valid and true youtube user, then we'll
+    # get data back from Youtube indicating their profile API which
+    # we can then use to ascertain their existence.
+    def existing?
+      get_info_from_youtube_api
+      profile_uri == "" ? false : true
+    end
+
     # Fetch information from youtube, returns the new info hash upon success
     # and false otherwise.
     def get_info_from_youtube_api
