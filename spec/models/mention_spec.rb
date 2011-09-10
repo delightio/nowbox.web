@@ -57,10 +57,8 @@ describe Aji::Mention do
       end
     end
 
-    it "marks all videos mentioned spam" do
-      video = mock "video"
-      video.should_receive :mark_spam
-      subject.stub(:videos).and_return([video])
+    it "adds spammy mention to a redis set" do
+      Aji.redis.should_receive(:sadd).with("spammy_mentions", subject.id)
       subject.mark_spam
     end
   end

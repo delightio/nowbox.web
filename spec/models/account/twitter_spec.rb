@@ -19,7 +19,6 @@ describe Aji::Account::Twitter do
       videos.stub(:map).and_return([])
       mention = mock("mention", :id => 9, :spam? => true, :videos => videos)
       mention.should_receive :mark_spam
-      mention.should_receive :destroy
       subject.stub(:mentions).and_return([mention])
       subject.mark_spammer
     end

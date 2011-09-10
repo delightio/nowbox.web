@@ -42,7 +42,7 @@ module Aji
     end
 
     def mark_spam
-      videos.map(&:mark_spam)
+      Aji.redis.sadd "spammy_mentions", id
     end
 
     # age from give time in seconds

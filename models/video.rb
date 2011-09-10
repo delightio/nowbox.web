@@ -66,6 +66,7 @@ module Aji
     end
 
     def mark_spam
+      Aji.redis.sadd "spammy_videos", id
       blacklist
       author.blacklist unless author.nil?
     end
