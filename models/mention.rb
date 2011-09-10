@@ -36,14 +36,12 @@ module Aji
       return true if author.blacklisted?
       videos.each do |video|
         count = video.latest_mentioners.select{ |a| a==author }.count
-        return true if count > 1
+        return true if count > 2
       end
       false
     end
 
     def mark_spam
-      Aji.log "Mention[#{self.id}].mark_spam"
-      return
       videos.map(&:mark_spam)
     end
 

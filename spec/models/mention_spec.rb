@@ -34,10 +34,10 @@ describe Aji::Mention do
       video.mentions.sample.should_not be_spam
     end
 
-    it "returns true if given mention's author mentioned the given video more than once" do
+    it "returns true if given mention's author mentioned the given video more than twice" do
       video = Factory :video_with_mentions
       spammer = Factory :account
-      spammy_mentions = video.mentions.sample(2)
+      spammy_mentions = video.mentions.sample(3)
       spammy_mentions.each do |m|
         m.update_attribute :author_id, spammer.id
       end

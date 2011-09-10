@@ -66,8 +66,6 @@ module Aji
     end
 
     def mark_spam
-      Aji.log "Video[#{self.id}].mark_spam"
-      return
       blacklist
       author.blacklist unless author.nil?
     end
