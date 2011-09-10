@@ -89,9 +89,9 @@ module Aji
         h[:s] = m.spam?
         h[:vids] = m.videos.map &:id
       end
-      Aji.log :INFO, "* spammer * Account::Twitter[#{id}].mentions: [#{h.inspect}]"
-      return
-      
+      Aji.log :INFO, "* spammer * Account::Twitter[#{id}].mentions: " +
+        "[#{h.inspect}]"
+
       mentions.map do |m|
         m.mark_spam
         m.destroy

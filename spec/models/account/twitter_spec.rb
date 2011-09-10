@@ -15,12 +15,15 @@ describe Aji::Account::Twitter do
 
   describe "#mark_spammer" do
     it "marks own mentions as spam and destroys them" do
-      mention = mock("mention")
+      videos = mock("video collection")
+      videos.stub(:map).and_return([])
+      mention = mock("mention", :id => 9, :spam? => true, :videos => videos)
       mention.should_receive :mark_spam
       mention.should_receive :destroy
       subject.stub(:mentions).and_return([mention])
       subject.mark_spammer
     end
+
     it "blacklists self" do
       subject.should_receive(:blacklist)
       subject.mark_spammer
