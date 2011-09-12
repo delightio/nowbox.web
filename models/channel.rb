@@ -137,6 +137,7 @@ module Aji
         next if descendant.searchable_columns.empty?
         results += descendant.send :search_helper, query
       end
+      results.uniq!
       results.each { |ch| Resque.enqueue Queues::RefreshChannel, ch.id }
       results
     end
