@@ -17,7 +17,7 @@ module Aji
       end
 
       def content_videos limit=0
-        content_video_ids(limit).map { |vid| Video.find vid }
+        content_video_ids(limit).map { |vid| Video.find_by_id vid }.compact
       end
 
       def content_video_id_count
