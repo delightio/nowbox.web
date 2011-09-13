@@ -4,8 +4,9 @@ module Aji
       def self.fetch source_id
         youtube_it_to_hash client.video_by source_id
 
-      rescue NoMethodError => e
-        raise unless e.message =~ /undefined method `elements' for nil:NilClass/
+      rescue OpenURI::HTTPError => e
+        Aji.log :WARN, "Recieved HTTP Status ##{e.message} from Youtube " +
+          "when fetching #{source_id}"
         fail Macker::FetchError, "unable to fetch youtube:#{source_id}",
         e.backtrace
       end
