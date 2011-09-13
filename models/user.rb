@@ -20,10 +20,10 @@ module Aji
     include Redis::Objects
     list :subscribed_list # User's Subscribed channels.
 
-    def subscribe_featured_channels limit=4
+    def subscribe_featured_channels
       featured_channels = Channel.featured
       unless featured_channels.empty?
-        featured_channels.first(limit).each { |c| subscribe c }
+        featured_channels.each { |c| subscribe c }
       end
       # TODO: we are pulling in the whole channel object but we really only care about Channel#id
     end
