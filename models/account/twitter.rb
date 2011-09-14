@@ -3,7 +3,6 @@ module Aji
   # - recent_zset: Redis::Objects::SortedSet
   class Account::Twitter < Account
     include Redis::Objects
-    sorted_set :recent_zset
     include Mixins::RecentVideos
 
     validates_presence_of :username

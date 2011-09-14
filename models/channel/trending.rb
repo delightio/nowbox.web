@@ -5,7 +5,6 @@ module Aji
   class Channel::Trending < Channel
     include Redis::Objects
 
-    sorted_set :recent_zset
     include Mixins::RecentVideos
 
     def refresh_content force=false

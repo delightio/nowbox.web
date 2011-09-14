@@ -1,14 +1,15 @@
 module Aji
   module Mixins
     module RecentVideos
-
       # We need to add the following BEFORE including this mixins because
       # Redis::Objects expect a database ID to generate a unique redis key
       #
       # ************************
       # include Redis::Objects
-      # sorted_set :recent_zset
       # ************************
+      def self.included(klass)
+        klass.sorted_set :recent_zset
+      end
 
       def recent_video_ids limit=-1
         (recent_zset.revrange 0, limit).map(&:to_i)
