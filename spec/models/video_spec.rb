@@ -27,9 +27,9 @@ describe Aji::Video do
       subject.should_not be_populated
       subject.title.should be_nil
       subject.populate
-      Aji::Video.find(subject.id).should be_populated
-      Aji::Video.find(subject.id).title.should_not be_nil
-      Aji::Video.find(subject.id).author.uid.should == "nowmov"
+      subject.should be_populated
+      subject.title.should_not be_nil
+      subject.author.uid.should == "nowmov"
     end
 
     context "when a video id is invalid" do
