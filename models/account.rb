@@ -71,8 +71,20 @@ module Aji
     # used to force a refresh in spite of a recently completed refresh.
     # The method returns no useful value.
     def refresh_content force=false
-      raise InterfaceMethodNotImplemented.new(
-        "#{self.class} must override Account#refresh_content.")
+      [].tap do |new_videos|
+        if recently_populated? && content_video_ids.count > 0 && !force
+          return new_videos
+        end
+
+        refresh_lock.lock do
+
+          # Use population strategy of subclass if presented.
+          yield new_videos if block_given?
+
+          self.populated_at = Time.now
+          save! # In this case we want failure to raise the error.
+        end
+      end
     end
 
     def influencer_ids
