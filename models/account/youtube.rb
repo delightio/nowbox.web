@@ -19,9 +19,7 @@ module Aji
     end
 
     def refresh_content force=false
-      new_videos = []
-      refresh_lock.lock do
-        return [] if recently_populated? && content_video_ids.count > 0 && !force
+      super force do |new_videos|
         vhashes = Macker::Search.new(:author => username).search
         vhashes.each do |vhash|
           video = Video.find_or_create_by_external_id vhash[:external_id], vhash
@@ -30,9 +28,7 @@ module Aji
           push video, relevance
           new_videos << video
         end
-        update_attribute :populated_at, Time.now
       end
-      new_videos
     end
 
     # If a username is a valid and true youtube user, then we'll

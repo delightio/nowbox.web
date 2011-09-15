@@ -12,8 +12,8 @@ shared_examples_for "any content holder" do
 
     it "allows forced refresh" do
       subject.refresh_content
-      expect { subject.refresh_content :force }.to(
-        change { subject.populated_at })
+      expect { subject.refresh_content :force }.
+        to change { subject.populated_at }
     end
 
     it "returns an array of videos no matter what" do
