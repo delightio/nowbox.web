@@ -22,13 +22,15 @@ module Aji
     end
 
     def refresh_content force=false
-      vhashes = Macker::Search.new(:keywords => keywords).search
-      vhashes.each_with_index do |vhash, i|
-        video = Video.find_or_create_by_external_id(
-          vhash[:external_id], vhash)
-          content_zset[video.id] = i
+      super force do |new_videos|
+        vhashes = Macker::Search.new(:keywords => keywords).search
+        vhashes.each_with_index do |vhash, i|
+          video = Video.find_or_create_by_external_id(
+            vhash[:external_id], vhash)
+          new_videos << video
+          push video, i
+        end
       end
-      update_attribute :populated_at, Time.now
     end
 
     def queue_refresh_channel
