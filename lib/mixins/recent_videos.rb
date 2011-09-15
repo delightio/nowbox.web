@@ -7,7 +7,7 @@ module Aji
       # ************************
       # include Redis::Objects
       # ************************
-      def self.included(klass)
+      def self.included klass
         klass.sorted_set :recent_zset
       end
 
