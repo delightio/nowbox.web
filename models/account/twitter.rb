@@ -40,9 +40,8 @@ module Aji
           select { |v| not (v.nil? || v.blacklisted?) }
         Aji.log "Found #{videos.count} videos in #{username}'s Twitter stream"
         videos.each do |video|
-          mention = mentions.detect { |m| m.videos.include? video }
           video.populate unless video.populated?
-          push(video, mention.published_at.to_i) and
+          push(video, recent_zset[video.id]) and
             new_videos << video if video.populated?
         end
         update_attribute :populated_at, Time.now

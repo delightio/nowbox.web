@@ -51,7 +51,7 @@ module Aji
       end
 
       mention = Mention.new(
-        :uid => tweet_hash['uid'],
+        :uid => tweet_hash['id_str'],
         :body => tweet_hash['text'],
         :published_at => tweet_hash['created_at'],
         :unparsed_data => json,

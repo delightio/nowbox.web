@@ -14,11 +14,12 @@ describe Aji::Parsers::Tweet do
     end
 
     context "when a block returning true is passed" do
-      it "returns a mention object" do
+      it "returns a mention object with uid" do
         m = Aji::Parsers::Tweet.parse @valid_json do |tweet|
           true
         end
         m.class.should == Aji::Mention
+        m.uid.should_not be_nil
       end
     end
 
@@ -47,6 +48,17 @@ describe Aji::Parsers::Tweet do
     it "creates author object if missing" do
       expect { Aji::Parsers::Tweet.parse(MultiJson.decode(@valid_json)) }.to
         change { Aji::Account::Twitter.find_by_uid(178492493)}.to(true)
+    end
+  end
+
+  context "when a duplicate mention is passed" do
+    before :each do
+      ap @mention = Aji::Parsers::Tweet.parse(@valid_json).save
+    end
+    it "returns nil" do
+      Aji::Parsers::Tweet.parse(@valid_json) do |tweet_hash|
+        Aji::Mention::Processor.video_filters['twitter'][tweet_hash]
+      end
     end
   end
 end

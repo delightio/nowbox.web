@@ -219,9 +219,11 @@ GEM
       rack (>= 1.0.0)
     yajl-ruby (0.8.3)
     yard (0.7.2)
-    youtube_it (1.4.3)
+    youtube_it (2.0.1)
       builder
+      faraday (>= 0.7.3)
       oauth (>= 0.4.4)
+      simple_oauth (>= 0.1.5)
 
 PLATFORMS
   ruby
@@ -259,4 +261,4 @@ DEPENDENCIES
   thor
   twitter!
   yajl-ruby
-  youtube_it (~> 1.4.3)
+  youtube_it (~> 2.0.0)

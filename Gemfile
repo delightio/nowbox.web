@@ -31,7 +31,7 @@ gem 'resque-scheduler', '~>2.0.0.d',
 gem 'resque-retry', :require => [ 'resque-retry', 'resque-retry/server' ]
 gem 'httparty'
 gem 'omniauth', '~>0.3.0.rc3', :require => 'oa-oauth'
-gem 'youtube_it', '~>1.4.3'
+gem 'youtube_it', '~>2.0.0'
 gem 'erubis'
 gem 'yajl-ruby'
 gem 'twitter', :git => 'https://github.com/jnunemaker/twitter.git'
