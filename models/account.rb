@@ -11,7 +11,6 @@ module Aji
   # - blacklisted_at: DateTime
   class Account < ActiveRecord::Base
     include Redis::Objects
-    sorted_set :content_zset
     include Mixins::ContentVideos
     include Mixins::CanRefreshContent
     include Mixins::Populating

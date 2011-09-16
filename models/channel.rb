@@ -17,7 +17,6 @@ module Aji
     has_many :events
 
     include Redis::Objects
-    sorted_set :content_zset
     include Mixins::ContentVideos
     include Mixins::CanRefreshContent
     include Mixins::Populating
