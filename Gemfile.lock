@@ -72,6 +72,9 @@ GEM
       crack (= 0.1.8)
     i18n (0.5.0)
     json (1.5.4)
+    koala (1.2.0beta3)
+      faraday (~> 0.7.0)
+      multi_json (~> 1.0)
     log4r (1.1.9)
     macaddr (1.4.0)
       systemu (~> 2.2.0)
@@ -239,6 +242,7 @@ DEPENDENCIES
   grape!
   hiredis
   httparty
+  koala (~> 1.2.0beta)
   newrelic_rpm (~> 3.1.1)
   omniauth (~> 0.3.0.rc3)
   pg

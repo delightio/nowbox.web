@@ -35,6 +35,7 @@ gem 'youtube_it', '~>2.0.0'
 gem 'erubis'
 gem 'yajl-ruby'
 gem 'twitter', :git => 'https://github.com/jnunemaker/twitter.git'
+gem 'koala', '~>1.2.0beta'
 
 # Mail related
 #gem 'activeresource'
