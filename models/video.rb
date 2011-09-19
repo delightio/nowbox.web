@@ -15,17 +15,17 @@ module Aji
   # - populated_at: DateTime
   # - category_id: Integer
   class Video < ActiveRecord::Base
+    include Mixins::Blacklisting
+    include Mixins::Populating
+
+    validates_presence_of :external_id, :source
+    validates_uniqueness_of :external_id, :scope => :source
+    validates_presence_of :author, :if => :populated?
+
     has_many :events
     has_and_belongs_to_many :mentions
     belongs_to :author, :class_name => 'Account'
     belongs_to :category
-
-    validates_presence_of :external_id
-    validates_presence_of :external_id, :if => :populated?
-    validates_uniqueness_of :external_id, :scope => :source
-
-    include Mixins::Blacklisting
-    include Mixins::Populating
 
     def populate
       if external_id.nil?
