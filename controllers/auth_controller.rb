@@ -44,8 +44,8 @@ module Aji
 
       case params['provider']
       when 'twitter'
-        t = Account::Twitter.find_by_username(
-          auth_hash['extra']['user_hash']['screen_name'])
+        t = Account::Twitter.find_by_uid(
+          auth_hash['extra']['user_hash']['uid'].to_s)
         unless t.nil?
           t.update_attributes(
             :info => auth_hash['extra']['user_hash'],
@@ -55,7 +55,7 @@ module Aji
         else
           t ||= Account::Twitter.create(
             :username => auth_hash['extra']['user_hash']['screen_name'],
-            :uid => auth_hash['uid'],
+            :uid => auth_hash['uid'].to_s,
             :identity => user.identity,
             :credentials => auth_hash['credentials'],
             :info => auth_hash['extra']['user_hash'])

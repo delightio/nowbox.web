@@ -39,10 +39,9 @@ module Aji
       filter = if block_given? then yield tweet_hash else true end
       return nil unless filter
 
-      # TODO: Is there a way to avoid saving this guy to DB?
-      author = Account::Twitter.find_by_username(
-        tweet_hash['user']['screen_name'])
-      author ||= Account::Twitter.new :uid => tweet_hash['user']['uid'],
+      author = Account::Twitter.find_by_uid(
+        tweet_hash['user']['uid'])
+      author ||= Account::Twitter.new :uid => tweet_hash['user']['uid'].to_s,
         :username => tweet_hash['user']['screen_name'],
         :info => tweet_hash['user']
 

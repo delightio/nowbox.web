@@ -9,7 +9,7 @@ Aji.log :WARN, "Found #{nil_author_mentions.count} mentions with nil authors."
 
 nil_author_mentions.each do |m|
   user = MultiJson.decode(m.unparsed_data)['user']
-  account = Aji::Account::Twitter.find_by_username user['screen_name']
+  account = Aji::Account::Twitter.find_by_uid user['uid'].to_s
   unless account.nil?
     Aji.log :WARN, "#{account.username} existed in DB but wasn't linked to " +
       "Mention[#{m.id}]"

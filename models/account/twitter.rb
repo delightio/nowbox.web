@@ -6,8 +6,8 @@ module Aji
     sorted_set :recent_zset
     include Mixins::RecentVideos
 
-    validates_presence_of :username
-    validates_uniqueness_of :username
+    validates_presence_of :uid
+    validates_uniqueness_of :uid
 
     has_many :mentions, :foreign_key => :author_id
 
@@ -73,15 +73,17 @@ module Aji
       resp_struct = ::Twitter.friends username
       while resp_struct.users.length == 100
         resp_struct.users.each do |user|
-          influencer_set << Account::Twitter.find_or_create_by_username(
-            user.screen_name.to_s, :info => user.to_hash, :uid => user.id).id
+          influencer_set << Account::Twitter.find_or_create_by_uid(
+            user.id.to_s, :info => user.to_hash,
+            :username => user.screen_name).id
         end
         resp_struct = ::Twitter.friends username,
           :cursor => resp_struct.next_cursor
       end
       resp_struct.users.each do |user|
-          influencer_set << Account::Twitter.find_or_create_by_username(
-            user.screen_name.to_s, :info => user.to_hash, :uid => user.id).id
+        influencer_set << Account::Twitter.find_or_create_by_uid(
+          user.id.to_s, :info => user.to_hash,
+          :username => user.screen_name).id
       end
     end
 
