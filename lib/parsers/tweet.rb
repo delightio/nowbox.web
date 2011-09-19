@@ -40,8 +40,8 @@ module Aji
       return nil unless filter
 
       author = Account::Twitter.find_by_uid(
-        tweet_hash['user']['uid'])
-      author ||= Account::Twitter.new :uid => tweet_hash['user']['uid'].to_s,
+        tweet_hash['user']['id_str'])
+      author ||= Account::Twitter.new :uid => tweet_hash['user']['id_str'].to_s,
         :username => tweet_hash['user']['screen_name'],
         :info => tweet_hash['user']
 
