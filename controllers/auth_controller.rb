@@ -34,8 +34,28 @@ module Aji
     # 5. `http://api.nowbox.com/auth/twitter/callback` will return an updated
     # JSON blob to the webkitview containing the updated user model.
     #
+    # For Facebook Authentication the process is a little more complicated since
+    # Facebook doesn't pass parameters outside of the callback url, which is
+    # how we pass the user's id through Twitter.
+    # 1. Open a webkitview and point it to `http://api.nowbox.com/auth/facebook`
+    # 2. The webkitview is redirected from our app to Facebook's tablet auth
+    # page.
+    # 3. The user logs in and authenticates with us. Giving us permission to
+    # post to their wall, access their content offline, and see friends and
+    # videos.
+    # 4. This is where the primary difference between Twitter and Facebook is.
+    # Upon successful authentication the redirect to
+    # `api.nowbox.com/auth/facebook/callback` must be intercepted before it goes
+    # back to our server and have the `user_id` parameter added to the end of
+    # it. The webkitview can then be closed and the iOS backend can send the
+    # final url back to the server. It will look something like:
+    # `http://api.nowbox.com/auth/facebook/callback?code=LONGCODE&user_id=ID`
+    # 5. That url will return an updated version of the user hash when the
+    # account has been added.
+    #
     # *Should the oauthentication fail for any reason the service will redirect
     # to `http://api.nowbox.com/auth/failure`.*
+    #
     get '/:provider/callback' do
       user = Aji::User.find_by_id params[:user_id]
       return { :error => "User[#{params[:user_id]}] does not exist." } if
@@ -72,9 +92,9 @@ module Aji
           fb ||= Account::Facebook.create(
           :identity => user.identity,
           :credentials => auth_hash['credentials'],
-          :username => auth_hash['nickname'],
+          :username => auth_hash['extra']['user_hash']['username'],
           :uid => auth_hash['uid'],
-          :info => auth_hash['extra'])
+          :info => auth_hash['extra']['user_hash'])
         end
       else
         "Unsupported provider #{auth_hash['provider']}"

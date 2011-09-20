@@ -12,21 +12,16 @@ module Aji
       end
     end
 
+    def description
+      info['bio']
+    end
+
     def thumbnail_uri
-      info["profile_uri"]
+      "http://graph.facebook.com/#{uid}/picture"
     end
 
     def profile_uri
-      info["profile_uri"]
-    end
-
-    def get_user_info
-      fb_hash =
-        MultiJson.decode(Faraday.get("http://graph.facebook.com/#{uid}").body)
-
-      info["thumbnail_uri"] = "http://graph.facebook.com/#{uid}/picture"
-      info["profile_uri"] = fb_hash["link"]
-      info["description"] = ""
+      info['link']
     end
   end
 end
