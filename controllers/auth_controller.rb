@@ -44,26 +44,42 @@ module Aji
 
       case params['provider']
       when 'twitter'
-        t = Account::Twitter.find_by_uid(
-          auth_hash['extra']['user_hash']['id_str'])
+        t = Account::Twitter.find_by_uid auth_hash['uid']
         unless t.nil?
           t.update_attributes(
-            :info => auth_hash['extra']['user_hash'],
             :identity => user.identity,
             :credentials => auth_hash['credentials'],
+            :username => auth_hash['extra']['user_hash']['screen_name'],
             :info => auth_hash['extra']['user_hash'])
         else
           t ||= Account::Twitter.create(
-            :username => auth_hash['extra']['user_hash']['screen_name'],
-            :uid => auth_hash['id_str'],
             :identity => user.identity,
             :credentials => auth_hash['credentials'],
+            :username => auth_hash['extra']['user_hash']['screen_name'],
+            :uid => auth_hash['uid'],
             :info => auth_hash['extra']['user_hash'])
         end
 
+      when 'facebook'
+        fb = Account::Facebook.find_by_uid auth_hash['uid']
+        unless fb.nil?
+          fb.update_attributes(
+          :identity => user.identity,
+          :credentials => auth_hash['credentials'],
+          :username => auth_hash['nickname'],
+          :info => auth_hash['extra'])
+        else
+          fb ||= Account::Facebook.create(
+          :identity => user.identity,
+          :credentials => auth_hash['credentials'],
+          :username => auth_hash['nickname'],
+          :uid => auth_hash['uid'],
+          :info => auth_hash['extra'])
+        end
       else
         "Unsupported provider #{auth_hash['provider']}"
       end
+
       Resque.enqueue Aji::Queues::UpdateGraphChannel, user.identity.id
       MultiJson.encode user.serializable_hash
     end

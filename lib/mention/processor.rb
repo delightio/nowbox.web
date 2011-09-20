@@ -38,7 +38,7 @@ module Aji
 
       rescue ActiveRecord::StatementInvalid => e
         raise unless e.message =~ /invalid byte sequence/
-          @errors << "Invalid Characters in #{@mention.body}"
+        @errors << "Invalid Characters in #{@mention.body}"
       end
 
       unless failed?

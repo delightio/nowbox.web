@@ -7,8 +7,10 @@ module Aji
       #
       # ************************
       # include Redis::Objects
-      # sorted_set :content_zset
       # ************************
+      def self.included klass
+        klass.sorted_set :content_zset
+      end
 
       # TODO: This isn't a particularly robust interface. I'm writing my own Redis
       # object library so when that's finished we'll use it.

@@ -9,8 +9,7 @@ module Aji
 
 
     def refresh_content force=false
-      new_videos = []
-      refresh_lock.lock do
+      super force do |new_videos|
         accounts_populated_at = []
         accounts.each do |account|
           unless account.blacklisted?
@@ -21,12 +20,8 @@ module Aji
         # NOTE: Steven! thinks this should either be the current time or the
         # oldest time since it will indicate the staleness of the channel
         # better.
-        unless new_videos.empty?
-          update_attribute :populated_at, accounts_populated_at.sort.last # latest
-        end
+        update_relevance_in_categories new_videos
       end
-      update_relevance_in_categories new_videos
-      new_videos
     end
 
     def content_video_ids limit=0

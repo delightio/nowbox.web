@@ -76,7 +76,6 @@ end
 # Monkey Patching
 require_relative 'lib/patches/string'
 
-module Mixins; end # Since models need them
 Dir.glob("lib/mixins/*.rb").each { |r| require_relative r }
 
 Dir.glob("models/*.rb").each { |r| require_relative r }
@@ -86,9 +85,6 @@ Dir.glob("models/account/*.rb").each { |r| require_relative r }
 
 # Run migrations after models are loaded.
 ActiveRecord::Migrator.migrate("db/migrate/") unless Aji.conf['NOMIGRATE']
-
-# Wall of shame. Monkey patches here.
-require_relative 'lib/patches/string.rb'
 
 Dir.glob("helpers/*.rb").each { |r| require_relative r }
 Dir.glob("controllers/*_controller.rb").each { |r| require_relative r }

@@ -6,8 +6,8 @@ use Rack::Deflater
 use Rack::Session::Cookie
 use OmniAuth::Builder do
   provider :twitter, Aji.conf['CONSUMER_KEY'], Aji.conf['CONSUMER_SECRET']
-  #provider :facebook, Aji.conf['APP_ID'], Aji.conf['APP_SECRET'],
-  #  { :scope => 'publish_stream,offline_access' }
+  provider :facebook, Aji.conf['APP_ID'], Aji.conf['APP_SECRET'],
+    { :scope => 'publish_stream,offline_access', :display => :touch }
   #provider :identica, Aji.conf['identica_key'], Aji.conf['identica_secret']
 end
 
