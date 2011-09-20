@@ -7,11 +7,11 @@ SimpleCov.start
 require_relative '../aji'
 require_relative 'factories'
 
-VCR.config do |c|
-  c.cassette_library_dir = "fixtures/vcr_cassettes"
-  c.stub_with :faraday
-  c.default_cassette_options = { :record => :new_episodes }
-end
+#VCR.config do |c|
+#  c.cassette_library_dir = "fixtures/vcr_cassettes"
+#  c.stub_with :faraday
+#  c.default_cassette_options = { :record => :new_episodes }
+#end
 
 module TestMixin
   include Rack::Test::Methods
