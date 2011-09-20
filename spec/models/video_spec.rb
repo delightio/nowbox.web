@@ -20,7 +20,7 @@ describe Aji::Video do
 
   describe "#populate" do
     subject do
-      Aji::Video.new :source => :youtube, :external_id => 'OzVPDiy4P9I'
+      Aji::Video.new :source => :youtube, :external_id => 'nhJj13iChCk'
     end
 
     it "should not be populated unless explicitly asked" do
@@ -29,7 +29,7 @@ describe Aji::Video do
       subject.populate
       subject.should be_populated
       subject.title.should_not be_nil
-      subject.author.uid.should == "nowmov"
+      subject.author.uid.should == "rymdreglage"
     end
 
     context "when a video id is invalid" do
