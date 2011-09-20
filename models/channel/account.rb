@@ -34,7 +34,7 @@ module Aji
     end
 
     def thumbnail_uri
-      return "http://beta.#{Aji.conf['TLD']}/images/icons/#{title.downcase}.png" if default_listing
+      return "http://#{Aji.conf['TLD']}/images/icons/#{title.downcase}.png" if default_listing
       accounts.first.thumbnail_uri
     end
 

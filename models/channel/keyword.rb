@@ -18,7 +18,7 @@ module Aji
     end
 
     def thumbnail_uri
-      "http://beta.#{Aji.conf['TLD']}/images/icons/tag.png"
+      "http://#{Aji.conf['TLD']}/images/icons/tag.png"
     end
 
     def refresh_content force=false

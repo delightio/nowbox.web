@@ -52,7 +52,7 @@ module Aji
     end
 
     def thumbnail_uri
-      "http://beta.#{Aji.conf['TLD']}/images/icons/nowpopular.png"
+      "http://#{Aji.conf['TLD']}/images/icons/nowpopular.png"
     end
 
     def self.singleton

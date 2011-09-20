@@ -3,11 +3,11 @@ module Aji
     def thumbnail_uri # LH 220
       case title
       when "Watch Later"
-        "http://beta.#{Aji.conf['TLD']}/images/icons/watch_later.png"
+        "http://#{Aji.conf['TLD']}/images/icons/watch_later.png"
       when "Favorites"
-        "http://beta.#{Aji.conf['TLD']}/images/icons/favorites.png"
+        "http://eta.#{Aji.conf['TLD']}/images/icons/favorites.png"
       when "History"
-        "http://beta.#{Aji.conf['TLD']}/images/icons/history.png"
+        "http://eta.#{Aji.conf['TLD']}/images/icons/history.png"
       end
     end
 
