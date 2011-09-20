@@ -218,6 +218,7 @@ GEM
     tzinfo (0.3.29)
     uuid (2.3.4)
       macaddr (~> 1.0)
+    vcr (1.10.3)
     vegas (0.1.8)
       rack (>= 1.0.0)
     yajl-ruby (0.8.3)
@@ -264,5 +265,6 @@ DEPENDENCIES
   thin
   thor
   twitter!
+  vcr
   yajl-ruby
   youtube_it (~> 2.0.0)

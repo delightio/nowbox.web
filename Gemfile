@@ -51,7 +51,7 @@ gem 'pony'
 # Testing gems.
 group :test do
 #  gem 'fakeweb'
-#  gem 'vcr'
+  gem 'vcr'
   gem 'rack-test', :require => 'rack/test'
   gem 'rspec'
   gem 'database_cleaner'
