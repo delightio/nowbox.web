@@ -37,6 +37,7 @@ module Aji
     # For Facebook Authentication the process is a little more complicated since
     # Facebook doesn't pass parameters outside of the callback url, which is
     # how we pass the user's id through Twitter.
+    #
     # 1. Open a webkitview and point it to `http://api.nowbox.com/auth/facebook`
     # 2. The webkitview is redirected from our app to Facebook's tablet auth
     # page.
