@@ -5,9 +5,9 @@ module Aji
       when "Watch Later"
         "http://#{Aji.conf['TLD']}/images/icons/watch_later.png"
       when "Favorites"
-        "http://eta.#{Aji.conf['TLD']}/images/icons/favorites.png"
+        "http://#{Aji.conf['TLD']}/images/icons/favorites.png"
       when "History"
-        "http://eta.#{Aji.conf['TLD']}/images/icons/history.png"
+        "http://#{Aji.conf['TLD']}/images/icons/history.png"
       end
     end
 
