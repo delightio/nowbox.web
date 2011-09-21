@@ -48,6 +48,10 @@ module Aji
       end
     end
 
+    def found_videos
+      @mention.videos || []
+    end
+
     def errors
       @errors.join ', '
     end
