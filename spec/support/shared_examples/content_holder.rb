@@ -28,7 +28,10 @@ shared_examples_for "any content holder" do
 
     it "marks videos populated" do
       subject.refresh_content
-      subject.content_videos.each {|v| v.should be_populated }
+      subject.content_videos.each do |v|
+        v.should be_populated,
+          "#{v.external_id} from #{v.source} was not populated."
+      end
     end
 
     it "waits for the lock before populating"
