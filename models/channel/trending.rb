@@ -24,20 +24,24 @@ module Aji
 
         start = Time.now
         in_flight.sort!{ |x,y| y[:relevance] <=> x[:relevance] }
-        Aji.log "Sorted #{in_flight.count} videos in #{Time.now-start} s. Top 5: #{in_flight.first(5).inspect}"
+        Aji.log "Sorted #{in_flight.count} videos in #{Time.now-start} s. " +
+          "Top 5: #{in_flight.first(5).inspect}"
 
         start = Time.now; populated_count = 0
         max_in_flight = Aji.conf['MAX_VIDEOS_IN_TRENDING']
         in_flight.first(max_in_flight).each do |h|
           video = Video.find_by_id h[:vid]
           next if video.nil?
-          if !video.populated?
-            video.populate
+
+          video.populate unless video.populated?
+
+          if video.populated?
             populated_count += 1
+            new_videos << video
+            push video, h[:relevance]
           end
-          new_videos << video
-          push video, h[:relevance]
         end
+
         truncate max_in_flight
 
         # Create channels from authors of top videos for search
