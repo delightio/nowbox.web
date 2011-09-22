@@ -100,6 +100,5 @@ require_relative "lib/mailer/mailer"
 require './lib/decay'
 require './lib/macker'
 require './lib/parsers'
-require './lib/mention/processor'
 require './lib/youtube_data_grabber'
 
