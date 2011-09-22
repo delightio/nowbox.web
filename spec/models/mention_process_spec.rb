@@ -25,14 +25,14 @@ module Aji
       end
 
       it "passes valid a valid channel and mention to a processor object" do
-        Mention::Processor.should_receive(:new).with(@mention, @channel).
+        MentionProcessor.should_receive(:new).with(@mention, @channel).
           and_return(mock('mention processor', :perform => true,
             :failed? => false))
         Queues::Mention::Process.perform 'twitter', @data, @channel.id
       end
 
       it "doesn't call Processor#perform if mention is nil" do
-        Mention::Processor.should_not_receive :new
+        MentionProcessor.should_not_receive :new
         Parsers::Tweet.stub(:parse).and_return nil
         Queues::Mention::Process.perform 'twitter', @data, @channel.id
       end
