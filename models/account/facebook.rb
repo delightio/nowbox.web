@@ -49,7 +49,7 @@ module Aji
     end
 
     def api
-      @api ||= Koala::Facebook::API.new credentials['token']
+      @api ||= FacebookAPI.new credentials['token']
     end
 
   end
