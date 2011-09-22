@@ -120,12 +120,12 @@ module Aji
       ::Twitter.user_timeline(username || uid, :include_entities => true,
         :count => 200).each do |tweet|
         mention = Parsers['twitter'].parse tweet.to_hash do |tweet_hash|
-          Mention::Processor.video_filters['twitter'].call tweet_hash
+          MentionProcessor.video_filters['twitter'].call tweet_hash
         end
 
         next if mention.nil?
 
-        processor = Mention::Processor.new mention, self
+        processor = MentionProcessor.new mention, self
         processor.perform
 
         if processor.failed?

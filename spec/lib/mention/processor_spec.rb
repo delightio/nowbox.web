@@ -1,7 +1,7 @@
 require File.expand_path("../../../spec_helper", __FILE__)
 
 module Aji
-  describe Mention::Processor do
+  describe MentionProcessor do
 
     describe "#perform" do
       before :each do
@@ -18,7 +18,7 @@ module Aji
           :published_at => Time.now, :save => true, :id => 1)
       end
 
-      subject { Mention::Processor.new @mention, @destination }
+      subject { MentionProcessor.new @mention, @destination }
 
 
       it "places all videos in their destination" do
@@ -36,7 +36,7 @@ module Aji
 
     describe ".video_filters" do
       it "returns a hash of lambdas" do
-        filters = Mention::Processor.video_filters
+        filters = MentionProcessor.video_filters
         filters.values.each do |f| f.class.should == Proc end
       end
     end

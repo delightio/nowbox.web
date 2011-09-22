@@ -1,5 +1,5 @@
 module Aji
-  class Mention::Processor
+  class MentionProcessor
     attr_accessor :mention, :destination
 
     def initialize mention, destination=nil

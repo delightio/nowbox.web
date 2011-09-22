@@ -25,7 +25,7 @@ module Aji
       videos = [].tap do |videos|
         links.each do |link|
           mention = Parsers[:facebook].parse link
-          processor = Mention::Processor.new mention, self
+          processor = MentionProcessor.new mention, self
           processor.perform
           videos.concat processor.found_videos
         end

@@ -57,7 +57,7 @@ describe Aji::Parsers::Tweet do
     end
     it "returns nil" do
       Aji::Parsers::Tweet.parse(@valid_json) do |tweet_hash|
-        Aji::Mention::Processor.video_filters['twitter'][tweet_hash]
+        Aji::MentionProcessor.video_filters['twitter'][tweet_hash]
       end
     end
   end

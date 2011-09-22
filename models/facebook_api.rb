@@ -23,7 +23,7 @@ module Aji
 
     def extract_video_mentions links
       links.map { |link| Parsers['facebook'].parse link }.reject do |mention|
-        processor = Mention::Processor.new mention
+        processor = MentionProcessor.new mention
         processor.perform
         processor.failed? || processor.no_videos?
       end
