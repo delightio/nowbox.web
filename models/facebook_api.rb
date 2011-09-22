@@ -5,9 +5,23 @@ module Aji
       @koala = Koala::Facebook::API.new @token
     end
 
-    def video_mentions_in_feed
-      posts = @koala.get_connections "me", "home"
-      links = posts.select { |p| p['type'] == 'link' }
+    def video_mentions_in_feed pages=2
+      [].tap do |mentions|
+        posts = @koala.get_connections "me", "home"
+        mentions.concat extract_video_mentions filter_links posts
+        (pages - 1).times do
+          posts = posts.next_page
+          mentions.concat extract_video_mentions filter_links posts
+        end
+      end
+    end
+
+    private
+    def filter_links posts
+      posts.select { |p| p['type'] == 'link' and p['link'] }
+    end
+
+    def extract_video_mentions links
       links.map { |link| Parsers['facebook'].parse link }.reject do |mention|
         processor = Mention::Processor.new mention
         processor.perform

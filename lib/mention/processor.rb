@@ -2,7 +2,7 @@ module Aji
   class Mention::Processor
     attr_accessor :mention, :destination
 
-    def initialize mention, destination
+    def initialize mention, destination=nil
       @mention = mention
       @destination = destination
       @errors = Array.new
@@ -43,7 +43,7 @@ module Aji
 
       unless failed?
         @mention.videos.each do |v|
-          @destination.push_recent v, @mention.published_at.to_i
+          @destination.push_recent v, @mention.published_at.to_i if @destination
         end
       end
     end
@@ -58,6 +58,10 @@ module Aji
 
     def failed?
       not @errors.empty?
+    end
+
+    def no_videos?
+      @mention.videos.empty?
     end
 
     # A hash of functions to extract links (if any) from the tweet and
