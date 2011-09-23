@@ -5,7 +5,6 @@ Bundler.require :test
 
 SimpleCov.start
 require_relative '../aji'
-require_relative 'factories'
 
 #VCR.config do |c|
 #  c.cassette_library_dir = "fixtures/vcr_cassettes"
