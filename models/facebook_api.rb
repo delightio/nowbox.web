@@ -16,7 +16,7 @@ module Aji
       end
     end
 
-    def video_mentions_in_feed pages=2
+    def video_mentions_in_feed pages=5
       [].tap do |mentions|
         posts = @koala.get_connections "me", "home"
         mentions.concat extract_video_mentions filter_links posts
