@@ -1,5 +1,8 @@
 module Aji
   class Channel::FacebookStream < Channel
+
+    validates_presence_of :owner
+
    has_one :owner, :class_name => 'Aji::Account',
      :foreign_key => :stream_channel_id
 
