@@ -97,6 +97,7 @@ module Aji
           :uid => auth_hash['uid'],
           :info => auth_hash['extra']['user_hash'])
         end
+        fb.create_stream_channel
       else
         "Unsupported provider #{auth_hash['provider']}"
       end
