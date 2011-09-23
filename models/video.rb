@@ -24,29 +24,22 @@ module Aji
 
     has_many :events
     has_and_belongs_to_many :mentions
-    belongs_to :author, :class_name => 'Account'
+    belongs_to :author, :class_name => 'Aji::Account'
     belongs_to :category
 
     def populate
-      if external_id.nil?
-        raise "Aji::Video#populate: missing external id for Aji::Video[#{id}]"
+      updated_info = api.video_info external_id
+      self.author = updated_info.fetch :author
+      self.category = updated_info.fetch :category
+      updated_info.each do |attribute, value|
+        self[attribute] = value if self.has_attribute? attribute
       end
-
-      send "populate_from_#{source}"
-    rescue Macker::FetchError
+    rescue Aji::VideoAPI::Error
       failed
       blacklist if failures >= MAX_FAILED_ATTEMPTS
     else
-       self.populated_at = Time.now
-       save && populated_at
-    end
-
-    # TODO: Merge this into Video#populate and use Macker for videos.
-    def populate_from_youtube
-      vhash = Macker.fetch :youtube, external_id
-      vhash.each do |attribute, value|
-        self[attribute] = value if self.has_attribute? attribute
-      end
+      populated_at = Time.now
+      save and if block_given? then yield self end
     end
 
     # Symbolize source attribute.
@@ -61,6 +54,7 @@ module Aji
     def latest_mentions n=50
       mentions.order("published_at DESC").limit(n)
     end
+
     def latest_mentioners limit=50
       latest_mentions(limit).map(&:author)
     end
@@ -72,11 +66,12 @@ module Aji
     end
 
     def thumbnail_uri
-      path = case source
-             when :youtube then "http://img.youtube.com/vi/#{self.external_id}/0.jpg"
-             else ""
+      case source
+             when :youtube
+               "http://img.youtube.com/vi/#{self.external_id}/0.jpg"
+             else
+               ""
              end
-      path
     end
 
     # Since Video#relevance is usually used when calculating a large collection
@@ -92,18 +87,23 @@ module Aji
     end
 
     def serializable_hash options={}
-      return Hash["id" => id, "external_id" => external_id, "source" => source.to_s ] if !populated?
-      Hash["id" => id,
-           "title" => title,
-           "description" => description,
-           "thumbnail_uri" => thumbnail_uri,
-           "category" => category.serializable_hash,
-           "source" => source.to_s,
-           "external_id" => external_id,
-           "duration" => duration.to_f,
-           "view_count" => view_count,
-           "published_at" => published_at.to_i,
-           "author" => author.serializable_hash]
+      if populated?
+        {
+          "id" => id,
+          "title" => title,
+          "description" => description,
+          "thumbnail_uri" => thumbnail_uri,
+          "category" => category.serializable_hash,
+          "source" => source.to_s,
+          "external_id" => external_id,
+          "duration" => duration.to_f,
+          "view_count" => view_count,
+          "published_at" => published_at.to_i,
+          "author" => author.serializable_hash
+        }
+      else
+        { "id" => id, "external_id" => external_id, "source" => source }
+      end
     end
 
     private
@@ -119,6 +119,10 @@ module Aji
 
     def failed
       Aji.redis.set failures_key, failures+1
+    end
+
+    def api
+      @api ||= VideoAPI.new source
     end
   end
 end
