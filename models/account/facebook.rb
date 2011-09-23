@@ -12,22 +12,16 @@ module Aji
 
     def refresh_content force=false
       super force do |new_videos|
-        links = api.get_connections "me", "links"
-        # TODO: smelly
-        new_videos.concat videos_from_graph_collection links
-        new_videos.concat videos_from_graph_collection links.next_page
-        new_videos.each { |v| v.populate }
-        Aji.log "Found #{new_videos.count} in facebook links."
-      end
-    end
+        mentions = api.video_mentions_i_post
+        mentions.each do |mention|
+          mention.videos.each do |video|
+            video.populate unless video.populated?
 
-    def videos_from_graph_collection links
-      videos = [].tap do |videos|
-        links.each do |link|
-          mention = Parsers[:facebook].parse link
-          processor = MentionProcessor.new mention, self
-          processor.perform
-          videos.concat processor.found_videos
+            if video.populated?
+              new_videos << video
+              push video, mention.published_at
+            end
+          end
         end
       end
     end
