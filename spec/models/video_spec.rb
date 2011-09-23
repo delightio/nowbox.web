@@ -1,32 +1,35 @@
 require File.expand_path("../../spec_helper", __FILE__)
-YouTubeIt = nil
+
 module Aji
-  describe Aji::Video do
+  describe Aji::Video, unit: true do
+    before :each do
+      @api = mock "api"
+      @api.stub(:video_info).and_return(:title => 'A Video',
+        :external_id => 'afakevideo1', :description => 'Hilarious video',
+        :duration => 1024, :viewable_mobile => true, :view_count => 11,
+        :source => 'youtube', :published_at => Time.now,
+        :populated_at => Time.now, :author => Account.new,
+        :category => Category.new)
+    end
+
+    subject do
+      Video.new(:source => :youtube, :external_id => 'afakevideo1').tap do |v|
+        v.stub(:api).and_return @api
+      end
+    end
 
     describe "#thumbnail_uri" do
       it "should always have a uri if source is youtube" do
-        video = Video.new :external_id => 'fhqwghads11', :source => :youtube
-        video.thumbnail_uri.should_not == ""
+        subject.thumbnail_uri.should_not == ""
+      end
+
+      it "should return empty otherwise" do
+        subject.source = :vimeo
+        subject.thumbnail_uri.should == ""
       end
     end
 
     describe "#populate" do
-      before :each do
-        @api = mock "api"
-        @api.stub(:video_info).and_return(:title => 'A Video',
-          :external_id => 'afakevideo1', :description => 'Hilarious video',
-          :duration => 1024, :viewable_mobile => true, :view_count => 11,
-          :source => 'youtube', :published_at => Time.now,
-          :populated_at => Time.now, :author => Account.new,
-          :category => Category.new)
-      end
-
-      subject do
-        Video.new(:source => :youtube, :external_id => 'afakevideo1').tap do |v|
-          v.stub(:api).and_return @api
-        end
-      end
-
       it "should not be populated unless explicitly asked" do
         subject.should_not be_populated
         subject.title.should be_nil
@@ -40,11 +43,12 @@ module Aji
         before :each do
           @api.stub(:video_info) { raise Aji::VideoAPI::Error }
         end
+
         subject do
           Video.new(:id => 666, :external_id => 'adudosucvdd',
             :source => 'youtube').tap do |v|
-            v.stub(:api).and_return @api
-            end
+              v.stub(:api).and_return @api
+          end
         end
 
         it "marks a failure" do
@@ -60,10 +64,8 @@ module Aji
       end
     end
 
-    describe "#relevance" do
-      subject { Aji::Video.new(:source => :youtube,
-                               :external_id => random_string) }
 
+    describe "#relevance" do
       context "when videos have an equal number of mentions" do
         it "should return higher relevance for newer mentions" do
           mention = mock("mention")
@@ -86,40 +88,64 @@ module Aji
 
     describe "#latest_mentions" do
       it "returns the latest N mentions" do
-        video = Factory :video
-        mentions =[]
-        mentions << Factory(:mention, :published_at => 5.minutes.ago)
-        mentions << Factory(:mention, :published_at => Time.now)
-        mentions << Factory(:mention, :published_at => 10.minutes.ago)
-        mentions.each { |m| m.videos << video }
-        oldest_mention = mentions.sort_by(&:published_at).first
-        video.mentions.count.should == 3
-        video.latest_mentions(2).should_not include oldest_mention
+        subject.mentions << Mention.new(:published_at => 5.minutes.ago)
+        subject.mentions << Mention.new(:published_at => Time.now)
+        subject.mentions << Mention.new(:published_at => 10.minutes.ago)
+        oldest_mention = subject.mentions.sort_by(&:published_at).first
+        subject.latest_mentions(2).should_not include oldest_mention
       end
     end
 
     describe "#latest_mentioners" do
       it "returns the latest external accounts who mentioned about the video" do
-        video = Factory :video_with_mentions
-        mentioners = video.mentions.map(&:author)
-        Set.new(video.latest_mentioners).should == Set.new(mentioners)
+        mentions = mock("mentions")
+        mentions.should_receive :map
+        subject.stub :latest_mentions => mentions
+        subject.latest_mentioners
       end
     end
 
     describe "#mark_spam" do
-      subject { Factory :video }
       it "blacklists itself" do
+        subject.stub :author => mock('author')
         subject.should_receive(:blacklist)
-        subject.author.should_not be_nil
         subject.author.should_receive(:blacklist)
         subject.mark_spam
       end
     end
 
+    describe "#serializable_hash" do
+      before :each do
+        subject.stub(:author).and_return mock("author",
+         :serializable_hash => "serial author")
+        subject.stub(:category).and_return mock("category",
+         :serializable_hash => "a category")
+      end
+
+      it "contains only source, external_id, and id when not populated" do
+        subject.serializable_hash.should == { "id" => nil,
+          "external_id" => "afakevideo1", "source" => :youtube }
+      end
+
+      it "contains many attributes when populated" do
+        subject.populate
+        subject.serializable_hash.keys.should == %w[id title description
+          thumbnail_uri category source external_id duration view_count
+          published_at author]
+      end
+
+    end
+
     describe "#failed" do
       it "increases the number of failures by one" do
-        subject { Video.new(:id => 777) }
         expect { subject.send :failed }.to change(subject, :failures).by(1)
+      end
+    end
+
+    describe "#api" do
+      it "gets an api object from VideoAPI" do
+        VideoAPI.should_receive(:new).with(:youtube)
+        Video.new(:source => :youtube).send :api
       end
     end
   end
