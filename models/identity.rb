@@ -31,6 +31,17 @@ module Aji
       accounts.map{ |a| a.influencers }.flatten
     end
 
+    def social_channel_ids
+      {}.tap do |channel_ids|
+        channel_ids['facebook_channel_id'] = facebook_account.stream_channel.id if facebook_account
+        #channel_ids['twitter_account'] = twitter_account.stream_channel if twitter_account
+      end
+    end
+
+    def facebook_account
+      accounts.where(:type => 'Aji::Account::Facebook').first
+    end
+
     # Identity is a model which associates multiple user accounts with the same
     #
     # person or corporation. At this time, the only way for this to happen is for
