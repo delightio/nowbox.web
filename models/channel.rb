@@ -89,7 +89,6 @@ module Aji
       new_videos[(total-limit)...total].to_a
     end
 
-
     def update_relevance_in_categories new_videos
       new_videos.map(&:category_id).group_by{|g| g}.each do |h|
         cid = h.first; count = h.last.count # category_id => array of occurance
@@ -97,6 +96,10 @@ module Aji
         category.update_channel_relevance self, count
         category_id_zset[cid] += count
       end
+    end
+
+    def background_refresh_content
+      Resque.enqueue Queues::RefreshChannel, id
     end
 
     def redis_keys

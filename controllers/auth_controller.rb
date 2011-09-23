@@ -97,12 +97,11 @@ module Aji
           :uid => auth_hash['uid'],
           :info => auth_hash['extra']['user_hash'])
         end
-        fb.create_stream_channel
+        fb.create_stream_channel.background_refresh_content
       else
         "Unsupported provider #{auth_hash['provider']}"
       end
 
-      Resque.enqueue Aji::Queues::UpdateGraphChannel, user.identity.id
       MultiJson.encode user.serializable_hash
     end
   end
