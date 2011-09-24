@@ -86,10 +86,6 @@ module Aji
       !subscribed?(channel)
     end
 
-    def create_identity
-      update_attribute :identity_id, Identity.create.id if self.identity.nil?
-    end
-
     def redis_keys
       [ subscribed_list ].map &:key
     end
@@ -101,22 +97,25 @@ module Aji
     end
 
     def user_channels; [ queue_channel, favorite_channel ]; end
+
+    def first_name
+      self.name.split(' ').first
+    end
+
+    def last_name
+      self.name.split(' ').last
+    end
+
+    private
     def create_user_channels
       self.queue_channel = Channel::User.create :title => 'Watch Later'
       self.favorite_channel = Channel::User.create :title => 'Favorites'
       self.history_channel = Channel::User.create :title => 'History'
     end
 
-		def first_name
-			self.name.split(' ').first
-		end
-		
-		def last_name
-			self.name.split(' ').last
-		end		
-		
-    private :create_identity, :create_user_channels
-
+    def create_identity
+      update_attribute :identity_id, Identity.create.id if self.identity.nil?
+    end
   end
 end
 
