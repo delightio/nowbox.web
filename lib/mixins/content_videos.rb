@@ -33,7 +33,7 @@ module Aji
       end
 
       def content_videos_rev limit=0
-        content_video_ids_rev(limit).map { |vid| Video.find vid }
+        content_video_ids_rev(limit).map { |vid| Video.find_by_id vid }
       end
 
       def relevance_of video
