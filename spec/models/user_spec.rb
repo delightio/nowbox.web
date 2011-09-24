@@ -2,6 +2,8 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
   describe Aji::User do
+    before :each do
+    end
 
     subject do
       User.create(:name => "John Doe",
@@ -14,15 +16,17 @@ module Aji
 
     describe ".create" do
       it "creates user channels" do
-        expect { Factory :user }.to change { Aji::Channel.count }.by(3)
+        Channel::User.should_receive(:create).exactly(3)
+        User.any_instance.stub(:save).and_return(true)
+        User.create
       end
     end
 
     describe "#subscribe_featured_channels" do
       it "subscribes to featured channels" do
-        featured = (0..2).map { Factory :channel }
+        featured = (0..2).map { |i| mock "featured_channel", :id => i }
         Aji::Channel.should_receive(:featured).and_return(featured)
-        u = Factory :user
+        u = User.create
         featured.each { |c| u.subscribed?(c).should be_true }
       end
     end
