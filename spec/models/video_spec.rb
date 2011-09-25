@@ -2,19 +2,20 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
   describe Aji::Video, unit: true do
-    before :each do
-      @api = mock "api"
-      @api.stub(:video_info).and_return(:title => 'A Video',
+    let :api do
+      mock("api").tap do |api|
+        api.stub(:video_info).and_return(:title => 'A Video',
         :external_id => 'afakevideo1', :description => 'Hilarious video',
         :duration => 1024, :viewable_mobile => true, :view_count => 11,
         :source => 'youtube', :published_at => Time.now,
         :populated_at => Time.now, :author => Account.new,
         :category => Category.new)
+      end
     end
 
     subject do
       Video.new(:source => :youtube, :external_id => 'afakevideo1').tap do |v|
-        v.stub(:api).and_return @api
+        v.stub(:api).and_return api
       end
     end
 
@@ -39,15 +40,30 @@ module Aji
         subject.author.should_not be_nil
       end
 
+      context "when given a block" do
+        it "it calls the block on successful population" do
+          null = stub.as_null_object
+          null.should_receive :success!
+          subject.populate { |v| null.success! }
+        end
+
+        it "it doesn't call the block when population fails" do
+          null = stub.as_null_object
+          null.should_not_receive :success!
+          api.stub(:video_info) { raise Aji::VideoAPI::Error }
+          subject.populate { |v| null.success! }
+        end
+      end
+
       context "when a video id is invalid" do
         before :each do
-          @api.stub(:video_info) { raise Aji::VideoAPI::Error }
+          api.stub(:video_info) { raise Aji::VideoAPI::Error }
         end
 
         subject do
           Video.new(:id => 666, :external_id => 'adudosucvdd',
             :source => 'youtube').tap do |v|
-              v.stub(:api).and_return @api
+              v.stub(:api).and_return api
           end
         end
 
