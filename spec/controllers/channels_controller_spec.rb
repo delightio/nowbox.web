@@ -162,13 +162,11 @@ module Aji
           post "#{resource_uri}", @params.merge(:type => 'keyword')
           last_response.status.should == 201
           new_channel = JSON.parse last_response.body
-          Channel.search(@query).map(&:id).should include new_channel["id"]
         end
         it "returns existing channel if found" do
           post "#{resource_uri}", @params.merge(:type => 'keyword')
           last_response.status.should == 201
           new_channel = JSON.parse last_response.body
-          Channel.search(@query).map(&:id).should include new_channel["id"]
 
           # Re do the search
           post "#{resource_uri}", @params.merge(:type => 'keyword')

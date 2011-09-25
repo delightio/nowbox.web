@@ -12,16 +12,18 @@ module Aji
   # - created_at: DateTime
   # - updated_at: DateTime
   class Channel < ActiveRecord::Base
-    after_destroy :delete_redis_keys
-
-    has_many :events
-
     include Redis::Objects
     include Mixins::ContentVideos
     include Mixins::CanRefreshContent
     include Mixins::Populating
     sorted_set :category_id_zset
     include Mixins::Featuring
+    include Aji::TankerDefaults::Channel
+
+    has_many :events
+
+    after_create :update_tank_indexes_if_searchable
+    after_destroy :delete_redis_keys, :delete_tank_indexes_if_searchable
 
     def category_ids limit=-1
       (category_id_zset.revrange 0, limit).map(&:to_i)
@@ -31,6 +33,7 @@ module Aji
     end
 
     def thumbnail_uri; raise InterfaceMethodNotImplemented; end
+    def description; ""; end
 
     def serializable_hash options={}
       h = {
@@ -107,33 +110,6 @@ module Aji
       redis_keys.each do |key|
         Redis::Objects.redis.del key
       end
-    end
-
-    # ## Class Methods
-    def self.search query
-      results = []
-      self.descendants.each do | descendant |
-        next if descendant.searchable_columns.empty?
-        results += descendant.send :search_helper, query
-      end
-      results.uniq!
-      results.each { |ch| Resque.enqueue Queues::RefreshChannel, ch.id }
-      results
-    end
-
-    def self.searchable_columns
-      []
-    end
-
-    def self.search_helper query
-      sql_string = searchable_columns.map {|c| "lower(#{c}) LIKE ?" }.join(' OR ')
-      results = []
-      query.tokenize.each do | q |
-        sql = [ sql_string ]
-        searchable_columns.count.times { |n| sql << "%#{q}%"}
-        results += self.where sql
-      end
-      results.uniq # since we search per each keyword
     end
 
     def self.default_listing

@@ -5,6 +5,7 @@ module Aji
   class Channel::Trending < Channel
     include Redis::Objects
     include Mixins::RecentVideos
+    include Aji::TankerDefaults::Channel
 
     # I have so much hate for this method but won't fix it now since it isn't a
     # "priority"
@@ -53,6 +54,10 @@ module Aji
 
     def thumbnail_uri
       "http://beta.#{Aji.conf['TLD']}/images/icons/nowpopular.png"
+    end
+
+    def description
+      "What popular videos the world is watching right now!"
     end
 
     def self.singleton

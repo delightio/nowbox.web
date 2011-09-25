@@ -4,6 +4,7 @@ module Aji
   class Account::Twitter < Account
     include Redis::Objects
     include Mixins::RecentVideos
+    include Aji::TankerDefaults::Account
 
     validates_presence_of :uid
     validates_uniqueness_of :uid
@@ -12,10 +13,6 @@ module Aji
 
     after_create :set_provider
 
-    def existing?
-      false
-    end
-
     def profile_uri
       "http://twitter.com/#{username}"
     end
@@ -23,6 +20,10 @@ module Aji
     def thumbnail_uri
       info['profile_image_url'] ||
       "http://api.twitter.com/1/users/profile_image/#{username}.json"
+    end
+
+    def realname
+      info['name'] || ""
     end
 
     def description

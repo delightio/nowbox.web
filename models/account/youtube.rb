@@ -1,5 +1,7 @@
 module Aji
   class Account::Youtube < Account
+    include Aji::TankerDefaults::Account
+
     validates_presence_of :uid
     validates_uniqueness_of :uid
 
@@ -16,6 +18,10 @@ module Aji
 
     def description
       info['description'] || ""
+    end
+
+    def realname
+      info['realname'] || ""
     end
 
     def refresh_content force=false
@@ -46,6 +52,7 @@ module Aji
       info['thumbnail_uri'] = youtube_data.thumbnail_uri
       info['profile_uri'] = youtube_data.profile_uri
       info['description'] = youtube_data.description
+      info['realname'] = youtube_data.realname
     end
 
     # A Youtube Account's uid is it's username. Let's set uid elsewhere and

@@ -6,6 +6,8 @@ module Aji
     validates_presence_of :uid
     validates_uniqueness_of :uid
 
+    def searchable?; false; end
+
     def refresh_content force=false
       super force do |new_videos|
 
@@ -20,6 +22,10 @@ module Aji
       info["profile_uri"]
     end
 
+    def realname
+      info["realname"]
+    end
+
     def get_user_info
       fb_hash =
         MultiJson.decode(Faraday.get("http://graph.facebook.com/#{uid}").body)
@@ -27,6 +33,7 @@ module Aji
       info["thumbnail_uri"] = "http://graph.facebook.com/#{uid}/picture"
       info["profile_uri"] = fb_hash["link"]
       info["description"] = ""
+      info["realname"] = fb_hash["name"]
     end
   end
 end

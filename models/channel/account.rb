@@ -1,12 +1,13 @@
 module Aji
   class Channel::Account < Channel
+    include Aji::TankerDefaults::Channel
+
     before_save :set_title
 
     has_and_belongs_to_many :accounts,
       :class_name => 'Aji::Account', :join_table => :accounts_channels,
       :foreign_key => :channel_id, :association_foreign_key => :account_id,
       :autosave => true
-
 
     def refresh_content force=false
       super force do |new_videos|
@@ -56,36 +57,17 @@ module Aji
       c
     end
 
+    def description
+      accounts.map(&:description).join('\n\n')
+    end
+
     def serializable_hash options={}
       s = super options
       h = {
         "type" => "Account::#{accounts.first.type.split('::').last}",
-        "description" => accounts.map(&:description).join('\n\n')
+        "description" => description
       }
       s.merge! h
-    end
-
-    def self.searchable_columns; [:title]; end
-
-    def self.search_helper query
-      individual_accounts = []
-      query.tokenize.map do |username|
-        accounts = Account.find_all_by_username username
-        individual_accounts += accounts
-        next unless accounts.empty?
-        accounts = Account.create_all_if_valid username
-        individual_accounts += accounts
-      end
-
-      combination = []
-      individual_accounts.count.times do |n|
-        individual_accounts.combination(n+1).to_a.each do |combo|
-          combination << find_or_create_by_accounts(combo)
-        end
-      end
-
-      results = super query
-      results + combination
     end
 
     private

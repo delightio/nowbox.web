@@ -2,6 +2,8 @@ module Aji
   # ## Keyword Schema Additions
   # - keywords: Serialized array of strings
   class Channel::Keyword < Channel
+    include Aji::TankerDefaults::Channel
+
     serialize :keywords, Array
 
     before_create :set_title, :sort_keywords
@@ -10,11 +12,23 @@ module Aji
     def set_title; self.title = title || self.class.to_title(keywords); end
     def sort_keywords; self.keywords = keywords.sort; end
 
-    # TODO LH 355
-    def self.find_or_create_by_keywords words
-      c = self.search_helper words.join(',')
+
+    def self.search_helper query
+      searchable_columns = [:title]
+      sql_string = searchable_columns.map {|c| "lower(#{c}) LIKE ?" }.join(' OR ')
+      results = []
+      query.tokenize.each do | q |
+        sql = [ sql_string ]
+        searchable_columns.count.times { |n| sql << "%#{q}%"}
+        results += self.where sql
+      end
+      results.uniq # since we search per each keyword
+    end
+
+    def self.find_or_create_by_query query
+      c = self.search_helper query
       return c.first unless c.empty?
-      self.create :keywords => words
+      self.create :keywords => query.tokenize
     end
 
     def thumbnail_uri
@@ -37,7 +51,6 @@ module Aji
       Resque.enqueue Aji::Queues::RefreshChannel, self.id
     end
 
-    def self.searchable_columns; [:title]; end
   end
 end
 

@@ -205,6 +205,8 @@ GEM
       tilt (< 2.0, >= 1.2.2)
     slop (1.9.1)
     systemu (2.2.0)
+    tanker (1.1.4)
+      json (>= 1.5.1)
     term-ansicolor (1.0.6)
     thin (1.2.11)
       daemons (>= 1.0.9)
@@ -221,6 +223,7 @@ GEM
     vcr (1.10.3)
     vegas (0.1.8)
       rack (>= 1.0.0)
+    will_paginate (3.0.1)
     yajl-ruby (0.8.3)
     yard (0.7.2)
     youtube_it (2.0.1)
@@ -262,9 +265,11 @@ DEPENDENCIES
   rspec
   simplecov
   sinatra
+  tanker
   thin
   thor
   twitter!
   vcr
+  will_paginate
   yajl-ruby
   youtube_it (~> 2.0.0)
