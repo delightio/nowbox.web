@@ -29,7 +29,6 @@ gem 'pry-doc'
 gem 'resque-scheduler', '~>2.0.0.d',
   :require => ['resque_scheduler', 'resque/scheduler']
 gem 'resque-retry', :require => [ 'resque-retry', 'resque-retry/server' ]
-gem 'httparty'
 gem 'omniauth', '~>0.3.0.rc3', :require => 'oa-oauth'
 gem 'youtube_it', '~>2.0.0'
 gem 'erubis'
