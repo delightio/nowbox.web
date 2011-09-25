@@ -1,35 +1,35 @@
-require File.expand_path("../../../spec_helper", __FILE__)
+require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
-  describe MentionProcessor do
-
+  describe MentionProcessor, unit: true do
     describe "#perform" do
-      before :each do
-        @destination = mock("video destination")
-        @link_count = 2
-        @video = mock("video", :blacklisted? => false)
-        @link = mock("video link", :to_video => @video)
-        @links = Array.new(@link_count, @link)
-        @author = mock("author", :blacklisted? => false, :save => true,
-          :username => "blah", :id => 1)
-        @mention_videos = Array.new
-        @mention = mock("mention", :author => @author, :spam? => false,
-          :links => @links, :videos => @mention_videos, :body => "",
-          :published_at => Time.now, :save => true, :id => 1)
+
+      let(:destination) { mock "video destination" }
+      let(:video) { mock "video", :blacklisted? => false }
+      let(:link)  { mock "video link", :to_video => video }
+      let(:link_count) { 2 }
+      let(:links) { Array.new link_count, link }
+      let(:author) do
+        mock "author", :blacklisted? => false, :save => true,
+          :username => "blah", :id => 1
+      end
+      let(:mention) do
+        mock "mention", :spam? => false, :links => links, :author => author,
+          :body => "", :videos => [], :save => true, :id => 1,
+          :published_at => Time.now
       end
 
-      subject { MentionProcessor.new @mention, @destination }
-
+      subject { MentionProcessor.new mention, destination }
 
       it "places all videos in their destination" do
-        @destination.should_receive(:push_recent).exactly(@link_count).times
+        destination.should_receive(:push_recent).exactly(link_count).times
         subject.perform
       end
 
       it "blacklists spamming authors and everything it touches" do
-        @mention.stub(:spam?).and_return(true)
+        mention.stub(:spam?).and_return(true)
         Resque.should_receive(:enqueue).with(Queues::RemoveSpammer,
-           @mention.author.id)
+           mention.author.id)
         subject.perform
       end
     end
