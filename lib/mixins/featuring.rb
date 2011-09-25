@@ -19,7 +19,7 @@ module Aji
 
         def featured
           objs = []
-          objs = find(featured_ids) unless featured_ids.empty?
+          objs = find_by_id(featured_ids) unless featured_ids.empty?
           objs
         end
 
