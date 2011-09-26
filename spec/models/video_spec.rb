@@ -85,6 +85,14 @@ describe Aji::Video do
       subject.stub(:blacklisted?).and_return(true)
       subject.relevance(Time.now.to_i).should == 0
     end
+
+    it "is 0 if mentions are spam" do
+      mention = mock("mention")
+      mention.stub(:age).with(anything()).and_return(Float::NAN)
+      subject.stub(:latest_mentions).and_return([mention])
+      subject.relevance.should == 0
+    end
+
   end
 
   describe "#latest_mentions" do

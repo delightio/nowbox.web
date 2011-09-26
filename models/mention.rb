@@ -47,6 +47,7 @@ module Aji
 
     # age from give time in seconds
     def age from_time_i
+      return Float::NAN if spam?
       diff = from_time_i - published_at.to_i
       diff = 0 if diff < 0
       diff

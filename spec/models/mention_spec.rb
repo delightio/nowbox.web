@@ -64,23 +64,29 @@ describe Aji::Mention do
   end
 
   describe "#age" do
-    # TODO: LH #342 why can't I do the following?
-    # Had to use Factory to get spec to run.
-    # before :each do
-    #   @author = mock('author', :blacklisted? => false)
-    # end
-    # subject { Aji::Mention.new :author => @author }
-    subject { Factory :mention }
+    subject do
+      m = Aji::Mention.new :published_at => Time.now
+      m.stub(:spam?).and_return(false)
+      m
+    end
+
     it "returns 0 if an older time is passed in" do
-      subject.age((subject.published_at-10.seconds).to_i).should == 0
+      subject.age((subject.published_at-1.seconds).to_i).should == 0
     end
+
     it "returns lower score for newer mention" do
+      older_mention = Aji::Mention.new(
+        :published_at => subject.published_at-2.hours)
+      older_mention.stub(:spam?).and_return(false)
       at_time_i = Time.now.to_i
-      newer_relevance = subject.age(at_time_i)
-      subject.update_attribute(:published_at,
-        subject.published_at-30.seconds)
-      subject.age(at_time_i).should be > newer_relevance
+      older_mention.age(at_time_i).should be > subject.age(at_time_i)
     end
+
+    it "returns not a number if mention is spam" do
+      subject.stub(:spam?).and_return(true)
+      subject.age(Time.now.to_i).should_not be_integer
+    end
+
   end
 
 end
