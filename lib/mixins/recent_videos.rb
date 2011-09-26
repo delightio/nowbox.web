@@ -15,8 +15,8 @@ module Aji
         recent_video_ids(limit).map { |vid| Video.find_by_id vid }.compact
       end
 
-      def recent_video_ids limit=-1
-        (recent_zset.revrange 0, limit).map(&:to_i)
+      def recent_video_ids limit=0
+        (recent_zset.revrange 0, (limit-1)).map(&:to_i)
       end
 
       def push_recent video, relevance=Time.now.to_i
