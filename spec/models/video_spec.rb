@@ -86,11 +86,12 @@ describe Aji::Video do
       subject.relevance(Time.now.to_i).should == 0
     end
 
-    it "is 0 if mentions are spam" do
-      mention = mock("mention")
-      mention.stub(:age).with(anything()).and_return(Float::NAN)
-      subject.stub(:latest_mentions).and_return([mention])
-      subject.relevance.should == 0
+    it "ignores spammy mention" do
+      spam = mock("mention")
+      spam.stub(:age).with(anything()).and_return(Float::NAN)
+      mention = mock("mention", :age => 0)
+      subject.stub(:latest_mentions).and_return([spam, mention])
+      subject.relevance.should == 10000
     end
 
   end
