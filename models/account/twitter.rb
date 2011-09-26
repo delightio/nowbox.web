@@ -33,8 +33,7 @@ module Aji
     def refresh_content force=false
       super force do |new_videos|
         harvest_tweets
-        videos = recent_video_ids.map { |id| Aji::Video.find_by_id id }.
-          select { |v| not (v.nil? || v.blacklisted?) }
+        videos = recent_videos.select { |v| !v.blacklisted? }
         Aji.log "Found #{videos.count} videos in #{username}'s Twitter stream"
 
         videos.each do |video|
