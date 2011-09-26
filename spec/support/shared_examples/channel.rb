@@ -9,10 +9,10 @@ shared_examples_for "any channel" do
     subject.should respond_to :category_ids, :categories
   end
 
-  describe "#background_refesh" do
-    it "enques a refresh job" do
+  describe "#background_refresh_content" do
+    it "enqueues a refresh job" do
       Resque.should_receive(:enqueue).with(Queues::RefreshChannel, subject.id)
-      subject.background_refesh
+      subject.background_refresh_content
     end
   end
 
