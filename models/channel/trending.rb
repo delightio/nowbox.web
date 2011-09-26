@@ -37,7 +37,7 @@ module Aji
       recent_videos_at_time = recent_videos
       Aji.log "Processing #{recent_videos_at_time.count} in-flight videos..."
       recent_videos_at_time.each do |video|
-        next if video.nil? || video.blacklisted?
+        next if video.blacklisted?
         in_flight << { :video => video, :relevance => video.relevance(at_time_i) }
       end
       Aji.log "Collected #{in_flight.count} recent videos in #{Time.now-start} s."
