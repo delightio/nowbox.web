@@ -1,5 +1,8 @@
 module Aji
   class Channel::User < Channel
+
+    def searchable?; false; end
+
     def thumbnail_uri # LH 220
       case title
       when "Watch Later"

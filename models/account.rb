@@ -15,6 +15,8 @@ module Aji
     include Mixins::CanRefreshContent
     include Mixins::Populating
     include Mixins::Blacklisting
+    include Aji::TankerDefaults::Account
+
     # All of the accounts that this account receives content from.
     set :influencer_set
 
@@ -29,11 +31,8 @@ module Aji
       :autosave => true
 
     after_initialize :initialize_info_hashes
-    after_destroy :delete_redis_keys
-
-    def existing?
-      false
-    end
+    after_create :update_tank_indexes_if_searchable
+    after_destroy :delete_redis_keys, :delete_tank_indexes_if_searchable
 
     def profile_uri
       raise InterfaceMethodNotImplemented
@@ -47,15 +46,7 @@ module Aji
       raise InterfaceMethodNotImplemented
     end
 
-    def self.create_all_if_valid username
-      results = []
-      self.descendants.each do | descendant |
-        tmp = descendant.new :uid => username
-        next unless tmp.existing?
-        results << tmp if tmp.save
-      end
-      results
-    end
+    def realname; ""; end
 
     # The publish interface is called by background tasks to publish a video
     # share to an external service.

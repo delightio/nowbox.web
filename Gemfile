@@ -36,6 +36,8 @@ gem 'erubis'
 gem 'yajl-ruby'
 gem 'twitter', :git => 'https://github.com/jnunemaker/twitter.git'
 gem 'koala', '~>1.2.0beta'
+gem 'tanker'
+gem 'will_paginate'
 
 # Mail related
 #gem 'activeresource'

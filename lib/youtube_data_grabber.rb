@@ -7,6 +7,12 @@ module Aji
       @data = get_data_from_youtube
     end
 
+    def realname
+      first_name = @data.fetch('yt$firstName',{}).fetch('$t', "")
+      last_name = @data.fetch('yt$lastName',{}).fetch('$t', "")
+      [first_name, last_name].join " "
+    end
+
     def description
       @data.fetch('yt$aboutMe',{}).fetch('$t', "")
     end

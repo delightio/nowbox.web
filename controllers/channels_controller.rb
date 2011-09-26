@@ -40,7 +40,7 @@ module Aji
       get do
         channels = []
         if params[:query]
-          channels += Channel.search params[:query]
+          channels = Searcher.new(params[:query]).results
         else
           user = User.find_by_id params[:user_id]
           channels = if user then
@@ -74,8 +74,7 @@ module Aji
       post do
         creation_error!(Channel::Keyword, params) if params[:type] != 'keyword'
         not_found_error!(Channel::Keyword, params) if params[:query].nil?
-        new_channel = Channel::Keyword.find_or_create_by_keywords(
-          params[:query].split(','))
+        new_channel = Channel::Keyword.find_or_create_by_query params[:query]
         new_channel
       end
 

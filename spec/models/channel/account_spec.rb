@@ -152,30 +152,5 @@ module Aji
       end
     end
 
-    describe ".search_helper" do
-
-      it "returns new channels from query" do
-        query = "nowmov"
-        results = Channel::Account.search_helper query
-        results.should have(2).channels
-      end
-
-      it "checks if query is a valid youtube author" do
-        query = "freddiew, day9tv"
-        results = Channel::Account.search_helper query
-        # We expect results to contain 3 channels:
-        # - freddiew
-        # - day9tv
-        # - freddiew and day9tv
-        f = Account::Youtube.find_or_create_by_uid "freddiew"
-        d = Account::Youtube.find_or_create_by_uid "day9tv"
-        ch1 = Channel::Account.find_or_create_by_accounts [f]
-        ch2 = Channel::Account.find_or_create_by_accounts [d]
-        ch3 = Channel::Account.find_or_create_by_accounts [f, d]
-        diff = [ch1,ch2,ch3] - results
-        diff.should be_empty
-      end
-    end
-
   end
 end

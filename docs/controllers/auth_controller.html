@@ -167,11 +167,11 @@ to <code>http://api.nowbox.com/auth/failure</code>.</em></p>
           <span class="ss">:uid</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;uid&#39;</span><span class="o">]</span><span class="p">,</span>
           <span class="ss">:info</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;extra&#39;</span><span class="o">][</span><span class="s1">&#39;user_hash&#39;</span><span class="o">]</span><span class="p">)</span>
         <span class="k">end</span>
+        <span class="n">fb</span><span class="o">.</span><span class="n">create_stream_channel</span><span class="o">.</span><span class="n">background_refresh_content</span>
       <span class="k">else</span>
         <span class="s2">&quot;Unsupported provider </span><span class="si">#{</span><span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;provider&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
       <span class="k">end</span>
 
-      <span class="no">Resque</span><span class="o">.</span><span class="n">enqueue</span> <span class="no">Aji</span><span class="o">::</span><span class="no">Queues</span><span class="o">::</span><span class="no">UpdateGraphChannel</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">id</span>
       <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span> <span class="n">user</span><span class="o">.</span><span class="n">serializable_hash</span>
     <span class="k">end</span>
   <span class="k">end</span>

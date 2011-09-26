@@ -171,16 +171,27 @@ from Heroku&rsquo;s Environment or a local <code>settings.yml</code>.</p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-10">&#182;</a>
         </div>
-        <p>An application specific error class.</p>
+        <p>For Account and Channel search</p>
       </td>
       <td class=code>
-        <div class='highlight'><pre>  <span class="k">class</span> <span class="nc">Error</span> <span class="o">&lt;</span> <span class="no">RuntimeError</span><span class="p">;</span> <span class="k">end</span></pre></div>
+        <div class='highlight'><pre>  <span class="no">Tanker</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="no">Aji</span><span class="o">.</span><span class="n">conf</span><span class="o">[</span><span class="s1">&#39;INDEXTANK_URL&#39;</span><span class="o">]</span> <span class="p">}</span></pre></div>
       </td>
     </tr>
     <tr id='section-11'>
       <td class=docs>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-11">&#182;</a>
+        </div>
+        <p>An application specific error class.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="k">class</span> <span class="nc">Error</span> <span class="o">&lt;</span> <span class="no">RuntimeError</span><span class="p">;</span> <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-12'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-12">&#182;</a>
         </div>
         <p>An error to raise when a required interface method has not been overridden
 by a subclass.</p>
@@ -197,10 +208,10 @@ by a subclass.</p>
 <span class="k">end</span></pre></div>
       </td>
     </tr>
-    <tr id='section-12'>
+    <tr id='section-13'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-12">&#182;</a>
+          <a class="pilcrow" href="#section-13">&#182;</a>
         </div>
         <p>Monkey Patching</p>
       </td>
@@ -208,14 +219,15 @@ by a subclass.</p>
         <div class='highlight'><pre><span class="n">require_relative</span> <span class="s1">&#39;lib/patches/string&#39;</span>
 
 <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;lib/mixins/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span>
+<span class="nb">require</span> <span class="s1">&#39;./lib/tanker_defaults&#39;</span>
 
 <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;models/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span></pre></div>
       </td>
     </tr>
-    <tr id='section-13'>
+    <tr id='section-14'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-13">&#182;</a>
+          <a class="pilcrow" href="#section-14">&#182;</a>
         </div>
         <p>Must load channel subtypes after other models for dependency reasons.</p>
       </td>
@@ -224,10 +236,10 @@ by a subclass.</p>
 <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;models/account/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span></pre></div>
       </td>
     </tr>
-    <tr id='section-14'>
+    <tr id='section-15'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-14">&#182;</a>
+          <a class="pilcrow" href="#section-15">&#182;</a>
         </div>
         <p>Run migrations after models are loaded.</p>
       </td>
@@ -241,10 +253,10 @@ by a subclass.</p>
 <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;queues/mention/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span></pre></div>
       </td>
     </tr>
-    <tr id='section-15'>
+    <tr id='section-16'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-15">&#182;</a>
+          <a class="pilcrow" href="#section-16">&#182;</a>
         </div>
         <p>Add Sinatra web viewer.</p>
       </td>
@@ -253,10 +265,10 @@ by a subclass.</p>
 <span class="n">require_relative</span> <span class="s2">&quot;lib/mailer/mailer&quot;</span></pre></div>
       </td>
     </tr>
-    <tr id='section-16'>
+    <tr id='section-17'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-16">&#182;</a>
+          <a class="pilcrow" href="#section-17">&#182;</a>
         </div>
         <p>Add miscelaneous library code.</p>
 
@@ -265,8 +277,8 @@ by a subclass.</p>
         <div class='highlight'><pre><span class="nb">require</span> <span class="s1">&#39;./lib/decay&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;./lib/macker&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;./lib/parsers&#39;</span>
-<span class="nb">require</span> <span class="s1">&#39;./lib/mention/processor&#39;</span>
-<span class="nb">require</span> <span class="s1">&#39;./lib/youtube_data_grabber&#39;</span></pre></div>
+<span class="nb">require</span> <span class="s1">&#39;./lib/youtube_data_grabber&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;./lib/searcher&#39;</span></pre></div>
       </td>
     </tr>
   </table>

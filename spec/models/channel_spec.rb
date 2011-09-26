@@ -153,52 +153,17 @@ module Aji
       end
     end
 
-    describe "search" do
-      before(:each) do
-        @query = Array.new(3){ |n| random_string }.join(",")
-      end
-
-      it "searches thru all sub classes that have a searchable_columns" do
-        Aji::Channel.descendants.each do | descendant |
-          next if descendant.searchable_columns.empty?
-        descendant.stub(:search_helper).and_return([])
-        descendant.should_receive(:search_helper).with(@query)
-        end
-        Aji::Channel.search @query
-      end
-
-      it "enqueues all search results for population" do
-        channel = Factory :channel
-        Aji::Channel.descendants.each do |descendant|
-          next if descendant.searchable_columns.empty?
-          descendant.should_receive(:search_helper).
-            with(an_instance_of(String)).
-            and_return([channel])
-        end
-        Resque.should_receive(:enqueue).
-          with(Aji::Queues::RefreshChannel, channel.id).
-          at_least(1)
-        Aji::Channel.search random_string
-      end
-
-      it "returns unique output" do
-        keywords = Array.new(3) {|n| random_string }
-        c = Factory :keyword_channel, :title => keywords.join(',')
-        results = Aji::Channel.search keywords.shuffle.first(2).join(',')
-        results.should have(1).channel
-      end
-
-      describe "#serializable_hash" do
-        it "includes video hash if :inline_videos count is positive" do
-          channel = Factory :youtube_channel
-          args = { :inline_videos=>3 }
-          hash = channel.serializable_hash args
-          hash["videos"].should have(args[:inline_videos]).videos
-          hash["videos"].first["video"] ==
-            channel.content_videos.first.serializable_hash
-        end
+    describe "#serializable_hash" do
+      it "includes video hash if :inline_videos count is positive" do
+        channel = Factory :youtube_channel
+        args = { :inline_videos=>3 }
+        hash = channel.serializable_hash args
+        hash["videos"].should have(args[:inline_videos]).videos
+        hash["videos"].first["video"] ==
+          channel.content_videos.first.serializable_hash
       end
     end
+
   end
 end
 

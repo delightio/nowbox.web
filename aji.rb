@@ -59,6 +59,9 @@ module Aji
   ActiveRecord::Base.establish_connection conf['DATABASE']
   ActiveRecord::Base.default_timezone = :utc
 
+  # For Account and Channel search
+  Tanker.configuration = { :url => Aji.conf['INDEXTANK_URL'] }
+
   # An application specific error class.
   class Error < RuntimeError; end
   # An error to raise when a required interface method has not been overridden
@@ -73,10 +76,12 @@ module Aji
   end
 end
 
+
 # Monkey Patching
 require_relative 'lib/patches/string'
 
 Dir.glob("lib/mixins/*.rb").each { |r| require_relative r }
+require './lib/tanker_defaults'
 
 Dir.glob("models/*.rb").each { |r| require_relative r }
 # Must load channel subtypes after other models for dependency reasons.
@@ -101,4 +106,4 @@ require './lib/decay'
 require './lib/macker'
 require './lib/parsers'
 require './lib/youtube_data_grabber'
-
+require './lib/searcher'
