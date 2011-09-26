@@ -32,6 +32,18 @@ describe Aji::Video do
       subject.author.uid.should == "rymdreglage"
     end
 
+    it "skips populating for blacklisted videos" do
+      subject.stub(:blacklisted?).and_return(true)
+      subject.should_receive(:send).never
+      subject.populate
+    end
+
+    it "does not re populate populated videos" do
+      subject.stub(:populated?).and_return(true)
+      subject.should_receive(:send).never
+      subject.populate
+    end
+
     context "when a video id is invalid" do
       subject do
        Aji::Video.new :id => 666, :external_id => 'adudosucvdd',

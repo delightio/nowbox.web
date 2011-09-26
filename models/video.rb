@@ -28,6 +28,8 @@ module Aji
     belongs_to :category
 
     def populate
+      return if blacklisted? || populated?
+
       if external_id.nil?
         raise "Aji::Video#populate: missing external id for Aji::Video[#{id}]"
       end
