@@ -9,7 +9,7 @@ module Aji
       end
     end
 
-    it_behaves_like "any content holder"
+    it_behaves_like "any channel"
     describe "#refresh_content" do
       it "skips blacklisted accounts" do
         bad_author = Factory :youtube_account
