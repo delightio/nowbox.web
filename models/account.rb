@@ -72,6 +72,7 @@ module Aji
             "username" => username,
             "profile_uri" => profile_uri,
             "thumbnail_uri" => thumbnail_uri,
+            "realname" => realname,
             "description" => description ]
     end
 
