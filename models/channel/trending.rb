@@ -39,9 +39,6 @@ module Aji
       recent_videos_at_time.each do |video|
         next if video.blacklisted?
         in_flight << { :video => video, :relevance => video.relevance(at_time_i) }
-        if in_flight.count <= 10 || in_flight.count % 50 == 0
-          Aji.log "#{in_flight.count} inserted: Video[#{in_flight.last[:video].id}] w/ relevance of #{in_flight.last[:relevance]}"
-        end
       end
       Aji.log "Collected #{in_flight.count} recent videos in #{Time.now-start} s."
 
