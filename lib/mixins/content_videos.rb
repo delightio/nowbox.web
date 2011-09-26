@@ -45,8 +45,12 @@ module Aji
         content_zset[video.id] = relevance
       end
 
+      def pop_by_id video_id
+        content_zset.delete video_id
+      end
+
       def pop video
-        content_zset.delete video.id
+        pop_by_id video.id
       end
 
       def truncate limit

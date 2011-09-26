@@ -22,6 +22,37 @@ describe Aji::Channel::Trending do
       subject.should be_populated
     end
 
+    context "when an old video with high relevance is not in recent videos" do
+      before(:each) do
+        @video1 = mock("video", :id=>1)
+        @video1.stub(:relevance).and_return(1000)
+        @video1.stub(:populated?).and_return(true)
+        @video1.stub(:blacklisted?).and_return(false)
+
+        @video2 = mock("video", :id=>2)
+        @video2.stub(:relevance).and_return(2000)
+        @video2.stub(:populated?).and_return(true)
+        @video2.stub(:blacklisted?).and_return(false)
+
+        Aji::Video.should_receive(:find_by_id).
+          with(@video1.id).and_return(@video1)
+        Aji::Video.should_receive(:find_by_id).
+          with(@video2.id).and_return(@video2)
+      end
+
+      it "should not be in content videos" do
+        subject.stub(:recent_video_ids).and_return([@video1.id])
+        subject.should_receive(:create_channels_from_top_authors).
+          with([@video1.id])
+        subject.refresh_content
+        subject.stub(:recent_video_ids).and_return([@video2.id])
+        subject.should_receive(:create_channels_from_top_authors).
+          with([@video2.id])
+        subject.refresh_content true
+        subject.content_video_ids.should_not include @video1.id
+      end
+    end
+
     context "after #refresh_content" do
       before(:each) do
         real_youtube_video_ids = %w[ l4qv4Ca1h94 Wx7c7nHXqKg BoTvCgJtcJU ]
