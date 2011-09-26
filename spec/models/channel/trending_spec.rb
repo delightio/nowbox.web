@@ -22,32 +22,31 @@ describe Aji::Channel::Trending do
       subject.should be_populated
     end
 
-    context "when an old video with high relevance is not in recent videos" do
+    context "when an old video with high relevance is not in recent videos anymore" do
       before(:each) do
         @video1 = mock("video", :id=>1)
-        @video1.stub(:relevance).and_return(1000)
+        @video1.should_receive(:populate)
         @video1.stub(:populated?).and_return(true)
-        @video1.stub(:blacklisted?).and_return(false)
 
         @video2 = mock("video", :id=>2)
-        @video2.stub(:relevance).and_return(2000)
+        @video2.should_receive(:populate)
         @video2.stub(:populated?).and_return(true)
-        @video2.stub(:blacklisted?).and_return(false)
 
-        Aji::Video.should_receive(:find_by_id).
-          with(@video1.id).and_return(@video1)
-        Aji::Video.should_receive(:find_by_id).
-          with(@video2.id).and_return(@video2)
+        [@video1, @video2].each do | v |
+          Aji::Video.should_receive(:find_by_id).with(v.id).and_return(v)
+        end
       end
 
       it "should not be in content videos" do
-        subject.stub(:recent_video_ids).and_return([@video1.id])
+        subject.stub(:sorted_recent_videos).with(an_instance_of(Fixnum)).
+          and_return([{:video=>@video1, :relevance=>1000}])
         subject.should_receive(:create_channels_from_top_authors).
-          with([@video1.id])
+          with([@video1])
         subject.refresh_content
-        subject.stub(:recent_video_ids).and_return([@video2.id])
+        subject.stub(:sorted_recent_videos).with(an_instance_of(Fixnum)).
+          and_return([{:video=>@video2, :relevance=>2000}])
         subject.should_receive(:create_channels_from_top_authors).
-          with([@video2.id])
+          with([@video2])
         subject.refresh_content true
         subject.content_video_ids.should_not include @video1.id
       end
@@ -60,12 +59,12 @@ describe Aji::Channel::Trending do
           subject.push_recent( Factory :video_with_mentions,
                                        :source => :youtube,
                                        :external_id => yt_id) }
-
+      
         old_video = Factory :video_with_mentions
         old_video.mentions.each { |m| m.update_attribute :published_at,
           1.years.ago }
         subject.push_recent old_video
-
+      
         Aji.stub(:conf).and_return(
           { 'MAX_RECENT_VIDEO_IDS_IN_TRENDING'=>real_youtube_video_ids.count*2,
             'MAX_VIDEOS_IN_TRENDING' => real_youtube_video_ids.count})
@@ -81,9 +80,8 @@ describe Aji::Channel::Trending do
 
       specify "not all recent_videos are populated" do
         subject.refresh_content
-        subject.recent_video_ids.select{ |vid|
-          !Aji::Video.find(vid).populated? }.
-            should have(1).video
+        subject.recent_videos.select{ |video| !video.populated? }.
+          should have(1).video
       end
 
       it "respects MAX_VIDEOS_IN_TRENDING" do
@@ -129,5 +127,38 @@ describe Aji::Channel::Trending do
       subject.refresh_content
       subject.content_videos.count.should == 0
     end
+
+    it "only continues if we have any recent videos. Otherwise, keep existing content" do
+      expect { subject.refresh_content }.
+        to_not change { subject.content_videos }
+    end
+
   end
+
+  # describe "#sorted_recent_videos" do
+  #   before :each do
+  #     @recent_videos = []
+  #     3.times.do |n|
+  #       v = mock("video")
+  #       v.stub(:blacklisted?).and_return(false)
+  #       v.stub(:relevance).with(instance_of(Fixnum)).and_return(n*1000)
+  #     end
+  #   end
+  # 
+  #   it "sorts all recent videos by relevance" do
+  #     subject.stub(:recent_videos).and_return(@recent_videos)
+  #     sorted = subject.sorted_recent_videos
+  #     sorted.should have(3).videos
+  #     sorted.should == [@recent_videos[2], @recent_videos[1], @recent_videos[0]]
+  #   end
+  # 
+  #   it "ignores blacklisted videos" do
+  #     blacklisted = mock("video")
+  #     blacklisted.stub(:blacklisted?).and_return(true)
+  #     subject.stub(:recent_videos).and_return(@recent_videos<<blacklisted)
+  #     sorted = subject.sorted_recent_videos
+  #     sorted.should have(3).videos
+  #     sorted.should_not include blacklisted
+  #   end
+  # end
 end

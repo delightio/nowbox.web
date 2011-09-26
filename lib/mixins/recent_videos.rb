@@ -11,6 +11,10 @@ module Aji
         klass.sorted_set :recent_zset
       end
 
+      def recent_videos limit=0
+        recent_video_ids(limit).map { |vid| Video.find_by_id vid }.compact
+      end
+
       def recent_video_ids limit=-1
         (recent_zset.revrange 0, limit).map(&:to_i)
       end
