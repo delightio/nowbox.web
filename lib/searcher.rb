@@ -2,7 +2,8 @@ module Aji
   class Searcher
 
     def self.enabled?
-      RACK_ENV!='test'
+      false
+      # RACK_ENV!='test'
     end
 
     def initialize query
