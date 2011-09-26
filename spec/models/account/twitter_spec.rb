@@ -1,8 +1,8 @@
 require File.expand_path("../../../spec_helper", __FILE__)
 
 describe Aji::Account::Twitter do
-  subject { Aji::Account::Twitter.create(:uid => '178492493',
-                                      :username => '_nuclearsammich') }
+  subject { Aji::Account::Twitter.create(:uid => '16131280',
+                                      :username => 'milboe') }
 
   it_behaves_like "any account"
 
