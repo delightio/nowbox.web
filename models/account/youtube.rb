@@ -48,6 +48,10 @@ module Aji
       info['description'] = youtube_data.description
     end
 
+    def api
+      @api ||= YoutubeAPI.new
+    end
+
     # A Youtube Account's uid is it's username. Let's set uid elsewhere and
     # set the username to be equal within the method.
     def set_uid_as_username
