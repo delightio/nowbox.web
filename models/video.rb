@@ -102,7 +102,7 @@ module Aji
           "author" => author.serializable_hash
         }
       else
-        { "id" => id, "external_id" => external_id, "source" => source }
+        { "id" => id, "external_id" => external_id, "source" => source.to_s }
       end
     end
 
