@@ -16,7 +16,6 @@ shared_examples_for "any featured model" do
     end
 
     it "returns an array" do
-      subject.unfeature
       subject.class.featured.should be_a_kind_of(Array)
     end
   end

@@ -23,6 +23,7 @@ module Aji
     def channels limit=-1
       channel_ids(limit).map { |cid| Channel.find_by_id cid }
     end
+
     def update_channel_relevance channel, relevance
       channel_id_zset[channel.id] += relevance
     end
