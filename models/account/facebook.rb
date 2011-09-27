@@ -14,8 +14,6 @@ module Aji
     # Channel::Trending without the need for a recent_zset buffer.
     alias_method :push_recent, :push
 
-    def searchable?; false; end
-
     def refresh_content force=false
       super force do |new_videos|
         mentions = api.video_mentions_i_post

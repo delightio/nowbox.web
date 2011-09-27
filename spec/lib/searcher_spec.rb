@@ -14,8 +14,10 @@ module Aji
         subject { Searcher.new @query }
         before :each do
           @query = "nowmov"
-          @account = Account::Twitter.create(:uid => "355199843",
+          @account = Account::Twitter.new(:uid => "355199843",
             :username => @query)
+          @account.stub(:searchable?).and_return(true)
+          @account.save
         end
 
         it "returns result from IndexTank" do

@@ -18,12 +18,17 @@ module Aji
         end
       end
 
+      def searchable?
+        Searcher.enabled? &&
+        content_video_id_count >= Searcher.minimun_video_count
+      end
+
       def update_tank_indexes_if_searchable
-        update_tank_indexes if Searcher.enabled?
+        update_tank_indexes if searchable?
       end
 
       def delete_tank_indexes_if_searchable
-        delete_tank_indexes if Searcher.enabled?
+        delete_tank_indexes if searchable?
       end
     end
 

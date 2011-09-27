@@ -6,6 +6,10 @@ module Aji
       # RACK_ENV!='test'
     end
 
+    def self.minimun_video_count
+      5
+    end
+
     def initialize query
       @query = query
     end
