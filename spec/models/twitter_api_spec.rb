@@ -1,12 +1,7 @@
 require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
-  describe Aji::TwitterAPI do
-    subject do
-      TwitterAPI.new "178492493-RexX78f8UlsAPfkqkYjUwDLaZ1qyLAP0qpcw3NWZ",
-        "e6PAUeVJxsTHqqKqKe8MeTypEohtz6UBgpa3V7ddXk"
-    end
-
+  describe Aji::TwitterAPI, :unit do
     describe "#valid_uid?" do
       it "returns true if the user exists" do
         subject.valid_uid?('178492493').should be_true
@@ -29,6 +24,7 @@ module Aji
 
     describe "#videos_in_timeline" do
       it "returns an array of videos from a user's home timeline" do
+        pending "Need to get valid OAuth Keys"
         videos = subject.videos_in_timeline
         videos.class.should == Array
         videos.all? { |v| v.class.should == Video }
