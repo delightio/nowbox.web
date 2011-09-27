@@ -140,7 +140,7 @@ module Aji
 
       it "contains only source, external_id, and id when not populated" do
         subject.serializable_hash.should == { "id" => nil,
-          "external_id" => "afakevideo1", "source" => :youtube }
+          "external_id" => "afakevideo1", "source" => 'youtube' }
       end
 
       it "contains many attributes when populated" do
