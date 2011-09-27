@@ -5,7 +5,6 @@ module Aji
   class Channel::Trending < Channel
     include Redis::Objects
     include Mixins::RecentVideos
-    include Aji::TankerDefaults::Channel
 
     def refresh_content force=false
       super force do |new_videos|

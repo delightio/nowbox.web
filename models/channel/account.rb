@@ -1,6 +1,5 @@
 module Aji
   class Channel::Account < Channel
-    include Aji::TankerDefaults::Channel
 
     before_save :set_title
 

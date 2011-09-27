@@ -27,24 +27,5 @@ module Aji
       end
     end
 
-    module Channel
-      def self.index; "channels_#{Aji.tanker_index_suffix}"; end
-      def self.included(base)
-        base.send(:include, ::Tanker)
-        base.tankit index, :as => 'Aji::Channel' do
-          indexes :title
-          indexes :description
-        end
-      end
-
-      def update_tank_indexes_if_searchable
-        update_tank_indexes if Searcher.enabled?
-      end
-
-      def delete_tank_indexes_if_searchable
-        delete_tank_indexes if Searcher.enabled?
-      end
-    end
-
   end
 end

@@ -10,10 +10,6 @@ module Aji
       @query = query
     end
 
-    def channel_results
-      Channel.search_tank @query
-    end
-
     def account_results
       Account.search_tank @query
     end
@@ -33,9 +29,9 @@ module Aji
         accounts << account if account.existing?
       end
 
-      channels = channel_results + accounts.map(&:to_channel)
+      channels = accounts.map(&:to_channel)
       channels = channels.uniq
-      channels.each { |ch| Resque.enqueue Queues::RefreshChannel, ch.id }
+      channels.each { |ch| ch.background_refresh_content }
       channels
     end
 

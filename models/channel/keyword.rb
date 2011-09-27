@@ -2,7 +2,6 @@ module Aji
   # ## Keyword Schema Additions
   # - keywords: Serialized array of strings
   class Channel::Keyword < Channel
-    include Aji::TankerDefaults::Channel
 
     serialize :keywords, Array
 

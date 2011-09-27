@@ -18,12 +18,10 @@ module Aji
     include Mixins::Populating
     sorted_set :category_id_zset
     include Mixins::Featuring
-    include Aji::TankerDefaults::Channel
 
     has_many :events
 
-    after_create :update_tank_indexes_if_searchable
-    after_destroy :delete_redis_keys, :delete_tank_indexes_if_searchable
+    after_destroy :delete_redis_keys
 
     def category_ids limit=-1
       (category_id_zset.revrange 0, limit).map(&:to_i)
