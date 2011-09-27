@@ -17,9 +17,6 @@ module Aji
             accounts_populated_at << account.populated_at
           end
         end
-        # NOTE: Steven! thinks this should either be the current time or the
-        # oldest time since it will indicate the staleness of the channel
-        # better.
         update_relevance_in_categories new_videos
       end
     end
