@@ -2,8 +2,6 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
   describe Aji::User do
-    before :each do
-    end
 
     subject do
       User.create(:name => "John Doe",
@@ -14,11 +12,10 @@ module Aji
 
     it_behaves_like "any redis object model"
 
-    describe ".create" do
+    describe "#create_user_channels" do
       it "creates user channels" do
-        Channel::User.should_receive(:create).exactly(3)
-        User.any_instance.stub(:save).and_return(true)
-        User.create
+        Channel::User.should_receive(:create).exactly(3).times
+        User.new.send :create_user_channels
       end
     end
 
