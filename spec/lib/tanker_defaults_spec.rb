@@ -44,8 +44,9 @@ module Aji
 
       it "delete self form index tank" do
         subject.stub(:searchable?).and_return(true)
-        subject.should_receive(:delete_tank_indexes).once
+        subject.should_receive(:update_tank_indexes).once # from save
         subject.save
+        subject.should_receive(:delete_tank_indexes).once
         subject.destroy
       end
     end
