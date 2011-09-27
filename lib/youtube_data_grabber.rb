@@ -10,7 +10,9 @@ module Aji
     def realname
       first_name = @data.fetch('yt$firstName',{}).fetch('$t', "")
       last_name = @data.fetch('yt$lastName',{}).fetch('$t', "")
-      [first_name, last_name].join " "
+      name = [first_name, last_name].join " "
+      name = name.strip
+      name
     end
 
     def description
