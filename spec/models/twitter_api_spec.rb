@@ -1,7 +1,7 @@
 require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
-  describe Aji::TwitterAPI, :unit do
+  describe Aji::TwitterAPI, :unit, :net do
     describe "#valid_uid?" do
       it "returns true if the user exists" do
         subject.valid_uid?('178492493').should be_true
