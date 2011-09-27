@@ -14,7 +14,7 @@ development:
   MAX_RECENT_VIDEO_IDS_IN_TRENDING: 1000
   MAX_VIDEOS_IN_TRENDING: 100
   TZ: "UTC"
-  INDEXTANK_URL: "http://:vHq8sbT7949Laz@d7voe.api.indextank.com"
+  INDEXTANK_API_URL: "http://:vHq8sbT7949Laz@d7voe.api.indextank.com"
 
 test:
   # TWITTER
@@ -29,4 +29,4 @@ test:
   MAX_RECENT_VIDEO_IDS_IN_TRENDING: 1000
   MAX_VIDEOS_IN_TRENDING: 100
   TZ: "UTC"
-  INDEXTANK_URL: "http://:vHq8sbT7949Laz@d7voe.api.indextank.com"
+  INDEXTANK_API_URL: "http://:vHq8sbT7949Laz@d7voe.api.indextank.com"

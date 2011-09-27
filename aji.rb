@@ -60,7 +60,7 @@ module Aji
   ActiveRecord::Base.default_timezone = :utc
 
   # For Account and Channel search
-  Tanker.configuration = { :url => Aji.conf['INDEXTANK_URL'] }
+  Tanker.configuration = { :url => Aji.conf['INDEXTANK_API_URL'] }
 
   # An application specific error class.
   class Error < RuntimeError; end
