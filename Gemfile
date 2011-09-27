@@ -29,12 +29,11 @@ gem 'pry-doc'
 gem 'resque-scheduler', '~>2.0.0.d',
   :require => ['resque_scheduler', 'resque/scheduler']
 gem 'resque-retry', :require => [ 'resque-retry', 'resque-retry/server' ]
-gem 'httparty'
 gem 'omniauth', '~>0.3.0.rc3', :require => 'oa-oauth'
 gem 'youtube_it', '~>2.0.0'
 gem 'erubis'
 gem 'yajl-ruby'
-gem 'twitter', :git => 'https://github.com/jnunemaker/twitter.git'
+gem 'twitter'
 gem 'koala', '~>1.2.0beta'
 gem 'tanker'
 gem 'will_paginate'
@@ -61,4 +60,5 @@ group :test do
   #gem 'capybara' # For viewer app.
   gem 'factory_girl'
   gem 'simplecov'
+  gem 'spork'
 end

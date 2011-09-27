@@ -48,11 +48,15 @@ module Aji
     # Fetch information from youtube, returns the new info hash upon success
     # and false otherwise.
     def get_info_from_youtube_api
-      youtube_data = YoutubeDataGrabber.new uid
+      youtube_data = api.author_info uid
       info['thumbnail_uri'] = youtube_data.thumbnail_uri
       info['profile_uri'] = youtube_data.profile_uri
       info['description'] = youtube_data.description
       info['realname'] = youtube_data.realname
+    end
+
+    def api
+      @api ||= YoutubeAPI.new
     end
 
     # A Youtube Account's uid is it's username. Let's set uid elsewhere and

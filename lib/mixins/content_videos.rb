@@ -33,7 +33,7 @@ module Aji
       end
 
       def content_videos_rev limit=0
-        content_video_ids_rev(limit).map { |vid| Video.find vid }
+        content_video_ids_rev(limit).map { |vid| Video.find_by_id vid }
       end
 
       def relevance_of video
@@ -42,7 +42,7 @@ module Aji
 
       # Push a video into the channel's content.
       def push video, relevance=Time.now.to_i
-        content_zset[video.id] = relevance
+        content_zset[video.id] = relevance.to_i
       end
 
       def pop_by_id video_id

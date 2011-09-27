@@ -1,27 +1,39 @@
 require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
-  describe Aji::Category do
-    subject { Category.create.tap{|c| c.channel_id_zset[1]=1 } }
+  describe Aji::Category, :unit do
+    subject do
+      Category.new.tap do |c|
+        c.stub :id => 1
+        c.channel_id_zset[1]=1
+        Category.stub(:find_by_id).with(c.id).and_return(c)
+        Category.stub(:find_all_by_id).with([c.id]).and_return([c])
+        Category.stub(:find_by_title).and_return(c)
+      end
+    end
 
     it_behaves_like "any redis object model"
     it_behaves_like "any featured model"
 
     it "sets title as raw_title after create" do
-      c = Aji::Category.find_or_create_by_raw_title random_string
+      c = Category.create :raw_title => "raw title"
       c.title.should_not be_nil
     end
 
     describe "#featured_channels" do
-      subject { Aji::Category.create :raw_title => random_string }
       it "returns channels which top categories are also self" do
-        ch1 = Factory :channel
-        ch1.stub(:category_ids).and_return([subject.id])
-        ch2 = Factory :channel
-        ch2.stub(:category_ids).
-          and_return([(Factory :category).id])
-        Aji::Channel.stub(:find).with(ch1.id).and_return ch1
-        Aji::Channel.stub(:find).with(ch2.id).and_return ch2
+        ch1 = mock("channel").tap do |c|
+          c.stub :id => 1
+          c.stub(:category_ids).and_return [subject.id]
+          Channel.stub(:find_by_id).with(c.id).and_return c
+        end
+
+        ch2 = mock("channel").tap do |c|
+          c.stub :id => 2
+          c.stub(:category_ids).and_return [4]
+          Aji::Channel.stub(:find_by_id).with(c.id).and_return c
+        end
+
         subject.stub(:channel_ids).and_return([ch1.id, ch2.id])
 
         featured = subject.featured_channels
