@@ -42,7 +42,7 @@ module Aji
 
       # Push a video into the channel's content.
       def push video, relevance=Time.now.to_i
-        content_zset[video.id] = relevance
+        content_zset[video.id] = relevance.to_i
       end
 
       def pop video
