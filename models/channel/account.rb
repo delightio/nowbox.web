@@ -14,7 +14,7 @@ module Aji
         accounts_populated_at = []
         accounts.each do |account|
           unless account.blacklisted?
-            new_videos += account.refresh_content(force)
+            new_videos.concat account.refresh_content(force)
             accounts_populated_at << account.populated_at
           end
         end
