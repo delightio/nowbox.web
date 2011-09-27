@@ -7,8 +7,9 @@ Spork.prefork do
   ENV["RACK_ENV"] ||= 'test'
   require 'bundler'
   Bundler.require :test
-
   SimpleCov.start
+
+  require './aji'
 
   module TestMixin
     include Rack::Test::Methods
