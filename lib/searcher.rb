@@ -2,8 +2,7 @@ module Aji
   class Searcher
 
     def self.enabled?
-      false
-      # RACK_ENV!='test'
+      RACK_ENV!='test'
     end
 
     def self.minimun_video_count
