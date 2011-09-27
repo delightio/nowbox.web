@@ -58,4 +58,5 @@ group :test do
   #gem 'capybara' # For viewer app.
   gem 'factory_girl'
   gem 'simplecov'
+  gem 'spork'
 end
