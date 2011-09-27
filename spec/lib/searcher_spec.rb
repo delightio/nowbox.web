@@ -14,9 +14,14 @@ module Aji
         subject { Searcher.new @query }
         before :each do
           @query = "nowmov"
-          @accounts = [(Account::Youtube.create uid: @query)]
-          @account_channel = Channel::Account.create accounts: @accounts
+          @account = Account::Youtube.create uid: @query
+          @account_channel = Channel::Account.create accounts: [@account]
           @keyword_channel = Channel::Keyword.create keywords: [@query]
+
+          # index these searchable objects
+          [@account, @account_channel, @keyword_channel].each do |obj|
+            obj.update_tank_indexes_if_searchable
+          end
         end
 
         it "returns results from IndexTank" do
@@ -30,6 +35,7 @@ module Aji
         subject { Searcher.new "popular" }
         before :each do
           @trending_channel = Channel.trending
+          @trending_channel.update_tank_indexes_if_searchable
         end
 
         it "returns trending channel when searching for popular" do
@@ -46,6 +52,7 @@ module Aji
           @query = "nowmov"
           @account = Account::Twitter.create(:uid => "355199843",
             :username => @query)
+          @account.update_tank_indexes_if_searchable
         end
 
         it "returns result from IndexTank" do

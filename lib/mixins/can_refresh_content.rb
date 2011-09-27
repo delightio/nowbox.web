@@ -10,6 +10,8 @@ module Aji
     # a recently completed refresh. The method returns an array of the newly
     # added content.
     def refresh_content force=false
+space = if self.class==Aji::Account::Youtube then "  " else "" end
+puts "#{space}#{self.class}.super.refresh_content called"
       [].tap do |new_videos|
         if recently_populated? && content_video_ids.count > 0 && !force
           return new_videos
@@ -18,6 +20,11 @@ module Aji
         refreshing_content_lock.lock do
           # Use population strategy of subclass if presented.
           yield new_videos if block_given?
+
+          # Index self for search only if it has some new videos
+          update_tank_indexes_if_searchable unless new_videos.empty?
+
+puts "#{space}#{self.class}.super returns #{new_videos.count} new videos: #{new_videos.map(&:id)}"
 
           # Update populated_at time, in this case we want to raise the error on
           # save since an object already in the database should never be invalid

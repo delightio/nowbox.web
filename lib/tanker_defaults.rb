@@ -38,6 +38,7 @@ module Aji
       end
 
       def update_tank_indexes_if_searchable
+puts "*** Channel#update_tank_indexes_if_searchable called for #{self.id}"
         update_tank_indexes if Searcher.enabled?
       end
 

@@ -31,7 +31,6 @@ module Aji
       :autosave => true
 
     after_initialize :initialize_info_hashes
-    after_create :update_tank_indexes_if_searchable
     after_destroy :delete_redis_keys, :delete_tank_indexes_if_searchable
 
     def profile_uri

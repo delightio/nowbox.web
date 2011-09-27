@@ -4,7 +4,7 @@ module Aji
   describe Channel::Account do
     subject { Channel::Account.create accounts: @accounts }
     before(:each) do
-      @accounts = %w{nowbox cnn }.map do |uid| Account::Youtube.create(
+      @accounts = %w{ nowmov cnn }.map do |uid| Account::Youtube.create(
         :uid => uid)
       end
     end
@@ -22,7 +22,7 @@ module Aji
     end
 
     it "should set title based on accounts" do
-      subject.title.should == "nowbox, cnn"
+      subject.title.should == "nowmov, cnn"
     end
 
     describe "#serializable_hash" do

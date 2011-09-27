@@ -11,17 +11,14 @@ module Aji
 
     def refresh_content force=false
       super force do |new_videos|
-        accounts_populated_at = []
         accounts.each do |account|
           unless account.blacklisted?
             new_videos += account.refresh_content(force)
-            accounts_populated_at << account.populated_at
           end
         end
-        # NOTE: Steven! thinks this should either be the current time or the
-        # oldest time since it will indicate the staleness of the channel
-        # better.
         update_relevance_in_categories new_videos
+
+puts "  * Channel::Account#refresh_content returns #{new_videos.count} new videos: #{new_videos.first(3).map &:id}"
       end
     end
 

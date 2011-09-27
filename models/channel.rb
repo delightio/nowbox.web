@@ -22,7 +22,6 @@ module Aji
 
     has_many :events
 
-    after_create :update_tank_indexes_if_searchable
     after_destroy :delete_redis_keys, :delete_tank_indexes_if_searchable
 
     def category_ids limit=-1
