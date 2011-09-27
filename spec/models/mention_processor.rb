@@ -1,7 +1,7 @@
 require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
-  describe MentionProcessor, unit: true do
+  describe MentionProcessor, :unit do
     describe "#perform" do
 
       let(:destination) { mock "video destination" }

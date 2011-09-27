@@ -1,6 +1,6 @@
 require File.expand_path("../../spec_helper", __FILE__)
 
-describe "String#tokenize", unit: true do
+describe "String#tokenize", :unit do
   subject { "Shoulder,est ,mollit, sint,  Occaecat,deserunt,beef" }
 
   it "removes leading and trailing space around token" do

@@ -1,7 +1,7 @@
 require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
-  describe Aji::Mention, unit: true do
+  describe Aji::Mention, :unit do
     let(:author) { stub :has_mentioned_video? => false, :blacklisted? => false }
 
     subject do

@@ -1,7 +1,7 @@
 require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
-  describe Aji::Category, unit: true do
+  describe Aji::Category, :unit do
     subject do
       Category.new.tap do |c|
         c.stub :id => 1

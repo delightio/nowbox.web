@@ -1,7 +1,7 @@
 require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
-  describe Aji::Link, unit:true do
+  describe Aji::Link, :unit do
     describe "detecting youtube links" do
       it "detects long youtube watch links" do
         link = Link.new("http://www.youtube.com/watch?v=3307vMsCG0I")

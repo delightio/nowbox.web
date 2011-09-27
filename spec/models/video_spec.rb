@@ -1,7 +1,7 @@
 require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
-  describe Aji::Video, unit: true do
+  describe Aji::Video, :unit do
     let :api do
       mock("api").tap do |api|
         api.stub(:video_info).and_return(:title => 'A Video',

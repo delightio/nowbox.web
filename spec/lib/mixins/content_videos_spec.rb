@@ -1,7 +1,7 @@
 require File.expand_path("../../../spec_helper", __FILE__)
 
 module Aji
-  describe Aji::Mixins::ContentVideos, unit: true do
+  describe Aji::Mixins::ContentVideos, :unit do
     #  A class with the minimum necessary to act as a content holder.
     class ContentVideoHolder
       include Redis::Objects
