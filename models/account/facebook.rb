@@ -2,13 +2,13 @@ module Aji
   class Account::Facebook < Account
     include Redis::Objects
     include Mixins::CanRefreshContent
+    include Aji::TankerDefaults::Account
 
     validates_presence_of :uid
     validates_uniqueness_of :uid
 
     belongs_to :stream_channel, :class_name => 'Aji::Channel::FacebookStream',
       :foreign_key => :stream_channel_id
-
 
     # Use an alias to allow Facebook accounts to implement the same protocal as
     # Channel::Trending without the need for a recent_zset buffer.
