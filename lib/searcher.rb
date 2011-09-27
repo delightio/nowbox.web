@@ -29,7 +29,12 @@ module Aji
       @query.tokenize.each do |q|
         next if usernames.include? q
         account = Account::Youtube.new :uid => q
-        accounts << account if account.existing?
+        # Search db again just in case the account wasn't indexed for
+        # other reasons, e.g., not enough content videos
+        if account.existing?
+          account = Account::Youtube.find_or_create_by_uid q
+          accounts << account
+        end
       end
 
       channels = accounts.map(&:to_channel)
