@@ -24,8 +24,7 @@ module Aji
       end
     end
 
-    #it_behaves_like "any content holder"
-    it_behaves_like "any redis object model"
+    it_behaves_like "any account"
 
     describe "#refresh_influencers" do
       xit "adds twitter followers as influencers" do

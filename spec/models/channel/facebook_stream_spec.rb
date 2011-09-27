@@ -1,13 +1,31 @@
 require File.expand_path("../../../spec_helper", __FILE__)
 
 module Aji
-  describe Channel::FacebookStream do
-    before :each do
-      @owner = Account::Facebook.create uid: "501776555", credentials:
-        { 'token' => "AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD" }
+  describe Channel::FacebookStream, :unit do
+
+    let(:video) do
+      mock("video").tap do |v|
+        v.stub :id => 7
+
+        def v.populate
+          yield self
+        end
+      end
     end
 
-    subject { Channel::FacebookStream.create :owner => @owner }
+    let(:api) do
+      mock "api", :video_mentions_in_feed => [
+        stub(:published_at => Time.now,
+         :videos => [video]) ]
+    end
+
+    subject do
+      Channel::FacebookStream.new.tap do |c|
+        c.stub(:owner => stub(:api =>api))
+        c.stub :id => 1
+      end
+    end
+
     it_behaves_like "any channel"
   end
 end

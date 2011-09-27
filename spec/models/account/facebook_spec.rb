@@ -1,7 +1,7 @@
 require File.expand_path("../../../spec_helper", __FILE__)
 
 module Aji
-  describe Account::Facebook do
+  describe Account::Facebook, :unit do
     let(:video) do
       mock("video").tap do |v|
         v.stub :id => 7
