@@ -49,7 +49,10 @@ module Aji
       start = Time.now
       sorted = in_flight.sort{ |x,y| y[:relevance] <=> x[:relevance] }
       Aji.log "Sorted #{in_flight.count} videos in #{Time.now-start} s. " +
-        "Top 5: #{sorted.first(5).inspect}"
+        "Top 5: #{sorted.first(5).map{|h| [
+        :id => h[:video].id,
+        :mention_count => h[:video].mentions.count,
+        :relevance => h[:relevance] ]}}"
       sorted
     end
 
