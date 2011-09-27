@@ -7,6 +7,8 @@ Spork.prefork do
   ENV["RACK_ENV"] ||= 'test'
   require 'bundler'
   Bundler.require :test
+  require './spec/factories'
+
   SimpleCov.start
 
   require './aji'
