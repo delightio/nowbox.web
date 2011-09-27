@@ -10,18 +10,6 @@ GIT
       rack-jsonp
       rack-mount
 
-GIT
-  remote: https://github.com/jnunemaker/twitter.git
-  revision: 4f5d12c5fb87d047f3bdb229c677818cd3733692
-  specs:
-    twitter (1.7.0)
-      faraday (~> 0.7.4)
-      faraday_middleware (~> 0.7.0)
-      hashie (~> 1.1.0)
-      multi_json (~> 1.0.0)
-      multi_xml (~> 0.3.0)
-      simple_oauth (~> 0.1.5)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -141,7 +129,7 @@ GEM
       pry (>= 0.9.0)
       yard (>= 0.6.4)
     pyu-ruby-sasl (0.0.3.3)
-    rack (1.3.2)
+    rack (1.3.3)
     rack-jsonp (1.2.0)
       rack
     rack-mount (0.8.3)
@@ -212,6 +200,13 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
+    twitter (1.7.1)
+      faraday (~> 0.7.4)
+      faraday_middleware (~> 0.7.0)
+      hashie (~> 1.1.0)
+      multi_json (~> 1.0.0)
+      multi_xml (~> 0.3.0)
+      simple_oauth (~> 0.1.5)
     tzinfo (0.3.29)
     uuid (2.3.4)
       macaddr (~> 1.0)
@@ -258,9 +253,10 @@ DEPENDENCIES
   rspec
   simplecov
   sinatra
+  spork
   thin
   thor
-  twitter!
+  twitter
   vcr
   yajl-ruby
   youtube_it (~> 2.0.0)
