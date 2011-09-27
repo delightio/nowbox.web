@@ -1,10 +1,8 @@
-require File.expand_path("../../spec_helper", __FILE__)
+shared_examples_for "any searchable model" do
+  describe "a searchable model" do
 
-module Aji
-  describe TankerDefaults do
-    subject { Account.new }
     before :each do
-      Searcher.stub(:enabled?).and_return(true)
+      Aji::Searcher.stub(:enabled?).and_return(true)
     end
 
     describe "#searchable?" do
@@ -15,7 +13,7 @@ module Aji
 
       it "is true if we have reached minimal number of content videos" do
         subject.stub(:content_video_id_count).and_return(
-          Searcher.minimun_video_count+1)
+          Aji::Searcher.minimun_video_count+1)
         subject.should be_searchable
       end
     end
