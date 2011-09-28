@@ -38,7 +38,7 @@ shared_examples_for "any account" do
 
     # TODO This should go into content holder example
     describe "#refresh_content" do
-      it "only inserts new videos" do
+      xit "only inserts new videos" do
         video = mock("video",:id=>1)
         video.stub(:populated?).and_return(true)
         relevance = 1000
