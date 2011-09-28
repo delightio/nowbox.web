@@ -18,6 +18,15 @@ shared_examples_for "any featured model" do
     it "returns an array" do
       subject.class.featured.should be_a_kind_of(Array)
     end
+
+    it "preserves the featured order" do
+      obj1 = mock("featured obj", :id => 1)
+      obj2 = mock("featured obj", :id => 2)
+      subject.class.stub(:find).with(obj1.id).and_return(obj1)
+      subject.class.stub(:find).with(obj2.id).and_return(obj2)
+      subject.class.stub(:featured_ids).and_return([2,1])
+      subject.class.featured.should == [obj2, obj1]
+    end
   end
 
   describe ".set_featured" do

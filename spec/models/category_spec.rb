@@ -6,8 +6,8 @@ module Aji
       Category.new.tap do |c|
         c.stub :id => 1
         c.channel_id_zset[1]=1
+        Category.stub(:find).with(c.id).and_return(c)
         Category.stub(:find_by_id).with(c.id).and_return(c)
-        Category.stub(:find_all_by_id).with([c.id]).and_return([c])
         Category.stub(:find_by_title).and_return(c)
       end
     end
