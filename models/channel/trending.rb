@@ -85,7 +85,9 @@ module Aji
 
     def create_channels_from_top_authors top_videos
       top_videos.each do | video |
-        video.author.to_channel.background_refresh_content
+        channel = video.author.to_channel
+        channel.background_refresh_content
+        Aji.log "Trending: created Channel[#{channel.id}] from Video[#{video.id}] (#{video.title})"
       end
     end
 
