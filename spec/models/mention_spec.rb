@@ -2,7 +2,7 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
   describe Aji::Mention, :unit do
-    let(:author) { stub :has_mentioned_video? => false, :blacklisted? => false }
+    let(:author) { stub :spamming_video? => false, :blacklisted? => false }
 
     subject do
       Mention.new.tap do |m|
@@ -45,7 +45,7 @@ module Aji
       end
 
       specify "true when author has mentioned video before" do
-        author.stub(:has_mentioned_video?).and_return true
+        author.stub(:spamming_video?).and_return true
         subject.should be_spam
       end
 

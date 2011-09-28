@@ -2,6 +2,11 @@ module Aji
   # ## Account::Twitter Schema Extensions
   # - recent_zset: Redis::Objects::SortedSet
   class Account::Twitter < Account
+
+    # The maximum amount of times a user can mention a video before they are
+    # considered a spammer.
+    SPAM_THRESHOLD = 3
+
     include Redis::Objects
     include Mixins::RecentVideos
     include Aji::TankerDefaults::Account
@@ -32,6 +37,15 @@ module Aji
 
     def refresh_content force=false
       super force do |new_videos|
+        mentions = api.video_mentions_i_post
+        mentions.each do |m|
+          m.videos.each do |v|
+            v.populate do |video|
+              push video, m.published_at
+              new_videos << video
+            end
+          end
+        end
       end
     end
 
@@ -46,6 +60,10 @@ module Aji
       else
         message << coda
       end
+    end
+
+    def spamming_video? video
+      mentions.select{ |m| m.videos.include? video }.count > SPAM_THRESHOLD
     end
 
     def refresh_influencers
