@@ -132,5 +132,20 @@ module Aji
         subject.relevance_of(subject.content_videos.last).should == scores.min
       end
     end
+
+    describe "#has_content_video?" do
+      before :each do
+        @video = mock("video", :id=>1)
+      end
+
+      it "is false if we don't have a score with given video" do
+        subject.has_content_video?(@video).should be_false
+      end
+
+      it "is true if we already have it in content_video zset" do
+        subject.push @video
+        subject.has_content_video?(@video).should be_true
+      end
+    end
   end
 end

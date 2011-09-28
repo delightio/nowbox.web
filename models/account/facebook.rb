@@ -17,11 +17,13 @@ module Aji
     def refresh_content force=false
       super force do |new_videos|
         mentions = api.video_mentions_i_post
-        mentions.each do |m|
-          m.videos.each do |v|
-            v.populate do |video|
+        mentions.each do |mention|
+          mention.videos.each do |video|
+            video.populate unless video.populated?
+
+            if video.populated?
               new_videos << video
-              push video, m.published_at
+              push video, mention.published_at
             end
           end
         end

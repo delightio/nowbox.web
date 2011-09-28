@@ -32,5 +32,24 @@ shared_examples_for "any account" do
       subject.should respond_to :profile_uri
     end
 
+    it "respons to videos_from_source" do
+      subject.should respond_to :videos_from_source
+    end
+
+    # TODO This should go into content holder example
+    describe "#refresh_content" do
+      it "only inserts new videos" do
+        video = mock("video",:id=>1)
+        video.stub(:populated?).and_return(true)
+        relevance = 1000
+        vhash = [{:video=>video, :relevance=>relevance}]
+        subject.should_receive(:has_content_video?).with(video).
+          and_return(true)
+        subject.stub(:videos_from_source).and_return(vhash)
+
+        subject.refresh_content.should_not include video
+      end
+    end
+
   end
 end

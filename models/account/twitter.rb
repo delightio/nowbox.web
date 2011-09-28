@@ -37,14 +37,14 @@ module Aji
 
     def refresh_content force=false
       super force do |new_videos|
-        mentions = api.video_mentions_i_post
-        mentions.each do |m|
-          m.videos.each do |v|
-            v.populate do |video|
-              push video, m.published_at
-              new_videos << video
-            end
-          end
+        harvest_tweets
+        videos = recent_videos.select { |v| !v.blacklisted? }
+        Aji.log "Found #{videos.count} videos in #{username}'s Twitter stream"
+
+        videos.each do |video|
+          video.populate unless video.populated?
+          push(video, recent_zset[video.id]) and
+            new_videos << video if video.populated?
         end
       end
     end

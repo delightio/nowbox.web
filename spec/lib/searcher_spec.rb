@@ -9,7 +9,7 @@ module Aji
     end
 
     describe "#account_results" do
-      
+
       context "when searching for existing account" do
         subject { Searcher.new @query }
         before :each do
@@ -67,11 +67,18 @@ module Aji
       end
 
       it "creates YouTube channel if we don't have it in our db" do
-        subject = Searcher.new "nowmov"
+        query = random_string
+        subject = Searcher.new query
+
+        youtube_account = @accounts.first
+        youtube_account.should_receive(:existing?).and_return(true)
+        Account::Youtube.should_receive(:new).with(:uid=>query).
+          and_return(youtube_account)
+        Account::Youtube.should_receive(:find_or_create_by_uid).
+          and_return(youtube_account)
+
         subject.stub(:account_results).and_return([])
-        results = subject.results
-        results.should have(1).channel
-        results.first.accounts.first.uid.should == "nowmov"
+        subject.results.should == [youtube_account.to_channel]
       end
 
     end
