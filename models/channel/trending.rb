@@ -85,8 +85,7 @@ module Aji
 
     def create_channels_from_top_authors top_videos
       top_videos.each do | video |
-        Resque.enqueue(
-          Queues::RefreshChannel, video.author.to_channel.id)
+        video.author.to_channel.background_refresh_content
       end
     end
 
