@@ -94,7 +94,7 @@ module Aji
       new_videos.map(&:category_id).group_by{|g| g}.each do |h|
         cid = h.first; count = h.last.count # category_id => array of occurance
         category = Category.find_by_id cid
-        Aji.log :ERROR "invalid Category[#{cid}] from Channel[#{id}]!"
+        Aji.log :ERROR, "invalid Category[#{cid}] from Channel[#{id}]!"
         unless category.nil?
           category.update_channel_relevance self, count
           category_id_zset[cid] += count
