@@ -210,6 +210,9 @@ GEM
       multi_json (~> 1.0.0)
       multi_xml (~> 0.3.0)
       simple_oauth (~> 0.1.5)
+    typhoeus (0.2.4)
+      mime-types
+      mime-types
     tzinfo (0.3.29)
     uuid (2.3.4)
       macaddr (~> 1.0)
@@ -262,6 +265,7 @@ DEPENDENCIES
   thin
   thor
   twitter
+  typhoeus
   vcr
   will_paginate
   yajl-ruby

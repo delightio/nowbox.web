@@ -8,6 +8,7 @@ gem 'grape', :git => 'git://github.com/intridea/grape.git'
 gem 'sinatra', :require => 'sinatra/base'
 gem 'thin' # Heroku recommends the Thin web server.
 gem 'resque', :require => [ 'resque', 'resque/failure/redis' ]
+gem 'typhoeus' # Better, Faster HTTP API for Faraday connections
 
 # Data persistence and related.
 gem 'hiredis' # Fast C Interface to Redis.
@@ -19,8 +20,8 @@ gem 'newrelic_rpm', '~>3.1.1'
 
 # Literate comments, generating lovely documentation HTML.
 gem 'rdiscount' # Required for Rocco.
+gem 'rocco', '~>0.8.2', :group => :development
 
-  gem 'rocco', '~>0.8.2', :group => :development
 gem 'awesome_print'
 gem 'pry'
 gem 'pry-doc'
