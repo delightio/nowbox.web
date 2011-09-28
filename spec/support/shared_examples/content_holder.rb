@@ -39,13 +39,4 @@ shared_examples_for "any content holder" do
     it "waits for the lock before populating"
 
   end
-
-  describe "#background_refesh_content" do
-    it "enques a refresh job" do
-      pending "Not sure why Queues::RefreshChannel is uninitialized constant"
-      Resque.should_receive(:enqueue).with(Queues::RefreshChannel, subject.id)
-      subject.background_refesh_content
-    end
-  end
-
 end
