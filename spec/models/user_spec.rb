@@ -12,17 +12,18 @@ module Aji
 
     it_behaves_like "any redis object model"
 
-    describe ".create" do
+    describe "#create_user_channels" do
       it "creates user channels" do
-        expect { Factory :user }.to change { Aji::Channel.count }.by(3)
+        Channel::User.should_receive(:create).exactly(3).times
+        User.new.send :create_user_channels
       end
     end
 
     describe "#subscribe_featured_channels" do
       it "subscribes to featured channels" do
-        featured = (0..2).map { Factory :channel }
+        featured = (0..2).map { |i| mock "featured_channel", :id => i }
         Aji::Channel.should_receive(:featured).and_return(featured)
-        u = Factory :user
+        u = User.create
         featured.each { |c| u.subscribed?(c).should be_true }
       end
     end

@@ -59,12 +59,12 @@ describe Aji::Channel::Trending do
           subject.push_recent( Factory :video_with_mentions,
                                        :source => :youtube,
                                        :external_id => yt_id) }
-      
+
         old_video = Factory :video_with_mentions
         old_video.mentions.each { |m| m.update_attribute :published_at,
           1.years.ago }
         subject.push_recent old_video
-      
+
         Aji.stub(:conf).and_return(
           { 'MAX_RECENT_VIDEO_IDS_IN_TRENDING'=>real_youtube_video_ids.count*2,
             'MAX_VIDEOS_IN_TRENDING' => real_youtube_video_ids.count})

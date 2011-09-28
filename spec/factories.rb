@@ -177,5 +177,5 @@ Factory.define :youtube_account_with_videos,
 
 Factory.define :mention, :class => 'Aji::Mention' do |a|
   a.published_at { rand(10000).seconds.ago }
-  a.association :author, :factory => :account
+  a.association :author, :factory => :twitter_account
 end

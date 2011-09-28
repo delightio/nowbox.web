@@ -23,7 +23,7 @@ module Aji
     end
 
     def links= value
-      @links = value
+      @links = value.map { |string| Link.new string }
       self[:links] = value.join('||')
     end
 
@@ -33,12 +33,7 @@ module Aji
 
     # Note: Client is responsible for dealing w/ spam mentions
     def spam?
-      return true if author.blacklisted?
-      videos.each do |video|
-        count = video.latest_mentioners.select{ |a| a==author }.count
-        return true if count > 2
-      end
-      false
+      author.blacklisted? or videos.any?{ |v| author.spamming_video? v }
     end
 
     def mark_spam

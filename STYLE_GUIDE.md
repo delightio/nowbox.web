@@ -56,6 +56,9 @@ opportunity to do so arises.
   easier to logically separate implementation from application. But this will be
   a long and gradual task.
 
+- Methods take explicit arguments. No `def my_method args={}` or I will fucking
+  murder you in your goddamn sleep.
+
 - ActiveRecord Models should follow the format:
   - Module opening
   - Class comment with Schema declaration unless inherited

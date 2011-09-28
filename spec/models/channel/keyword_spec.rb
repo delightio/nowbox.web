@@ -51,7 +51,7 @@ module Aji
           results.should include old_keyword_channel
       end
 
-      it "returns existing keyword channel if previously existed regardless of query order" do
+      it "returns existing keyword channel regardless of query order" do
         old_keyword_channel = Aji::Channel::Keyword.create(
           :keywords => @query.split(',').shuffle)
           results = Aji::Channel::Keyword.search_helper @query
