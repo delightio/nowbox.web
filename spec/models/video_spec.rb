@@ -24,28 +24,9 @@ module Aji
         subject.thumbnail_uri.should_not == ""
       end
 
-<<<<<<< HEAD
-    it "skips populating for blacklisted videos" do
-      subject.stub(:blacklisted?).and_return(true)
-      subject.should_receive(:send).never
-      subject.populate
-    end
-
-    it "does not re populate populated videos" do
-      subject.stub(:populated?).and_return(true)
-      subject.should_receive(:send).never
-      subject.populate
-    end
-
-    context "when a video id is invalid" do
-      subject do
-       Aji::Video.new :id => 666, :external_id => 'adudosucvdd',
-         :source => 'youtube'
-=======
       it "should return empty otherwise" do
         subject.source = :vimeo
         subject.thumbnail_uri.should == ""
->>>>>>> fix_tests
       end
     end
 
@@ -130,19 +111,6 @@ module Aji
         subject.latest_mentions(2).should_not include oldest_mention
       end
     end
-<<<<<<< HEAD
-
-    it "ignores spammy mention" do
-      spam = mock("mention")
-      spam.stub(:age).with(anything()).and_return(Float::NAN)
-      mention = mock("mention", :age => 0)
-      subject.stub(:latest_mentions).and_return([spam, mention])
-      subject.relevance.should == 10000
-    end
-
-  end
-=======
->>>>>>> fix_tests
 
     describe "#latest_mentioners" do
       it "returns the latest external accounts who mentioned about the video" do
