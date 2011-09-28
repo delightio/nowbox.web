@@ -257,6 +257,8 @@ DEPENDENCIES
   rspec
   simplecov
   sinatra
+  spork
+  tanker
   thin
   thor
   twitter
