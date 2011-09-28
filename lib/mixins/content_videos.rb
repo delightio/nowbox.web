@@ -40,6 +40,10 @@ module Aji
         content_zset.score video.id
       end
 
+      def has_content_video? video
+        content_zset.redis.zscore(content_zset.key, video.id) != nil
+      end
+
       # Push a video into the channel's content.
       def push video, relevance=Time.now.to_i
         content_zset[video.id] = relevance

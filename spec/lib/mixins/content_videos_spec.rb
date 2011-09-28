@@ -29,27 +29,20 @@ describe Aji::Mixins::ContentVideos do
     end
   end
 
+
+  # +1 on the relevance since content_zset.score returns 0 for
+  # new vidoe that isn't in the zset
   describe "#content_video_ids_rev" do
     it "returns content in ascending order" do
-      5.times { |n| subject.push (Factory :video), n }
-      subject.relevance_of(
-        Aji::Video.find(subject.content_video_ids_rev.first)).
-        should == 0
-      subject.relevance_of(
-        Aji::Video.find(subject.content_video_ids_rev.last)).
-        should == 4
+      (1..3).each { |n| subject.push mock("video",:id=>n), n }
+      subject.content_video_ids_rev.should == [1,2,3]
     end
   end
 
   describe "#content_video_ids" do
     it "returns content in descending order" do
-      5.times { |n| subject.push (Factory :video), n }
-      subject.relevance_of(
-        Aji::Video.find(subject.content_video_ids.first)).
-        should == 4
-      subject.relevance_of(
-        Aji::Video.find(subject.content_video_ids.last)).
-        should == 0
+      (1..3).each { |n| subject.push mock("video",:id=>n), n }
+      subject.content_video_ids.should == [3,2,1]
     end
   end
 
@@ -60,15 +53,34 @@ describe Aji::Mixins::ContentVideos do
     end
   end
 
+  describe "#has_content_video?" do
+    before :each do
+      @video = mock("video", :id=>1)
+    end
+
+    it "is false if we don't have a score with given video" do
+      subject.has_content_video?(@video).should be_false
+    end
+
+    it "is true if we already have it in content_video zset" do
+      subject.push @video
+      subject.has_content_video?(@video).should be_true
+    end
+  end
+
   describe "#push" do
+    before :each do
+      @video = mock("video", :id=>1)
+    end
+
     it "increments the number of content_videos" do
-      expect { subject.push(Factory :video) }.to
+      expect { subject.push(@video) }.to
         change { subject.content_videos.count }.by(1)
     end
+
     it "adds given video into content_video" do
-      video = Factory :video
-      expect { subject.push video }.to
-        change { subject.content_videos.include? video }.to(true)
+      expect { subject.push @video }.to
+        change { subject.has_content_video? @video }.to(true)
     end
   end
 
@@ -83,11 +95,11 @@ describe Aji::Mixins::ContentVideos do
     end
     it "removes video from content_video" do
       expect { subject.pop @video }.to
-        change { subject.content_videos.include? @video }.to(false)
+        change { subject.has_content_video? @video }.to(false)
     end
   end
 
-  describe "#relevance_of" do 
+  describe "#relevance_of" do
     it "returns the score used when pushed" do
       relevance = rand(100).seconds.ago.to_i
       video = Factory :video
