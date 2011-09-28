@@ -74,6 +74,12 @@ module Aji
         @data.fetch("media$thumbnail", {}).fetch('url', "")
       end
 
+      def realname
+      first_name = @data.fetch('yt$firstName',{}).fetch('$t', "")
+      last_name = @data.fetch('yt$lastName',{}).fetch('$t', "")
+      [first_name, last_name].join(' ').strip
+      end
+
       def get_data_from_youtube
         response = Faraday.get(@feed_url)
         return {} unless response.status == 200
