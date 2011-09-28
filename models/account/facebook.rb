@@ -14,20 +14,19 @@ module Aji
     # Channel::Trending without the need for a recent_zset buffer.
     alias_method :push_recent, :push
 
-    def refresh_content force=false
-      super force do |new_videos|
-        mentions = api.video_mentions_i_post
-        mentions.each do |mention|
-          mention.videos.each do |video|
-            video.populate unless video.populated?
-
-            if video.populated?
-              new_videos << video
-              push video, mention.published_at
-            end
+    def videos_from_source
+      videos_hash = []
+      mentions = api.video_mentions_i_post
+      mentions.each do |mention|
+        mention.videos.each do |video|
+          video.populate unless video.populated?
+          if video.populated?
+            new_videos << video unless has_content_video? video
+            videos_hash << ({:video => video, :relevance => mention.published_at})
           end
         end
       end
+      videos_hash
     end
 
     def description

@@ -30,18 +30,18 @@ module Aji
       info['description'] || ""
     end
 
-    def refresh_content force=false
-      super force do |new_videos|
-        harvest_tweets
-        videos = recent_videos.select { |v| !v.blacklisted? }
-        Aji.log "Found #{videos.count} videos in #{username}'s Twitter stream"
-
-        videos.each do |video|
-          video.populate unless video.populated?
-          push(video, recent_zset[video.id]) and
-            new_videos << video if video.populated?
+    def videos_from_source
+      videos_hash = []
+      harvest_tweets
+      videos = recent_videos.select { |v| !v.blacklisted? }
+      Aji.log "Found #{videos.count} videos in #{username}'s Twitter stream"
+      videos.each do |video|
+        video.populate unless video.populated?
+        if video.populated?
+          videos_hash << ({:video => video, :relevance => recent_zset[video.id]})
         end
       end
+      videos_hash
     end
 
     def publish share

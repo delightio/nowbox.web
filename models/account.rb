@@ -48,6 +48,23 @@ module Aji
 
     def realname; ""; end
 
+    def videos_from_source
+      raise InterfaceMethodNotImplemented
+    end
+
+    def refresh_content force=false
+      super force do |new_videos|
+        videos_from_source.each do |h|
+          video = h[:video]
+          relevance = h[:relevance]
+          if video.populated?
+            new_videos << video unless has_content_video? video
+            push video, relevance
+          end
+        end
+      end
+    end
+
     # The publish interface is called by background tasks to publish a video
     # share to an external service.
     def publish share
