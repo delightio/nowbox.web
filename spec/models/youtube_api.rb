@@ -14,7 +14,7 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
       end
     end
 
-    describe "#video_info", :focus do
+    describe "#video_info" do
       let(:video_info) do {
         :duration => 901,
         :view_count => 54814,
@@ -30,6 +30,12 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
         hash[:title].should == "[Portal 2] Corrupt Core Quotes (Space, Fact and Adventure Spheres)"
         hash[:external_id].should == "3307vMsCG0I"
         hash[:description].should == "Here are all the lines for the corrupt cores during the final fight scene. Not gunna lie, i couldnt stop laughing during the final battle because of these little bastards.   Anyways, Enjoy, Comment, Rate, Subscribe, Share! :D"
+      end
+
+      it "raises a VideoAPI::Error when video is unavailable" do
+        client.stub(:video_by) { raise OpenURI::HTTPError }
+        subject.video_info("foobarbazqu").should(
+          raise_error Aji::VideoAPI::Error)
       end
     end
   end

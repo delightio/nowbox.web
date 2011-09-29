@@ -9,6 +9,8 @@ module Aji
 
     def video_info youtube_id
       youtube_it_to_hash client.video_by youtube_id
+    rescue OpenURI::HTTPError => exp
+      raise VideoAPI::Error, "Unable to populate #{youtube_id}.", exp.backtrace
     end
 
     def video youtube_id
