@@ -10,6 +10,10 @@ module Aji
   # - credentials: Text (Serialized Hash)
   # - blacklisted_at: DateTime
   class Account < ActiveRecord::Base
+    # The maximum amount of times a user can mention a video before they are
+    # considered a spammer.
+    SPAM_THRESHOLD = 3
+
     include Redis::Objects
     include Mixins::ContentVideos
     include Mixins::CanRefreshContent
