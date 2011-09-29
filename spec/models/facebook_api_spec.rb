@@ -7,7 +7,7 @@ module Aji
       it "returns mentions with videos" do
         mentions = subject.video_mentions_in_feed
         mentions.each do |m|
-          m.class.should_equal Mention, "Expected #{m.inspect} to be a Mention."
+          m.class.should eq(Mention), "Expected #{m.inspect} to be a Mention."
           m.videos.should_not be_empty, "Expected #{m.inspect} to have Videos."
         end
       end
