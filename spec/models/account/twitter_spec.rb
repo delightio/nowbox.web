@@ -2,6 +2,8 @@ require File.expand_path("../../../spec_helper", __FILE__)
 
 module Aji
   describe Aji::Account::Twitter, :unit, do
+    let(:mentions) { stub.as_null_object }
+
     let(:video) do
       mock("video").tap do |v|
         v.stub :id => 7
@@ -21,6 +23,7 @@ module Aji
     subject do
       Account::Twitter.create(:uid => '178492493').tap do |a|
         a.stub :api => api
+        a.stub :mentions => mentions
       end
     end
 
@@ -32,12 +35,6 @@ module Aji
     end
 
     describe "#mark_spammer" do
-      let(:mentions) { stub.as_null_object }
-
-      before do
-        subject.stub(:mentions).and_return mentions
-      end
-
       it "marks own mentions as spam and destroys them" do
         mentions.should_receive :each
         subject.mark_spammer
@@ -46,6 +43,19 @@ module Aji
       it "blacklists itself" do
         subject.should_receive :blacklist
         subject.mark_spammer
+      end
+    end
+
+    describe "#spamming_video?" do
+      specify "true when video is mentioned more than SPAM_THRESHOLD times" do
+        subject.stub(:mentions).and_return(
+          Array.new Account::SPAM_THRESHOLD+1, stub(:has_video? => true))
+        subject.spamming_video?(mock("video")).should be_true
+      end
+
+      specify "false otherwise" do
+        subject.stub(:mentions).and_return([stub(:has_video? => false)])
+        subject.spamming_video?(mock("video")).should be_false
       end
     end
 

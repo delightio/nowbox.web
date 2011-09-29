@@ -7,6 +7,8 @@ module Aji
     validates_presence_of :uid
     validates_uniqueness_of :uid
 
+    has_many :mentions, :foreign_key => :author_id
+
     belongs_to :stream_channel, :class_name => 'Aji::Channel::FacebookStream',
       :foreign_key => :stream_channel_id
 
@@ -45,6 +47,10 @@ module Aji
 
     def authorized?
       credentials.key? 'token'
+    end
+
+    def spamming_video? video
+      mentions.select{ |m| m.has_video? video }.count > SPAM_THRESHOLD
     end
 
     def api
