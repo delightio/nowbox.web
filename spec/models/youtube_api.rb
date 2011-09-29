@@ -22,6 +22,7 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
         hash = VCR.use_cassette "youtube_api/video" do
           subject.video_info '3307vMsCG0I'
         end
+
         hash[:title].should == "[Portal 2] Corrupt Core Quotes (Space, Fact and Adventure Spheres)"
         hash[:external_id].should == "3307vMsCG0I"
         hash[:description].should == "Here are all the lines for the corrupt cores during the final fight scene. Not gunna lie, i couldnt stop laughing during the final battle because of these little bastards.   Anyways, Enjoy, Comment, Rate, Subscribe, Share! :D"
