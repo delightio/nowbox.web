@@ -17,6 +17,7 @@ module Aji
   # DEBUG logs are not logged in production environments so conditional logging
   # should not be used.
   def Aji.log level=:INFO, message
+    return if RACK_ENV == 'test' unless ENV['LOG']
     case level
     when :ERROR, :WARN, :FATAL, :error, :warn, :fatal
       $stderr.puts message
