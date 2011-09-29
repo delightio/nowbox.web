@@ -53,7 +53,7 @@ describe Aji::Parsers::Tweet do
 
   context "when a duplicate mention is passed" do
     before :each do
-      ap @mention = Aji::Parsers::Tweet.parse(@valid_json).save
+      @mention = Aji::Parsers::Tweet.parse(@valid_json).save
     end
     it "returns nil" do
       Aji::Parsers::Tweet.parse(@valid_json) do |tweet_hash|
