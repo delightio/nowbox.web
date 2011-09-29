@@ -3,6 +3,7 @@ require File.expand_path("../../spec_helper", __FILE__)
 module Aji
   describe Aji::Mention, :unit do
     let(:author) { stub :spamming_video? => false, :blacklisted? => false }
+    let(:video) { mock "video" }
 
     subject do
       Mention.new.tap do |m|
@@ -12,7 +13,7 @@ module Aji
           http://google.com
         ]
         m.stub(:author).and_return author
-        m.stub(:videos).and_return [ mock("video") ]
+        m.stub(:videos).and_return [ video ]
         m.stub(:published_at).and_return 1.hour.ago
       end
     end
@@ -36,6 +37,12 @@ module Aji
         subject.links = [link]
         subject.save :validate => false
         Mention.find(subject.id).links.should include link
+      end
+    end
+
+    describe "has_video?" do
+      specify "true when the video is mentioned" do
+        subject.has_video?(video).should be_true
       end
     end
 

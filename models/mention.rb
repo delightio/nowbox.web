@@ -31,6 +31,10 @@ module Aji
       links.length > 0
     end
 
+    def has_video? video
+      videos.include? video
+    end
+
     # Note: Client is responsible for dealing w/ spam mentions
     def spam?
       author.blacklisted? or videos.any?{ |v| author.spamming_video? v }
