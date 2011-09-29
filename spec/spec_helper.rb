@@ -13,6 +13,12 @@ Spork.prefork do
 
   require './aji'
 
+  VCR.config do |c|
+    c.cassette_library_dir = "spec/cassettes"
+    c.stub_with :typhoeus
+    c.default_cassette_options = { :record => :none }
+  end
+
   module TestMixin
     include Rack::Test::Methods
     def app
@@ -22,21 +28,9 @@ Spork.prefork do
 
   RSpec.configure do |config|
     config.treat_symbols_as_metadata_keys_with_true_values = true
-    # == Mock Framework
-    #
-    # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
-    #
-    # config.mock_with :mocha
-    # config.mock_with :flexmock
-    # config.mock_with :rr
     config.mock_with :rspec
     config.include TestMixin
-    # config.extend VCR::RSpec::Macros
-    #  config.before :suite do
-    #    DatabaseCleaner.strategy = :transaction
-    #    DatabaseCleaner.clean_with(:truncation)
-    #  end
-
+    config.extend VCR::RSpec::Macros
     config.before :each do
       DatabaseCleaner.start
       Aji.redis.flushdb
@@ -67,8 +61,3 @@ end
 # - These instructions should self-destruct in 10 seconds.  If they don't,
 #   feel free to delete them.
 #
-#VCR.config do |c|
-#  c.cassette_library_dir = "fixtures/vcr_cassettes"
-#  c.stub_with :faraday
-#  c.default_cassette_options = { :record => :new_episodes }
-#end

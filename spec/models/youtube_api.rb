@@ -4,7 +4,10 @@ module Aji
   describe Aji::YoutubeAPI, :unit, :net do
     describe "#author_info" do
       it "gets info from youtube" do
-        info = subject.author_info 'day9tv'
+        info = VCR.use_cassette "youtube_api/author" do
+          subject.author_info 'day9tv'
+        end
+
         info.description.should ==%(I grew up playing Starcraft with my brother, Nick (Tasteless). With the launch of Starcraft 2, I'm dedicated to helping the eSports movement grow in popularity around the world.
 
 Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
@@ -15,27 +18,20 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
     end
 
     describe "#video_info" do
-      let(:video_info) do {
-        :duration => 901,
-        :view_count => 54814,
-        :blacklisted_at => nil,
-        :published_at => Time.parse("2011-04-23 16:16:48 UTC"),
-        :source => "youtube",
-        :populated_at => "2011-09-28 15:34:17 -0700"
-      }
-      end
-
       it "gives information about a video in a hash" do
-        hash = subject.video_info '3307vMsCG0I'
+        hash = VCR.use_cassette "youtube_api/video" do
+          subject.video_info '3307vMsCG0I'
+        end
         hash[:title].should == "[Portal 2] Corrupt Core Quotes (Space, Fact and Adventure Spheres)"
         hash[:external_id].should == "3307vMsCG0I"
         hash[:description].should == "Here are all the lines for the corrupt cores during the final fight scene. Not gunna lie, i couldnt stop laughing during the final battle because of these little bastards.   Anyways, Enjoy, Comment, Rate, Subscribe, Share! :D"
       end
 
       it "raises a VideoAPI::Error when video is unavailable" do
-        client.stub(:video_by) { raise OpenURI::HTTPError }
-        subject.video_info("foobarbazqu").should(
-          raise_error Aji::VideoAPI::Error)
+        VCR.use_cassette "youtube_api/bad_video" do
+          expect { subject.video_info("foobarbazqu") }.to(
+            raise_error Aji::VideoAPI::Error)
+        end
       end
     end
   end

@@ -216,7 +216,7 @@ GEM
     tzinfo (0.3.29)
     uuid (2.3.4)
       macaddr (~> 1.0)
-    vcr (1.10.3)
+    vcr (1.11.3)
     vegas (0.1.8)
       rack (>= 1.0.0)
     will_paginate (3.0.1)
