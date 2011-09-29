@@ -20,8 +20,10 @@ module Aji
           last_response.status.should == 200
           body_hash = JSON.parse last_response.body
           body_hash.should == user.serializable_hash
-          body_hash["subscribed_channel_ids"].should == user.subscribed_channels.map {|c| c.id.to_s}
-          [:queue_channel_id, :favorite_channel_id, :history_channel_id].each do |c|
+          body_hash["subscribed_channel_ids"].should ==(
+            user.subscribed_channels.map {|c| c.id.to_s})
+          [:queue_channel_id, :favorite_channel_id,
+            :history_channel_id].each do |c|
             body_hash[c.to_s].should == (user.send c)
           end
         end
@@ -41,7 +43,6 @@ module Aji
           user = Aji::User.create
           params = { name: "Thomas Pun", email: "dapunster@gmail.com" }
           put "#{resource_uri}/#{user.id}", params
-          ap last_response
           last_response.status.should == 200
           user.reload
           user.name.should == "Thomas Pun"
