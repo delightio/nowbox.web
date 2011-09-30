@@ -41,8 +41,7 @@ module Aji
     # get data back from Youtube indicating their profile API which
     # we can then use to ascertain their existence.
     def existing?
-      get_info_from_youtube_api
-      profile_uri == "" ? false : true
+      api.valid_uid? uid
     end
 
     # Fetch information from youtube, returns the new info hash upon success
