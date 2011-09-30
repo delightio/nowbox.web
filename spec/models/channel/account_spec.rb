@@ -1,20 +1,27 @@
 require File.expand_path("../../../spec_helper", __FILE__)
 
 module Aji
-  describe Channel::Account do
-    subject { Channel::Account.create accounts: @accounts }
-    before(:each) do
-      @accounts = %w{nowbox cnn }.map do |uid| Account::Youtube.create(
-        :uid => uid)
-      end
+  describe Channel::Account, :net do
+   # before :all do
+     # VCR.config do |c|
+     #   c.cassette_library_dir = "spec/cassettes"
+     #   c.stub_with :typhoeus
+     #   c.default_cassette_options = { :record => :all }
+     # end
+   # end
+
+    subject { Channel::Account.create accounts: accounts }
+
+    let(:accounts) do
+      %w[freddiew brentalfloss].map { |uid| Account::Youtube.create uid:uid }
     end
 
     it_behaves_like "any channel"
+
     describe "#refresh_content" do
       it "skips blacklisted accounts" do
-        bad_author = Factory :youtube_account
-
-        channel = Channel::Account.create accounts: (@accounts << bad_author)
+        bad_author = Account.new uid: "badman"
+        channel = Channel::Account.create accounts: (accounts + [bad_author])
         bad_author.should_receive(:blacklisted?).and_return(true)
         bad_author.should_not_receive(:refresh_content)
         channel.refresh_content
@@ -22,7 +29,7 @@ module Aji
     end
 
     it "should set title based on accounts" do
-      subject.title.should == "nowbox, cnn"
+      subject.title.should == "freddiew, brentalfloss"
     end
 
     describe "#serializable_hash" do
@@ -34,10 +41,9 @@ module Aji
       end
     end
 
-    # TODO: Refactor using context block to show Thomas
     describe ".find_or_create_by_accounts" do
       it "returns a new channel when there is no exact match" do
-        new = Channel::Account.find_or_create_by_accounts @accounts[1..-1]
+        new = Channel::Account.find_or_create_by_accounts accounts[1..-1]
         new.class.should == Channel::Account
         new.should_not == subject
       end
@@ -52,7 +58,7 @@ module Aji
       end
 
       it "returns a channel with given youtube accounts" do
-        subject.accounts.should == @accounts
+        subject.accounts.should == accounts
       end
 
       it "returns unpopulated channel by default" do
@@ -69,7 +75,7 @@ module Aji
       it "passes initial parameters to .create" do
         test_title = random_string
         h = {:default_listing => true}
-        ch = Channel::Account.find_or_create_by_accounts(@accounts, h)
+        ch = Channel::Account.find_or_create_by_accounts(accounts, h)
         ch.default_listing.should == true
       end
 
