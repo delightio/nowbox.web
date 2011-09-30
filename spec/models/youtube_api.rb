@@ -2,6 +2,14 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
   describe Aji::YoutubeAPI, :unit, :net do
+    before :all do
+      VCR.config do |c|
+        c.cassette_library_dir = "spec/cassettes"
+        c.stub_with :typhoeus
+        c.default_cassette_options = { :record => :new_episodes }
+      end
+    end
+
     describe "#author_info" do
       it "gets info from youtube" do
         info = VCR.use_cassette "youtube_api/author" do
