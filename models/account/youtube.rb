@@ -24,17 +24,22 @@ module Aji
       info['realname'] || ""
     end
 
-    def videos_from_source
-      videos_hash = []
-      vhashes = Macker::Search.new(:author => username).search
-      vhashes.each do |vhash|
-        video = Video.find_or_create_by_external_id vhash[:external_id], vhash
-        video.update_attributes vhash unless video.populated?
-        if video.populated?
-          videos_hash << ({:video => video, :relevance => video.published_at.to_i})
+    def refresh_content force = false
+      super force do |new_videos|
+        videos_hash = []
+        vhashes = Macker::Search.new(:author => username).search
+        videos = vhashes.map do |vhash|
+          Video.find_or_create_by_external_id vhash[:external_id], vhash
+        end
+
+        videos.each do |v|
+          next if has_content_video? v
+          v.populate do |video|
+            push video, video.published_at
+            new_videos << video
+          end
         end
       end
-      videos_hash
     end
 
     # If a username is a valid and true youtube user, then we'll
