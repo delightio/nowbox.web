@@ -13,11 +13,11 @@ Spork.prefork do
 
   require './aji'
 
-  VCR.config do |c|
-    c.cassette_library_dir = "spec/cassettes"
-    c.stub_with :typhoeus
-    c.default_cassette_options = { :record => :none }
-  end
+  #VCR.config do |c|
+  #  c.cassette_library_dir = "spec/cassettes"
+  #  c.stub_with :typhoeus
+  #  c.default_cassette_options = { :record => :all }
+  #end
 
   module TestMixin
     include Rack::Test::Methods
@@ -30,7 +30,6 @@ Spork.prefork do
     config.treat_symbols_as_metadata_keys_with_true_values = true
     config.mock_with :rspec
     config.include TestMixin
-    config.extend VCR::RSpec::Macros
     config.before :each do
       DatabaseCleaner.start
       Aji.redis.flushdb
