@@ -20,33 +20,27 @@ module Aji
 
     subject { ContentVideoHolder.new }
 
-    before :each do
-      @videos = (1..5).map do |i|
+    # # Cannot be lazily initialized use let-bang.
+    # Cannot be lazily initialized use let-bang.
+    let!(:videos) do
+      (1..5).map do |i|
         mock("video").tap do |v|
           v.stub :id => i
-          subject.push v, i
           Video.stub(:find_by_id).with(i).and_return(v)
+          subject.push v, i
         end
       end
     end
 
     context "when asking for content" do
-      before(:each) do
-        @total = 10
-        @videos = []
-        @total.times { |i| @videos << mock("video").tap { |v| v.stub :id => i } }
-        @videos.each do |v|
-          Video.stub(:find_by_id).with(v.id).and_return(v)
-          subject.push v
-        end
-        @limit = 5
-      end
+      let(:total) { videos.size }
+      let(:limit) { videos.size - 3 }
 
       describe "when a limit parameter is not passed in" do
         [ :content_video_ids, :content_videos,
           :content_video_ids_rev, :content_videos_rev].each do |m|
             specify "##{m} returns all videos" do
-              subject.send(m).should have(@total).videos
+              subject.send(m).should have(total).videos
             end
           end
       end
@@ -55,9 +49,9 @@ module Aji
         [ :content_video_ids, :content_videos,
           :content_video_ids_rev, :content_videos_rev].each do |m|
           specify "##{m} respects the limit" do
-            subject.send(m, @limit).should have(@limit).videos,
-              "expected ##{m} to return #{@limit} videos, got " +
-              subject.send(m, @limit).size.to_s
+            subject.send(m, limit).should have(limit).videos,
+              "expected ##{m} to return #{limit} videos, got " +
+              subject.send(m, limit).size.to_s
           end
           end
       end
@@ -83,33 +77,33 @@ module Aji
     end
 
     describe "#push" do
-      before do
-        @video = mock "video", :id => 6
-        Video.stub(:find_by_id).with(@video.id).and_return(@video)
+      let(:video) do
+        mock("video", :id => 6).tap do |v|
+          Video.stub(:find_by_id).with(v.id).and_return(v)
+        end
       end
 
       it "increments the number of content_videos" do
-        expect { subject.push @video }.to change(subject, :content_videos)
+        expect { subject.push video }.to change(subject, :content_videos)
       end
 
       it "adds given video into content_video" do
-        expect { subject.push @video }.to(
-          change { subject.content_videos.include? @video }.to(true))
+        expect { subject.push video }.to(
+          change { subject.content_videos.include? video }.to(true))
       end
     end
 
     describe "#pop" do
-      before(:each) do
-        @video = subject.content_videos.sample
-      end
+      let(:video) { subject.content_videos.sample }
 
       it "decrements the number of content_videos" do
-        expect { subject.pop @video }.to(
+        expect { subject.pop video }.to(
           change { subject.content_videos.count }.by(-1))
       end
+
       it "removes video from content_video" do
-        expect { subject.pop @video }.to(
-        change { subject.content_videos.include? @video }.to(false))
+        expect { subject.pop video }.to(
+        change { subject.content_videos.include? video }.to(false))
       end
     end
 
@@ -124,7 +118,6 @@ module Aji
 
     describe "#truncate" do
       it "truncates elements from lowest scores to keep given size" do
-
         expect { subject.truncate 4 }.to(
         change { subject.content_video_id_count }.from(5).to(4))
         scores = subject.content_videos.map {|v| subject.relevance_of v }
@@ -133,18 +126,16 @@ module Aji
       end
     end
 
-    describe "#has_content_video?" do
-      before :each do
-        @video = mock("video", :id=>1)
-      end
+      describe "#has_content_video?" do
+        let(:video) { mock "video", :id=> 99 }
 
       it "is false if we don't have a score with given video" do
-        subject.has_content_video?(@video).should be_false
+        subject.has_content_video?(video).should be_false
       end
 
       it "is true if we already have it in content_video zset" do
-        subject.push @video
-        subject.has_content_video?(@video).should be_true
+        subject.push video
+        subject.has_content_video?(video).should be_true
       end
     end
   end
