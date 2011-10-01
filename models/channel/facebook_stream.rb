@@ -6,6 +6,10 @@ module Aji
    has_one :owner, :class_name => 'Aji::Account',
      :foreign_key => :stream_channel_id
 
+    def thumbnail_uri
+      "http://#{Aji.conf['TLD']}/images/icons/nowpopular.png"
+    end
+
     def refresh_content force=false
       super force do |new_videos|
         mentions = owner.api.video_mentions_in_feed
