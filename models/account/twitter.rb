@@ -12,6 +12,9 @@ module Aji
 
     has_many :mentions, :foreign_key => :author_id
 
+    belongs_to :stream_channel, :class_name => 'Aji::Channel::TwitterStream',
+      :foreign_key => :stream_channel_id
+
     after_create :set_provider
 
     def profile_uri
@@ -92,43 +95,25 @@ module Aji
       credentials.has_key? 'token' and credentials.has_key? 'secret'
     end
 
-    private
-    # HACK: This is long, complex, blocking, and tightly coupled. A good
-    # candidate for refactoring later.
-    def harvest_tweets
-      ::Twitter.user_timeline(username || uid, :include_entities => true,
-                              :count => 200).each do |tweet|
-        mention = Parsers['twitter'].parse tweet.to_hash do |tweet_hash|
-          MentionProcessor.video_filters['twitter'].call tweet_hash
-        end
-
-        next if mention.nil?
-
-        processor = MentionProcessor.new mention, self
-        processor.perform
-
-        if processor.failed?
-          Aji.log "Processing failed due to #{processor.errors}"
-        end
-                              end
-
-
-    rescue ::Twitter::BadGateway, ::Twitter::InternalServerError,
-      ::Twitter::ServiceUnavailable => e
-      Aji.log :WARN, "#{e.class}: #{e.message}"
+    def existing?
+      api.valid_uid? uid
     end
 
     def api
       @api ||= TwitterAPI.new credentials['token'], credentials['secret']
     end
 
+    def create_stream_channel
+      self.stream_channel ||= Channel::TwitterStream.create :owner => self,
+        :title => "Twitter Stream"
+      save and stream_channel
+    end
+
+    private
     def set_provider
       update_attribute :provider, 'twitter'
     end
 
-    def existing?
-      api.valid_uid? uid
-    end
   end
 end
 

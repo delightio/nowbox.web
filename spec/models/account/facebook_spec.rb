@@ -40,6 +40,17 @@ module Aji
       end
     end
 
+    describe "#create_stream_channel" do
+      it "creates a channel for the account's facebook stream" do
+        Channel.should_receive(:create).with(:owner => subject,
+          :title => "Facebook Stream").and_return(
+          Channel::FacebookStream.new(:owner => subject,
+            :title => "Facebook Stream"))
+        subject.stub(:save => true)
+        subject.create_stream_channel
+      end
+    end
+
     it_behaves_like "any account"
   end
 end

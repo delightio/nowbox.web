@@ -93,5 +93,16 @@ module Aji
         subject.format(short_message, link_text).should include coda
       end
     end
+
+    describe "#create_stream_channel" do
+      it "creates a channel for the account's twitter stream" do
+        Channel::TwitterStream.should_receive(:create).with(:owner => subject,
+          :title => "Twitter Stream").and_return(
+          Channel::TwitterStream.new(:owner => subject,
+            :title => "Twitter Stream"))
+        subject.stub(:save => true)
+        subject.create_stream_channel
+      end
+    end
   end
 end

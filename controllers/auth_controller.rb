@@ -80,6 +80,7 @@ module Aji
             :uid => auth_hash['uid'],
             :info => auth_hash['extra']['user_hash'])
         end
+        t.create_stream_channel.background_refresh_content
 
       when 'facebook'
         fb = Account::Facebook.find_by_uid auth_hash['uid']
