@@ -5,9 +5,7 @@ module Aji
     subject { FacebookAPI.new "AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD" }
     describe "#video_mentions_in_feed" do
       it "returns mentions with videos" do
-        mentions = subject.video_mentions_in_feed
-        mentions.each do |m|
-          m.class.should eq(Mention), "Expected #{m.inspect} to be a Mention."
+        subject.video_mentions_in_feed.each do |m|
           m.videos.should_not be_empty, "Expected #{m.inspect} to have Videos."
         end
       end
