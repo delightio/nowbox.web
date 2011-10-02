@@ -12,6 +12,7 @@ module Aji
     has_and_belongs_to_many :videos
     after_initialize :initialize_links
 
+    validates_uniqueness_of :uid
     validates_presence_of :author
 
     def links
