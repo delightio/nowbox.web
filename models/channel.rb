@@ -30,8 +30,13 @@ module Aji
       category_ids(limit).map { |cid| Category.find cid }
     end
 
-    def thumbnail_uri; raise InterfaceMethodNotImplemented; end
-    def description; ""; end
+    def thumbnail_uri
+      ""
+    end
+
+    def description
+      ""
+    end
 
     def serializable_hash options={}
       h = {

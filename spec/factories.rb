@@ -175,7 +175,8 @@ Factory.define :youtube_account_with_videos,
     end
   end
 
-Factory.define :mention, :class => 'Aji::Mention' do |a|
-  a.published_at { rand(10000).seconds.ago }
-  a.association :author, :factory => :twitter_account
+Factory.define :mention, :class => 'Aji::Mention' do |m|
+  m.published_at { rand(10000).seconds.ago }
+  m.association :author, :factory => :twitter_account
+  m.sequence(:uid) { |n| n.to_s }
 end
