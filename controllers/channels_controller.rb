@@ -45,7 +45,7 @@ module Aji
           user = User.find_by_id params[:user_id]
           channels = if user then
                         user.user_channels + user.subscribed_channels else
-                        Channel.all end
+                        Channel::Account.all.sample(10) end
         end
         channels
       end
