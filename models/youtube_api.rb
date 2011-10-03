@@ -75,7 +75,7 @@ module Aji
         time_string = @data.fetch('updated', {}).fetch('$t', nil)
         t = if time_string then DateTime.parse(time_string) else nil end
         #t.to_time # Why the shit does this not work?
-        return if t.nil
+        return if t.nil?
         t.instance_eval { Time.utc(year, mon, mday, hour, min, sec).getlocal }
       end
 
