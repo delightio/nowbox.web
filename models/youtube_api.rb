@@ -7,6 +7,10 @@ module Aji
       DataGrabber.new(author_id).build_hash
     end
 
+    def valid_uid? uid
+      author_info(uid)!=nil
+    end
+
     def video_info youtube_id
       youtube_it_to_hash client.video_by youtube_id
     rescue OpenURI::HTTPError => exp
