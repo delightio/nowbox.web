@@ -15,7 +15,8 @@ module Aji
     resource :users do
 
       # ## GET users/:user_id
-      # __Returns__ the user with the specified id and HTTP Status Code 200 or 404
+      # __Returns__ the user with the specified id and HTTP Status Code 200 or
+      # 404
       #
       # __Required params__ `user_id` unique id of the user  
       # __Optional params__ none
@@ -39,7 +40,8 @@ module Aji
 
       # ## PUT users/:user_id
       # __Updates__ given user's attributes  
-      # __Returns__ HTTP Status Code 200 if successful or a JSON encoded error message  
+      # __Returns__ HTTP Status Code 200 if successful or a JSON encoded error
+      # message  
       # __Required params__ (need just one of the two params)  
       # - `name` name of the user  
       # - `email` email address of the user
