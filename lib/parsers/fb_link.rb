@@ -4,7 +4,8 @@ module Aji
       filter = if block_given? then yield post else true end
       return nil unless filter
 
-      author = Account::Facebook.find_or_create_by_uid(post['from']['id'])
+      author = Account::Facebook.find_or_create_by_uid(post['from']['id'],
+        :info => post['from'])
 
       Mention.new(
         :uid => post['id'],
