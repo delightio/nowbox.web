@@ -32,10 +32,6 @@ shared_examples_for "any account" do
       subject.should respond_to :profile_uri
     end
 
-    it "respons to videos_from_source" do
-      subject.should respond_to :videos_from_source
-    end
-
     # TODO This should go into content holder example
     describe "#refresh_content" do
       xit "only inserts new videos" do

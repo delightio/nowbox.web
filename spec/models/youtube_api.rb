@@ -11,17 +11,36 @@ module Aji
     end
 
     describe "#author_info" do
-      it "gets info from youtube" do
+      it "retrieves a hash of information from youtube" do
         info = VCR.use_cassette "youtube_api/author" do
           subject.author_info 'day9tv'
         end
 
-        info.description.should ==%(I grew up playing Starcraft with my brother, Nick (Tasteless). With the launch of Starcraft 2, I'm dedicated to helping the eSports movement grow in popularity around the world.
+        info.keys.should == %w[uid published updated
+          category title profile homepage featured_video_id about_me first_name
+          last_name hobbies location occupation school subscriber_count
+          thumbnail username total_upload_views]
+        info['uid'].should == "day9tv"
+        info['published'].should == Time.new(2010, 4, 22, 14, 48, 11, '-07:00')
+        info['updated'].should > Time.new(2011, 9, 29, 07, 30, 00, '-07:00')
+        info['category'].should == "Guru"
+        info['title'].should == "YouTube user: day9tv"
+        info['profile'].should == "http://www.youtube.com/profile?user=day9tv"
+        info['homepage'].should == "http://day9.tv"
+        info['about_me'].should ==%(I grew up playing Starcraft with my brother, Nick (Tasteless). With the launch of Starcraft 2, I'm dedicated to helping the eSports movement grow in popularity around the world.
 
 Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
-        info.profile_uri.should == "http://www.youtube.com/profile?user=day9tv"
-        info.thumbnail_uri.should == "http://i2.ytimg.com/i/axar6TBM-94_ezoS00fLkA/1.jpg?v=b5d95a"
-        info.realname.should == "Sean Day[9] Plott Plott"
+        info['featured_video_id'].should match Link::YOUTUBE_ID_REGEXP
+        info['first_name'].should == "Sean Day[9] Plott"
+        info['last_name'].should == "Plott"
+        info['location'].should == "Los Angeles, CA, US"
+        info['hobbies'].should == "Starcraft 2"
+        info['occupation'].should == "Starcraft 2 Player and Commentator"
+        info['school'].should == "Harvey Mudd College, USC"
+        info['subscriber_count'].should > 21000
+        info['thumbnail'].should == "http://i2.ytimg.com/i/axar6TBM-94_ezoS00fLkA/1.jpg?v=b5d95a"
+        info['username'].should == "day9tv"
+        info['total_upload_views'].should > 27000000
       end
     end
 

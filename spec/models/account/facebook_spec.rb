@@ -24,7 +24,6 @@ module Aji
       }).tap do |a|
         a.stub :api => api
       end
-
     end
 
     describe "spamming_video?" do
