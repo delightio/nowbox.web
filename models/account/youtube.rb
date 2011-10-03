@@ -13,7 +13,7 @@ module Aji
     end
 
     def thumbnail_uri
-      info['thumbnail']
+      info['thumbnail_uri']
     end
 
     def description
