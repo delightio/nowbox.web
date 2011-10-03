@@ -80,7 +80,7 @@ module Aji
       end
 
       def category
-        @data.fetch('category', {})[1].fetch('term', '*** undefined ***')
+        @data.fetch('category', [nil,{}])[1].fetch('term', '*** undefined ***')
       end
 
       def title
