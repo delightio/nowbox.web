@@ -8,14 +8,14 @@ module Aji
       match_videos
     end
 
-    @@youtube_id_regexp = %r<([-_\w]{11})>
-    @@vimeo_id_regexp = /\d+/
-    @@youtube_regexps = [
-      %r<https?://(?:www\.)?youtube(?:-nocookie)?\.com/v/#{@@youtube_id_regexp}["?]?>,
-      %r<https?://(?:www\.)?youtube(?:-nocookie)?\.com/watch\?(?:\S&)?v=#{@@youtube_id_regexp}[&"]?>,
-      %r<https?://(?:youtu|y2u)\.be/#{@@youtube_id_regexp}>
+    YOUTUBE_ID_REGEXP = %r<([-_\w]{11})>
+    VIMEO_ID_REGEXP = /\d+/
+    YOUTUBE_REGEXPS = [
+      %r<https?://(?:www\.)?youtube(?:-nocookie)?\.com/v/#{YOUTUBE_ID_REGEXP}["?]?>,
+      %r<https?://(?:www\.)?youtube(?:-nocookie)?\.com/watch\?(?:\S&)?v=#{YOUTUBE_ID_REGEXP}[&"]?>,
+      %r<https?://(?:youtu|y2u)\.be/#{YOUTUBE_ID_REGEXP}>
     ]
-    @@vimeo_regexp = %r<https?://(?:www\.)?vimeo\.com/(#{@@vimeo_id_regexp})>
+    VIMEO_REGEXP = %r<https?://(?:www\.)?vimeo\.com/(#{VIMEO_ID_REGEXP})>
 
     def video?
       (@external_id && @type) ? true : false
@@ -39,11 +39,11 @@ module Aji
 
     private
     def match_videos
-      youtube_match = @@youtube_regexps.map do |r|
+      youtube_match = YOUTUBE_REGEXPS.map do |r|
         self.match r || false
       end.inject { |acc, el| acc ||= el }
       # TODO: Finish implementing vimeo support.
-      vimeo_match = nil#self.match @@vimeo_regexp
+      vimeo_match = nil#self.match VIMEO_REGEXP
       if youtube_match
         @external_id = youtube_match[1]
         @type = 'youtube'
