@@ -61,6 +61,20 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
             raise_error Aji::VideoAPI::Error)
         end
       end
+
+      describe "#valid_uid?" do
+        specify "true if the uid belongs to a valid youtube account" do
+          VCR.use_cassette 'youtube_api/valid_author' do
+            subject.valid_uid?("nuclearsandwich").should be_true
+          end
+        end
+
+        specify "false otherwise" do
+          VCR.use_cassette 'youtube_api/invalid_author' do
+            subject.valid_uid?("noaosldfads").should be_false
+          end
+        end
+      end
     end
   end
 end
