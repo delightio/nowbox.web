@@ -2,6 +2,41 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
   describe Aji::Identity, :unit => true do
+
+    describe "#merge" do
+      subject do
+        Identity.new.tap do |i|
+          i.stub :accounts => []
+          i.stub :user => mock("user", :merge => true)
+        end
+      end
+
+      let(:other_identity) do
+        Identity.new.tap do |i|
+          i.stub :accounts => [mock("other account")]
+          i.stub :user => mock("other user")
+        end
+      end
+
+      it "merges the user associated with the other identity into its own" do
+        subject.user.should_receive(:merge).with(other_identity.user)
+        subject.merge other_identity
+      end
+
+      it "adds accounts from the other identity to this one" do
+        subject.merge other_identity
+        other_identity.accounts.all? do |a|
+          subject.accounts.should include a
+        end
+      end
+
+      it "preserves accounts that were already in the identity" do
+        subject.accounts << (existing_account = mock("existing account"))
+        subject.merge other_identity
+        subject.accounts.should include existing_account
+      end
+    end
+
     describe "#social_channel_ids" do
       let(:identity_with_nothing) do
         Identity.new.tap do |i|

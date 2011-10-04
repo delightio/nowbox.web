@@ -4,6 +4,13 @@ module Aji
     has_one :user, :class_name => 'Aji::User'
     belongs_to :graph_channel, :class_name => 'Aji::Channel'
 
+    def merge other
+      user.merge other.user
+      other.accounts.each do |a|
+        accounts << a unless accounts.include? a
+      end
+    end
+
     def social_channel_ids
       {}.tap do |channel_ids|
         channel_ids['facebook_channel_id'] =
