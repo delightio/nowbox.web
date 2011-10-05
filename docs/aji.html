@@ -40,7 +40,9 @@
       </td>
       <td class=code>
         <div class='highlight'><pre><span class="nb">require</span> <span class="s1">&#39;bundler&#39;</span>
-<span class="no">Bundler</span><span class="o">.</span><span class="n">require</span></pre></div>
+<span class="no">Bundler</span><span class="o">.</span><span class="n">require</span>
+
+<span class="no">Faraday</span><span class="o">.</span><span class="n">default_adapter</span> <span class="o">=</span> <span class="ss">:typhoeus</span></pre></div>
       </td>
     </tr>
     <tr id='section-2'>
@@ -81,6 +83,8 @@ should not be used.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>  <span class="k">def</span> <span class="nc">Aji</span><span class="o">.</span><span class="nf">log</span> <span class="n">level</span><span class="o">=</span><span class="ss">:INFO</span><span class="p">,</span> <span class="n">message</span>
+    <span class="k">return</span> <span class="k">if</span> <span class="no">RACK_ENV</span> <span class="o">==</span> <span class="s1">&#39;test&#39;</span> <span class="k">unless</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;LOG&#39;</span><span class="o">]</span>
+
     <span class="k">case</span> <span class="n">level</span>
     <span class="k">when</span> <span class="ss">:ERROR</span><span class="p">,</span> <span class="ss">:WARN</span><span class="p">,</span> <span class="ss">:FATAL</span><span class="p">,</span> <span class="ss">:error</span><span class="p">,</span> <span class="ss">:warn</span><span class="p">,</span> <span class="ss">:fatal</span>
       <span class="vg">$stderr</span><span class="o">.</span><span class="n">puts</span> <span class="n">message</span>
@@ -174,7 +178,7 @@ from Heroku&rsquo;s Environment or a local <code>settings.yml</code>.</p>
         <p>For Account and Channel search</p>
       </td>
       <td class=code>
-        <div class='highlight'><pre>  <span class="no">Tanker</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="no">Aji</span><span class="o">.</span><span class="n">conf</span><span class="o">[</span><span class="s1">&#39;INDEXTANK_URL&#39;</span><span class="o">]</span> <span class="p">}</span></pre></div>
+        <div class='highlight'><pre>  <span class="no">Tanker</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="no">Aji</span><span class="o">.</span><span class="n">conf</span><span class="o">[</span><span class="s1">&#39;INDEXTANK_API_URL&#39;</span><span class="o">]</span> <span class="p">}</span></pre></div>
       </td>
     </tr>
     <tr id='section-11'>
@@ -276,13 +280,8 @@ by a subclass.</p>
       <td class=code>
         <div class='highlight'><pre><span class="nb">require</span> <span class="s1">&#39;./lib/decay&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;./lib/macker&#39;</span>
-<<<<<<< HEAD
 <span class="nb">require</span> <span class="s1">&#39;./lib/parsers&#39;</span>
-<span class="nb">require</span> <span class="s1">&#39;./lib/youtube_data_grabber&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;./lib/searcher&#39;</span></pre></div>
-=======
-<span class="nb">require</span> <span class="s1">&#39;./lib/parsers&#39;</span></pre></div>
->>>>>>> fix_tests
       </td>
     </tr>
   </table>
