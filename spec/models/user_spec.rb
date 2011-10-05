@@ -3,9 +3,14 @@ require File.expand_path("../../spec_helper", __FILE__)
 module Aji
   describe Aji::User do
     subject do
-      User.new.tap do |user|
-        user.stub(:id => 1)
-        user.subscribed_list << 1
+      User.new.tap do |u|
+        u.stub(:id => 1)
+        u.subscribed_list << 1
+        u.name = "George"
+        u.email = "george@thejungle.com"
+        u.stub(:history_channel => stub(:merge! => true))
+        u.stub(:favorite_channel => stub(:merge! => true))
+        u.stub(:queue_channel => stub(:merge! => true))
       end
     end
 
@@ -116,10 +121,12 @@ module Aji
       end
     end
 
-    describe "#merge" do
+    describe "#merge!" do
       let(:other_user) do
         User.new.tap do |u|
           u.stub :id => 2
+          u.name = "Tarzan"
+          u.email = "tarzan@apes.gov"
           u.stub(:subscribed_channels => (4..7).map do |i|
             mock("channel", :id => i).tap do |c|
               Channel.stub(:find_by_id).with(c.id).and_return(c)
@@ -140,7 +147,7 @@ module Aji
       # TODO: Should we provide a facility to subscribe without instantiating
       # a channel?
       it "combines subscribed channels from both" do
-        subject.merge other_user
+        subject.merge! other_user
 
         other_user.subscribed_channels.each do |c|
           subject.should be_subscribed(c)
@@ -148,18 +155,72 @@ module Aji
       end
 
       it "preserves channels the user was already subscribed to" do
-        subject.merge other_user
+        subject.merge! other_user
 
         previously_subscribed_channels.each do |c|
           subject.should be_subscribed(c)
         end
       end
 
-      it "combines history, favorites, and queues of the two users"
+      it "combines history, favorites, and queues of the two users" do
+        subject.history_channel.should_receive(
+          :merge!).with(other_user.history_channel)
+        subject.favorite_channel.should_receive(
+          :merge!).with(other_user.favorite_channel)
+        subject.queue_channel.should_receive(
+          :merge!).with(other_user.queue_channel)
+        subject.merge! other_user
+      end
 
-      it "takes email and name from whichever user is populated most recently"
+      describe "updating user information" do
+        it "uses the other user's info when its missing" do
+          subject.name = ""
+          subject.email = ""
+          other_user.name = "Joe"
+          other_user.email = "joe@example.com"
 
-      it "keeps the identity of the local (implicit) user"
+          subject.merge! other_user
+          subject.name.should == other_user.name
+          subject.email.should == other_user.email
+        end
+
+        it "doesn't change info if the new user's is empty" do
+          subject.name = "Joe"
+          subject.email = "joe@example.com"
+
+          subject.merge! other_user
+
+          subject.name.should == "Joe"
+          subject.email.should == "joe@example.com"
+        end
+
+        it "keeps local info if it is more current" do
+          subject.updated_at = 1.day.ago
+          other_user.updated_at = 10.days.ago
+
+          subject.merge! other_user
+
+          subject.name.should == "George"
+          subject.email.should == "george@thejungle.com"
+        end
+
+        it "uses other info if it is more current" do
+          subject.updated_at = 10.days.ago
+          other_user.updated_at = 1.day.ago
+
+          subject.merge! other_user
+
+          subject.name.should == "Tarzan"
+          subject.email.should == "tarzan@apes.gov"
+        end
+      end
+
+
+      it "keeps the identity of the local (implicit) user" do
+          primary_identity = subject.identity
+          subject.merge! other_user
+          subject.identity.should == primary_identity
+      end
     end
   end
 end

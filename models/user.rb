@@ -100,7 +100,9 @@ module Aji
       end
     end
 
-    def user_channels; [ queue_channel, favorite_channel ]; end
+    def user_channels
+      [ queue_channel, favorite_channel, history_channel ]
+    end
 
     def first_name
       self.name.split(' ').first
@@ -110,9 +112,21 @@ module Aji
       self.name.split(' ').last
     end
 
-    def merge other
+    def merge! other
       other.subscribed_channels.each do |c|
         subscribe c
+      end
+
+      history_channel.merge! other.history_channel
+      favorite_channel.merge! other.favorite_channel
+      queue_channel.merge! other.queue_channel
+
+      self.name = other.name if name == ""
+      self.email = other.email if email == ""
+
+      if other.updated_at.to_i > updated_at.to_i
+        self.name = other.name unless other.name == ""
+        self.email = other.email unless other.email == ""
       end
     end
 
