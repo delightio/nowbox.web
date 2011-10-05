@@ -13,6 +13,7 @@ module Aji
 
     has_many :events
     belongs_to :identity
+    belongs_to :region
     belongs_to :queue_channel, :class_name => 'Channel::User'
     belongs_to :favorite_channel, :class_name => 'Channel::User'
     belongs_to :history_channel, :class_name => 'Channel::User'
@@ -21,11 +22,12 @@ module Aji
     list :subscribed_list # User's Subscribed channels.
 
     def subscribe_featured_channels
-      featured_channels = Channel.featured
-      unless featured_channels.empty?
-        featured_channels.each { |c| subscribe c }
+      if region.nil?
+        Aji.log "User[#{id}] is not assigned to any region."
+        return
       end
-      # TODO: we are pulling in the whole channel object but we really only care about Channel#id
+
+      region.featured_channels.each { |c| subscribe c }
     end
 
     def subscribed_channels

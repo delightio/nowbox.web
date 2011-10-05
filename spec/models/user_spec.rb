@@ -20,11 +20,13 @@ module Aji
     end
 
     describe "#subscribe_featured_channels" do
-      it "subscribes to featured channels" do
-        featured = (0..2).map { |i| mock "featured_channel", :id => i }
-        Aji::Channel.should_receive(:featured).and_return(featured)
-        u = User.create
-        featured.each { |c| u.subscribed?(c).should be_true }
+      it "subscribes to featured channels based on its region" do
+        channel = stub("channel", :id=>5)
+        region = stub("region", :featured_channels=>[channel])
+        subject.stub(:region).and_return(region)
+
+        subject.should_receive(:subscribe).with(channel)
+        subject.subscribe_featured_channels
       end
     end
 

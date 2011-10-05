@@ -19,5 +19,9 @@ module Aji
       featured_channel_id_zset.delete channel.id
     end
 
+    def self.undefined
+      find_or_create_by_locale_and_time_zone nil, nil
+    end
+
   end
 end

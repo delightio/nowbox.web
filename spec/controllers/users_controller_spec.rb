@@ -14,14 +14,15 @@ module Aji
         end
 
         it "should return user info if found" do
-          user = Factory :user_with_channels
-          channel_ids = user.subscribed_list
+          user = User.create
+          channel = Channel.create
+          user.subscribe channel
+
           get "#{resource_uri}/#{user.id}"
           last_response.status.should == 200
           body_hash = JSON.parse last_response.body
           body_hash.should == user.serializable_hash
-          body_hash["subscribed_channel_ids"].should ==(
-            user.subscribed_channels.map {|c| c.id.to_s})
+          body_hash["subscribed_channel_ids"].should == user.subscribed_list.values
           [:queue_channel_id, :favorite_channel_id,
             :history_channel_id].each do |c|
             body_hash[c.to_s].should == (user.send c)
@@ -35,6 +36,23 @@ module Aji
           last_response.status.should ==201
           user_hash = JSON.parse last_response.body
           User.find(user_hash["id"]).should_not be_nil
+        end
+
+        it "assigns new user object with underfined region" do
+          post "#{resource_uri}/"
+          last_response.status.should ==201
+          user_hash = JSON.parse last_response.body
+          User.find(user_hash["id"]).region.should == Region.undefined
+        end
+
+        it "assigns the correct region when specific" do
+          params = {:locale => "en_US", :time_zone => "+8"}
+          region = Region.create params
+
+          post "#{resource_uri}/", params
+          last_response.status.should ==201
+          user_hash = JSON.parse last_response.body
+          User.find(user_hash["id"]).region.should == region
         end
       end
 
