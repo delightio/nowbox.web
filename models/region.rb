@@ -1,6 +1,17 @@
 module Aji
   class Region < ActiveRecord::Base
     include Redis::Objects
+    after_destroy :delete_redis_keys
+
+    def redis_keys
+      [ featured_channel_id_zset ].map &:key
+    end
+
+    def delete_redis_keys
+      redis_keys.each do |key|
+        Aji.redis.del key
+      end
+    end
 
     # CHANNELS ################################################################
     sorted_set :featured_channel_id_zset
