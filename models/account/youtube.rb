@@ -13,7 +13,7 @@ module Aji
     end
 
     def thumbnail_uri
-      info['thumbnail_uri']
+      info['thumbnail']
     end
 
     def description
@@ -52,7 +52,7 @@ module Aji
     # Fetch information from youtube, returns the new info hash upon success
     # and false otherwise.
     def get_info_from_youtube_api
-      info = api.author_info uid
+      self.info = api.author_info uid
     end
 
     def api

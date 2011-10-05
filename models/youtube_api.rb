@@ -1,5 +1,6 @@
 module Aji
   class YoutubeAPI
+    USER_FEED_URL = "http://gdata.youtube.com/feeds/api/users"
 
     @@client ||= YouTubeIt::Client.new {}
 
@@ -8,7 +9,7 @@ module Aji
     end
 
     def valid_uid? uid
-      author_info(uid)!=nil
+      Faraday.get("#{USER_FEED_URL}/#{uid}").status == 200
     end
 
     def video_info youtube_id
