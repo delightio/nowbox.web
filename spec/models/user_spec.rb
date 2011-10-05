@@ -2,12 +2,11 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
   describe Aji::User do
-
     subject do
-      User.create(:name => "John Doe",
-        :email => "john@doe.com").tap do |user|
-          user.subscribed_list << 1
-        end
+      User.new.tap do |user|
+        user.stub(:id => 1)
+        user.subscribed_list << 1
+      end
     end
 
     it_behaves_like "any redis object model"
@@ -15,18 +14,23 @@ module Aji
     describe "#create_user_channels" do
       it "creates user channels" do
         Channel::User.should_receive(:create).exactly(3).times
-        User.new.send :create_user_channels
+        subject.send :create_user_channels
       end
     end
 
     describe "#subscribe_featured_channels" do
-      it "subscribes to featured channels based on its region" do
-        channel = stub("channel", :id=>5)
-        region = stub("region", :featured_channels=>[channel])
-        subject.stub(:region).and_return(region)
+      let(:featured_channels) do
+        (1..3).map do |i|
+          mock("channel", :id => i)
+        end
+      end
 
-        subject.should_receive(:subscribe).with(channel)
+      let(:region) { mock "region", :featured_channels => featured_channels }
+
+      it "subscribes the user to the featured channels" do
+        subject.stub :region => region
         subject.subscribe_featured_channels
+        featured_channels.each { |c| subject.should be_subscribed(c) }
       end
     end
 

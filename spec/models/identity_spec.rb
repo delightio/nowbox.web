@@ -25,7 +25,7 @@ module Aji
 
       it "adds accounts from the other identity to this one" do
         subject.merge other_identity
-        other_identity.accounts.all? do |a|
+        other_identity.accounts.each do |a|
           subject.accounts.should include a
         end
       end
