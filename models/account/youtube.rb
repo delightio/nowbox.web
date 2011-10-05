@@ -49,6 +49,19 @@ module Aji
       api.valid_uid? uid
     end
 
+    def self.create_if_existing uid
+      found = find_by_uid uid
+      return found if found
+
+      new_account = new :uid => uid
+      return nil unless new_account.existing?
+
+      # Exists but we don't have it
+      # Search db again just in case the account wasn't indexed for
+      # other reasons, e.g., not enough content videos
+      Account::Youtube.find_or_create_by_uid uid
+    end
+
     # Fetch information from youtube, returns the new info hash upon success
     # and false otherwise.
     def get_info_from_youtube_api

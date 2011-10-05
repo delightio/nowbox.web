@@ -71,11 +71,8 @@ module Aji
         subject = Searcher.new query
 
         youtube_account = @accounts.first
-        youtube_account.should_receive(:existing?).and_return(true)
-        Account::Youtube.should_receive(:new).with(:uid=>query).
-          and_return(youtube_account)
-        Account::Youtube.should_receive(:find_or_create_by_uid).
-          and_return(youtube_account)
+        Account::Youtube.should_receive(:create_if_existing).
+          with(query).and_return(youtube_account)
 
         subject.stub(:account_results).and_return([])
         subject.results.should == [youtube_account.to_channel]
