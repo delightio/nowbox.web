@@ -31,12 +31,32 @@ module Aji
       end
     end
 
-    describe "remove_feature" do
+    describe "#remove_feature" do
       it "removes given channel from featured list" do
         subject.add_featured_channel(channel)
         expect { subject.remove_featured_channel(channel) }.
           to change { subject.featured_channel_ids.include? channel.id }.
           from(true).to(false)
+      end
+    end
+
+    describe "#language_based" do
+      it "returns the parent region based on language" do
+        [:en, :ko].each do |code|
+          region = Region.create :locale => "#{code}_xxx"
+          region.language_based.should == (Region.send code)
+        end
+      end
+
+      it "uses english based if there isn't a specific set of features for given language" do
+        region = Region.create :locale => "zh_HK"
+        region.language_based.should == Region.en
+      end
+    end
+
+    describe "#master" do
+      it "returns its master region based on language" do
+        subject.master.should == subject.language_based
       end
     end
 
