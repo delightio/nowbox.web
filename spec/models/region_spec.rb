@@ -8,8 +8,8 @@ module Aji
 
     context "After channels are added" do
       before(:each) do
-        subject.add_featured_channel channel
-        subject.add_featured_channel channel2
+        subject.feature_channel channel
+        subject.feature_channel channel2
       end
 
       it "#featured_channels returns feature channel objects" do
@@ -23,9 +23,9 @@ module Aji
       end
     end
 
-    describe "#add_featured_channel" do
+    describe "#feature_channel" do
       it "adds given channel into featured list" do
-        expect { subject.add_featured_channel(channel) }.
+        expect { subject.feature_channel(channel) }.
           to change {subject.featured_channel_ids.count}.by(1)
         subject.featured_channel_ids.should include channel.id
       end
@@ -33,8 +33,8 @@ module Aji
 
     describe "#remove_feature" do
       it "removes given channel from featured list" do
-        subject.add_featured_channel(channel)
-        expect { subject.remove_featured_channel(channel) }.
+        subject.feature_channel(channel)
+        expect { subject.remove_channel(channel) }.
           to change { subject.featured_channel_ids.include? channel.id }.
           from(true).to(false)
       end

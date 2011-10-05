@@ -13,11 +13,11 @@ module Aji
       master.featured_channel_ids.map { |cid| Channel.find_by_id cid }.compact
     end
 
-    def add_featured_channel channel
+    def feature_channel channel
       master.featured_channel_id_zset[channel.id] = Time.now.to_i
     end
 
-    def remove_featured_channel channel
+    def remove_channel channel
       master.featured_channel_id_zset.delete channel.id
     end
     # CHANNELS ################################################################
