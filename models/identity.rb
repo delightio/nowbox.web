@@ -4,8 +4,8 @@ module Aji
     has_one :user, :class_name => 'Aji::User'
     belongs_to :graph_channel, :class_name => 'Aji::Channel'
 
-    def merge other
-      user.merge other.user
+    def merge! other
+      user.merge! other.user
       other.accounts.each do |a|
         accounts << a unless accounts.include? a
       end

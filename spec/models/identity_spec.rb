@@ -3,11 +3,11 @@ require File.expand_path("../../spec_helper", __FILE__)
 module Aji
   describe Aji::Identity, :unit => true do
 
-    describe "#merge" do
+    describe "#merge!" do
       subject do
         Identity.new.tap do |i|
           i.stub :accounts => []
-          i.stub :user => mock("user", :merge => true)
+          i.stub :user => mock("user", :merge! => true)
         end
       end
 
@@ -19,12 +19,12 @@ module Aji
       end
 
       it "merges the user associated with the other identity into its own" do
-        subject.user.should_receive(:merge).with(other_identity.user)
-        subject.merge other_identity
+        subject.user.should_receive(:merge!).with(other_identity.user)
+        subject.merge! other_identity
       end
 
       it "adds accounts from the other identity to this one" do
-        subject.merge other_identity
+        subject.merge! other_identity
         other_identity.accounts.each do |a|
           subject.accounts.should include a
         end
@@ -32,7 +32,7 @@ module Aji
 
       it "preserves accounts that were already in the identity" do
         subject.accounts << (existing_account = mock("existing account"))
-        subject.merge other_identity
+        subject.merge! other_identity
         subject.accounts.should include existing_account
       end
     end
