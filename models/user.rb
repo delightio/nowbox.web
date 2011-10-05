@@ -79,10 +79,12 @@ module Aji
     def subscribed? channel
       subscribed_list.include? channel.id.to_s
     end
+
     def subscribe channel, args={}
       subscribed_list << channel.id if !subscribed? channel
       subscribed? channel
     end
+
     def unsubscribe channel, args={}
       subscribed_list.delete channel.id
       !subscribed?(channel)
@@ -106,6 +108,12 @@ module Aji
 
     def last_name
       self.name.split(' ').last
+    end
+
+    def merge other
+      other.subscribed_channels.each do |c|
+        subscribe c
+      end
     end
 
     private

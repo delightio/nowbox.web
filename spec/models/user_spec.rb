@@ -85,8 +85,7 @@ module Aji
           expect { Factory :channel_event,
             :action => :subscribe,
             :channel => channel,
-            :user => user }.
-            to_not change { user.subscribed_channels.count }
+            :user => user }.to_not change { user.subscribed_channels.count }
         end
       end
 
@@ -106,7 +105,7 @@ module Aji
     end
 
     describe "#serializable_hash" do
-      it "should include a list of subscribed channel ids" do
+      it "includes a list of subscribed channel ids" do
         user = Factory :user
         5.times do |n|
           channel = Factory :channel
@@ -115,6 +114,52 @@ module Aji
         end
         user.serializable_hash["subscribed_channel_ids"].should == user.subscribed_list.values
       end
+    end
+
+    describe "#merge" do
+      let(:other_user) do
+        User.new.tap do |u|
+          u.stub :id => 2
+          u.stub(:subscribed_channels => (4..7).map do |i|
+            mock("channel", :id => i).tap do |c|
+              Channel.stub(:find_by_id).with(c.id).and_return(c)
+            end
+          end)
+        end
+      end
+
+      let!(:previously_subscribed_channels) do
+        (1..3).map do |i|
+          mock("channel", :id => i).tap do |c|
+            subject.subscribe c
+            Channel.stub(:find_by_id).with(c.id).and_return(c)
+          end
+        end
+      end
+
+      # TODO: Should we provide a facility to subscribe without instantiating
+      # a channel?
+      it "combines subscribed channels from both" do
+        subject.merge other_user
+
+        other_user.subscribed_channels.each do |c|
+          subject.should be_subscribed(c)
+        end
+      end
+
+      it "preserves channels the user was already subscribed to" do
+        subject.merge other_user
+
+        previously_subscribed_channels.each do |c|
+          subject.should be_subscribed(c)
+        end
+      end
+
+      it "combines history, favorites, and queues of the two users"
+
+      it "takes email and name from whichever user is populated most recently"
+
+      it "keeps the identity of the local (implicit) user"
     end
   end
 end
