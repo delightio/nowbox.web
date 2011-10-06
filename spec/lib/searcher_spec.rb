@@ -88,6 +88,16 @@ module Aji
         subject.results.should include Channel.trending
       end
 
+      it "will not search youtube for existing accounts if query has more than 1 word" do
+        query = "steve jobs"
+        subject = Searcher.new query
+
+        subject.stub(:account_results).and_return([])
+        Account::Youtube.should_receive(:create_if_existing).never
+
+        subject.results
+      end
+
     end
 
   end

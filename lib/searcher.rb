@@ -27,7 +27,7 @@ module Aji
       accounts = account_results
       usernames = accounts.map &:username
       @query.tokenize.each do |q|
-        next if usernames.include? q
+        next if usernames.include?(q) || q.split(' ').count > 1
         new_account = Account::Youtube.create_if_existing q
         accounts << new_account unless new_account.nil?
       end
