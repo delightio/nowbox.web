@@ -78,6 +78,16 @@ module Aji
         subject.results.should == [youtube_account.to_channel]
       end
 
+      it "allows NowPopular channel to be searched" do
+        query = 'now popular'
+        subject = Searcher.new query
+
+        subject.stub(:account_results).and_return([])
+        Account::Youtube.stub(:create_if_existing).and_return(nil)
+
+        subject.results.should include Channel.trending
+      end
+
     end
 
   end

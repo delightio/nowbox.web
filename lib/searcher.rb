@@ -33,6 +33,13 @@ module Aji
       end
 
       channels = accounts.map(&:to_channel)
+
+      # TODO: hack to make NowPopular searchable
+      splits = @query.split ' '
+      if (splits.include? "now") || (splits.include? "popular")
+        channels = [Channel.trending] + channels
+      end
+
       channels = channels.uniq
       channels.each { |ch| ch.background_refresh_content }
       channels
