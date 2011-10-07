@@ -2,20 +2,23 @@ module Aji
   class YoutubeAPI
     USER_FEED_URL = "http://gdata.youtube.com/feeds/api/users"
 
-    @@client ||= YouTubeIt::Client.new {}
-
     def author_info author_id
+      tracker.hit!
       DataGrabber.new(author_id).build_hash
     end
 
     def valid_uid? uid
+      tracker.hit!
       Faraday.get("#{USER_FEED_URL}/#{uid}").status == 200
     end
 
     def video_info youtube_id
+      tracker.hit!
       youtube_it_to_hash client.video_by youtube_id
     rescue OpenURI::HTTPError => exp
       raise VideoAPI::Error, "Unable to populate #{youtube_id}.", exp.backtrace
+    rescue NoMethodError => exp
+      raise VideoAPI::Error, "Unable to reach YoutubeAPI.", exp.backtrace
     end
 
     def video youtube_id
@@ -53,9 +56,13 @@ module Aji
       Video.new youtube_it_to_hash video
     end
 
+    def tracker
+      @@tracker ||= APITracker.new self.class.to_s, 100, 3600, Aji.redis
+    end
+
     private
     def client
-      @@client
+      @@client ||= YouTubeIt::Client.new {}
     end
 
     class DataGrabber

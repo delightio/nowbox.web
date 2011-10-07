@@ -11,6 +11,14 @@ module Aji
     end
 
     describe "#author_info" do
+      it "hits youtube only once" do
+        subject.tracker.should_receive(:hit!)
+
+        info = VCR.use_cassette "youtube_api/author" do
+          subject.author_info 'day9tv'
+        end
+      end
+
       it "retrieves a hash of information from youtube" do
         info = VCR.use_cassette "youtube_api/author" do
           subject.author_info 'day9tv'
@@ -45,6 +53,14 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
     end
 
     describe "#video_info" do
+      it "hits youtube only once" do
+        subject.tracker.should_receive(:hit!)
+
+         hash = VCR.use_cassette "youtube_api/video" do
+           subject.video_info '3307vMsCG0I'
+         end
+      end
+
       it "gives information about a video in a hash" do
         hash = VCR.use_cassette "youtube_api/video" do
           subject.video_info '3307vMsCG0I'
@@ -63,6 +79,14 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
       end
 
       describe "#valid_uid?" do
+        it "hits youtube only once" do
+          subject.tracker.should_receive(:hit!)
+
+          VCR.use_cassette 'youtube_api/valid_author' do
+            subject.valid_uid?("nuclearsandwich").should be_true
+          end
+        end
+
         specify "true if the uid belongs to a valid youtube account" do
           VCR.use_cassette 'youtube_api/valid_author' do
             subject.valid_uid?("nuclearsandwich").should be_true
