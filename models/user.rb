@@ -101,7 +101,7 @@ module Aji
     end
 
     def user_channels
-      [ queue_channel, favorite_channel, history_channel ]
+      [ queue_channel, favorite_channel ]
     end
 
     def first_name
