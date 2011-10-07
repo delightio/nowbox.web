@@ -20,7 +20,7 @@ module Aji
       # __Returns__ the channel with the specified id and HTTP Status Code 200
       # or 404
       #
-      # __Required params__ `channel_id` unique id of the channel
+      # __Required params__ `channel_id` unique id of the channel  
       # __Optional params__ `inline_videos` integer, number of videos to include
       get '/:channel_id' do
         channel = find_channel_by_id_or_error params[:channel_id]
@@ -30,13 +30,13 @@ module Aji
 
       # ## GET channels/
       # __Returns__ a list of channels matching the request parameters or all
-      # channels if no parameters are specified.
-      # __Required params__ none
-      # __Optional params__
+      # channels if no parameters are specified.  
+      # __Required params__ none  
+      # __Optional params__  
       # - `user_id`:  user id. If supplied without `query`, server returns
-      #   given user's subscribed channels.
+      #   given user's subscribed channels.  
       # - `query`:  comma separated list of search terms. Server returns all
-      #   channels regardless of type.
+      #   channels regardless of type.  
       get do
         channels = []
         if params[:query]
@@ -44,7 +44,7 @@ module Aji
         else
           user = User.find_by_id params[:user_id]
           channels = if user then
-                        user.subscribed_channels else
+                        user.user_channels + user.subscribed_channels else
                         Channel::Account.all.sample(10) end
         end
         channels
@@ -52,12 +52,12 @@ module Aji
 
       # ## GET channels/:channel_id/videos
       # __Returns__ all the videos of given channel and HTTP Status Code 200 or
-      # 404
-      # __Required params__
-      # - `channel_id` unique id of the channel
-      # - `user_id` unique id of the user
-      # __Optional params__
-      # - `limit` max. number of videos to return
+      # 404  
+      # __Required params__  
+      # - `channel_id` unique id of the channel  
+      # - `user_id` unique id of the user  
+      # __Optional params__  
+      # - `limit` max. number of videos to return  
       # - `page` which page of videos to return, starts at 1
       get '/:channel_id/videos' do
         channel = find_channel_by_id_or_error params[:channel_id]
@@ -66,9 +66,9 @@ module Aji
       end
 
       # ## POST channels/
-      # __Returns__ new keyword channel created by given parameters
-      # __Required params__
-      # - `type`: channel type. Currently support: `keyword`
+      # __Returns__ new keyword channel created by given parameters  
+      # __Required params__  
+      # - `type`: channel type. Currently support: `keyword`  
       # - `query`:  comma separated list of search terms
       #
       post do
