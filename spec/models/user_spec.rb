@@ -2,12 +2,16 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
   describe Aji::User do
-
     subject do
-      User.create(:name => "John Doe",
-        :email => "john@doe.com").tap do |user|
-          user.subscribed_list << 1
-        end
+      User.new.tap do |u|
+        u.stub(:id => 1)
+        u.subscribed_list << 1
+        u.name = "George"
+        u.email = "george@thejungle.com"
+        u.stub(:history_channel => stub(:merge! => true))
+        u.stub(:favorite_channel => stub(:merge! => true))
+        u.stub(:queue_channel => stub(:merge! => true))
+      end
     end
 
     it_behaves_like "any redis object model"
@@ -15,18 +19,23 @@ module Aji
     describe "#create_user_channels" do
       it "creates user channels" do
         Channel::User.should_receive(:create).exactly(3).times
-        User.new.send :create_user_channels
+        subject.send :create_user_channels
       end
     end
 
     describe "#subscribe_featured_channels" do
-      it "subscribes to featured channels based on its region" do
-        channel = stub("channel", :id=>5)
-        region = stub("region", :featured_channels=>[channel])
-        subject.stub(:region).and_return(region)
+      let(:featured_channels) do
+        (1..3).map do |i|
+          mock("channel", :id => i)
+        end
+      end
 
-        subject.should_receive(:subscribe).with(channel)
+      let(:region) { mock "region", :featured_channels => featured_channels }
+
+      it "subscribes the user to the featured channels" do
+        subject.stub :region => region
         subject.subscribe_featured_channels
+        featured_channels.each { |c| subject.should be_subscribed(c) }
       end
     end
 
@@ -81,8 +90,7 @@ module Aji
           expect { Factory :channel_event,
             :action => :subscribe,
             :channel => channel,
-            :user => user }.
-            to_not change { user.subscribed_channels.count }
+            :user => user }.to_not change { user.subscribed_channels.count }
         end
       end
 
@@ -102,7 +110,7 @@ module Aji
     end
 
     describe "#serializable_hash" do
-      it "should include a list of subscribed channel ids" do
+      it "includes a list of subscribed channel ids" do
         user = Factory :user
         5.times do |n|
           channel = Factory :channel
@@ -110,6 +118,108 @@ module Aji
             :user => user, :channel => channel
         end
         user.serializable_hash["subscribed_channel_ids"].should == user.subscribed_list.values
+      end
+    end
+
+    describe "#merge!" do
+      let(:other_user) do
+        User.new.tap do |u|
+          u.stub :id => 2
+          u.name = "Tarzan"
+          u.email = "tarzan@apes.gov"
+          u.stub(:subscribed_channels => (4..7).map do |i|
+            mock("channel", :id => i).tap do |c|
+              Channel.stub(:find_by_id).with(c.id).and_return(c)
+            end
+          end)
+        end
+      end
+
+      let!(:previously_subscribed_channels) do
+        (1..3).map do |i|
+          mock("channel", :id => i).tap do |c|
+            subject.subscribe c
+            Channel.stub(:find_by_id).with(c.id).and_return(c)
+          end
+        end
+      end
+
+      # TODO: Should we provide a facility to subscribe without instantiating
+      # a channel?
+      it "combines subscribed channels from both" do
+        subject.merge! other_user
+
+        other_user.subscribed_channels.each do |c|
+          subject.should be_subscribed(c)
+        end
+      end
+
+      it "preserves channels the user was already subscribed to" do
+        subject.merge! other_user
+
+        previously_subscribed_channels.each do |c|
+          subject.should be_subscribed(c)
+        end
+      end
+
+      it "combines history, favorites, and queues of the two users" do
+        subject.history_channel.should_receive(
+          :merge!).with(other_user.history_channel)
+        subject.favorite_channel.should_receive(
+          :merge!).with(other_user.favorite_channel)
+        subject.queue_channel.should_receive(
+          :merge!).with(other_user.queue_channel)
+        subject.merge! other_user
+      end
+
+      describe "updating user information" do
+        it "uses the other user's info when its missing" do
+          subject.name = ""
+          subject.email = ""
+          other_user.name = "Joe"
+          other_user.email = "joe@example.com"
+
+          subject.merge! other_user
+          subject.name.should == other_user.name
+          subject.email.should == other_user.email
+        end
+
+        it "doesn't change info if the new user's is empty" do
+          subject.name = "Joe"
+          subject.email = "joe@example.com"
+
+          subject.merge! other_user
+
+          subject.name.should == "Joe"
+          subject.email.should == "joe@example.com"
+        end
+
+        it "keeps local info if it is more current" do
+          subject.updated_at = 1.day.ago
+          other_user.updated_at = 10.days.ago
+
+          subject.merge! other_user
+
+          subject.name.should == "George"
+          subject.email.should == "george@thejungle.com"
+        end
+
+        it "uses other info if it is more current" do
+          subject.updated_at = 10.days.ago
+          other_user.updated_at = 1.day.ago
+
+          subject.merge! other_user
+
+          subject.name.should == "Tarzan"
+          subject.email.should == "tarzan@apes.gov"
+        end
+      end
+
+
+      it "keeps the identity of the local (implicit) user" do
+          primary_identity = subject.identity
+          subject.merge! other_user
+          subject.identity.should == primary_identity
       end
     end
   end

@@ -12,8 +12,25 @@ module Aji
       end
     end
 
+
     def refresh_content force=false
       # This is a no-op. All actions on this channel are done via its user.
+    end
+
+    def merge! other
+      other.content_zset.members(:with_scores => true).each do |(vid,score)|
+        content_zset[vid] = score
+      end
+
+      other.category_id_zset.members(:with_scores => true).each do |(cid,score)|
+        category_id_zset[cid] = score
+      end
+
+      other.events.each do |ev|
+        events << ev
+      end
+
+      save
     end
   end
 end

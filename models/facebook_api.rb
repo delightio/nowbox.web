@@ -7,9 +7,11 @@ module Aji
 
     def video_mentions_i_post pages=2
       [].tap do |mentions|
+        tracker.hit!
         posts = @koala.get_connections "me", "links"
         mentions.concat extract_video_mentions filter_links posts
         (pages - 1).times do
+          tracker.hit!
           posts = posts.next_page
           mentions.concat extract_video_mentions filter_links posts
         end
@@ -18,13 +20,19 @@ module Aji
 
     def video_mentions_in_feed pages=5
       [].tap do |mentions|
+        tracker.hit!
         posts = @koala.get_connections "me", "home"
         mentions.concat extract_video_mentions filter_links posts
         (pages - 1).times do
+          tracker.hit!
           posts = posts.next_page
           mentions.concat extract_video_mentions filter_links posts
         end
       end
+    end
+
+    def tracker
+      @@tracker ||= APITracker.new self.class.to_s, 100, 3600, Aji.redis
     end
 
     private

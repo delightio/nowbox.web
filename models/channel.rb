@@ -19,7 +19,7 @@ module Aji
     sorted_set :category_id_zset
     include Mixins::Featuring
 
-    has_many :events
+    has_many :events, :class_name => 'Aji::Event'
 
     after_destroy :delete_redis_keys
 
