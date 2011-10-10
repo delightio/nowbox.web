@@ -13,7 +13,7 @@ namespace :spec do
 end
 
 def source_dirs
-  %w[models queues lib controllers config helpers script]
+  %w[models queues lib controllers config helpers]
 end
 
 def source_files
