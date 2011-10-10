@@ -16,7 +16,6 @@ module Aji
       it "raises an error when the limit is reached" do
         hits_per_session.times { subject.hit }
         expect{ subject.hit }.to raise_error APITracker::LimitReached
-        ap subject.hit_count
       end
 
       it "executes an optional block unless the rate limit is exceeded" do

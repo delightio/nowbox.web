@@ -6,6 +6,20 @@ unless ENV['RACK_ENV'] == 'production'
   RSpec::Core::RakeTask.new(:spec)
 end
 
+namespace :spec do
+  task :unit do
+    system %(bin/rspec spec -t unit)
+  end
+end
+
+def source_dirs
+  %w[models queues lib controllers config helpers]
+end
+
+def source_files
+  Dir.glob("{#{source_dirs * ','}}/**/*.rb")
+end
+
 # Load the Aji environment.
 task :environment do
   puts "Loading Aji environment."
@@ -18,8 +32,12 @@ task :console => :environment do
   Pry.start Aji
 end
 
-task :readstream => :environment do
-  require_relative 'lib/read_stream'
+task :flog do
+  sh %(flog --continue #{source_files * ' '})
+end
+
+task :flay do
+  sh %(flay #{source_files * ' '})
 end
 
 namespace :resque do
