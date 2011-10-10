@@ -9,10 +9,8 @@ module Aji
         video = Video.find_by_id args[:video_id]
         unless video.nil?
           video.blacklist
-          bad_count = Video.where(
-            "author_id = ? AND blacklisted_at IS NOT NULL", video.author.id).
-            count
-          video.author.blacklist if bad_count >= 3
+          author = video.author # TODO: !law of demeter
+          author.blacklist_repeated_offender
         end
       end
     end

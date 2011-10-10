@@ -88,6 +88,14 @@ module Aji
       Channel::Account.find_or_create_by_accounts Array(self)
     end
 
+    def blacklisted_videos
+      Video.where("author_id = ? AND blacklisted_at IS NOT NULL", id)
+    end
+
+    def blacklist_repeated_offender
+      blacklist if blacklisted_videos.count >= 3
+    end
+
     def redis_keys
       [ content_zset, influencer_set ].map &:key
     end
