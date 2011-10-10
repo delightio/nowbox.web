@@ -103,6 +103,13 @@ module Aji
       @api ||= TwitterAPI.new credentials['token'], credentials['secret']
     end
 
+    def update_from_auth_info auth_hash
+      self.credentials = auth_hash['credentials']
+      self.username = auth_hash['user_hash']['screen_name']
+      self.info = auth_hash['user_hash']
+      save
+    end
+
     def create_stream_channel
       self.stream_channel ||= Channel::TwitterStream.create :owner => self,
         :title => "Twitter Stream"

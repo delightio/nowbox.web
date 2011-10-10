@@ -94,6 +94,28 @@ module Aji
       end
     end
 
+    describe "#update_from_auth_info" do
+      let(:auth_info) do
+        {
+          'credentials' => {:token => 'sometoken', :secret => 'somesecret'},
+          'user_hash' => {'screen_name' => 'somescreenname'}
+        }
+      end
+      it "updates twitter credentials" do
+        expect { subject.update_from_auth_info auth_info }.to(
+          change{subject.credentials}.to(auth_info['credentials']))
+      end
+      it "updates the username" do
+        expect { subject.update_from_auth_info auth_info }.to(
+          change{subject.username}.to(auth_info['user_hash']['screen_name']))
+      end
+
+      it "updates the stored info hash" do
+        expect { subject.update_from_auth_info auth_info }.to(
+          change{subject.info}.to(auth_info['user_hash']))
+      end
+    end
+
     describe "#create_stream_channel" do
       it "creates a channel for the account's twitter stream" do
         Channel::TwitterStream.should_receive(:create).with(:owner => subject,
