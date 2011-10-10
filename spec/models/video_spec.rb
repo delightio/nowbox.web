@@ -84,14 +84,13 @@ module Aji
     describe "#relevance" do
       context "when videos have an equal number of mentions" do
         it "should return higher relevance for newer mentions" do
-          mention = mock("mention")
-          mention.stub(:age).with(anything()).and_return 1000
-          subject.stub(:latest_mentions).and_return([mention])
+          mention = mock("mention", :age=>1000)
+          subject.stub_chain(:mentions, :latest).and_return([mention])
           current_relevance = subject.relevance
 
-          old_mention = mock("mention")
-          old_mention.stub(:age).with(anything()).and_return 5000
-          subject.stub(:latest_mentions).and_return([old_mention])
+          old_mention = mock("mention", :age=>5000)
+          subject.stub_chain(:mentions, :latest).and_return([old_mention])
+
           subject.relevance.should < current_relevance
         end
       end
@@ -99,16 +98,6 @@ module Aji
       it "is 0 if video is blacklisted" do
         subject.stub(:blacklisted?).and_return(true)
         subject.relevance(Time.now.to_i).should == 0
-      end
-    end
-
-    describe "#latest_mentions" do
-      it "returns the latest N mentions" do
-        subject.mentions << Mention.new(:published_at => 5.minutes.ago)
-        subject.mentions << Mention.new(:published_at => Time.now)
-        subject.mentions << Mention.new(:published_at => 10.minutes.ago)
-        oldest_mention = subject.mentions.sort_by(&:published_at).first
-        subject.latest_mentions(2).should_not include oldest_mention
       end
     end
 

@@ -51,10 +51,6 @@ module Aji
       write_attribute(:source, value.to_sym)
     end
 
-    def latest_mentions n=50
-      mentions.order("published_at DESC").limit(n)
-    end
-
     def mark_spam
       Aji.redis.sadd "spammy_videos", id
       blacklist
@@ -76,7 +72,7 @@ module Aji
     def relevance at_time_i=Time.now.to_i
       return 0 if blacklisted?
       time_diffs = []
-      latest_mentions(50).each do |mention|
+      mentions.latest(50).each do |mention|
         time_diffs << mention.age(at_time_i)
       end
       Integer Decay.exponentially time_diffs

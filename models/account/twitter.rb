@@ -61,7 +61,7 @@ module Aji
     end
 
     def spamming_video? video
-      mentions.select{ |m| m.has_video? video }.count > SPAM_THRESHOLD
+      mentions.latest.select{ |m| m.has_video? video }.count > SPAM_THRESHOLD
     end
 
     def refresh_influencers

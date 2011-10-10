@@ -87,5 +87,23 @@ module Aji
         subject.age(Time.now.to_i).should_not be_integer
       end
     end
+
+    describe "#latest" do
+      it "returns a named scope returning latest mentions sorted by published date" do
+        total = 5
+        all_mentions = []
+        (total+1).times do |n|
+          m = Mention.new :published_at => n.minutes.ago
+          m.save :validate => false
+          all_mentions << m
+        end
+        oldest = all_mentions.last
+        all_mentions.shuffle!
+
+        latest = Mention.latest(total)
+        latest.should have(total).mentions
+        latest.should_not include oldest
+      end
+    end
   end
 end

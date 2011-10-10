@@ -15,6 +15,8 @@ module Aji
     validates_uniqueness_of :uid, :scope => 'source'
     validates_presence_of :author
 
+    scope :latest, lambda { |n=30| order('published_at desc').limit(n) }
+
     def links
       @links ||= if self[:links]
                    self[:links].split('||').map{|l| Link.new l}

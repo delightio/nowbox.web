@@ -48,13 +48,13 @@ module Aji
 
     describe "#spamming_video?" do
       specify "true when video is mentioned more than SPAM_THRESHOLD times" do
-        subject.stub(:mentions).and_return(
+        subject.stub_chain(:mentions, :latest).and_return(
           Array.new Account::SPAM_THRESHOLD+1, stub(:has_video? => true))
         subject.spamming_video?(mock("video")).should be_true
       end
 
       specify "false otherwise" do
-        subject.stub(:mentions).and_return([stub(:has_video? => false)])
+        subject.stub_chain(:mentions, :latest).and_return([stub(:has_video? => false)])
         subject.spamming_video?(mock("video")).should be_false
       end
     end
