@@ -21,6 +21,8 @@ gem 'newrelic_rpm', '~>3.1.1'
 # Literate comments, generating lovely documentation HTML.
 gem 'rdiscount' # Required for Rocco.
 gem 'rocco', '~>0.8.2', :group => :development
+gem 'flog', :group => :development
+gem 'flay', :group => :development
 
 gem 'awesome_print'
 gem 'pry'
