@@ -5,7 +5,7 @@ module Aji
       # Require a 'blacklisted_at' DateTime database column
 
       def blacklist
-        update_attribute :blacklisted_at, Time.now
+        update_attribute(:blacklisted_at, Time.now) unless blacklisted?
       end
 
       def blacklisted?
