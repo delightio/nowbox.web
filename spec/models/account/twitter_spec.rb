@@ -97,14 +97,16 @@ module Aji
     describe "#update_from_auth_info" do
       let(:auth_info) do
         {
-          'credentials' => {:token => 'sometoken', :secret => 'somesecret'},
+          'credentials' => { 'token' => 'sometoken', 'secret' => 'somesecret'},
           'user_hash' => {'screen_name' => 'somescreenname'}
         }
       end
+
       it "updates twitter credentials" do
         expect { subject.update_from_auth_info auth_info }.to(
           change{subject.credentials}.to(auth_info['credentials']))
       end
+
       it "updates the username" do
         expect { subject.update_from_auth_info auth_info }.to(
           change{subject.username}.to(auth_info['user_hash']['screen_name']))

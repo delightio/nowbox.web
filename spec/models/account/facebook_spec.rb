@@ -39,6 +39,30 @@ module Aji
       end
     end
 
+    describe "#update_from_auth_info" do
+      let(:auth_info) do
+        {
+          'credentials' => { 'token' => 'somesecrettoken' },
+          'user_hash' => {'username' => 'somescreenname'}
+        }
+      end
+
+      it "updates facebook credentials" do
+        expect { subject.update_from_auth_info auth_info }.to(
+          change{subject.credentials}.to(auth_info['credentials']))
+      end
+
+      it "updates the username" do
+        expect { subject.update_from_auth_info auth_info }.to(
+          change{subject.username}.to(auth_info['user_hash']['username']))
+      end
+
+      it "updates the stored info hash" do
+        expect { subject.update_from_auth_info auth_info }.to(
+          change{subject.info}.to(auth_info['user_hash']))
+      end
+    end
+
     describe "#create_stream_channel" do
       it "creates a channel for the account's facebook stream" do
         Channel.should_receive(:create).with(:owner => subject,
