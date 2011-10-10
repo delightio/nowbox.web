@@ -112,15 +112,6 @@ module Aji
       end
     end
 
-    describe "#latest_mentioners" do
-      it "returns the latest external accounts who mentioned about the video" do
-        mentions = mock("mentions")
-        mentions.should_receive :map
-        subject.stub :latest_mentions => mentions
-        subject.latest_mentioners
-      end
-    end
-
     describe "#mark_spam" do
       it "blacklists itself" do
         subject.stub :author => mock('author')

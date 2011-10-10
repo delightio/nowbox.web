@@ -55,10 +55,6 @@ module Aji
       mentions.order("published_at DESC").limit(n)
     end
 
-    def latest_mentioners limit=50
-      latest_mentions(limit).map(&:author)
-    end
-
     def mark_spam
       Aji.redis.sadd "spammy_videos", id
       blacklist
