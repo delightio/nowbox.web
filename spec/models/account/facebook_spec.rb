@@ -63,6 +63,10 @@ module Aji
         expect { subject.update_from_auth_info auth_info }.to(
           change{subject.info}.to(auth_info['extra']['user_hash']))
       end
+
+      it "returns the account" do
+        subject.update_from_auth_info(auth_info).should == subject
+      end
     end
 
     describe "#create_stream_channel" do
