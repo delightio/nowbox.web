@@ -60,10 +60,6 @@ module Aji
       end
     end
 
-    def spamming_video? video
-      mentions.latest.select{ |m| m.has_video? video }.count > SPAM_THRESHOLD
-    end
-
     def refresh_influencers
       # TODO: This method is very Java. We should find a Better Way (tm)
       # We get users from twitter 100 at a time, so we crawl over their API
@@ -93,6 +89,10 @@ module Aji
       Aji.redis.sadd "spammers", id
       mentions.each { |m| m.mark_spam }
       blacklist
+    end
+
+    def spamming_video? video
+      mentions.latest.select{ |m| m.has_video? video }.count > SPAM_THRESHOLD
     end
 
     def authorized?
