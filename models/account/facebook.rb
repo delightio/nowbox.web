@@ -59,8 +59,8 @@ module Aji
 
     def update_from_auth_info auth_hash
       self.credentials = auth_hash['credentials']
-      self.username = auth_hash['user_hash']['username']
-      self.info = auth_hash['user_hash']
+      self.username = auth_hash['extra']['user_hash']['username']
+      self.info = auth_hash['extra']['user_hash']
       save
     end
 

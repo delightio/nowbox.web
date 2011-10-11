@@ -111,7 +111,7 @@ module Aji
       let(:auth_info) do
         {
           'credentials' => { 'token' => 'sometoken', 'secret' => 'somesecret'},
-          'user_hash' => {'screen_name' => 'somescreenname'}
+          'extra' => { 'user_hash' => {'screen_name' => 'somescreenname'} }
         }
       end
 
@@ -122,12 +122,13 @@ module Aji
 
       it "updates the username" do
         expect { subject.update_from_auth_info auth_info }.to(
-          change{subject.username}.to(auth_info['user_hash']['screen_name']))
+          change{subject.username}.to(
+            auth_info['extra']['user_hash']['screen_name']))
       end
 
       it "updates the stored info hash" do
         expect { subject.update_from_auth_info auth_info }.to(
-          change{subject.info}.to(auth_info['user_hash']))
+          change{subject.info}.to(auth_info['extra']['user_hash']))
       end
     end
 
