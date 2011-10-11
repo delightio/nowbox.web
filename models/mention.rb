@@ -40,7 +40,7 @@ module Aji
 
     # Note: Client is responsible for dealing w/ spam mentions
     def spam?
-      author.spammer? or videos.any?{ |v| author.spamming_video? v }
+      author.marked_spammer? or videos.any?{ |v| author.spamming_video? v }
     end
 
     def marked_spam?

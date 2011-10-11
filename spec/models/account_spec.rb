@@ -21,7 +21,7 @@ module Aji
       end
     end
 
-    describe "#spammer?" do
+    describe "#marked_spammer?" do
       specify "true if account id is in the set of spammers" do
         Aji.redis.should_receive(:sismember).with("spammers", subject.id).
           and_return(true)
