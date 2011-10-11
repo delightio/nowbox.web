@@ -3,24 +3,32 @@ module Aji
     class RefreshAllChannels
       extend WithDatabaseConnection
       @queue = :refresh_channel
-      def self.queue; @queue; end # to check queue depth
 
       def self.perform
         unless RefreshAllChannels.automatically?
           Aji.log "Automatic channel population is off."
           return
         end
-        if Resque.size(@queue) > Channel.count/2
+        if RefreshAllChannels.backlogging?
           Aji.log "Skip RefreshAllChannels since #{Resque.size(@queue)} channels are still refreshing."
           return
         end
-        Channel.all.each { |ch| Resque.enqueue RefreshChannel, ch.id }
+        # TODO: We would need a different strategy for refreshing all channels.
+        [ Channel::Account, Channel::Keyword,
+          Channel::FacebookStream, Channel::TwitterStream].each do |ch_class|
+            ch_class.all.each { |ch| Resque.enqueue RefreshChannel, ch.id }
+        end
       end
 
       def self.automatically?
         flag = Aji.conf['PAUSE_AUTOMATIC_CHANNEL_POPULATION']
         flag.nil? || flag.to_s!='true'
       end
+
+      def self.backlogging?
+        Resque.size(@queue) > Channel.count/2
+      end
+
     end
   end
 end
