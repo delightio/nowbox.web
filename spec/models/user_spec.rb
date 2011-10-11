@@ -80,33 +80,64 @@ module Aji
         event = Factory :channel_event, :action => :subscribe
         event.user.subscribed_channels.should include event.channel
       end
-      describe "#subscribe" do
-        it "ignores already subscribed channels" do
-          user = Factory :user
-          channel = Factory :channel
-          event = Factory :channel_event, :action => :subscribe,
-            :channel => channel, :user => user
-          user.subscribed_channels.should include channel
-          expect { Factory :channel_event,
-            :action => :subscribe,
-            :channel => channel,
-            :user => user }.to_not change { user.subscribed_channels.count }
-        end
-      end
-
-      it "unsubscribes subscribed channel" do
-        event = Factory :channel_event, :action => :subscribe
-        event.user.subscribed_channels.should include event.channel
-        event = Factory :channel_event, :action => :unsubscribe
-        event.user.subscribed_channels.should_not include event.channel
-      end
 
       it "does not require video object when sending channel actions" do
         event = Factory :channel_event
         event.video.should be_nil
         event.id.should_not be_nil
       end
+    end
 
+    describe "#subscribe" do
+      it "ignores already subscribed channels" do
+        user = Factory :user
+        channel = Factory :channel
+        event = Factory :channel_event, :action => :subscribe,
+          :channel => channel, :user => user
+        user.subscribed_channels.should include channel
+        expect { Factory :channel_event,
+          :action => :subscribe,
+          :channel => channel,
+          :user => user }.to_not change { user.subscribed_channels.count }
+      end
+    end
+
+    describe "#unsubscribe" do
+      it "unsubscribes subscribed channel" do
+        event = Factory :channel_event, :action => :subscribe
+        event.user.subscribed_channels.should include event.channel
+        event = Factory :channel_event, :action => :unsubscribe
+        event.user.subscribed_channels.should_not include event.channel
+      end
+    end
+
+    describe "#user_channels" do
+      it "returns all user channels" do
+        pending "Current name conflict with method"
+      end
+    end
+
+    describe "#social_channels" do
+      it "delegates to the identity's #social_channels" do
+        subject.stub(:identity => mock("identity"))
+        subject.identity.should_receive(:social_channels)
+
+        subject.social_channels
+      end
+    end
+
+    describe "#display_channels" do
+      let(:user_channels) { [ mock("fav channel"), mock("queue_channel") ] }
+      let(:subscribed_channels) { [ mock("hilarious channel") ] }
+      let(:social_channels) { [ mock("fb channel"), mock("twitter channel") ] }
+
+      it "returns an array of of all displayable channels" do
+        subject.stub(:user_channels).and_return(user_channels)
+        subject.stub(:subscribed_channels).and_return(subscribed_channels)
+        subject.stub(:social_channels).and_return(social_channels)
+        subject.display_channels.should == user_channels + social_channels +
+          subscribed_channels
+      end
     end
 
     describe "#serializable_hash" do
@@ -165,11 +196,18 @@ module Aji
       it "combines history, favorites, and queues of the two users" do
         subject.history_channel.should_receive(
           :merge!).with(other_user.history_channel)
-        subject.favorite_channel.should_receive(
-          :merge!).with(other_user.favorite_channel)
-        subject.queue_channel.should_receive(
-          :merge!).with(other_user.queue_channel)
+          subject.favorite_channel.should_receive(
+            :merge!).with(other_user.favorite_channel)
+            subject.queue_channel.should_receive(
+              :merge!).with(other_user.queue_channel)
+              subject.merge! other_user
+
+      end
+
+      it "keeps the identity of the local (implicit) user" do
+        primary_identity = subject.identity
         subject.merge! other_user
+        subject.identity.should == primary_identity
       end
 
       describe "updating user information" do
@@ -179,10 +217,10 @@ module Aji
           other_user.name = "Joe"
           other_user.email = "joe@example.com"
 
-          subject.merge! other_user
-          subject.name.should == other_user.name
-          subject.email.should == other_user.email
-        end
+        subject.merge! other_user
+        subject.name.should == other_user.name
+        subject.email.should == other_user.email
+      end
 
         it "doesn't change info if the new user's is empty" do
           subject.name = "Joe"
@@ -213,13 +251,6 @@ module Aji
           subject.name.should == "Tarzan"
           subject.email.should == "tarzan@apes.gov"
         end
-      end
-
-
-      it "keeps the identity of the local (implicit) user" do
-          primary_identity = subject.identity
-          subject.merge! other_user
-          subject.identity.should == primary_identity
       end
     end
   end

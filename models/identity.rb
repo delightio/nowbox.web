@@ -20,6 +20,10 @@ module Aji
       end
     end
 
+    def social_channels
+      accounts.map{ |a| a.stream_channel }.compact
+    end
+
     def facebook_account
       accounts.where(:type => 'Aji::Account::Facebook').first
     end

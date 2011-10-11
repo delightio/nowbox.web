@@ -2,7 +2,6 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
   describe Aji::Identity, :unit => true do
-
     describe "#merge!" do
       subject do
         Identity.new.tap do |i|
@@ -77,8 +76,8 @@ module Aji
           identity_with_twitter.social_channel_ids.should == {
             'twitter_channel_id' => 1 }
 
-          identity_with_facebook.social_channel_ids.should == {
-            'facebook_channel_id' => 1 }
+            identity_with_facebook.social_channel_ids.should == {
+              'facebook_channel_id' => 1 }
         end
       end
 
@@ -92,13 +91,32 @@ module Aji
       end
     end
 
+    describe "#social_channels" do
+      context "with no accounts" do
+        it "returns an empty array" do
+          subject.social_channels.should be_empty
+        end
+      end
+
+      context "with accounts" do
+        it "returns a single element array" do
+          subject.stub(:accounts => [
+           mock("twitter", :stream_channel => stub),
+           mock("facebook", :stream_channel => stub)
+          ])
+
+          subject.social_channels.should have(2).channels
+        end
+      end
+    end
+
     describe "#facebook_account" do
       it "gets the identity's facebook account from accounts list" do
         subject.accounts.should_receive(:where).with(
           :type => 'Aji::Account::Facebook').and_return(
           (accounts = stub).should_receive(:first) && accounts)
 
-        subject.facebook_account
+          subject.facebook_account
       end
     end
 
@@ -108,7 +126,7 @@ module Aji
           :type => 'Aji::Account::Twitter').and_return(
           (accounts = stub).should_receive(:first) && accounts)
 
-        subject.twitter_account
+          subject.twitter_account
       end
     end
   end
