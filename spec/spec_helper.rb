@@ -13,11 +13,12 @@ Spork.prefork do
 
   require './aji'
 
-  #VCR.config do |c|
-  #  c.cassette_library_dir = "spec/cassettes"
-  #  c.stub_with :typhoeus
-  #  c.default_cassette_options = { :record => :all }
-  #end
+  VCR.config do |c|
+    c.cassette_library_dir = "spec/cassettes"
+    c.stub_with :typhoeus
+    c.default_cassette_options = { :record => :new_episodes }
+    c.allow_http_connections_when_no_cassette = true
+  end
 
   module TestMixin
     include Rack::Test::Methods

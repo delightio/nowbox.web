@@ -7,14 +7,6 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
   describe Aji::TwitterAPI, :unit, :net do
-    before :all do
-      VCR.config do |c|
-        c.cassette_library_dir = "spec/cassettes"
-        c.stub_with :typhoeus
-        c.default_cassette_options = { :record => :new_episodes }
-      end
-    end
-
     subject do
       TwitterAPI.new "178492493-AmMNGcEjYmK7OuCL7jNlPVv85yHGNmVmVMfJhTtN",
         "DwRJZLB8UYAovc7L9fqavHvRPDNoFoX0IPM3V34z0", "RWUyehmqjKRBMSlVTeZDw",

@@ -2,14 +2,6 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
   describe FacebookAPI, :unit, :net do
-    before :all do
-      VCR.config do |c|
-        c.cassette_library_dir = "spec/cassettes"
-        c.stub_with :typhoeus
-        c.default_cassette_options = { :record => :new_episodes }
-      end
-    end
-
     subject do
       FacebookAPI.new "AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD"
     end
