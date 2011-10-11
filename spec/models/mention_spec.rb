@@ -2,7 +2,7 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
   describe Aji::Mention, :unit do
-    let(:author) { stub :spamming_video? => false, :marked_spammer? => false}
+    let(:author) { stub :spamming_video? => false, :spammer? => false}
     let(:video) { mock "video" }
 
     subject do
@@ -57,7 +57,7 @@ module Aji
       end
 
       specify "true when mention is from a spammer author" do
-        author.stub(:marked_spammer?).and_return true
+        author.stub(:spammer?).and_return true
         subject.should be_spam
       end
     end

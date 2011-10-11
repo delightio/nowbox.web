@@ -34,14 +34,6 @@ module Aji
       end
     end
 
-    describe "#marked_spammer?" do
-      it "is true after mark_spammer" do
-        expect { subject.mark_spammer }.
-          to change { subject.marked_spammer? }.
-          from(false).to(true)
-      end
-    end
-
     describe "#mark_spammer" do
       it "marks own mentions as spam and destroys them" do
         mentions.each {|m| m.should_receive :mark_spam }

@@ -21,6 +21,22 @@ module Aji
       end
     end
 
+    describe "#spammer?" do
+      specify "true if account id is in the set of spammers" do
+        Aji.redis.should_receive(:sismember).with("spammers", subject.id).
+          and_return(true)
+
+        subject.should be_spammer
+      end
+
+      specify "false otherwise" do
+        Aji.redis.should_receive(:sismember).with("spammers", subject.id).
+          and_return(false)
+
+        subject.should_not be_spammer
+      end
+    end
+
     describe "#blacklisted_videos" do
       it "returns the previously blacklisted videos" do
         pending "#blacklisted_videos is an AR call but we should test it."

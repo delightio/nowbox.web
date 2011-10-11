@@ -72,6 +72,10 @@ module Aji
       influencer_set.map { |id| Account.find_by_id id }
     end
 
+    def spammer?
+      Aji.redis.sismember "spammers", id
+    end
+
     def serializable_hash
       Hash[ "id" => id,
             "provider" => type.split('::').last.downcase,
