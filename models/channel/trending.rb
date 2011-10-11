@@ -45,6 +45,7 @@ module Aji
         next if video.blacklisted?
         in_flight << { :video_id => video_id,
                        :relevance => video.relevance(at_time_i) }
+        Aji.log "  Processed #{in_flight.count} videos in #{Time.now-start} s." if in_flight.count % 100 == 0
       end
       Aji.log "Collected #{in_flight.count} recent videos in #{Time.now-start} s."
 
