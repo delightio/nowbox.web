@@ -40,7 +40,11 @@ module Aji
 
     # Note: Client is responsible for dealing w/ spam mentions
     def spam?
-      author.blacklisted? or videos.any?{ |v| author.spamming_video? v }
+      author.marked_spammer? or videos.any?{ |v| author.spamming_video? v }
+    end
+
+    def marked_spam?
+      Aji.redis.sismember "spammy_mentions", id
     end
 
     def mark_spam
@@ -49,7 +53,10 @@ module Aji
 
     # age from give time in seconds
     def age from_time_i
-      return Float::NAN if spam?
+      # Every mention creation would have gone thru spam deteciton.
+      # So we can just check for result and do not need to run detection again.
+      return Float::NAN if marked_spam?
+
       diff = from_time_i - published_at.to_i
       diff = 0 if diff < 0
       diff

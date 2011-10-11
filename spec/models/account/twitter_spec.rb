@@ -34,14 +34,27 @@ module Aji
       end
     end
 
+    describe "#marked_spammer?" do
+      it "is true after mark_spammer" do
+        expect { subject.mark_spammer }.
+          to change { subject.marked_spammer? }.
+          from(false).to(true)
+      end
+    end
+
     describe "#mark_spammer" do
       it "marks own mentions as spam and destroys them" do
-        mentions.should_receive :each
+        mentions.each {|m| m.should_receive :mark_spam }
         subject.mark_spammer
       end
 
       it "blacklists itself" do
         subject.should_receive :blacklist
+        subject.mark_spammer
+      end
+
+      it "adds itself to a redis set of spammers" do
+        Aji.redis.should_receive(:sadd).with("spammers", subject.id)
         subject.mark_spammer
       end
     end

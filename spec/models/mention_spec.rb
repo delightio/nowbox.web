@@ -2,7 +2,7 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
   describe Aji::Mention, :unit do
-    let(:author) { stub :spamming_video? => false, :blacklisted? => false }
+    let(:author) { stub :spamming_video? => false, :marked_spammer? => false}
     let(:video) { mock "video" }
 
     subject do
@@ -47,7 +47,7 @@ module Aji
     end
 
     describe "#spam?" do
-      specify "false when non-blacklisted author mentions video once" do
+      specify "false when non-spammer author mentions video once" do
         subject.should_not be_spam
       end
 
@@ -56,9 +56,17 @@ module Aji
         subject.should be_spam
       end
 
-      specify "true when mention is from a blacklisted author" do
-        author.stub(:blacklisted?).and_return true
+      specify "true when mention is from a spammer author" do
+        author.stub(:marked_spammer?).and_return true
         subject.should be_spam
+      end
+    end
+
+    describe "#marked_spam?" do
+      it "is true after mark_spam" do
+        expect { subject.mark_spam }.
+          to change { subject.marked_spam? }.
+          from(false).to(true)
       end
     end
 
@@ -83,7 +91,7 @@ module Aji
       end
 
       it "returns not a number if mention is spam" do
-        subject.stub(:spam?).and_return(true)
+        subject.stub(:marked_spam?).and_return(true)
         subject.age(Time.now.to_i).should_not be_integer
       end
     end

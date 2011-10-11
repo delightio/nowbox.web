@@ -85,6 +85,10 @@ module Aji
       end
     end
 
+    def marked_spammer?
+      Aji.redis.sismember "spammers", id
+    end
+
     def mark_spammer
       Aji.redis.sadd "spammers", id
       mentions.each { |m| m.mark_spam }
