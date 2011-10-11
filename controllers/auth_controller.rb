@@ -63,44 +63,33 @@ module Aji
         user.nil?
       auth_hash = request.env['omniauth.auth']
 
-      case params['provider']
-      when 'twitter'
-        t = Account::Twitter.find_by_uid auth_hash['uid']
-        unless t.nil?
-          t.update_attributes(
-            :identity => user.identity,
-            :credentials => auth_hash['credentials'],
-            :username => auth_hash['extra']['user_hash']['screen_name'],
-            :info => auth_hash['extra']['user_hash'])
-        else
-          t ||= Account::Twitter.create(
-            :identity => user.identity,
-            :credentials => auth_hash['credentials'],
-            :username => auth_hash['extra']['user_hash']['screen_name'],
-            :uid => auth_hash['uid'],
-            :info => auth_hash['extra']['user_hash'])
-        end
-        t.create_stream_channel.background_refresh_content
+      provider_class = case params['provider']
+                       when 'twitter' then Account::Twitter
+                       when 'facebook' then Account::Facebook
+                       end
+      if provider_class.nil?
+        return MultiJson.encode(
+          :error => "Unsuported_provider #{params['provider']}")
+      end
 
-      when 'facebook'
-        fb = Account::Facebook.find_by_uid auth_hash['uid']
-        unless fb.nil?
-          fb.update_attributes(
-          :identity => user.identity,
-          :credentials => auth_hash['credentials'],
-          :username => auth_hash['nickname'],
-          :info => auth_hash['extra'])
-        else
-          fb ||= Account::Facebook.create(
-          :identity => user.identity,
-          :credentials => auth_hash['credentials'],
-          :username => auth_hash['extra']['user_hash']['username'],
-          :uid => auth_hash['uid'],
-          :info => auth_hash['extra']['user_hash'])
+
+      account = provider_class.find_by_uid auth_hash['uid']
+
+      unless account.nil?
+        if account.identity != user.identity
+          account.identity.merge! user.identity
+          user = account.identity.user
         end
-        fb.create_stream_channel.background_refresh_content
+
+        account.update_from_auth_info auth_hash
       else
-        "Unsupported provider #{auth_hash['provider']}"
+        provider_class.create(
+          :identity => user.identity,
+          :uid => @auth_hash['uid'],
+          :credentials => @auth_hash['credentials'],
+          :user_name => @auth_hash['nickname'],
+          :info => @auth_hash['user_hash']
+        )
       end
 
       MultiJson.encode user.serializable_hash
