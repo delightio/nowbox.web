@@ -38,16 +38,13 @@ module Aji
       # - `query`:  comma separated list of search terms. Server returns all
       #   channels regardless of type.  
       get do
-        channels = []
         if params[:query]
-          channels = Searcher.new(params[:query]).results
+          Searcher.new(params[:query]).results
+        elsif (user = User.find_by_id params[:user_id])
+          user.display_channels
         else
-          user = User.find_by_id params[:user_id]
-          channels = if user then
-                        user.user_channels + user.subscribed_channels else
-                        Channel::Account.all.sample(10) end
+          Channel::Account.all.sample(10)
         end
-        channels
       end
 
       # ## GET channels/:channel_id/videos
