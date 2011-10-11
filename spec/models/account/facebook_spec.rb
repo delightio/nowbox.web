@@ -34,7 +34,8 @@ module Aji
       end
 
       specify "false otherwise" do
-        subject.stub_chain(:mentions, :latest).and_return([stub(:has_video? => false)])
+        subject.stub_chain(:mentions, :latest).and_return(
+          [stub(:has_video? => false)])
         subject.spamming_video?(mock("video")).should be_false
       end
     end
@@ -43,7 +44,7 @@ module Aji
       let(:auth_info) do
         {
           'credentials' => { 'token' => 'somesecrettoken' },
-          'user_hash' => {'username' => 'somescreenname'}
+          'extra' => { 'user_hash' => {'username' => 'somescreenname'} }
         }
       end
 
@@ -54,12 +55,13 @@ module Aji
 
       it "updates the username" do
         expect { subject.update_from_auth_info auth_info }.to(
-          change{subject.username}.to(auth_info['user_hash']['username']))
+          change{subject.username}.to(
+            auth_info['extra']['user_hash']['username']))
       end
 
       it "updates the stored info hash" do
         expect { subject.update_from_auth_info auth_info }.to(
-          change{subject.info}.to(auth_info['user_hash']))
+          change{subject.info}.to(auth_info['extra']['user_hash']))
       end
     end
 
