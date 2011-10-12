@@ -62,37 +62,29 @@ module Aji
       return { :error => "User[#{params[:user_id]}] does not exist." } if
         user.nil?
       auth_hash = request.env['omniauth.auth']
-
-      provider_class = case params['provider']
+      provider_class = case @auth_hash['provider']
                        when 'twitter' then Account::Twitter
                        when 'facebook' then Account::Facebook
                        end
-      if provider_class.nil?
-        return MultiJson.encode(
-          :error => "Unsuported_provider #{params['provider']}")
-      end
 
+      auth = Authorization.new account, user.identity
 
-      account = provider_class.find_by_uid auth_hash['uid']
-
-      unless account.nil?
-        if account.identity != user.identity
-          account.identity.merge! user.identity
-          user = account.identity.user
-        end
-
-        account.update_from_auth_info auth_hash
+      if auth.grant!
+        MultiJson.encode auth.user.serializable_hash
       else
-        provider_class.create(
-          :identity => user.identity,
-          :uid => @auth_hash['uid'],
-          :credentials => @auth_hash['credentials'],
-          :user_name => @auth_hash['nickname'],
-          :info => @auth_hash['user_hash']
-        )
+        MultiJson.encode :error => "Unable to authenticate"
       end
+    end
 
-      MultiJson.encode user.serializable_hash
+    get '/:provider/deauthorize' do
+      account = Account.find_by_uid_and_provider params[:uid], params[:provider]
+
+      auth = Authorization.new account, account.identity
+
+      auth.deauthorize!
+
+      MultiJson.encode auth.user.serializable_hash
+
     end
   end
 end
