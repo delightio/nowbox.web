@@ -14,7 +14,19 @@ module Aji
       end
     end
 
-    it_behaves_like "any redis object model"
+    it_behaves_like "any redis object model" do
+      subject do
+        User.new.tap do |u|
+          u.stub(:id => 1)
+          u.subscribed_list << 1
+          u.name = "George"
+          u.email = "george@thejungle.com"
+          u.stub(:history_channel).as_null_object
+          u.stub(:favorite_channel).as_null_object
+          u.stub(:queue_channel).as_null_object
+        end
+      end
+    end
 
     describe "#create_user_channels" do
       it "creates user channels" do
