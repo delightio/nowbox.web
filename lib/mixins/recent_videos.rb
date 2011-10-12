@@ -29,6 +29,19 @@ module Aji
         recent_zset.delete video.id
       end
 
+      def recent_relevance_of video
+        recent_zset.score video.id
+      end
+
+      def adjust_relevance_in_all_recent_videos amount, remove_negative=false
+        recent_video_ids.each do |vid|
+          Aji.redis.zincrby recent_zset.key, amount, vid
+        end
+        if remove_negative
+          Aji.redis.zremrangebyscore recent_zset.key, "-inf", 0
+        end
+      end
+
     end
   end
 end

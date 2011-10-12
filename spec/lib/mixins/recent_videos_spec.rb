@@ -8,14 +8,16 @@ describe Aji::Mixins::RecentVideos do
     @videos = []
     5.times {|n| @videos << (mock("video", :id=>n))}
     @video = @videos.sample
+    @videos.each do |v|
+      Aji::Video.stub(:find_by_id).with(v.id).
+        and_return(v)
+    end
   end
 
   context "when asking for recent videos" do
     before(:each) do
       @limit = @videos.count/2
       @videos.each do |v|
-        Aji::Video.stub(:find_by_id).with(v.id).
-          and_return(v)
         subject.push_recent v
       end
     end
@@ -51,7 +53,7 @@ describe Aji::Mixins::RecentVideos do
       Aji.stub(:conf).and_return({'MAX_RECENT_VIDEO_IDS_IN_TRENDING'=>n})
       (n*2).times {|k| subject.push_recent(@videos[k])}
       subject.recent_video_ids.count.should == n
-    end    
+    end
   end
 
   describe "#pop_recent" do
@@ -66,5 +68,39 @@ describe Aji::Mixins::RecentVideos do
       expect { subject.pop_recent @video }.to
         change { subject.recent_video_ids.include? @video.id }.to(false)
     end
+  end
+
+  describe "#recent_relevance_of" do
+    let(:video) { mock("video", :id=>100) }
+    let(:relevance) { 23232 }
+
+    it "returns relevance previously set" do
+      subject.push_recent video, relevance
+      subject.recent_relevance_of(video).should == relevance
+    end
+  end
+
+  describe "#adjust_all_scores_in_recent_videos" do
+    let(:amount) { -10 }
+    before (:each) do
+      @videos.each { |v| subject.push_recent v, v.id*100 }
+    end
+
+    it "adjusts all scores by given amount" do
+      before_adj = subject.recent_videos.map{ |v| subject.recent_relevance_of v }
+      subject.adjust_relevance_in_all_recent_videos amount
+      after_adj = subject.recent_videos.map{ |v| subject.recent_relevance_of v }
+
+      before_adj.each_index do |i|
+        (after_adj[i]-before_adj[i]).should == amount
+      end
+    end
+
+    it "removes videos with negative relevance after adjustment" do
+      subject.push_recent @video, -1*amount
+      subject.adjust_relevance_in_all_recent_videos amount, true
+      subject.recent_video_ids.should_not include @video.id
+    end
+
   end
 end
