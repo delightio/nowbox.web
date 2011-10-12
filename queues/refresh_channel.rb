@@ -9,8 +9,9 @@ module Aji
 
       def self.perform channel_id
         start = Time.now
-        Channel.find(channel_id).refresh_content
-        Aji.log :INFO, "Channel[#{channel_id}]#refresh_content took #{Time.now-start} s."
+        channel = Channel.find channel_id
+        channel.refresh_content
+        Aji.log :INFO, "#{channel.class}[#{channel_id}]#refresh_content took #{Time.now-start} s."
       end
     end
   end
