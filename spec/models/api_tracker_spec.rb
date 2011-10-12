@@ -6,7 +6,10 @@ module Aji
     let(:hits_per_session) { 10 }
     let(:key_name) { "api_tracker:spec" }
     let(:redis) { Aji.redis }
-    subject { APITracker.new "spec", hits_per_session, cooldown, redis }
+    subject do
+      APITracker.new "spec", redis, cooldown: cooldown,
+      hits_per_session: hits_per_session
+    end
 
     describe "#hit" do
       it "increases the hit count" do
