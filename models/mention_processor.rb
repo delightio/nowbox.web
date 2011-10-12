@@ -43,7 +43,9 @@ module Aji
 
       unless failed?
         @mention.videos.each do |v|
-          @destination.push_recent v, @mention.published_at.to_i if @destination
+          if @destination.respond_to? :promote_video
+            @destination.promote_video v, @mention
+          end
         end
       end
     end

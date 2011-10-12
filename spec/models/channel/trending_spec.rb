@@ -88,4 +88,14 @@ describe Aji::Channel::Trending do
     end
   end
 
+  describe "#promote_video" do
+    let(:video) { mock "video", :id=>1 }
+    let(:trigger) { mock "trigger", :significance => 1000 }
+    it "increment the relevance (in recent_zset) of given video" do
+      subject.should_receive(:adjust_relevance_of_recent_video).
+        with(video, trigger.significance)
+      subject.promote_video(video, trigger)
+    end
+  end
+
 end

@@ -33,6 +33,10 @@ module Aji
         recent_zset.score video.id
       end
 
+      def adjust_relevance_of_recent_video video, significance
+        Aji.redis.zincrby recent_zset.key, significance, video.id
+      end
+
       def adjust_relevance_in_all_recent_videos amount, remove_negative=false
         recent_video_ids.each do |vid|
           Aji.redis.zincrby recent_zset.key, amount, vid

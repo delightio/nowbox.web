@@ -80,6 +80,17 @@ describe Aji::Mixins::RecentVideos do
     end
   end
 
+  describe "#adjust_relevance_of_recent_video" do
+    let(:video) { mock "video", :id=>100 }
+    let(:significance) { 545234 }
+
+    it "increment the relevance of the given video by the given relevnace" do
+      Aji.redis.should_receive(:zincrby).
+        with(subject.recent_zset.key, significance, video.id)
+      subject.adjust_relevance_of_recent_video video, significance
+    end
+  end
+
   describe "#adjust_all_scores_in_recent_videos" do
     let(:amount) { -10 }
     before (:each) do

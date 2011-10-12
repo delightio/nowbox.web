@@ -25,6 +25,10 @@ module Aji
       end
     end
 
+    def promote_video video, trigger
+      adjust_relevance_of_recent_video video, trigger.significance
+    end
+
     def thumbnail_uri
       "http://#{Aji.conf['TLD']}/images/icons/nowpopular.png"
     end

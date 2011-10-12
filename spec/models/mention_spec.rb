@@ -77,6 +77,12 @@ module Aji
       end
     end
 
+    describe "#significance" do
+      it "is defined" do
+        subject.significance.should == 10000
+      end
+    end
+
     describe "#age" do
       it "returns 0 if an older time is passed in" do
         subject.age((subject.published_at - 10.seconds).to_i).should == 0

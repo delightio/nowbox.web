@@ -21,8 +21,10 @@ module Aji
 
       subject { MentionProcessor.new mention, destination }
 
-      it "places all videos in their destination" do
-        destination.should_receive(:push_recent).exactly(link_count).times
+      it "promotes videos mentioned" do
+        destination.should_receive(:promote_video).
+          with(video, mention).
+          exactly(link_count).times
         subject.perform
       end
 
