@@ -7,6 +7,8 @@ module Aji
 
     # If there's an OAuth Failure log it and return an error message.
     get '/failure' do
+      content_type :json
+
       env_hash = request.env.dup
       Aji.log :WARN, "OAuth failure: #{env_hash.inspect}"
       error "OAuth authentication failed", 500
@@ -58,41 +60,56 @@ module Aji
     # to `http://api.nowbox.com/auth/failure`.*
     #
     get '/:provider/callback' do
+      content_type :json
+
       user = Aji::User.find_by_id params[:user_id]
       return { :error => "User[#{params[:user_id]}] does not exist." } if
         user.nil?
       auth_hash = request.env['omniauth.auth']
-
-      provider_class = case params['provider']
+      provider_class = case auth_hash['provider']
                        when 'twitter' then Account::Twitter
                        when 'facebook' then Account::Facebook
                        end
-      if provider_class.nil?
-        return MultiJson.encode(
-          :error => "Unsuported_provider #{params['provider']}")
-      end
 
-
-      account = provider_class.find_by_uid auth_hash['uid']
-
-      unless account.nil?
-        if account.identity != user.identity
-          account.identity.merge! user.identity
-          user = account.identity.user
-        end
-
+      if (account = provider_class.find_by_uid auth_hash['uid'])
         account.update_from_auth_info auth_hash
       else
-        provider_class.create(
+        account = provider_class.create(
           :identity => user.identity,
-          :uid => @auth_hash['uid'],
-          :credentials => @auth_hash['credentials'],
-          :user_name => @auth_hash['nickname'],
-          :info => @auth_hash['user_hash']
+          :credentials => auth_hash['credentials'],
+          :uid => auth_hash['uid'],
+          :username => auth_hash['nickname'],
+          :info => auth_hash['extra']['user_hash']
         )
       end
 
-      MultiJson.encode user.serializable_hash
+      account.create_stream_channel
+
+      auth = Authorization.new account, user.identity
+
+      if auth.grant!
+        MultiJson.encode auth.user.serializable_hash
+      else
+        MultiJson.encode :error => "Unable to authenticate"
+      end
+    end
+
+    get '/:provider/deauthorize' do
+      content_type :json
+
+      account = Account.find_by_uid_and_provider params[:uid], params[:provider]
+
+      if account.nil?
+        return MultiJson.encode(:error => "No #{params[:provider]} account " +
+          "with uid:#{params[:uid]} known")
+      end
+
+      auth = Authorization.new account, account.identity
+
+      auth.deauthorize!
+
+      MultiJson.encode auth.user.serializable_hash
+
     end
   end
 end

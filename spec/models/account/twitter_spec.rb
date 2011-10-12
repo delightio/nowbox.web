@@ -134,15 +134,34 @@ module Aji
         expect { subject.update_from_auth_info auth_info }.to(
           change{subject.info}.to(auth_info['extra']['user_hash']))
       end
+
+      it "returns the account" do
+        subject.update_from_auth_info(auth_info).should == subject
+      end
     end
 
     describe "#create_stream_channel" do
+      let!(:stream_channel) do
+        Channel::TwitterStream.new(:owner => subject,
+          :title => "Twitter Stream").tap do |c|
+            c.stub :id => 1
+            c.stub :save => true
+            c.stub :refresh_content
+            Channel::TwitterStream.should_receive(:create).with(
+              :owner => subject, :title => "Twitter Stream").and_return(c)
+          end
+      end
+
       it "creates a channel for the account's twitter stream" do
-        Channel::TwitterStream.should_receive(:create).with(:owner => subject,
-          :title => "Twitter Stream").and_return(
-          Channel::TwitterStream.new(:owner => subject,
-            :title => "Twitter Stream"))
         subject.stub(:save => true)
+
+        subject.create_stream_channel
+      end
+
+      it "refreshes the channel's content" do
+        subject.stub(:save => true)
+        stream_channel.should_receive(:refresh_content)
+
         subject.create_stream_channel
       end
     end
