@@ -9,6 +9,8 @@ module Aji
       other.accounts.each do |a|
         accounts << a unless accounts.include? a
       end
+
+      other.destroy
     end
 
     def social_channel_ids

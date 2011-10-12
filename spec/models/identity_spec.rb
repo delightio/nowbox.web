@@ -14,6 +14,7 @@ module Aji
         Identity.new.tap do |i|
           i.stub :accounts => [mock("other account")]
           i.stub :user => mock("other user")
+          i.stub :destroy => i
         end
       end
 
@@ -33,6 +34,12 @@ module Aji
         subject.accounts << (existing_account = mock("existing account"))
         subject.merge! other_identity
         subject.accounts.should include existing_account
+      end
+
+      it "destroys the merged in identity when complete" do
+        other_identity.should_receive(:destroy)
+
+        subject.merge! other_identity
       end
     end
 
