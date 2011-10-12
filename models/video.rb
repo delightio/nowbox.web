@@ -28,17 +28,19 @@ module Aji
     belongs_to :category
 
     def populate
-      updated_info = api.video_info external_id
-      self.author = updated_info.fetch :author
-      self.category = updated_info.fetch :category
-      updated_info.each do |attribute, value|
-        self[attribute] = value if self.has_attribute? attribute
+      unless populated?
+        updated_info = api.video_info external_id
+        self.author = updated_info.fetch :author
+        self.category = updated_info.fetch :category
+        updated_info.each do |attribute, value|
+          self[attribute] = value if self.has_attribute? attribute
+        end
+        self.populated_at = Time.now
       end
     rescue Aji::VideoAPI::Error
       failed
       blacklist if failures >= MAX_FAILED_ATTEMPTS
     else
-      populated_at = Time.now
       save and if block_given? then yield self end
     end
 
