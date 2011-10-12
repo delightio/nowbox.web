@@ -47,6 +47,7 @@ module Aji
         "title" => title,
         "description" => "",
         "thumbnail_uri" => thumbnail_uri,
+        "subscriber_count" => subscriber_count,
         "video_count" => content_video_id_count,
         # TODO: Shouldn't just catch the first version since we may change
         # this method in a version bump.
@@ -60,6 +61,10 @@ module Aji
         )
       end
       h
+    end
+
+    def subscriber_count
+      0
     end
 
     # TODO: Refactor to take a list of video ids and a limit parameter instead

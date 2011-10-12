@@ -34,6 +34,10 @@ module Aji
       info['description'] || ""
     end
 
+    def subscriber_count
+      info['followers_count'] || 0
+    end
+
     def refresh_content force=false
       super force do |new_videos|
         api.video_mentions_i_post.each do |m|

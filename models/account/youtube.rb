@@ -24,6 +24,10 @@ module Aji
       info.fetch('first_name', '') + info.fetch('last_name', '')
     end
 
+    def subscriber_count
+      info['subscriber_count'] || 0
+    end
+
     def refresh_content force = false
       super force do |new_videos|
         videos_hash = []

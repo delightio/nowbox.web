@@ -32,6 +32,10 @@ shared_examples_for "any account" do
       subject.should respond_to :profile_uri
     end
 
+    it "has a subscriber_count" do
+      subject.should respond_to :subscriber_count
+    end
+
     # TODO This should go into content holder example
     describe "#refresh_content" do
       xit "only inserts new videos" do

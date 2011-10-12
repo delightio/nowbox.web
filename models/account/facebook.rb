@@ -45,6 +45,10 @@ module Aji
       info["name"]
     end
 
+    def subscriber_count
+      0 # TODO: don't we get number of friends back?
+    end
+
     def authorized?
       credentials.key? 'token'
     end

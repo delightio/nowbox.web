@@ -30,6 +30,11 @@ module Aji
       (content_zset.revrange 0, (limit-1)).map(&:to_i)
     end
 
+    def subscriber_count
+      subscriber_counts = accounts.map &:subscriber_count
+      subscriber_counts.max
+    end
+
     def thumbnail_uri
       return "http://#{Aji.conf['TLD']}/images/icons/#{title.downcase}.png" if default_listing
       accounts.first.thumbnail_uri

@@ -28,6 +28,15 @@ module Aji
       end
     end
 
+    describe "#subscriber_count" do
+      it "returns the max number of subscribers among all the accounts" do
+        subject.accounts.each_with_index do |a,i|
+          a.stub(:subscriber_count).and_return(i*1000)
+        end
+        subject.subscriber_count.should == (subject.accounts.count-1)*1000
+      end
+    end
+
     it "should set title based on accounts" do
       subject.title.should == "freddiew, brentalfloss"
     end
@@ -148,7 +157,7 @@ module Aji
         expect {subject.update_relevance_in_categories [video] }.
           to_not change { subject.categories.count }
 
-        # 1 video in different category. 
+        # 1 video in different category.
         # top category is still category1 since it was from 2 videos
         category2 = Factory :category
         video = Factory :populated_video, :category => category2

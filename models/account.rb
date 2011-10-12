@@ -50,6 +50,10 @@ module Aji
       raise InterfaceMethodNotImplemented
     end
 
+    def subscriber_count
+      raise InterfaceMethodNotImplemented
+    end
+
     def realname; ""; end
 
     def videos_from_source
@@ -85,6 +89,7 @@ module Aji
             "profile_uri" => profile_uri,
             "thumbnail_uri" => thumbnail_uri,
             "realname" => realname,
+            "subscriber_count" => subscriber_count,
             "description" => description ]
     end
 

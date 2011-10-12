@@ -5,6 +5,18 @@ module Aji
     subject { Account::Youtube.create :uid => "freddiew" }
     it_behaves_like "any account"
 
+    describe "#subscriber_count" do
+      it "reads from the info hash" do
+        subject.stub(:info).and_return("subscriber_count"=>100)
+        subject.subscriber_count.should == 100
+      end
+
+      it "returns 0 if it's missing from hash" do
+        subject.stub(:info).and_return({})
+        subject.subscriber_count.should == 0
+      end
+    end
+
     describe "#existing?" do
       it "is false for non existing youtube account" do
         a = Account::Youtube.new :uid => "doesntexist"

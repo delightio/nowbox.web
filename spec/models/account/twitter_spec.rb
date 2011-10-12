@@ -29,8 +29,20 @@ module Aji
 
     it_behaves_like "any account"
 
+    describe "#subscriber_count" do
+      it "reads from the info hash" do
+        subject.stub(:info).and_return("followers_count"=>100)
+        subject.subscriber_count.should == 100
+      end
+
+      it "returns 0 if it's missing from hash" do
+        subject.stub(:info).and_return({})
+        subject.subscriber_count.should == 0
+      end
+    end
+
     describe "#refresh_influencers" do
-      xit "adds twitter followers as influencers" do
+      it "adds twitter followers as influencers" do
       end
     end
 
