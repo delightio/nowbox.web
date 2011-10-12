@@ -8,16 +8,20 @@ module Aji
 
     def refresh_content force=false
       super force do |new_videos|
-        in_flight = sorted_recent_videos Time.now.to_i
-        unless in_flight.empty?
-          max_videos_in_trending = Aji.conf['MAX_VIDEOS_IN_TRENDING']
-          new_videos = update_and_populate_content_videos(
-            in_flight.first(max_videos_in_trending*3/2),
-            max_videos_in_trending)
-          create_channels_from_top_authors content_videos(50)
+        adjust_relevance_in_all_recent_videos -100, true
 
-          update_attribute :populated_at, Time.now
+        # Populate the top N trending videos and add them to content_videos
+        recent_videos(Aji.conf['MAX_VIDEOS_IN_TRENDING']).each do |v|
+          next if v.blacklisted?
+          v.populate do |populated|
+            push populated, recent_relevance_of(populated)
+          end
         end
+
+        # Create channels from the top 50 authors
+        top_authors = content_videos(50).map &:author
+        create_channels_from_top_authors top_authors
+        update_attribute :populated_at, Time.now
       end
     end
 
@@ -85,11 +89,11 @@ module Aji
       new_videos
     end
 
-    def create_channels_from_top_authors top_videos
-      top_videos.each do | video |
-        channel = video.author.to_channel
+    def create_channels_from_top_authors top_authors
+      top_authors.each do | author |
+        channel = author.to_channel
         channel.background_refresh_content
-        Aji.log "Trending: created Channel[#{channel.id}] from Video[#{video.id}] (#{video.title})"
+        Aji.log "Trending: created Channel[#{channel.id}] for #{author.username}"
       end
     end
 
