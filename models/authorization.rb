@@ -15,9 +15,9 @@ module Aji
         @account.identity.merge! @identity
         @identity = @account.identity
       end
+
       @account.save
       @identity.save
-
       @user = @identity.user
     end
 

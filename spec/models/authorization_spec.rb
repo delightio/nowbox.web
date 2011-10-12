@@ -2,12 +2,12 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
   describe Aji::Authorization do
-    let(:given_identity) { stub :user => stub }
+    let(:given_identity) { stub :user => stub, :save => true }
     subject { Authorization.new account, given_identity }
 
     describe "#grant!" do
       context "when the account is not associated with an identity" do
-        let(:account) { OpenStruct.new :identity => nil }
+        let(:account) { OpenStruct.new :identity => nil, :save => true }
 
         it "assigns the given identity to the account" do
           expect{ subject.grant! }.to change{ account.identity }.from(nil).to(
@@ -16,7 +16,7 @@ module Aji
       end
 
       context "when the account identity matches the given identity" do
-        let(:account) { stub :identity => given_identity }
+        let(:account) { stub :identity => given_identity, :save => true }
 
         it "sets the user to the given identity's user" do
           expect{ subject.grant! }.to change{ subject.user }.from(nil).to(
@@ -25,7 +25,10 @@ module Aji
       end
 
       context "when the account identity is not the given identity" do
-        let(:account) { stub :identity => stub(:merge! => true, :user => stub) }
+        let(:account) do
+          stub :identity => stub(:merge! => true, :user => stub, :save => true),
+            :save => true
+        end
 
         it "merges the given identity into the account identity" do
           account.identity.should_receive(:merge!).with(given_identity)
@@ -42,7 +45,8 @@ module Aji
 
     describe "#deauthorize!" do
       let!(:account) do
-        stub :identity => stub, :user => stub, :deauthorize! => true
+        stub :identity => stub, :user => stub, :deauthorize! => true,
+          :save => true
       end
 
       subject { Authorization.new account, account.identity }
