@@ -13,7 +13,7 @@ module Aji
     has_many :mentions, :foreign_key => :author_id, :dependent => :destroy
 
     belongs_to :stream_channel, :class_name => 'Aji::Channel::TwitterStream',
-      :foreign_key => :stream_channel_id
+      :foreign_key => :stream_channel_id, :dependent => :destroy
 
     after_create :set_provider
 

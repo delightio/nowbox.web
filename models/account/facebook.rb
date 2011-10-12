@@ -10,7 +10,7 @@ module Aji
     has_many :mentions, :foreign_key => :author_id, :dependent => :destroy
 
     belongs_to :stream_channel, :class_name => 'Aji::Channel::FacebookStream',
-      :foreign_key => :stream_channel_id
+      :foreign_key => :stream_channel_id, :dependent => :destroy
 
     # Use an alias to allow Facebook accounts to implement the same protocal as
     # Channel::Trending without the need for a recent_zset buffer.
