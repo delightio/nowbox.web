@@ -90,6 +90,7 @@ module Aji
     end
 
     def deauthorize!
+      self.identity = nil
       self.credentials.clear
       self.mentions.each{ |m| m.destroy }
       self.mentions.clear

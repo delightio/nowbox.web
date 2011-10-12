@@ -55,9 +55,19 @@ module Aji
       subject do
         Account.new(:uid => "foobar").tap do |a|
           a.credentials = { 'token' => 'sometoken', 'secret' => 'somesecret'}
+          a.identity = Identity.new
           a.stub :id => 1
           a.stub :mentions => [mock("mention", :destroy => true)]
         end
+      end
+
+      it "removes itself from its identity" do
+        old_identity = subject.identity
+
+        subject.deauthorize!
+
+        subject.identity.should be_nil
+        old_identity.accounts.should_not include subject
       end
 
       it "deletes credentials" do
