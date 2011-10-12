@@ -104,6 +104,14 @@ module Aji
       [ queue_channel, favorite_channel ]
     end
 
+    def social_channels
+      identity.social_channels
+    end
+
+    def display_channels
+      user_channels + social_channels + subscribed_channels
+    end
+
     def first_name
       self.name.split(' ').first
     end
