@@ -1,17 +1,17 @@
 module Aji
   class Authorization
-
-    def initialize auth_hash, given_user
+    def initialize auth_hash, given_identity
       @auth_hash = auth_hash
-      @user = given_user
+      @identity = given_identity
     end
 
     def account
       @account ||=
         if (account = provider_class.find_by_uid(@auth_hash['uid']))
           account.update_from_auth_info @auth_hash
+          account
         else
-          provider_class.create(:identity => @user.identity,
+          provider_class.create(:identity => @identity,
                                 :uid => @auth_hash['uid'],
                                 :credentials => @auth_hash['credentials'],
                                 :username => @auth_hash['nickname'],
@@ -20,12 +20,12 @@ module Aji
     end
 
     def user
-      if account.identity == @user.identity
-        @user
-      else
-        account.identity.merge! @user.identity
-        @user = account.identity.user
-      end
+      @user ||= if account.identity == @identity
+                  @identity.user
+                else
+                  account.identity.merge! @identity
+                  account.identity.user
+                end
     end
 
     def provider_class
