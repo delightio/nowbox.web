@@ -16,7 +16,7 @@ module Aji
         # TODO: We would need a different strategy for refreshing all channels.
         [ Channel::Account, Channel::Keyword,
           Channel::FacebookStream, Channel::TwitterStream].each do |ch_class|
-            ch_class.all.each { |ch| Resque.enqueue RefreshChannel, ch.id }
+            ch_class.all.each { |ch| ch.background_refresh_content }
         end
       end
 

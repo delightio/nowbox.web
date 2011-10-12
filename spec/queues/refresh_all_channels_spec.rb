@@ -30,7 +30,7 @@ module Aji
         channel_types.each do |ch_class|
             ch_class.should_receive(:all).and_return([channel])
         end
-        Resque.should_receive(:enqueue).with(Queues::RefreshChannel, channel.id).
+        channel.should_receive(:background_refresh_content).
           exactly(channel_types.count).times
 
         subject.perform
