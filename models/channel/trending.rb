@@ -8,8 +8,11 @@ module Aji
 
     def refresh_content force=false
       super force do |new_videos|
+        start = Time.now
         adjust_relevance_in_all_recent_videos -100, true
+        Aji.log "Adjusted #{recent_video_id_count} recent videos in #{Time.now-start} s."
 
+        start = Time.now
         # Populate the top N trending videos and add them to content_videos
         recent_videos(Aji.conf['MAX_VIDEOS_IN_TRENDING']).each do |v|
           next if v.blacklisted?
@@ -17,10 +20,12 @@ module Aji
             push populated, recent_relevance_of(populated)
           end
         end
+        Aji.log "Pushed and populated #{Aji.conf['MAX_VIDEOS_IN_TRENDING']} videos in #{Time.now-start} s."
 
         # Create channels from the top 50 authors
         top_authors = content_videos(50).map &:author
         create_channels_from_top_authors top_authors
+
         update_attribute :populated_at, Time.now
       end
     end
