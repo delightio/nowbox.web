@@ -4,11 +4,19 @@ module Aji
 
     attr_reader :cooldown, :hits_per_session, :redis, :namespace
 
-    def initialize api_name, hits_per_session, cooldown, redis
+    def initialize api_name, redis, options
+
+
       @namespace = api_name.strip.downcase.gsub(/[-\s]+/,'_')
-      @hits_per_session = hits_per_session
-      @cooldown = cooldown
       @redis = redis
+
+      @hits_per_session = options.fetch :hits_per_session do
+        raise ArgumentError, "Must supply :hits_per_session"
+      end
+
+      @cooldown = options.fetch :cooldown do
+        raise ArgumentError, "Must supply :cooldown"
+      end
     end
 
     def hit
