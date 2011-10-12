@@ -68,7 +68,9 @@ module Aji
     def create_stream_channel
       self.stream_channel ||= Channel::FacebookStream.create :owner => self,
         :title => "Facebook Stream"
-      save and stream_channel
+
+      save and stream_channel.refresh_content
+      stream_channel
     end
   end
 end
