@@ -80,4 +80,13 @@ describe Aji::Channel::Trending do
     end
   end
 
+  describe "#create_channels_from_top_authors" do
+    let(:channel) { mock("channel", :id=>1)}
+    let(:authors) { [mock("author", :username=>"John", :to_channel=>channel)] }
+    it "background refresh given authors" do
+      channel.should_receive(:background_refresh_content)
+      subject.send(:create_channels_from_top_authors, authors)
+    end
+  end
+
 end
