@@ -2,73 +2,53 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
   describe Aji::Authorization do
-    let(:given_identity) { mock("identity", :user => stub) }
-    let(:auth_hash) do
-      { 'provider' => 'twitter', 'uid' => '1234', 'extra' => {} }
-    end
+    let(:given_identity) { stub :user => stub }
+    subject { Authorization.new account, given_identity }
 
-    subject { Authorization.new auth_hash, given_identity }
+    describe "#grant!" do
+      context "when the account identity matches the given identity" do
+        let(:account) { stub :identity => given_identity }
 
-    context "during authorization" do
-
-    end
-
-    context "during deauthorization" do
-    end
-
-    describe "#account" do
-      let(:account) { stub.as_null_object }
-
-      it "returns a new account instance when none exists" do
-        Account::Twitter.stub(:find_by_uid).and_return(nil)
-        Account::Twitter.should_receive(:create)
-
-        subject.account
-      end
-
-      it "returns an existing account when one is found" do
-        Account::Twitter.should_receive(:find_by_uid).with(
-          auth_hash['uid']).and_return(account)
-
-        subject.account
-      end
-    end
-
-    describe "#user" do
-      context "when the account is new" do
-        let(:account) { stub(:identity => given_identity) }
-
-        it "returns the user from the given identity" do
-          Account::Twitter.stub(:find_by_uid).and_return(nil)
-          Account::Twitter.stub(:create).and_return(account)
-
-          subject.user.should == given_identity.user
+        it "sets the user to the given identity's user" do
+          expect{ subject.grant! }.to change{ subject.user }.from(nil).to(
+            given_identity.user)
         end
       end
 
-      context "when the account has an existing identity" do
-        let(:existing_user) { stub }
-        let(:account) do
-          stub(:identity => mock("existing identity", :user => existing_user,
-           :merge! => true), :update_from_auth_info => true)
-        end
+      context "when the account identity is not the given identity" do
+        let(:account) { stub :identity => stub(:merge! => true, :user => stub) }
 
-        it "merges the given identity with the account's" do
-          Account::Twitter.should_receive(:find_by_uid).with(
-            auth_hash['uid']).and_return(account)
-
+        it "merges the given identity into the account identity" do
           account.identity.should_receive(:merge!).with(given_identity)
 
-          subject.user
+          subject.grant!
         end
 
-        it "returns the user associated with the account identity" do
-          Account::Twitter.should_receive(:find_by_uid).with(
-            auth_hash['uid']).and_return(account)
-
-          subject.user.should == existing_user
+        it "sets the user to the account identity's user" do
+          expect{ subject.grant! }.to change{ subject.user }.from(nil).to(
+            account.identity.user)
         end
       end
     end
+
+    describe "#deauthorize!" do
+      let!(:account) do
+        stub :identity => stub, :user => stub, :deauthorize! => true
+      end
+
+      subject { Authorization.new account, account.identity }
+
+      it "deauthorizes the given account" do
+        account.should_receive(:deauthorize!)
+
+        subject.deauthorize!
+      end
+
+      it "sets the user to the given identity's user" do
+        expect{ subject.deauthorize! }.to change{ subject.user }.from(nil).to(
+          account.user)
+      end
+    end
+
   end
 end
