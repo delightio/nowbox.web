@@ -94,7 +94,14 @@ module Aji
       end
     end
 
-    get '/:provider/deauthorize' do
+
+    # ## POST /auth/:provider/deauthorize
+    # Deauthorizes an account effectively removing it from the system.
+    # __Returns__ an updated version of the user resource.
+    #
+    # __Required params__
+    # - `uid`: The unique identifier of the account to be deauthorized.
+    post '/:provider/deauthorize' do
       content_type :json
 
       account = Account.find_by_uid_and_provider params[:uid], params[:provider]
