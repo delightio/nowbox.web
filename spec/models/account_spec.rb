@@ -26,14 +26,14 @@ module Aji
         Aji.redis.should_receive(:sismember).with("spammers", subject.id).
           and_return(true)
 
-        subject.should be_spammer
+        subject.should be_marked_spammer
       end
 
       specify "false otherwise" do
         Aji.redis.should_receive(:sismember).with("spammers", subject.id).
           and_return(false)
 
-        subject.should_not be_spammer
+        subject.should_not be_marked_spammer
       end
     end
 
