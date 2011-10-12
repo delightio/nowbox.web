@@ -8,10 +8,15 @@ module Aji
     end
 
     def grant!
-      if @account.identity != @identity
+      case
+      when @account.identity.nil?
+        @account.identity = @identity
+      when @account.identity != @identity
         @account.identity.merge! @identity
         @identity = @account.identity
       end
+      @account.save
+      @identity.save
 
       @user = @identity.user
     end

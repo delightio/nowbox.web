@@ -6,6 +6,15 @@ module Aji
     subject { Authorization.new account, given_identity }
 
     describe "#grant!" do
+      context "when the account is not associated with an identity" do
+        let(:account) { OpenStruct.new :identity => nil }
+
+        it "assigns the given identity to the account" do
+          expect{ subject.grant! }.to change{ account.identity }.from(nil).to(
+            given_identity)
+        end
+      end
+
       context "when the account identity matches the given identity" do
         let(:account) { stub :identity => given_identity }
 
