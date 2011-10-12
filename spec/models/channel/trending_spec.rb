@@ -20,8 +20,7 @@ describe Aji::Channel::Trending do
     before :each do
       @videos = []
       5.times do |n|
-        v = mock("video", :id=>n, :author=>mock)
-        v.stub(:blacklisted?).and_return(false)
+        v = mock("video", :id => n, :blacklisted? => false, :author => mock)
         v.stub(:populate).and_yield(v)
         Aji::Video.stub(:find_by_id).with(v.id).and_return(v)
         subject.stub(:recent_relevance_of).with(v).and_return(n*1000)
