@@ -28,11 +28,14 @@ module Aji
           Aji.log "  Account[#{id}].update_tank_indexes"
           update_tank_indexes
         end
-        # update_tank_indexes if searchable?
+      rescue => e
+        Aji.log :ERROR, "Failed to update_tank_indexes cuz: #{e}"
       end
 
       def delete_tank_indexes_if_searchable
         delete_tank_indexes if searchable?
+      rescue => e
+        Aji.log :ERROR, "Failed to delete_tank_indexes cuz #{e}"
       end
     end
 
