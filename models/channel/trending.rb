@@ -10,7 +10,9 @@ module Aji
     def refresh_content force=true
       super force do |new_videos|
         start = Time.now
-        increment_relevance_in_all_recent_videos -100
+        # We want 1 mention to have effect over 4 hours.
+        # 10,000 is default for 1 mention and we refresh 4 times an hour.
+        increment_relevance_in_all_recent_videos -625
         Aji.log "Adjusted #{recent_video_id_count} recent videos in #{Time.now-start} s."
 
         start = Time.now
