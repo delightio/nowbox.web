@@ -14,7 +14,7 @@ module Aji
     end
 
     def account_results
-      Account.search_tank @query
+      Account.search_tank @query+"*"
     end
 
     def results
