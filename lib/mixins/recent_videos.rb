@@ -43,13 +43,12 @@ module Aji
         Aji.redis.zincrby recent_zset.key, significance, video.id
       end
 
-      def increment_relevance_in_all_recent_videos amount, remove_negative=false
+      # All videos with a lower relevance than min_relevance will be removed.
+      def increment_relevance_in_all_recent_videos amount, min_relevance=0
         recent_video_ids.each do |vid|
           Aji.redis.zincrby recent_zset.key, amount, vid
         end
-        if remove_negative
-          Aji.redis.zremrangebyscore recent_zset.key, "-inf", 0
-        end
+        Aji.redis.zremrangebyscore recent_zset.key, "-inf", min_relevance
       end
 
     end

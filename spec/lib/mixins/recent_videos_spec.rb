@@ -94,22 +94,23 @@ describe Aji::Mixins::RecentVideos do
   describe "#increment_all_scores_in_recent_videos" do
     let(:amount) { -10 }
     before (:each) do
-      @videos.each { |v| subject.push_recent v, v.id*100 }
+      # 1 + v.id so we won't have 0 relevance
+      @videos.each { |v| subject.push_recent v, (1+v.id)*100 }
     end
 
     it "adjusts all scores by given amount" do
       before_adj = subject.recent_videos.map{ |v| subject.recent_relevance_of v }
       subject.increment_relevance_in_all_recent_videos amount
       after_adj = subject.recent_videos.map{ |v| subject.recent_relevance_of v }
-
       before_adj.each_index do |i|
         (after_adj[i]-before_adj[i]).should == amount
       end
     end
 
-    it "removes videos with negative relevance after adjustment" do
-      subject.push_recent @video, -1*amount
-      subject.increment_relevance_in_all_recent_videos amount, true
+    it "removes videos with below minimun relevance after adjustment" do
+      min = -1 * amount
+      subject.push_recent @video, min
+      subject.increment_relevance_in_all_recent_videos amount, min
       subject.recent_video_ids.should_not include @video.id
     end
 
