@@ -14,15 +14,7 @@ module Aji
     end
 
     def account_results
-      searchable_columns = [ :username, :info ]
-      sql_string = searchable_columns.map {|c| "lower(#{c}) LIKE ?" }.join(' OR ')
-      results = []
-      @query.tokenize.each do | q |
-        sql = [ sql_string ]
-        searchable_columns.count.times { |n| sql << "%#{q}%"}
-        results += Account.where sql
-      end
-      results.uniq # since we search per each keyword
+      Account.search_tank @query
     end
 
     def results

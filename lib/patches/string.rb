@@ -73,23 +73,7 @@ module Aji::StringTokenizer
                          which while whim whither who whod whoever whole wholl whom whomever
                          whos whose why widely willing wish with within without wont words
                          world would wouldnt www x y yes yet you youd youll your youre yours
-                         yourself yourselves youve z zero
-
-                         default_profile show_all_inline_media contributors_enabled
-                         geo_enabled notifications profile_sidebar_border_color url
-                         lang profile_use_background_image default_profile_image
-                         statuses_count profile_background_image_url_https time_zone
-                         favourites_count profile_background_color profile_image_url
-                         description location following profile_background_image_url
-                         id_str follow_request_sent verified friends_count profile_text_color
-                         profile_sidebar_fill_color followers_count protected
-                         profile_background_tile created_at screen_name name
-                         is_translator id listed_count utc_offset profile_link_color
-                         profile_image_url_https
-                         uid published updated category title profile homepage
-                         featured_video_id about_me first_name last_name hobbies location
-                         occupation school subscriber_count thumbnail username total_upload_views
-                         }
+                         yourself yourselves youve z zero}
 
 end
 
