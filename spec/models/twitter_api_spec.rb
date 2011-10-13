@@ -5,12 +5,14 @@ require File.expand_path("../../spec_helper", __FILE__)
 #require './models/mention'
 
 
+# TODO: Only be authorized for the tests that need it!
 module Aji
   describe Aji::TwitterAPI, :unit, :net do
     subject do
-      TwitterAPI.new "178492493-AmMNGcEjYmK7OuCL7jNlPVv85yHGNmVmVMfJhTtN",
-        "DwRJZLB8UYAovc7L9fqavHvRPDNoFoX0IPM3V34z0", "RWUyehmqjKRBMSlVTeZDw",
-        "BglumdMZZoYjosQIV8acdf9twivPrH15jE6AL2jmw"
+      TwitterAPI.new "RWUyehmqjKRBMSlVTeZDw",
+        "BglumdMZZoYjosQIV8acdf9twivPrH15jE6AL2jmw",
+        token: "178492493-AmMNGcEjYmK7OuCL7jNlPVv85yHGNmVmVMfJhTtN",
+        secret: "DwRJZLB8UYAovc7L9fqavHvRPDNoFoX0IPM3V34z0"
     end
 
     describe "#valid_uid?" do
@@ -36,12 +38,26 @@ module Aji
     end
 
     describe "#video_mentions_i_post" do
+      context "for unauthorized users" do
+        subject { TwitterAPI.new uid: '178492493' }
+
+        it "returns an array of video mentions by the user" do
+          mentions = VCR.use_cassette "twitter_api/unauthed_user_timeline" do
+            subject.video_mentions_i_post
+          end
+
+          mentions.should_not be_empty
+          mentions.all? { |m| m.videos.should_not be_empty }
+        end
+      end
+
       it "hits twitter only once" do
         subject.tracker.should_receive(:hit!)
 
         VCR.use_cassette "twitter_api/user_timeline" do
           subject.video_mentions_i_post
         end
+
       end
 
       it "returns an array of video mentions by the authorized user" do
