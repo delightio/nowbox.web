@@ -25,7 +25,7 @@ module Aji
 
       def update_tank_indexes_if_searchable
         if searchable?
-          Aji.log "Account[#{id}].update_tank_indexes"
+          Aji.log "  Account[#{id}].update_tank_indexes"
           update_tank_indexes
         end
         # update_tank_indexes if searchable?
