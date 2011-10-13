@@ -40,7 +40,7 @@ describe Aji::Channel::Trending do
 
     it "adjusts relevances for all recent videos and remove videos with negative relevance" do
       subject.should_receive(:increment_relevance_in_all_recent_videos).
-        with(an_instance_of(Fixnum), true)
+        with(an_instance_of(Fixnum))
       subject.refresh_content
     end
 
