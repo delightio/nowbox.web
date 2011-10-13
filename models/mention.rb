@@ -51,6 +51,10 @@ module Aji
       Aji.redis.sadd "spammy_mentions", id
     end
 
+    def significance
+      if marked_spam? then 0 else 10000 end
+    end
+
     # age from give time in seconds
     def age from_time_i
       # Every mention creation would have gone thru spam deteciton.

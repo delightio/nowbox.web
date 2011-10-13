@@ -19,6 +19,12 @@ module Aji
         (recent_zset.revrange 0, (limit-1)).map(&:to_i)
       end
 
+      def recent_video_id_count
+        # TODO LH #346 content_zset.size always returns 0
+        #   before any calls to content_video_ids
+        recent_video_ids.count
+      end
+
       def push_recent video, relevance=Time.now.to_i
         recent_zset[video.id] = relevance
         n = 1 + Aji.conf['MAX_RECENT_VIDEO_IDS_IN_TRENDING']
@@ -27,6 +33,22 @@ module Aji
 
       def pop_recent video
         recent_zset.delete video.id
+      end
+
+      def recent_relevance_of video
+        recent_zset.score video.id
+      end
+
+      def increment_relevance_of_recent_video video, significance
+        Aji.redis.zincrby recent_zset.key, significance, video.id
+      end
+
+      # All videos with a lower relevance than min_relevance will be removed.
+      def increment_relevance_in_all_recent_videos amount, min_relevance=0
+        recent_video_ids.each do |vid|
+          Aji.redis.zincrby recent_zset.key, amount, vid
+        end
+        Aji.redis.zremrangebyscore recent_zset.key, "-inf", min_relevance
       end
 
     end

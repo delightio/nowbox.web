@@ -53,6 +53,17 @@ module Aji
           api.stub(:video_info) { raise Aji::VideoAPI::Error }
           subject.populate { |v| null.success! }
         end
+
+        it "does not re populate nor update populated_at if already populated" do
+          subject.populate
+          ts = 30.minutes.ago
+          subject.update_attribute :populated_at, ts
+          null = stub.as_null_object
+          null.should_receive :success!
+          subject.should_receive(:api).never
+          subject.populate { |v| null.success! }
+          subject.populated_at.should == ts
+        end
       end
 
       context "when a video id is invalid" do

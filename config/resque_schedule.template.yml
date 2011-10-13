@@ -3,3 +3,9 @@ refresh_all_channels:
   cron: "0 * * * *"
   args:
   description: "Update all channels."
+
+refresh_trending_channels:
+  class: Aji::Queues::RefreshTrendingChannels
+  cron: "*/1 * * * *"
+  args:
+  description: "Update all trending channels."
