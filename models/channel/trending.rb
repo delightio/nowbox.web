@@ -6,7 +6,8 @@ module Aji
     include Redis::Objects
     include Mixins::RecentVideos
 
-    def refresh_content force=false
+    # Always allow trending channel to refresh
+    def refresh_content force=true
       super force do |new_videos|
         start = Time.now
         increment_relevance_in_all_recent_videos -100
@@ -20,10 +21,11 @@ module Aji
             push populated, recent_relevance_of(populated)
           end
         end
-        Aji.log "Pushed and populated #{Aji.conf['MAX_VIDEOS_IN_TRENDING']} videos in #{Time.now-start} s."
+        Aji.log "Pushed and populated #{Aji.conf['MAX_VIDEOS_IN_TRENDING']} videos in #{Time.now-start} s. " +
+          "Top 5: "+ content_videos(5).map{|v| "#{v.external_id} (#{relevance_of(v)})"}.join(', ')
 
-        # Create channels from the top 50 authors
-        top_authors = content_videos(50).map &:author
+        # Create channels from the top 10 authors
+        top_authors = content_videos(10).map &:author
         create_channels_from_top_authors top_authors
 
         update_attribute :populated_at, Time.now
@@ -49,11 +51,13 @@ module Aji
     private
 
     def create_channels_from_top_authors top_authors
+      debug = []
       top_authors.each do | author |
         channel = author.to_channel
         channel.background_refresh_content
-        Aji.log "Trending: created Channel[#{channel.id}] for #{author.username}"
+        debug << "#{author.username} (cid: #{channel.id})"
       end
+      Aji.log "Trending: channels created: #{debug.join(', ')}"
     end
 
 
