@@ -11,17 +11,15 @@ module Aji
     describe "#account_results" do
 
       context "when searching for existing account" do
-        subject { Searcher.new @query }
         before :each do
-          @query = "nowmov"
-          @account = Account::Twitter.new(:uid => "355199843",
-            :username => @query)
+          @account = Account.new :username => "nowmov", :info => {"description" => "nowbox is awesome!"}
           @account.stub(:searchable?).and_return(true)
-          @account.save
+          @account.save :validate => false
         end
 
-        it "returns result from IndexTank" do
-          subject.account_results.should include @account
+        it "returns result with LIKE" do
+          Searcher.new('owm').account_results.should == [@account] # by username
+          Searcher.new('box').account_results.should == [@account] # by info
         end
       end
     end
