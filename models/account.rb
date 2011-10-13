@@ -101,6 +101,7 @@ module Aji
       self.mentions.clear
       content_zset.clear
       influencer_set.clear
+      self.stream_channel.destroy if self.respond_to? :stream_channel
       save
     end
 
