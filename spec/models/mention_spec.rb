@@ -78,8 +78,13 @@ module Aji
     end
 
     describe "#significance" do
-      it "is defined" do
-        subject.significance.should == 10000
+      it "is 0 if it's spam" do
+        subject.stub(:marked_spam?).and_return(true)
+        subject.significance.should == 0
+      end
+
+      it "is +ve if it's not spam" do
+        subject.significance.should > 0
       end
     end
 

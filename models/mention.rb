@@ -52,7 +52,7 @@ module Aji
     end
 
     def significance
-      10000
+      if marked_spam? then 0 else 10000 end
     end
 
     # age from give time in seconds
