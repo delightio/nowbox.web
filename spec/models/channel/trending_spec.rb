@@ -29,7 +29,7 @@ describe Aji::Channel::Trending do
         subject.push_recent v
       end
 
-      subject.stub(:adjust_relevance_in_all_recent_videos)
+      subject.stub(:increment_relevance_in_all_recent_videos)
       subject.stub(:create_channels_from_top_authors)
     end
 
@@ -39,7 +39,7 @@ describe Aji::Channel::Trending do
     end
 
     it "adjusts relevances for all recent videos and remove videos with negative relevance" do
-      subject.should_receive(:adjust_relevance_in_all_recent_videos).
+      subject.should_receive(:increment_relevance_in_all_recent_videos).
         with(an_instance_of(Fixnum), true)
       subject.refresh_content
     end
@@ -92,7 +92,7 @@ describe Aji::Channel::Trending do
     let(:video) { mock "video", :id=>1 }
     let(:trigger) { mock "trigger", :significance => 1000 }
     it "increment the relevance (in recent_zset) of given video" do
-      subject.should_receive(:adjust_relevance_of_recent_video).
+      subject.should_receive(:increment_relevance_of_recent_video).
         with(video, trigger.significance)
       subject.promote_video(video, trigger)
     end

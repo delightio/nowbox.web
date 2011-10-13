@@ -80,18 +80,18 @@ describe Aji::Mixins::RecentVideos do
     end
   end
 
-  describe "#adjust_relevance_of_recent_video" do
+  describe "#increment_relevance_of_recent_video" do
     let(:video) { mock "video", :id=>100 }
     let(:significance) { 545234 }
 
     it "increment the relevance of the given video by the given relevnace" do
       Aji.redis.should_receive(:zincrby).
         with(subject.recent_zset.key, significance, video.id)
-      subject.adjust_relevance_of_recent_video video, significance
+      subject.increment_relevance_of_recent_video video, significance
     end
   end
 
-  describe "#adjust_all_scores_in_recent_videos" do
+  describe "#increment_all_scores_in_recent_videos" do
     let(:amount) { -10 }
     before (:each) do
       @videos.each { |v| subject.push_recent v, v.id*100 }
@@ -99,7 +99,7 @@ describe Aji::Mixins::RecentVideos do
 
     it "adjusts all scores by given amount" do
       before_adj = subject.recent_videos.map{ |v| subject.recent_relevance_of v }
-      subject.adjust_relevance_in_all_recent_videos amount
+      subject.increment_relevance_in_all_recent_videos amount
       after_adj = subject.recent_videos.map{ |v| subject.recent_relevance_of v }
 
       before_adj.each_index do |i|
@@ -109,7 +109,7 @@ describe Aji::Mixins::RecentVideos do
 
     it "removes videos with negative relevance after adjustment" do
       subject.push_recent @video, -1*amount
-      subject.adjust_relevance_in_all_recent_videos amount, true
+      subject.increment_relevance_in_all_recent_videos amount, true
       subject.recent_video_ids.should_not include @video.id
     end
 

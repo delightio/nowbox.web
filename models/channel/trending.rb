@@ -9,7 +9,7 @@ module Aji
     def refresh_content force=false
       super force do |new_videos|
         start = Time.now
-        adjust_relevance_in_all_recent_videos -100, true
+        increment_relevance_in_all_recent_videos -100, true
         Aji.log "Adjusted #{recent_video_id_count} recent videos in #{Time.now-start} s."
 
         start = Time.now
@@ -31,7 +31,7 @@ module Aji
     end
 
     def promote_video video, trigger
-      adjust_relevance_of_recent_video video, trigger.significance
+      increment_relevance_of_recent_video video, trigger.significance
     end
 
     def thumbnail_uri
