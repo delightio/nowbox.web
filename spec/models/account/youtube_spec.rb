@@ -2,7 +2,28 @@ require File.expand_path("../../../spec_helper", __FILE__)
 
 module Aji
   describe Account::Youtube do
-    subject { Account::Youtube.create :uid => "freddiew" }
+    let(:video) do
+      mock("video").tap do |v|
+        v.stub :id => 7
+
+        v.stub :published_at => 3.days.ago
+
+        def v.populate
+          yield self
+        end
+      end
+    end
+
+    let(:api) do
+      mock "api", :uploaded_videos => [video]
+    end
+
+    subject do
+      Account::Youtube.create(uid: "freddiew").tap do |a|
+        a.stub :api => api
+      end
+    end
+
     it_behaves_like "any account"
 
     describe "#subscriber_count" do
@@ -31,9 +52,10 @@ module Aji
     end
 
     describe "#get_info_from_youtube_api" do
+      subject { Account::Youtube.new :uid => 'day9tv' }
+
       it "uses the youtube api to get author info" do
-        subject { Account::Youtube.new :uid => 'day9tv' }
-        subject.api.should_receive(:author_info).with(subject.uid)
+        subject.api.should_receive(:author_info)
         subject.get_info_from_youtube_api
       end
     end

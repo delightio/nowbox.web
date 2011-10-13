@@ -2,12 +2,18 @@ module Aji
   class YoutubeAPI
     USER_FEED_URL = "http://gdata.youtube.com/feeds/api/users"
 
-    def author_info author_id
-      tracker.hit!
-      DataGrabber.new(author_id).build_hash
+    attr_reader :uid
+
+    def initialize uid=nil
+      @uid = uid
     end
 
-    def valid_uid? uid
+    def author_info uid=uid
+      tracker.hit!
+      DataGrabber.new(uid).build_hash
+    end
+
+    def valid_uid? uid=uid
       tracker.hit!
       Faraday.get("#{USER_FEED_URL}/#{uid}").status == 200
     end
@@ -23,6 +29,12 @@ module Aji
 
     def video youtube_id
       youtube_it_to_video client.video_by youtube_id
+    end
+
+    def uploaded_videos uid=uid
+      tracker.hit!
+      client.videos_by(:author => uid, :order_by => 'published',
+       :per_page => 50).videos.map{ |v| youtube_it_to_video v }
     end
 
     def youtube_it_to_hash video
@@ -63,7 +75,7 @@ module Aji
 
     private
     def client
-      @@client ||= YouTubeIt::Client.new {}
+      @@client ||= YouTubeIt::Client.new dev_key: Aji.conf['YOUTUBE_KEY']
     end
 
     class DataGrabber

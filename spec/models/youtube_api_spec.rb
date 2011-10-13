@@ -92,5 +92,28 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
         end
       end
     end
+
+    context "for a user with uploaded content" do
+      subject { YoutubeAPI.new "brentalfloss" }
+
+      describe "#uploaded_videos" do
+        it "hits youtube only once" do
+          subject.tracker.should_receive(:hit!)
+
+          videos = VCR.use_cassette "youtube_api/uploaded_videos" do
+            subject.uploaded_videos
+          end
+        end
+
+        it "returns a nonempty list of populated videos" do
+          videos = VCR.use_cassette "youtube_api/uploaded_videos" do
+            subject.uploaded_videos
+          end
+
+          videos.should_not be_empty
+          videos.each { |v| v.should be_populated }
+        end
+      end
+    end
   end
 end
