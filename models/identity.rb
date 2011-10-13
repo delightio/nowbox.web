@@ -1,7 +1,7 @@
 module Aji
   class Identity < ActiveRecord::Base
     has_many :accounts, :class_name => 'Aji::Account'
-    has_one :user, :class_name => 'Aji::User'
+    has_one :user, :class_name => 'Aji::User', :dependent => :destroy
     belongs_to :graph_channel, :class_name => 'Aji::Channel'
 
     def merge! other
@@ -9,6 +9,8 @@ module Aji
       other.accounts.each do |a|
         accounts << a unless accounts.include? a
       end
+
+      other.destroy
     end
 
     def social_channel_ids

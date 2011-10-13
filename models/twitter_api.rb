@@ -1,11 +1,18 @@
 module Aji
   class TwitterAPI
-    def initialize token=nil, secret=nil, consumer_key=nil, consumer_secret=nil
-      @token, @secret = token, secret
+    def initialize consumer_key=nil, consumer_secret=nil, user_opts
+      if user_opts.key? :token and user_opts.key? :secret
+        @token, @secret = user_opts[:token], user_opts[:secret]
+      elsif user_opts.key? :uid
+        @uid = user_opts[:uid].to_i
+      else
+        raise ArgumentError, "Must supply :token and :secret, or :uid"
+      end
+
       consumer_key ||= Aji.conf['CONSUMER_KEY']
       consumer_secret ||= Aji.conf['CONSUMER_SECRET']
-      @client = Twitter::Client.new :oauth_token => token,
-        :oauth_token_secret => secret, :consumer_key => consumer_key,
+      @client = Twitter::Client.new :oauth_token => @token,
+        :oauth_token_secret => @secret, :consumer_key => consumer_key,
         :consumer_secret => consumer_secret
     end
 
@@ -22,8 +29,8 @@ module Aji
 
     def video_mentions_i_post
       tracker.hit!
-      tweets_with_videos = filter_links @client.user_timeline(:count => 200,
-        :include_entities => true)
+      tweets_with_videos = filter_links @client.user_timeline(@uid,
+        :count => 200, :include_entities => true)
       tweets_with_videos.map{|t| Parsers::Tweet.parse t }.reject do |mention|
         processor = MentionProcessor.new mention
         processor.perform

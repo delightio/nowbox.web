@@ -7,10 +7,10 @@ module Aji
     validates_presence_of :uid
     validates_uniqueness_of :uid
 
-    has_many :mentions, :foreign_key => :author_id
+    has_many :mentions, :foreign_key => :author_id, :dependent => :destroy
 
     belongs_to :stream_channel, :class_name => 'Aji::Channel::FacebookStream',
-      :foreign_key => :stream_channel_id
+      :foreign_key => :stream_channel_id, :dependent => :destroy
 
     # Use an alias to allow Facebook accounts to implement the same protocal as
     # Channel::Trending without the need for a recent_zset buffer.
@@ -66,12 +66,15 @@ module Aji
       self.username = auth_hash['extra']['user_hash']['username']
       self.info = auth_hash['extra']['user_hash']
       save
+      self
     end
 
     def create_stream_channel
       self.stream_channel ||= Channel::FacebookStream.create :owner => self,
         :title => "Facebook Stream"
-      save and stream_channel
+
+      save and stream_channel.refresh_content
+      stream_channel
     end
   end
 end

@@ -10,10 +10,10 @@ module Aji
     validates_presence_of :uid
     validates_uniqueness_of :uid
 
-    has_many :mentions, :foreign_key => :author_id
+    has_many :mentions, :foreign_key => :author_id, :dependent => :destroy
 
     belongs_to :stream_channel, :class_name => 'Aji::Channel::TwitterStream',
-      :foreign_key => :stream_channel_id
+      :foreign_key => :stream_channel_id, :dependent => :destroy
 
     after_create :set_provider
 
@@ -104,7 +104,12 @@ module Aji
     end
 
     def api
-      @api ||= TwitterAPI.new credentials['token'], credentials['secret']
+      @api ||= if authorized?
+                 TwitterAPI.new token: credentials['token'],
+                   secret: credentials['secret']
+               else
+                 TwitterAPI.new uid: uid
+               end
     end
 
     def update_from_auth_info auth_hash
@@ -112,12 +117,14 @@ module Aji
       self.username = auth_hash['extra']['user_hash']['screen_name']
       self.info = auth_hash['extra']['user_hash']
       save
+      self
     end
 
     def create_stream_channel
       self.stream_channel ||= Channel::TwitterStream.create :owner => self,
         :title => "Twitter Stream"
-      save and stream_channel
+      save and stream_channel.refresh_content
+      stream_channel
     end
 
     private

@@ -14,9 +14,12 @@ module Aji
     has_many :events
     belongs_to :identity
     belongs_to :region
-    belongs_to :queue_channel, :class_name => 'Channel::User'
-    belongs_to :favorite_channel, :class_name => 'Channel::User'
-    belongs_to :history_channel, :class_name => 'Channel::User'
+    belongs_to :queue_channel, :class_name => 'Channel::User',
+      :dependent => :destroy
+    belongs_to :favorite_channel, :class_name => 'Channel::User',
+      :dependent => :destroy
+    belongs_to :history_channel, :class_name => 'Channel::User',
+      :dependent => :destroy
 
     include Redis::Objects
     list :subscribed_list # User's Subscribed channels.

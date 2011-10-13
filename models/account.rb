@@ -28,7 +28,8 @@ module Aji
     serialize :credentials, Hash
     serialize :auth_info, Hash
 
-    belongs_to :identity
+    belongs_to :identity, :class_name => 'Aji::Identity'
+    has_one :user, :through => :identity
     has_and_belongs_to_many :channels,
       :class_name => 'Channel::Account', :join_table => :accounts_channels,
       :foreign_key => :account_id, :association_foreign_key => :channel_id,
@@ -91,6 +92,16 @@ module Aji
             "realname" => realname,
             "subscriber_count" => subscriber_count,
             "description" => description ]
+    end
+
+    def deauthorize!
+      self.identity = nil
+      self.credentials.clear
+      self.mentions.each{ |m| m.destroy }
+      self.mentions.clear
+      content_zset.clear
+      influencer_set.clear
+      save
     end
 
     def to_channel
