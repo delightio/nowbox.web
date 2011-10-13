@@ -104,7 +104,12 @@ module Aji
     end
 
     def api
-      @api ||= TwitterAPI.new credentials['token'], credentials['secret']
+      @api ||= if authorized?
+                 TwitterAPI.new token: credentials['token'],
+                   secret: credentials['secret']
+               else
+                 TwitterAPI.new uid: uid
+               end
     end
 
     def update_from_auth_info auth_hash
