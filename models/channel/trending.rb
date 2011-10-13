@@ -24,8 +24,8 @@ module Aji
         Aji.log "Pushed and populated #{Aji.conf['MAX_VIDEOS_IN_TRENDING']} videos in #{Time.now-start} s. " +
           "Top 5: "+ content_videos(5).map{|v| "#{v.external_id} (#{relevance_of(v)})"}.join(', ')
 
-        # Create channels from the top 50 authors
-        top_authors = content_videos(50).map &:author
+        # Create channels from the top 10 authors
+        top_authors = content_videos(10).map &:author
         create_channels_from_top_authors top_authors
 
         update_attribute :populated_at, Time.now

@@ -6,6 +6,6 @@ refresh_all_channels:
 
 refresh_trending_channels:
   class: Aji::Queues::RefreshTrendingChannels
-  cron: "*/1 * * * *"
+  cron: "*/15 * * * *"
   args:
   description: "Update all trending channels."
