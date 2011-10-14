@@ -17,7 +17,7 @@ module Aji
             accounts_populated_at << account.populated_at
           end
         end
-        update_relevance_in_categories new_videos
+        update_relevance_in_categories
       end
     end
 
@@ -30,14 +30,20 @@ module Aji
       (content_zset.revrange 0, (limit-1)).map(&:to_i)
     end
 
-    def update_relevance_in_categories new_videos
-      new_videos.map(&:category_id).group_by{|g| g}.each do |h|
-        cid = h.first; count = h.last.count # category_id => array of occurance
-        category = Category.find_by_id cid
-        Aji.log :ERROR, "invalid Category[#{cid}] from Channel[#{id}]!" if category.nil?
+    def relevance
+      100 + Math.sqrt(subscriber_count)
+    end
+
+    def update_relevance_in_categories
+      top_videos = content_videos(100)
+      total = top_videos.count
+      top_videos.map(&:category).group_by{|g| g}.each do |h|
+        category = h.first
+        count = h.last.count
         unless category.nil?
-          category.update_channel_relevance self, count
-          category_id_zset[cid] += count
+          relevance_in_category = relevance * count / total
+          category.update_channel_relevance self, relevance_in_category
+          category_id_zset[category.id] += count
         end
       end
     end

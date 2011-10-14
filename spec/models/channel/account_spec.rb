@@ -27,6 +27,12 @@ module Aji
         accounts.each {|a| a.should_receive(:refresh_content).and_return([])}
         channel.refresh_content
       end
+
+      it "updates category relevance after" do
+        subject.accounts.each {|a| a.should_receive(:refresh_content).and_return([mock])}
+        subject.should_receive(:update_relevance_in_categories)
+        subject.refresh_content
+      end
     end
 
     describe "#most_significant_account" do
@@ -170,34 +176,49 @@ module Aji
       end
     end
 
-    describe "#update_relevance_in_categories" do
-      it "updates category relevance after #refresh_content" do
-        subject.accounts.each {|a| a.should_receive(:refresh_content).and_return([mock])}
-        subject.should_receive(:update_relevance_in_categories).
-          with(an_instance_of(Array))
-        subject.refresh_content
+    describe "#relevance" do
+      subject { Channel::Account.new }
+      it "defaults to 1000" do
+        subject.stub(:subscriber_count).and_return(0)
+        subject.relevance.should == 100
       end
 
-      it "orders categories according to occurance in videos" do
+      it "doubles when you hit 100k subscribers" do
+        subject.stub(:subscriber_count).and_return(10000)
+        subject.relevance.should == 100*2
+      end
+    end
+
+    describe "#update_relevance_in_categories" do
+      it "orders categories according the relevance of each channel" do
         category1 = mock "category1", :id=>1, :update_channel_relevance=>nil
-        Category.stub(:find_by_id).with(category1.id).and_return(category1)
-        video2 = mock "video", :id=>2, :category_id => category1.id
-        expect {subject.update_relevance_in_categories [video2] }.
-          to change { subject.category_ids.first }.to category1.id
+        video1 = mock "video", :id=>1, :category=>category1
 
-        # same category differnet video
-        video3 = mock "video", :id=>3, :category_id => category1.id
-        expect {subject.update_relevance_in_categories [video3] }.
-          to_not change { subject.category_ids.count }
+        channel1 = Channel::Account.new
+        channel1.save :validate=>false
+        channel1.stub(:relevance).and_return(100)
+        channel1.stub(:content_videos).with(100).and_return([video1])
+        category1.should_receive(:update_channel_relevance).
+          with(channel1, channel1.relevance)
 
-        # 1 video in different category.
-        # top category is still category1 since it was from 2 videos
+        expect { channel1.update_relevance_in_categories }.
+          to change { channel1.category_ids.first }.
+          from(nil).to(category1.id)
+
         category2 = mock "category2", :id=>2, :update_channel_relevance=>nil
-        Category.stub(:find_by_id).with(category2.id).and_return(category2)
-        video4 = mock "video", :id=>4, :category_id => category2.id
-        expect {subject.update_relevance_in_categories [video4] }.
-          to change { subject.category_ids.count }.by 1
-        subject.category_ids.should == [category1.id, category2.id]
+        video2 = mock "video", :id=>2, :category=>category2
+
+        channel1.stub(:content_videos).with(100).and_return([video1, video2])
+        relevance = channel1.relevance * 1 / 2 # since we have 2 different categories
+        category1.should_receive(:update_channel_relevance).
+          with(channel1, relevance )
+        category2.should_receive(:update_channel_relevance).
+          with(channel1, relevance )
+
+        expect { channel1.update_relevance_in_categories }.
+          to change { channel1.category_ids }.
+          from([category1.id]).to([category1.id, category2.id])
+
       end
     end
 
