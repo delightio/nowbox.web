@@ -3,7 +3,7 @@ module Aji
     Error = Class.new StandardError
 
     def initialize sources=VideoAPI.source_apis.keys
-      @apis = sources.map{ |s| VideoAPI.source_apis[s] }
+      @apis = Array(sources).map{ |s| VideoAPI.source_apis[s].new }
     end
 
     def method_missing symbol, *args, &block

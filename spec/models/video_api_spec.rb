@@ -13,17 +13,17 @@ module Aji
 
     describe "#method_missing" do
       it "delegates to specified sources" do
-        VideoAPI.source_apis.values.each do |source_api|
-          source_api.should_receive(:send).with(:method_name, :arg1, :arg2)
+        VideoAPI.source_apis.values.each do |source|
+          source.any_instance.should_receive(:method_name).with(:arg1, :arg2)
         end
 
         subject.method_name :arg1, :arg2
       end
 
       it "returns an array containing the results from each source" do
-        VideoAPI.source_apis.values.each do |source_api|
-          source_api.should_receive(:send).with(:meth, :arg1).and_return(
-            [:return_value])
+        VideoAPI.source_apis.values.each do |source|
+          source.any_instance.should_receive(:meth).with(:arg1).and_return(
+          :return_value)
         end
 
         subject.meth(:arg1).should == Array.new(VideoAPI.source_apis.count,
