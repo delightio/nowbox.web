@@ -21,7 +21,7 @@ module Aji
     end
 
     def channels limit=-1
-      channel_ids(limit).map { |cid| Channel.find_by_id cid }
+      channel_ids(limit).map { |cid| Channel.find_by_id cid }.compact
     end
 
     def update_channel_relevance channel, relevance
