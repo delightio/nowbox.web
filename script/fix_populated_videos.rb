@@ -1,9 +1,9 @@
 require_relative '../aji'
 
-def fix_nil_authors count
+def fix_nil_authors count, offset=0
   Aji.log "Fixing #{count} populated videos with nil authors..."
   done = 0
-  Aji::Video.find_each do |v|
+  Aji::Video.find_each(:offset=>0) do |v|
     break if done > count
     if v.has_nil_author?
       Resque.enqueue Aji::Queues::FixPopulatedVideo, v.id
