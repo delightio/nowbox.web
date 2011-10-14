@@ -16,5 +16,9 @@ module Aji
         #:vimeo => VimeoAPI
       }.freeze
     end
+
+    def self.for_source s
+      source_apis[s].new
+    end
   end
 end

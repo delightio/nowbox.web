@@ -117,7 +117,7 @@ module Aji
     end
 
     def api
-      @api ||= VideoAPI.new source
+      @api ||= VideoAPI.for_source(source)
     end
   end
 end

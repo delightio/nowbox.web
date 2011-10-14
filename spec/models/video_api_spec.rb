@@ -11,6 +11,12 @@ module Aji
       end
     end
 
+    describe ".for_source" do
+      it "returns a new instance of the api class for a given source" do
+        VideoAPI.for_source(:youtube).should be_kind_of(YoutubeAPI)
+      end
+    end
+
     describe "#method_missing" do
       it "delegates to specified sources" do
         VideoAPI.source_apis.values.each do |source|

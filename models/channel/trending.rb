@@ -61,7 +61,6 @@ module Aji
       end
       Aji.log "Trending: channels created: #{debug.join(', ')}"
     end
-
-
   end
 end
+

@@ -151,7 +151,7 @@ module Aji
 
     describe "#api" do
       it "gets an api object from VideoAPI" do
-        VideoAPI.should_receive(:new).with(:youtube)
+        VideoAPI.should_receive(:for_source).with(:youtube)
         Video.new(:source => :youtube).send :api
       end
     end
