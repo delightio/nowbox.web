@@ -7,17 +7,20 @@ module Aji
   end
   puts
 
-  [Channel::Keyword, Channel::Account].each do |channel_class|
+  [Channel::Account].each do |channel_class|
     Aji.log "Updating from #{channel_class.count} #{channel_class} channels..."
     channel_class.find_each do |ch|
-      Aji.log "  Channel[#{ch.id}], #{ch.title}, #{ch.content_video_id_count}"
-      ch.update_relevance_in_categories ch.content_videos
+      Aji.log "  Channel[#{ch.id}], #{ch.title}, #{ch.content_video_id_count}, #{ch.relevance} (#{ch.subscriber_count})"
+
+      all_refreshed = ch.accounts.all? {|a| a.refreshed? }
+      Aji.log "  * Channel[#{ch.id}] does not have all info needed. *" if !all_refreshed
+      ch.update_relevance_in_categories if all_refreshed
     end
     puts
   end
 
   Category.all.each do |cat|
     Aji.log "Cateogry[#{cat.id}], #{cat.raw_title}, has #{cat.channel_ids.count} channels, " +
-      "featured: #{cat.featured_channels.count}"
+      "featured: #{cat.featured_channels.count}, #{cat.featured_channels.map(&:title).join(" | ")}"
   end
 end

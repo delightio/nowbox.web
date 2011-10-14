@@ -66,6 +66,15 @@ module Aji
       Account::Youtube.find_or_create_by_uid uid
     end
 
+    def refreshed?
+      not thumbnail_uri.empty?
+    end
+
+    def refresh_info
+      get_info_from_youtube_api
+      save
+    end
+
     # Fetch information from youtube, returns the new info hash upon success
     # and false otherwise.
     def get_info_from_youtube_api

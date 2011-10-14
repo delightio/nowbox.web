@@ -222,5 +222,21 @@ module Aji
       end
     end
 
+    describe "#background_refresh_content" do
+      it "enques a refresh job" do
+        Resque.should_receive(:enqueue).with(
+          Aji::Queues::RefreshChannel, subject.id).at_most(2).times
+        subject.background_refresh_content
+      end
+    end
+
+    describe "#background_refresh_info" do
+      it "enqueues to refresh info" do
+        Resque.should_receive(:enqueue).
+          with(Aji::Queues::RefreshChannelInfo, subject.id)
+        subject.background_refresh_info
+      end
+    end
+
   end
 end
