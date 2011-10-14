@@ -93,10 +93,10 @@ module Aji
       s.merge! h
     end
 
-    private
     def set_title
       self.title ||= "#{accounts.map(&:username).join(", ")}"
     end
+    private :set_title
 
   end
 end
