@@ -30,9 +30,13 @@ module Aji
       (content_zset.revrange 0, (limit-1)).map(&:to_i)
     end
 
+    def most_significant_account
+      sorted = accounts.sort {|x,y| y.subscriber_count <=> x.subscriber_count}
+      sorted.first
+    end
+
     def subscriber_count
-      subscriber_counts = accounts.map &:subscriber_count
-      subscriber_counts.max
+      most_significant_account.subscriber_count
     end
 
     def thumbnail_uri

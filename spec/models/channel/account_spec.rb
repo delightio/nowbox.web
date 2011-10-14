@@ -24,16 +24,25 @@ module Aji
         channel = Channel::Account.create accounts: (accounts + [bad_author])
         bad_author.should_receive(:blacklisted?).and_return(true)
         bad_author.should_not_receive(:refresh_content)
+        accounts.each {|a| a.should_receive(:refresh_content).and_return([])}
         channel.refresh_content
+      end
+    end
+
+    describe "#most_significant_account" do
+      it "returns account with most subscribers" do
+        account1 = mock "account", :subscriber_count => 10
+        account2 = mock "account", :subscriber_count => 20
+        most_significant = mock "account", :subscriber_count => 10000
+        subject.stub(:accounts).and_return([account1, account2, most_significant].shuffle)
+        subject.most_significant_account.should == most_significant
       end
     end
 
     describe "#subscriber_count" do
       it "returns the max number of subscribers among all the accounts" do
-        subject.accounts.each_with_index do |a,i|
-          a.stub(:subscriber_count).and_return(i*1000)
-        end
-        subject.subscriber_count.should == (subject.accounts.count-1)*1000
+        subject.stub(:most_significant_account).and_return(mock("account", :subscriber_count=>12))
+        subject.subscriber_count.should == 12
       end
     end
 
@@ -43,10 +52,17 @@ module Aji
 
     describe "#serializable_hash" do
       it "returns an hash of account types" do
-        youtube = Factory :youtube_channel
-        youtube.serializable_hash['type'].should == "Account::Youtube"
-        twitter = Factory :twitter_channel
-        twitter.serializable_hash['type'].should == "Account::Twitter"
+
+        channel = Channel::Account.new
+        # TODO: Too bad we can't stub super
+        channel.stub(:category_ids).and_return([])
+        channel.stub(:subscriber_count).and_return(0)
+        channel.stub(:content_video_id_count).and_return(0)
+        channel.stub(:accounts).and_return([Account::Youtube.new])
+        channel.serializable_hash['type'].should == "Account::Youtube"
+
+        channel.stub(:accounts).and_return([Account::Twitter.new])
+        channel.serializable_hash['type'].should == "Account::Twitter"
       end
     end
 
@@ -89,13 +105,19 @@ module Aji
       end
 
       it "works with account which never has a channel on our system" do
-        account_array = Array(Factory :account)
-        new_channel = Channel::Account.find_or_create_by_accounts account_array
+        account = Account.new
+        account.save :validate=>false
+        new_channel = Channel::Account.find_or_create_by_accounts([account])
         new_channel.should_not be_nil
       end
 
       # FIXME: Test dependent on nowbox account having tweeted videos.
       it "inserts videos into the channel of the given accounts" do
+        # account = Account.new
+        # account.save :validate=>false
+        # account.should_receive(:refresh_content).and_return([mock.as_null_object])
+        # Channel.any_instance.should_receive(:update_relevance_in_categories)
+        # channel = Channel::Account.find_or_create_by_accounts [account], {},
         accounts = Array(Account::Youtube.create :uid => "nicnicolecole")
         channel = Channel::Account.find_or_create_by_accounts accounts, {},
           :reload
@@ -105,19 +127,27 @@ module Aji
     end
 
     describe "#content_video_ids" do
+      before :each do
+        accounts = []
+        videos = [mock("video",:id=>1), mock("video",:id=>2), mock("video",:id=>3)]
+        3.times do |n|
+          account = Account.new
+          account.save :validate=>false
+          account.push videos[n]
+          accounts << account
+        end
+        subject = Channel::Account.create accounts: accounts.first(2)
+      end
+
       it "returns the union of all accounts' content_video_ids" do
-        channel = Factory :youtube_channel
-        ids = []
-        channel.accounts.each { |a| ids += a.content_video_ids }
-        Set.new(ids).should == Set.new(channel.content_video_ids)
+        subject.content_video_ids == [1,2]
       end
 
       it "returns cached values when it can" do
-        channel = Factory :youtube_channel
-        cached_ids = channel.content_video_ids
-        channel.accounts << (Factory :youtube_account_with_videos)
-        channel.save
-        channel.content_video_ids.should == cached_ids
+        cached_ids = subject.content_video_ids
+        subject.accounts << (accounts.last)
+        subject.save
+        subject.content_video_ids.should == cached_ids
       end
     end
 
@@ -142,28 +172,32 @@ module Aji
 
     describe "#update_relevance_in_categories" do
       it "updates category relevance after #refresh_content" do
+        subject.accounts.each {|a| a.should_receive(:refresh_content).and_return([mock])}
         subject.should_receive(:update_relevance_in_categories).
           with(an_instance_of(Array))
         subject.refresh_content
       end
+
       it "orders categories according to occurance in videos" do
-        category1 = Factory :category
-        video = Factory :populated_video, :category => category1
-        expect {subject.update_relevance_in_categories [video] }.
-          to change { subject.categories.first }.to category1
+        category1 = mock "category1", :id=>1, :update_channel_relevance=>nil
+        Category.stub(:find_by_id).with(category1.id).and_return(category1)
+        video2 = mock "video", :id=>2, :category_id => category1.id
+        expect {subject.update_relevance_in_categories [video2] }.
+          to change { subject.category_ids.first }.to category1.id
 
         # same category differnet video
-        video = Factory :populated_video, :category => category1
-        expect {subject.update_relevance_in_categories [video] }.
-          to_not change { subject.categories.count }
+        video3 = mock "video", :id=>3, :category_id => category1.id
+        expect {subject.update_relevance_in_categories [video3] }.
+          to_not change { subject.category_ids.count }
 
         # 1 video in different category.
         # top category is still category1 since it was from 2 videos
-        category2 = Factory :category
-        video = Factory :populated_video, :category => category2
-        expect {subject.update_relevance_in_categories [video] }.
-          to change { subject.categories.count }.by 1
-        subject.categories.should == [category1, category2]
+        category2 = mock "category2", :id=>2, :update_channel_relevance=>nil
+        Category.stub(:find_by_id).with(category2.id).and_return(category2)
+        video4 = mock "video", :id=>4, :category_id => category2.id
+        expect {subject.update_relevance_in_categories [video4] }.
+          to change { subject.category_ids.count }.by 1
+        subject.category_ids.should == [category1.id, category2.id]
       end
     end
 
