@@ -30,6 +30,18 @@ module Aji
       (content_zset.revrange 0, (limit-1)).map(&:to_i)
     end
 
+    def update_relevance_in_categories new_videos
+      new_videos.map(&:category_id).group_by{|g| g}.each do |h|
+        cid = h.first; count = h.last.count # category_id => array of occurance
+        category = Category.find_by_id cid
+        Aji.log :ERROR, "invalid Category[#{cid}] from Channel[#{id}]!" if category.nil?
+        unless category.nil?
+          category.update_channel_relevance self, count
+          category_id_zset[cid] += count
+        end
+      end
+    end
+
     def most_significant_account
       sorted = accounts.sort {|x,y| y.subscriber_count <=> x.subscriber_count}
       sorted.first

@@ -100,18 +100,6 @@ module Aji
       new_videos[(total-limit)...total].to_a
     end
 
-    def update_relevance_in_categories new_videos
-      new_videos.map(&:category_id).group_by{|g| g}.each do |h|
-        cid = h.first; count = h.last.count # category_id => array of occurance
-        category = Category.find_by_id cid
-        Aji.log :ERROR, "invalid Category[#{cid}] from Channel[#{id}]!" if category.nil?
-        unless category.nil?
-          category.update_channel_relevance self, count
-          category_id_zset[cid] += count
-        end
-      end
-    end
-
     def background_refresh_content
       Resque.enqueue Queues::RefreshChannel, id
     end
