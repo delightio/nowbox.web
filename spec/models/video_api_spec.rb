@@ -28,7 +28,6 @@ module Aji
 
         subject.meth(:arg1).should == Array.new(VideoAPI.source_apis.count,
           :return_value)
-
       end
 
     end

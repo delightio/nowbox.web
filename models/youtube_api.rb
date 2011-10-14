@@ -37,6 +37,12 @@ module Aji
        :per_page => 50).videos.map{ |v| youtube_it_to_video v }
     end
 
+    def keyword_search keywords
+      tracker.hit!
+      client.videos_by(:query => Array(keywords).join(' '), :per_page => 50).
+        videos.map{ |v| youtube_it_to_video v }
+    end
+
     def youtube_it_to_hash video
       if youtube_category = video.categories.first
         category = Category.find_by_raw_title youtube_category.label

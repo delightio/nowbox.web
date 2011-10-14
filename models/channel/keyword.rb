@@ -45,16 +45,16 @@ module Aji
 
     def refresh_content force=false
       super force do |new_videos|
-        vhashes = Macker::Search.new(:keywords => keywords).search
-        vhashes.each_with_index do |vhash, i|
-          video = Video.find_or_create_by_external_id(
-            vhash[:external_id], vhash)
+        api.keyword_search(keywords).each_with_index do |video, i|
           new_videos << video
           push video, i
         end
       end
     end
 
+    def api
+      @api ||= VideoAPI.new
+    end
   end
 end
 

@@ -93,6 +93,25 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
       end
     end
 
+    describe "#keyword_search" do
+      it "hits youtube only once" do
+        subject.tracker.should_receive(:hit!)
+
+        VCR.use_cassette "youtube_api/keyword_search" do
+          subject.keyword_search "george carlin"
+        end
+      end
+
+      it "returns a nonempty collection of populated videos" do
+        videos = VCR.use_cassette "youtube_api/keyword_search" do
+          subject.keyword_search "george carlin"
+        end
+
+        videos.should_not be_empty
+        videos.each { |v| v.should be_populated }
+      end
+    end
+
     context "for a user with uploaded content" do
       subject { YoutubeAPI.new "brentalfloss" }
 
