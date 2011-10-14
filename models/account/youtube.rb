@@ -75,6 +75,10 @@ module Aji
       save
     end
 
+    def background_refresh_info
+      Resque.enqueue Queues::RefreshChannelInfo, id
+    end
+
     # Fetch information from youtube, returns the new info hash upon success
     # and false otherwise.
     def get_info_from_youtube_api

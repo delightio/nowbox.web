@@ -93,10 +93,6 @@ module Aji
       s.merge! h
     end
 
-    def background_refresh_info
-      Resque.enqueue Queues::RefreshChannelInfo, id
-    end
-
     private
     def set_title
       self.title ||= "#{accounts.map(&:username).join(", ")}"

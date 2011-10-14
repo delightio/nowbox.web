@@ -61,14 +61,6 @@ module Aji
 
     end
 
-    describe "#refresh_info" do
-      it "updates from youtube and save" do
-        subject.should_receive :get_info_from_youtube_api
-        subject.should_receive :save
-        subject.refresh_info
-      end
-    end
-
     describe "#refreshed?" do
       it "true if it has a thumbnail_uri" do
         subject.stub(:thumbnail_uri).and_return("jlkjlk")
@@ -78,6 +70,22 @@ module Aji
       it "false otherwise" do
         subject.stub(:thumbnail_uri).and_return("")
         subject.should_not be_refreshed
+      end
+    end
+
+    describe "#refresh_info" do
+      it "updates from youtube and save" do
+        subject.should_receive :get_info_from_youtube_api
+        subject.should_receive :save
+        subject.refresh_info
+      end
+    end
+
+    describe "#background_refresh_info" do
+      it "enqueues to refresh info" do
+        Resque.should_receive(:enqueue).
+          with(Aji::Queues::RefreshChannelInfo, subject.id)
+        subject.background_refresh_info
       end
     end
 
