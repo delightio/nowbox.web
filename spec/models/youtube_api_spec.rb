@@ -52,7 +52,7 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
 
     describe "#video_info" do
       it "hits youtube only once" do
-        pending "please check actual hits required since we always create author object in db"
+        #pending "please check actual hits required since we always create author object in db"
 
         subject.tracker.should_receive(:hit!)
 
@@ -69,6 +69,7 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
         hash[:title].should == "[Portal 2] Corrupt Core Quotes (Space, Fact and Adventure Spheres)"
         hash[:external_id].should == "3307vMsCG0I"
         hash[:description].should == "Here are all the lines for the corrupt cores during the final fight scene. Not gunna lie, i couldnt stop laughing during the final battle because of these little bastards.   Anyways, Enjoy, Comment, Rate, Subscribe, Share! :D"
+        hash[:source].should == :youtube
       end
 
       it "raises a VideoAPI::Error when video is unavailable" do
@@ -80,7 +81,7 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
 
       describe "#valid_uid?" do
         it "hits youtube only once" do
-          pending "please check actual hits required since we always create author object in db"
+          #pending "please check actual hits required since we always create author object in db"
 
           subject.tracker.should_receive(:hit!)
 
@@ -109,7 +110,7 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
 
     describe "#keyword_search" do
       it "hits youtube only once" do
-        pending "please check actual hits required since we always create author object in db"
+        #pending "please check actual hits required since we always create author object in db"
 
         subject.tracker.should_receive(:hit!)
 
@@ -136,7 +137,7 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
 
       describe "#uploaded_videos" do
         it "hits youtube only once" do
-          pending "please check actual hits required since we always create author object in db"
+          #pending "please check actual hits required since we always create author object in db"
 
           subject.tracker.should_receive(:hit!)
 
