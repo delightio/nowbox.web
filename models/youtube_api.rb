@@ -45,15 +45,13 @@ module Aji
 
     def youtube_it_to_hash video
       if youtube_category = video.categories.first
-        category = Category.find_by_raw_title youtube_category.label
-        category ||= Category.new :raw_title => youtube_category.label,
+        category = Category.find_or_create_by_raw_title youtube_category.label,
           :title => youtube_category.term
       else
         category = Category.undefined
       end
 
-      author = Account::Youtube.find_by_uid(video.author.name)
-      author ||= Account::Youtube.new :uid => video.author.name
+      author = Account::Youtube.find_or_create_by_uid(video.author.name)
 
       {
         :title => video.title,
