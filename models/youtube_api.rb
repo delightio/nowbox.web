@@ -69,7 +69,10 @@ module Aji
     end
 
     def youtube_it_to_video video
-      Video.new youtube_it_to_hash video
+      h = youtube_it_to_hash video
+      # We indexed by external_id followed by source
+      v = Video.find_or_create_by_external_id_and_source(
+        h[:external_id], :source, h)
     end
 
     def tracker

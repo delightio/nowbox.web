@@ -103,6 +103,10 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
       end
     end
 
+    describe "#youtube_it_to_video" do
+      it "returns an valid video from database"
+    end
+
     describe "#keyword_search" do
       it "hits youtube only once" do
         pending "please check actual hits required since we always create author object in db"
@@ -114,13 +118,16 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
         end
       end
 
-      it "returns a nonempty collection of populated videos" do
+      it "returns a nonempty collection of populated videos from db" do
         videos = VCR.use_cassette "youtube_api/keyword_search" do
           subject.keyword_search "george carlin"
         end
 
         videos.should_not be_empty
-        videos.each { |v| v.should be_populated }
+        videos.each do |v|
+          v.should_not be_new_record
+          v.should be_populated
+        end
       end
     end
 
@@ -138,13 +145,16 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
           end
         end
 
-        it "returns a nonempty list of populated videos" do
+        it "returns a nonempty list of populated videos from db" do
           videos = VCR.use_cassette "youtube_api/uploaded_videos" do
             subject.uploaded_videos
           end
 
           videos.should_not be_empty
-          videos.each { |v| v.should be_populated }
+          videos.each do |v|
+            v.should_not be_new_record
+            v.should be_populated
+          end
         end
       end
     end
