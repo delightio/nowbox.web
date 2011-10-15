@@ -2,6 +2,12 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
   describe Aji::YoutubeAPI, :unit, :net do
+
+    describe "#youtube_it_to_hash" do
+      it "creates Category object if needed"
+      it "creates Account::Youtube object if needed"
+    end
+
     describe "#author_info" do
       it "hits youtube only once" do
         subject.tracker.should_receive(:hit!)
