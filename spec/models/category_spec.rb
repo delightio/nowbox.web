@@ -5,7 +5,6 @@ module Aji
     subject do
       Category.new.tap do |c|
         c.stub :id => 1
-        c.channel_id_zset[1]=1
         Category.stub(:find).with(c.id).and_return(c)
         Category.stub(:find_by_id).with(c.id).and_return(c)
         Category.stub(:find_by_title).and_return(c)
@@ -18,6 +17,17 @@ module Aji
     it "sets title as raw_title after create" do
       c = Category.create :raw_title => "raw title"
       c.title.should_not be_nil
+    end
+
+    describe "#update_channel_relevance" do
+      let(:channel) { mock "channel", :id=>1 }
+      it "overwrites previous relevance with new one" do
+        old_relevance, new_relevance = 100, 200
+        subject.update_channel_relevance channel, old_relevance
+        expect { subject.update_channel_relevance channel, new_relevance }.
+          to change { subject.channel_id_zset.score channel.id }.
+          from(old_relevance).to(new_relevance)
+      end
     end
 
     describe "#featured_channels" do

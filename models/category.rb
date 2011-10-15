@@ -25,7 +25,7 @@ module Aji
     end
 
     def update_channel_relevance channel, relevance
-      channel_id_zset[channel.id] += relevance
+      channel_id_zset[channel.id] = relevance
     end
 
     def serializable_hash options={}
