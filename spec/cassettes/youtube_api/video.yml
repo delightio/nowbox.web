@@ -1,0 +1,54 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/lookitsmyvideo?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Sat, 15 Oct 2011 06:11:37 GMT
+      date:
+      - Sat, 15 Oct 2011 06:06:37 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"CE4EQ347eCp7I2A9WhdbFkg."
+      last-modified:
+      - Sat, 15 Oct 2011 04:28:22 GMT
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+      transfer-encoding:
+      - chunked
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"CE4EQ347eCp7I2A9WhdbFkg.\"","id":{"$t":"tag:youtube.com,2008:user:lookitsmyvideo"},"published":{"$t":"2008-10-13T15:23:40.000-07:00"},"updated":{"$t":"2011-10-14T21:28:22.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Director"}],"title":{"$t":"YouTube
+      user: lookitsmyvideo"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=lookitsmyvideo"},{"rel":"http://gdata.youtube.com/schemas/2007#user.vlog","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/playlists/294528A842926182?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/VnhMPEYsuoQ?v=2"},{"rel":"related","type":"text/html","href":"http://twitter.com/lookitsmyvideo"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo?v=2"}],"author":[{"name":{"$t":"lookitsmyvideo"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo"}}],"yt$aboutMe":{"$t":"Join
+      my Public Steam Group! http://steamcommunity.com/groups/lookitsmyvideo\n\nFollow
+      my Stream! http://www.justin.tv/eyeofthehawks\n\nSystem Specs:\nAMD Phenom 955
+      BE 3.2GHz Quad Core\nEVGA GeForce 9800GTX+ 512MB\n8GB DDR3 1333mhz Corsair XMS3
+      RAM\n250GB 7200 RPM OS Disk\n1.5TB 7200 RPM Recording Disk\nCoolermaster HAF
+      Case\nMSi NF750-G55 Motherboard\nCorsair H70 Water Cooler\n\n\n\nHonours: #87
+      Most Viewed this Month (May)[Canada]\n\nPersonal Twitter - http://twitter.com/#!/EyeOfTheHawks\n\n\nNOT
+      A SUB4SUB CHANNEL - Shut up about it"},"yt$age":{"$t":18},"yt$books":{"$t":"NO"},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/favorites?v=2","countHint":140},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/contacts?v=2","countHint":184},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/subscriptions?v=2","countHint":66},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/uploads?v=2","countHint":206},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Alex
+      [Hawks]"},"yt$gender":{"$t":"m"},"yt$hobbies":{"$t":"Makin z videox"},"yt$location":{"$t":"CA"},"yt$movies":{"$t":"Austin
+      Powers"},"yt$music":{"$t":"Tool, Rage Against the Machine, APC"},"yt$occupation":{"$t":"Student"},"yt$statistics":{"lastWebAccess":"2011-08-16T06:33:35.000-07:00","subscriberCount":"518","videoWatchCount":0,"viewCount":"11477","totalUploadViews":"847380"},"media$thumbnail":{"url":"http://i1.ytimg.com/i/0YcjhK7b76VDoce80SU0-w/1.jpg?v=af6c3e"},"yt$username":{"$t":"lookitsmyvideo"}}}'
+    http_version: '1.1'
