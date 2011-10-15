@@ -43,7 +43,7 @@ module Aji
         unless category.nil?
           relevance_in_category = relevance * count / total
           category.update_channel_relevance self, relevance_in_category
-          category_id_zset[category.id] += count
+          category_id_zset[category.id] = count
         end
       end
     end

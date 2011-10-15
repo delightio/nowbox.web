@@ -207,17 +207,16 @@ module Aji
 
         category2 = mock "category2", :id=>2, :update_channel_relevance=>nil
         video2 = mock "video", :id=>2, :category=>category2
-
-        channel1.stub(:content_videos).with(100).and_return([video1, video2])
-        relevance = channel1.relevance * 1 / 2 # since we have 2 different categories
+        video3 = mock "video", :id=>3, :category=>category2
+        channel1.stub(:content_videos).with(100).and_return([video1, video2, video3])
         category1.should_receive(:update_channel_relevance).
-          with(channel1, relevance )
+          with(channel1, channel1.relevance * 1 / 3 )
         category2.should_receive(:update_channel_relevance).
-          with(channel1, relevance )
+          with(channel1, channel1.relevance * 2 / 3 ) # 2 videos w/ cat2
 
         expect { channel1.update_relevance_in_categories }.
           to change { channel1.category_ids }.
-          from([category1.id]).to([category1.id, category2.id])
+          from([category1.id]).to([category2.id, category1.id])
 
       end
     end
