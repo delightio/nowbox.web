@@ -92,7 +92,7 @@ module Aji
         viewed_video_ids = user.history_channel.content_video_ids
         content_video_ids.each do |channel_video_id|
           video = Video.find_by_id channel_video_id
-          next if video.blacklisted?
+          next if video.nil? || video.blacklisted?
           new_videos << video if !viewed_video_ids.member? channel_video_id
           break if new_videos.count >= total
         end
