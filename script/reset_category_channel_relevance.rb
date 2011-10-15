@@ -12,6 +12,11 @@ module Aji
     channel_class.find_each do |ch|
       Aji.log "  Channel[#{ch.id}], #{ch.title}, #{ch.content_video_id_count}, #{ch.relevance} (#{ch.subscriber_count})"
 
+      if ch.accounts.any? {|a| a.class != Account::Youtube }
+        Aji.log "  ** non youtube acccounts. Skipping..."
+        next
+      end
+
       all_refreshed = ch.accounts.all? {|a| a.refreshed? }
       Aji.log "  * Channel[#{ch.id}] does not have all info needed. *" if !all_refreshed
       ch.update_relevance_in_categories if all_refreshed
