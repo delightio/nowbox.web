@@ -13,6 +13,10 @@ development:
   # FACEBOOK
   APP_ID: "147264905366497"
   APP_SECRET: "69e12456a7c11a35c653e325c7e8c249"
+
+  # YOUTUBE
+  YOUTUBE_KEY: "AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA"
+
   TLD: "smackaho.st"
   REDISTOGO_URL: "redis://localhost/7"
   DATABASE_URL: "postgres://localhost/aji_dev"
@@ -33,6 +37,10 @@ test:
   # FACEBOOK
   APP_ID: "147264905366497"
   APP_SECRET: "69e12456a7c11a35c653e325c7e8c249"
+
+  # YOUTUBE
+  YOUTUBE_KEY: "AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA"
+
   TLD: "smackaho.st"
   REDISTOGO_URL: "redis://localhost/9"
   DATABASE_URL: "postgres://localhost/aji_test"

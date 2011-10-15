@@ -41,7 +41,8 @@ module Aji
       failed
       blacklist if failures >= MAX_FAILED_ATTEMPTS
     else
-      save and if block_given? then yield self end
+      populated_at = Time.now
+      save and if block_given? then yield self else true end
     end
 
     # Symbolize source attribute.
@@ -116,7 +117,7 @@ module Aji
     end
 
     def api
-      @api ||= VideoAPI.new source
+      @api ||= VideoAPI.for_source(source)
     end
   end
 end

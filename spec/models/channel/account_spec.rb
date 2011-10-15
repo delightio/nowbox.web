@@ -52,8 +52,17 @@ module Aji
       end
     end
 
-    it "should set title based on accounts" do
-      subject.title.should == "freddiew, brentalfloss"
+    describe "#set_title" do
+      let(:accounts) { [stub(:username => "Bob"), stub(:username => "Sally")] }
+      let(:title) { "Bob, Sally" }
+
+      subject { Channel::Account.new.tap{ |a| a.stub :accounts => accounts } }
+
+      it "should set title based on accounts" do
+        subject.send(:set_title)
+
+        subject.title.should == title
+      end
     end
 
     describe "#serializable_hash" do
@@ -117,18 +126,13 @@ module Aji
         new_channel.should_not be_nil
       end
 
-      # FIXME: Test dependent on nowbox account having tweeted videos.
-      it "inserts videos into the channel of the given accounts" do
-        # account = Account.new
-        # account.save :validate=>false
-        # account.should_receive(:refresh_content).and_return([mock.as_null_object])
-        # Channel.any_instance.should_receive(:update_relevance_in_categories)
-        # channel = Channel::Account.find_or_create_by_accounts [account], {},
-        accounts = Array(Account::Youtube.create :uid => "nicnicolecole")
-        channel = Channel::Account.find_or_create_by_accounts accounts, {},
-          :reload
-        channel.should_not be_nil
-        channel.content_videos.should_not be_empty
+      it "refreshes channel content when refresh is true", :unit do
+        accounts = [mock("account")]
+        c1 = mock("channel").tap{ |c| c.should_receive(:refresh_content) }
+        Channel::Account.stub(:find_all_by_accounts).and_return([])
+        Channel::Account.stub(:create).with(accounts: accounts).and_return(c1)
+
+        Channel::Account.find_or_create_by_accounts accounts, {}, :refresh!
       end
     end
 

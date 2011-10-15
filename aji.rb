@@ -107,6 +107,5 @@ require_relative "lib/mailer/mailer"
 
 # Add miscelaneous library code.
 require './lib/decay'
-require './lib/macker'
 require './lib/parsers'
 require './lib/searcher'

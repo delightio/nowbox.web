@@ -57,11 +57,11 @@
       x-gdata-user-country:
       - US
       content-type:
-      - application/atom+xml; charset=UTF-8
+      - application/atom+xml;charset=UTF-8
       expires:
-      - Mon, 03 Oct 2011 20:01:12 GMT
+      - Thu, 13 Oct 2011 22:29:54 GMT
       date:
-      - Mon, 03 Oct 2011 19:56:12 GMT
+      - Thu, 13 Oct 2011 22:24:54 GMT
       cache-control:
       - public, max-age=300, no-transform
       vary:
@@ -69,27 +69,27 @@
       gdata-version:
       - '1.0'
       last-modified:
-      - Sat, 01 Oct 2011 08:57:45 GMT
+      - Thu, 13 Oct 2011 07:23:20 GMT
       x-content-type-options:
       - nosniff
       x-frame-options:
       - SAMEORIGIN
       x-xss-protection:
       - 1; mode=block
+      content-length:
+      - '2409'
       server:
       - GSE
-      transfer-encoding:
-      - chunked
     body: ! '<?xml version=''1.0'' encoding=''UTF-8''?><entry xmlns=''http://www.w3.org/2005/Atom''
       xmlns:media=''http://search.yahoo.com/mrss/'' xmlns:gd=''http://schemas.google.com/g/2005''
-      xmlns:yt=''http://gdata.youtube.com/schemas/2007''><id>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</id><published>2008-11-23T23:38:28.000-08:00</published><updated>2011-10-01T01:57:45.000-07:00</updated><category
+      xmlns:yt=''http://gdata.youtube.com/schemas/2007''><id>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</id><published>2008-11-23T23:38:28.000-08:00</published><updated>2011-10-13T00:23:20.000-07:00</updated><category
       scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#userProfile''/><category
       scheme=''http://gdata.youtube.com/schemas/2007/channeltypes.cat'' term=''Standard''/><title
       type=''text''>YouTube user: nuclearsandwich</title><link rel=''alternate'' type=''text/html''
       href=''http://www.youtube.com/profile?user=nuclearsandwich''/><link rel=''self''
       type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:age>23</yt:age><gd:feedLink
       rel=''http://gdata.youtube.com/schemas/2007#user.favorites'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/favorites''
-      countHint=''61''/><gd:feedLink rel=''http://gdata.youtube.com/schemas/2007#user.contacts''
+      countHint=''63''/><gd:feedLink rel=''http://gdata.youtube.com/schemas/2007#user.contacts''
       href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/contacts'' countHint=''0''/><gd:feedLink
       rel=''http://gdata.youtube.com/schemas/2007#user.inbox'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/inbox''/><gd:feedLink
       rel=''http://gdata.youtube.com/schemas/2007#user.playlists'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/playlists''/><gd:feedLink
@@ -98,5 +98,5 @@
       href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/uploads'' countHint=''0''/><gd:feedLink
       rel=''http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/newsubscriptionvideos''/><yt:gender>m</yt:gender><yt:location>US</yt:location><yt:statistics
       lastWebAccess=''2011-08-31T16:23:11.000-07:00'' subscriberCount=''0'' videoWatchCount=''0''
-      viewCount=''101'' totalUploadViews=''0''/><media:thumbnail url=''http://s.ytimg.com/yt/img/no_videos_140-vfl1fDI7-.png''/><yt:username>nuclearsandwich</yt:username></entry>'
+      viewCount=''102'' totalUploadViews=''0''/><media:thumbnail url=''http://s.ytimg.com/yt/img/no_videos_140-vfl1fDI7-.png''/><yt:username>nuclearsandwich</yt:username></entry>'
     http_version: '1.1'
