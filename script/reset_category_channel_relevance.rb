@@ -9,18 +9,24 @@ module Aji
 
   non_yt = []
   incomplete = []
+  empty = []
   [Channel::Account].each do |channel_class|
     c=0
     Aji.log "Updating from #{channel_class.count} #{channel_class} channels..."
     channel_class.find_each do |ch|
-      print " #{c.to_s.rjust(4)}  Channel[#{ch.id}], #{ch.title},"
-      puts " #{ch.content_video_id_count}, #{ch.relevance} (#{ch.subscriber_count})"
-      c += 1
       if ch.accounts.any? {|a| a.class != Account::Youtube }
         Aji.log "    ** non youtube acccounts. Skipping..."
         non_yt << ch.id
         next
       end
+      if ch.accounts.count==0
+        Aji.log "   *** Channel with no account association Skipping..."
+        empty << ch.id
+        next
+      end
+
+      Aji.log " #{c.to_s.rjust(4)}  Channel[#{ch.id}], #{ch.title}, #{ch.content_video_id_count}, #{ch.relevance} (#{ch.subscriber_count})"
+      c += 1
 
       all_refreshed = ch.accounts.all? {|a| a.refreshed? }
       if all_refreshed
@@ -40,4 +46,5 @@ module Aji
 
   puts "non_yt = #{non_yt}"
   puts "incomplete = #{incomplete}"
+  puts "empty = #{empty}"
 end
