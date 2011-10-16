@@ -63,7 +63,7 @@ module Aji
         :category => category,
         :author => author,
         :published_at => video.published_at,
-        :source => 'youtube',
+        :source => :youtube,
         :populated_at => Time.now
       }
     end
@@ -71,8 +71,8 @@ module Aji
     def youtube_it_to_video video
       h = youtube_it_to_hash video
       # We indexed by external_id followed by source
-      v = Video.find_or_create_by_external_id_and_source(
-        h[:external_id], :source, h)
+      Video.find_or_create_by_external_id_and_source(
+        h[:external_id], h[:source], h)
     end
 
     def tracker
