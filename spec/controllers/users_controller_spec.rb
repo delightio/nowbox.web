@@ -46,7 +46,7 @@ module Aji
         end
 
         it "assigns the correct region when specific" do
-          params = {:locale => "en_US", :time_zone => "+8"}
+          params = {:language => "ko", :locale => "ko_KR"}
           region = Region.create params
 
           post "#{resource_uri}/", params

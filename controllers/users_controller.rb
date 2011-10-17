@@ -30,6 +30,7 @@ module Aji
       # a JSON encoded error message if not.
       #
       # __Required params__
+      # - `language` language id tag given by iOS, string
       # - `locale` locale given by iOS, string
       #
       # __Optional params__
@@ -37,8 +38,8 @@ module Aji
       # - `email` email address of the user
       # - `time_zone` time zone info given by iOS, string
       post do
-        region = Region.find_or_create_by_locale_and_time_zone(
-          params[:locale], params[:time_zone]) ||
+        region = Region.find_or_create_by_language_and_locale(
+          params[:language], params[:locale]) ||
           Region.undefined
         User.create(:email => params[:email],
                     :name => params[:name],

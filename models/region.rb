@@ -40,22 +40,23 @@ module Aji
     end
 
     def language_based
-      iso_code = Language.new(locale).iso_code
+      iso_code = Language.new(language).iso_code
       iso_code = "en" if !self.class.respond_to? iso_code.to_sym
       self.class.send iso_code.to_sym
     end
 
-
     def self.undefined
-      find_or_create_by_locale_and_time_zone nil, nil
+      find_or_create_by_language_and_locale nil, nil
     end
 
+    # MASTER based on laungage ################################################
+
     def self.en
-      find_or_create_by_locale "en_US"
+      find_or_create_by_language_and_locale "en", nil
     end
 
     def self.ko
-      find_or_create_by_locale "ko_KR"
+      find_or_create_by_language_and_locale "ko", nil
     end
 
   end

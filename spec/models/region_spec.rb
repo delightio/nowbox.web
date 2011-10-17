@@ -43,13 +43,13 @@ module Aji
     describe "#language_based" do
       it "returns the parent region based on language" do
         [:en, :ko].each do |code|
-          region = Region.create :locale => "#{code}_xxx"
+          region = Region.create :language => "#{code}-xxx"
           region.language_based.should == (Region.send code)
         end
       end
 
       it "uses english based if there isn't a specific set of features for given language" do
-        region = Region.create :locale => "zh_HK"
+        region = Region.create :language => "zh-Hant"
         region.language_based.should == Region.en
       end
     end

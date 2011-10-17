@@ -13,25 +13,25 @@ module Aji
 
     describe "#iso_code" do
 
-      let(:locale_en) { "en_US"}
-      let(:locale_zh) { "zh-hans_HK"}
+      let(:id_tag_en) { "en_US"}
+      let(:id_tag_zh) { "zh-hans_HK"}
       it "returns the 2 letter ISO language code" do
-        en = Language.new locale_en
+        en = Language.new id_tag_en
         en.iso_code.should == "en"
 
-        zh = Language.new locale_zh
+        zh = Language.new id_tag_zh
         zh.iso_code.should == "zh"
       end
 
-      let(:locale_ace) { "ace_xxx"}
+      let(:id_tag_ace) { "ace_xxx"}
       it "returns english if locale has a 3 letter ISO code" do
-        ace = Language.new locale_ace
+        ace = Language.new id_tag_ace
         ace.iso_code.should == "en"
       end
 
-      let(:locale_nil) { nil }
+      let(:id_tag_nil) { nil }
       it "returns english if locale is nil" do
-        empty = Language.new locale_nil
+        empty = Language.new id_tag_nil
         empty.iso_code.should == "en"
       end
     end
