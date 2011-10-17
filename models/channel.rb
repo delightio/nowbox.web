@@ -49,6 +49,7 @@ module Aji
         "thumbnail_uri" => thumbnail_uri,
         "subscriber_count" => subscriber_count,
         "video_count" => content_video_id_count,
+        "populated_at" => populated_at.to_i,
         # TODO: Shouldn't just catch the first version since we may change
         # this method in a version bump.
         "resource_uri" => "http://api.#{Aji.conf['TLD']}/" +
