@@ -2148,3 +2148,107 @@
     body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"C0AHSH47eCp7I2A9WhdbFEQ.\"","id":{"$t":"tag:youtube.com,2008:user:VideosInHQ"},"published":{"$t":"2009-09-11T15:44:01.000-07:00"},"updated":{"$t":"2011-10-13T00:42:19.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"YouTube
       user: VideosInHQ"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=VideosInHQ"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/VideosInHQ?v=2"}],"author":[{"name":{"$t":"VideosInHQ"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/videosinhq"}}],"yt$age":{"$t":25},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/videosinhq/favorites?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/videosinhq/contacts?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/videosinhq/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/videosinhq/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/videosinhq/subscriptions?v=2","countHint":1},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/videosinhq/uploads?v=2","countHint":3},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/videosinhq/newsubscriptionvideos?v=2"}],"yt$gender":{"$t":"m"},"yt$location":{"$t":"US"},"yt$statistics":{"lastWebAccess":"2009-11-14T17:56:25.000-08:00","subscriberCount":"39","videoWatchCount":0,"viewCount":"974","totalUploadViews":"584789"},"media$thumbnail":{"url":"http://s.ytimg.com/yt/img/no_videos_140-vfl1fDI7-.png"},"yt$username":{"$t":"VideosInHQ"}}}'
     http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/AssociatedPress?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Mon, 17 Oct 2011 18:53:33 GMT
+      date:
+      - Mon, 17 Oct 2011 18:48:33 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DUYNSX47eCp7I2A9WhdbGEo."
+      last-modified:
+      - Mon, 17 Oct 2011 18:46:38 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"DUYNSX47eCp7I2A9WhdbGEo.\"","id":{"$t":"tag:youtube.com,2008:user:AssociatedPress"},"published":{"$t":"2006-09-18T15:46:11.000-07:00"},"updated":{"$t":"2011-10-17T11:46:38.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Reporter"}],"title":{"$t":"YouTube
+      user: AssociatedPress"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=AssociatedPress"},{"rel":"http://gdata.youtube.com/schemas/2007#user.vlog","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/playlists/87FB2E7615B25B00?v=2"},{"rel":"related","type":"text/html","href":"http://www.ap.org/"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/AssociatedPress?v=2"}],"author":[{"name":{"$t":"AssociatedPress"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/associatedpress"}}],"yt$aboutMe":{"$t":"The
+      Associated Press is the essential global news network, delivering fast, unbiased
+      news from every corner of the world to all media platforms and formats. Founded
+      in 1846, AP today is the largest and most trusted source of independent news
+      and information. On any given day, more than half the world''s population sees
+      news from AP."},"yt$age":{"$t":33},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/associatedpress/favorites?v=2","countHint":2},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/associatedpress/contacts?v=2","countHint":1},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/associatedpress/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/associatedpress/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/associatedpress/subscriptions?v=2","countHint":1},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/associatedpress/uploads?v=2","countHint":50852},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/associatedpress/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Associated
+      Press"},"yt$location":{"$t":"AF"},"yt$statistics":{"lastWebAccess":"2011-08-21T15:01:22.000-07:00","subscriberCount":"240984","videoWatchCount":0,"viewCount":"7026097","totalUploadViews":"940493589"},"media$thumbnail":{"url":"http://i2.ytimg.com/i/52X5wxOL_s5yw0dQk7NtgA/1.jpg?v=7bd540"},"yt$username":{"$t":"AssociatedPress"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/Werebull?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Mon, 17 Oct 2011 18:53:33 GMT
+      date:
+      - Mon, 17 Oct 2011 18:48:33 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DkQDR347eCp7I2A9WhdbGE8."
+      last-modified:
+      - Mon, 17 Oct 2011 04:06:16 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"DkQDR347eCp7I2A9WhdbGE8.\"","id":{"$t":"tag:youtube.com,2008:user:Werebull"},"published":{"$t":"2006-07-07T09:23:29.000-07:00"},"updated":{"$t":"2011-10-16T21:06:16.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Director"}],"title":{"$t":"YouTube
+      user: Werebull"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=Werebull"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/KgBj2HQPTl0?v=2"},{"rel":"related","type":"text/html","href":"http://www.facebook.com/werebull"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/Werebull?v=2"}],"author":[{"name":{"$t":"Werebull"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/werebull"}}],"yt$aboutMe":{"$t":"Individualistic
+      advocate of individuality, ambivert neophyte, astral traveler, entropy fan,
+      determinist, fatalist, naturalist, disillusionist, deconstructionist wannabe.
+      \n\nEnfant terrible, pompous poseur, savior of dragons & slayer of damsels."},"yt$age":{"$t":25},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/werebull/favorites?v=2","countHint":65},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/werebull/contacts?v=2","countHint":219},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/werebull/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/werebull/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/werebull/subscriptions?v=2","countHint":37},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/werebull/uploads?v=2","countHint":16},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/werebull/newsubscriptionvideos?v=2"}],"yt$gender":{"$t":"m"},"yt$hobbies":{"$t":"Metacognition,
+      metatation, neuro-linguistic programming, astrology, cryptozoology, evolutionary
+      psychology, cinema, deadpan humor, the psychosocial tendency towards pomposity."},"yt$hometown":{"$t":"Covasna"},"yt$location":{"$t":"Bucharest,
+      RO"},"yt$movies":{"$t":"American Beauty, About Schmidt, Scarecrow, All That
+      Jazz, Blue Velvet, Easy Rider, Five Easy Pieces and all of Scorsese''s movies.
+      Six Feet Under, The Sopranos, Curb Your Enthusiasm, Seinfeld, Da Ali G Show,
+      The Colbert Report."},"yt$music":{"$t":"Classic rock"},"yt$occupation":{"$t":"Bodhisattva,
+      demiurge, guru"},"yt$statistics":{"lastWebAccess":"2011-06-07T07:29:21.000-07:00","subscriberCount":"203","videoWatchCount":0,"viewCount":"9635","totalUploadViews":"1082246"},"media$thumbnail":{"url":"http://i3.ytimg.com/i/voP0S9zRnOITBNVmVmLeAw/1.jpg?v=86a7e7"},"yt$username":{"$t":"Werebull"}}}'
+    http_version: '1.1'

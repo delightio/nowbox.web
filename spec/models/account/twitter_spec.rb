@@ -1,7 +1,7 @@
 require File.expand_path("../../../spec_helper", __FILE__)
 
 module Aji
-  describe Aji::Account::Twitter, :unit, do
+  describe Aji::Account::Twitter, :unit do
     let(:mentions) { stub.as_null_object }
 
     let(:video) do
