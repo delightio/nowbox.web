@@ -87,11 +87,11 @@ module Aji
             "uid" => uid,
             "username" => username,
             "thumbnail_uri" => thumbnail_uri,
+            "profile_uri" => profile_uri,
             "subscriber_count" => subscriber_count ]
 
             # These are available but iOS doesn't need it.
             # Extra memory neede for these has became significant on iOS.
-            # "profile_uri" => profile_uri,
             # "realname" => realname,
             # "description" => description
     end
