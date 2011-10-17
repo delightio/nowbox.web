@@ -43,7 +43,7 @@ module Aji
         "id" => id,
         "type" => (type||"").split("::").last,
         "default_listing" => default_listing,
-        "category_ids" => category_ids,
+        # "category_ids" => category_ids, # iOS doesn't need them
         "title" => title,
         "description" => "",
         "thumbnail_uri" => thumbnail_uri,

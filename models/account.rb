@@ -85,13 +85,15 @@ module Aji
       Hash[ "id" => id,
             "provider" => type.split('::').last.downcase,
             "uid" => uid,
-
             "username" => username,
-            "profile_uri" => profile_uri,
             "thumbnail_uri" => thumbnail_uri,
-            "realname" => realname,
-            "subscriber_count" => subscriber_count,
-            "description" => description ]
+            "subscriber_count" => subscriber_count ]
+
+            # These are available but iOS doesn't need it.
+            # Extra memory neede for these has became significant on iOS.
+            # "profile_uri" => profile_uri,
+            # "realname" => realname,
+            # "description" => description
     end
 
     def deauthorize!
