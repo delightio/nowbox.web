@@ -18,7 +18,7 @@ module Aji
         end
 
         def featured
-          featured_ids.map{ |fid| find fid }
+          featured_ids.map{ |fid| find_by_id fid }.compact
         end
 
         def set_featured to_be_featured_by_title
