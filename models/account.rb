@@ -24,17 +24,21 @@ module Aji
     # All of the accounts that this account receives content from.
     set :influencer_set
 
+    validates_uniqueness_of :uid, :case_sensitive => false
+
     serialize :info, Hash
     serialize :credentials, Hash
     serialize :auth_info, Hash
 
     belongs_to :identity, :class_name => 'Aji::Identity'
+
     has_one :user, :through => :identity
     has_and_belongs_to_many :channels,
       :class_name => 'Channel::Account', :join_table => :accounts_channels,
       :foreign_key => :account_id, :association_foreign_key => :channel_id,
       :autosave => true
 
+    before_save :downcase_uid
     after_initialize :initialize_info_hashes
     after_save :update_tank_indexes_if_searchable
     after_destroy :delete_redis_keys, :delete_tank_indexes_if_searchable
@@ -135,6 +139,10 @@ module Aji
       self.info         ||= Hash.new
       self.auth_info    ||= Hash.new
       self.credentials  ||= Hash.new
+    end
+
+    def downcase_uid
+      self.uid = uid.downcase
     end
 
     # Class Methods follow

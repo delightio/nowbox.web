@@ -11,6 +11,15 @@ module Aji
       end
     end
 
+    describe "#downcase_uid" do
+      subject { Account.new uid: "CNN" }
+
+      it "converts the stored uid to lower case" do
+        expect { subject.downcase_uid }.to change{ subject.uid }.from(
+          "CNN").to("cnn")
+      end
+    end
+
     it_behaves_like "any redis object model"
 
     describe ".from_param" do
