@@ -52,11 +52,22 @@ module Aji
     end
 
     describe "#get_info_from_youtube_api" do
-      subject { Account::Youtube.new :uid => 'day9tv' }
+      let(:info_hash) { { 'username' => 'day9tv' } }
+      let(:api) { stub :author_info => info_hash }
+      subject do
+        Account::Youtube.new(uid: 'day9tv').tap do |a|
+          a.stub :api => api
+        end
+      end
 
       it "uses the youtube api to get author info" do
-        subject.api.should_receive(:author_info)
+        subject.api.should_receive(:author_info).and_return(info_hash)
         subject.get_info_from_youtube_api
+      end
+
+      it "sets the username from the info hash" do
+        expect { subject.get_info_from_youtube_api }.to(
+          change{ subject.username }.to("day9tv"))
       end
     end
 
@@ -77,10 +88,9 @@ module Aji
       it "creates a new object if given uid is valid but not already in db" do
         a = mock("account", :existing? => true)
         Account::Youtube.should_receive(:find_or_create_by_uid).
-          with(uid).and_return(mock)
+          with(uid, {}).and_return(mock)
         Account::Youtube.create_if_existing uid
       end
-
     end
 
     describe "#refreshed?" do
@@ -111,5 +121,37 @@ module Aji
       end
     end
 
+    describe ".find_by_lower_uid" do
+      let(:uid) { "Freddie25" }
+
+      it "downcases its argument" do
+        uid.should_receive(:downcase)
+
+        Account::Youtube.find_by_lower_uid uid
+      end
+
+      it "delegates to find_by_uid" do
+        Account::Youtube.should_receive(:find_by_uid).with(uid.downcase)
+
+        Account::Youtube.find_by_lower_uid uid
+      end
+    end
+
+    describe ".find_or_create_by_lower_uid" do
+      let(:uid) { "Freddie25" }
+
+      it "downcases its argument" do
+        uid.should_receive(:downcase)
+
+        Account::Youtube.find_or_create_by_lower_uid uid
+      end
+
+      it "delegates to find_by_uid" do
+        Account::Youtube.should_receive(:find_or_create_by_uid).with(
+          uid.downcase, {})
+
+        Account::Youtube.find_or_create_by_lower_uid uid
+      end
+    end
   end
 end

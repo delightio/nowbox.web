@@ -6,7 +6,6 @@ module Aji
     validates_uniqueness_of :uid
 
     before_create :get_info_from_youtube_api
-    after_create :set_uid_as_username
 
     def profile_uri
       info['profile']
@@ -44,19 +43,6 @@ module Aji
       api.valid_uid?
     end
 
-    def self.create_if_existing uid
-      found = find_by_uid uid
-      return found if found
-
-      new_account = new :uid => uid
-      return nil unless new_account.existing?
-
-      # Exists but we don't have it
-      # Search db again just in case the account wasn't indexed for
-      # other reasons, e.g., not enough content videos
-      Account::Youtube.find_or_create_by_uid uid
-    end
-
     def refreshed?
       not thumbnail_uri.empty?
     end
@@ -74,23 +60,37 @@ module Aji
     # and false otherwise.
     def get_info_from_youtube_api
       self.info = api.author_info
+      self.username = info.fetch 'username'
     end
 
     def api
       @api ||= YoutubeAPI.new uid
     end
 
-    # A Youtube Account's uid is it's username. Let's set uid elsewhere and
-    # set the username to be equal within the method.
-    def set_uid_as_username
-      update_attribute :username, self.uid
-    end
-    private :set_uid_as_username
-
     def set_provider
       update_attribute :provider, 'youtube'
     end
     private :set_provider
 
+    def self.find_by_lower_uid uid
+      find_by_uid uid.downcase
+    end
+
+    def self.find_or_create_by_lower_uid uid, attributes={}
+      find_or_create_by_uid uid.downcase, attributes
+    end
+
+    def self.create_if_existing uid
+      return found = find_by_lower_uid(uid)if found
+
+      new_account = new :uid => uid
+      return nil unless new_account.existing?
+
+      # Exists but we don't have it
+      # Search db again just in case the account wasn't indexed for
+      # other reasons, e.g., not enough content videos
+      Account::Youtube.find_or_create_by_lower_uid uid
+    end
   end
 end
+
