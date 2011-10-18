@@ -51,10 +51,8 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
     end
 
     describe "#video_info" do
-      it "hits youtube only once" do
-        #pending "please check actual hits required since we always create author object in db"
-
-        subject.tracker.should_receive(:hit!)
+      it "hits youtube twice: 1 for video_info call and 1 for author_info" do
+        subject.tracker.should_receive(:hit!).twice
 
          hash = VCR.use_cassette "youtube_api/video" do
            subject.video_info '3307vMsCG0I'
@@ -109,11 +107,9 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
     end
 
     describe "#keyword_search" do
-      it "hits youtube only once" do
-        #pending "please check actual hits required since we always create author object in db"
-
-        subject.tracker.should_receive(:hit!)
-
+      it "hits youtube only once for keyword_search api and 1 time per unique author" do
+        unique_author_count = 43
+        subject.tracker.should_receive(:hit!).exactly(1+unique_author_count).times
         VCR.use_cassette "youtube_api/keyword_search" do
           subject.keyword_search "george carlin"
         end
@@ -136,10 +132,8 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
       subject { YoutubeAPI.new "brentalfloss" }
 
       describe "#uploaded_videos" do
-        it "hits youtube only once" do
-          #pending "please check actual hits required since we always create author object in db"
-
-          subject.tracker.should_receive(:hit!)
+        it "hits youtube twice: 1 for video_info call and 1 for author_info" do
+          subject.tracker.should_receive(:hit!).twice
 
           videos = VCR.use_cassette "youtube_api/uploaded_videos" do
             subject.uploaded_videos
