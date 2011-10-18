@@ -2300,3 +2300,48 @@
       shoes off, grab a brew and relax!"},"yt$age":{"$t":38},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/mwlivo/favorites?v=2","countHint":22},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/mwlivo/contacts?v=2","countHint":60},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/mwlivo/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/mwlivo/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/mwlivo/subscriptions?v=2","countHint":43},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/mwlivo/uploads?v=2","countHint":13},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/mwlivo/newsubscriptionvideos?v=2"}],"yt$gender":{"$t":"m"},"yt$hometown":{"$t":"Haydock"},"yt$location":{"$t":"Liverpool,
       GB"},"yt$statistics":{"lastWebAccess":"2011-06-09T00:23:40.000-07:00","subscriberCount":"68","videoWatchCount":0,"viewCount":"1963","totalUploadViews":"265368"},"media$thumbnail":{"url":"http://i2.ytimg.com/vi/Io4DKHzloWk/default.jpg"},"yt$username":{"$t":"mwlivo"}}}'
     http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/shoeyonfire?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Tue, 18 Oct 2011 18:32:28 GMT
+      date:
+      - Tue, 18 Oct 2011 18:27:28 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DU4HR347eCp7I2A9WhdbGUw."
+      last-modified:
+      - Tue, 18 Oct 2011 06:05:36 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"DU4HR347eCp7I2A9WhdbGUw.\"","id":{"$t":"tag:youtube.com,2008:user:shoeyonfire"},"published":{"$t":"2006-04-05T22:09:08.000-07:00"},"updated":{"$t":"2011-10-17T23:05:36.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"YouTube
+      user: shoeyonfire"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=shoeyonfire"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/shoeyonfire?v=2"}],"author":[{"name":{"$t":"shoeyonfire"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/shoeyonfire"}}],"yt$aboutMe":{"$t":"Hi."},"yt$age":{"$t":25},"yt$books":{"$t":"Ewh."},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/shoeyonfire/favorites?v=2","countHint":1},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/shoeyonfire/contacts?v=2","countHint":3},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/shoeyonfire/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/shoeyonfire/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/shoeyonfire/subscriptions?v=2","countHint":8},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/shoeyonfire/uploads?v=2","countHint":11},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/shoeyonfire/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Mike"},"yt$gender":{"$t":"m"},"yt$hobbies":{"$t":"Music.  Art.  Science.  Gaming."},"yt$hometown":{"$t":"Johnstown"},"yt$lastName":{"$t":"Shoey"},"yt$location":{"$t":"California,
+      US"},"yt$movies":{"$t":"A lot."},"yt$music":{"$t":"More than you could imagine."},"yt$occupation":{"$t":"Student"},"yt$relationship":{"$t":"single"},"yt$school":{"$t":"CUP"},"yt$statistics":{"lastWebAccess":"2010-10-25T22:29:10.000-07:00","subscriberCount":"116","videoWatchCount":0,"viewCount":"4421","totalUploadViews":"1314619"},"media$thumbnail":{"url":"http://i3.ytimg.com/vi/Nzvm8k5kSjs/default.jpg"},"yt$username":{"$t":"shoeyonfire"}}}'
+    http_version: '1.1'
