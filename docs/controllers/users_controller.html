@@ -95,6 +95,7 @@
 a JSON encoded error message if not.</p>
 
 <p><strong>Required params</strong>
+&ndash; <code>language</code> language id tag given by iOS, string
 &ndash; <code>locale</code> locale given by iOS, string</p>
 
 <p><strong>Optional params</strong>
@@ -104,8 +105,8 @@ a JSON encoded error message if not.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">post</span> <span class="k">do</span>
-        <span class="n">region</span> <span class="o">=</span> <span class="no">Region</span><span class="o">.</span><span class="n">find_or_create_by_locale_and_time_zone</span><span class="p">(</span>
-          <span class="n">params</span><span class="o">[</span><span class="ss">:locale</span><span class="o">]</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:time_zone</span><span class="o">]</span><span class="p">)</span> <span class="o">||</span>
+        <span class="n">region</span> <span class="o">=</span> <span class="no">Region</span><span class="o">.</span><span class="n">find_or_create_by_language_and_locale</span><span class="p">(</span>
+          <span class="n">params</span><span class="o">[</span><span class="ss">:language</span><span class="o">]</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:locale</span><span class="o">]</span><span class="p">)</span> <span class="o">||</span>
           <span class="no">Region</span><span class="o">.</span><span class="n">undefined</span>
         <span class="no">User</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:email</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:email</span><span class="o">]</span><span class="p">,</span>
                     <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span><span class="p">,</span>

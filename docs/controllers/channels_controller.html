@@ -76,7 +76,7 @@
 <p><strong>Returns</strong> the channel with the specified id and HTTP Status Code 200
 or 404</p>
 
-<p><strong>Required params</strong> <code>channel_id</code> unique id of the channel<br>
+<p><strong>Required params</strong> <code>channel_id</code> unique id of the channel
 <strong>Optional params</strong> <code>inline_videos</code> integer, number of videos to include</p>
       </td>
       <td class=code>
@@ -95,13 +95,13 @@ or 404</p>
         <h2>GET channels/</h2>
 
 <p><strong>Returns</strong> a list of channels matching the request parameters or all
-channels if no parameters are specified.<br>
-<strong>Required params</strong> none<br>
-<strong>Optional params</strong><br>
+channels if no parameters are specified.
+<strong>Required params</strong> none
+<strong>Optional params</strong>
 &ndash; <code>user_id</code>:  user id. If supplied without <code>query</code>, server returns
-  given user&rsquo;s subscribed channels.<br>
+  given user&rsquo;s subscribed channels.
 &ndash; <code>query</code>:  comma separated list of search terms. Server returns all
-  channels regardless of type.  </p>
+  channels regardless of type.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">get</span> <span class="k">do</span>
@@ -123,12 +123,12 @@ channels if no parameters are specified.<br>
         <h2>GET channels/:channel_id/videos</h2>
 
 <p><strong>Returns</strong> all the videos of given channel and HTTP Status Code 200 or
-404<br>
-<strong>Required params</strong><br>
-&ndash; <code>channel_id</code> unique id of the channel<br>
-&ndash; <code>user_id</code> unique id of the user<br>
-<strong>Optional params</strong><br>
-&ndash; <code>limit</code> max. number of videos to return<br>
+404
+<strong>Required params</strong>
+&ndash; <code>channel_id</code> unique id of the channel
+&ndash; <code>user_id</code> unique id of the user
+<strong>Optional params</strong>
+&ndash; <code>limit</code> max. number of videos to return
 &ndash; <code>page</code> which page of videos to return, starts at 1</p>
       </td>
       <td class=code>
@@ -146,9 +146,9 @@ channels if no parameters are specified.<br>
         </div>
         <h2>POST channels/</h2>
 
-<p><strong>Returns</strong> new keyword channel created by given parameters<br>
-<strong>Required params</strong><br>
-&ndash; <code>type</code>: channel type. Currently support: <code>keyword</code><br>
+<p><strong>Returns</strong> new keyword channel created by given parameters
+<strong>Required params</strong>
+&ndash; <code>type</code>: channel type. Currently support: <code>keyword</code>
 &ndash; <code>query</code>:  comma separated list of search terms</p>
 
       </td>
