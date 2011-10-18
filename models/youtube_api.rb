@@ -51,7 +51,7 @@ module Aji
         category = Category.undefined
       end
 
-      author = Account::Youtube.find_or_create_by_uid(video.author.name)
+      author = Account::Youtube.find_or_create_by_lower_uid video.author.name
 
       {
         :title => video.title,
@@ -95,7 +95,7 @@ module Aji
       end
 
       def uid
-        @data.fetch('id', {}).fetch('$t', "").split(':').last || ""
+        @data.fetch('id', {}).fetch('$t', "").split(':').last.downcase || ""
       end
 
       def published

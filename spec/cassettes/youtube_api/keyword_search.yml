@@ -2110,3 +2110,380 @@
       N"},"yt$gender":{"$t":"m"},"yt$hobbies":{"$t":"news, politics, artwork, relaxing
       with a good book, libertarianism"},"yt$location":{"$t":"Chicago, US"},"yt$statistics":{"lastWebAccess":"2011-02-03T13:28:32.000-08:00","subscriberCount":"1767","videoWatchCount":0,"viewCount":"95489","totalUploadViews":"5092868"},"media$thumbnail":{"url":"http://i2.ytimg.com/vi/-jT0JfxwOyo/default.jpg"},"yt$username":{"$t":"librarien"}}}'
     http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/alaazahra?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Tue, 18 Oct 2011 20:35:38 GMT
+      date:
+      - Tue, 18 Oct 2011 20:30:38 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"AkcEQ347eCp7I2A9WhdbGUg."
+      last-modified:
+      - Tue, 18 Oct 2011 17:13:22 GMT
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+      transfer-encoding:
+      - chunked
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"AkcEQ347eCp7I2A9WhdbGUg.\"","id":{"$t":"tag:youtube.com,2008:user:alaazahra"},"published":{"$t":"2009-11-28T22:06:53.000-08:00"},"updated":{"$t":"2011-10-18T10:13:22.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"YouTube
+      user: alaazahra"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=alaazahra"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/dcnd55tLCv8?v=2"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/alaazahra?v=2"}],"author":[{"name":{"$t":"alaazahra"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/alaazahra"}}],"yt$age":{"$t":20},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/alaazahra/favorites?v=2","countHint":167},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/alaazahra/contacts?v=2","countHint":1},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/alaazahra/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/alaazahra/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/alaazahra/subscriptions?v=2","countHint":30},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/alaazahra/uploads?v=2","countHint":24},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/alaazahra/newsubscriptionvideos?v=2"}],"yt$gender":{"$t":"m"},"yt$location":{"$t":"US"},"yt$statistics":{"lastWebAccess":"2011-08-29T14:23:47.000-07:00","subscriberCount":"41","videoWatchCount":0,"viewCount":"2002","totalUploadViews":"352496"},"media$thumbnail":{"url":"http://i3.ytimg.com/i/rIfEI9lBHAySFNoYoNj0mQ/1.jpg?v=8b288c"},"yt$username":{"$t":"alaazahra"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/tvlegends?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Tue, 18 Oct 2011 20:35:38 GMT
+      date:
+      - Tue, 18 Oct 2011 20:30:38 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"AkECQH47eCp7I2A9WhdbGUg."
+      last-modified:
+      - Tue, 18 Oct 2011 17:24:21 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"AkECQH47eCp7I2A9WhdbGUg.\"","id":{"$t":"tag:youtube.com,2008:user:TVLEGENDS"},"published":{"$t":"2008-03-12T09:26:09.000-07:00"},"updated":{"$t":"2011-10-18T10:24:21.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Director"}],"title":{"$t":"YouTube
+      user: TVLEGENDS"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=TVLEGENDS"},{"rel":"http://gdata.youtube.com/schemas/2007#user.vlog","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/playlists/348885A9199DA312?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/uca2zUm9zk8?v=2"},{"rel":"related","type":"text/html","href":"http://emmytvlegends.org"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/TVLEGENDS?v=2"}],"author":[{"name":{"$t":"TVLEGENDS"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/tvlegends"}}],"yt$age":{"$t":63},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.liveevent","href":"http://gdata.youtube.com/feeds/api/users/tvlegends/live/events?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/tvlegends/favorites?v=2","countHint":73},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/tvlegends/contacts?v=2","countHint":6},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/tvlegends/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/tvlegends/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/tvlegends/subscriptions?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/tvlegends/uploads?v=2","countHint":3504},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/tvlegends/newsubscriptionvideos?v=2"}],"yt$hobbies":{"$t":"TV
+      History"},"yt$location":{"$t":"US"},"yt$movies":{"$t":"Primetime Emmy Awards"},"yt$statistics":{"lastWebAccess":"2011-10-11T23:08:45.000-07:00","subscriberCount":"12545","videoWatchCount":0,"viewCount":"373608","totalUploadViews":"12776107"},"media$thumbnail":{"url":"http://i3.ytimg.com/i/j4PxzfWBNV9vIdEPkglrrg/1.jpg?v=6fa42d"},"yt$username":{"$t":"TVLEGENDS"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/usa4july1776?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Tue, 18 Oct 2011 20:35:39 GMT
+      date:
+      - Tue, 18 Oct 2011 20:30:39 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"AkAARH47eCp7I2A9WhdbGUg."
+      last-modified:
+      - Tue, 18 Oct 2011 17:25:45 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"AkAARH47eCp7I2A9WhdbGUg.\"","id":{"$t":"tag:youtube.com,2008:user:USA4July1776"},"published":{"$t":"2008-03-16T17:57:06.000-07:00"},"updated":{"$t":"2011-10-18T10:25:45.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"YouTube
+      user: USA4July1776"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=USA4July1776"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/JHfSzdRZt7k?v=2"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/USA4July1776?v=2"}],"author":[{"name":{"$t":"USA4July1776"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/usa4july1776"}}],"yt$aboutMe":{"$t":"''If
+      a conservative doesnt like guns, he doesn`t buy one.\r\nIf a liberal doesnt
+      like guns, he wants all guns outlawed.\r\n\r\nIf a conservative is a vegetarian,
+      he doesn`t eat meat.\r\nIf a liberal is a vegetarian, he wants all meat products
+      banned for everyone.\r\n\r\n If a conservative sees a foreign threat, he thinks
+      about how to defeat his enemy.\r\nA liberal wonders how to surrender gracefully
+      and still look good.\r\n\r\nIf a conservative is homosexual, he quietly leads
+      his life.\r\nIf a liberal is homosexual, he wants legislated recognition, he
+      demands that everyone applaud his life-style and wants to re-define marriage
+      and the family according to himself.\r\n\r\nIf a black man or Hispanic are conservative,
+      they see themselves as\r\nindependently successful.\r\nTheir liberal counterparts
+      see themselves as victims in need of government aid and protection.\r\n\r\nIf
+      a conservative is down-and-out, he thinks about how to better his situation.\r\nA
+      liberal wonders who is going to take care of him.\r\n\r\nIf a conservative doesnt
+      like a talk show host, he switches channels.\r\nLiberals demand that those they
+      dont like be shut down.\r\n\r\nIf a conservative is a non-believer, he doesnt
+      go to church.\r\nA liberal non-believer wants any mention of God and religion
+      silenced.\r\n(Unless its a foreign religion, of course!)\r\n\r\nIf a conservative
+      decides he needs health care, he goes about shopping for\r\nit, or may choose
+      a job that provides it.\r\nA liberal demands that the rest of us pay for his.\r\n\r\nIf
+      a conservative slips and falls in a store, he gets up, laughs and is\r\nembarrassed.\r\nIf
+      a liberal slips and falls, he grabs his neck, moans like hes in labor and then
+      sues.\r\n\r\nIf a conservative disagrees with an argument being made, he comes
+      up with a better argument to make his point.\r\nIf a liberal doesn''t like an
+      argument being made, he questions the motives of the person making the argument,
+      ignores the legitimacy of the argument itself, and instead attacks the person
+      making the argument directly, invoking twisted inuendos which really only expose
+      the liberal mind-set, the liberal tries to intimidate the person making the
+      offending argument into self-sensorship and silence, and if all else fails the
+      liberal sues because, according to him, offending him is a hate crime that should
+      land you in prison.\r\n\r\nIf a conservative reads this, he''ll forward it so
+      his friends can have a\r\ngood laugh.\r\nA liberal will delete it because he''s
+      \"offended.\"\r\n_______________________________\r\n\r\nThe  Governor of California
+      is jogging with his dog along a nature trail. \r\n \r\nA coyote jumps out and
+      attacks the Governor''s dog, then bites the Governor. \r\n \r\n \r\n1.  The
+      Governor starts to intervene, but reflects upon the movie \"Bambi\" and then
+      realizes he should stop because the coyote is only doing what is natural. \r\n
+      \r\n2.  He calls  animal control.  Animal Control captures the coyote and bills
+      \r\nthe State $200 testing it for diseases and $500 for relocating it. \r\n
+      \r\n3.  He calls a veterinarian.  The vet collects the dead dog and bills the
+      \r\nState $200 testing it for diseases. \r\n \r\n4. The Governor goes to the
+      hospital and spends $3,500 getting checked for \r\ndiseases from the coyote
+      and on getting his bite wound bandaged. \r\n \r\n5.  The running trail gets
+      shut down for 6 months while Fish & Game conducts \r\na $100,000 survey to make
+      sure the area is now free of dangerous animals. \r\n \r\n6.  The Governor spends
+      $50,000 in state funds implementing a \"coyote \r\nawareness program\" for residents
+      of the area. \r\n \r\n7.  The State Legislature spends $2 million to study how
+      to better treat rabies and how to permanently eradicate the disease throughout
+      the world. \r\n \r\n8.  The Governor''s security agent is fired for not stopping
+      the attack. \r\nThe State spends $150,000 to hire and train a new agent with
+      additional \r\nspecial training bout the nature of coyotes. \r\n \r\n9. PETA
+      protests the coyote''s relocation and files a $5 million suit against  the State.
+      \r\n \r\n \r\nTexas : \r\n \r\nThe Governor of Texas is jogging with his dog
+      along a nature trail.  A Coyote jumps out and attacks his dog. \r\n \r\n1. The
+      Governor shoots the coyote with his State-issued pistol and keeps \r\njogging.
+      The Governor has spent $0.50 on a .45 ACP  hollow point cartridge. \r\n \r\n2.
+      The Buzzards eat the dead coyote. \r\n\r\nAnd that, my friends, is why California
+      is broke and Texas is not."},"yt$age":{"$t":30},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/usa4july1776/favorites?v=2","countHint":76},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/usa4july1776/contacts?v=2","countHint":815},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/usa4july1776/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/usa4july1776/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/usa4july1776/subscriptions?v=2","countHint":386},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/usa4july1776/uploads?v=2","countHint":8},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/usa4july1776/newsubscriptionvideos?v=2"}],"yt$gender":{"$t":"m"},"yt$location":{"$t":"US"},"yt$statistics":{"lastWebAccess":"2011-10-13T21:05:54.000-07:00","subscriberCount":"373","videoWatchCount":0,"viewCount":"15154","totalUploadViews":"223301"},"media$thumbnail":{"url":"http://i3.ytimg.com/i/rcJiv4ctvzkhqttGBv_tkw/1.jpg"},"yt$username":{"$t":"USA4July1776"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/hayman4548213?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Tue, 18 Oct 2011 20:35:39 GMT
+      date:
+      - Tue, 18 Oct 2011 20:30:39 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"CkIGQX47eCp7I2A9WhdbGUk."
+      last-modified:
+      - Tue, 18 Oct 2011 12:22:00 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"CkIGQX47eCp7I2A9WhdbGUk.\"","id":{"$t":"tag:youtube.com,2008:user:hayman4548213"},"published":{"$t":"2008-02-21T01:12:40.000-08:00"},"updated":{"$t":"2011-10-18T05:22:00.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"YouTube
+      user: hayman4548213"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=hayman4548213"},{"rel":"http://gdata.youtube.com/schemas/2007#user.vlog","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/playlists/FB8E3ED756BE9BD6?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/Z7mZAXJHeV4?v=2"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/hayman4548213?v=2"}],"author":[{"name":{"$t":"hayman4548213"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/hayman4548213"}}],"yt$age":{"$t":52},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/hayman4548213/favorites?v=2","countHint":360},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/hayman4548213/contacts?v=2","countHint":80},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/hayman4548213/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/hayman4548213/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/hayman4548213/subscriptions?v=2","countHint":170},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/hayman4548213/uploads?v=2","countHint":99},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/hayman4548213/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Davey
+      or David"},"yt$gender":{"$t":"m"},"yt$hobbies":{"$t":"Surfing, Philosophy, I
+      am a bit of a scifi freak. I like riding my motorcycle. I am a romantic, i consider
+      myself part of the enlightenment. I am a human encyclopedia of American history."},"yt$lastName":{"$t":"Shieraam"},"yt$location":{"$t":"US"},"yt$movies":{"$t":"My
+      favorite movie is really a documentary called Al Ghazali: The Alchemist of Happiness."},"yt$music":{"$t":"If
+      it sounds good i listen to it."},"yt$occupation":{"$t":"Enviormentalist"},"yt$statistics":{"lastWebAccess":"2011-01-03T19:32:16.000-08:00","subscriberCount":"374","videoWatchCount":0,"viewCount":"25739","totalUploadViews":"873533"},"media$thumbnail":{"url":"http://i4.ytimg.com/i/KJ8ORFXQJjFPTS9-uMcMMw/1.jpg"},"yt$username":{"$t":"hayman4548213"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/associatedpress?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Tue, 18 Oct 2011 20:35:39 GMT
+      date:
+      - Tue, 18 Oct 2011 20:30:39 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"AkcESH47eCp7I2A9WhdbGUs."
+      last-modified:
+      - Tue, 18 Oct 2011 20:00:09 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"AkcESH47eCp7I2A9WhdbGUs.\"","id":{"$t":"tag:youtube.com,2008:user:AssociatedPress"},"published":{"$t":"2006-09-18T15:46:11.000-07:00"},"updated":{"$t":"2011-10-18T13:00:09.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Reporter"}],"title":{"$t":"YouTube
+      user: AssociatedPress"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=AssociatedPress"},{"rel":"http://gdata.youtube.com/schemas/2007#user.vlog","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/playlists/87FB2E7615B25B00?v=2"},{"rel":"related","type":"text/html","href":"http://www.ap.org/"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/AssociatedPress?v=2"}],"author":[{"name":{"$t":"AssociatedPress"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/associatedpress"}}],"yt$aboutMe":{"$t":"The
+      Associated Press is the essential global news network, delivering fast, unbiased
+      news from every corner of the world to all media platforms and formats. Founded
+      in 1846, AP today is the largest and most trusted source of independent news
+      and information. On any given day, more than half the world''s population sees
+      news from AP."},"yt$age":{"$t":33},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/associatedpress/favorites?v=2","countHint":2},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/associatedpress/contacts?v=2","countHint":1},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/associatedpress/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/associatedpress/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/associatedpress/subscriptions?v=2","countHint":1},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/associatedpress/uploads?v=2","countHint":50906},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/associatedpress/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Associated
+      Press"},"yt$location":{"$t":"AF"},"yt$statistics":{"lastWebAccess":"2011-08-21T15:01:22.000-07:00","subscriberCount":"241211","videoWatchCount":0,"viewCount":"7029861","totalUploadViews":"943240294"},"media$thumbnail":{"url":"http://i2.ytimg.com/i/52X5wxOL_s5yw0dQk7NtgA/1.jpg?v=7bd540"},"yt$username":{"$t":"AssociatedPress"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/bromista5?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Tue, 18 Oct 2011 20:35:39 GMT
+      date:
+      - Tue, 18 Oct 2011 20:30:39 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"CEMFRH47eCp7I2A9WhdbGU4."
+      last-modified:
+      - Tue, 18 Oct 2011 10:06:55 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"CEMFRH47eCp7I2A9WhdbGU4.\"","id":{"$t":"tag:youtube.com,2008:user:Bromista5"},"published":{"$t":"2006-03-14T19:31:22.000-08:00"},"updated":{"$t":"2011-10-18T03:06:55.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"YouTube
+      user: Bromista5"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=Bromista5"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/Bromista5?v=2"}],"author":[{"name":{"$t":"Bromista5"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/bromista5"}}],"yt$age":{"$t":30},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/bromista5/favorites?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/bromista5/contacts?v=2","countHint":2},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/bromista5/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/bromista5/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/bromista5/subscriptions?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/bromista5/uploads?v=2","countHint":3},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/bromista5/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Jeff"},"yt$gender":{"$t":"m"},"yt$location":{"$t":"US"},"yt$statistics":{"lastWebAccess":"2011-10-18T11:34:00.000-07:00","subscriberCount":"45","videoWatchCount":0,"viewCount":"1648","totalUploadViews":"398530"},"media$thumbnail":{"url":"http://s.ytimg.com/yt/img/no_videos_140-vfl1fDI7-.png"},"yt$username":{"$t":"Bromista5"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/karlmarx80?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Tue, 18 Oct 2011 20:35:39 GMT
+      date:
+      - Tue, 18 Oct 2011 20:30:39 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"C0UMRX47eCp7I2A9WhdbGUw."
+      last-modified:
+      - Tue, 18 Oct 2011 04:14:44 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"C0UMRX47eCp7I2A9WhdbGUw.\"","id":{"$t":"tag:youtube.com,2008:user:karlmarx80"},"published":{"$t":"2006-05-29T12:20:36.000-07:00"},"updated":{"$t":"2011-10-17T21:14:44.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"YouTube
+      user: karlmarx80"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=karlmarx80"},{"rel":"http://gdata.youtube.com/schemas/2007#user.vlog","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/playlists/B05579A012B1CA9E?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/DeM4DViObx0?v=2"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/karlmarx80?v=2"}],"author":[{"name":{"$t":"karlmarx80"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/karlmarx80"}}],"yt$age":{"$t":31},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/karlmarx80/favorites?v=2","countHint":59},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/karlmarx80/contacts?v=2","countHint":11},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/karlmarx80/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/karlmarx80/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/karlmarx80/subscriptions?v=2","countHint":2},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/karlmarx80/uploads?v=2","countHint":18},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/karlmarx80/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"J"},"yt$gender":{"$t":"m"},"yt$location":{"$t":"US"},"yt$occupation":{"$t":"Sociologist\r\nPhilosopher"},"yt$relationship":{"$t":"single"},"yt$statistics":{"lastWebAccess":"2011-06-18T14:21:22.000-07:00","subscriberCount":"204","videoWatchCount":0,"viewCount":"6810","totalUploadViews":"1367698"},"media$thumbnail":{"url":"http://i4.ytimg.com/vi/_rIPe5akN48/default.jpg"},"yt$username":{"$t":"karlmarx80"}}}'
+    http_version: '1.1'
