@@ -15,10 +15,13 @@ module Aji
   # - populated_at: DateTime
   # - category_id: Integer
   class Video < ActiveRecord::Base
+    SOURCES = [:youtube]
+
     include Mixins::Blacklisting
     include Mixins::Populating
 
     validates_presence_of :external_id, :source
+    validates_inclusion_of :source, :in => SOURCES
     validates_uniqueness_of :external_id, :scope => :source
     validates_presence_of :author, :if => :populated?
 
