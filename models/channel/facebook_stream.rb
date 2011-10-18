@@ -7,7 +7,7 @@ module Aji
      :foreign_key => :stream_channel_id
 
     def thumbnail_uri
-      "http://#{Aji.conf['TLD']}/images/icons/nowpopular.png"
+      "http://#{Aji.conf['TLD']}/images/icons/facebook.png"
     end
 
     def refresh_content force=false

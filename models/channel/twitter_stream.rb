@@ -6,6 +6,10 @@ module Aji
 
     validates_presence_of :owner
 
+    def thumbnail_uri
+      "http://#{Aji.conf['TLD']}/images/icons/twitter.png"
+    end
+
     def refresh_content force=false
       super force do |new_videos|
         owner.api.video_mentions_in_feed.each do |m|
