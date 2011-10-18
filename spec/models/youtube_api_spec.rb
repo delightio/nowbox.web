@@ -108,7 +108,7 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
 
     describe "#keyword_search" do
       it "hits youtube once for the search and again for each new author" do
-        unique_author_count = 44
+        unique_author_count = 43
         subject.tracker.should_receive(:hit!).exactly(1+unique_author_count).times
         VCR.use_cassette "youtube_api/keyword_search" do
           subject.keyword_search "george carlin"
