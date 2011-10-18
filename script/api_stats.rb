@@ -6,8 +6,9 @@ def print_stats api
   time_remaining = api.seconds_until_available.seconds
   time_since_start = (api.cooldown - time_remaining).seconds
 
-  puts "API has made #{api.hit_count} of #{api.hits_per_session} in the last \
-#{time_since_start.inspect} and has #{time_remaining.inspect} until resetting."
+  puts "#{api.namespace} has made #{api.hit_count} of #{api.hits_per_session} \
+in the last #{time_since_start.inspect} and has #{time_remaining.inspect} \
+until resetting."
 end
 
 def print_aggregate_stats apis
@@ -23,12 +24,20 @@ end
 
 @default_twitter_tracker = TwitterAPI.new(uid: "dummy id").tracker
 
-@twitter_trackers = Aji.redis.keys("api_tracker:TwitterAPI:*").map do
-  |tracker_key|
-  default_twitter_tracker.dup.tap do |tracker|
-    def tracker.key
-      tracker_key
+@twitter_trackers =
+  Aji.redis.keys("api_tracker:aji::twitterapi:*").map do |tracker_key|
+  @default_twitter_tracker.dup.tap do |tracker|
+    tracker.instance_eval do
+      def key
+        @key
+      end
+
+      def key= new_key
+        @key = new_key
+      end
     end
+
+    tracker.key = tracker_key
   end
 end
 
