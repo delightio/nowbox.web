@@ -7,6 +7,8 @@ module Aji
 
     before_create :get_info_from_youtube_api
 
+    has_many :videos, :foreign_key => :author_id, :dependent => :destroy
+
     def profile_uri
       info['profile']
     end
