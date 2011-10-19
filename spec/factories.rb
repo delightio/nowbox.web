@@ -143,7 +143,8 @@ Factory.define :video_with_mentions, :parent => :video do |a|
   end
 end
 
-Factory.define :populated_video_with_mentions, :parent => :populated_video do |a|
+Factory.define :populated_video_with_mentions,
+  :parent => :populated_video do |a|
   a.after_create do |v|
     10.times do |n|
       m = Factory :mention
@@ -160,6 +161,7 @@ Factory.define :account,
 Factory.define :youtube_account,
   :class => 'Aji::Account::Youtube' do |a|
     a.uid { random_string }
+    a.username { uid }
   end
 
 Factory.define :twitter_account,

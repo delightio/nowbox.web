@@ -51,6 +51,43 @@ module Aji
       end
     end
 
+    describe "#subscribed_channels" do
+      let(:subscribed_channels) { (0..2).map { |i| mock "channel", :id => i } }
+      let(:nonexistant_channel) { mock "channel", :id => 10 }
+
+      subject do
+        User.new.tap do |u|
+          u.stub :id => 1
+          u.stub :subscribed_list => subscribed_channels.map(&:id)
+        end
+      end
+
+      before do
+        Channel.stub(:find_by_id).with(nonexistant_channel.id).and_return(nil)
+
+        subscribed_channels.each do |c|
+          Channel.stub(:find_by_id).with(c.id).and_return(c)
+        end
+      end
+
+      it "returns a list of channels matching channel ids in subscribed_list" do
+        subject.subscribed_channels.should == subscribed_channels
+      end
+
+      it "ignores channel ids that don't resolve" do
+        subject.subscribed_list << nonexistant_channel.id
+
+        subject.subscribed_channels.should == subscribed_channels
+      end
+
+      it "removes empty channels when they're found" do
+        subject.subscribed_list << nonexistant_channel.id
+        subject.should_receive :remove_empty_channels
+
+        subject.subscribed_channels.should == subscribed_channels
+      end
+    end
+
     describe "#process_event" do
       it "caches video id in viewed regardless of event type except :unfavorite, :enqueue and :dequeue" do
         Aji::Event.video_actions.delete_if{ |t|
@@ -160,7 +197,39 @@ module Aji
           event = Factory :channel_event, :action => :subscribe,
             :user => user, :channel => channel
         end
-        user.serializable_hash["subscribed_channel_ids"].should == user.subscribed_list.values
+        user.serializable_hash["subscribed_channel_ids"].should ==(
+          user.subscribed_list.values)
+      end
+    end
+
+    describe "#remove_empty_channels" do
+      let(:valid_ids) do
+        [1, 2].each { |i| Channel.stub(:find_by_id).and_return(true) }
+      end
+
+      let(:invalid_ids) do
+        [3, 4].each { |i| Channel.stub(:find_by_id).and_return(nil) }
+      end
+
+      subject do
+        User.new.tap do |u|
+          u.stub :id => 1
+          u.stub :subscribed_list => valid_ids + invalid_ids
+        end
+      end
+
+      it "doesn't hit the database for known good channel ids" do
+        valid_ids.each { |id| Channel.should_not_receive(:find_by_id).with(id) }
+
+        subject.send :remove_empty_channels, valid_ids
+      end
+
+      it "removes channels that don't exist" do
+        invalid_ids.each do |id|
+          subject.subscribed_list.should_receive(:delete).with(id)
+        end
+
+        subject.send :remove_empty_channels, valid_ids
       end
     end
 
@@ -229,10 +298,10 @@ module Aji
           other_user.name = "Joe"
           other_user.email = "joe@example.com"
 
-        subject.merge! other_user
-        subject.name.should == other_user.name
-        subject.email.should == other_user.email
-      end
+          subject.merge! other_user
+          subject.name.should == other_user.name
+          subject.email.should == other_user.email
+        end
 
         it "doesn't change info if the new user's is empty" do
           subject.name = "Joe"

@@ -51,7 +51,7 @@ module Aji
         category = Category.undefined
       end
 
-      author = Account::Youtube.find_or_create_by_uid(video.author.name)
+      author = Account::Youtube.find_or_create_by_lower_uid video.author.name
 
       {
         :title => video.title,
@@ -95,7 +95,7 @@ module Aji
       end
 
       def uid
-        @data.fetch('id', {}).fetch('$t', "").split(':').last || ""
+        (@data.fetch('id', {}).fetch('$t', "").split(':').last || "").downcase
       end
 
       def published
@@ -162,7 +162,7 @@ module Aji
       end
 
       def subscriber_count
-        @data.fetch('yt$statistics', {}).fetch('subscriberCount', "").to_i
+        @data.fetch('yt$statistics', {}).fetch('subscriberCount', 0).to_i
       end
 
       def thumbnail
@@ -176,11 +176,11 @@ module Aji
       end
 
       def username
-        @data.fetch('yt$username', {}).fetch('$t', {})
+        @data.fetch('yt$username', {}).fetch('$t', "")
       end
 
       def total_upload_views
-        @data.fetch('yt$statistics', {}).fetch('totalUploadViews', "").to_i
+        @data.fetch('yt$statistics', {}).fetch('totalUploadViews', 0).to_i
       end
 
       def find_link link_type

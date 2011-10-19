@@ -28,7 +28,7 @@ module Aji
     has_many :events
     has_and_belongs_to_many :mentions
     belongs_to :author, :class_name => 'Aji::Account'
-    belongs_to :category
+    belongs_to :category, :class_name => 'Aji::Category'
 
     def populate
       unless populated?

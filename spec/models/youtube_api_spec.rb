@@ -4,8 +4,69 @@ module Aji
   describe Aji::YoutubeAPI, :unit, :net do
 
     describe "#youtube_it_to_hash" do
-      it "creates Category object if needed"
-      it "creates Account::Youtube object if needed"
+      before :each do
+        Account::Youtube.stub :find_or_create_by_lower_uid
+        Category.stub :find_or_create_by_raw_title
+        Category.stub :undefined
+      end
+
+      let(:video) { stub.as_null_object }
+      let(:video_attributes) do
+        [:title, :external_id, :description, :duration, :viewable_mobile,
+          :view_count, :category, :author, :published_at, :source,
+          :populated_at]
+      end
+
+      it "gets a category when a category is specified" do
+        video.stub :categories => [stub(:label => "label", :term => "term")]
+        Category.should_receive :find_or_create_by_raw_title
+
+        subject.youtube_it_to_hash video
+      end
+
+      it "uses the undefined category when none is specified" do
+        video.stub :categories => []
+        Category.should_receive :undefined
+
+        subject.youtube_it_to_hash video
+      end
+
+      it "creates Account::Youtube object if needed" do
+        Account::Youtube.should_receive :find_or_create_by_lower_uid
+
+        subject.youtube_it_to_hash video
+      end
+
+      it "returns a valid hash of video attributes" do
+        subject.youtube_it_to_hash(video).keys.should == video_attributes
+      end
+    end
+
+    describe "#youtube_it_to_video" do
+      let(:video) { mock("youtube it video") }
+
+      let(:video_hash) do
+        {
+          :title => "A Video",
+          :external_id => "1234567890-",
+          :description => "Hilarious Video",
+          :duration => 320.seconds,
+          :viewable_mobile => true,
+          :view_count => 111,
+          :category => Category.new,
+          :author => Account::Youtube.new,
+          :published_at => 4.hours.ago,
+          :source => :youtube,
+          :populated_at => Time.now
+        }
+      end
+
+      it "returns an valid video from database" do
+        subject.should_receive(:youtube_it_to_hash).with(video).and_return(
+          video_hash)
+
+        subject.youtube_it_to_video(video).should be_valid
+      end
     end
 
     describe "#author_info" do
@@ -102,13 +163,9 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
       end
     end
 
-    describe "#youtube_it_to_video" do
-      it "returns an valid video from database"
-    end
-
     describe "#keyword_search" do
       it "hits youtube once for the search and again for each new author" do
-        unique_author_count = 44
+        unique_author_count = 43
         subject.tracker.should_receive(:hit!).exactly(1+unique_author_count).times
         VCR.use_cassette "youtube_api/keyword_search" do
           subject.keyword_search "george carlin"
