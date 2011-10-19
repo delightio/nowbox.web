@@ -120,7 +120,7 @@ module Aji
       end
 
       it "works with account which never has a channel on our system" do
-        account = Account.new
+        account = Account.new uid: "batman"
         account.save :validate=>false
         new_channel = Channel::Account.find_or_create_by_accounts([account])
         new_channel.should_not be_nil
@@ -141,7 +141,7 @@ module Aji
         accounts = []
         videos = [mock("video",:id=>1), mock("video",:id=>2), mock("video",:id=>3)]
         3.times do |n|
-          account = Account.new
+          account = Account.new uid: "Balls#{n}"
           account.save :validate=>false
           account.push videos[n]
           accounts << account

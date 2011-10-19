@@ -8,7 +8,7 @@ module Aji
         :external_id => 'afakevideo1', :description => 'Hilarious video',
         :duration => 1024, :viewable_mobile => true, :view_count => 11,
         :source => 'youtube', :published_at => Time.now,
-        :populated_at => Time.now, :author => Account.new,
+        :populated_at => Time.now, :author => Account.new(uid: "bob"),
         :category => Category.new)
       end
     end

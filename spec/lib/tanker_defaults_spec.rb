@@ -2,7 +2,7 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 module Aji
   describe TankerDefaults do
-    subject { Account.new }
+    subject { Account.new uid: "oneeleven" }
     before :each do
       Searcher.stub(:enabled?).and_return(true)
     end
