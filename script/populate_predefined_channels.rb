@@ -13,7 +13,7 @@ channels_json.each do |ch|
   raise "Can't deal with type #{ch["type"]}" if ch["type"]!="youtube"
 
   accounts = ch['usernames'].map do |u|
-    Aji::Account::Youtube.find_or_create_by_uid u
+    Aji::Account::Youtube.find_or_create_by_lower_uid u
   end
 
   channel = Aji::Channel::Account.find_by_title ch["title"]

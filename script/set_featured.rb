@@ -28,7 +28,7 @@ module Aji
         # Search db again just in case the account wasn't indexed for
         # other reasons, e.g., not enough content videos
         if account.existing?
-          account = Account::Youtube.find_or_create_by_uid q
+          account = Account::Youtube.find_or_create_by_lower_uid q
           channel = account.to_channel
         end
       end
