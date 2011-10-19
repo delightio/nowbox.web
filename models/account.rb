@@ -142,7 +142,7 @@ module Aji
     end
 
     def downcase_uid
-      self.uid = uid.downcase
+      self.uid = uid.downcase unless uid.nil?
     end
 
     # Class Methods follow
