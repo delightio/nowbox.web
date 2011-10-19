@@ -93,7 +93,7 @@ Dir.glob("models/channel/*.rb").each { |r| require_relative r }
 Dir.glob("models/account/*.rb").each { |r| require_relative r }
 
 # Run migrations after models are loaded.
-ActiveRecord::Migrator.migrate("db/migrate/") unless Aji.conf['NOMIGRATE']
+ActiveRecord::Migrator.migrate("db/migrate/") if Aji.conf['RUN_DB_MIGRATIONS']=='true'
 
 Dir.glob("helpers/*.rb").each { |r| require_relative r }
 Dir.glob("controllers/*_controller.rb").each { |r| require_relative r }
