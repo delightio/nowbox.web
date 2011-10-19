@@ -4,7 +4,7 @@ include Aji
 
 duped_uids =
   Account::Youtube.select("LOWER(uid), COUNT(LOWER(uid))").
-                  group("LOWER(uid), HAVING COUNT(LOWER(uid)) > 1").map do |a|
+                  group("LOWER(uid) HAVING COUNT(LOWER(uid)) > 1").map do |a|
                                                               [a.lower, a.count]
                                                             end
 duped_uids.each do |uid|
