@@ -54,6 +54,7 @@ module Aji
     describe "#get_info_from_youtube_api" do
       let(:info_hash) { { 'username' => 'day9tv' } }
       let(:api) { stub :author_info => info_hash }
+
       subject do
         Account::Youtube.new(uid: 'day9tv').tap do |a|
           a.stub :api => api
@@ -65,9 +66,16 @@ module Aji
         subject.get_info_from_youtube_api
       end
 
-      it "sets the username from the info hash" do
+      it "uses the username from the info hash if there is one" do
         expect { subject.get_info_from_youtube_api }.to(
           change{ subject.username }.to("day9tv"))
+      end
+
+      it "sets the username to the uid otherwise" do
+        info_hash['username'] = ''
+
+        subject.get_info_from_youtube_api
+        subject.username.should == subject.uid
       end
     end
 

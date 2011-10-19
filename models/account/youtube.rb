@@ -60,7 +60,11 @@ module Aji
     # and false otherwise.
     def get_info_from_youtube_api
       self.info = api.author_info
-      self.username = info.fetch 'username'
+      self.username = unless info['username'].empty?
+                        info['username']
+                      else
+                        uid
+                      end
     end
 
     def api
