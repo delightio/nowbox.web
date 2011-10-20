@@ -13,6 +13,8 @@ module Aji
         (pages - 1).times do
           tracker.hit!
           posts = posts.next_page
+
+          break if posts.nil?
           mentions.concat extract_video_mentions filter_links posts
         end
       end
@@ -26,6 +28,8 @@ module Aji
         (pages - 1).times do
           tracker.hit!
           posts = posts.next_page
+
+          break if posts.nil?
           mentions.concat extract_video_mentions filter_links posts
         end
       end

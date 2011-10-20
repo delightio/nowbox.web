@@ -780,3 +780,116 @@
       Kinzel","id":"1406180000"},"message":"Wow...note to self, don''t mountain bike
       in Africa unless my bike is armored.","created_time":"2011-10-10T19:02:04+0000"}],"count":3}}],"paging":{"previous":"https:\/\/graph.facebook.com\/me\/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&since=1318280043","next":"https:\/\/graph.facebook.com\/me\/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&until=1318269290"}}'
     http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://graph.facebook.com:443/me/links?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-origin:
+      - ! '*'
+      cache-control:
+      - private, no-cache, no-store, must-revalidate
+      content-type:
+      - text/javascript; charset=UTF-8
+      etag:
+      - ! '"18dd5346c66ac1ebb40329b51a907a17117f5313"'
+      expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      pragma:
+      - no-cache
+      x-fb-rev:
+      - '460957'
+      content-encoding:
+      - gzip
+      x-fb-server:
+      - 10.32.77.109
+      x-cnection:
+      - close
+      date:
+      - Thu, 20 Oct 2011 19:56:18 GMT
+      content-length:
+      - '2525'
+    body: ! '{"data":[{"id":"180118175396429","from":{"name":"Steven Ragnar\u00f6k","id":"501776555"},"message":"I
+      need everybody to posh their favorite youtube videos. I want to test some shit.
+      Here''s a video explaining why Taxing the Rich is *not* class warfare. http:\/\/www.youtube.com\/watch?v=htX2usfqMEs&feature=player_embedded","picture":"http:\/\/external.ak.fbcdn.net\/safe_image.php?d=AQDKumrph_Q5ixAU&w=130&h=130&url=http\u00253A\u00252F\u00252Fi1.ytimg.com\u00252Fvi\u00252FhtX2usfqMEs\u00252Fdefault.jpg","link":"http:\/\/www.youtube.com\/watch?v=htX2usfqMEs&feature=player_embedded","name":"Elizabeth
+      Warren on Debt Crisis, Fair Taxation","description":"Elizabeth Warren discussing
+      the debt crisis, fair taxation and other important issues as part of her talking
+      tour.","icon":"http:\/\/static.ak.fbcdn.net\/rsrc.php\/v1\/yR\/r\/23eNFy_VOig.gif","created_time":"2011-09-23T18:50:37+0000","comments":{"data":[{"id":"180118175396429_1215869","from":{"name":"Steven
+      Ragnar\u00f6k","id":"501776555"},"message":"s\/posh\/post\/","can_remove":true,"created_time":"2011-09-23T18:53:12+0000"},{"id":"180118175396429_1215871","from":{"name":"Steven
+      Ragnar\u00f6k","id":"501776555"},"message":"If there were actually hackers at
+      Facebook that would correct the error. It works in Skype for fuck''s sake.","can_remove":true,"created_time":"2011-09-23T18:53:32+0000"}]}},{"id":"101981716578028","from":{"name":"Steven
+      Ragnar\u00f6k","id":"501776555"},"message":"test psot.","picture":"http:\/\/external.ak.fbcdn.net\/safe_image.php?d=AQBlAduoIYpn_6DJ&w=130&h=130&url=http\u00253A\u00252F\u00252Fi1.ytimg.com\u00252Fvi\u00252Ft9LMOydfc4k\u00252Fdefault.jpg","link":"http:\/\/www.youtube.com\/watch?v=t9LMOydfc4k&feature=share","name":"Ruby
+      2.0: What We Want to Accomplish in the Near Future","description":"Filmed at
+      Twilio in San Francisco on October 7, 2010 - Matz, the founder of Ruby talks
+      about Ruby 2.0 and the future of Ruby. Matz begins with a brief histor...","icon":"http:\/\/static.ak.fbcdn.net\/rsrc.php\/v1\/yR\/r\/23eNFy_VOig.gif","created_time":"2011-09-21T18:18:49+0000"},{"id":"231967410185677","from":{"name":"Steven
+      Ragnar\u00f6k","id":"501776555"},"message":"Postin'' a video like ya do. http:\/\/www.youtube.com\/watch?v=xzFI034MUWM","picture":"http:\/\/external.ak.fbcdn.net\/safe_image.php?d=AQBSvKO0fN0ykzU9&w=130&h=130&url=http\u00253A\u00252F\u00252Fi1.ytimg.com\u00252Fvi\u00252FxzFI034MUWM\u00252Fdefault.jpg","link":"http:\/\/www.youtube.com\/watch?v=xzFI034MUWM","name":"I
+      can kill you with my brain","icon":"http:\/\/static.ak.fbcdn.net\/rsrc.php\/v1\/yR\/r\/23eNFy_VOig.gif","created_time":"2011-09-21T17:25:26+0000"},{"id":"236027356448101","from":{"name":"Steven
+      Ragnar\u00f6k","id":"501776555"},"message":"Current feelings toward the facebook
+      devs, also Graph Objects test: http:\/\/youtu.be\/xLz54rWO2xM?t=10s\n","picture":"http:\/\/external.ak.fbcdn.net\/safe_image.php?d=AQA5PwqovZJxb8ks&w=130&h=130&url=http\u00253A\u00252F\u00252Fi1.ytimg.com\u00252Fvi\u00252FxLz54rWO2xM\u00252Fdefault.jpg","link":"http:\/\/www.youtube.com\/watch?v=xLz54rWO2xM&feature=youtu.be&t=10s","name":"Crash
+      and the Boys - I''m So Sad, So Very, Very, Sad","description":"Scott Pilgrim
+      vs. the World Original Motion Picture Soundtrack \"I''m So Sad, So Very, Very,
+      Sad\" by Crash and the Boys","icon":"http:\/\/static.ak.fbcdn.net\/rsrc.php\/v1\/yR\/r\/23eNFy_VOig.gif","created_time":"2011-09-20T19:24:09+0000"},{"id":"190253411011639","from":{"name":"Steven
+      Ragnar\u00f6k","id":"501776555"},"message":"This is so great!","picture":"http:\/\/external.ak.fbcdn.net\/safe_image.php?d=AQBFC3VkYae5vs9A&w=90&h=90&url=http\u00253A\u00252F\u00252Fimg.youtube.com\u00252Fvi\u00252FW3h7nmL9PKM\u00252F0.jpg","link":"http:\/\/nowmov.com\/nuclearsandwich\/6837635?ref=fb","name":"We
+      Don''t Have That Kind of Bread - Zoey Van Goey","description":"New music video
+      from Glasgow based three-piece ''Zoey Van Goey''","icon":"http:\/\/static.ak.fbcdn.net\/rsrc.php\/v1\/yR\/r\/23eNFy_VOig.gif","created_time":"2011-03-18T21:54:55+0000"},{"id":"145600625503646","from":{"name":"Steven
+      Ragnar\u00f6k","id":"501776555"},"message":"Reminds me of the Books.","picture":"http:\/\/external.ak.fbcdn.net\/safe_image.php?d=AQBrPETnG5PzkJta&w=130&h=130&url=http\u00253A\u00252F\u00252Fbeta.grooveshark.com\u00252Fstatic\u00252Famazonart\u00252Fs126661.jpg","link":"http:\/\/listen.grooveshark.com\/s\/Responsible+Stu\/7oQwR?src=5","name":"Responsible
+      Stu by The Octopus Project on One Ten Hundred Thousand Million","description":"Listen
+      to Responsible Stu by The Octopus Project on One Ten Hundred Thousand Million","icon":"http:\/\/static.ak.fbcdn.net\/rsrc.php\/v1\/yR\/r\/23eNFy_VOig.gif","created_time":"2011-03-09T10:38:01+0000"},{"id":"119734974765440","from":{"name":"Steven
+      Ragnar\u00f6k","id":"501776555"},"picture":"http:\/\/external.ak.fbcdn.net\/safe_image.php?d=AQCw58Yl1-XWRVYT&w=90&h=90&url=http\u00253A\u00252F\u00252Fimg.youtube.com\u00252Fvi\u00252FUu6MDdxBork\u00252F0.jpg","link":"http:\/\/nowmov.com\/nuclearsandwich\/1694381?ref=fb","name":"Tubeway
+      Army - Gary Numan - Are Friends Electric","description":"Tubeway Army - Gary
+      Numan - Are Friends Electric Old Grey Whistle Test 1979","icon":"http:\/\/static.ak.fbcdn.net\/rsrc.php\/v1\/yR\/r\/23eNFy_VOig.gif","created_time":"2011-01-18T23:35:26+0000"},{"id":"106946812672078","from":{"name":"Steven
+      Ragnar\u00f6k","id":"501776555"},"message":"Shameless not-quite-self-promotion.
+      Cool band, cool ideas. Pretty much everyone in the band is cool. Except Avery.","picture":"http:\/\/external.ak.fbcdn.net\/safe_image.php?d=AQDJi1rjSdRCnS_Y&w=130&h=130&url=http\u00253A\u00252F\u00252Fs3.amazonaws.com\u00252Fksr\u00252Fphotos\u00252F3789\u00252Fprojectimage.med.jpg","link":"http:\/\/www.kickstarter.com\/projects\/1800285815\/corpus-callosum","name":"Kickstarter
+      >> Corpus Callosum by Corpus Callosum","description":"Corpus Callosum is raising
+      funds for Corpus Callosum on Kickstarter! California-based music & performance
+      art ensemble, Corpus Callosum, will be going to great lengths to craft their
+      first studio album.","icon":"http:\/\/static.ak.fbcdn.net\/rsrc.php\/v1\/yR\/r\/23eNFy_VOig.gif","created_time":"2010-03-31T20:44:41+0000"},{"id":"276871014947","from":{"name":"Steven
+      Ragnar\u00f6k","id":"501776555"},"message":"New favorite game: vvvvvv Buy IT!
+      I command you: I will as soon as I pay tuition...\nhttp:\/\/thelettervsixtim.es\/","picture":"http:\/\/external.ak.fbcdn.net\/safe_image.php?d=AQDMJllkijsduM8c&w=90&h=90&url=http\u00253A\u00252F\u00252Fthelettervsixtim.es\u00252Fimages\u00252Fpic1.png","link":"http:\/\/thelettervsixtim.es\/","name":"VVVVVV","icon":"http:\/\/static.ak.fbcdn.net\/rsrc.php\/v1\/yR\/r\/23eNFy_VOig.gif","created_time":"2010-01-13T21:10:53+0000","comments":{"data":[{"id":"276871014947_9821772","from":{"name":"Erik
+      Ostrom","id":"535351473"},"message":"Neat idea. Too twitchy for me, though!","can_remove":true,"created_time":"2010-01-13T21:58:36+0000"},{"id":"276871014947_9821805","from":{"name":"Katherine
+      McHenry","id":"1407904874"},"message":"ADDICTING....","can_remove":true,"created_time":"2010-01-13T21:59:09+0000"}]}}],"paging":{"previous":"https:\/\/graph.facebook.com\/me\/links?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&since=1316803837","next":"https:\/\/graph.facebook.com\/me\/links?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&until=1263417053"}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://graph.facebook.com:443/me/links?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&until=1263417053
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-origin:
+      - ! '*'
+      cache-control:
+      - private, no-cache, no-store, must-revalidate
+      content-type:
+      - text/javascript; charset=UTF-8
+      etag:
+      - ! '"aa74121767ec3d6729dcd22aab616742c8a7cb2b"'
+      expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      pragma:
+      - no-cache
+      x-fb-rev:
+      - '460957'
+      x-fb-server:
+      - 10.33.13.108
+      x-cnection:
+      - close
+      date:
+      - Thu, 20 Oct 2011 19:56:18 GMT
+      content-length:
+      - '1329'
+    body: ! '{"data":[{"id":"276871014947","from":{"name":"Steven Ragnar\u00f6k","id":"501776555"},"message":"New
+      favorite game: vvvvvv Buy IT! I command you: I will as soon as I pay tuition...\nhttp:\/\/thelettervsixtim.es\/","picture":"http:\/\/external.ak.fbcdn.net\/safe_image.php?d=AQDMJllkijsduM8c&w=90&h=90&url=http\u00253A\u00252F\u00252Fthelettervsixtim.es\u00252Fimages\u00252Fpic1.png","link":"http:\/\/thelettervsixtim.es\/","name":"VVVVVV","icon":"http:\/\/static.ak.fbcdn.net\/rsrc.php\/v1\/yR\/r\/23eNFy_VOig.gif","created_time":"2010-01-13T21:10:53+0000","comments":{"data":[{"id":"276871014947_9821772","from":{"name":"Erik
+      Ostrom","id":"535351473"},"message":"Neat idea. Too twitchy for me, though!","can_remove":true,"created_time":"2010-01-13T21:58:36+0000"},{"id":"276871014947_9821805","from":{"name":"Katherine
+      McHenry","id":"1407904874"},"message":"ADDICTING....","can_remove":true,"created_time":"2010-01-13T21:59:09+0000"}]}}],"paging":{"previous":"https:\/\/graph.facebook.com\/me\/links?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&since=1263417053","next":"https:\/\/graph.facebook.com\/me\/links?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&until=1263417052"}}'
+    http_version: '1.1'
