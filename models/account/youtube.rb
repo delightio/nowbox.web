@@ -89,6 +89,16 @@ module Aji
       # other reasons, e.g., not enough content videos
       Account::Youtube.find_or_create_by_lower_uid uid
     end
+
+    def blacklisted_videos
+      Video.where("author_id = ? AND blacklisted_at IS NOT NULL", id)
+    end
+
+    def blacklist_repeated_offender
+      percent = blacklisted_videos.count * 100 /  videos.count
+      blacklist if percent >= 50
+    end
+
   end
 end
 

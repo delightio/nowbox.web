@@ -128,6 +128,21 @@ module Aji
         subject.background_refresh_info
       end
     end
+
+    describe "#blacklisted_videos" do
+      it "returns the previously blacklisted videos" do
+        pending "#blacklisted_videos is an AR call but we should test it."
+      end
+    end
+
+    describe "#blacklist_repeated_offender" do
+      it "blacklists self if it has too many blacklisted videos" do
+        subject.stub(:blacklisted_videos).and_return(Array.new(3, mock))
+        subject.stub(:videos).and_return(Array.new(6,mock))
+        subject.should_receive(:blacklist).once
+        subject.blacklist_repeated_offender
+      end
+    end
   end
 end
 
