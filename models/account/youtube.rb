@@ -96,7 +96,10 @@ module Aji
 
     def blacklist_repeated_offender
       percent = blacklisted_videos.count * 100 /  videos.count
-      blacklist if percent >= 50
+      if percent >= 50
+        blacklist
+        Aji.log "Account::Youtube[#{id}] is blacklisted due to too many unviewable videos (#{percent} percent)"
+      end
     end
 
   end
