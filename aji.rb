@@ -84,6 +84,7 @@ end
 # Monkey Patching
 require_relative 'lib/patches/string'
 
+Mixins = Module.new
 Dir.glob("lib/mixins/*.rb").each { |r| require_relative r }
 require './lib/tanker_defaults'
 
