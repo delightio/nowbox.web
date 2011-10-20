@@ -32,6 +32,11 @@ task :console => :environment do
   Pry.start Aji
 end
 
+task :h => :heroku_console
+task :heroku_console do
+  system "heroku run console"
+end
+
 task :flog do
   sh %(flog --continue #{source_files * ' '})
 end
