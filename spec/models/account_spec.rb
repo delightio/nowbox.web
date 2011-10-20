@@ -114,6 +114,7 @@ module Aji
     describe "case insensitive uid" do
       it "makes case sensitive finders private" do
         pending "Hide base activerecord method to protect db"
+
         expect{ Account.find_by_uid "anything" }.to(
           raise_error NoMethodError)
       end
