@@ -78,14 +78,6 @@ module Aji
     end
     private :set_provider
 
-    def self.find_by_lower_uid uid
-      find_by_uid uid.downcase
-    end
-
-    def self.find_or_create_by_lower_uid uid, attributes={}
-      find_or_create_by_uid uid.downcase, attributes
-    end
-
     def self.create_if_existing uid
       return found = find_by_lower_uid(uid)if found
 

@@ -128,38 +128,6 @@ module Aji
         subject.background_refresh_info
       end
     end
-
-    describe ".find_by_lower_uid" do
-      let(:uid) { "Freddie25" }
-
-      it "downcases its argument" do
-        uid.should_receive(:downcase)
-
-        Account::Youtube.find_by_lower_uid uid
-      end
-
-      it "delegates to find_by_uid" do
-        Account::Youtube.should_receive(:find_by_uid).with(uid.downcase)
-
-        Account::Youtube.find_by_lower_uid uid
-      end
-    end
-
-    describe ".find_or_create_by_lower_uid" do
-      let(:uid) { "Freddie25" }
-
-      it "downcases its argument" do
-        uid.should_receive(:downcase)
-
-        Account::Youtube.find_or_create_by_lower_uid uid
-      end
-
-      it "delegates to find_by_uid" do
-        Account::Youtube.should_receive(:find_or_create_by_uid).with(
-          uid.downcase, {})
-
-        Account::Youtube.find_or_create_by_lower_uid uid
-      end
-    end
   end
 end
+

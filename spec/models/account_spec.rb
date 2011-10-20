@@ -110,5 +110,47 @@ module Aji
         subject.deauthorize!
       end
     end
+
+    describe "case insensitive uid" do
+      it "makes case sensitive finders private" do
+        pending "Hide base activerecord method to protect db"
+        expect{ Account.find_by_uid "anything" }.to(
+          raise_error NoMethodError)
+      end
+
+      describe ".find_by_lower_uid" do
+        let(:uid) { "Freddie25" }
+
+        it "downcases its argument" do
+          uid.should_receive(:downcase)
+
+          Account.find_by_lower_uid uid
+        end
+
+        it "delegates to find_by_uid" do
+          Account.should_receive(:find_by_uid).with(uid.downcase)
+
+          Account.find_by_lower_uid uid
+        end
+      end
+
+      describe ".find_or_create_by_lower_uid" do
+        let(:uid) { "Freddie25" }
+
+        it "downcases its argument" do
+          uid.should_receive(:downcase)
+
+          Account.find_or_create_by_lower_uid uid
+        end
+
+        it "delegates to find_by_uid" do
+          Account.should_receive(:find_or_create_by_uid).with(
+            uid.downcase, {})
+
+            Account.find_or_create_by_lower_uid uid
+        end
+      end
+    end
   end
 end
+

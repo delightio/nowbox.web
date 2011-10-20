@@ -146,14 +146,22 @@ module Aji
     end
 
     # Class Methods follow
-    def Account.find_or_create_by_param string, params
-      username, provider = Account.from_param string
-      Account.find_or_create_by_provider_and_username provider, username, params
+    def self.find_or_create_by_param string, params
+      username, provider = from_param string
+      find_or_create_by_provider_and_username provider, username, params
     end
 
     # Returns the `username` and `provider` of a given parameterized account.
-    def Account.from_param str
+    def self.from_param str
       str.split("@")[0..1]
+    end
+
+    def self.find_by_lower_uid uid
+      find_by_uid uid.downcase
+    end
+
+    def self.find_or_create_by_lower_uid uid, attributes={}
+      find_or_create_by_uid uid.downcase, attributes
     end
   end
 end
