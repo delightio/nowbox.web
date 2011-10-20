@@ -32,6 +32,66 @@ module Aji
       end
     end
 
+    describe "#content_videos" do
+      it "removes videos that aren't found" do
+        subject.content_zset[20] = 20
+        Video.stub(:find_by_id).with(20).and_return(nil)
+        subject.should_receive(:remove_missing_videos)
+
+        subject.content_videos
+      end
+
+      it "doesn't remove videos when all ids resolve" do
+        subject.should_not_receive :remove_missing_videos
+      end
+    end
+
+    describe "#remove_missing_videos" do
+      before(:each) { subject.content_zset.clear }
+
+      let!(:valid_ids) do
+        [2,4].each do |id|
+          mock("video", :id => id).tap do |v|
+            Video.stub(:find_by_id).with(id).and_return(v)
+            subject.content_zset[id] = id
+          end
+        end
+      end
+
+      let!(:invalid_ids) do
+        [1,3].each do |id|
+          mock("video", :id => id).tap do |v|
+            Video.stub(:find_by_id).with(id).and_return(nil)
+            subject.content_zset[id] = id
+          end
+        end
+      end
+
+      it "doesn't remove valid content" do
+        valid_ids.each do |id|
+          subject.content_zset.should_not_receive(:delete).with(id)
+        end
+
+        subject.remove_missing_videos
+      end
+
+      it "deletes missing ids from content_zset" do
+        invalid_ids.each do |id|
+          subject.content_zset.should_receive(:delete).with(id)
+        end
+
+        subject.remove_missing_videos
+      end
+
+      it "doesn't hit the database for known good video ids" do
+        valid_ids.each do |id|
+          Video.should_not_receive(:find_by_id).with(id)
+        end
+
+        subject.remove_missing_videos valid_ids
+      end
+    end
+
     context "when asking for content" do
       let(:total) { videos.size }
       let(:limit) { videos.size - 3 }

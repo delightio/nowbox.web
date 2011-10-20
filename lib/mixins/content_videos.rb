@@ -12,14 +12,21 @@ module Aji
         klass.sorted_set :content_zset
       end
 
-      # TODO: This isn't a particularly robust interface. I'm writing my own Redis
-      # object library so when that's finished we'll use it.
+      # TODO: This isn't a particularly robust interface. I'm writing my own
+      # Redis object library so when that's finished we'll use it.
       def content_video_ids limit=0
         (content_zset.revrange 0, (limit-1)).map(&:to_i)
       end
 
       def content_videos limit=0
-        content_video_ids(limit).map { |vid| Video.find_by_id vid }.compact
+        videos =
+          content_video_ids(limit).map { |vid| Video.find_by_id vid }.compact
+
+        if videos.size < content_video_ids(limit).size
+          remove_missing_videos videos.map &:id
+        end
+
+        videos
       end
 
       def content_video_id_count
@@ -61,7 +68,17 @@ module Aji
         content_zset.remrangebyrank 0, -(1+limit)
       end
 
-      def content_zset_ttl; 15.minutes; end
+      def remove_missing_videos known_good_ids=[]
+        content_zset.members.map(&:to_i).each do |id|
+          unless known_good_ids.include?(id) || Video.find_by_id(id)
+            content_zset.delete id
+          end
+        end
+      end
+
+      def content_zset_ttl
+        15.minutes
+      end
 
     end
   end
