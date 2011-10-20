@@ -35,7 +35,7 @@ module Aji
 
     def subscribed_channels
       channels = subscribed_list.map { |cid| Channel.find_by_id cid }.compact
-      remove_empty_channels channels.map(&:id) if channels.length <
+      remove_missing_channels channels.map(&:id) if channels.length <
         subscribed_list.length
 
       channels
@@ -150,10 +150,11 @@ module Aji
       self.history_channel = Channel::User.create :title => 'History'
     end
 
-    def remove_empty_channels known_good_ids=[]
-      subscribed_list.each do |id|
-        subscribed_list.delete id unless known_good_ids.include?(id) ||
-          Channel.find_by_id(id)
+    def remove_missing_channels known_good_ids=[]
+      subscribed_list.map(&:to_i).each do |id|
+        unless known_good_ids.include?(id) || Channel.find_by_id(id)
+          subscribed_list.delete id
+        end
       end
     end
 

@@ -82,7 +82,7 @@ module Aji
 
       it "removes empty channels when they're found" do
         subject.subscribed_list << nonexistant_channel.id
-        subject.should_receive :remove_empty_channels
+        subject.should_receive :remove_missing_channels
 
         subject.subscribed_channels.should == subscribed_channels
       end
@@ -202,34 +202,46 @@ module Aji
       end
     end
 
-    describe "#remove_empty_channels" do
+    describe "#remove_missing_channels" do
       let(:valid_ids) do
-        [1, 2].each { |i| Channel.stub(:find_by_id).and_return(true) }
+        [1, 2].each { |i| Channel.stub(:find_by_id).with(i).and_return(true) }
       end
 
       let(:invalid_ids) do
-        [3, 4].each { |i| Channel.stub(:find_by_id).and_return(nil) }
+        [3, 4].each { |i| Channel.stub(:find_by_id).with(i).and_return(nil) }
       end
 
       subject do
-        User.new.tap do |u|
+        User.new do |u|
           u.stub :id => 1
-          u.stub :subscribed_list => valid_ids + invalid_ids
+          (valid_ids + invalid_ids).each do |id|
+            u.subscribed_list << id
+          end
         end
       end
 
-      it "doesn't hit the database for known good channel ids" do
-        valid_ids.each { |id| Channel.should_not_receive(:find_by_id).with(id) }
+      it "doesn't remove valid channels" do
+        valid_ids.each do |id|
+          subject.subscribed_list.should_not_receive(:delete).with(id)
+        end
 
-        subject.send :remove_empty_channels, valid_ids
+        subject.send :remove_missing_channels
       end
 
-      it "removes channels that don't exist" do
+      it "deletes missing ids from subscribed_list" do
         invalid_ids.each do |id|
           subject.subscribed_list.should_receive(:delete).with(id)
         end
 
-        subject.send :remove_empty_channels, valid_ids
+        subject.send :remove_missing_channels
+      end
+
+      it "doesn't hit the database for known good video ids" do
+        valid_ids.each do |id|
+          Video.should_not_receive(:find_by_id).with(id)
+        end
+
+        subject.send :remove_missing_channels, valid_ids
       end
     end
 
