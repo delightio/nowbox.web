@@ -165,11 +165,14 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
 
     describe "#keyword_search" do
       it "hits youtube once for the search and again for each new author" do
-        unique_author_count = 45
-        subject.tracker.should_receive(:hit!).exactly(1+unique_author_count).times
-        VCR.use_cassette "youtube_api/keyword_search" do
+        # TODO: VCR is giving us different results from our cache.
+        # subject.tracker.should_receive(:hit!).exactly(1+unique_author_count).times
+        result = VCR.use_cassette "youtube_api/keyword_search" do
           subject.keyword_search "george carlin"
         end
+
+        unique_author = Set.new result.map &:author
+        subject.tracker.hit_count.should == (1+unique_author.count)
       end
 
       it "returns a nonempty collection of populated videos from db" do
