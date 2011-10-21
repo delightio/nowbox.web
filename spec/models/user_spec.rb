@@ -103,6 +103,35 @@ module Aji
     describe "channel subscriptions" do
       let(:channel) { mock "channel", :id => 12 }
 
+      describe "#unsubscribe_from_all" do
+        before :each do
+          subject.stub(:unsubscribe).with(channel).and_return(true)
+          subject.stub(:unsubscribe_social).with(channel).and_return(true)
+        end
+
+        it "unsubscribes from regular channels and social subscription" do
+          subject.should_receive(:unsubscribe).with(channel)
+          subject.should_receive(:unsubscribe_social).with(channel)
+
+          subject.unsubscribe_from_all channel
+        end
+
+        specify "returns true when the channel is not in either list" do
+          subject.unsubscribe_from_all(channel).should be_true
+        end
+
+        specify "returns false when the channel is still subscribed" do
+          subject.stub(:unsubscribe).with(channel).and_return(false)
+
+          subject.unsubscribe_from_all(channel).should be_false
+        end
+
+        specify "returns false when the channel is still in social channels" do
+          subject.stub(:unsubscribe_social).with(channel).and_return(false)
+          subject.unsubscribe_from_all(channel).should be_false
+        end
+      end
+
       describe "#social_channels" do
         let(:social_channels) { (0..2).map{ |i| mock "channel", :id => i } }
         let(:nonexistant_channel) { mock "channel", :id => 10 }

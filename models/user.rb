@@ -43,7 +43,7 @@ module Aji
         subscribe event.channel
 
       when :unsubscribe
-        unsubscribe event.channel
+        unsubscribe_from_all event.channel
 
       when :share
         favorite_channel.push video, event.created_at.to_i
@@ -86,7 +86,6 @@ module Aji
       channels = social_channel_list.map{ |cid| Channel.find_by_id cid }.compact
       remove_missing_channels channels.map(&:id) if channels.length <
         social_channel_list.length
-      puts social_channel_list.length, channels.length
 
       channels
     end
@@ -117,6 +116,10 @@ module Aji
     def unsubscribe_social channel
       social_channel_list.delete channel.id
       not subscribed_social? channel
+    end
+
+    def unsubscribe_from_all channel
+      [ unsubscribe(channel), unsubscribe_social(channel) ].all?
     end
 
     def redis_keys
