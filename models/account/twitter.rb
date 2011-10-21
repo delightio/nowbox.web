@@ -122,7 +122,7 @@ module Aji
 
     def create_stream_channel
       self.stream_channel ||= Channel::TwitterStream.create :owner => self,
-        :title => "Twitter Stream"
+        :title => username
       save and stream_channel.refresh_content
       stream_channel
     end

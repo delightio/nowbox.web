@@ -77,7 +77,7 @@ module Aji
             c.stub :save => true
             c.stub :refresh_content
             Channel.should_receive(:create).with(:owner => subject,
-              :title => "Facebook Stream").and_return(c)
+              :title => subject.realname).and_return(c)
           end
       end
 
