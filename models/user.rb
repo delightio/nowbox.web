@@ -70,8 +70,10 @@ module Aji
          "queue_channel_id" => queue_channel_id,
          "favorite_channel_id" => favorite_channel_id,
          "history_channel_id" => history_channel_id,
-         "subscribed_channel_ids" => subscribed_list.values
-      }.merge! identity.social_channel_ids
+         "twitter_channel_id" => twitter_channel_id,
+         "facebook_channel_id" => facebook_channel_id,
+         "subscribed_channel_ids" => subscribed_list.values,
+      }
     end
 
     def subscribed_channels
@@ -88,6 +90,22 @@ module Aji
         social_channel_list.length
 
       channels
+    end
+
+    def facebook_channel_id
+      if (c = social_channels.find{|c| c.class == Aji::Account::Facebook })
+        c.id
+      else
+        nil
+      end
+    end
+
+    def twitter_channel_id
+      if (c = social_channels.find{|c| c.class == Aji::Account::Twitter })
+        c.id
+      else
+        nil
+      end
     end
 
     def subscribed? channel
