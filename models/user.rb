@@ -22,7 +22,8 @@ module Aji
       :dependent => :destroy
 
     include Redis::Objects
-    list :subscribed_list # User's Subscribed channels.
+    list :subscribed_list
+    list :social_channel_list
 
     def subscribe_featured_channels
       if region.nil?
@@ -31,14 +32,6 @@ module Aji
       end
 
       region.featured_channels.each { |c| subscribe c }
-    end
-
-    def subscribed_channels
-      channels = subscribed_list.map { |cid| Channel.find_by_id cid }.compact
-      remove_missing_channels channels.map(&:id) if channels.length <
-        subscribed_list.length
-
-      channels
     end
 
     def process_event event
@@ -81,18 +74,49 @@ module Aji
       }.merge! identity.social_channel_ids
     end
 
+    def subscribed_channels
+      channels = subscribed_list.map{ |cid| Channel.find_by_id cid }.compact
+      remove_missing_channels channels.map(&:id) if channels.length <
+        subscribed_list.length
+
+      channels
+    end
+
+    def social_channels
+      channels = social_channel_list.map{ |cid| Channel.find_by_id cid }.compact
+      remove_missing_channels channels.map(&:id) if channels.length <
+        social_channel_list.length
+      puts social_channel_list.length, channels.length
+
+      channels
+    end
+
     def subscribed? channel
       subscribed_list.include? channel.id.to_s
     end
 
-    def subscribe channel, args={}
-      subscribed_list << channel.id if !subscribed? channel
+    def subscribed_social? channel
+      social_channel_list.include? channel.id.to_s
+    end
+
+    def subscribe channel
+      subscribed_list << channel.id unless subscribed? channel
       subscribed? channel
     end
 
-    def unsubscribe channel, args={}
+    def subscribe_social channel
+      social_channel_list << channel.id unless subscribed_social? channel
+      subscribed_social? channel
+    end
+
+    def unsubscribe channel
       subscribed_list.delete channel.id
-      !subscribed?(channel)
+      not subscribed? channel
+    end
+
+    def unsubscribe_social channel
+      social_channel_list.delete channel.id
+      not subscribed_social? channel
     end
 
     def redis_keys
@@ -107,10 +131,6 @@ module Aji
 
     def user_channels
       [ queue_channel, favorite_channel ]
-    end
-
-    def social_channels
-      identity.social_channels
     end
 
     def display_channels
@@ -151,9 +171,11 @@ module Aji
     end
 
     def remove_missing_channels known_good_ids=[]
-      subscribed_list.map(&:to_i).each do |id|
-        unless known_good_ids.include?(id) || Channel.find_by_id(id)
-          subscribed_list.delete id
+      [subscribed_list, social_channel_list].each do |channel_list|
+        channel_list.map(&:to_i).each do |id|
+          unless known_good_ids.include?(id) || Channel.find_by_id(id)
+            channel_list.delete id
+          end
         end
       end
     end
