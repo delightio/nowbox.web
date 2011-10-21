@@ -34,7 +34,8 @@ module Aji
         @channels = [].tap do |channels|
           @account_count.times do |n|
             channel = mock("channel", :id => n,
-              :background_refresh_content => nil)
+              :background_refresh_content => nil,
+              :available? => true)
             channels << channel
           end
         end
@@ -42,7 +43,7 @@ module Aji
           @account_count.times do |n|
             account = mock("account", :id => n,
               :username => random_string,
-              :blacklisted? => false,
+              # :blacklisted? => false,
               :to_channel => @channels[n])
             # TODO this sucks
             @channels[n].stub(:accounts).and_return([account])
@@ -105,10 +106,9 @@ module Aji
 
     context "when #results contains blacklisted channel" do
       it "does not return blacklisted channels" do
-        blacklisted_channel = mock "channel with blacklisted account"
+        blacklisted_channel = mock "bad channel", :available? => false
         blacklisted_account = mock "spammer",
-          :blacklisted? => true, :username => "spammer",
-          :to_channel => blacklisted_channel
+          :username => "spammer", :to_channel => blacklisted_channel
         blacklisted_channel.stub(:accounts).and_return([blacklisted_account])
         blacklisted_channel.should_not_receive(:background_refresh_content)
 
