@@ -1,30 +1,39 @@
 require File.expand_path("../../spec_helper", __FILE__)
 
-describe Aji::Event do
-  describe "#create" do
-    it "triggers caching for user" do
-      Aji::User.any_instance.should_receive(:process_event).
-        with(an_instance_of(Aji::Event))
-      event = Factory :event, :action => :view
+include Aji
+
+describe Aji::Event, :unit do
+  describe "#process" do
+    let(:user) { mock "user", :id => 1, :process_event => true }
+    let(:video) { mock "video", :id => 2 }
+    let(:channel) { mock "video", :id => 3 }
+
+    subject do
+      Event.new do |e|
+        e.stub :user => user
+        e.stub :video => video
+        e.stub :channel => channel
+      end
     end
 
-    context "When asked to examine video" do
-      it "queues the given video in queue" do
-        Resque.should_receive(:enqueue).with(
-          Aji::Queues::ExamineVideo, an_instance_of(Hash))
-        event = Factory :event, :action => :examine,
-          :reason => random_string
-      end
+    it "sends the event to the user for processing" do
+      user.should_receive(:process_event).with(subject)
 
-      it "saves the reason" do
-        reason = random_string
-        Resque.should_receive(:enqueue).with(
-          Aji::Queues::ExamineVideo, an_instance_of(Hash))
-        event = Factory :event, :action => :examine,
-          :reason => reason
-        Aji::Event.find(event.id).reason.should == reason
-      end
+      subject.send :process
+    end
 
+    context "when an examine action is sent" do
+      it "enqueues the video for examination in background" do
+        subject.action = :examine
+        subject.reason = "I hate squirrels"
+
+        Resque.should_receive(:enqueue).with(
+          Aji::Queues::ExamineVideo,{ :user_id => user.id,
+          :video_id => video.id, :channel_id => channel.id,
+          :reason => subject.reason })
+
+        subject.process
+      end
     end
   end
 end
