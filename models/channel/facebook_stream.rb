@@ -10,6 +10,10 @@ module Aji
       "http://#{Aji.conf['TLD']}/images/icons/facebook.png"
     end
 
+    def description
+      "Videos from #{owner.realname}'s Facebook Feed"
+    end
+
     def refresh_content force=false
       super force do |new_videos|
         mentions = owner.api.video_mentions_in_feed
