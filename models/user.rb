@@ -93,7 +93,7 @@ module Aji
     end
 
     def facebook_channel_id
-      if (c = social_channels.find{|c| c.class == Aji::Account::Facebook })
+      if c = social_channels.find{|c| c.class == Aji::Channel::FacebookStream }
         c.id
       else
         nil
@@ -101,7 +101,7 @@ module Aji
     end
 
     def twitter_channel_id
-      if (c = social_channels.find{|c| c.class == Aji::Account::Twitter })
+      if c = social_channels.find{|c| c.class == Aji::Channel::TwitterStream }
         c.id
       else
         nil
