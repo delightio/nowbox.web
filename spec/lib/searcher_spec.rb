@@ -33,16 +33,19 @@ module Aji
         @searcher = Searcher.new ""
         @channels = [].tap do |channels|
           @account_count.times do |n|
-            channel = mock("channel", :id => n)
-            channel.stub(:background_refresh_content)
+            channel = mock("channel", :id => n,
+              :background_refresh_content => nil)
             channels << channel
           end
         end
         @accounts = [].tap do |accounts|
           @account_count.times do |n|
-            account = mock("account", :id => n)
-            account.stub(:username).and_return(random_string)
-            account.stub(:to_channel).and_return(@channels[n])
+            account = mock("account", :id => n,
+              :username => random_string,
+              :blacklisted? => false,
+              :to_channel => @channels[n])
+            # TODO this sucks
+            @channels[n].stub(:accounts).and_return([account])
             accounts << account
           end
         end
@@ -98,6 +101,21 @@ module Aji
         subject.results
       end
 
+    end
+
+    context "when #results contains blacklisted channel" do
+      it "does not return blacklisted channels" do
+        blacklisted_channel = mock "channel with blacklisted account"
+        blacklisted_account = mock "spammer",
+          :blacklisted? => true, :username => "spammer",
+          :to_channel => blacklisted_channel
+        blacklisted_channel.stub(:accounts).and_return([blacklisted_account])
+        blacklisted_channel.should_not_receive(:background_refresh_content)
+
+        subject = Searcher.new random_string
+        subject.stub(:account_results).and_return([blacklisted_account])
+        subject.results.should_not include blacklisted_channel
+      end
     end
 
   end

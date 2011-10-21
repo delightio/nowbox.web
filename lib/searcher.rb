@@ -33,6 +33,10 @@ module Aji
       end
 
       channels = accounts.map(&:to_channel)
+      # pick channels with non blacklisted accounts
+      channels = channels.select do |ch|
+        ch.accounts.any? {|a| !a.blacklisted?}
+      end
 
       # TODO: hack to make NowPopular searchable
       splits = @query.split ' '
