@@ -72,7 +72,7 @@ module Aji
          "history_channel_id" => history_channel_id,
          "twitter_channel_id" => twitter_channel_id,
          "facebook_channel_id" => facebook_channel_id,
-         "subscribed_channel_ids" => subscribed_list.values,
+         "subscribed_channel_ids" => subscribed_channel_ids,
       }
     end
 
@@ -106,6 +106,10 @@ module Aji
       else
         nil
       end
+    end
+
+    def subscribed_channel_ids
+      subscribed_list.values.map(&:to_i)
     end
 
     def subscribed? channel

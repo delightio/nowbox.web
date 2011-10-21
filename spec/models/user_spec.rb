@@ -346,15 +346,75 @@ module Aji
     end
 
     describe "#serializable_hash" do
-      it "includes a list of subscribed channel ids" do
-        user = Factory :user
-        5.times do |n|
-          channel = Factory :channel
-          event = Factory :channel_event, :action => :subscribe,
-            :user => user, :channel => channel
+      subject do
+        User.new do |u|
+          u.stub :id => 111
+          u.stub :name => "Jim"
+          u.stub :email => "jim@james.com"
+          u.stub :queue_channel_id => 1
+          u.stub :favorite_channel_id => 2
+          u.stub :history_channel_id => 3
+          u.stub :twitter_channel_id => nil
+          u.stub :facebook_channel_id => 5
+          u.stub :subscribed_channel_ids => [6,7,8,9,10]
         end
-        user.serializable_hash["subscribed_channel_ids"].should ==(
-          user.subscribed_list.values)
+      end
+
+      it "returns a hash of users attributes" do
+        subject.serializable_hash.should == {
+          'id' => 111,
+          'name' => "Jim",
+          'email' => "jim@james.com",
+          'queue_channel_id' => 1,
+          'favorite_channel_id' => 2,
+          'history_channel_id' => 3,
+          'twitter_channel_id' => nil,
+          'facebook_channel_id' => 5,
+          'subscribed_channel_ids' => [6,7,8,9,10]
+        }
+      end
+    end
+
+    describe "#subscribed_channel_ids" do
+      let(:subscribed_ids) { [1, 50, 27, 9] }
+      let(:subscribed_list) { stub :values => subscribed_ids.map(&:to_s) }
+      subject { User.new { |u| u.stub :subscribed_list => subscribed_list } }
+
+      it "returns a list of ids from the subscribed list" do
+        subject.subscribed_channel_ids.should == subscribed_ids
+      end
+
+      it "doesn't include ids that with missing channels"
+    end
+
+    describe "#twitter_channel_id" do
+      let(:tw_channel) { stub :id => 9, :class => Aji::Channel::TwitterStream }
+
+      it "returns the id of the twitter channel if one is present" do
+        subject.stub :social_channels => [stub, tw_channel]
+
+        subject.twitter_channel_id.should == tw_channel.id
+      end
+
+      it "returns nil if no facebook channel is present" do
+        subject.stub :social_channels => [stub, stub]
+        subject.twitter_channel_id.should be_nil
+      end
+    end
+
+
+    describe "#facebook_channel_id" do
+      let(:fb_channel) { stub :id => 8, :class => Aji::Channel::FacebookStream }
+
+      it "returns the id of the facebook channel if one is present" do
+        subject.stub :social_channels => [stub, fb_channel]
+
+        subject.facebook_channel_id.should == fb_channel.id
+      end
+
+      it "returns nil if no facebook channel is present" do
+        subject.stub :social_channels => [stub, stub]
+        subject.facebook_channel_id.should be_nil
       end
     end
 
