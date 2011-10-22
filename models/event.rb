@@ -39,6 +39,7 @@ module Aji
       write_attribute(:action, value.to_s)
     end
 
+    private
     def process
       user.process_event self
 

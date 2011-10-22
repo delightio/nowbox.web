@@ -32,7 +32,7 @@ describe Aji::Event, :unit do
           :video_id => video.id, :channel_id => channel.id,
           :reason => subject.reason })
 
-        subject.process
+        subject.send :process
       end
     end
   end

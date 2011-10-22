@@ -46,19 +46,21 @@ module Aji
         unsubscribe_from_all event.channel
 
       when :share
-        favorite_channel.push video, event.created_at.to_i
-        history_channel.push video, event.created_at.to_i
+        watched_video event.video, event.created_at
+        favorite_video event.video, event.created_at
+        create_share_from_event event
+
       when :unfavorite
-        favorite_channel.pop video
+        unfavorite_video event.video
 
       when :view, :examine
-        history_channel.push video, event.created_at.to_i
+        watched_video event.video, event.created_at
 
       when :enqueue
-        queue_channel.push video, event.created_at.to_i
-      when :dequeue
-        queue_channel.pop video
+        enqueue_video event.video, event.created_at
 
+      when :dequeue
+        dequeue_video event.video
       end
     end
 
@@ -142,6 +144,29 @@ module Aji
 
     def unsubscribe_from_all channel
       [ unsubscribe(channel), unsubscribe_social(channel) ].all?
+    end
+
+    def watched_video video, watched_time
+      history_channel.push video, watched_time.to_i
+    end
+
+    def favorite_video video, favorited_time
+      favorite_channel.push video, favorited_time.to_i
+    end
+
+    def unfavorite_video video
+      favorite_channel.pop video
+    end
+
+    def enqueue_video video, enqueued_time
+      queue_channel.push video, enqueued_time.to_i
+    end
+
+    def dequeue_video video
+      queue_channel.pop video
+    end
+
+    def create_share_from_event event
     end
 
     def redis_keys
