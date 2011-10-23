@@ -10,6 +10,10 @@ module Aji
       "http://#{Aji.conf['TLD']}/images/icons/twitter.png"
     end
 
+    def description
+      "Videos from #{owner.username}'s Twitter Feed"
+    end
+
     def refresh_content force=false
       super force do |new_videos|
         owner.api.video_mentions_in_feed.each do |m|

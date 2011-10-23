@@ -65,35 +65,33 @@ module Aji
       user = Aji::User.find_by_id params[:user_id]
       return { :error => "User[#{params[:user_id]}] does not exist." } if
         user.nil?
-      auth_hash = request.env['omniauth.auth']
-      provider_class = case auth_hash['provider']
-                       when 'twitter' then Account::Twitter
-                       when 'facebook' then Account::Facebook
-                       end
 
-      if (account = provider_class.find_by_uid auth_hash['uid'])
-        account.update_from_auth_info auth_hash
-      else
-        account = provider_class.create(
-          :identity => user.identity,
-          :credentials => auth_hash['credentials'],
-          :uid => auth_hash['uid'],
-          :username => auth_hash['nickname'],
-          :info => auth_hash['extra']['user_hash']
-        )
-      end
+      begin
+        auth_hash = request.env['omniauth.auth']
+        provider_class = case auth_hash['provider']
+                         when 'twitter' then Account::Twitter
+                         when 'facebook' then Account::Facebook
+                         end
 
-      account.create_stream_channel
+        if (account = provider_class.find_by_uid auth_hash['uid'])
+          account.update_from_auth_info auth_hash
+        else
+          account = provider_class.create(
+            :identity => user.identity,
+            :credentials => auth_hash['credentials'],
+            :uid => auth_hash['uid'],
+            :username => auth_hash['nickname'],
+            :info => auth_hash['extra']['user_hash']
+          )
+        end
 
-      auth = Authorization.new account, user.identity
+        user.subscribe_social account.create_stream_channel
+        MultiJson.encode user.serializable_hash
 
-      if auth.grant!
-        MultiJson.encode auth.user.serializable_hash
-      else
-        MultiJson.encode :error => "Unable to authenticate"
+      rescue
+        MultiJson.encode :error => 'Unable to authenticate'
       end
     end
-
 
     # ## POST /auth/:provider/deauthorize
     # Deauthorizes an account effectively removing it from the system.
@@ -108,7 +106,7 @@ module Aji
 
       if account.nil?
         return MultiJson.encode(:error => "No #{params[:provider]} account " +
-          "with uid:#{params[:uid]} known")
+                                "with uid:#{params[:uid]} known")
       end
 
       auth = Authorization.new account, account.identity

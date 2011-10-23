@@ -9,3 +9,9 @@ refresh_trending_channels:
   cron: "*/15 * * * *"
   args:
   description: "Update all trending channels."
+
+kill_bill:
+  class: Aji::Queues::KillBill
+  cron: "* * * * * 2000"
+  args:
+  description: "Remove Bill's test twitter and facebook accounts for debugging."

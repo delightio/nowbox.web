@@ -148,7 +148,7 @@ module Aji
             c.stub :save => true
             c.stub :refresh_content
             Channel::TwitterStream.should_receive(:create).with(
-              :owner => subject, :title => "Twitter Stream").and_return(c)
+              :owner => subject, :title => subject.username).and_return(c)
           end
       end
 

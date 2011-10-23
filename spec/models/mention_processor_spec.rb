@@ -11,7 +11,7 @@ module Aji
       let(:links) { Array.new link_count, link }
       let(:author) do
         mock "author", :blacklisted? => false, :save => true,
-          :username => "blah", :id => 1
+          :username => "blah", :id => 1, :push => true
       end
       let(:mention) do
         mock "mention", :spam? => false, :links => links, :author => author,
@@ -34,6 +34,12 @@ module Aji
            mention.author.id)
         subject.perform
       end
+
+       it "adds found videos to author's content" do
+         author.should_receive(:push).with(video).exactly(link_count).times
+
+         subject.perform
+       end
     end
 
     describe ".video_filters" do
