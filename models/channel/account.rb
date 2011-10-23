@@ -9,7 +9,7 @@ module Aji
       :autosave => true
 
     def available?
-      accounts.any? {|a| !a.blacklisted?}
+      accounts.any? {|a| a.available?}
     end
 
     def refresh_content force=false

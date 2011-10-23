@@ -19,8 +19,8 @@ module Aji
     it_behaves_like "any channel"
 
     describe "#available?" do
-      let(:good_account) { mock "good guy", :blacklisted? => false}
-      let(:bad_account)  { mock "bad guy", :blacklisted? => true}
+      let(:good_account) { mock "good guy", :available? => true}
+      let(:bad_account)  { mock "bad guy", :available? => false}
 
       it "is true if it contains any non blacklisted accounts" do
         subject.stub(:accounts).and_return([good_account, bad_account])

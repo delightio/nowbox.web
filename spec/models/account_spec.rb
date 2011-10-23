@@ -30,6 +30,12 @@ module Aji
       end
     end
 
+    describe "#available?" do
+      it "is false by default" do
+        subject.should_not be_available
+      end
+    end
+
     describe "#marked_spammer?" do
       specify "true if account id is in the set of spammers" do
         Aji.redis.should_receive(:sismember).with("spammers", subject.id).

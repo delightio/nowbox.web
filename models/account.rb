@@ -81,6 +81,10 @@ module Aji
       influencer_set.map { |id| Account.find_by_id id }
     end
 
+    def available?
+      false
+    end
+
     def marked_spammer?
       Aji.redis.sismember "spammers", id
     end
