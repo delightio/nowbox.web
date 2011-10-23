@@ -78,6 +78,17 @@ module Aji
     end
     private :set_provider
 
+    def forbidden_words_in_username?
+      pos = username =~ /VEVO$/
+      pos != nil
+    end
+
+    def available?
+      return false if blacklisted? ||
+                      forbidden_words_in_username?
+      true
+    end
+
     def self.create_if_existing uid
       return found = find_by_lower_uid(uid)if found
 
