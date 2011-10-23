@@ -80,16 +80,16 @@ module Aji
     end
 
     describe "#forbidden_words_in_username?" do
-      specify "is true for anything with VEVO at the end is bad" do
-        bad_usernames = %w( VEVO JustinVEVO jkjljVEVO )
+      specify "is true for anything with VEVO/vevo at the end is bad" do
+        bad_usernames = %w( VEVO JustinVEVO Justinvevo jkjljVEVO )
         bad_usernames.each do |bad_username|
           subject.should_receive(:username).and_return bad_username
           subject.should be_forbidden_words_in_username
         end
       end
 
-      specify "is false if VEVO is at the beginning or it's not cap'ed" do
-        usernames = %w( vevo JustinVEVOblah )
+      specify "is false if VEVO is at the beginning" do
+        usernames = %w( JustinVEVOblah vevoblah )
         usernames.each do |username|
           subject.should_receive(:username).and_return username
           subject.should_not be_forbidden_words_in_username

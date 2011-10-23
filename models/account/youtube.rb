@@ -79,7 +79,7 @@ module Aji
     private :set_provider
 
     def forbidden_words_in_username?
-      pos = username =~ /VEVO$/
+      pos = username.downcase =~ /vevo$/
       pos != nil
     end
 
