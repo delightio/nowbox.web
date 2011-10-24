@@ -143,6 +143,25 @@ module Aji
 
     end
 
+    describe "#update_or_create_by_external_id_and_source" do
+      before :each do
+        Video.stub(:find_or_create_by_external_id_and_source).
+          and_return(subject)
+      end
+
+      it "updates for non populated video" do
+        subject.stub(:populated?).and_return true
+        subject.should_not_receive(:update_attributes)
+        Video.update_or_create_by_external_id_and_source mock, mock, mock
+      end
+
+      it "only updates if video was not populated" do
+        subject.stub(:populated?).and_return false
+        subject.should_receive(:update_attributes)
+        Video.update_or_create_by_external_id_and_source mock, mock, mock
+      end
+    end
+
     describe "#failed" do
       it "increases the number of failures by one" do
         expect { subject.send :failed }.to change(subject, :failures).by(1)

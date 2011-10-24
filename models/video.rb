@@ -104,6 +104,12 @@ module Aji
       end
     end
 
+    def self.update_or_create_by_external_id_and_source(external_id, source, h)
+      existing_or_new = find_or_create_by_external_id_and_source(external_id, source, h)
+      existing_or_new.update_attributes h unless existing_or_new.populated?
+      existing_or_new
+    end
+
     private
     MAX_FAILED_ATTEMPTS = 10
 
