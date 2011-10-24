@@ -124,5 +124,25 @@ module Aji
         latest.should_not include oldest
       end
     end
+
+    describe ".create_or_find_by_uid_and_source" do
+      let(:uid) { "1234567" }
+      let(:source) { "twitter" }
+      let(:author) { Account.new uid: uid, provider: source }
+      let(:attributes) { { :author => author } }
+
+      it "tries to create the mention immediately" do
+        Mention.should_receive(:create!).with(attributes.merge!(:uid => uid,
+          :source => source))
+        Mention.create_or_find_by_uid_and_source uid, source, attributes
+      end
+
+      it "tries to find an existing mention if create! raises an exception" do
+        Mention.stub(:create!) { raise ActiveRecord::RecordInvalid }
+        Mention.should_receive(:find_by_uid_and_source).with(uid, source)
+
+        Mention.create_or_find_by_uid_and_source uid, source
+      end
+    end
   end
 end
