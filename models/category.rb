@@ -38,9 +38,10 @@ module Aji
     # Only returns channels which their top categories are also self.
     def featured_channels
       results = []
-      channel_ids.first(10).each do |channel_id|
-        channel = Channel.find_by_id channel_id
-        if channel.category_ids.first(2).include? self.id
+      channels(10).each do |channel|
+        if channel &&
+           channel.available? &&
+           channel.category_ids.first(2).include?(self.id)
           results << channel
         end
       end

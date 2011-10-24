@@ -32,24 +32,24 @@ module Aji
 
     describe "#featured_channels" do
       it "returns channels which top categories are also self" do
-        ch1 = mock("channel").tap do |c|
-          c.stub :id => 1
-          c.stub(:category_ids).and_return [subject.id]
-          Channel.stub(:find_by_id).with(c.id).and_return c
-        end
-
-        ch2 = mock("channel").tap do |c|
-          c.stub :id => 2
-          c.stub(:category_ids).and_return [4]
-          Aji::Channel.stub(:find_by_id).with(c.id).and_return c
-        end
-
-        subject.stub(:channel_ids).and_return([ch1.id, ch2.id])
+        ch1 = mock "channel1", :available? => true,
+          :category_ids => [subject.id]
+        ch2 = mock "channel1", :available? => true,
+          :category_ids => [4]
+        subject.stub(:channels).and_return([ch1, ch2])
 
         featured = subject.featured_channels
         featured.should include ch1
         featured.should_not include ch2
       end
+
+      it "skips unavailable channels" do
+        ch1 = mock "unavailable channel",
+          :category_ids => [subject.id], :available? => false
+        subject.stub(:channels).and_return([ch1])
+        subject.featured_channels.should_not include ch1
+      end
+
     end
   end
 end

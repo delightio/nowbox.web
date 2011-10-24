@@ -13,6 +13,12 @@ module Aji
     it_behaves_like "any redis object model"
     it_behaves_like "any featured model"
 
+    describe "#available?" do
+      it "is true by default" do
+        subject.should be_available
+      end
+    end
+
     describe "#personalized_content_videos" do
       context "when dealing with non user channels" do
         it "returns unviewed videos" do

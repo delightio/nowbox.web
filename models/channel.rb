@@ -68,6 +68,10 @@ module Aji
       0
     end
 
+    def available?
+      true
+    end
+
     # TODO: Refactor to take a list of video ids and a limit parameter instead
     # of hash. This will reduce coupling and allow us to do more sophisticated
     # things than just removing a users viewed videos with less coupling and

@@ -18,6 +18,21 @@ module Aji
 
     it_behaves_like "any channel"
 
+    describe "#available?" do
+      let(:good_account) { mock "good guy", :available? => true}
+      let(:bad_account)  { mock "bad guy", :available? => false}
+
+      it "is true if it contains any non blacklisted accounts" do
+        subject.stub(:accounts).and_return([good_account, bad_account])
+        subject.should be_available
+      end
+
+      it "is false if it only contains blacklisted accounts" do
+        subject.stub(:accounts).and_return([bad_account])
+        subject.should_not be_available
+      end
+    end
+
     describe "#refresh_content" do
       it "skips blacklisted accounts" do
         bad_author = Account.new uid: "badman"

@@ -8,6 +8,10 @@ module Aji
       :foreign_key => :channel_id, :association_foreign_key => :account_id,
       :autosave => true
 
+    def available?
+      accounts.any? {|a| a.available?}
+    end
+
     def refresh_content force=false
       super force do |new_videos|
         accounts_populated_at = []

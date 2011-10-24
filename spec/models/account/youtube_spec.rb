@@ -79,6 +79,61 @@ module Aji
       end
     end
 
+    describe "#forbidden_words_in_username?" do
+      specify "is true for anything with VEVO/vevo at the end is bad" do
+        bad_usernames = %w( VEVO JustinVEVO Justinvevo jkjljVEVO )
+        bad_usernames.each do |bad_username|
+          subject.should_receive(:username).and_return bad_username
+          subject.should be_forbidden_words_in_username
+        end
+      end
+
+      specify "is false if VEVO is at the beginning" do
+        usernames = %w( JustinVEVOblah vevoblah )
+        usernames.each do |username|
+          subject.should_receive(:username).and_return username
+          subject.should_not be_forbidden_words_in_username
+        end
+      end
+    end
+
+    describe "#available?" do
+      before :each do
+        subject.stub(:blacklisted?).and_return(false)
+        subject.stub(:forbidden_words_in_username).and_return(false)
+      end
+
+      context "when account is not backlisted AND its name doesn't follow pattern" do
+        it "is true" do
+          subject.should be_available
+        end
+      end
+
+      context "when account is blacklisted" do
+        it "is false" do
+          subject.stub(:blacklisted?).and_return(true)
+          subject.should_not be_available
+        end
+      end
+
+      context "when account's name has forbidden words" do
+        it "is false" do
+          subject.stub(:forbidden_words_in_username?).
+            and_return(true)
+          subject.should_not be_available
+        end
+      end
+
+      context "when account is blacklisted and its name has forbidden words" do
+        it "is false" do
+          subject.stub(:blacklisted?).and_return(true)
+          subject.stub(:forbidden_words_in_username?).and_return(true)
+          subject.should_not be_available
+        end
+      end
+
+    end
+
     describe ".create_if_existing" do
       let(:uid) { "anything" }
 
