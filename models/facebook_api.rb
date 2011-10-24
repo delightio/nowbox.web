@@ -5,21 +5,6 @@ module Aji
       @koala = Koala::Facebook::API.new @token
     end
 
-    def video_mentions_i_post pages=2
-      [].tap do |mentions|
-        tracker.hit!
-        posts = @koala.get_connections "me", "links"
-        mentions.concat extract_video_mentions filter_links posts
-        (pages - 1).times do
-          tracker.hit!
-          posts = posts.next_page
-
-          break if posts.nil?
-          mentions.concat extract_video_mentions filter_links posts
-        end
-      end
-    end
-
     def video_mentions_in_feed pages=5
       [].tap do |mentions|
         tracker.hit!
@@ -33,6 +18,11 @@ module Aji
           mentions.concat extract_video_mentions filter_links posts
         end
       end
+    end
+
+    def publish body_text
+      tracker.hit!
+      @koala.put_wall_post body_text
     end
 
     def tracker
