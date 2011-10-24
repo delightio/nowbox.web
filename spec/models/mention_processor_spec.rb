@@ -5,14 +5,16 @@ module Aji
     describe "#perform" do
 
       let(:destination) { mock "video destination" }
-      let(:video) { mock "video", :blacklisted? => false }
+      let(:video_1) { mock "video", :blacklisted? => false }
+      let(:video_2) { mock "video", :blacklisted? => false }
       let(:link)  { mock "video link", :to_video => video }
-      let(:link_count) { 2 }
-      let(:links) { Array.new link_count, link }
+      let(:links) { [stub(:to_video => video_1), stub(:to_video => video_2)] }
+
       let(:author) do
         mock "author", :blacklisted? => false, :save => true,
           :username => "blah", :id => 1, :push => true
       end
+
       let(:mention) do
         mock "mention", :spam? => false, :links => links, :author => author,
           :body => "", :videos => [], :save => true, :id => 1,
@@ -22,9 +24,10 @@ module Aji
       subject { MentionProcessor.new mention, destination }
 
       it "promotes videos mentioned" do
-        destination.should_receive(:promote_video).
-          with(video, mention).
-          exactly(link_count).times
+        links.map(&:to_video).each do |video|
+          destination.should_receive(:promote_video).with(video, mention)
+        end
+
         subject.perform
       end
 
@@ -32,11 +35,14 @@ module Aji
         mention.stub(:spam?).and_return(true)
         Resque.should_receive(:enqueue).with(Queues::RemoveSpammer,
            mention.author.id)
+
         subject.perform
       end
 
        it "adds found videos to author's content" do
-         author.should_receive(:push).with(video).exactly(link_count).times
+         links.map(&:to_video).each do |video|
+           author.should_receive(:push).with(video)
+         end
 
          subject.perform
        end
