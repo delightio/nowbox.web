@@ -42,7 +42,7 @@ module Aji
 
     private
     def filter_links posts
-      posts.select { |p| p['type'] == 'video' and p['link'] }
+      posts.select { |p| p['link'] }
     end
 
     def extract_video_mentions links
