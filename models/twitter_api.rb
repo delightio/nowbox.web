@@ -59,6 +59,11 @@ module Aji
         cooldown: 1.hour, hits_per_session: 350
     end
 
+    def publish body_text
+      tracker.hit!
+      @client.update body_text
+    end
+
     private
     def filter_links tweets
       tweets.reject do |tweet|
