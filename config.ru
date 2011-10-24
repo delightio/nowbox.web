@@ -4,6 +4,7 @@ require "#{File.expand_path(".")}/aji"
 
 use Rack::Deflater
 use Rack::Session::Cookie
+use Rack::Exceptional, Aji.conf['EXCEPTIONAL_API_KEY']
 use OmniAuth::Builder do
   provider :twitter, Aji.conf['CONSUMER_KEY'], Aji.conf['CONSUMER_SECRET']
   provider :facebook, Aji.conf['APP_ID'], Aji.conf['APP_SECRET'],
