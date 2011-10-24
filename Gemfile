@@ -38,8 +38,12 @@ gem 'erubis'
 gem 'yajl-ruby'
 gem 'twitter'
 gem 'koala', '~>1.2.0beta'
+
 gem 'tanker'
 gem 'will_paginate'
+
+# monitoring
+gem 'exceptional'
 
 # Mail related
 #gem 'activeresource'
