@@ -11,7 +11,7 @@ module Aji
           get "#{resource_uri}/#{rand(100)}"
           last_response.status.should == 404
         end
-        
+
         it "should return video info if found regardless if video is populated" do
           [(Factory :video), (Factory :populated_video)].each do |video|
             get "#{resource_uri}/#{video.id}"

@@ -8,7 +8,8 @@ module Aji
     belongs_to :user
     belongs_to :video
 
-    #after_create :queue_publishing
+    validates_presence_of :user
+    validates_presence_of :video
 
     attr_accessor :publish_to
 

@@ -167,6 +167,7 @@ module Aji
     end
 
     def create_share_from_event event
+
     end
 
     def redis_keys
