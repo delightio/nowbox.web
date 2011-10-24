@@ -11,28 +11,45 @@ module Aji
   # - created_at: DateTime
   # - updated_at: DateTime
   class Event < ActiveRecord::Base
+    def self.video_actions
+      [ :view, :share, :enqueue, :dequeue, :examine, :unfavorite ]
+    end
+
+    def self.channel_actions
+      [ :subscribe, :unsubscribe ]
+    end
+
+    def self.allowed_actions
+      video_actions + channel_actions
+    end
+
+    validates_inclusion_of :action, :in => self.allowed_actions
+
     belongs_to :user
     belongs_to :video
     belongs_to :channel
+
     after_create :process
 
-    def self.video_actions; [ :view, :share, :enqueue, :dequeue, :examine, :unfavorite ]; end
-    def self.channel_actions; [ :subscribe, :unsubscribe ]; end
+    def action
+      read_attribute(:action).to_sym
+    end
 
-    validates_inclusion_of :action, :in => (Event.video_actions + Event.channel_actions)
-    def action; read_attribute(:action).to_sym; end
-    def action= value; write_attribute(:action, value.to_s); end
+    def action= value
+      write_attribute(:action, value.to_s)
+    end
 
     private
-      def process
-        self.user.process_event self
-        if action == :examine
-          Resque.enqueue Aji::Queues::ExamineVideo,
-            { :user_id => user.id,
-              :video_id => video.id,
-              :channel_id => channel.id,
-              :reason => reason }
-        end
+    def process
+      user.process_event self
+
+      if action == :examine
+        Resque.enqueue Aji::Queues::ExamineVideo,
+          { :user_id => user.id,
+            :video_id => video.id,
+            :channel_id => channel.id,
+            :reason => reason }
       end
+    end
   end
 end

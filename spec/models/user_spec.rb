@@ -1,565 +1,647 @@
 require File.expand_path("../../spec_helper", __FILE__)
 
-module Aji
-  describe Aji::User do
+include Aji
+
+describe Aji::User do
+  subject do
+    User.new.tap do |u|
+      u.stub(:id => 1)
+      u.subscribed_list << 1
+      u.name = "George"
+      u.email = "george@thejungle.com"
+      u.stub(:history_channel => stub(:merge! => true))
+      u.stub(:favorite_channel => stub(:merge! => true))
+      u.stub(:queue_channel => stub(:merge! => true))
+    end
+  end
+
+  it_behaves_like "any redis object model" do
     subject do
       User.new.tap do |u|
         u.stub(:id => 1)
         u.subscribed_list << 1
         u.name = "George"
         u.email = "george@thejungle.com"
-        u.stub(:history_channel => stub(:merge! => true))
-        u.stub(:favorite_channel => stub(:merge! => true))
-        u.stub(:queue_channel => stub(:merge! => true))
+        u.stub(:history_channel).as_null_object
+        u.stub(:favorite_channel).as_null_object
+        u.stub(:queue_channel).as_null_object
+      end
+    end
+  end
+
+  describe "#create_user_channels" do
+    it "creates user channels" do
+      Channel::User.should_receive(:create).exactly(3).times
+      subject.send :create_user_channels
+    end
+  end
+
+  describe "#subscribe_featured_channels" do
+    let(:featured_channels) do
+      (1..3).map do |i|
+        mock "channel", :id => i
       end
     end
 
-    it_behaves_like "any redis object model" do
-      subject do
-        User.new.tap do |u|
-          u.stub(:id => 1)
-          u.subscribed_list << 1
-          u.name = "George"
-          u.email = "george@thejungle.com"
-          u.stub(:history_channel).as_null_object
-          u.stub(:favorite_channel).as_null_object
-          u.stub(:queue_channel).as_null_object
-        end
+    let(:region) { mock "region", :featured_channels => featured_channels }
+
+    it "subscribes the user to the featured channels" do
+      subject.stub :region => region
+      subject.subscribe_featured_channels
+      featured_channels.each { |c| subject.should be_subscribed(c) }
+    end
+  end
+
+  describe "#process_event" do
+    let(:video) { mock "video" }
+    let(:channel) { mock "channel" }
+
+    let(:event) do
+      mock("event").tap do |e|
+        e.stub :video => video
+        e.stub :channel => channel
+        e.stub :created_at => 3.minutes.ago
       end
     end
 
-    describe "#create_user_channels" do
-      it "creates user channels" do
-        Channel::User.should_receive(:create).exactly(3).times
-        subject.send :create_user_channels
+    describe "channel actions" do
+      specify "subscribe subscribes to the channel" do
+        event.stub :action => :subscribe
+        subject.should_receive(:subscribe).with(channel)
+
+        subject.process_event event
+      end
+
+      specify "unsubscribe removes the video from all subscriptions" do
+        event.stub :action => :unsubscribe
+        subject.should_receive(:unsubscribe_from_all).with(channel)
+
+        subject.process_event event
       end
     end
 
-    describe "#subscribe_featured_channels" do
-      let(:featured_channels) do
-        (1..3).map do |i|
-          mock("channel", :id => i)
+    describe "video actions" do
+      [ :view, :examine ].each do |action|
+        specify "#{action} markes the video as watched by the user" do
+          event.stub :action => action
+          subject.should_receive(:watched_video).with(event.video,
+            event.created_at)
+
+          subject.process_event event
         end
       end
 
-      let(:region) { mock "region", :featured_channels => featured_channels }
 
-      it "subscribes the user to the featured channels" do
-        subject.stub :region => region
-        subject.subscribe_featured_channels
-        featured_channels.each { |c| subject.should be_subscribed(c) }
+      specify "share favorites a video and creates a share from the event" do
+        event.stub :action => :share
+        subject.should_receive(:favorite_video).with(video, event.created_at)
+        subject.should_receive(:watched_video).with(video, event.created_at)
+        subject.should_receive(:create_share_from_event).with(event)
+
+        subject.process_event event
+      end
+
+      specify "unfavorite unfavorites a video" do
+        event.stub :action => :unfavorite
+        subject.should_receive(:unfavorite_video).with(video)
+
+        subject.process_event event
+      end
+
+      specify "dequeue dequeues the video" do
+        event.stub :action => :dequeue
+        subject.should_receive(:dequeue_video).with(video)
+
+        subject.process_event event
+      end
+
+      specify "enqueue enqueues a video without marking it as watched" do
+        event.stub :action => :enqueue
+        subject.should_not_receive(:watched_video).with(video, event.created_at)
+        subject.should_receive(:enqueue_video).with(video, event.created_at)
+
+        subject.process_event event
+      end
+    end
+  end
+
+  describe "channel subscriptions" do
+    let(:channel) { mock "channel", :id => 12 }
+
+    describe "#unsubscribe_from_all" do
+      before :each do
+        subject.stub(:unsubscribe).with(channel).and_return(true)
+        subject.stub(:unsubscribe_social).with(channel).and_return(true)
+      end
+
+      it "unsubscribes from regular channels and social subscription" do
+        subject.should_receive(:unsubscribe).with(channel)
+        subject.should_receive(:unsubscribe_social).with(channel)
+
+        subject.unsubscribe_from_all channel
+      end
+
+      specify "returns true when the channel is not in either list" do
+        subject.unsubscribe_from_all(channel).should be_true
+      end
+
+      specify "returns false when the channel is still subscribed" do
+        subject.stub(:unsubscribe).with(channel).and_return(false)
+
+        subject.unsubscribe_from_all(channel).should be_false
+      end
+
+      specify "returns false when the channel is still in social channels" do
+        subject.stub(:unsubscribe_social).with(channel).and_return(false)
+        subject.unsubscribe_from_all(channel).should be_false
       end
     end
 
-    describe "#process_event" do
-      it "caches video id in viewed regardless of event type except :unfavorite, :enqueue and :dequeue" do
-        Aji::Event.video_actions.delete_if{ |t|
-          t==:unfavorite || t==:enqueue || t==:dequeue }.each do |action|
-            event = Factory :event, :action => action
-            event.user.history_channel.content_videos.should include event.video
-          end
-      end
-
-      it "never fails dequeuing a video" do
-        event = nil
-        lambda { event = Factory :event, :action => :dequeue }.should_not raise_error
-        event.user.queue_channel.content_videos.should_not include event.video
-      end
-
-      it "dequeues enqueued video" do
-        event = Factory :event, :action => :enqueue
-        event.user.queue_channel.content_videos.should include event.video
-        dequeued_event = Factory :event, :action => :dequeue,
-          :video => event.video, :user => event.user
-        event.user.queue_channel.content_videos.should_not include event.video
-      end
-
-      it "does not mark a video viewed when queuing" do
-        event = Factory :event, :action => :enqueue
-        event.user.history_channel.content_videos.should_not include event.video
-      end
-
-      it "unfavorites shared videos" do
-        user = Factory :user
-        video = Factory :video
-        event = Factory :event, :action => :share, :user => user, :video => video
-        user.favorite_channel.content_videos.should include video
-        event = Factory :event, :action => :unfavorite, :user => user, :video => video
-        user.favorite_channel.content_videos.should_not include video
-      end
-
-      it "subscribes given channel" do
-        event = Factory :channel_event, :action => :subscribe
-        event.user.subscribed_channels.should include event.channel
-      end
-
-      it "does not require video object when sending channel actions" do
-        event = Factory :channel_event
-        event.video.should be_nil
-        event.id.should_not be_nil
-      end
-    end
-
-    describe "channel subscriptions" do
-      let(:channel) { mock "channel", :id => 12 }
-
-      describe "#unsubscribe_from_all" do
-        before :each do
-          subject.stub(:unsubscribe).with(channel).and_return(true)
-          subject.stub(:unsubscribe_social).with(channel).and_return(true)
-        end
-
-        it "unsubscribes from regular channels and social subscription" do
-          subject.should_receive(:unsubscribe).with(channel)
-          subject.should_receive(:unsubscribe_social).with(channel)
-
-          subject.unsubscribe_from_all channel
-        end
-
-        specify "returns true when the channel is not in either list" do
-          subject.unsubscribe_from_all(channel).should be_true
-        end
-
-        specify "returns false when the channel is still subscribed" do
-          subject.stub(:unsubscribe).with(channel).and_return(false)
-
-          subject.unsubscribe_from_all(channel).should be_false
-        end
-
-        specify "returns false when the channel is still in social channels" do
-          subject.stub(:unsubscribe_social).with(channel).and_return(false)
-          subject.unsubscribe_from_all(channel).should be_false
-        end
-      end
-
-      describe "#social_channels" do
-        let(:social_channels) { (0..2).map{ |i| mock "channel", :id => i } }
-        let(:nonexistant_channel) { mock "channel", :id => 10 }
-
-        subject do
-          User.new do |u|
-            u.stub :id => 1
-            u.stub :social_channel_list => social_channels.map(&:id)
-          end
-        end
-
-        before do
-          Channel.stub(:find_by_id).with(nonexistant_channel.id).and_return(nil)
-
-          social_channels.each do |c|
-            Channel.stub(:find_by_id).with(c.id).and_return(c)
-          end
-        end
-
-        it "returns a list of channels whose ids in social_channel_list" do
-          subject.social_channels.should == social_channels
-        end
-
-        it "ignores channel ids that don't resolve" do
-          subject.social_channel_list << nonexistant_channel.id
-
-          subject.social_channels.should == social_channels
-        end
-
-        it "removes empty channels when they're found" do
-          subject.social_channel_list << nonexistant_channel.id
-          subject.should_receive :remove_missing_channels
-
-          subject.social_channels.should == social_channels
-        end
-      end
-
-      describe "#subscribed_channels" do
-        let(:subscribed_channels) { (0..2).map{ |i| mock "channel", :id => i } }
-        let(:nonexistant_channel) { mock "channel", :id => 10 }
-
-        subject do
-          User.new do |u|
-            u.stub :id => 1
-            u.stub :subscribed_list => subscribed_channels.map(&:id)
-          end
-        end
-
-        before do
-          Channel.stub(:find_by_id).with(nonexistant_channel.id).and_return(nil)
-
-          subscribed_channels.each do |c|
-            Channel.stub(:find_by_id).with(c.id).and_return(c)
-          end
-        end
-
-        it "returns a list of channels whose ids in subscribed_list" do
-          subject.subscribed_channels.should == subscribed_channels
-        end
-
-        it "ignores channel ids that don't resolve" do
-          subject.subscribed_list << nonexistant_channel.id
-
-          subject.subscribed_channels.should == subscribed_channels
-        end
-
-        it "removes empty channels when they're found" do
-          subject.subscribed_list << nonexistant_channel.id
-          subject.should_receive :remove_missing_channels
-
-          subject.subscribed_channels.should == subscribed_channels
-        end
-      end
-
-      describe "#subscribed?" do
-        specify "true when video is in subscribed_list" do
-          subject.subscribed_list << channel.id
-
-          subject.should be_subscribed(channel)
-        end
-
-        specify "false otherwise" do
-          subject.should_not be_subscribed(channel)
-        end
-      end
-
-      describe "#subscribed_social?" do
-        specify "true when video is included in social_channel_list" do
-          subject.social_channel_list << channel.id
-
-          subject.should be_subscribed_social(channel)
-        end
-
-        specify "false otherwise" do
-          subject.should_not be_subscribed_social(channel)
-        end
-      end
-
-      describe "#subscribe" do
-        it "puts the channel id into the user's social_channel_list" do
-          subject.subscribed_list.should_receive(:<<).with(channel.id)
-
-          subject.subscribe channel
-        end
-
-        it "doesn't add videos that are already subcribed" do
-          subject.stub(:subscribed?).with(channel).and_return(true)
-          subject.subscribed_list.should_not_receive(:<<).with(channel.id)
-
-          subject.subscribe channel
-        end
-
-        it "returns true when the video is succesfully subscribed" do
-          subject.subscribe(channel).should be_true
-        end
-
-        it "returns false when the video is not subscribed" do
-          subject.stub(:subscribed?).with(channel).and_return(false)
-
-          subject.subscribe(channel).should be_false
-        end
-      end
-
-      describe "#subscribe_social" do
-        it "puts the channel id into the user's social_channel_list" do
-          subject.social_channel_list.should_receive(:<<).with(channel.id)
-
-          subject.subscribe_social channel
-        end
-
-        it "doesn't add videos that are already subcribed" do
-          subject.stub(:subscribed_social?).with(channel).and_return(true)
-          subject.social_channel_list.should_not_receive(:<<).with(channel.id)
-
-          subject.subscribe_social channel
-        end
-
-        it "returns true when the video is succesfully subscribed" do
-          subject.subscribe_social(channel).should be_true
-        end
-
-        it "returns false when the video is not subscribed" do
-          subject.stub(:subscribed_social?).with(channel).and_return(false)
-
-          subject.subscribe_social(channel).should be_false
-        end
-      end
-
-      describe "#unsubscribe" do
-        it "deletetes the channel id from the subscribed_list" do
-          subject.subscribed_list.should_receive(:delete).with(
-            channel.id)
-
-            subject.unsubscribe channel
-            subject.subscribed_list.should_not include channel.id
-        end
-
-        specify "returns true when the channel is no longer in the list" do
-          subject.subscribed_list << channel.id
-
-          subject.unsubscribe(channel).should be_true
-        end
-
-        specify "returns false when the channel is still subscribed" do
-          subject.stub(:subscribed?).with(channel).and_return(true)
-
-          subject.unsubscribe(channel).should be_false
-        end
-      end
-
-      describe "#unsubscribe_social" do
-        it "deletetes the channel id from the social_channel_list" do
-          subject.social_channel_list.should_receive(:delete).with(
-            channel.id)
-
-            subject.unsubscribe_social channel
-            subject.social_channel_list.should_not include channel.id
-        end
-
-        specify "returns true when the channel is no longer in the list" do
-          subject.social_channel_list << channel.id
-
-          subject.unsubscribe_social(channel).should be_true
-        end
-
-        specify "returns false when the channel is still subscribed" do
-          subject.stub(:subscribed_social?).with(channel).and_return(true)
-
-          subject.unsubscribe_social(channel).should be_false
-        end
-      end
-    end
-
-    describe "#user_channels" do
-      it "returns all user channels" do
-        pending "Current name conflict with method"
-      end
-    end
-
-    describe "#display_channels" do
-      let(:user_channels) { [ mock("fav channel"), mock("queue_channel") ] }
-      let(:subscribed_channels) { [ mock("hilarious channel") ] }
-      let(:social_channels) { [ mock("fb channel"), mock("twitter channel") ] }
-
-      it "returns an array of of all displayable channels" do
-        subject.stub(:user_channels).and_return(user_channels)
-        subject.stub(:subscribed_channels).and_return(subscribed_channels)
-        subject.stub(:social_channels).and_return(social_channels)
-        subject.display_channels.should == user_channels + social_channels +
-          subscribed_channels
-      end
-    end
-
-    describe "#serializable_hash" do
-      subject do
-        User.new do |u|
-          u.stub :id => 111
-          u.stub :name => "Jim"
-          u.stub :email => "jim@james.com"
-          u.stub :queue_channel_id => 1
-          u.stub :favorite_channel_id => 2
-          u.stub :history_channel_id => 3
-          u.stub :twitter_channel_id => nil
-          u.stub :facebook_channel_id => 5
-          u.stub :subscribed_channel_ids => [6,7,8,9,10]
-        end
-      end
-
-      it "returns a hash of users attributes" do
-        subject.serializable_hash.should == {
-          'id' => 111,
-          'name' => "Jim",
-          'email' => "jim@james.com",
-          'queue_channel_id' => 1,
-          'favorite_channel_id' => 2,
-          'history_channel_id' => 3,
-          'twitter_channel_id' => nil,
-          'facebook_channel_id' => 5,
-          'subscribed_channel_ids' => [6,7,8,9,10]
-        }
-      end
-    end
-
-    describe "#subscribed_channel_ids" do
-      let(:subscribed_ids) { [1, 50, 27, 9] }
-      let(:subscribed_list) { stub :values => subscribed_ids.map(&:to_s) }
-      subject { User.new { |u| u.stub :subscribed_list => subscribed_list } }
-
-      it "returns a list of ids from the subscribed list" do
-        subject.subscribed_channel_ids.should == subscribed_ids
-      end
-
-      it "doesn't include ids that with missing channels"
-    end
-
-    describe "#twitter_channel_id" do
-      let(:tw_channel) { stub :id => 9, :class => Aji::Channel::TwitterStream }
-
-      it "returns the id of the twitter channel if one is present" do
-        subject.stub :social_channels => [stub, tw_channel]
-
-        subject.twitter_channel_id.should == tw_channel.id
-      end
-
-      it "returns nil if no facebook channel is present" do
-        subject.stub :social_channels => [stub, stub]
-        subject.twitter_channel_id.should be_nil
-      end
-    end
-
-
-    describe "#facebook_channel_id" do
-      let(:fb_channel) { stub :id => 8, :class => Aji::Channel::FacebookStream }
-
-      it "returns the id of the facebook channel if one is present" do
-        subject.stub :social_channels => [stub, fb_channel]
-
-        subject.facebook_channel_id.should == fb_channel.id
-      end
-
-      it "returns nil if no facebook channel is present" do
-        subject.stub :social_channels => [stub, stub]
-        subject.facebook_channel_id.should be_nil
-      end
-    end
-
-    describe "#remove_missing_channels" do
-      let(:valid_ids) do
-        [1, 2].each { |i| Channel.stub(:find_by_id).with(i).and_return(true) }
-      end
-
-      let(:invalid_ids) do
-        [3, 4].each { |i| Channel.stub(:find_by_id).with(i).and_return(nil) }
-      end
+    describe "#social_channels" do
+      let(:social_channels) { (0..2).map{ |i| mock "channel", :id => i } }
+      let(:nonexistant_channel) { mock "channel", :id => 10 }
 
       subject do
         User.new do |u|
           u.stub :id => 1
-          (valid_ids + invalid_ids).each do |id|
-            u.subscribed_list << id
-          end
+          u.stub :social_channel_list => social_channels.map(&:id)
         end
       end
 
-      it "doesn't remove valid channels" do
-        valid_ids.each do |id|
-          subject.subscribed_list.should_not_receive(:delete).with(id)
-        end
+      before do
+        Channel.stub(:find_by_id).with(nonexistant_channel.id).and_return(nil)
 
-        subject.send :remove_missing_channels
+        social_channels.each do |c|
+          Channel.stub(:find_by_id).with(c.id).and_return(c)
+        end
       end
 
-      it "deletes missing ids from subscribed_list" do
-        invalid_ids.each do |id|
-          subject.subscribed_list.should_receive(:delete).with(id)
-        end
-
-        subject.send :remove_missing_channels
+      it "returns a list of channels whose ids in social_channel_list" do
+        subject.social_channels.should == social_channels
       end
 
-      it "doesn't hit the database for known good video ids" do
-        valid_ids.each do |id|
-          Video.should_not_receive(:find_by_id).with(id)
-        end
+      it "ignores channel ids that don't resolve" do
+        subject.social_channel_list << nonexistant_channel.id
 
-        subject.send :remove_missing_channels, valid_ids
+        subject.social_channels.should == social_channels
+      end
+
+      it "removes empty channels when they're found" do
+        subject.social_channel_list << nonexistant_channel.id
+        subject.should_receive :remove_missing_channels
+
+        subject.social_channels.should == social_channels
       end
     end
 
-    describe "#merge!" do
-      let(:other_user) do
-        User.new.tap do |u|
-          u.stub :id => 2
-          u.name = "Tarzan"
-          u.email = "tarzan@apes.gov"
-          u.stub(:subscribed_channels => (4..7).map do |i|
-            mock("channel", :id => i).tap do |c|
-              Channel.stub(:find_by_id).with(c.id).and_return(c)
-            end
-          end)
+    describe "#subscribed_channels" do
+      let(:subscribed_channels) { (0..2).map{ |i| mock "channel", :id => i } }
+      let(:nonexistant_channel) { mock "channel", :id => 10 }
+
+      subject do
+        User.new do |u|
+          u.stub :id => 1
+          u.stub :subscribed_list => subscribed_channels.map(&:id)
         end
       end
 
-      let!(:previously_subscribed_channels) do
-        (1..3).map do |i|
+      before do
+        Channel.stub(:find_by_id).with(nonexistant_channel.id).and_return(nil)
+
+        subscribed_channels.each do |c|
+          Channel.stub(:find_by_id).with(c.id).and_return(c)
+        end
+      end
+
+      it "returns a list of channels whose ids in subscribed_list" do
+        subject.subscribed_channels.should == subscribed_channels
+      end
+
+      it "ignores channel ids that don't resolve" do
+        subject.subscribed_list << nonexistant_channel.id
+
+        subject.subscribed_channels.should == subscribed_channels
+      end
+
+      it "removes empty channels when they're found" do
+        subject.subscribed_list << nonexistant_channel.id
+        subject.should_receive :remove_missing_channels
+
+        subject.subscribed_channels.should == subscribed_channels
+      end
+    end
+
+    describe "video actions" do
+      let(:time) { 3.seconds.ago }
+      let(:history_channel) { mock "history channel" }
+      let(:favorite_channel) { mock "favorite channel" }
+      let(:queue_channel) { mock "queue channel" }
+      let(:video) { mock "video" }
+
+      subject do
+        User.new do |u|
+          u.stub :id => 1
+          u.stub :history_channel => history_channel
+          u.stub :favorite_channel => favorite_channel
+          u.stub :queue_channel => queue_channel
+        end
+      end
+
+      describe "#watched_video" do
+
+        it "adds the video to the user's history channel" do
+          history_channel.should_receive(:push).with(video, time.to_i)
+
+          subject.watched_video video, time
+        end
+      end
+
+      describe "#favorite_video" do
+        it "adds the video to the user's favorites channel" do
+          favorite_channel.should_receive(:push).with(video, time.to_i)
+
+          subject.favorite_video video, time
+        end
+      end
+
+      describe "#unfavorite_video" do
+        it "removes the video from the user's favorites channel" do
+          favorite_channel.should_receive(:pop).with(video)
+
+          subject.unfavorite_video video
+        end
+      end
+
+      describe "#enqueue_video" do
+        it "adds the video to the user's queue channel" do
+          queue_channel.should_receive(:push).with(video, time.to_i)
+
+          subject.enqueue_video video, time
+        end
+      end
+
+      describe "#dequeue_video" do
+        it "removes the video from the user's queueu channel" do
+          queue_channel.should_receive(:pop).with(video)
+
+          subject.dequeue_video video
+        end
+      end
+    end
+
+    describe "#subscribed?" do
+      specify "true when video is in subscribed_list" do
+        subject.subscribed_list << channel.id
+
+        subject.should be_subscribed(channel)
+      end
+
+      specify "false otherwise" do
+        subject.should_not be_subscribed(channel)
+      end
+    end
+
+    describe "#subscribed_social?" do
+      specify "true when video is included in social_channel_list" do
+        subject.social_channel_list << channel.id
+
+        subject.should be_subscribed_social(channel)
+      end
+
+      specify "false otherwise" do
+        subject.should_not be_subscribed_social(channel)
+      end
+    end
+
+    describe "#subscribe" do
+      it "puts the channel id into the user's social_channel_list" do
+        subject.subscribed_list.should_receive(:<<).with(channel.id)
+
+        subject.subscribe channel
+      end
+
+      it "doesn't add videos that are already subcribed" do
+        subject.stub(:subscribed?).with(channel).and_return(true)
+        subject.subscribed_list.should_not_receive(:<<).with(channel.id)
+
+        subject.subscribe channel
+      end
+
+      it "returns true when the video is succesfully subscribed" do
+        subject.subscribe(channel).should be_true
+      end
+
+      it "returns false when the video is not subscribed" do
+        subject.stub(:subscribed?).with(channel).and_return(false)
+
+        subject.subscribe(channel).should be_false
+      end
+    end
+
+    describe "#subscribe_social" do
+      it "puts the channel id into the user's social_channel_list" do
+        subject.social_channel_list.should_receive(:<<).with(channel.id)
+
+        subject.subscribe_social channel
+      end
+
+      it "doesn't add videos that are already subcribed" do
+        subject.stub(:subscribed_social?).with(channel).and_return(true)
+        subject.social_channel_list.should_not_receive(:<<).with(channel.id)
+
+        subject.subscribe_social channel
+      end
+
+      it "returns true when the video is succesfully subscribed" do
+        subject.subscribe_social(channel).should be_true
+      end
+
+      it "returns false when the video is not subscribed" do
+        subject.stub(:subscribed_social?).with(channel).and_return(false)
+
+        subject.subscribe_social(channel).should be_false
+      end
+    end
+
+    describe "#unsubscribe" do
+      it "deletetes the channel id from the subscribed_list" do
+        subject.subscribed_list.should_receive(:delete).with(
+          channel.id)
+
+          subject.unsubscribe channel
+          subject.subscribed_list.should_not include channel.id
+      end
+
+      specify "returns true when the channel is no longer in the list" do
+        subject.subscribed_list << channel.id
+
+        subject.unsubscribe(channel).should be_true
+      end
+
+      specify "returns false when the channel is still subscribed" do
+        subject.stub(:subscribed?).with(channel).and_return(true)
+
+        subject.unsubscribe(channel).should be_false
+      end
+    end
+
+    describe "#unsubscribe_social" do
+      it "deletetes the channel id from the social_channel_list" do
+        subject.social_channel_list.should_receive(:delete).with(
+          channel.id)
+
+          subject.unsubscribe_social channel
+          subject.social_channel_list.should_not include channel.id
+      end
+
+      specify "returns true when the channel is no longer in the list" do
+        subject.social_channel_list << channel.id
+
+        subject.unsubscribe_social(channel).should be_true
+      end
+
+      specify "returns false when the channel is still subscribed" do
+        subject.stub(:subscribed_social?).with(channel).and_return(true)
+
+        subject.unsubscribe_social(channel).should be_false
+      end
+    end
+  end
+
+  describe "#user_channels" do
+    it "returns all user channels" do
+      pending "Current name conflict with method"
+    end
+  end
+
+  describe "#display_channels" do
+    let(:user_channels) { [ mock("fav channel"), mock("queue_channel") ] }
+    let(:subscribed_channels) { [ mock("hilarious channel") ] }
+    let(:social_channels) { [ mock("fb channel"), mock("twitter channel") ] }
+
+    it "returns an array of of all displayable channels" do
+      subject.stub(:user_channels).and_return(user_channels)
+      subject.stub(:subscribed_channels).and_return(subscribed_channels)
+      subject.stub(:social_channels).and_return(social_channels)
+      subject.display_channels.should == user_channels + social_channels +
+        subscribed_channels
+    end
+  end
+
+  describe "#serializable_hash" do
+    subject do
+      User.new do |u|
+        u.stub :id => 111
+        u.stub :name => "Jim"
+        u.stub :email => "jim@james.com"
+        u.stub :queue_channel_id => 1
+        u.stub :favorite_channel_id => 2
+        u.stub :history_channel_id => 3
+        u.stub :twitter_channel_id => nil
+        u.stub :facebook_channel_id => 5
+        u.stub :subscribed_channel_ids => [6,7,8,9,10]
+      end
+    end
+
+    it "returns a hash of users attributes" do
+      subject.serializable_hash.should == {
+        'id' => 111,
+        'name' => "Jim",
+        'email' => "jim@james.com",
+        'queue_channel_id' => 1,
+        'favorite_channel_id' => 2,
+        'history_channel_id' => 3,
+        'twitter_channel_id' => nil,
+        'facebook_channel_id' => 5,
+        'subscribed_channel_ids' => [6,7,8,9,10]
+      }
+    end
+  end
+
+  describe "#subscribed_channel_ids" do
+    let(:subscribed_ids) { [1, 50, 27, 9] }
+    let(:subscribed_list) { stub :values => subscribed_ids.map(&:to_s) }
+    subject { User.new { |u| u.stub :subscribed_list => subscribed_list } }
+
+    it "returns a list of ids from the subscribed list" do
+      subject.subscribed_channel_ids.should == subscribed_ids
+    end
+
+    it "doesn't include ids that with missing channels"
+  end
+
+  describe "#twitter_channel_id" do
+    let(:tw_channel) { stub :id => 9, :class => Aji::Channel::TwitterStream }
+
+    it "returns the id of the twitter channel if one is present" do
+      subject.stub :social_channels => [stub, tw_channel]
+
+      subject.twitter_channel_id.should == tw_channel.id
+    end
+
+    it "returns nil if no facebook channel is present" do
+      subject.stub :social_channels => [stub, stub]
+      subject.twitter_channel_id.should be_nil
+    end
+  end
+
+
+  describe "#facebook_channel_id" do
+    let(:fb_channel) { stub :id => 8, :class => Aji::Channel::FacebookStream }
+
+    it "returns the id of the facebook channel if one is present" do
+      subject.stub :social_channels => [stub, fb_channel]
+
+      subject.facebook_channel_id.should == fb_channel.id
+    end
+
+    it "returns nil if no facebook channel is present" do
+      subject.stub :social_channels => [stub, stub]
+      subject.facebook_channel_id.should be_nil
+    end
+  end
+
+  describe "#remove_missing_channels" do
+    let(:valid_ids) do
+      [1, 2].each { |i| Channel.stub(:find_by_id).with(i).and_return(true) }
+    end
+
+    let(:invalid_ids) do
+      [3, 4].each { |i| Channel.stub(:find_by_id).with(i).and_return(nil) }
+    end
+
+    subject do
+      User.new do |u|
+        u.stub :id => 1
+        (valid_ids + invalid_ids).each do |id|
+          u.subscribed_list << id
+        end
+      end
+    end
+
+    it "doesn't remove valid channels" do
+      valid_ids.each do |id|
+        subject.subscribed_list.should_not_receive(:delete).with(id)
+      end
+
+      subject.send :remove_missing_channels
+    end
+
+    it "deletes missing ids from subscribed_list" do
+      invalid_ids.each do |id|
+        subject.subscribed_list.should_receive(:delete).with(id)
+      end
+
+      subject.send :remove_missing_channels
+    end
+
+    it "doesn't hit the database for known good video ids" do
+      valid_ids.each do |id|
+        Video.should_not_receive(:find_by_id).with(id)
+      end
+
+      subject.send :remove_missing_channels, valid_ids
+    end
+  end
+
+  describe "#merge!" do
+    let(:other_user) do
+      User.new.tap do |u|
+        u.stub :id => 2
+        u.name = "Tarzan"
+        u.email = "tarzan@apes.gov"
+        u.stub(:subscribed_channels => (4..7).map do |i|
           mock("channel", :id => i).tap do |c|
-            subject.subscribe c
             Channel.stub(:find_by_id).with(c.id).and_return(c)
           end
+        end)
+      end
+    end
+
+    let!(:previously_subscribed_channels) do
+      (1..3).map do |i|
+        mock("channel", :id => i).tap do |c|
+          subject.subscribe c
+          Channel.stub(:find_by_id).with(c.id).and_return(c)
         end
       end
+    end
 
-      # TODO: Should we provide a facility to subscribe without instantiating
-      # a channel?
-      it "combines subscribed channels from both" do
+    # TODO: Should we provide a facility to subscribe without instantiating
+    # a channel?
+    it "combines subscribed channels from both" do
+      subject.merge! other_user
+
+      other_user.subscribed_channels.each do |c|
+        subject.should be_subscribed(c)
+      end
+    end
+
+    it "preserves channels the user was already subscribed to" do
+      subject.merge! other_user
+
+      previously_subscribed_channels.each do |c|
+        subject.should be_subscribed(c)
+      end
+    end
+
+    it "combines history, favorites, and queues of the two users" do
+      subject.history_channel.should_receive(
+        :merge!).with(other_user.history_channel)
+        subject.favorite_channel.should_receive(
+          :merge!).with(other_user.favorite_channel)
+          subject.queue_channel.should_receive(
+            :merge!).with(other_user.queue_channel)
+            subject.merge! other_user
+
+    end
+
+    it "keeps the identity of the local (implicit) user" do
+      primary_identity = subject.identity
+      subject.merge! other_user
+      subject.identity.should == primary_identity
+    end
+
+    describe "updating user information" do
+      it "uses the other user's info when its missing" do
+        subject.name = ""
+        subject.email = ""
+        other_user.name = "Joe"
+        other_user.email = "joe@example.com"
+
+        subject.merge! other_user
+        subject.name.should == other_user.name
+        subject.email.should == other_user.email
+      end
+
+      it "doesn't change info if the new user's is empty" do
+        subject.name = "Joe"
+        subject.email = "joe@example.com"
+
         subject.merge! other_user
 
-        other_user.subscribed_channels.each do |c|
-          subject.should be_subscribed(c)
-        end
+        subject.name.should == "Joe"
+        subject.email.should == "joe@example.com"
       end
 
-      it "preserves channels the user was already subscribed to" do
+      it "keeps local info if it is more current" do
+        subject.updated_at = 1.day.ago
+        other_user.updated_at = 10.days.ago
+
         subject.merge! other_user
 
-        previously_subscribed_channels.each do |c|
-          subject.should be_subscribed(c)
-        end
+        subject.name.should == "George"
+        subject.email.should == "george@thejungle.com"
       end
 
-      it "combines history, favorites, and queues of the two users" do
-        subject.history_channel.should_receive(
-          :merge!).with(other_user.history_channel)
-          subject.favorite_channel.should_receive(
-            :merge!).with(other_user.favorite_channel)
-            subject.queue_channel.should_receive(
-              :merge!).with(other_user.queue_channel)
-              subject.merge! other_user
+      it "uses other info if it is more current" do
+        subject.updated_at = 10.days.ago
+        other_user.updated_at = 1.day.ago
 
-      end
-
-      it "keeps the identity of the local (implicit) user" do
-        primary_identity = subject.identity
         subject.merge! other_user
-        subject.identity.should == primary_identity
-      end
 
-      describe "updating user information" do
-        it "uses the other user's info when its missing" do
-          subject.name = ""
-          subject.email = ""
-          other_user.name = "Joe"
-          other_user.email = "joe@example.com"
-
-          subject.merge! other_user
-          subject.name.should == other_user.name
-          subject.email.should == other_user.email
-        end
-
-        it "doesn't change info if the new user's is empty" do
-          subject.name = "Joe"
-          subject.email = "joe@example.com"
-
-          subject.merge! other_user
-
-          subject.name.should == "Joe"
-          subject.email.should == "joe@example.com"
-        end
-
-        it "keeps local info if it is more current" do
-          subject.updated_at = 1.day.ago
-          other_user.updated_at = 10.days.ago
-
-          subject.merge! other_user
-
-          subject.name.should == "George"
-          subject.email.should == "george@thejungle.com"
-        end
-
-        it "uses other info if it is more current" do
-          subject.updated_at = 10.days.ago
-          other_user.updated_at = 1.day.ago
-
-          subject.merge! other_user
-
-          subject.name.should == "Tarzan"
-          subject.email.should == "tarzan@apes.gov"
-        end
+        subject.name.should == "Tarzan"
+        subject.email.should == "tarzan@apes.gov"
       end
     end
   end
