@@ -41,7 +41,7 @@ test:
   # YOUTUBE
   YOUTUBE_KEY: "AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA"
 
-  TLD: "smackaho.st"
+  TLD: "nowbox.test"
   REDISTOGO_URL: "redis://localhost/9"
   DATABASE_URL: "postgres://localhost/aji_test"
   MAX_RECENT_VIDEO_IDS_IN_TRENDING: 1000

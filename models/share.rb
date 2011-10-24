@@ -14,7 +14,7 @@ module Aji
     attr_accessor :publish_to
 
     def link
-      "http://#{Aji.conf['TLD']}/#{id}"
+      "http://#{Aji.conf['TLD']}/share/#{id}"
     end
 
     # TODO: This method was written pre-Identity and isn't valid.
