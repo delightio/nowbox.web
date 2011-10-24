@@ -21,6 +21,7 @@ module Aji
       tweets_with_videos = filter_links @client.home_timeline(:count => 200,
        :include_entities => true)
       tweets_with_videos.map{|t| Parsers::Tweet.parse t }.reject do |mention|
+        binding.pry if Aji.debug
         processor = MentionProcessor.new mention
         processor.perform
         processor.failed? || processor.no_videos?
