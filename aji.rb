@@ -7,7 +7,16 @@ Faraday.default_adapter = :typhoeus
 # loading and application level settings are done here.
 module Aji
   # Set the application root directory.
-  def Aji.root; File.expand_path('..', __FILE__); end
+  def Aji.root
+    File.expand_path('..', __FILE__)
+  end
+
+  # Debug mode spawns consoles bound to specific function runtimmes. To
+  # find places where this may happen use `git grep binding\.pry`
+  # Turning it on requires overriding the method.
+  def Aji.debug
+    false
+  end
 
   # Logging interface for local development and heroku.
   # There are four internal Log levels aliased to the standard SYSLOG levels.

@@ -66,9 +66,15 @@ module Aji
       diff
     end
 
+    def self.create_or_find_by_uid_and_source uid, source, attributes={}
+      create! attributes.merge! uid: uid, source: source
+    rescue
+      find_by_uid_and_source uid, source
+    end
+
     private
     def initialize_links
-      self.links= links.map { |link| Link.new(link) }
+      self.links= links.map { |link| Link.new link }
     end
   end
 end

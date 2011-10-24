@@ -49,13 +49,12 @@ module Aji
         Link.new(url['expanded_url'] || url['url'])
       end
 
-      mention = Mention.new(
-        :uid => tweet_hash['id_str'],
+      mention = Mention.create_or_find_by_uid_and_source(tweet_hash['id_str'],
+        'twitter',
         :body => tweet_hash['text'],
         :published_at => tweet_hash['created_at'],
         :unparsed_data => json,
         :author => author,
-        :source => 'twitter',
         :links => links)
     end
   end
