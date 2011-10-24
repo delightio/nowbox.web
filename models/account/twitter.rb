@@ -6,6 +6,7 @@ module Aji
     include Redis::Objects
     include Mixins::RecentVideos
     include Aji::TankerDefaults::Account
+    include Mixins::Formatters::Twitter
 
     validates_presence_of :uid
     validates_uniqueness_of :uid
@@ -53,15 +54,6 @@ module Aji
 
     def publish share
       api.publish format share.message, share.link
-    end
-
-    def format message, link
-      coda = " #{link} via @nowbox for iPad"
-      if (message + coda).length > 140
-        message[0..message.length - (3 + coda.length)] << "..." << coda
-      else
-        message << coda
-      end
     end
 
     def refresh_influencers
