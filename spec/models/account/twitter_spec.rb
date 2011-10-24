@@ -89,6 +89,18 @@ module Aji
       end
     end
 
+    describe "#publish" do
+      let(:share) { stub :message => "A message", :link => "http://link.io" }
+      let(:formatted_message) { "A formatted message" }
+      it "publishes the formatted share message to the twitter api" do
+        subject.should_receive(:format).with(share.message, share.link).
+          and_return(formatted_message)
+        subject.api.should_receive(:publish).with(formatted_message)
+
+        subject.publish share
+      end
+    end
+
     describe "#format" do
       let(:long_message) { "A really #{"long" * 15} string" }
       let(:short_message) { "Hah this video!" }
