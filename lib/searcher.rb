@@ -60,6 +60,7 @@ module Aji
       channels = channels.sort do |x,y|
         y.accounts.first.subscriber_count <=> x.accounts.first.subscriber_count
       end
+      channels = channels.first(5)
 
       # TODO: hack to make NowPopular searchable
       splits = @query.split ' '
