@@ -37,10 +37,12 @@ module Aji
        :per_page => 50).videos.map{ |v| youtube_it_to_video v }
     end
 
-    def keyword_search keywords
+    def keyword_search keywords, per_page=50
       tracker.hit!
-      client.videos_by(:query => Array(keywords).join(' '), :per_page => 50).
-        videos.map{ |v| youtube_it_to_video v }
+      client.videos_by(
+        :query => Array(keywords).join(' '),
+        :per_page => per_page).
+          videos.map{ |v| youtube_it_to_video v }
     end
 
     def youtube_it_to_hash video
