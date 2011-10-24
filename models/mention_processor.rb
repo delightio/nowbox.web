@@ -14,7 +14,7 @@ module Aji
           if video.blacklisted?
             @errors << "Video[#{video.id}] is blacklisted"
           else
-            @mention.videos << video
+            @mention.videos << video unless @mention.videos.include? video
           end
         end
         return if @mention.videos.empty?
