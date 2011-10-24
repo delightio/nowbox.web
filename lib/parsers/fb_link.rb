@@ -7,14 +7,11 @@ module Aji
       author = Account::Facebook.find_or_create_by_uid(post['from']['id'],
         :info => post['from'])
 
-      Mention.new(
-        :uid => post['id'],
+      Mention.create_or_find_by_uid_and_source post['id'], 'facebook',
         :body => post['message'],
         :published_at => post['created_time'],
         :author => author,
         :links => Array(Link.new post['link']),
-        :source => 'facebook'
-      )
     end
   end
 end
