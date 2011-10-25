@@ -107,19 +107,19 @@ module Aji
       erb :launch, {:layout => :layout_splash}
     end
 
-    get '/random/?' do 
+    get '/random' do
       random =  Share.offset(rand(Share.count)).first
       redirect to("/video/#{random.video.id}/#{random.id}")
     end
 
-    get '/channel/:channel_id/?' do
+    get '/channel/:channel_id' do
       @channel = Channel.find(params[:channel_id]).serializable_hash(:inline_videos => 3 * 6)
 
       deliver('channel', 'layout_channel')
     end
 
-    get '/video/:video_id/:share_id/?' do
-      begin
+    get '/video/:video_id/:share_id' do
+       begin
         @video = Video.find(params[:video_id])
         if(params[:share_id])
           @share = Share.find(params[:share_id])
@@ -133,13 +133,13 @@ module Aji
 
         deliver('video', 'layout_video')
       rescue
-        Aji.log "#{e.class}: #{e.message}"
-        erb :'404', {:layout => :layout_error} 
+        Aji.log :WARN, "#{e.class}: #{e.message}"
+        erb :'404', {:layout => :layout_error}
       end
     end
 
-    get '/share/:share_id/' do
-      begin
+    get '/share/:share_id' do
+       begin
         @share = Share.find(params[:share_id])
         @user = @share.user
         @video = @share.video
@@ -151,7 +151,7 @@ module Aji
 
         deliver('video', 'layout_video')
       rescue => e
-        Aji.log "#{e.class}: #{e.message}"
+        Aji.log :WARN, "#{e.class}: #{e.message}"
         erb :'404', {:layout => :layout_error}
       end
     end
