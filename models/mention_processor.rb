@@ -43,7 +43,6 @@ module Aji
 
       unless failed?
         @mention.videos.each do |v|
-          @mention.author.push v
           if @destination.respond_to? :promote_video
             @destination.promote_video v, @mention
           end
