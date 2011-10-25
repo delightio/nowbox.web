@@ -62,21 +62,28 @@ module Aji
       end
     end
 
-    describe "#channel_results" do
-      let(:channel1) { mock "channel 1" }
-      let(:channel2) { mock "channel 2"}
-      let(:author_1) { mock "author 1", :to_channel => channel1 }
-      let(:author_2) { mock "author 2", :to_channel => channel2 }
-      let(:keyword_search_results) {
-        Array.new(3, mock("video 1", :author => author_1)) +
-        Array.new(3, mock("video 2", :author => author_2))
-      }
+    describe "#authors_from_keyword_search" do
       subject { Searcher.new "" }
-
-      it "creates channels from the unique authors out of the search results" do
+      it "returns authors from keyword search result" do
+        author = mock "author"
+        video = mock "video", :author => author
+        videos = [video]
         subject.should_receive(:video_results_from_keywords).
-          and_return(keyword_search_results)
-        subject.channel_results.should == ([channel1, channel2])
+          and_return(videos)
+        subject.authors_from_keyword_search.should == [author]
+      end
+    end
+
+    describe "#unique_and_sorted" do
+      let(:author1) { mock "author 1", :available? => true,
+        :subscriber_count => 10 }
+      let(:author2) { mock "author 2", :available? => true,
+        :subscriber_count => 100 }
+      let(:author3) { mock "author 3", :available? => false}
+      let(:authors) {[author1, author1, author2, author3 ]}
+
+      it "sorts the input and return unique and availabe results" do
+        Searcher.new("").unique_and_sorted(authors).should == [author2, author1]
       end
     end
 
@@ -88,8 +95,7 @@ module Aji
         @channels = [].tap do |channels|
           @account_count.times do |n|
             channel = mock("channel", :id => n,
-              :background_refresh_content => nil,
-              :available? => true)
+              :background_refresh_content => nil)
             channels << channel
           end
         end
@@ -98,6 +104,7 @@ module Aji
             account = mock("account", :id => n,
               :username => random_string,
               :to_channel => @channels[n],
+              :available? => true,
               :subscriber_count => n*1000)
             # TODO this sucks
             @channels[n].stub(:accounts).and_return([account])
@@ -112,16 +119,16 @@ module Aji
 
       context "multiple results are found" do
         it "returns unique results" do
-          subject.stub(:account_results).and_return(
-            @accounts)
-          subject.stub(:channel_results).and_return(
-            @accounts.map(&:to_channel))
+          subject.stub(:account_results).and_return(@accounts)
+          subject.stub(:authors_from_keyword_search).and_return(@accounts)
           results = subject.results
           results.should have(@account_count).channels
           results.should == @sorted_channels
         end
 
         it "enqueue all channels for refresh" do
+          subject.stub(:account_results).and_return(@accounts)
+          subject.stub(:authors_from_keyword_search).and_return(@accounts)
           @channels.each do |ch|
             ch.should_receive(:background_refresh_content).once
           end
@@ -131,8 +138,8 @@ module Aji
         it "sorts channels by subscriber count" do
           subject.should_receive(:account_results).
             and_return []
-          subject.should_receive(:channel_results).
-            and_return @channels
+          subject.should_receive(:authors_from_keyword_search).
+            and_return @accounts
           subject.results.should == @sorted_channels
         end
 
@@ -148,20 +155,6 @@ module Aji
         subject.results.should include Channel.trending
       end
 
-    end
-
-    context "when #results contains blacklisted channel" do
-      it "does not return blacklisted channels" do
-        blacklisted_channel = mock "bad channel", :available? => false
-        blacklisted_account = mock "spammer",
-          :username => "spammer", :to_channel => blacklisted_channel
-        blacklisted_channel.stub(:accounts).and_return([blacklisted_account])
-        blacklisted_channel.should_not_receive(:background_refresh_content)
-
-        subject = Searcher.new random_string
-        subject.stub(:account_results).and_return([blacklisted_account])
-        subject.results.should_not include blacklisted_channel
-      end
     end
 
   end

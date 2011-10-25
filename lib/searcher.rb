@@ -39,28 +39,24 @@ module Aji
         @query, Searcher.max_video_count_from_keyword_search)
     end
 
-    def channel_results
+    def authors_from_keyword_search
       videos_from_keywords = video_results_from_keywords
-      unique_authors = videos_from_keywords.map(&:author).uniq
-      unique_authors.map &:to_channel
-      # sorted = unique_authors.sort {|x,y| y.subscriber_count <=> x.subscriber_count }
-      # sorted.map &:to_channel
+      unique_authors = videos_from_keywords.map(&:author)
+    end
+
+    def unique_and_sorted authors
+      authors = authors.uniq.select {|a| a.available?}
+      authors = authors.sort do |x,y|
+        y.subscriber_count <=> x.subscriber_count
+      end
     end
 
     def results
-      channels = [] # Always return channel objects
-      return channels unless Searcher.enabled?
+      return [] unless Searcher.enabled?
 
-      channels += account_results.map(&:to_channel)
-      channels += channel_results
-
-      # only show unique, available channels, sorted by subscriber count
-      channels = channels.uniq
-      channels = channels.select {|ch| ch.available?}
-      channels = channels.sort do |x,y|
-        y.accounts.first.subscriber_count <=> x.accounts.first.subscriber_count
-      end
-      channels = channels.first(5)
+      authors = account_results + authors_from_keyword_search
+      filtered_authors = unique_and_sorted authors
+      channels = filtered_authors.first(7).map(&:to_channel)
 
       # TODO: hack to make NowPopular searchable
       splits = @query.split ' '
