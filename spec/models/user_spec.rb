@@ -29,6 +29,24 @@ describe Aji::User do
     end
   end
 
+  describe "#initialize_settings" do
+    subject { User.new }
+
+    it "makes settings an empty hash if it is nil" do
+      subject.send :initialize_settings
+
+      subject.settings.should == {}
+    end
+
+    it "doesn't overwrite settings if it is already present" do
+      subject.settings[:baked_goods] = "Yes Please!"
+      subject.send :initialize_settings
+
+      subject.settings.should have_key(:baked_goods)
+      subject.settings[:baked_goods].should == "Yes Please!"
+    end
+  end
+
   describe "#create_user_channels" do
     it "creates user channels" do
       Channel::User.should_receive(:create).exactly(3).times

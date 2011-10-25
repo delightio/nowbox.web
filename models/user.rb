@@ -24,6 +24,7 @@ module Aji
     belongs_to :history_channel, :class_name => 'Channel::User',
       :dependent => :destroy
 
+    after_initialize :initialize_settings
     before_create :create_user_channels
     after_create :create_identity, :subscribe_featured_channels
     after_destroy :delete_redis_keys
@@ -236,6 +237,10 @@ module Aji
 
     def create_identity
       update_attribute :identity_id, Identity.create.id if self.identity.nil?
+    end
+
+    def initialize_settings
+      self.settings ||= {}
     end
   end
 end
