@@ -38,14 +38,6 @@ module Aji
 
         subject.perform
       end
-
-       it "adds found videos to author's content" do
-         links.map(&:to_video).each do |video|
-           author.should_receive(:push).with(video)
-         end
-
-         subject.perform
-       end
     end
 
     describe ".video_filters" do
