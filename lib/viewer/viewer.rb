@@ -133,6 +133,7 @@ module Aji
 
         deliver('video', 'layout_video')
       rescue
+        Aji.log :WARN, "#{e.class}: #{e.message}"
         erb :'404', {:layout => :layout_error} 
       end
     end
@@ -149,8 +150,9 @@ module Aji
         @share_url = "http://nowbox.com/share/#{@share.id}"
 
         deliver('video', 'layout_video')
-      rescue
-        erb :'404', {:layout => :layout_error} 
+      rescue => e
+        Aji.log :WARN, "#{e.class}: #{e.message}"
+        erb :'404', {:layout => :layout_error}
       end
     end
   end
