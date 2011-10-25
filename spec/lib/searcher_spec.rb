@@ -150,7 +150,7 @@ module Aji
         subject = Searcher.new query
 
         subject.stub(:account_results).and_return([])
-        Account::Youtube.stub(:create_if_existing).and_return(nil)
+        subject.stub(:authors_from_keyword_search).and_return([])
 
         subject.results.should include Channel.trending
       end
