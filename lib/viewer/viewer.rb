@@ -119,27 +119,27 @@ module Aji
     end
 
     get '/video/:video_id/:share_id/?' do
-       begin
+      begin
         @video = Video.find(params[:video_id])
         if(params[:share_id])
           @share = Share.find(params[:share_id])
           @user = @share.user
           @rec_videos = Share.where("user_id = ? AND id <> ?", @user.id, @share.id).limit(3 * 3)
-          @share_url = "http://nowbox.com/video/#{@video.id}/#{@share.id}";
+          @share_url = "http://nowbox.com/video/#{@video.id}/#{@share.id}"
         else
           @rec_videos = Share.find(:all, :order => "id desc", :limit => 3 * 3)
-          @share_url = "http://nowbox.com/video/#{@video.id}";                
+          @share_url = "http://nowbox.com/video/#{@video.id}"
         end
 
         deliver('video', 'layout_video')
       rescue
-        Aji.log :WARN, "#{e.class}: #{e.message}"
+        Aji.log "#{e.class}: #{e.message}"
         erb :'404', {:layout => :layout_error} 
       end
     end
 
     get '/share/:share_id/' do
-       begin
+      begin
         @share = Share.find(params[:share_id])
         @user = @share.user
         @video = @share.video
@@ -151,7 +151,7 @@ module Aji
 
         deliver('video', 'layout_video')
       rescue => e
-        Aji.log :WARN, "#{e.class}: #{e.message}"
+        Aji.log "#{e.class}: #{e.message}"
         erb :'404', {:layout => :layout_error}
       end
     end
