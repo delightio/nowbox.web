@@ -7,9 +7,12 @@ module Aji
   # - created_at: DateTime
   # - updated_at: DateTime
   class User < ActiveRecord::Base
-    before_create :create_user_channels
-    after_create :create_identity, :subscribe_featured_channels
-    after_destroy :delete_redis_keys
+
+    include Redis::Objects
+    list :subscribed_list
+    list :social_channel_list
+
+    serialize :settings, Hash
 
     has_many :events
     belongs_to :identity
@@ -21,9 +24,9 @@ module Aji
     belongs_to :history_channel, :class_name => 'Channel::User',
       :dependent => :destroy
 
-    include Redis::Objects
-    list :subscribed_list
-    list :social_channel_list
+    before_create :create_user_channels
+    after_create :create_identity, :subscribe_featured_channels
+    after_destroy :delete_redis_keys
 
     def subscribe_featured_channels
       if region.nil?
@@ -67,14 +70,14 @@ module Aji
     def serializable_hash options={}
       {
         "id" => id,
-         "name" => name,
-         "email" => email,
-         "queue_channel_id" => queue_channel_id,
-         "favorite_channel_id" => favorite_channel_id,
-         "history_channel_id" => history_channel_id,
-         "twitter_channel_id" => twitter_channel_id,
-         "facebook_channel_id" => facebook_channel_id,
-         "subscribed_channel_ids" => subscribed_channel_ids,
+        "name" => name,
+        "email" => email,
+        "queue_channel_id" => queue_channel_id,
+        "favorite_channel_id" => favorite_channel_id,
+        "history_channel_id" => history_channel_id,
+        "twitter_channel_id" => twitter_channel_id,
+        "facebook_channel_id" => facebook_channel_id,
+        "subscribed_channel_ids" => subscribed_channel_ids,
       }
     end
 
