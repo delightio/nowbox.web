@@ -6,12 +6,6 @@ Bundler.require
 class Aji < Thor
 
   map "c" => :console, "s" => :server, "sp" => :spec
-  desc "migrate", "Migrate the database through scripts in db/migrate."
-  def migrate
-    ActiveRecord::Base.establish_connection(
-      YAML.load_file("config/database.yml")[ENV['RACK_ENV'] || 'development'])
-    ActiveRecord::Migrator.migrate("db/migrate/")
-  end
 
   desc "migration TITLE", "generate a new migration based on the title"
   def migration title

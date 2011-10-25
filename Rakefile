@@ -49,4 +49,10 @@ namespace :resque do
   task :setup => :environment
 end
 
+namespace :db do
+  task :migrate => :environment do
+    ActiveRecord::Migrator.migrate("db/migrate/")
+  end
+end
+
 task :default => :spec
