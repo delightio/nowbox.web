@@ -57,6 +57,10 @@ module Aji
       mentions.latest.select{ |m| m.has_video? video }.count > SPAM_THRESHOLD
     end
 
+    def publish share
+      api.publish format share.message, share.link
+    end
+
     def api
       @api ||= FacebookAPI.new credentials['token']
     end
