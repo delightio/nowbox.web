@@ -111,6 +111,7 @@ describe Aji::User do
 
 
       specify "share favorites a video and creates a share from the event" do
+        pending "iOS Sharing support"
         event.stub :action => :share
         subject.should_receive(:favorite_video).with(video, event.created_at)
         subject.should_receive(:watched_video).with(video, event.created_at)

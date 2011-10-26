@@ -52,7 +52,8 @@ module Aji
       when :share
         watched_video event.video, event.created_at
         favorite_video event.video, event.created_at
-        create_share_from_event event
+        # ## Pending iOS support.
+        #create_share_from_event event
 
       when :unfavorite
         unfavorite_video event.video
