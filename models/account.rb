@@ -24,7 +24,8 @@ module Aji
     # All of the accounts that this account receives content from.
     set :influencer_set
 
-    #validates_uniqueness_of :uid, :case_sensitive => false
+    validates_presence_of :uid
+    validates_uniqueness_of :uid
 
     serialize :info, Hash
     serialize :credentials, Hash

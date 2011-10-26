@@ -156,5 +156,27 @@ describe Aji::Account::Twitter, :unit do
 
       subject.create_stream_channel
     end
+
+  end
+  describe ".from_auth_hash" do
+    let(:auth_hash) do
+      {
+        'uid' => '178492493',
+        'credentials' => { 'token' => 'sometoken', 'secret' => 'seekrit' },
+        'extra' => { 'user_hash' => { 'screen_name' => '_nuclearsammich' } }
+      }
+    end
+
+    it "finds the account if it is already in the database" do
+      existing = Account::Twitter.create uid: "178492493", provider: 'twitter'
+
+      Account::Twitter.from_auth_hash(auth_hash).should == existing.reload
+    end
+
+    it "creates a new account if none is found" do
+      Account::Twitter.from_auth_hash(auth_hash).should_not be_new_record
+    end
+
+    it "uses the information in the auth_hash for the user"
   end
 end

@@ -2,9 +2,6 @@ module Aji
   class Account::Youtube < Account
     include Aji::TankerDefaults::Account
 
-    validates_presence_of :uid
-    validates_uniqueness_of :uid
-
     before_create :get_info_from_youtube_api
 
     has_many :videos, :foreign_key => :author_id, :dependent => :destroy
@@ -113,6 +110,17 @@ module Aji
       end
     end
 
+    def self.from_auth_hash auth_hash
+      find_or_initialize_by_uid_and_provider auth_hash['uid'].downcase,
+        'youtube' do |account|
+          account.uid = auth_hash['uid'].downcase
+          account.username = auth_hash['uid']
+          account.credentials = auth_hash['credentials']
+          # NOTE: Conflicts with un-XMLified hash schema from YoutubeAPI
+          account.info = auth_hash['extra']['user_hash']
+          account.save!
+        end
+    end
   end
 end
 

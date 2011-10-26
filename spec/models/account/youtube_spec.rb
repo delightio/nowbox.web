@@ -198,6 +198,27 @@ module Aji
         subject.blacklist_repeated_offender
       end
     end
+
+    describe ".from_auth_hash" do
+      let(:auth_hash) do
+        {
+          'uid' => 'nuclearsandwich',
+          'credentials' => { 'token' => 'sometoken', 'secret' => 'seekrit' },
+          'extra' => { 'user_hash' => { 'first_name' => 'Steven!' } }
+        }
+      end
+
+      it "finds the account if it is already in the database" do
+        existing = Account::Youtube.create uid: "nuclearsandwich",
+          provider: 'youtube'
+
+        Account::Youtube.from_auth_hash(auth_hash).should == existing.reload
+      end
+
+      it "creates a new account if none is found" do
+        Account::Youtube.from_auth_hash(auth_hash).should_not be_new_record
+      end
+    end
   end
 end
 

@@ -80,5 +80,21 @@ module Aji
       save and stream_channel.refresh_content
       stream_channel
     end
+
+    def self.from_auth_hash auth_hash
+      find_or_initialize_by_uid_and_provider auth_hash['uid'],
+        'facebook' do |account|
+          account.uid = auth_hash['uid']
+          account.credentials = auth_hash['credentials']
+          account.username = auth_hash['nickname'] || ""
+          account.info = auth_hash['extra']['user_hash']
+          account.save!
+        end
+    end
+
+    private
+    def set_provider
+      update_attribute :provider, 'facebook'
+    end
   end
 end

@@ -109,4 +109,26 @@ describe Account::Facebook, :unit do
   end
 
   it_behaves_like "any account"
+
+  describe ".from_auth_hash" do
+    let(:auth_hash) do
+      {
+        'uid' => '1075392174',
+        'credentials' => { 'token' => 'sometoken' },
+        'extra' => { 'user_hash' => { 'name' => 'Vienna Teng' } }
+      }
+    end
+
+    it "finds the account if it is already in the database" do
+      existing = Account::Facebook.create uid: "1075392174", provider: 'facebook'
+
+      Account::Facebook.from_auth_hash(auth_hash).should == existing.reload
+    end
+
+    it "creates a new account if none is found" do
+      Account::Facebook.from_auth_hash(auth_hash).should_not be_new_record
+    end
+
+    it "uses the information in the auth_hash for the user"
+  end
 end

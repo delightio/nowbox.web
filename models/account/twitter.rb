@@ -119,9 +119,20 @@ module Aji
       stream_channel
     end
 
-    private
     def set_provider
       update_attribute :provider, 'twitter'
+    end
+    private :set_provider
+
+    def self.from_auth_hash auth_hash
+      find_or_initialize_by_uid_and_provider auth_hash['uid'],
+        'twitter' do |account|
+          account.uid = auth_hash['uid']
+          account.credentials = auth_hash['credentials']
+          account.username = auth_hash['extra']['user_hash']['screen_name']
+          account.info = auth_hash['extra']['user_hash']
+          account.save!
+        end
     end
 
   end
