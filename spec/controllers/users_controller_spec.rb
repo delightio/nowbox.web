@@ -6,6 +6,7 @@ module Aji
 
   describe API do
     describe "resource: #{resource}" do
+      let(:bob) { Factory :user, name: "Bob" }
 
       describe "get #{resource_uri}/:id" do
         it "should return 404 if not found" do
@@ -74,6 +75,31 @@ module Aji
         end
       end
 
+      describe "settings API" do
+        describe "get #{resource_uri}/:id/settings" do
+          it "returns a JSON object representing the user's settings" do
+            bob.settings = { :post_to_twitter => false,
+                             :wadsworth_mode => true }
+            bob.save
+
+            get "#{resource_uri}/#{bob.id}/settings"
+
+            last_response.body.
+              should == '{"post_to_twitter":false,"wadsworth_mode":true}'
+          end
+        end
+
+        describe "put #{resource_uri}/:id/settings" do
+          it "updates the users settings with the parameters" do
+            bob.settings = { :a_param => "old value" }
+            put "#{resource_uri}/#{bob.id}/settings", :settings => {
+              :a_param => "a value" }
+
+            bob.reload.settings.should == { :a_param => "a value" }
+            last_response.body.should == '{"a_param":"a value"}'
+          end
+        end
+      end
     end
   end
 end

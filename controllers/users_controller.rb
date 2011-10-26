@@ -66,6 +66,27 @@ module Aji
         end
         u.update_attributes(params_to_update)
       end
+
+      # ## GET users/:user_id/settings
+      # __Returns__ JSON object representing the user's settings.
+      get '/:user_id/settings' do
+        find_user_by_id_or_error(params[:user_id]).settings
+      end
+
+      # ## PUT users/:user_id/settings
+      # __Updates__ User's updated settings JSON.
+      # __Returns__ JSON object representing the user's settings.
+      put '/:user_id/settings' do
+        user = find_user_by_id_or_error params[:user_id]
+        user.settings = {}.tap do|settings|
+          params[:settings].each do |k,v|
+            settings[k.to_sym] = v
+          end
+        end
+
+        user.save or error!
+        user.settings
+      end
     end
   end
 end
