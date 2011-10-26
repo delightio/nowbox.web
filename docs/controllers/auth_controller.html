@@ -134,32 +134,31 @@ to <code>http://api.nowbox.com/auth/failure</code>.</em></p>
       <span class="n">user</span> <span class="o">=</span> <span class="no">Aji</span><span class="o">::</span><span class="no">User</span><span class="o">.</span><span class="n">find_by_id</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
       <span class="k">return</span> <span class="p">{</span> <span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s2">&quot;User[</span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span><span class="si">}</span><span class="s2">] does not exist.&quot;</span> <span class="p">}</span> <span class="k">if</span>
         <span class="n">user</span><span class="o">.</span><span class="n">nil?</span>
-      <span class="n">auth_hash</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">&#39;omniauth.auth&#39;</span><span class="o">]</span>
-      <span class="n">provider_class</span> <span class="o">=</span> <span class="k">case</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;provider&#39;</span><span class="o">]</span>
-                       <span class="k">when</span> <span class="s1">&#39;twitter&#39;</span> <span class="k">then</span> <span class="no">Account</span><span class="o">::</span><span class="no">Twitter</span>
-                       <span class="k">when</span> <span class="s1">&#39;facebook&#39;</span> <span class="k">then</span> <span class="no">Account</span><span class="o">::</span><span class="no">Facebook</span>
-                       <span class="k">end</span>
 
-      <span class="k">if</span> <span class="p">(</span><span class="n">account</span> <span class="o">=</span> <span class="n">provider_class</span><span class="o">.</span><span class="n">find_by_uid</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;uid&#39;</span><span class="o">]</span><span class="p">)</span>
-        <span class="n">account</span><span class="o">.</span><span class="n">update_from_auth_info</span> <span class="n">auth_hash</span>
-      <span class="k">else</span>
-        <span class="n">account</span> <span class="o">=</span> <span class="n">provider_class</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-          <span class="ss">:identity</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="o">.</span><span class="n">identity</span><span class="p">,</span>
-          <span class="ss">:credentials</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;credentials&#39;</span><span class="o">]</span><span class="p">,</span>
-          <span class="ss">:uid</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;uid&#39;</span><span class="o">]</span><span class="p">,</span>
-          <span class="ss">:username</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;nickname&#39;</span><span class="o">]</span><span class="p">,</span>
-          <span class="ss">:info</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;extra&#39;</span><span class="o">][</span><span class="s1">&#39;user_hash&#39;</span><span class="o">]</span>
-        <span class="p">)</span>
-      <span class="k">end</span>
+      <span class="k">begin</span>
+        <span class="n">auth_hash</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">&#39;omniauth.auth&#39;</span><span class="o">]</span>
+        <span class="n">provider_class</span> <span class="o">=</span> <span class="k">case</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;provider&#39;</span><span class="o">]</span>
+                         <span class="k">when</span> <span class="s1">&#39;twitter&#39;</span> <span class="k">then</span> <span class="no">Account</span><span class="o">::</span><span class="no">Twitter</span>
+                         <span class="k">when</span> <span class="s1">&#39;facebook&#39;</span> <span class="k">then</span> <span class="no">Account</span><span class="o">::</span><span class="no">Facebook</span>
+                         <span class="k">end</span>
 
-      <span class="n">account</span><span class="o">.</span><span class="n">create_stream_channel</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">account</span> <span class="o">=</span> <span class="n">provider_class</span><span class="o">.</span><span class="n">find_by_uid</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;uid&#39;</span><span class="o">]</span><span class="p">)</span>
+          <span class="n">account</span><span class="o">.</span><span class="n">update_from_auth_info</span> <span class="n">auth_hash</span>
+        <span class="k">else</span>
+          <span class="n">account</span> <span class="o">=</span> <span class="n">provider_class</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="ss">:identity</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="o">.</span><span class="n">identity</span><span class="p">,</span>
+            <span class="ss">:credentials</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;credentials&#39;</span><span class="o">]</span><span class="p">,</span>
+            <span class="ss">:uid</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;uid&#39;</span><span class="o">]</span><span class="p">,</span>
+            <span class="ss">:username</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;nickname&#39;</span><span class="o">]</span><span class="p">,</span>
+            <span class="ss">:info</span> <span class="o">=&gt;</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;extra&#39;</span><span class="o">][</span><span class="s1">&#39;user_hash&#39;</span><span class="o">]</span>
+          <span class="p">)</span>
+        <span class="k">end</span>
 
-      <span class="n">auth</span> <span class="o">=</span> <span class="no">Authorization</span><span class="o">.</span><span class="n">new</span> <span class="n">account</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">identity</span>
+        <span class="n">user</span><span class="o">.</span><span class="n">subscribe_social</span> <span class="n">account</span><span class="o">.</span><span class="n">create_stream_channel</span>
+        <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span> <span class="n">user</span><span class="o">.</span><span class="n">serializable_hash</span>
 
-      <span class="k">if</span> <span class="n">auth</span><span class="o">.</span><span class="n">grant!</span>
-        <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span> <span class="n">auth</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">serializable_hash</span>
-      <span class="k">else</span>
-        <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span> <span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s2">&quot;Unable to authenticate&quot;</span>
+      <span class="k">rescue</span>
+        <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span> <span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s1">&#39;Unable to authenticate&#39;</span>
       <span class="k">end</span>
     <span class="k">end</span></pre></div>
       </td>
@@ -186,7 +185,7 @@ to <code>http://api.nowbox.com/auth/failure</code>.</em></p>
 
       <span class="k">if</span> <span class="n">account</span><span class="o">.</span><span class="n">nil?</span>
         <span class="k">return</span> <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s2">&quot;No </span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:provider</span><span class="o">]</span><span class="si">}</span><span class="s2"> account &quot;</span> <span class="o">+</span>
-          <span class="s2">&quot;with uid:</span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:uid</span><span class="o">]</span><span class="si">}</span><span class="s2"> known&quot;</span><span class="p">)</span>
+                                <span class="s2">&quot;with uid:</span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:uid</span><span class="o">]</span><span class="si">}</span><span class="s2"> known&quot;</span><span class="p">)</span>
       <span class="k">end</span>
 
       <span class="n">auth</span> <span class="o">=</span> <span class="no">Authorization</span><span class="o">.</span><span class="n">new</span> <span class="n">account</span><span class="p">,</span> <span class="n">account</span><span class="o">.</span><span class="n">identity</span>

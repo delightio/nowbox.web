@@ -128,7 +128,6 @@ message
 <strong>Required params</strong> (need just one of the two params)
 &ndash; <code>name</code> name of the user
 &ndash; <code>email</code> email address of the user</p>
-
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">put</span> <span class="s1">&#39;/:user_id&#39;</span> <span class="k">do</span>
@@ -142,6 +141,46 @@ message
           <span class="n">must_supply_params_error!</span> <span class="n">updatable_params</span>
         <span class="k">end</span>
         <span class="n">u</span><span class="o">.</span><span class="n">update_attributes</span><span class="p">(</span><span class="n">params_to_update</span><span class="p">)</span>
+      <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-GET_users/:user_id/settings'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-GET_users/:user_id/settings">&#182;</a>
+        </div>
+        <h2>GET users/:user_id/settings</h2>
+
+<p><strong>Returns</strong> JSON object representing the user&rsquo;s settings.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      <span class="n">get</span> <span class="s1">&#39;/:user_id/settings&#39;</span> <span class="k">do</span>
+        <span class="n">find_user_by_id_or_error</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">settings</span>
+      <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-PUT_users/:user_id/settings'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-PUT_users/:user_id/settings">&#182;</a>
+        </div>
+        <h2>PUT users/:user_id/settings</h2>
+
+<p><strong>Updates</strong> User&rsquo;s updated settings JSON.
+<strong>Returns</strong> JSON object representing the user&rsquo;s settings.</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      <span class="n">put</span> <span class="s1">&#39;/:user_id/settings&#39;</span> <span class="k">do</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">find_user_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
+        <span class="n">user</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="p">{}</span><span class="o">.</span><span class="n">tap</span> <span class="k">do</span><span class="o">|</span><span class="n">settings</span><span class="o">|</span>
+          <span class="n">params</span><span class="o">[</span><span class="ss">:settings</span><span class="o">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="o">|</span>
+            <span class="n">settings</span><span class="o">[</span><span class="n">k</span><span class="o">.</span><span class="n">to_sym</span><span class="o">]</span> <span class="o">=</span> <span class="n">v</span>
+          <span class="k">end</span>
+        <span class="k">end</span>
+
+        <span class="n">user</span><span class="o">.</span><span class="n">save</span> <span class="ow">or</span> <span class="n">error!</span>
+        <span class="n">user</span><span class="o">.</span><span class="n">settings</span>
       <span class="k">end</span>
     <span class="k">end</span>
   <span class="k">end</span>
