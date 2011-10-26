@@ -74,7 +74,7 @@ module Aji
       end
 
       # ## PUT users/:user_id/settings
-      # __Updates__ User's updated settings JSON.
+      # __Updates__ User's updated settings JSON.  
       # __Returns__ JSON object representing the user's settings.
       put '/:user_id/settings' do
         user = find_user_by_id_or_error params[:user_id]
