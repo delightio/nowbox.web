@@ -65,14 +65,6 @@ module Aji
       @api ||= FacebookAPI.new credentials['token']
     end
 
-    def update_from_auth_info auth_hash
-      self.credentials = auth_hash['credentials']
-      self.username = auth_hash['extra']['user_hash']['username']
-      self.info = auth_hash['extra']['user_hash']
-      save
-      self
-    end
-
     def create_stream_channel
       self.stream_channel ||= Channel::FacebookStream.create :owner => self,
         :title => realname

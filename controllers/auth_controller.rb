@@ -71,19 +71,10 @@ module Aji
         provider_class = case auth_hash['provider']
                          when 'twitter' then Account::Twitter
                          when 'facebook' then Account::Facebook
+                         when 'you_tube' then Account::Youtube
                          end
 
-        if (account = provider_class.find_by_uid auth_hash['uid'])
-          account.update_from_auth_info auth_hash
-        else
-          account = provider_class.create(
-            :identity => user.identity,
-            :credentials => auth_hash['credentials'],
-            :uid => auth_hash['uid'],
-            :username => auth_hash['nickname'],
-            :info => auth_hash['extra']['user_hash']
-          )
-        end
+        account = provider_class.from_auth_hash auth_hash
 
         user.subscribe_social account.create_stream_channel
         MultiJson.encode user.serializable_hash

@@ -41,35 +41,6 @@ describe Account::Facebook, :unit do
     end
   end
 
-  describe "#update_from_auth_info" do
-    let(:auth_info) do
-      {
-        'credentials' => { 'token' => 'somesecrettoken' },
-        'extra' => { 'user_hash' => {'username' => 'somescreenname'} }
-      }
-    end
-
-    it "updates facebook credentials" do
-      expect { subject.update_from_auth_info auth_info }.to(
-        change{subject.credentials}.to(auth_info['credentials']))
-    end
-
-    it "updates the username" do
-      expect { subject.update_from_auth_info auth_info }.to(
-        change{subject.username}.to(
-          auth_info['extra']['user_hash']['username']))
-    end
-
-    it "updates the stored info hash" do
-      expect { subject.update_from_auth_info auth_info }.to(
-        change{subject.info}.to(auth_info['extra']['user_hash']))
-    end
-
-    it "returns the account" do
-      subject.update_from_auth_info(auth_info).should == subject
-    end
-  end
-
   describe "#create_stream_channel" do
     let!(:stream_channel) do
       Channel::FacebookStream.new(:owner => subject,

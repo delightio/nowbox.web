@@ -12,7 +12,8 @@ use OmniAuth::Builder do
   provider :facebook, Aji.conf['APP_ID'], Aji.conf['APP_SECRET'],
     { :scope => 'read_stream,publish_stream,offline_access',
       :display => :touch }
-  #provider :identica, Aji.conf['identica_key'], Aji.conf['identica_secret']
+  #provider :you_tube, Aji.conf['YOUTUBE_OA_KEY'], Aji.conf['YOUTUBE_OA_SECRET']
+  # TODO: Do want: Diaspora* integration... somehow.. someway.
 end
 
 map "http://#{Aji.conf['TLD']}/" do

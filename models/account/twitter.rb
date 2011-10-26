@@ -104,14 +104,6 @@ module Aji
                end
     end
 
-    def update_from_auth_info auth_hash
-      self.credentials = auth_hash['credentials']
-      self.username = auth_hash['extra']['user_hash']['screen_name']
-      self.info = auth_hash['extra']['user_hash']
-      save
-      self
-    end
-
     def create_stream_channel
       self.stream_channel ||= Channel::TwitterStream.create :owner => self,
         :title => username
