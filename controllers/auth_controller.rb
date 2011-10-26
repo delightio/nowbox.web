@@ -79,7 +79,8 @@ module Aji
         user.subscribe_social account.create_stream_channel
         MultiJson.encode user.serializable_hash
 
-      rescue
+      rescue => e
+        Aji.log :WARN, "#{e.class}: #{e.message}"
         MultiJson.encode :error => 'Unable to authenticate'
       end
     end
