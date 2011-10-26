@@ -4,9 +4,6 @@ module Aji
     include Mixins::CanRefreshContent
     include Aji::TankerDefaults::Account
 
-    validates_presence_of :uid
-    validates_uniqueness_of :uid
-
     has_many :mentions, :foreign_key => :author_id, :dependent => :destroy
 
     belongs_to :stream_channel, :class_name => 'Aji::Channel::FacebookStream',
