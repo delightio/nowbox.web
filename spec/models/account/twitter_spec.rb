@@ -103,35 +103,6 @@ describe Aji::Account::Twitter, :unit do
     end
   end
 
-  describe "#update_from_auth_info" do
-    let(:auth_info) do
-      {
-        'credentials' => { 'token' => 'sometoken', 'secret' => 'somesecret'},
-        'extra' => { 'user_hash' => {'screen_name' => 'somescreenname'} }
-      }
-    end
-
-    it "updates twitter credentials" do
-      expect { subject.update_from_auth_info auth_info }.to(
-        change{subject.credentials}.to(auth_info['credentials']))
-    end
-
-    it "updates the username" do
-      expect { subject.update_from_auth_info auth_info }.to(
-        change{subject.username}.to(
-          auth_info['extra']['user_hash']['screen_name']))
-    end
-
-    it "updates the stored info hash" do
-      expect { subject.update_from_auth_info auth_info }.to(
-        change{subject.info}.to(auth_info['extra']['user_hash']))
-    end
-
-    it "returns the account" do
-      subject.update_from_auth_info(auth_info).should == subject
-    end
-  end
-
   describe "#create_stream_channel" do
     let!(:stream_channel) do
       Channel::TwitterStream.new(:owner => subject,
@@ -158,7 +129,10 @@ describe Aji::Account::Twitter, :unit do
     end
 
   end
+
   describe ".from_auth_hash" do
+    subject { Account::Twitter.from_auth_hash auth_hash }
+
     let(:auth_hash) do
       {
         'uid' => '178492493',
@@ -170,13 +144,18 @@ describe Aji::Account::Twitter, :unit do
     it "finds the account if it is already in the database" do
       existing = Account::Twitter.create uid: "178492493", provider: 'twitter'
 
-      Account::Twitter.from_auth_hash(auth_hash).should == existing.reload
+      subject.should == existing.reload
     end
 
     it "creates a new account if none is found" do
-      Account::Twitter.from_auth_hash(auth_hash).should_not be_new_record
+      subject.should_not be_new_record
     end
 
-    it "uses the information in the auth_hash for the user"
+    describe "uses auth_hash information for user" do
+      its(:uid) { should == auth_hash['uid'] }
+      its(:username) { should == auth_hash['extra']['user_hash']['screen_name'] }
+      its(:credentials) { should == auth_hash['credentials'] }
+      its(:info) { should == auth_hash['extra']['user_hash'] }
+    end
   end
 end

@@ -108,9 +108,9 @@ describe Account::Facebook, :unit do
     end
   end
 
-  it_behaves_like "any account"
-
   describe ".from_auth_hash" do
+    subject { Account::Facebook.from_auth_hash auth_hash }
+
     let(:auth_hash) do
       {
         'uid' => '1075392174',
@@ -120,15 +120,26 @@ describe Account::Facebook, :unit do
     end
 
     it "finds the account if it is already in the database" do
-      existing = Account::Facebook.create uid: "1075392174", provider: 'facebook'
+      existing = Account::Facebook.create uid: "1075392174",
+        provider: 'facebook'
 
-      Account::Facebook.from_auth_hash(auth_hash).should == existing.reload
+      subject.should == existing.reload
     end
 
     it "creates a new account if none is found" do
-      Account::Facebook.from_auth_hash(auth_hash).should_not be_new_record
+      subject.should_not be_new_record
     end
 
-    it "uses the information in the auth_hash for the user"
+    describe "uses auth_hash information for user" do
+      its(:username) do
+        should == (auth_hash['extra']['user_hash']['username'] || "")
+      end
+      its(:uid) { should == auth_hash['uid'] }
+      its(:credentials) { should == auth_hash['credentials'] }
+      its(:info) { should == auth_hash['extra']['user_hash'] }
+    end
   end
+
+  it_behaves_like "any account"
 end
+

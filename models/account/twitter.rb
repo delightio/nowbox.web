@@ -134,7 +134,6 @@ module Aji
           account.save!
         end
     end
-
   end
 end
 

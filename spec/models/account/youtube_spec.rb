@@ -200,23 +200,32 @@ module Aji
     end
 
     describe ".from_auth_hash" do
+      subject { Account::Youtube.from_auth_hash auth_hash }
       let(:auth_hash) do
         {
-          'uid' => 'nuclearsandwich',
+          'uid' => 'NucLearsaNdWicH',
           'credentials' => { 'token' => 'sometoken', 'secret' => 'seekrit' },
           'extra' => { 'user_hash' => { 'first_name' => 'Steven!' } }
         }
       end
 
       it "finds the account if it is already in the database" do
-        existing = Account::Youtube.create uid: "nuclearsandwich",
+        existing = Account::Youtube.create uid: "NucLearsaNdWicH",
           provider: 'youtube'
-
-        Account::Youtube.from_auth_hash(auth_hash).should == existing.reload
+        subject.should == existing.reload
       end
 
       it "creates a new account if none is found" do
-        Account::Youtube.from_auth_hash(auth_hash).should_not be_new_record
+        subject.should_not be_new_record
+      end
+
+      describe "uses auth_hash information for user" do
+        pending "halt get_info_from_youtube_api call for authed accounts" do
+          its(:uid) { should == auth_hash['uid'].downcase }
+          its(:username) { should == auth_hash['uid'] }
+          its(:credentials) { should == auth_hash['credentials'] }
+          its(:info) { should == auth_hash['extra']['user_hash'] }
+        end
       end
     end
   end
