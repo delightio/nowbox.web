@@ -1,14 +1,11 @@
 module Aji
   module Queues
-    class PublishShare
+    class Publish
       extend WithDatabaseConnection
       @queue = :publish_share
 
       def self.perform account_id, share_id
-        acc = Account.find(account_id)
-        share = Share.find(share_id)
-
-        acc.publish share.message
+        Account.find(account_id).publish Share.find(share_id)
       end
     end
   end

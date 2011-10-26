@@ -99,7 +99,7 @@ module Aji
     end
 
     def facebook_channel_id
-      if c = social_channels.find{|c| c.class == Aji::Channel::FacebookStream }
+      if c = social_channels.find{|c| c.class == Channel::FacebookStream }
         c.id
       else
         nil
@@ -107,10 +107,33 @@ module Aji
     end
 
     def twitter_channel_id
-      if c = social_channels.find{|c| c.class == Aji::Channel::TwitterStream }
+      if c = social_channels.find{|c| c.class == Channel::TwitterStream }
         c.id
       else
         nil
+      end
+    end
+
+    def twitter_account
+      if c = social_channels.find{|c| c.class == Channel::TwitterStream }
+        c.owner
+      else
+        nil
+      end
+    end
+
+    def facebook_account
+      if c = social_channels.find{|c| c.class == Channel::FacebookStream }
+        c.owner
+      else
+        nil
+      end
+    end
+
+    def autopost_accounts
+      [].tap do |accounts|
+        accounts << twitter_account if settings[:post_to_twitter]
+        accounts << facebook_account if settings[:post_to_facebook]
       end
     end
 
@@ -171,7 +194,10 @@ module Aji
     end
 
     def create_share_from_event event
-
+      autopost_accounts.each_with_object(Share.create user: event.user,
+        video: event.video) do |account, share|
+          account.background_publish share
+      end
     end
 
     def redis_keys

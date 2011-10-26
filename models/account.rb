@@ -119,6 +119,10 @@ module Aji
       Channel::Account.find_or_create_by_accounts Array(self)
     end
 
+    def background_publish share
+      Resque.enqueue Aji::Queues::Publish, id, share.id
+    end
+
     def redis_keys
       [ content_zset, influencer_set ].map &:key
     end

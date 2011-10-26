@@ -6,6 +6,7 @@ module Aji
       # We tap the account to return it after pushing content to its Redis
       # Objects so we can test the cleanup code.
       Account.create(:username => "foobar", :uid => "1234").tap do |account|
+        account.stub :id => 1
         account.content_zset[1] = 1
         account.influencer_set << 1
       end
@@ -17,6 +18,16 @@ module Aji
       it "converts the stored uid to lower case" do
         expect { subject.downcase_uid }.to change{ subject.uid }.from(
           "CNN").to("cnn")
+      end
+    end
+
+    describe "#background_publish" do
+      let(:share) { mock "share", :id => 11 }
+      it "enqueues the share in resque for background publishing" do
+        Resque.should_receive(:enqueue).with(Aji::Queues::Publish, subject.id,
+         share.id)
+
+        subject.background_publish share
       end
     end
 

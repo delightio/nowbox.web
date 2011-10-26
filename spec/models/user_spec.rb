@@ -426,6 +426,96 @@ describe Aji::User do
     end
   end
 
+  describe "temporary account stuff" do
+    describe "#twitter_account" do
+      subject { User.new { |u| u.stub :social_channels => [twitter_channel] } }
+      let(:twitter_channel) do
+        mock "channel", :owner => mock("tw account"),
+          :class => Channel::TwitterStream
+      end
+
+      specify "the account associated with the users twitter channel" do
+        subject.twitter_account.should == twitter_channel.owner
+      end
+
+      specify "nil when no twitter channel in social subscriptions" do
+        subject.stub :social_channels => []
+
+        subject.twitter_account.should be_nil
+      end
+    end
+
+    describe "#facebook_account" do
+      subject { User.new { |u| u.stub :social_channels => [facebook_channel] } }
+      let(:facebook_channel) do
+        mock "channel", :owner => mock("fb account"),
+          :class => Channel::FacebookStream
+      end
+
+      specify "the account associated with the users facebook channel" do
+        subject.facebook_account.should == facebook_channel.owner
+      end
+
+      specify "nil when no facebook channel in social subscriptions" do
+        subject.stub :social_channels => []
+
+        subject.facebook_account.should be_nil
+      end
+    end
+
+    describe "#autopost_accounts" do
+      let(:twitter_account) { mock "twitter account" }
+      let(:facebook_account) { mock "facebook account" }
+      let(:settings) { { :post_to_twitter => true } }
+
+      subject do
+        User.new do |u|
+          u.stub :twitter_account => twitter_account
+          u.stub :facebook_account => facebook_account
+          u.stub :settings => settings
+        end
+      end
+
+      it "returns a user's social accounts which are set to autopost" do
+        subject.autopost_accounts.should == [twitter_account]
+      end
+    end
+  end
+
+  describe "#create_share_from_event" do
+    #pending "Enabling of the share system"
+    subject do
+      User.new do |u|
+        u.stub :id => 1
+        u.stub :autopost_accounts => autopost_accounts
+      end
+    end
+
+    let(:share) do
+      mock("share", :id => 1).tap do |share|
+        Share.stub(:create).with(user: event.user, video: event.video).
+          and_return(share)
+      end
+    end
+
+    let(:event) { mock "event", :video => stub, :user => stub }
+    let(:autopost_accounts) { [mock("account", :background_publish => [])] }
+
+    it "creates a share object with the user and share from the event" do
+      Share.should_receive(:create).with(user: event.user, video:event.video)
+
+      subject.create_share_from_event event
+    end
+
+    it "publishes the share to all autopost accounts" do
+      autopost_accounts.each do |a|
+        a.should_receive(:background_publish).with(share)
+      end
+
+      subject.create_share_from_event event
+    end
+  end
+
   describe "#user_channels" do
     it "returns all user channels" do
       pending "Current name conflict with method"
