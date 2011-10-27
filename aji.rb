@@ -95,7 +95,10 @@ require_relative 'lib/patches/string'
 
 Mixins = Module.new
 Dir.glob("lib/mixins/*.rb").each { |r| require_relative r }
-require './lib/tanker_defaults'
+require_relative 'lib/tanker_defaults'
+require_relative 'lib/decay'
+require_relative 'lib/parsers'
+require_relative 'lib/searcher'
 
 Dir.glob("models/*.rb").each { |r| require_relative r }
 # Must load channel subtypes after other models for dependency reasons.
@@ -111,8 +114,3 @@ Dir.glob("queues/mention/*.rb").each { |r| require_relative r }
 # Add Sinatra web viewer.
 require_relative "lib/viewer/viewer"
 require_relative "lib/mailer/mailer"
-
-# Add miscelaneous library code.
-require './lib/decay'
-require './lib/parsers'
-require './lib/searcher'
