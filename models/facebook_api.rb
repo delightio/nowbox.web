@@ -9,13 +9,13 @@ module Aji
       [].tap do |mentions|
         tracker.hit!
         posts = @koala.get_connections "me", "home"
-        mentions.concat extract_video_mentions parse_mentions posts
+        mentions.concat extract_video_mentions parse_mentions_with_links posts
         (pages - 1).times do
           tracker.hit!
           posts = posts.next_page
 
           break if posts.nil?
-          mentions.concat extract_video_mentions parse_mentions posts
+          mentions.concat extract_video_mentions parse_mentions_with_links posts
         end
       end
     end
