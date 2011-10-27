@@ -141,21 +141,35 @@ describe Aji::Account::Twitter, :unit do
       }
     end
 
-    it "finds the account if it is already in the database" do
-      existing = Account::Twitter.create uid: "178492493", provider: 'twitter'
+    context "when the account is already in the database" do
+      let!(:existing) do
+        Account::Twitter.create! uid: "178492493", provider: 'twitter'
+      end
 
-      subject.should == existing.reload
+      it "finds the existing account" do
+        subject.should == existing.reload
+      end
+
+      describe "uses auth_hash information for user" do
+        its(:uid) { should == auth_hash['uid'] }
+        its(:username) { should == auth_hash['extra']['user_hash']['screen_name'] }
+        its(:credentials) { should == auth_hash['credentials'] }
+        its(:info) { should == auth_hash['extra']['user_hash'] }
+      end
     end
 
-    it "creates a new account if none is found" do
-      subject.should_not be_new_record
-    end
+    context "when the account is not in the database" do
+      it "creates a new account if none is found" do
+        subject.should_not be_new_record
+      end
 
-    describe "uses auth_hash information for user" do
-      its(:uid) { should == auth_hash['uid'] }
-      its(:username) { should == auth_hash['extra']['user_hash']['screen_name'] }
-      its(:credentials) { should == auth_hash['credentials'] }
-      its(:info) { should == auth_hash['extra']['user_hash'] }
+      describe "uses auth_hash information for user" do
+        its(:uid) { should == auth_hash['uid'] }
+        its(:username) { should == auth_hash['extra']['user_hash']['screen_name'] }
+        its(:credentials) { should == auth_hash['credentials'] }
+        its(:info) { should == auth_hash['extra']['user_hash'] }
+      end
     end
   end
 end
+

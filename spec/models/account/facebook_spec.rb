@@ -90,24 +90,38 @@ describe Account::Facebook, :unit do
       }
     end
 
-    it "finds the account if it is already in the database" do
-      existing = Account::Facebook.create uid: "1075392174",
-        provider: 'facebook'
-
-      subject.should == existing.reload
-    end
-
-    it "creates a new account if none is found" do
-      subject.should_not be_new_record
-    end
-
-    describe "uses auth_hash information for user" do
-      its(:username) do
-        should == (auth_hash['extra']['user_hash']['username'] || "")
+    context "when the account is already in the database" do
+      let!(:existing) do
+        Account::Facebook.create! uid: "1075392174", provider: 'facebook'
       end
-      its(:uid) { should == auth_hash['uid'] }
-      its(:credentials) { should == auth_hash['credentials'] }
-      its(:info) { should == auth_hash['extra']['user_hash'] }
+
+      it "finds the existing account" do
+        subject.should == existing.reload
+      end
+
+      describe "uses auth_hash information for user" do
+        its(:username) do
+          should == (auth_hash['extra']['user_hash']['username'] || "")
+        end
+        its(:uid) { should == auth_hash['uid'] }
+        its(:credentials) { should == auth_hash['credentials'] }
+        its(:info) { should == auth_hash['extra']['user_hash'] }
+      end
+    end
+
+    context "when the account is not in the database" do
+      it "creates a new account" do
+        subject.should_not be_new_record
+      end
+
+      describe "uses auth_hash information for user" do
+        its(:username) do
+          should == (auth_hash['extra']['user_hash']['username'] || "")
+        end
+        its(:uid) { should == auth_hash['uid'] }
+        its(:credentials) { should == auth_hash['credentials'] }
+        its(:info) { should == auth_hash['extra']['user_hash'] }
+      end
     end
   end
 

@@ -2,7 +2,7 @@ module Aji
   class Account::Youtube < Account
     include Aji::TankerDefaults::Account
 
-    before_create :get_info_from_youtube_api
+    before_create :get_info_from_youtube_api, :unless => :authorized?
 
     has_many :videos, :foreign_key => :author_id, :dependent => :destroy
 
@@ -44,6 +44,10 @@ module Aji
 
     def refreshed?
       not thumbnail_uri.empty?
+    end
+
+    def authorized?
+      credentials.has_key? 'token' and credentials.has_key? 'secret'
     end
 
     def refresh_info
@@ -111,8 +115,8 @@ module Aji
     end
 
     def self.from_auth_hash auth_hash
-      find_or_initialize_by_uid_and_type auth_hash['uid'].downcase,
-        self.to_s do |account|
+      find_or_initialize_by_uid_and_type(auth_hash['uid'].downcase,
+        self.to_s).tap do |account|
           account.uid = auth_hash['uid'].downcase
           account.username = auth_hash['uid']
           account.credentials = auth_hash['credentials']

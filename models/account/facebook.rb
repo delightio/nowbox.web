@@ -71,8 +71,8 @@ module Aji
     end
 
     def self.from_auth_hash auth_hash
-      find_or_initialize_by_uid_and_type auth_hash['uid'],
-        self.to_s do |account|
+      find_or_initialize_by_uid_and_type(auth_hash['uid'],
+        self.to_s).tap do |account|
           account.uid = auth_hash['uid']
           account.credentials = auth_hash['credentials']
           account.username = auth_hash['nickname'] || ""

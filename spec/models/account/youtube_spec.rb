@@ -131,7 +131,20 @@ module Aji
           subject.should_not be_available
         end
       end
+    end
 
+    describe "#authorized?" do
+      specify "true when we have their token and secret" do
+        subject.stub :credentials => { 'token' => "token", 'secret' => "shh" }
+
+        subject.should be_authorized
+      end
+
+      specify "false when we don't have their token and secret" do
+        subject.stub :credentials => {}
+
+        subject.should_not be_authorized
+      end
     end
 
     describe ".create_if_existing" do
@@ -209,18 +222,30 @@ module Aji
         }
       end
 
-      it "finds the account if it is already in the database" do
-        existing = Account::Youtube.create uid: "NucLearsaNdWicH",
-          provider: 'youtube'
-        subject.should == existing.reload
+      context "when the account is already in the database" do
+        let!(:existing) do
+          Account::Youtube.create uid: "NucLearsaNdWicH",
+            provider: 'youtube'
+        end
+
+        it "finds the account if it is already in the database" do
+          subject.should == existing.reload
+        end
+
+        describe "uses auth_hash information for user" do
+          its(:uid) { should == auth_hash['uid'].downcase }
+          its(:username) { should == auth_hash['uid'] }
+          its(:credentials) { should == auth_hash['credentials'] }
+          its(:info) { should == auth_hash['extra']['user_hash'] }
+        end
       end
 
-      it "creates a new account if none is found" do
-        subject.should_not be_new_record
-      end
+      context "when the account is not in the database" do
+        it "creates a new account" do
+          subject.should_not be_new_record
+        end
 
-      describe "uses auth_hash information for user" do
-        pending "halt get_info_from_youtube_api call for authed accounts" do
+        describe "uses auth_hash information for user" do
           its(:uid) { should == auth_hash['uid'].downcase }
           its(:username) { should == auth_hash['uid'] }
           its(:credentials) { should == auth_hash['credentials'] }
