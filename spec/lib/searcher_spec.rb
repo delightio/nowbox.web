@@ -8,6 +8,15 @@ module Aji
       Searcher.stub(:enabled?).and_return(true)
     end
 
+    describe "#initialize" do
+      it "strips out spaces" do
+        query = random_string
+        query_with_spaces = "\t  #{query}  \r\n"
+        searcher = Searcher.new query_with_spaces
+        searcher.query.should == query
+      end
+    end
+
     describe "#account_results_from_indextank" do
 
       context "when searching for existing account" do
@@ -92,25 +101,19 @@ module Aji
       before do
         @account_count = 2
         @searcher = Searcher.new ""
-        @channels = [].tap do |channels|
-          @account_count.times do |n|
-            channel = mock("channel", :id => n,
-              :background_refresh_content => nil)
-            channels << channel
-          end
-        end
-        @accounts = [].tap do |accounts|
-          @account_count.times do |n|
+        @accounts = (1..@account_count).map do |n|
             account = mock("account", :id => n,
               :username => random_string,
-              :to_channel => @channels[n],
               :available? => true,
               :subscriber_count => n*1000)
-            # TODO this sucks
-            @channels[n].stub(:accounts).and_return([account])
-            accounts << account
-          end
+            account.stub(
+              :to_channel => mock("channel",
+                :background_refresh_content => [],
+                :accounts => [account]))
+            account
         end
+        @channels = @accounts.map &:to_channel
+
         @sorted_channels = @channels.sort do |x,y|
           y.accounts.first.subscriber_count <=> x.accounts.first.subscriber_count
         end
@@ -118,17 +121,18 @@ module Aji
       end
 
       context "multiple results are found" do
-        it "returns unique results" do
+        before :each do
           subject.stub(:account_results).and_return(@accounts)
           subject.stub(:authors_from_keyword_search).and_return(@accounts)
+        end
+
+        it "returns unique results" do
           results = subject.results
           results.should have(@account_count).channels
           results.should == @sorted_channels
         end
 
         it "enqueue all channels for refresh" do
-          subject.stub(:account_results).and_return(@accounts)
-          subject.stub(:authors_from_keyword_search).and_return(@accounts)
           @channels.each do |ch|
             ch.should_receive(:background_refresh_content).once
           end
@@ -136,10 +140,6 @@ module Aji
         end
 
         it "sorts channels by subscriber count" do
-          subject.should_receive(:account_results).
-            and_return []
-          subject.should_receive(:authors_from_keyword_search).
-            and_return @accounts
           subject.results.should == @sorted_channels
         end
 

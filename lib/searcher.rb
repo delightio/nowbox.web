@@ -1,5 +1,6 @@
 module Aji
   class Searcher
+    attr_reader :query
 
     def self.enabled?
       RACK_ENV!='test'
@@ -14,7 +15,7 @@ module Aji
     end
 
     def initialize query
-      @query = query
+      @query = query.strip
     end
 
     def account_results_from_indextank
