@@ -20,6 +20,21 @@ module Aji
     end
 
     describe "#personalized_content_videos" do
+
+      context "when dealing with fixed channels" do
+        let(:blacklisted) { mock "blacklisted", :blacklisted? => true, :id => 10 }
+        let(:viewed) { mock "viewed", :blacklisted? => false, :id => 20 }
+
+        it "always returns same content regardless of viewed or blacklisted status" do
+          fixed_channel = Channel::Fixed.create
+          fixed_channel.push blacklisted
+          fixed_channel.push viewed
+
+          fixed_channel.personalized_content_videos(user: mock).should ==
+            fixed_channel.content_videos
+        end
+      end
+
       context "when dealing with non user channels" do
         it "returns unviewed videos" do
           channel = Factory :youtube_channel_with_videos

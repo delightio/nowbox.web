@@ -92,6 +92,9 @@ module Aji
           new_videos << video unless video.nil?
           break if new_videos.count >= total
         end
+      elsif self.class == Channel::Fixed
+        # Don't care if the videos are blacklisted or viewed
+        new_videos = content_videos(total)
       else
         # TODO: use Redis for this.. zdiff not found?
         viewed_video_ids = user.history_channel.content_video_ids
