@@ -11,7 +11,8 @@ module Aji
         :body => post['message'],
         :published_at => post['created_time'],
         :author => author,
-        :links => Array(Link.new post['link']),
+        :unparsed_data => post,
+        :links => Array(post['link']).map{ |l| Link.new l },
     end
   end
 end

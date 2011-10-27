@@ -9,13 +9,13 @@ module Aji
       [].tap do |mentions|
         tracker.hit!
         posts = @koala.get_connections "me", "home"
-        mentions.concat extract_video_mentions filter_links posts
+        mentions.concat extract_video_mentions parse_mentions posts
         (pages - 1).times do
           tracker.hit!
           posts = posts.next_page
 
           break if posts.nil?
-          mentions.concat extract_video_mentions filter_links posts
+          mentions.concat extract_video_mentions parse_mentions posts
         end
       end
     end
@@ -30,13 +30,26 @@ module Aji
         hits_per_session: 1000
     end
 
-    private
-    def filter_links posts
-      posts.select { |p| p['link'] }
+    def mention_ids_from_my_feed
+      Aji.redis.lrange("debug:mention_ids_from_#{@token}", 0, -1).map(&:to_i)
     end
 
-    def extract_video_mentions links
-      links.map { |link| Parsers['facebook'].parse link }.reject do |mention|
+    private
+    def parse_mentions posts
+      posts.map do |post|
+        Parsers::FBLink.parse(post).tap do |mention|
+          Aji.redis.lpush "debug:mention_ids_from_#{@token}", mention.id
+        end
+      end
+    end
+
+    def parse_mentions_with_links posts
+      posts.select { |p| p['link'] }.map{ |post| Parsers::FBLink.parse post }
+    end
+
+
+    def extract_video_mentions mentions
+      mentions.reject do |mention|
         processor = MentionProcessor.new mention
         processor.perform
         processor.failed? || processor.no_videos?

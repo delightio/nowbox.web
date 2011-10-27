@@ -114,12 +114,13 @@ module Aji
     private :set_provider
 
     def self.from_auth_hash auth_hash
-      find_or_initialize_by_uid_and_type auth_hash['uid'],
-        self.to_s do |account|
+      find_or_initialize_by_uid_and_type(auth_hash['uid'],
+        self.to_s).tap do |account|
           account.uid = auth_hash['uid']
           account.credentials = auth_hash['credentials']
           account.username = auth_hash['extra']['user_hash']['screen_name']
           account.info = auth_hash['extra']['user_hash']
+          account.auth_info = auth_hash
           account.save!
         end
     end

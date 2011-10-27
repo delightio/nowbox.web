@@ -53,7 +53,7 @@ module Aji
         'twitter',
         :body => tweet_hash['text'],
         :published_at => tweet_hash['created_at'],
-        :unparsed_data => json,
+        :unparsed_data => tweet_hash,
         :author => author,
         :links => links)
     end
