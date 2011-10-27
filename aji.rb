@@ -112,5 +112,6 @@ Dir.glob("queues/*.rb").each { |r| require_relative r }
 Dir.glob("queues/mention/*.rb").each { |r| require_relative r }
 
 # Add Sinatra web viewer.
+require_relative 'lib/google_auth'
 require_relative "lib/viewer/viewer"
 require_relative "lib/mailer/mailer"
