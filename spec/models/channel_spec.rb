@@ -26,12 +26,16 @@ module Aji
         let(:viewed) { mock "viewed", :blacklisted? => false, :id => 20 }
 
         it "always returns same content regardless of viewed or blacklisted status" do
+          [blacklisted, viewed].each do |v|
+            Video.stub(:find_by_id).with(v.id).and_return v
+          end
+
           fixed_channel = Channel::Fixed.create
-          fixed_channel.push blacklisted
-          fixed_channel.push viewed
+          fixed_channel.push blacklisted, 1
+          fixed_channel.push viewed, 2
 
           fixed_channel.personalized_content_videos(user: mock).should ==
-            fixed_channel.content_videos
+            [blacklisted, viewed]
         end
       end
 
