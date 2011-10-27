@@ -25,7 +25,7 @@ module Aji
     set :influencer_set
 
     validates_presence_of :uid
-    validates_uniqueness_of :uid
+    validates_uniqueness_of :uid, :scope => :type
 
     serialize :info, Hash
     serialize :credentials, Hash

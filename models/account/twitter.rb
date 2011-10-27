@@ -8,9 +8,6 @@ module Aji
     include Aji::TankerDefaults::Account
     include Mixins::Formatters::Twitter
 
-    validates_presence_of :uid
-    validates_uniqueness_of :uid
-
     has_many :mentions, :foreign_key => :author_id, :dependent => :destroy
 
     belongs_to :stream_channel, :class_name => 'Aji::Channel::TwitterStream',
@@ -117,8 +114,8 @@ module Aji
     private :set_provider
 
     def self.from_auth_hash auth_hash
-      find_or_initialize_by_uid_and_provider auth_hash['uid'],
-        'twitter' do |account|
+      find_or_initialize_by_uid_and_type auth_hash['uid'],
+        self.to_s do |account|
           account.uid = auth_hash['uid']
           account.credentials = auth_hash['credentials']
           account.username = auth_hash['extra']['user_hash']['screen_name']
