@@ -39,6 +39,14 @@ map "http://api.#{Aji.conf['TLD']}/" do
   run Aji::API
 end
 
+map "http://api.#{Aji.conf['TLD']}/google217e8f968a51d67c.html" do
+  run GoogleAuth
+end
+
+map "http://api.#{Aji.conf['TLD']}/hello" do
+  run GoogleAuth
+end
+
 map "http://apidoc.#{Aji.conf['TLD']}/" do
   use Rack::Auth::Basic do |username, password|
     [ username, password ] == [ "apidoc", "water" ]
