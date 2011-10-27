@@ -111,8 +111,8 @@ module Aji
     end
 
     def self.from_auth_hash auth_hash
-      find_or_initialize_by_uid_and_provider auth_hash['uid'].downcase,
-        'youtube' do |account|
+      find_or_initialize_by_uid_and_type auth_hash['uid'].downcase,
+        self.to_s do |account|
           account.uid = auth_hash['uid'].downcase
           account.username = auth_hash['uid']
           account.credentials = auth_hash['credentials']
