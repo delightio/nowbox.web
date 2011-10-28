@@ -253,6 +253,17 @@ module Aji
         end
       end
     end
+
+    describe "#sign_in_as" do
+      subject { Account::Youtube.new }
+      let(:user) { stub }
+
+      it "starts a new youtube syncronization" do
+        YoutubeSync.should_receive(:new).with(user, subject)
+
+        subject.sign_in_as user
+      end
+    end
   end
 end
 
