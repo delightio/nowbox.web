@@ -73,7 +73,7 @@ module Aji
                          when 'facebook' then Account::Facebook
                          when 'you_tube' then Account::Youtube
                          end
-
+Aji.log "*** /callback auth_hash: #{auth_hash.inspect}"
         account = provider_class.from_auth_hash auth_hash
 
         user.subscribe_social account.create_stream_channel
