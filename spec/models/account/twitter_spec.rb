@@ -103,73 +103,96 @@ describe Aji::Account::Twitter, :unit do
     end
   end
 
-  describe "#create_stream_channel" do
-    let!(:stream_channel) do
-      Channel::TwitterStream.new(:owner => subject,
-       :title => "Twitter Stream").tap do |c|
-         c.stub :id => 1
-         c.stub :save => true
-         c.stub :refresh_content
-         Channel::TwitterStream.should_receive(:create).with(
-           :owner => subject, :title => subject.username).and_return(c)
-       end
-    end
-
-    it "creates a channel for the account's twitter stream" do
-      subject.stub(:save => true)
-
-      subject.create_stream_channel
-    end
-
-    it "refreshes the channel's content" do
-      subject.stub(:save => true)
-      stream_channel.should_receive(:refresh_content)
-
-      subject.create_stream_channel
-    end
-
-  end
-
-  describe ".from_auth_hash" do
-    subject { Account::Twitter.from_auth_hash auth_hash }
-
-    let(:auth_hash) do
-      {
-        'uid' => '178492493',
-        'credentials' => { 'token' => 'sometoken', 'secret' => 'seekrit' },
-        'extra' => { 'user_hash' => { 'screen_name' => '_nuclearsammich' } }
-      }
-    end
-
-    context "when the account is already in the database" do
-      let!(:existing) do
-        Account::Twitter.create! uid: "178492493", provider: 'twitter'
+    describe "#build_stream_channel" do
+      let!(:stream_channel) do
+        Channel::TwitterStream.new(:owner => subject,
+         :title => "Twitter Stream").tap do |c|
+           c.stub :id => 1
+           c.stub :save => true
+           c.stub :refresh_content
+           Channel::TwitterStream.should_receive(:create).with(
+             :owner => subject, :title => subject.username).and_return(c)
+         end
       end
 
-      it "finds the existing account" do
-        subject.should == existing.reload
+      it "creates a channel for the account's twitter stream" do
+        subject.stub(:save => true)
+
+        subject.build_stream_channel
       end
 
-      describe "uses auth_hash information for user" do
-        its(:uid) { should == auth_hash['uid'] }
-        its(:username) { should == auth_hash['extra']['user_hash']['screen_name'] }
-        its(:credentials) { should == auth_hash['credentials'] }
+      it "refreshes the channel's content" do
+        subject.stub(:save => true)
+        stream_channel.should_receive(:refresh_content)
+
+        subject.build_stream_channel
+      end
+
+    end
+
+    describe ".from_auth_hash" do
+      subject { Account::Twitter.from_auth_hash auth_hash }
+
+      let(:auth_hash) do
+        {
+          'uid' => '178492493',
+          'credentials' => { 'token' => 'sometoken', 'secret' => 'seekrit' },
+          'extra' => { 'user_hash' => { 'screen_name' => '_nuclearsammich' } }
+        }
+      end
+
+      context "when the account is already in the database" do
+        let!(:existing) do
+          Account::Twitter.create! uid: "178492493", provider: 'twitter'
+        end
+
+        it "finds the existing account" do
+          subject.should == existing.reload
+        end
+
+        describe "uses auth_hash information for user" do
+          its(:uid) { should == auth_hash['uid'] }
+          its(:username) { should == auth_hash['extra']['user_hash']['screen_name'] }
+          its(:credentials) { should == auth_hash['credentials'] }
+          its(:info) { should == auth_hash['extra']['user_hash'] }
+        end
+      end
+
+      context "when the account is not in the database" do
+        it "creates a new account if none is found" do
+          subject.should_not be_new_record
+        end
+
+        describe "uses auth_hash information for user" do
+          its(:uid) { should == auth_hash['uid'] }
+          its(:username) { should == auth_hash['extra']['user_hash']['screen_name'] }
+          its(:credentials) { should == auth_hash['credentials'] }
         its(:info) { should == auth_hash['extra']['user_hash'] }
       end
     end
+  end
 
-    context "when the account is not in the database" do
-      it "creates a new account if none is found" do
-        subject.should_not be_new_record
-      end
-
-      describe "uses auth_hash information for user" do
-        its(:uid) { should == auth_hash['uid'] }
-        its(:username) { should == auth_hash['extra']['user_hash']['screen_name'] }
-        its(:credentials) { should == auth_hash['credentials'] }
-        its(:info) { should == auth_hash['extra']['user_hash'] }
+  describe "#sign_in_as" do
+    subject do
+      Account::Twitter.new do |a|
+        a.stub :build_stream_channel => stream_channel
       end
     end
+    let(:user) { stub :subscribe_social => true }
+    let(:stream_channel) { stub }
+
+    it "subscribes the user to this account's stream channel" do
+      user.should_receive(:subscribe_social).with(stream_channel)
+
+      subject.sign_in_as user
+    end
+
+    it "builds the account's stream channel" do
+      subject.should_receive(:build_stream_channel)
+
+      subject.sign_in_as user
+    end
   end
+
 end
 

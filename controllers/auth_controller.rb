@@ -68,6 +68,8 @@ module Aji
 
       begin
         auth_hash = request.env['omniauth.auth']
+
+        # TODO: Replace case-when with `Account.const_get`
         provider_class = case auth_hash['provider']
                          when 'twitter' then Account::Twitter
                          when 'facebook' then Account::Facebook
@@ -76,7 +78,8 @@ module Aji
 
         account = provider_class.from_auth_hash auth_hash
 
-        user.subscribe_social account.create_stream_channel
+        account.sign_in_as user
+
         MultiJson.encode user.serializable_hash
 
       rescue => e
