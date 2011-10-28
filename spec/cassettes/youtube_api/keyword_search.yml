@@ -2579,3 +2579,47 @@
     body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"D0cMQX47eCp7I2A9WhdaF0k.\"","id":{"$t":"tag:youtube.com,2008:user:gotknowledge1"},"published":{"$t":"2009-04-02T13:16:32.000-07:00"},"updated":{"$t":"2011-10-27T12:51:20.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"YouTube
       user: gotknowledge1"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=gotknowledge1"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/6DL_AnG0SvU?v=2"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/gotknowledge1?v=2"}],"author":[{"name":{"$t":"gotknowledge1"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/gotknowledge1"}}],"yt$age":{"$t":32},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/gotknowledge1/favorites?v=2","countHint":471},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/gotknowledge1/contacts?v=2","countHint":501},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/gotknowledge1/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/gotknowledge1/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/gotknowledge1/subscriptions?v=2","countHint":511},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/gotknowledge1/uploads?v=2","countHint":42},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/gotknowledge1/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"gotknowledge"},"yt$gender":{"$t":"m"},"yt$hometown":{"$t":"Nottingham"},"yt$location":{"$t":"GB"},"yt$statistics":{"lastWebAccess":"2011-06-05T08:58:18.000-07:00","subscriberCount":"1436","videoWatchCount":0,"viewCount":"23956","totalUploadViews":"495679"},"media$thumbnail":{"url":"http://i1.ytimg.com/i/PxT9kTRw0cZXoLwqV5gpVQ/1.jpg?v=932692"},"yt$username":{"$t":"gotknowledge1"}}}'
     http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/doctrdave?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Fri, 28 Oct 2011 19:22:25 GMT
+      date:
+      - Fri, 28 Oct 2011 19:17:25 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"CUQDRH47eCp7I2A9WhdaF0Q."
+      last-modified:
+      - Fri, 28 Oct 2011 09:16:15 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"CUQDRH47eCp7I2A9WhdaF0Q.\"","id":{"$t":"tag:youtube.com,2008:user:doctrDave"},"published":{"$t":"2008-04-16T07:44:14.000-07:00"},"updated":{"$t":"2011-10-28T02:16:15.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Musician"}],"title":{"$t":"YouTube
+      user: doctrDave"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=doctrDave"},{"rel":"related","type":"text/html","href":"http://www.DaveHoffner.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/doctrDave?v=2"}],"author":[{"name":{"$t":"doctrDave"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/doctrdave"}}],"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/doctrdave/favorites?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/doctrdave/contacts?v=2","countHint":3},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/doctrdave/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/doctrdave/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/doctrdave/subscriptions?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/doctrdave/uploads?v=2","countHint":15},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/doctrdave/newsubscriptionvideos?v=2"}],"yt$gender":{"$t":"m"},"yt$location":{"$t":"US"},"yt$statistics":{"lastWebAccess":"2011-04-22T11:01:55.000-07:00","subscriberCount":"283","videoWatchCount":0,"viewCount":"5025","totalUploadViews":"1114436"},"media$thumbnail":{"url":"http://i2.ytimg.com/i/Yoo4yTbw62hY0qz3L6YkLA/1.jpg?v=a6a1dd"},"yt$username":{"$t":"doctrDave"}}}'
+    http_version: '1.1'
