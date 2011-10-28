@@ -75,7 +75,7 @@ module Aji
         self.to_s).tap do |account|
           account.uid = auth_hash['uid']
           account.credentials = auth_hash['credentials']
-          account.username = auth_hash['nickname'] || ""
+          account.username = auth_hash['extra']['user_hash']['username'] || ""
           account.info = auth_hash['extra']['user_hash']
           account.save!
         end
