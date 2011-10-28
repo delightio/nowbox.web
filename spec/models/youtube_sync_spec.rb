@@ -13,6 +13,7 @@ describe YoutubeSync do
   it "favorites videos from youtube on the user's favorites channel"
 
   it "unsubscribes from youtube channels when they're unsubscribed locally"
+  it "unsubscribes from youtube channels when they're unsubscribed locally"
 
   it "creates a link between a youtube account and a user"
 end
