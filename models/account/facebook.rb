@@ -71,7 +71,6 @@ module Aji
     end
 
     def self.from_auth_hash auth_hash
-puts "*** Facebook => auth_hash: #{auth_hash.inspect}"
       find_or_initialize_by_uid_and_type(auth_hash['uid'],
         self.to_s).tap do |account|
           account.uid = auth_hash['uid']
