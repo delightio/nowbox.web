@@ -61,7 +61,7 @@ module Aji
     #
     get '/:provider/callback' do
       content_type :json
-
+Aji.log "*** callback #{request.env['omniauth.auth'].inspect}"
       user = Aji::User.find_by_id params[:user_id]
       return { :error => "User[#{params[:user_id]}] does not exist." } if
         user.nil?
