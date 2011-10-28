@@ -101,11 +101,15 @@ module Aji
                end
     end
 
-    def create_stream_channel
+    def build_stream_channel
       self.stream_channel ||= Channel::TwitterStream.create :owner => self,
         :title => username
       save and stream_channel.refresh_content
       stream_channel
+    end
+
+    def sign_in_as user
+      user.subscribe_social build_stream_channel
     end
 
     def set_provider

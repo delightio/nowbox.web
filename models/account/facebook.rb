@@ -62,12 +62,16 @@ module Aji
       @api ||= FacebookAPI.new credentials['token']
     end
 
-    def create_stream_channel
+    def build_stream_channel
       self.stream_channel ||= Channel::FacebookStream.create :owner => self,
         :title => realname
 
       save and stream_channel.refresh_content
       stream_channel
+    end
+
+    def sign_in_as user
+      user.subscribe_social build_stream_channel
     end
 
     def self.from_auth_hash auth_hash

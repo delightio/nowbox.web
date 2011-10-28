@@ -41,7 +41,7 @@ describe Account::Facebook, :unit do
     end
   end
 
-  describe "#create_stream_channel" do
+  describe "#build_stream_channel" do
     let!(:stream_channel) do
       Channel::FacebookStream.new(:owner => subject,
         :title => "Facebook Stream").tap do |c|
@@ -56,13 +56,13 @@ describe Account::Facebook, :unit do
     it "creates a channel for the account's facebook stream" do
       subject.stub(:save => true)
 
-      subject.create_stream_channel
+      subject.build_stream_channel
     end
 
     it "refreshes the channel's content" do
       stream_channel.should_receive(:refresh_content)
 
-      subject.create_stream_channel
+      subject.build_stream_channel
     end
   end
 
@@ -122,6 +122,28 @@ describe Account::Facebook, :unit do
         its(:credentials) { should == auth_hash['credentials'] }
         its(:info) { should == auth_hash['extra']['user_hash'] }
       end
+    end
+  end
+
+  describe "#sign_in_as" do
+    subject do
+      Account::Facebook.new do |a|
+        a.stub :build_stream_channel => stream_channel
+      end
+    end
+    let(:user) { stub :subscribe_social => true }
+    let(:stream_channel) { stub }
+
+    it "subscribes the user to this account's stream channel" do
+      user.should_receive(:subscribe_social).with(stream_channel)
+
+      subject.sign_in_as user
+    end
+
+    it "builds the account's stream channel" do
+      subject.should_receive(:build_stream_channel)
+
+      subject.sign_in_as user
     end
   end
 
