@@ -114,6 +114,10 @@ module Aji
       end
     end
 
+    def sign_in_as user
+      YoutubeSync.new user, self
+    end
+
     def self.from_auth_hash auth_hash
       find_or_initialize_by_uid_and_type(auth_hash['uid'].downcase,
         self.to_s).tap do |account|
