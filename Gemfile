@@ -58,13 +58,11 @@ gem 'pony'
 
 # Testing gems.
 group :test do
-#  gem 'fakeweb'
-  gem 'vcr'
+  gem 'vcr', '~>2.0.0.beta1'
   gem 'rack-test', :require => 'rack/test'
   gem 'rspec'
   gem 'database_cleaner'
-  gem 'cucumber'
-  #gem 'capybara' # For viewer app.
+  gem 'spinach'
   gem 'factory_girl'
   gem 'simplecov'
   gem 'spork'

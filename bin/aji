@@ -33,22 +33,14 @@ class Aji < Thor
     end
   end
 
-  desc "cuke", "Run application acceptance tests"
-  def cuke
-    exec "bin/cucumber"
-  end
-
   desc "test", "Run full application tests (spec and acceptance)"
   def test
-    system "bin/cucumber"
-    cuke_status = $?.exitstatus
     system "bin/rspec spec"
     rspec_status = $?.exitstatus
-    unless cuke_status != 0 or rspec_status != 0
-      kk
+    unless rspec_status != 0
       invoke :docs
     else
-      exit cuke_status != 0 && cuke_status or rspec_status
+      exit rspec_status
     end
   end
 

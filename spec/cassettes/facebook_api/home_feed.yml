@@ -893,3 +893,699 @@
       Ostrom","id":"535351473"},"message":"Neat idea. Too twitchy for me, though!","can_remove":true,"created_time":"2010-01-13T21:58:36+0000"},{"id":"276871014947_9821805","from":{"name":"Katherine
       McHenry","id":"1407904874"},"message":"ADDICTING....","can_remove":true,"created_time":"2010-01-13T21:59:09+0000"}]}}],"paging":{"previous":"https:\/\/graph.facebook.com\/me\/links?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&since=1263417053","next":"https:\/\/graph.facebook.com\/me\/links?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&until=1263417052"}}'
     http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://graph.facebook.com:443/me/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-origin:
+      - ! '*'
+      cache-control:
+      - private, no-cache, no-store, must-revalidate
+      content-type:
+      - text/javascript; charset=UTF-8
+      etag:
+      - ! '"a3dabfc85ed7913944fb60f8008749af48dc94e5"'
+      expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      pragma:
+      - no-cache
+      x-fb-rev:
+      - '465110'
+      x-fb-server:
+      - 10.36.41.115
+      x-cnection:
+      - close
+      date:
+      - Sat, 29 Oct 2011 18:46:14 GMT
+      content-length:
+      - '26431'
+    body: ! '{"data":[{"id":"1112466152_2442903107932","from":{"name":"James Ryan
+      Adams","id":"1112466152"},"story":"James Ryan Adams is now friends with Paul
+      Chamberlain and Greg Bryce.","story_tags":{"0":[{"id":1112466152,"name":"James
+      Ryan Adams","offset":0,"length":16}],"37":[{"id":1352901957,"name":"Paul Chamberlain","offset":37,"length":16}],"58":[{"id":1047013959,"name":"Greg
+      Bryce","offset":58,"length":10}]},"type":"status","created_time":"2011-10-29T18:45:03+0000","updated_time":"2011-10-29T18:45:03+0000","comments":{"count":0}},{"id":"1238014_10100723133596283","from":{"name":"Kevin
+      Chou","id":"1238014"},"message":"McDonald''s lady read my mind...GET OUTTA MY
+      HEAD!!","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v27562\/23\/2231777543\/app_2_2231777543_9553.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1238014\/posts\/10100723133596283"},{"name":"Like","link":"http:\/\/www.facebook.com\/1238014\/posts\/10100723133596283"},{"name":"\u0040kevinbchou
+      on Twitter","link":"http:\/\/twitter.com\/kevinbchou?utm_source=fb&utm_medium=fb&utm_campaign=kevinbchou&utm_content=130354250445373440"}],"type":"status","application":{"name":"Twitter","canvas_name":"twitter","namespace":"twitter","id":"2231777543"},"created_time":"2011-10-29T18:44:10+0000","updated_time":"2011-10-29T18:44:10+0000","comments":{"count":0}},{"id":"30901951_572513551400","from":{"name":"Sharon
+      Walsh","id":"30901951"},"message":"paid to have my luggage wrapped up in plastic
+      at the airport in Quito, only to have it cut open by security guards who thought
+      there was somthing suspicious in my bag. I hate flying...","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/30901951\/posts\/572513551400"},{"name":"Like","link":"http:\/\/www.facebook.com\/30901951\/posts\/572513551400"}],"type":"status","created_time":"2011-10-29T18:31:45+0000","updated_time":"2011-10-29T18:31:45+0000","comments":{"count":0}},{"id":"501361683_10150376243761684","from":{"name":"Archit
+      Sheth-Shah","id":"501361683"},"story":"Archit Sheth-Shah is now friends with
+      Tim Tianheng Wang and 2 other people.","story_tags":{"0":[{"id":501361683,"name":"Archit
+      Sheth-Shah","offset":0,"length":17}],"38":[{"id":1230930185,"name":"Tim Tianheng
+      Wang","offset":38,"length":17}],"60":[{"id":888010367,"name":"Leandro Legarda
+      Leviste","offset":60,"length":14},{"id":1014743281,"name":"Daniel Levine","offset":60,"length":14}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/276042_1230930185_7622384_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=1230930185&ref=nf_fr","type":"link","created_time":"2011-10-29T18:12:12+0000","updated_time":"2011-10-29T18:12:12+0000","comments":{"count":0}},{"id":"1206335_10100723082239203","from":{"name":"Stephen
+      S. Wade","id":"1206335"},"story":"Stephen S. Wade is now friends with Alan Carroll
+      and 2 other people.","story_tags":{"0":[{"id":1206335,"name":"Stephen S. Wade","offset":0,"length":15}],"36":[{"id":100000865052458,"name":"Alan
+      Carroll","offset":36,"length":12}],"53":[{"id":8801068,"name":"Mark Richard
+      Caswell","offset":53,"length":14},{"id":661447253,"name":"Shawn Brower","offset":53,"length":14}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/187441_100000865052458_4389908_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=100000865052458&ref=nf_fr","type":"link","created_time":"2011-10-29T18:06:57+0000","updated_time":"2011-10-29T18:06:57+0000","comments":{"count":0}},{"id":"598727831_10150344415072832","from":{"name":"Reg
+      C Barber","id":"598727831"},"story":"Reg C Barber is now friends with Andre
+      Jacobs and 37 other people.","story_tags":{"0":[{"id":598727831,"name":"Reg
+      C Barber","offset":0,"length":12}],"33":[{"id":100002177741925,"name":"Andre
+      Jacobs","offset":33,"length":12}],"50":[{"id":100002404408702,"name":"Baristas
+      Cafes Ays","offset":50,"length":15},{"id":100000498071540,"name":"Karime Alzate","offset":50,"length":15},{"id":100001401127361,"name":"Sakis
+      Athanatos","offset":50,"length":15},{"id":100002475766703,"name":"Doris Melania
+      Lobo","offset":50,"length":15},{"id":569320059,"name":"Sebastian Hurtado Bustamante","offset":50,"length":15},{"id":651357236,"name":"Hamish
+      Paul McKenzie","offset":50,"length":15},{"id":100001471838156,"name":"Song-Hyun
+      Park","offset":50,"length":15},{"id":100002463063174,"name":"Jes\u00fas Jaime
+      Mar\u00eda Paula","offset":50,"length":15},{"id":100001644180127,"name":"James
+      Carlsen","offset":50,"length":15},{"id":100002579942954,"name":"Takahiro Matsumoto","offset":50,"length":15},{"id":1731988119,"name":"Mahina
+      Kim","offset":50,"length":15},{"id":100001745561583,"name":"Jin Ho Jang","offset":50,"length":15},{"id":100002664271425,"name":"NamCoffee
+      Smoothies","offset":50,"length":15},{"id":100002557833375,"name":"Aggie Corner
+      Coffee","offset":50,"length":15},{"id":100001251841323,"name":"UKcoffee Pods","offset":50,"length":15},{"id":100001041978574,"name":"Coffeebark
+      Homeroaster","offset":50,"length":15},{"id":1019997359,"name":"Jeroen Veldkamp","offset":50,"length":15},{"id":1356585838,"name":"Don
+      Fleming","offset":50,"length":15},{"id":100002109666780,"name":"Jin Young Kim","offset":50,"length":15},{"id":1372784830,"name":"Cangkir
+      Kopi","offset":50,"length":15},{"id":625508323,"name":"Lieke Hanssen","offset":50,"length":15},{"id":100001950808403,"name":"Doi
+      Chang View","offset":50,"length":15},{"id":1036810490,"name":"Ertan Oval\u0131","offset":50,"length":15},{"id":100000788188012,"name":"Chungthin
+      Huang","offset":50,"length":15},{"id":100000065387900,"name":"\u9ec3\u82b1\u82b1","offset":50,"length":15},{"id":100000064476002,"name":"Yujen
+      Chen","offset":50,"length":15},{"id":100002164438245,"name":"Maharaja Coffee","offset":50,"length":15},{"id":100002277860245,"name":"Junbae  Bang","offset":50,"length":15},{"id":100000061422885,"name":"Charles
+      Huang","offset":50,"length":15},{"id":100002931041372,"name":"IDharbest Commodities","offset":50,"length":15},{"id":744466200,"name":"Juan
+      Andres Lozada","offset":50,"length":15},{"id":100002344835818,"name":"Olivia
+      Alice","offset":50,"length":15},{"id":100002094842432,"name":"\u8349\u5716\u5496\u5561","offset":50,"length":15},{"id":100002598170050,"name":"Coffeeta
+      Toraja","offset":50,"length":15},{"id":100000135408405,"name":"Stein Ho","offset":50,"length":15},{"id":100001581408195,"name":"Glenn
+      Watson","offset":50,"length":15},{"id":100002431761426,"name":"Leopold Koffieschool","offset":50,"length":15}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/187536_100002177741925_3503425_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=100002177741925&ref=nf_fr","type":"link","created_time":"2011-10-29T18:01:59+0000","updated_time":"2011-10-29T18:01:59+0000","comments":{"count":0}},{"id":"1374210040_239529752772226","from":{"name":"Terran
+      Chao","id":"1374210040"},"message":"http:\/\/store.steampowered.com\/sale\/scary_sale_2011","picture":"https:\/\/s-external.ak.fbcdn.net\/safe_image.php?d=AQC31hZzRtBMr81z&w=90&h=90&url=http\u00253A\u00252F\u00252Fcdn.steampowered.com\u00252Fv\u00252Fgfx\u00252Fapps\u00252F46540\u00252Fcapsule_467x181.jpg\u00253Ft\u00253D1311100722","link":"http:\/\/store.steampowered.com\/sale\/scary_sale_2011","name":"2011
+      Halloween Sale","caption":"store.steampowered.com","description":"SAW centers
+      on Detective David Tapp who awakens in a decrepit, abandoned asylum. He has
+      been captured by his longtime nemesis, Jigsaw.","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yR\/r\/23eNFy_VOig.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1374210040\/posts\/239529752772226"},{"name":"Like","link":"http:\/\/www.facebook.com\/1374210040\/posts\/239529752772226"}],"type":"link","created_time":"2011-10-29T17:55:11+0000","updated_time":"2011-10-29T17:55:11+0000","comments":{"count":0}},{"id":"722471559_10150335450916560","from":{"name":"Chris
+      Black","id":"722471559"},"story":"Chris Black is now friends with Michael Shack
+      and Vera Williams-walden.","story_tags":{"0":[{"id":722471559,"name":"Chris
+      Black","offset":0,"length":11}],"32":[{"id":1024337975,"name":"Michael Shack","offset":32,"length":13}],"50":[{"id":1807624718,"name":"Vera
+      Williams-walden","offset":50,"length":20}]},"type":"status","created_time":"2011-10-29T17:48:41+0000","updated_time":"2011-10-29T17:48:41+0000","comments":{"count":0}},{"id":"1670318850_2048435945094","from":{"name":"Andy
+      Newbom","id":"1670318850"},"story":"Andy Newbom is now friends with Lady Carolina
+      and 12 other people.","story_tags":{"0":[{"id":1670318850,"name":"Andy Newbom","offset":0,"length":11}],"32":[{"id":1407630994,"name":"Lady
+      Carolina","offset":32,"length":13}],"50":[{"id":100001651576900,"name":"Juan
+      Carlos Gregg","offset":50,"length":15},{"id":1557041344,"name":"Exportadora
+      El Volcan","offset":50,"length":15},{"id":883415366,"name":"Emilio Lopez","offset":50,"length":15},{"id":100000563434833,"name":"Oliver
+      Strand","offset":50,"length":15},{"id":568845563,"name":"Pedro Giron","offset":50,"length":15},{"id":549682923,"name":"Wolthers
+      America","offset":50,"length":15},{"id":508136934,"name":"Diego Choco","offset":50,"length":15},{"id":831115550,"name":"Mette-Marie
+      Hansen","offset":50,"length":15},{"id":1381590156,"name":"Patrick Murray","offset":50,"length":15},{"id":100003032561366,"name":"\ubc31\uc0c1\uc6b1","offset":50,"length":15},{"id":605961967,"name":"Marcus
+      Sage Laws","offset":50,"length":15},{"id":100002344835818,"name":"Olivia Alice","offset":50,"length":15}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-ash2\/370940_1407630994_1887927573_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=1407630994&ref=nf_fr","type":"link","created_time":"2011-10-29T17:29:35+0000","updated_time":"2011-10-29T17:29:35+0000","comments":{"count":0}},{"id":"3227475_10100581567151593","from":{"name":"Deepti
+      Menon","id":"3227475"},"story":"Deepti Menon is now friends with Ariel Sarver
+      and 6 other people.","story_tags":{"0":[{"id":3227475,"name":"Deepti Menon","offset":0,"length":12}],"33":[{"id":3229284,"name":"Ariel
+      Sarver","offset":33,"length":12}],"50":[{"id":1238951,"name":"Robert Balicki","offset":50,"length":14},{"id":100002275943728,"name":"Tenure
+      Bait","offset":50,"length":14},{"id":570545100,"name":"Clay Tanaka","offset":50,"length":14},{"id":791394714,"name":"Jess
+      Rozek","offset":50,"length":14},{"id":1390615188,"name":"Lindsay Whittaker","offset":50,"length":14},{"id":1573620043,"name":"Holly
+      Wever","offset":50,"length":14}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-ash2\/273941_3229284_761867100_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=3229284&ref=nf_fr","type":"link","created_time":"2011-10-29T17:18:20+0000","updated_time":"2011-10-29T17:18:20+0000","comments":{"count":0}},{"id":"1357854925_2603300485945","from":{"name":"Tracy
+      Allen","id":"1357854925"},"story":"Tracy Allen is now friends with D''vienno
+      Coffee and 11 other people.","story_tags":{"0":[{"id":1357854925,"name":"Tracy
+      Allen","offset":0,"length":11}],"32":[{"id":100003000385108,"name":"D''vienno
+      Coffee","offset":32,"length":15}],"52":[{"id":1353826830,"name":"Kathleen Serdons","offset":52,"length":15},{"id":688761734,"name":"Giuseppe
+      Trovato","offset":52,"length":15},{"id":100000550082461,"name":"Rotem Levin","offset":52,"length":15},{"id":1413337231,"name":"Alberto
+      Terzetti","offset":52,"length":15},{"id":100001662175797,"name":"Ivo Weller","offset":52,"length":15},{"id":100001401127361,"name":"Sakis
+      Athanatos","offset":52,"length":15},{"id":100001840428412,"name":"David Walsh","offset":52,"length":15},{"id":100002722900899,"name":"Rio
+      Vitoria Rio","offset":52,"length":15},{"id":100000355828639,"name":"Oliver Krach","offset":52,"length":15},{"id":100000188664558,"name":"\u6797\u5c1a\u502b","offset":52,"length":15},{"id":100002363002175,"name":"Mari
+      Ngopi","offset":52,"length":15}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/273924_100003000385108_552043184_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=100003000385108&ref=nf_fr","type":"link","created_time":"2011-10-29T17:11:23+0000","updated_time":"2011-10-29T17:11:23+0000","comments":{"count":0}},{"id":"1206335_10100722971086953","from":{"name":"Stephen
+      S. Wade","id":"1206335"},"message":"At OWS with Food Studies, BFC!","picture":"https:\/\/fbcdn-photos-a.akamaihd.net\/hphotos-ak-snc7\/386336_10100722970567993_1206335_61277084_1578761783_s.jpg","link":"http:\/\/www.facebook.com\/photo.php?fbid=10100722970567993&set=a.10100586023306403.2899136.1206335&type=1","name":"Mobile
+      Uploads","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yb\/r\/FzSuxp0Kqwz.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1206335\/posts\/10100722971086953"},{"name":"Like","link":"http:\/\/www.facebook.com\/1206335\/posts\/10100722971086953"}],"type":"photo","object_id":"10100722970567993","application":{"name":"Facebook
+      for iPhone","canvas_name":"fbtouch","namespace":"fbtouch","id":"6628568379"},"created_time":"2011-10-29T16:51:46+0000","updated_time":"2011-10-29T17:23:48+0000","likes":{"data":[{"name":"Andrew
+      Michael Calhoun","id":"1201527"}],"count":4},"comments":{"data":[{"id":"1206335_10100722971086953_21503133","from":{"name":"Mike
+      Ebelhar","id":"579643137"},"message":"Lettuce fought the law but the law won","created_time":"2011-10-29T17:23:48+0000"}],"count":1}},{"id":"541764248_10150344818939249","from":{"name":"Anna
+      Julian","id":"541764248"},"message":"Well, Friday sucked. Hopefully Saturday
+      will be awesome to make up for it.","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/541764248\/posts\/10150344818939249"},{"name":"Like","link":"http:\/\/www.facebook.com\/541764248\/posts\/10150344818939249"}],"type":"status","application":{"name":"Facebook
+      for iPhone","canvas_name":"fbtouch","namespace":"fbtouch","id":"6628568379"},"created_time":"2011-10-29T16:41:09+0000","updated_time":"2011-10-29T18:04:21+0000","likes":{"data":[{"name":"Samantha
+      Schmitt","id":"1057140009"}],"count":2},"comments":{"data":[{"id":"541764248_10150344818939249_19024446","from":{"name":"Megan
+      Ray","id":"731376427"},"message":"It''ll be great because you get to see the
+      monster! Is your mom back?","created_time":"2011-10-29T17:55:29+0000"},{"id":"541764248_10150344818939249_19024557","from":{"name":"Belinda
+      Julian Weller","id":"1422995936"},"message":"Oh, ouch!!!","created_time":"2011-10-29T18:04:21+0000"}],"count":5}},{"id":"1670318850_2048249460432","from":{"name":"Andy
+      Newbom","id":"1670318850"},"to":{"data":[{"name":"Jacob Newbom","id":"1327525369"},{"name":"Aaron
+      Elias Newbom","id":"716720417"}]},"message":"my face when missing my sons Jacob
+      Newbom and Aaron Elias Newbom","message_tags":{"29":[{"id":"1327525369","name":"Jacob
+      Newbom","offset":29,"length":12}],"46":[{"id":"716720417","name":"Aaron Elias
+      Newbom","offset":46,"length":18}]},"picture":"https:\/\/fbcdn-photos-a.akamaihd.net\/hphotos-ak-snc7\/381531_2048249300428_1670318850_1431971_980531911_s.jpg","link":"http:\/\/www.facebook.com\/photo.php?fbid=2048249300428&set=a.1183443840832.23226.1670318850&type=1","name":"Wall
+      Photos","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yk\/r\/3hBLgN5GxNc.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1670318850\/posts\/2048249460432"},{"name":"Like","link":"http:\/\/www.facebook.com\/1670318850\/posts\/2048249460432"}],"type":"photo","object_id":"2048249300428","created_time":"2011-10-29T16:15:57+0000","updated_time":"2011-10-29T18:43:15+0000","likes":{"data":[{"name":"Nanelle
+      Newbom","id":"100000488235925"},{"name":"Michele Daniels","id":"660252177"}],"count":3},"comments":{"data":[{"id":"1670318850_2048249460432_1137442","from":{"name":"Jacob
+      Newbom","id":"1327525369"},"message":"Awwwwww......","created_time":"2011-10-29T17:46:59+0000"},{"id":"1670318850_2048249460432_1137512","from":{"name":"Nanelle
+      Newbom","id":"100000488235925"},"message":"well..... awe tooo...","created_time":"2011-10-29T18:43:15+0000"}],"count":2}},{"id":"55201992_576589184043","from":{"name":"Mike
+      Christensen","id":"55201992"},"story":"Mike Christensen added a new photo.","story_tags":{"0":[{"id":55201992,"name":"Mike
+      Christensen","offset":0,"length":16}]},"picture":"https:\/\/fbcdn-photos-a.akamaihd.net\/hphotos-ak-ash4\/381547_576589169073_55201992_32001648_573582602_s.jpg","link":"http:\/\/www.facebook.com\/photo.php?fbid=576589169073&set=a.513882473793.2029094.55201992&type=1","name":"Wall
+      Photos","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yk\/r\/3hBLgN5GxNc.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/55201992\/posts\/576589184043"},{"name":"Like","link":"http:\/\/www.facebook.com\/55201992\/posts\/576589184043"}],"type":"photo","object_id":"576589169073","created_time":"2011-10-29T16:15:57+0000","updated_time":"2011-10-29T17:45:34+0000","comments":{"data":[{"id":"55201992_576589184043_1264221","from":{"name":"Chris
+      Christensen","id":"502481342"},"message":"is this a hint?","created_time":"2011-10-29T17:45:34+0000","likes":1}],"count":1}},{"id":"24605158_998632899747","from":{"name":"Jessica
+      Marshall","id":"24605158"},"story":"Jessica Marshall likes ROAD DOGS WEENIE
+      WAGON.","story_tags":{"23":[{"id":128761657153716,"name":"ROAD DOGS WEENIE WAGON","offset":23,"length":22}],"0":[{"id":24605158,"name":"Jessica
+      Marshall","offset":0,"length":16}]},"type":"status","application":{"name":"Pages","id":"2530096808"},"created_time":"2011-10-29T16:05:55+0000","updated_time":"2011-10-29T16:05:55+0000","comments":{"count":0}},{"id":"716720417_10150343641875418","from":{"name":"Andy
+      Newbom","id":"1670318850"},"to":{"data":[{"name":"Aaron Elias Newbom","id":"716720417"}]},"message":"get
+      your bike chain dude. go to any bike shop\nwe miss you","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/716720417\/posts\/10150343641875418"},{"name":"Like","link":"http:\/\/www.facebook.com\/716720417\/posts\/10150343641875418"}],"type":"status","created_time":"2011-10-29T16:00:57+0000","updated_time":"2011-10-29T16:00:57+0000","comments":{"count":0}},{"id":"1327525369_2556375031827","from":{"name":"Andy
+      Newbom","id":"1670318850"},"to":{"data":[{"name":"Jacob Newbom","id":"1327525369"}]},"message":"hi","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1327525369\/posts\/2556375031827"},{"name":"Like","link":"http:\/\/www.facebook.com\/1327525369\/posts\/2556375031827"}],"type":"status","created_time":"2011-10-29T16:00:22+0000","updated_time":"2011-10-29T16:00:22+0000","comments":{"count":0}},{"id":"1490282971_2521490645165","from":{"name":"Ryan
+      VanderDussen","id":"1490282971"},"message":"Party is tonight. Still have no
+      costume. Gonna be a busy day.","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1490282971\/posts\/2521490645165"},{"name":"Like","link":"http:\/\/www.facebook.com\/1490282971\/posts\/2521490645165"}],"type":"status","created_time":"2011-10-29T15:27:26+0000","updated_time":"2011-10-29T16:46:46+0000","comments":{"data":[{"id":"1490282971_2521490645165_3074190","from":{"name":"Rachel
+      Camp Boldt","id":"150900201"},"message":"Gotta go get Nathan Boldt his costume
+      too :) Yay Halloween!","created_time":"2011-10-29T15:58:28+0000"},{"id":"1490282971_2521490645165_3074507","from":{"name":"Gail
+      Norris Rogers","id":"680289306"},"message":"Pin panties, a towel, a sock and
+      whatever on your clothes and go as \"static cling\".","created_time":"2011-10-29T16:46:46+0000"}],"count":2}},{"id":"1670318850_305846192774224","from":{"name":"Andy
+      Newbom","id":"1670318850"},"message":"Who''s coming with us? The first Craft
+      Beer Tasting, we will have a few of our Brew Revolution Beta test beers to taste.
+      Rad!","picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/373756_166279866799807_1407240381_s.jpg","link":"http:\/\/www.facebook.com\/event.php?eid=166279866799807","name":"Craft
+      Beer Tasting - El Salvador","description":"Friday, December 2 at 2:30am, Plaza
+      Torre Futura, San Salvador, El Salvador","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yR\/r\/23eNFy_VOig.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1670318850\/posts\/305846192774224"},{"name":"Like","link":"http:\/\/www.facebook.com\/1670318850\/posts\/305846192774224"}],"type":"link","object_id":"166279866799807","application":{"name":"Events","id":"2344061033"},"created_time":"2011-10-29T14:34:20+0000","updated_time":"2011-10-29T17:56:46+0000","likes":{"data":[{"name":"Marcus
+      Sage Laws","id":"605961967"}],"count":1},"comments":{"data":[{"id":"1670318850_305846192774224_4482643","from":{"name":"Marcus
+      Sage Laws","id":"605961967"},"message":"I can''t wait!","created_time":"2011-10-29T14:49:29+0000"},{"id":"1670318850_305846192774224_4482936","from":{"name":"Andy
+      Newbom","id":"1670318850"},"message":"me neithe!","created_time":"2011-10-29T16:05:48+0000"},{"id":"1670318850_305846192774224_4483699","from":{"name":"Trish
+      Browning","id":"1669322280"},"message":"Wish we could be there!","created_time":"2011-10-29T17:56:46+0000"}],"count":3}},{"id":"1072200153_2340113576916","from":{"name":"DanDan
+      Tran","id":"1072200153"},"message":"Bout time I started dancing my dances like
+      a dancer and less like a martial artist. Haha.","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1072200153\/posts\/2340113576916"},{"name":"Like","link":"http:\/\/www.facebook.com\/1072200153\/posts\/2340113576916"}],"type":"status","created_time":"2011-10-29T11:32:37+0000","updated_time":"2011-10-29T18:04:58+0000","likes":{"data":[{"name":"Christian
+      Solares","id":"1487136681"}],"count":4},"comments":{"data":[{"id":"1072200153_2340113576916_2833610","from":{"name":"Chris
+      Turan","id":"2250902"},"message":"I''m curious to see what it would look like
+      as a martial artist. :)","created_time":"2011-10-29T15:50:05+0000"},{"id":"1072200153_2340113576916_2834483","from":{"name":"DanDan
+      Tran","id":"1072200153"},"message":"Basically how I''ve danced from now to the
+      start. I depend on lots of speed and I even kiai softly as a habit when doing
+      bigger actions.","created_time":"2011-10-29T18:03:55+0000"},{"id":"1072200153_2340113576916_2834489","from":{"name":"DanDan
+      Tran","id":"1072200153"},"message":"When I danced jive for the first time in
+      the silver level, I lacked any training whatsoever and completely emulated the
+      action. We took 2nd.","created_time":"2011-10-29T18:04:58+0000"}],"count":3}},{"id":"6417738_10100165508117265","from":{"name":"Zander
+      Brandt","id":"6417738"},"story":"Zander Brandt was tagged in Ivana Yeung''s
+      photo.","story_tags":{"28":[{"id":6023304,"name":"Ivana Yeung","offset":28,"length":11}],"0":[{"id":6417738,"name":"Zander
+      Brandt","offset":0,"length":13}]},"picture":"https:\/\/fbcdn-photos-a.akamaihd.net\/hphotos-ak-snc7\/374154_10100573359370081_6023304_57432137_943811670_s.jpg","link":"http:\/\/www.facebook.com\/photo.php?fbid=10100573359370081&set=t.6417738&type=1","name":"Ivana
+      Yeung''s Photos","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yk\/r\/3hBLgN5GxNc.gif","type":"photo","object_id":"10100573359370081","application":{"name":"Photos","id":"2305272732"},"created_time":"2011-10-29T09:40:55+0000","updated_time":"2011-10-29T09:40:55+0000","comments":{"count":0}},{"id":"2507750_159180200844067","from":{"name":"Yu-kai
+      Chou","id":"2507750"},"message":"New Blogpost: The Mysterious Case of the Startup
+      CEO","picture":"https:\/\/s-external.ak.fbcdn.net\/safe_image.php?d=AQCdOx6g_Q8osrBS&w=90&h=90&url=http\u00253A\u00252F\u00252Fimg.zemanta.com\u00252Fzemified_e.png\u00253Fx-id\u00253Dde6026a8-96b9-43fa-82b5-25ed4505fe8a","link":"http:\/\/bit.ly\/uFY77C","name":"The
+      Mysterious Case of the Startup CEO | Yu-kai Chou","caption":"yukaichou.com","description":"Ever
+      wonder why your Startup CEO doesn''t seem to be doing anything?","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yR\/r\/23eNFy_VOig.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/2507750\/posts\/159180200844067"},{"name":"Like","link":"http:\/\/www.facebook.com\/2507750\/posts\/159180200844067"}],"type":"link","application":{"name":"Ping.fm","canvas_name":"pingdotfm","namespace":"pingdotfm","id":"10732101402"},"created_time":"2011-10-29T09:18:02+0000","updated_time":"2011-10-29T13:41:10+0000","likes":{"data":[{"name":"Allen
+      Lee","id":"678361250"}],"count":2},"comments":{"data":[{"id":"2507750_159180200844067_516421","from":{"name":"Samuel
+      Ayodele","id":"100001573849604"},"message":"I''m glad to read your blogpost
+      after a very long time! :)","created_time":"2011-10-29T13:41:10+0000"}],"count":1}},{"id":"1072200153_2339908251783","from":{"name":"DanDan
+      Tran","id":"1072200153"},"message":"Like many others, I too wonder what the
+      change to the USA Dance membership rules mean? I need to renew my membership
+      tomorrow. Will my membership last me until January 2013 with the new rules?
+      Or will it only last me until January 2012 when the membership calender resets
+      and re-formats?","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1072200153\/posts\/2339908251783"},{"name":"Like","link":"http:\/\/www.facebook.com\/1072200153\/posts\/2339908251783"}],"type":"status","created_time":"2011-10-29T09:16:05+0000","updated_time":"2011-10-29T14:18:08+0000","comments":{"data":[{"id":"1072200153_2339908251783_2833311","from":{"name":"Brian
+      Wolf","id":"1218940"},"message":"When you find out, let me know. I just signed
+      up a couple of weeks ago, and I definitely need to know how long that will last.","created_time":"2011-10-29T14:18:08+0000"}],"count":1}},{"id":"100000791692574_268166409886413","from":{"name":"Sal
+      Silva","id":"100000791692574"},"message":"This one could be my last time..","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/100000791692574\/posts\/268166409886413"},{"name":"Like","link":"http:\/\/www.facebook.com\/100000791692574\/posts\/268166409886413"}],"type":"status","application":{"name":"Facebook
+      for Android","id":"350685531728"},"created_time":"2011-10-29T09:07:02+0000","updated_time":"2011-10-29T09:07:02+0000","comments":{"count":0}}],"paging":{"previous":"https:\/\/graph.facebook.com\/me\/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&since=1319913903","next":"https:\/\/graph.facebook.com\/me\/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&until=1319879221"}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://graph.facebook.com:443/me/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&until=1319879221
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-origin:
+      - ! '*'
+      cache-control:
+      - private, no-cache, no-store, must-revalidate
+      content-type:
+      - text/javascript; charset=UTF-8
+      etag:
+      - ! '"3e3e532d47a29df002a59a0c94fb73aa87862c26"'
+      expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      pragma:
+      - no-cache
+      x-fb-rev:
+      - '465110'
+      x-fb-server:
+      - 10.36.14.124
+      x-cnection:
+      - close
+      date:
+      - Sat, 29 Oct 2011 18:46:16 GMT
+      content-length:
+      - '26022'
+    body: ! '{"data":[{"id":"1055790424_1521378308499","from":{"name":"Chih Cheng
+      Jason Lee","id":"1055790424"},"story":"Chih Cheng Jason Lee and 3 other friends
+      changed their profile pictures.","story_tags":{"0":[{"id":1055790424,"name":"Chih
+      Cheng Jason Lee","offset":0,"length":20}],"25":[{"id":122604843,"name":"Fahd
+      Butt","offset":25,"length":15},{"id":30901951,"name":"Sharon Walsh","offset":25,"length":15},{"id":1055186112,"name":"Brad
+      Foster","offset":25,"length":15}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/371023_122604843_966178832_q.jpg","link":"http:\/\/www.facebook.com\/fahdoo","type":"link","application":{"name":"Photos","id":"2305272732"},"created_time":"2011-10-29T09:07:00+0000","updated_time":"2011-10-29T09:07:00+0000","comments":{"count":0}},{"id":"1057140016_2229823299226","from":{"name":"Ray
+      Ancheta","id":"1057140016"},"story":"Ray Ancheta is now friends with Castor
+      Lai and Cozzi ''Daniela Garofani.","story_tags":{"0":[{"id":1057140016,"name":"Ray
+      Ancheta","offset":0,"length":11}],"32":[{"id":691555491,"name":"Castor Lai","offset":32,"length":10}],"47":[{"id":1422752097,"name":"Cozzi
+      ''Daniela Garofani","offset":47,"length":23}]},"type":"status","created_time":"2011-10-29T09:06:38+0000","updated_time":"2011-10-29T09:06:38+0000","comments":{"count":0}},{"id":"1055520042_2245901261111","from":{"name":"Jackie
+      Diaz","id":"1055520042"},"message":"Annoying flu issues all day. TIRED of being
+      ill. Dear body, you suck. :(","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1055520042\/posts\/2245901261111"},{"name":"Like","link":"http:\/\/www.facebook.com\/1055520042\/posts\/2245901261111"}],"type":"status","application":{"name":"Facebook
+      for iPhone","canvas_name":"fbtouch","namespace":"fbtouch","id":"6628568379"},"created_time":"2011-10-29T08:33:21+0000","updated_time":"2011-10-29T08:44:03+0000","likes":{"data":[{"name":"Belen
+      Guzman","id":"1459571148"}],"count":3},"comments":{"data":[{"id":"1055520042_2245901261111_2658795","from":{"name":"Nathan
+      Villanueva","id":"1056330009"},"message":":(","created_time":"2011-10-29T08:39:24+0000"},{"id":"1055520042_2245901261111_2658802","from":{"name":"Trung
+      Nguyen","id":"730797650"},"message":"*dislike*... T_T","created_time":"2011-10-29T08:44:03+0000"}],"count":2}},{"id":"3312089_10100502145084054","from":{"name":"Christine
+      Ko","id":"3312089"},"message":"Like my new hair do?","picture":"https:\/\/fbcdn-photos-a.akamaihd.net\/hphotos-ak-snc7\/298977_10100502145049124_3312089_57014104_833177987_s.jpg","link":"http:\/\/www.facebook.com\/photo.php?fbid=10100502145049124&set=a.10100425662226314.2736791.3312089&type=1","name":"Mobile
+      Uploads","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yb\/r\/FzSuxp0Kqwz.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/3312089\/posts\/10100502145084054"},{"name":"Like","link":"http:\/\/www.facebook.com\/3312089\/posts\/10100502145084054"}],"type":"photo","object_id":"10100502145049124","application":{"name":"Facebook
+      for BlackBerry\u00ae smartphones","id":"2254487659"},"created_time":"2011-10-29T08:32:18+0000","updated_time":"2011-10-29T08:49:12+0000","likes":{"data":[{"name":"An
+      Ly","id":"3626465"}],"count":10},"comments":{"data":[{"id":"3312089_10100502145084054_17678697","from":{"name":"Annie
+      Chi","id":"3401861"},"message":"haha so cute!","created_time":"2011-10-29T08:49:12+0000"}],"count":1}},{"id":"1075392174_2376879696152","from":{"name":"Vienna
+      Teng","id":"1075392174"},"story":"Vienna Teng is now friends with Jose Maria
+      Pinyol Gallardo and 5 other people.","story_tags":{"0":[{"id":1075392174,"name":"Vienna
+      Teng","offset":0,"length":11}],"32":[{"id":1296054626,"name":"Jose Maria Pinyol
+      Gallardo","offset":32,"length":26}],"63":[{"id":626492984,"name":"Steve Lurie","offset":63,"length":14},{"id":751946924,"name":"Ed
+      Chin","offset":63,"length":14},{"id":606478542,"name":"Melissa Giges","offset":63,"length":14},{"id":11703896,"name":"Avi
+      Vinocur","offset":63,"length":14},{"id":100003058375615,"name":"Tom Svensson","offset":63,"length":14}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/276305_1296054626_5853885_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=1296054626&ref=nf_fr","type":"link","created_time":"2011-10-29T08:24:48+0000","updated_time":"2011-10-29T08:24:48+0000","comments":{"count":0}},{"id":"1134204200_239440789446586","from":{"name":"Sean
+      Nolen","id":"1134204200"},"message":"Watching ColCatZ''s drunkCRAFT (twitch.tv\/colcatz).  Totally
+      lame that he can stomp a master league zerg by playing off-race (toss),  holing
+      up in his base and sending out a maxed army to just win outright with barely
+      any scouting.  TOSSIMBA","source":"http:\/\/www.twitch.tv\/widgets\/live_facebook_embed_player.swf?channel=colcatz","name":"StarCraft
+      2 Progamer","caption":"twitch.tv","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yi\/r\/OjzTEXM4lrQ.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1134204200\/posts\/239440789446586"},{"name":"Like","link":"http:\/\/www.facebook.com\/1134204200\/posts\/239440789446586"}],"type":"video","created_time":"2011-10-29T08:05:17+0000","updated_time":"2011-10-29T17:30:47+0000","likes":{"data":[{"name":"Spencer
+      West","id":"500608262"}],"count":1},"comments":{"data":[{"id":"1134204200_239440789446586_2799599","from":{"name":"Alison
+      Uyehara","id":"19507890"},"message":"drunk craft?","created_time":"2011-10-29T17:30:47+0000"}],"count":1}},{"id":"1134204200_2450003966173","from":{"name":"Sean
+      Nolen","id":"1134204200"},"message":"Let\/s try this again with just text....
+      Maybe...","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1134204200\/posts\/2450003966173"},{"name":"Like","link":"http:\/\/www.facebook.com\/1134204200\/posts\/2450003966173"}],"type":"status","application":null,"created_time":"2011-10-29T08:00:42+0000","updated_time":"2011-10-29T08:03:31+0000","comments":{"data":[{"id":"1134204200_2450003966173_3035781","from":{"name":"Sean
+      Nolen","id":"1134204200"},"message":"Hmm okay so it hates line breaks....???
+      This is kinda lame actually...","created_time":"2011-10-29T08:01:09+0000"},{"id":"1134204200_2450003966173_3035784","from":{"name":"Sean
+      Nolen","id":"1134204200"},"message":"Limited to 50 characters???","created_time":"2011-10-29T08:03:31+0000"}],"count":2}},{"id":"1134204200_2450003046150","from":{"name":"Sean
+      Nolen","id":"1134204200"},"message":"Fairly happy with this solution... It means...","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1134204200\/posts\/2450003046150"},{"name":"Like","link":"http:\/\/www.facebook.com\/1134204200\/posts\/2450003046150"}],"type":"status","application":null,"created_time":"2011-10-29T07:59:25+0000","updated_time":"2011-10-29T08:00:02+0000","comments":{"data":[{"id":"1134204200_2450003046150_3035778","from":{"name":"Sean
+      Nolen","id":"1134204200"},"message":"Hmm....apparently it''s not perfect...","created_time":"2011-10-29T08:00:02+0000"}],"count":1}},{"id":"26200286_691073975313","from":{"name":"Siobhan
+      Granvold","id":"26200286"},"message":"Oh, Tomcat...I \u003c3 you. \"I want to
+      dress up as the \"ReTardis\"...aka, happily going nowhere.\"","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/26200286\/posts\/691073975313"},{"name":"Like","link":"http:\/\/www.facebook.com\/26200286\/posts\/691073975313"}],"type":"status","application":{"name":"Facebook
+      for Android","id":"350685531728"},"created_time":"2011-10-29T07:56:25+0000","updated_time":"2011-10-29T07:56:25+0000","comments":{"count":0}},{"id":"1073828878_2362773263448","from":{"name":"Bruce
+      Paulson","id":"1073828878"},"message":"Sleep? Me? Ofcourse not...","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1073828878\/posts\/2362773263448"},{"name":"Like","link":"http:\/\/www.facebook.com\/1073828878\/posts\/2362773263448"}],"type":"status","created_time":"2011-10-29T07:55:43+0000","updated_time":"2011-10-29T07:58:56+0000","likes":{"data":[{"name":"Wendy
+      Tran","id":"601260411"}],"count":3},"comments":{"data":[{"id":"1073828878_2362773263448_2838167","from":{"name":"Lee
+      Doebler Sowers","id":"1053423538"},"message":"Sleep is overrated ...","created_time":"2011-10-29T07:56:52+0000"},{"id":"1073828878_2362773263448_2838170","from":{"name":"Bruce
+      Paulson","id":"1073828878"},"message":"And hey, I''m just teaching tomorrow,
+      they''re the ones performing.","created_time":"2011-10-29T07:57:56+0000","likes":1},{"id":"1073828878_2362773263448_2838171","from":{"name":"Lee
+      Doebler Sowers","id":"1053423538"},"message":"And there''s always coffee ....","created_time":"2011-10-29T07:58:56+0000"}],"count":3}},{"id":"1134204200_2449994445935","from":{"name":"Sean
+      Nolen","id":"1134204200"},"message":"This is posted from Google+","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1134204200\/posts\/2449994445935"},{"name":"Like","link":"http:\/\/www.facebook.com\/1134204200\/posts\/2449994445935"}],"type":"status","application":null,"created_time":"2011-10-29T07:52:08+0000","updated_time":"2011-10-29T08:09:26+0000","comments":{"data":[{"id":"1134204200_2449994445935_3035774","from":{"name":"Gabriel
+      Fisheye Balensiefer","id":"1050602726"},"message":"This is posted from Citrus
+      Heights.","created_time":"2011-10-29T07:57:31+0000"},{"id":"1134204200_2449994445935_3035796","from":{"name":"Sean
+      Nolen","id":"1134204200"},"message":"This is posted from a place of sadness
+      at 50 character limitations.  Twitter is freer than that!","created_time":"2011-10-29T08:09:26+0000"}],"count":2}},{"id":"1055790424_1521372228347","from":{"name":"Chih
+      Cheng Jason Lee","id":"1055790424"},"picture":"https:\/\/fbcdn-photos-a.akamaihd.net\/hphotos-ak-ash4\/392424_1521346227697_1055790424_31462633_1626904639_s.jpg","link":"http:\/\/www.facebook.com\/photo.php?fbid=1521346227697&set=a.1521346147695.2035368.1055790424&type=1","name":"HAlloween
+      \u0040 SF stern grove","caption":"124 new photos","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yk\/r\/3hBLgN5GxNc.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1055790424\/posts\/1521372228347"},{"name":"Like","link":"http:\/\/www.facebook.com\/1055790424\/posts\/1521372228347"}],"type":"photo","object_id":"1521346227697","created_time":"2011-10-29T07:50:46+0000","updated_time":"2011-10-29T16:36:27+0000","likes":{"data":[{"name":"Benjamin
+      Tan","id":"100000130929128"}],"count":3},"comments":{"data":[{"id":"1055790424_1521372228347_533357","from":{"name":"Tiffany
+      Chen","id":"100001796518120"},"message":"\u5c31\u662f\u8981\u9019\u7a2e\"\u6050\u6016\"\u7684\u611f\u89ba
+      \u4e0b\u6b21\u4f86\u6211\u5011\u5e7c\u7a1a\u5712\u8fa6\u4e00\u5834 \u9435\u5b9a\u5c0f\u5b69~\u5168\u4e0d\u8b80~","created_time":"2011-10-29T08:24:36+0000","likes":1},{"id":"1055790424_1521372228347_533387","from":{"name":"\u5353\u632f\u8ce2","id":"100000728939026"},"message":"\u570b\u5916\u7684\u751f\u6d3b\u611f\u89ba\u9084\u4e0d\u932f\u5594","created_time":"2011-10-29T10:09:24+0000","likes":1},{"id":"1055790424_1521372228347_533496","from":{"name":"Chih
+      Cheng Jason Lee","id":"1055790424"},"message":"\u9b3c\u5c4b\u8d85\u6050\u6016\u7684\uff5e\u6839\u672c\u5c31\u662f\u9023\u5927\u4eba\u4e5f\u4e00\u8d77\u5687...\u6211\u8d70\u7b2c\u4e00\u500b\u5feb\u88ab\u5687\u5230\u5fc3\u81df\u75c5...xD\n\n\u5c0d\u963f\uff5e\u842c\u8056\u7bc0\u9084\u883b\u6709\u6c23\u5206\u7684^^","created_time":"2011-10-29T16:36:27+0000"}],"count":3}},{"id":"1055790021_1521345107669","from":{"name":"Gabriella
+      Joma","id":"1055790021"},"picture":"https:\/\/www.facebook.com\/app_full_proxy.php?app=48119224995&v=1&size=z&cksum=07339726a615479ca1d2ca343e5768ab&src=http\u00253A\u00252F\u00252F27.media.tumblr.com\u00252Ftumblr_lttgdhfT5s1qfxqdto1_250.jpg","link":"http:\/\/londonrenegade.tumblr.com\/post\/12065091974\/my-little-bracelet-box-jewelry-dior-jcrew","name":"My
+      little bracelet box #jewelry #dior #jcrew #jomalone #tarinatarentino #beauty
+      (Taken with instagram)","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v43\/135\/48119224995\/app_2_48119224995_4168.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1055790021\/posts\/1521345107669"},{"name":"Like","link":"http:\/\/www.facebook.com\/1055790021\/posts\/1521345107669"},{"name":"View
+      post","link":"http:\/\/londonrenegade.tumblr.com\/post\/12065091974\/my-little-bracelet-box-jewelry-dior-jcrew"}],"type":"link","application":{"name":"Tumblr","canvas_name":"tumblr-feed","namespace":"tumblr-feed","id":"48119224995"},"created_time":"2011-10-29T07:20:09+0000","updated_time":"2011-10-29T07:20:09+0000","comments":{"count":0}},{"id":"1206335_10100722640404643","from":{"name":"Stephen
+      S. Wade","id":"1206335"},"story":"Stephen S. Wade is now friends with Mark Richard
+      Caswell and Shawn Brower.","story_tags":{"0":[{"id":1206335,"name":"Stephen
+      S. Wade","offset":0,"length":15}],"36":[{"id":8801068,"name":"Mark Richard Caswell","offset":36,"length":20}],"61":[{"id":661447253,"name":"Shawn
+      Brower","offset":61,"length":12}]},"type":"status","created_time":"2011-10-29T07:19:19+0000","updated_time":"2011-10-29T07:19:19+0000","comments":{"count":0}},{"id":"1055790296_289479281071977","from":{"name":"Te
+      Chao","id":"1055790296"},"to":{"data":[{"name":"Alexis Kaneshiro","id":"1031010058"}]},"message":"Aww
+      shiet!!!watch this! Alexis Kaneshiro http:\/\/www.youtube.com\/watch?v=c4BLVznuWnU","message_tags":{"24":[{"id":"1031010058","name":"Alexis
+      Kaneshiro","offset":24,"length":16}]},"picture":"https:\/\/s-external.ak.fbcdn.net\/safe_image.php?d=AQC0uAbYzH9rMO_p&w=130&h=130&url=http\u00253A\u00252F\u00252Fi4.ytimg.com\u00252Fvi\u00252Fc4BLVznuWnU\u00252Fdefault.jpg","link":"http:\/\/www.youtube.com\/watch?v=c4BLVznuWnU","source":"http:\/\/www.youtube.com\/v\/c4BLVznuWnU?version=3&autohide=1&autoplay=1","name":"Ed
+      Sheeran - Lego House (Official Video)","caption":"www.youtube.com","description":"Download
+      this track on iTunes now: http:\/\/bit.ly\/r5w6RO You can pre-order the Lego
+      House EP featuring acoustic versions of Lego House & Grade 8 here: http:\/\/...","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yi\/r\/OjzTEXM4lrQ.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1055790296\/posts\/289479281071977"},{"name":"Like","link":"http:\/\/www.facebook.com\/1055790296\/posts\/289479281071977"}],"type":"video","created_time":"2011-10-29T06:20:37+0000","updated_time":"2011-10-29T18:42:36+0000","comments":{"data":[{"id":"1055790296_289479281071977_4192802","from":{"name":"Marie
+      Bower","id":"86800113"},"message":"FTW!? Is that RON???? 0.0","created_time":"2011-10-29T11:12:14+0000"},{"id":"1055790296_289479281071977_4193567","from":{"name":"Alexis
+      Kaneshiro","id":"1031010058"},"message":"\"i''m gonna paint you by numbers and
+      color you in \/ if things go right, you can frame it and put you on a wall\"
+      WHAT THE HELL RON WEASLEY","created_time":"2011-10-29T14:44:06+0000"},{"id":"1055790296_289479281071977_4194797","from":{"name":"Te
+      Chao","id":"1055790296"},"message":"it''s not him singing! but yeah that''s
+      ron!!hahahaha","created_time":"2011-10-29T18:42:36+0000"}],"count":3}},{"id":"712969285_10150364397344286","from":{"name":"Ettore
+      Scagliola","id":"712969285"},"story":"Ettore Scagliola is now friends with Italia
+      Unita and 4 other people.","story_tags":{"0":[{"id":712969285,"name":"Ettore
+      Scagliola","offset":0,"length":16}],"37":[{"id":100000374374731,"name":"Italia
+      Unita","offset":37,"length":12}],"54":[{"id":100001351701410,"name":"Hario Glass","offset":54,"length":14},{"id":1844236721,"name":"Jovana
+      Vuckovic","offset":54,"length":14},{"id":808418653,"name":"Oli Obradovic Bronsky","offset":54,"length":14},{"id":1557815501,"name":"Elisa
+      Simoni","offset":54,"length":14}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/49871_100000374374731_6204_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=100000374374731&ref=nf_fr","type":"link","created_time":"2011-10-29T06:20:01+0000","updated_time":"2011-10-29T06:20:01+0000","comments":{"count":0}},{"id":"1768320229_1582894950127","from":{"name":"Garth
+      Cameron","id":"1768320229"},"to":{"data":[{"name":"James Wade Sponsler","id":"100000388260226"},{"name":"Natalie
+      Sponsler","id":"1788958280"}]},"message":"James Wade Sponsler and Natalie Sponsler
+      are expecting their first child on December 13, email me at GCameron169\u0040hotmail.com
+      for an invite to do something special in their honor.","message_tags":{"0":[{"id":"100000388260226","name":"James
+      Wade Sponsler","offset":0,"length":19}],"24":[{"id":"1788958280","name":"Natalie
+      Sponsler","offset":24,"length":16}]},"actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1768320229\/posts\/1582894950127"},{"name":"Like","link":"http:\/\/www.facebook.com\/1768320229\/posts\/1582894950127"}],"type":"status","created_time":"2011-10-29T06:17:06+0000","updated_time":"2011-10-29T06:17:06+0000","comments":{"count":0}},{"id":"100000791692574_268131653223222","from":{"name":"Sal
+      Silva","id":"100000791692574"},"message":"Mile high O.o ahaha","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/100000791692574\/posts\/268131653223222"},{"name":"Like","link":"http:\/\/www.facebook.com\/100000791692574\/posts\/268131653223222"}],"type":"status","application":{"name":"Facebook
+      for Android","id":"350685531728"},"created_time":"2011-10-29T05:40:39+0000","updated_time":"2011-10-29T05:40:39+0000","comments":{"count":0}},{"id":"1072200153_2339619124555","from":{"name":"DanDan
+      Tran","id":"1072200153"},"message":"Spotlight performance! Rhett Grant and Anastasia
+      Kurakina perform a cha cha at Cheryl Burke Dance on Friday night, 10\/28\/11.","picture":"https:\/\/fbcdn-vthumb-a.akamaihd.net\/hvthumb-ak-ash2\/159054_2339658085529_2339619124555_59876_639_t.jpg","link":"https:\/\/www.facebook.com\/photo.php?v=2339619124555","source":"https:\/\/fbcdn-video-a.akamaihd.net\/cfs-ak-ash4\/347207\/284\/2339619124555_11735.mp4?oh=c3cef82fa609acad4c2c804c31b3b31b&oe=4EAEEC00&__gda__=1320086528_f652c04af60bd8346d6e13f30c3b78d2","name":"Rhett
+      & Anastasia - Samba \u0040CBD 10\/28\/11 [HD]","properties":[{"name":"Length","text":"1:48"}],"icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yO\/r\/NkLFo9nE4rB.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1072200153\/posts\/2339619124555"},{"name":"Like","link":"http:\/\/www.facebook.com\/1072200153\/posts\/2339619124555"}],"place":{"id":"87820458426","name":"Cheryl
+      Burke Dance","location":{"street":"1400 North Shoreline Blvd. #A-1","city":"Mountain
+      View","state":"CA","country":"United States","zip":"94043","latitude":37.41368114735,"longitude":-122.08042264759}},"type":"video","object_id":"2339619124555","application":{"name":"Video","canvas_name":"video","namespace":"video","id":"2392950137"},"created_time":"2011-10-29T05:26:26+0000","updated_time":"2011-10-29T07:02:54+0000","likes":{"data":[{"name":"Kimberly
+      C. Wong","id":"1018870024"}],"count":1},"comments":{"data":[{"id":"1072200153_2339619124555_2832291","from":{"name":"Svetlana
+      Tenishcheva","id":"100001248756868"},"message":"\u041d\u0430\u0441\u0442\u0435\u043d\u0430,
+      \u043d\u0443 \u043f\u0440\u043e\u0441\u0442\u043e \u043a\u0440\u0430\u0441\u0430\u0432\u0438\u0446\u0430!","created_time":"2011-10-29T07:02:54+0000"}],"count":1}},{"id":"122604843_971369920957","from":{"name":"Fahd
+      Butt","id":"122604843"},"story":"Fahd Butt subscribed to updates from Gurbaksh
+      Chahal and Felicia Day.","story_tags":{"0":[{"id":122604843,"name":"Fahd Butt","offset":0,"length":9}],"37":[{"id":532615110,"name":"Gurbaksh
+      Chahal","offset":37,"length":15}],"57":[{"id":747535978,"name":"Felicia Day","offset":57,"length":11}]},"type":"status","created_time":"2011-10-29T05:20:43+0000","updated_time":"2011-10-29T05:20:43+0000","comments":{"count":0}},{"id":"100000791692574_268127476556973","from":{"name":"Sal
+      Silva","id":"100000791692574"},"message":"Itttsssss vodka!!!!!!","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/100000791692574\/posts\/268127476556973"},{"name":"Like","link":"http:\/\/www.facebook.com\/100000791692574\/posts\/268127476556973"}],"type":"status","application":{"name":"Facebook
+      for Android","id":"350685531728"},"created_time":"2011-10-29T05:15:32+0000","updated_time":"2011-10-29T05:38:40+0000","likes":{"data":[{"name":"Kimy
+      Garcia","id":"100001296138276"}],"count":1},"comments":{"data":[{"id":"100000791692574_268127476556973_3551685","from":{"name":"Blanca
+      Sanchez","id":"100002727842747"},"message":"borracho","created_time":"2011-10-29T05:25:29+0000","likes":1},{"id":"100000791692574_268127476556973_3551696","from":{"name":"Kimy
+      Garcia","id":"100001296138276"},"message":"Yayyy!!! :3","created_time":"2011-10-29T05:37:59+0000"},{"id":"100000791692574_268127476556973_3551697","from":{"name":"Sal
+      Silva","id":"100000791692574"},"message":"Lmao^^^yeee","created_time":"2011-10-29T05:38:40+0000","likes":1}],"count":3}},{"id":"1670318850_2046763423282","from":{"name":"Andy
+      Newbom","id":"1670318850"},"story":"Andy Newbom is now friends with Oliver Strand
+      and 8 other people.","story_tags":{"0":[{"id":1670318850,"name":"Andy Newbom","offset":0,"length":11}],"32":[{"id":100000563434833,"name":"Oliver
+      Strand","offset":32,"length":13}],"50":[{"id":568845563,"name":"Pedro Giron","offset":50,"length":14},{"id":549682923,"name":"Wolthers
+      America","offset":50,"length":14},{"id":508136934,"name":"Diego Choco","offset":50,"length":14},{"id":831115550,"name":"Mette-Marie
+      Hansen","offset":50,"length":14},{"id":1381590156,"name":"Patrick Murray","offset":50,"length":14},{"id":100003032561366,"name":"\ubc31\uc0c1\uc6b1","offset":50,"length":14},{"id":605961967,"name":"Marcus
+      Sage Laws","offset":50,"length":14},{"id":100002344835818,"name":"Olivia Alice","offset":50,"length":14}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/186060_100000563434833_871230_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=100000563434833&ref=nf_fr","type":"link","created_time":"2011-10-29T04:53:49+0000","updated_time":"2011-10-29T04:53:49+0000","comments":{"count":0}},{"id":"1072200153_2339561043103","from":{"name":"DanDan
+      Tran","id":"1072200153"},"message":"Spotlight performance! Rhett Grant and Anastasia
+      Kurakina perform a cha cha at Cheryl Burke Dance on Friday night, 10\/28\/11.","picture":"https:\/\/fbcdn-vthumb-a.akamaihd.net\/hvthumb-ak-snc6\/51235_2339597164006_2339561043103_4741_644_t.jpg","link":"https:\/\/www.facebook.com\/photo.php?v=2339561043103","source":"https:\/\/fbcdn-video-a.akamaihd.net\/cfs-ak-snc4\/343704\/816\/2339561043103_62678.mp4?oh=70f873d5e9d43638850be1fda3a77815&oe=4EAEEC00&__gda__=1320086528_286df99799740e5d2dc32be0455f036b","name":"Rhett
+      & Anastasia - Cha Cha \u0040 CBD 10\/28\/11 [HD]","properties":[{"name":"Length","text":"1:36"}],"icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yO\/r\/NkLFo9nE4rB.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1072200153\/posts\/2339561043103"},{"name":"Like","link":"http:\/\/www.facebook.com\/1072200153\/posts\/2339561043103"}],"place":{"id":"87820458426","name":"Cheryl
+      Burke Dance","location":{"street":"1400 North Shoreline Blvd. #A-1","city":"Mountain
+      View","state":"CA","country":"United States","zip":"94043","latitude":37.41368114735,"longitude":-122.08042264759}},"type":"video","object_id":"2339561043103","application":{"name":"Video","canvas_name":"video","namespace":"video","id":"2392950137"},"created_time":"2011-10-29T04:43:59+0000","updated_time":"2011-10-29T18:09:12+0000","likes":{"data":[{"name":"Irene
+      Semenikhina","id":"100000382012310"}],"count":4},"comments":{"data":[{"id":"1072200153_2339561043103_2833867","from":{"name":"Angie
+      Silvey-Grant","id":"100000165624147"},"message":"Unstoppable!","created_time":"2011-10-29T16:29:37+0000"},{"id":"1072200153_2339561043103_2834510","from":{"name":"Ilona
+      Ivanova","id":"536960411"},"message":"Glad to see your emotions and smile) \u0425\u0425\u0425\u0425\u0425","created_time":"2011-10-29T18:09:12+0000"}],"count":7}},{"id":"1083866954_2292086896667","from":{"name":"Dave
+      Brunjes","id":"1083866954"},"story":"Dave Brunjes started playing Words With
+      Friends.","story_tags":{"29":[{"id":168378113211268,"name":"Words With Friends","offset":29,"length":18}],"0":[{"id":1083866954,"name":"Dave
+      Brunjes","offset":0,"length":12}]},"picture":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v43\/184\/168378113211268\/app_1_168378113211268_4420.gif","link":"https:\/\/apps.facebook.com\/wordswithfriends\/?type=discovery","caption":"Words
+      With Friends is easily the best and most popular word game in the world.  We
+      think you''re going to love it.  Play now!","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1083866954\/posts\/2292086896667"},{"name":"Like","link":"http:\/\/www.facebook.com\/1083866954\/posts\/2292086896667"}],"type":"link","application":{"name":"Words
+      With Friends","canvas_name":"wordswithfriends","namespace":"wordswithfriends","id":"168378113211268"},"created_time":"2011-10-29T04:24:33+0000","updated_time":"2011-10-29T04:24:33+0000","comments":{"count":0}},{"id":"100000791692574_268117166558004","from":{"name":"Sal
+      Silva","id":"100000791692574"},"message":"I''m fucked..... ahahah","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/100000791692574\/posts\/268117166558004"},{"name":"Like","link":"http:\/\/www.facebook.com\/100000791692574\/posts\/268117166558004"}],"type":"status","application":{"name":"Facebook
+      for Android","id":"350685531728"},"created_time":"2011-10-29T04:24:10+0000","updated_time":"2011-10-29T04:24:10+0000","likes":{"data":[{"name":"Daniel
+      Avila","id":"100002336583300"}],"count":2},"comments":{"count":0}}],"paging":{"previous":"https:\/\/graph.facebook.com\/me\/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&since=1319879220","next":"https:\/\/graph.facebook.com\/me\/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&until=1319862249"}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://graph.facebook.com:443/me/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&until=1319862249
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-origin:
+      - ! '*'
+      cache-control:
+      - private, no-cache, no-store, must-revalidate
+      content-type:
+      - text/javascript; charset=UTF-8
+      etag:
+      - ! '"8f6a203c4ec75cc87aacf5d7993af9651dd4853c"'
+      expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      pragma:
+      - no-cache
+      x-fb-rev:
+      - '465110'
+      x-fb-server:
+      - 10.36.46.116
+      x-cnection:
+      - close
+      date:
+      - Sat, 29 Oct 2011 18:46:18 GMT
+      content-length:
+      - '27055'
+    body: ! '{"data":[{"id":"598727831_10150343424747832","from":{"name":"Reg C Barber","id":"598727831"},"story":"Reg
+      C Barber is now friends with Aggie Corner Coffee and 23 other people.","story_tags":{"0":[{"id":598727831,"name":"Reg
+      C Barber","offset":0,"length":12}],"33":[{"id":100002557833375,"name":"Aggie
+      Corner Coffee","offset":33,"length":19}],"57":[{"id":100001251841323,"name":"UKcoffee
+      Pods","offset":57,"length":15},{"id":100001041978574,"name":"Coffeebark Homeroaster","offset":57,"length":15},{"id":1019997359,"name":"Jeroen
+      Veldkamp","offset":57,"length":15},{"id":1356585838,"name":"Don Fleming","offset":57,"length":15},{"id":100002109666780,"name":"Jin
+      Young Kim","offset":57,"length":15},{"id":1372784830,"name":"Cangkir Kopi","offset":57,"length":15},{"id":625508323,"name":"Lieke
+      Hanssen","offset":57,"length":15},{"id":100001950808403,"name":"Doi Chang View","offset":57,"length":15},{"id":1036810490,"name":"Ertan
+      Oval\u0131","offset":57,"length":15},{"id":100000788188012,"name":"Chungthin
+      Huang","offset":57,"length":15},{"id":100000065387900,"name":"\u9ec3\u82b1\u82b1","offset":57,"length":15},{"id":100000064476002,"name":"Yujen
+      Chen","offset":57,"length":15},{"id":100002164438245,"name":"Maharaja Coffee","offset":57,"length":15},{"id":100002277860245,"name":"Junbae  Bang","offset":57,"length":15},{"id":100000061422885,"name":"Charles
+      Huang","offset":57,"length":15},{"id":100002931041372,"name":"IDharbest Commodities","offset":57,"length":15},{"id":744466200,"name":"Juan
+      Andres Lozada","offset":57,"length":15},{"id":100002344835818,"name":"Olivia
+      Alice","offset":57,"length":15},{"id":100002094842432,"name":"\u8349\u5716\u5496\u5561","offset":57,"length":15},{"id":100002598170050,"name":"Coffeeta
+      Toraja","offset":57,"length":15},{"id":100000135408405,"name":"Stein Ho","offset":57,"length":15},{"id":100001581408195,"name":"Glenn
+      Watson","offset":57,"length":15},{"id":100002431761426,"name":"Leopold Koffieschool","offset":57,"length":15}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/275798_100002557833375_241258_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=100002557833375&ref=nf_fr","type":"link","created_time":"2011-10-29T04:21:08+0000","updated_time":"2011-10-29T04:21:08+0000","comments":{"count":0}},{"id":"26200286_690993486613","from":{"name":"Siobhan
+      Granvold","id":"26200286"},"message":"Thoughtful...\n\u201cHere\u2019s what
+      I think, Mr. Wind-Up Bird,\u201d said May Kasahara. \u201cEverybody\u2019s born
+      with some different thing at the core of their existence. And that thing, whatever
+      it is, becomes like a heat source that runs each person from the inside. I...","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v43\/135\/48119224995\/app_2_48119224995_4168.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/26200286\/posts\/690993486613"},{"name":"Like","link":"http:\/\/www.facebook.com\/26200286\/posts\/690993486613"},{"name":"View
+      post","link":"http:\/\/siogran.tumblr.com\/post\/12059516437"}],"type":"status","application":{"name":"Tumblr","canvas_name":"tumblr-feed","namespace":"tumblr-feed","id":"48119224995"},"created_time":"2011-10-29T03:34:35+0000","updated_time":"2011-10-29T04:52:56+0000","comments":{"data":[{"id":"26200286_690993486613_3180832","from":{"name":"Nathaniel
+      Morton","id":"828429700"},"message":"DUDE the new book showed up at my house
+      this morning :D","created_time":"2011-10-29T04:52:56+0000"}],"count":1}},{"id":"712969285_10150364397344286","from":{"name":"Ettore
+      Scagliola","id":"712969285"},"story":"Ettore Scagliola is now friends with Hario
+      Glass and 3 other people.","story_tags":{"0":[{"id":712969285,"name":"Ettore
+      Scagliola","offset":0,"length":16}],"37":[{"id":100001351701410,"name":"Hario
+      Glass","offset":37,"length":11}],"53":[{"id":1844236721,"name":"Jovana Vuckovic","offset":53,"length":14},{"id":808418653,"name":"Oli
+      Obradovic Bronsky","offset":53,"length":14},{"id":1557815501,"name":"Elisa Simoni","offset":53,"length":14}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/41428_100001351701410_4677_q.jpg","link":"http:\/\/www.facebook.com\/HarioJapan?ref=nf_fr","type":"link","created_time":"2011-10-29T03:31:22+0000","updated_time":"2011-10-29T03:31:22+0000","comments":{"count":0}},{"id":"541764248_10150344309299249","from":{"name":"Anna
+      Julian","id":"541764248"},"message":"How much would it hurt to get a tattoo
+      of a blue ox on my bunion? Probs way too much for it to be worth it. :\/","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/541764248\/posts\/10150344309299249"},{"name":"Like","link":"http:\/\/www.facebook.com\/541764248\/posts\/10150344309299249"}],"type":"status","application":{"name":"Facebook
+      for iPhone","canvas_name":"fbtouch","namespace":"fbtouch","id":"6628568379"},"created_time":"2011-10-29T03:15:43+0000","updated_time":"2011-10-29T16:54:46+0000","likes":{"data":[{"name":"Aalia
+      Mohiuddin","id":"548655273"}],"count":5},"comments":{"data":[{"id":"541764248_10150344309299249_19017873","from":{"name":"Megan
+      Ray","id":"731376427"},"message":"LOVE","created_time":"2011-10-29T03:59:52+0000"},{"id":"541764248_10150344309299249_19017891","from":{"name":"Haley
+      Rogers Zerr","id":"1373996528"},"message":"That big, huh?","created_time":"2011-10-29T04:01:45+0000","likes":1},{"id":"541764248_10150344309299249_19023550","from":{"name":"James
+      Ganz","id":"706055281"},"message":"you should just get \"Paul\" tattooed on
+      it.","created_time":"2011-10-29T16:54:46+0000"}],"count":3}},{"id":"1075392174_2376879696152","from":{"name":"Vienna
+      Teng","id":"1075392174"},"story":"Vienna Teng is now friends with Steve Lurie
+      and 4 other people.","story_tags":{"0":[{"id":1075392174,"name":"Vienna Teng","offset":0,"length":11}],"32":[{"id":626492984,"name":"Steve
+      Lurie","offset":32,"length":11}],"48":[{"id":751946924,"name":"Ed Chin","offset":48,"length":14},{"id":606478542,"name":"Melissa
+      Giges","offset":48,"length":14},{"id":11703896,"name":"Avi Vinocur","offset":48,"length":14},{"id":100003058375615,"name":"Tom
+      Svensson","offset":48,"length":14}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/49056_626492984_9298_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=626492984&ref=nf_fr","type":"link","created_time":"2011-10-29T03:07:19+0000","updated_time":"2011-10-29T03:07:19+0000","comments":{"count":0}},{"id":"1259046563_293630967333723","from":{"name":"Christopher
+      Nicely Abel Alameda","id":"1259046563"},"story":"Christopher Nicely Abel Alameda
+      shared a link.","story_tags":{"0":[{"id":1259046563,"name":"Christopher Nicely
+      Abel Alameda","offset":0,"length":31}]},"picture":"https:\/\/s-external.ak.fbcdn.net\/safe_image.php?d=AQAnrkq4cYnBJ68B&w=130&h=130&url=http\u00253A\u00252F\u00252Fwww-tc.pbs.org\u00252Fcove-media\u00252Fhttp\u00252FPBS_CP_National_Parks\u00252F900\u00252F794\u00252FStatueOfLibertyLiberty142.jpg","link":"http:\/\/video.pbs.org\/video\/2017223988?utm_source=Facebook&utm_medium=fanpage&utm_campaign=ThisDayHistory","source":"http:\/\/www-tc.pbs.org\/video\/media\/swf\/PBSPlayer.swf?video=2017223988&player=viral","name":"Statue
+      of Liberty: What is Liberty?, Ken Burns, PBS Video","caption":"video.pbs.org","description":"\"What
+      is Liberty?\"","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yi\/r\/OjzTEXM4lrQ.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1259046563\/posts\/293630967333723"},{"name":"Like","link":"http:\/\/www.facebook.com\/1259046563\/posts\/293630967333723"}],"type":"video","application":{"name":"Links","id":"2309869772"},"created_time":"2011-10-29T02:58:09+0000","updated_time":"2011-10-29T03:00:31+0000","comments":{"data":[{"id":"1259046563_293630967333723_4364362","from":{"name":"Christopher
+      Nicely Abel Alameda","id":"1259046563"},"message":"Barbara Jordan","created_time":"2011-10-29T03:00:31+0000"}],"count":1}},{"id":"1259046563_2539029595920","from":{"name":"Christopher
+      Nicely Abel Alameda","id":"1259046563"},"message":"Can''t fault that effort
+      by Elvis Andrus.  #Game7","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v27562\/23\/2231777543\/app_2_2231777543_9553.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1259046563\/posts\/2539029595920"},{"name":"Like","link":"http:\/\/www.facebook.com\/1259046563\/posts\/2539029595920"},{"name":"\u0040nicely85
+      on Twitter","link":"http:\/\/twitter.com\/nicely85?utm_source=fb&utm_medium=fb&utm_campaign=nicely85&utm_content=130112206107975680"}],"type":"status","application":{"name":"Twitter","canvas_name":"twitter","namespace":"twitter","id":"2231777543"},"created_time":"2011-10-29T02:42:22+0000","updated_time":"2011-10-29T02:42:22+0000","comments":{"count":0}},{"id":"1110924981_2410260811843","from":{"name":"Brad
+      Eitner","id":"1110924981"},"message":"watching the world series on my laptop.
+      i love the internets.","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1110924981\/posts\/2410260811843"},{"name":"Like","link":"http:\/\/www.facebook.com\/1110924981\/posts\/2410260811843"}],"type":"status","created_time":"2011-10-29T02:37:12+0000","updated_time":"2011-10-29T02:37:12+0000","comments":{"count":0}},{"id":"1259046563_2539014515543","from":{"name":"Christopher
+      Nicely Abel Alameda","id":"1259046563"},"message":"The dude that sang God Bless
+      America Last night was way better.","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v27562\/23\/2231777543\/app_2_2231777543_9553.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1259046563\/posts\/2539014515543"},{"name":"Like","link":"http:\/\/www.facebook.com\/1259046563\/posts\/2539014515543"},{"name":"\u0040nicely85
+      on Twitter","link":"http:\/\/twitter.com\/nicely85?utm_source=fb&utm_medium=fb&utm_campaign=nicely85&utm_content=130110340322168832"}],"type":"status","application":{"name":"Twitter","canvas_name":"twitter","namespace":"twitter","id":"2231777543"},"created_time":"2011-10-29T02:34:57+0000","updated_time":"2011-10-29T02:34:57+0000","likes":{"data":[{"name":"Greg
+      Lefcourt","id":"729635263"}],"count":1},"comments":{"count":0}},{"id":"1259046563_2539010555444","from":{"name":"Christopher
+      Nicely Abel Alameda","id":"1259046563"},"message":"patience.","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v27562\/23\/2231777543\/app_2_2231777543_9553.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1259046563\/posts\/2539010555444"},{"name":"Like","link":"http:\/\/www.facebook.com\/1259046563\/posts\/2539010555444"},{"name":"\u0040nicely85
+      on Twitter","link":"http:\/\/twitter.com\/nicely85?utm_source=fb&utm_medium=fb&utm_campaign=nicely85&utm_content=130109994539548673"}],"type":"status","application":{"name":"Twitter","canvas_name":"twitter","namespace":"twitter","id":"2231777543"},"created_time":"2011-10-29T02:33:35+0000","updated_time":"2011-10-29T02:33:35+0000","comments":{"count":0}},{"id":"541764248_10150344275759249","from":{"name":"Anna
+      Julian","id":"541764248"},"message":"To the jerk who bought ALL THE CASES of
+      distilled water at Walgreens and made me go to Safeway and pay almost 4 dollars
+      for 10 times as much a I needed... I despise you.","picture":"https:\/\/fbcdn-photos-a.akamaihd.net\/hphotos-ak-ash4\/383357_10150344229429249_541764248_8065364_737701974_s.jpg","link":"http:\/\/www.facebook.com\/photo.php?fbid=10150344229429249&set=a.10150093465194249.263338.541764248&type=1","name":"Mobile
+      Uploads","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yb\/r\/FzSuxp0Kqwz.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/541764248\/posts\/10150344275759249"},{"name":"Like","link":"http:\/\/www.facebook.com\/541764248\/posts\/10150344275759249"}],"type":"photo","object_id":"10150344229429249","application":{"name":"Facebook
+      for iPhone","canvas_name":"fbtouch","namespace":"fbtouch","id":"6628568379"},"created_time":"2011-10-29T02:29:19+0000","updated_time":"2011-10-29T12:27:39+0000","likes":{"data":[{"name":"Lori
+      Witteveen","id":"601596253"}],"count":1},"comments":{"data":[{"id":"541764248_10150344275759249_4943395","from":{"name":"Caleb
+      Z. Arellano","id":"588755488"},"message":"water is good for tea and cleansing
+      the chakras from what I''m told. roll with it :)","created_time":"2011-10-29T03:17:34+0000"},{"id":"541764248_10150344275759249_4944876","from":{"name":"Belinda
+      Julian Weller","id":"1422995936"},"message":"Some do not know the meaning of
+      sharing.","created_time":"2011-10-29T12:27:39+0000"}],"count":4}},{"id":"122604843_971212182067","from":{"name":"Fahd
+      Butt","id":"122604843"},"story":"Fahd Butt and 2 other friends changed their
+      profile pictures.","story_tags":{"0":[{"id":122604843,"name":"Fahd Butt","offset":0,"length":9}],"14":[{"id":30901951,"name":"Sharon
+      Walsh","offset":14,"length":15},{"id":1055186112,"name":"Brad Foster","offset":14,"length":15}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-ash2\/369460_30901951_1621762951_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=30901951","type":"link","application":{"name":"Photos","id":"2305272732"},"created_time":"2011-10-29T02:25:10+0000","updated_time":"2011-10-29T02:25:10+0000","comments":{"count":0}},{"id":"1259046563_2538986154834","from":{"name":"Christopher
+      Nicely Abel Alameda","id":"1259046563"},"message":"That standing ovation for
+      Chris Carpenter is well deserved.  Tip of the cap to you, Sir. #Game7","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v27562\/23\/2231777543\/app_2_2231777543_9553.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1259046563\/posts\/2538986154834"},{"name":"Like","link":"http:\/\/www.facebook.com\/1259046563\/posts\/2538986154834"},{"name":"\u0040nicely85
+      on Twitter","link":"http:\/\/twitter.com\/nicely85?utm_source=fb&utm_medium=fb&utm_campaign=nicely85&utm_content=130107066567245824"}],"type":"status","application":{"name":"Twitter","canvas_name":"twitter","namespace":"twitter","id":"2231777543"},"created_time":"2011-10-29T02:21:56+0000","updated_time":"2011-10-29T02:21:56+0000","comments":{"count":0}},{"id":"770289541_10150345564724542","from":{"name":"Kristopher
+      Sterling Moreland","id":"770289541"},"message":"Getting sushi with my dad.","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/770289541\/posts\/10150345564724542"},{"name":"Like","link":"http:\/\/www.facebook.com\/770289541\/posts\/10150345564724542"}],"type":"status","application":{"name":"Facebook
+      for Android","id":"350685531728"},"created_time":"2011-10-29T02:12:27+0000","updated_time":"2011-10-29T02:12:27+0000","likes":{"data":[{"name":"Vickie
+      Pollock","id":"100001056652015"}],"count":4},"comments":{"count":0}},{"id":"1259046563_2538937353614","from":{"name":"Christopher
+      Nicely Abel Alameda","id":"1259046563"},"message":"Are the #Rangers melting
+      down in #Game7?","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v27562\/23\/2231777543\/app_2_2231777543_9553.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1259046563\/posts\/2538937353614"},{"name":"Like","link":"http:\/\/www.facebook.com\/1259046563\/posts\/2538937353614"},{"name":"\u0040nicely85
+      on Twitter","link":"http:\/\/twitter.com\/nicely85?utm_source=fb&utm_medium=fb&utm_campaign=nicely85&utm_content=130101533957304320"}],"type":"status","application":{"name":"Twitter","canvas_name":"twitter","namespace":"twitter","id":"2231777543"},"created_time":"2011-10-29T01:59:57+0000","updated_time":"2011-10-29T01:59:57+0000","likes":{"data":[{"name":"Cathi
+      Muckerman","id":"1583301853"}],"count":1},"comments":{"count":0}},{"id":"1259046563_2538929993430","from":{"name":"Christopher
+      Nicely Abel Alameda","id":"1259046563"},"message":"Though that looked a whole
+      lot like a strike....","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v27562\/23\/2231777543\/app_2_2231777543_9553.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1259046563\/posts\/2538929993430"},{"name":"Like","link":"http:\/\/www.facebook.com\/1259046563\/posts\/2538929993430"},{"name":"\u0040nicely85
+      on Twitter","link":"http:\/\/twitter.com\/nicely85?utm_source=fb&utm_medium=fb&utm_campaign=nicely85&utm_content=130100617485107200"}],"type":"status","application":{"name":"Twitter","canvas_name":"twitter","namespace":"twitter","id":"2231777543"},"created_time":"2011-10-29T01:56:19+0000","updated_time":"2011-10-29T01:56:19+0000","comments":{"count":0}},{"id":"6713928_10100115142380608","from":{"name":"Matthew
+      P. Williams","id":"6713928"},"message":"How OWS Confuses and Ignores Fox News
+      and the Pundit Class http:\/\/t.co\/izuqXLCT #OWS","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v27562\/23\/2231777543\/app_2_2231777543_9553.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/6713928\/posts\/10100115142380608"},{"name":"Like","link":"http:\/\/www.facebook.com\/6713928\/posts\/10100115142380608"},{"name":"\u0040worstofthewurst
+      on Twitter","link":"http:\/\/twitter.com\/worstofthewurst?utm_source=fb&utm_medium=fb&utm_campaign=worstofthewurst&utm_content=130099913341153280"}],"type":"status","application":{"name":"Twitter","canvas_name":"twitter","namespace":"twitter","id":"2231777543"},"created_time":"2011-10-29T01:53:31+0000","updated_time":"2011-10-29T01:53:31+0000","comments":{"count":0}},{"id":"1055790128_1521209504279","from":{"name":"Amanda
+      Nguyen","id":"1055790128"},"picture":"https:\/\/fbcdn-photos-a.akamaihd.net\/hphotos-ak-snc7\/392040_1521210464303_1055790128_31462437_1765551963_s.jpg","link":"http:\/\/www.facebook.com\/photo.php?fbid=1521210464303&set=a.1308840915197.2030684.1055790128&type=1","name":"Mobile
+      Uploads","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yb\/r\/FzSuxp0Kqwz.gif","type":"photo","object_id":"1521210464303","application":{"name":"Facebook
+      for iPhone","canvas_name":"fbtouch","namespace":"fbtouch","id":"6628568379"},"created_time":"2011-10-29T01:50:37+0000","updated_time":"2011-10-29T01:50:37+0000","comments":{"count":0}},{"id":"1055790788_295622967133587","from":{"name":"Sunny
+      Kung","id":"1055790788"},"message":"so funny! http:\/\/www.youtube.com\/watch?feature=player_embedded&v=RK43NtL7b-k","link":"http:\/\/www.youtube.com\/watch?feature=player_embedded&v=RK43NtL7b-k","name":"http:\/\/www.youtube.com\/watch?v=RK43NtL7b-k","caption":"www.youtube.com","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yR\/r\/23eNFy_VOig.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1055790788\/posts\/295622967133587"},{"name":"Like","link":"http:\/\/www.facebook.com\/1055790788\/posts\/295622967133587"}],"type":"link","created_time":"2011-10-29T01:47:58+0000","updated_time":"2011-10-29T01:47:58+0000","comments":{"count":0}},{"id":"1055790976_113407768770705","from":{"name":"Miles
+      Ward","id":"1055790976"},"message":"lol catz","picture":"https:\/\/fbcdn-vthumb-a.akamaihd.net\/hvthumb-ak-ash2\/159052_253336518051672_253335764718414_39590_994_t.jpg","link":"https:\/\/www.facebook.com\/photo.php?v=253335764718414","source":"https:\/\/fbcdn-video-a.akamaihd.net\/cfs-ak-ash4\/348010\/952\/253335764718414_16204.mp4?oh=246bc8f24d0575297bf8dd9a38b2c628&oe=4EAEEC00&__gda__=1320086528_e7c92c07cdafbc348aabd75ab7035684","name":"The
+      Cat Haz Swagger [HD]","description":"Look at your cat. Now look at PUSS IN BOOTS.
+      Does your cat have Golden Eggs? We didn\u2019t think so.","properties":[{"name":"Length","text":"0:31"}],"icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yR\/r\/23eNFy_VOig.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1055790976\/posts\/113407768770705"},{"name":"Like","link":"http:\/\/www.facebook.com\/1055790976\/posts\/113407768770705"}],"type":"video","object_id":"253335764718414","application":{"name":"Video","canvas_name":"video","namespace":"video","id":"2392950137"},"created_time":"2011-10-29T01:47:44+0000","updated_time":"2011-10-29T02:08:36+0000","likes":{"data":[{"name":"Desiree
+      Jaser","id":"1248996572"}],"count":3},"comments":{"data":[{"id":"1055790976_113407768770705_76122","from":{"name":"Miles
+      Ward","id":"1055790976"},"message":"I''m free tomorrow","created_time":"2011-10-29T01:56:46+0000","likes":1},{"id":"1055790976_113407768770705_76163","from":{"name":"Desiree
+      Jaser","id":"1248996572"},"message":"LOVE, especailly since its a spoofff of
+      my fav commertial ever","created_time":"2011-10-29T02:08:36+0000"}],"count":6}},{"id":"740075925_10150428761125926","from":{"name":"Deaton
+      Pigot","id":"740075925"},"message":"Rum and chocolate anyone?  \u0040 Cacao
+      Prieto","picture":"https:\/\/www.facebook.com\/app_full_proxy.php?app=124024574287414&v=1&size=z&cksum=9af43381aab939829203f2f63a13615e&src=http\u00253A\u00252F\u00252Fimages.instagram.com\u00252Fmedia\u00252F2011\u00252F10\u00252F28\u00252F324dcf115d114bb2879d306eb6c8c66e_7.jpg","link":"http:\/\/instagr.am\/p\/R0ZQ9\/","name":"Cacao
+      Prieto","caption":"instagr.am","description":"218 Conover street","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v85005\/10\/124024574287414\/app_2_124024574287414_554.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/740075925\/posts\/10150428761125926"},{"name":"Like","link":"http:\/\/www.facebook.com\/740075925\/posts\/10150428761125926"}],"type":"link","application":{"name":"Instagram","canvas_name":"instapp","namespace":"instapp","id":"124024574287414"},"created_time":"2011-10-29T01:40:29+0000","updated_time":"2011-10-29T03:05:00+0000","likes":{"data":[{"name":"Christopher
+      Nicely Abel Alameda","id":"1259046563"}],"count":1},"comments":{"data":[{"id":"740075925_10150428761125926_19785716","from":{"name":"Andrew
+      Low","id":"100001440673472"},"message":"Hey mate, I was all keen to come over
+      for rum and chocolate but everyone else bailed. Txt me on +61 (0)439  547 193
+      for beers on Sunday... Can''t wait!!","created_time":"2011-10-29T03:05:00+0000"}],"count":1}},{"id":"1670318850_2046763423282","from":{"name":"Andy
+      Newbom","id":"1670318850"},"story":"Andy Newbom is now friends with Pedro Giron
+      and 7 other people.","story_tags":{"0":[{"id":1670318850,"name":"Andy Newbom","offset":0,"length":11}],"32":[{"id":568845563,"name":"Pedro
+      Giron","offset":32,"length":11}],"48":[{"id":549682923,"name":"Wolthers America","offset":48,"length":14},{"id":508136934,"name":"Diego
+      Choco","offset":48,"length":14},{"id":831115550,"name":"Mette-Marie Hansen","offset":48,"length":14},{"id":1381590156,"name":"Patrick
+      Murray","offset":48,"length":14},{"id":100003032561366,"name":"\ubc31\uc0c1\uc6b1","offset":48,"length":14},{"id":605961967,"name":"Marcus
+      Sage Laws","offset":48,"length":14},{"id":100002344835818,"name":"Olivia Alice","offset":48,"length":14}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/203100_568845563_7664288_q.jpg","link":"http:\/\/www.facebook.com\/PitrMrkdr?ref=nf_fr","type":"link","created_time":"2011-10-29T01:31:35+0000","updated_time":"2011-10-29T01:31:35+0000","comments":{"count":0}},{"id":"1670318850_2046759943195","from":{"name":"Andy
+      Newbom","id":"1670318850"},"story":"Andy Newbom likes Citron and 4 other pages.","story_tags":{"0":[{"id":1670318850,"name":"Andy
+      Newbom","offset":0,"length":11}],"18":[{"id":165301233540965,"name":"Citron","offset":18,"length":6}],"29":[{"id":197046844346,"name":"Hotel
+      Mopelia El Salvador","offset":29,"length":13},{"id":162185977130349,"name":"Clip
+      Estudio Creativo","offset":29,"length":13},{"id":255138704508237,"name":"Casa
+      Alemana","offset":29,"length":13},{"id":129684103712840,"name":"CraftBeer.com","offset":29,"length":13}]},"type":"status","application":{"name":"Pages","id":"2530096808"},"created_time":"2011-10-29T01:30:11+0000","updated_time":"2011-10-29T01:30:11+0000","comments":{"count":0}},{"id":"1670318850_2046750702964","from":{"name":"Andy
+      Newbom","id":"1670318850"},"message":"sooooooo excited!","story":"Andy Newbom
+      commented on events.r20.constantcontact.com.","story_tags":{"0":[{"id":1670318850,"name":"Andy
+      Newbom","offset":0,"length":11}]},"picture":"https:\/\/s-external.ak.fbcdn.net\/safe_image.php?d=AQCSsOzF4OKE-Co1&w=90&h=90&url=https\u00253A\u00252F\u00252Fimgssl.constantcontact.com\u00252Fui\u00252Fimages1\u00252FEvMButton.gif","link":"https:\/\/events.r20.constantcontact.com\/register\/event?oeidk=a07e566e22hd6046ab4&fb_comment_id=fbc_10150362122574694_19254517_10150362333849694","name":"Craft
+      Beer tasting (Cata de Cerveza Artesanal)","caption":"events.r20.constantcontact.com","description":"The
+      Craft beer Consejo nos trae la primera cata de cerveza artesanal en El Salvador
+      (Craft Beer tasting), presentando 10 tipos direrentes de cerveza que ser\u00e1n
+      catadas en mesas interactivas de 6 participantes guiados por 1 conocedor de
+      la cerveza. \u00a1reserva tu espacio lo m\u00e1s pronto posible ya que el c...","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yd\/r\/WSqdpOlKIGd.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1670318850\/posts\/2046750702964"},{"name":"Like","link":"http:\/\/www.facebook.com\/1670318850\/posts\/2046750702964"}],"type":"link","created_time":"2011-10-29T01:24:40+0000","updated_time":"2011-10-29T01:24:40+0000","comments":{"count":0}},{"id":"100000488235925_267424189969177","from":{"name":"Nanelle
+      Newbom","id":"100000488235925"},"message":"http:\/\/www.whatsupelsalvador.com\/2011\/10\/butterflies-and-circus-tents\/","picture":"https:\/\/s-external.ak.fbcdn.net\/safe_image.php?d=AQDvfzcFjOnyl6fk&w=90&h=90&url=http\u00253A\u00252F\u00252Fwww.whatsupelsalvador.com\u00252Fwp-content\u00252Fuploads\u00252F2011\u00252F10\u00252Fmedium_tent-300x174.jpg","link":"http:\/\/www.whatsupelsalvador.com\/2011\/10\/butterflies-and-circus-tents\/","name":"\u00bb
+      Butterflies and Circus Tents \u00bb What''s Up El Salvador","caption":"www.whatsupelsalvador.com","description":"In
+      the way-back time, \u201cRan Away with the Circus\u201d meant something other
+      than it does for most people, to me and my kinfolk. For us, it represented going
+      all out and doing whatever impractical thing your heart wanted to, without regard
+      for any of that realistic bullshit. It represented abandoning ever...","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yR\/r\/23eNFy_VOig.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/100000488235925\/posts\/267424189969177"},{"name":"Like","link":"http:\/\/www.facebook.com\/100000488235925\/posts\/267424189969177"}],"type":"link","created_time":"2011-10-29T01:24:22+0000","updated_time":"2011-10-29T04:32:33+0000","comments":{"data":[{"id":"100000488235925_267424189969177_3622380","from":{"name":"Papd
+      Explorers","id":"1367754603"},"message":"Sounds like a lot of fun!","created_time":"2011-10-29T04:32:33+0000"}],"count":1}}],"paging":{"previous":"https:\/\/graph.facebook.com\/me\/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&since=1319862068","next":"https:\/\/graph.facebook.com\/me\/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&until=1319851461"}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://graph.facebook.com:443/me/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&until=1319851461
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-origin:
+      - ! '*'
+      cache-control:
+      - private, no-cache, no-store, must-revalidate
+      content-type:
+      - text/javascript; charset=UTF-8
+      etag:
+      - ! '"b41e929aba0aeb7e021dc4d0b9ca5a03a734601e"'
+      expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      pragma:
+      - no-cache
+      x-fb-rev:
+      - '465110'
+      x-fb-server:
+      - 10.36.42.110
+      x-cnection:
+      - close
+      date:
+      - Sat, 29 Oct 2011 18:46:19 GMT
+      content-length:
+      - '26276'
+    body: ! '{"data":[{"id":"100000488235925_305129156180023","from":{"name":"Nanelle
+      Newbom","id":"100000488235925"},"message":"Im pretty happy that Paulaner is
+      now available here. I just had a Weisbier and loved it. Next taste? maybe the
+      Helles? I dunno. Small things make me happy when the beer variety is wanting.
+      Im very very glad these are newly available.","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/100000488235925\/posts\/305129156180023"},{"name":"Like","link":"http:\/\/www.facebook.com\/100000488235925\/posts\/305129156180023"}],"type":"status","created_time":"2011-10-29T01:20:54+0000","updated_time":"2011-10-29T01:20:54+0000","likes":{"data":[{"name":"Trish
+      Browning","id":"1669322280"}],"count":2},"comments":{"count":0}},{"id":"716720417_238114176245367","from":{"name":"Aaron
+      Elias Newbom","id":"716720417"},"message":"my dads a winner, duh!","picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/373756_166279866799807_1407240381_s.jpg","link":"http:\/\/www.facebook.com\/event.php?eid=166279866799807","name":"Craft
+      Beer Tasting - El Salvador","description":"Friday, December 2 at 2:30am, Plaza
+      Torre Futura, San Salvador, El Salvador","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yR\/r\/23eNFy_VOig.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/716720417\/posts\/238114176245367"},{"name":"Like","link":"http:\/\/www.facebook.com\/716720417\/posts\/238114176245367"}],"type":"link","object_id":"166279866799807","application":{"name":"Events","id":"2344061033"},"created_time":"2011-10-29T00:51:31+0000","updated_time":"2011-10-29T16:00:35+0000","likes":{"data":[{"name":"Nanelle
+      Newbom","id":"100000488235925"},{"name":"Sarah Newbom Zito","id":"622922860"}],"count":2},"comments":{"data":[{"id":"716720417_238114176245367_2818397","from":{"name":"Andy
+      Newbom","id":"1670318850"},"message":"duh","created_time":"2011-10-29T16:00:35+0000"}],"count":1}},{"id":"716720417_10150343052390418","from":{"name":"Aaron
+      Elias Newbom","id":"716720417"},"message":"i got that baby lotion squuueeeeze","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/716720417\/posts\/10150343052390418"},{"name":"Like","link":"http:\/\/www.facebook.com\/716720417\/posts\/10150343052390418"}],"type":"status","created_time":"2011-10-29T00:48:49+0000","updated_time":"2011-10-29T16:31:16+0000","likes":{"data":[{"name":"Rebecca
+      Salas","id":"100000806115624"}],"count":1},"comments":{"data":[{"id":"716720417_10150343052390418_19695417","from":{"name":"Patrick
+      Rojas","id":"100000594281574"},"message":"Johnsons Johnsons.","created_time":"2011-10-29T16:31:16+0000"}],"count":1}},{"id":"1057140016_2229358607609","from":{"name":"Ray
+      Ancheta","id":"1057140016"},"message":"Hot cocoa(noe)","picture":"https:\/\/www.facebook.com\/app_full_proxy.php?app=86734274142&v=1&size=z&cksum=05b33c1921eef52c6cec4e422aa9a0fe&src=https\u00253A\u00252F\u00252Ffoursquare.com\u00252Fmapproxy\u00252F37.323584\u00252F-121.972474\u00252Fmap.png","link":"https:\/\/foursquare.com\/raydere\/checkin\/4eab4d007ee5cd8bcdd77f2b?s=vTogujHENOEgGhtq6zxtDlUFkWg&ref=fb&source=fbwall","name":"Bellano
+      Coffee","caption":"Raymoo just checked in \u0040 Bellano Coffee (Santa Clara,
+      CA)","description":"foursquare","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v85005\/138\/86734274142\/app_2_86734274142_3268.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1057140016\/posts\/2229358607609"},{"name":"Like","link":"http:\/\/www.facebook.com\/1057140016\/posts\/2229358607609"},{"name":"Raymoo
+      on foursquare","link":"https:\/\/foursquare.com\/raydere"}],"type":"link","application":{"name":"Foursquare","canvas_name":"playfoursquare","namespace":"playfoursquare","id":"86734274142"},"created_time":"2011-10-29T00:46:57+0000","updated_time":"2011-10-29T00:46:57+0000","comments":{"count":0}},{"id":"1214194329_2129968368150","from":{"name":"David
+      Vicente Johnson","id":"1214194329"},"story":"David Vicente Johnson is now friends
+      with Albi Romero and 2 other people.","story_tags":{"0":[{"id":1214194329,"name":"David
+      Vicente Johnson","offset":0,"length":21}],"42":[{"id":100000054583201,"name":"Albi
+      Romero","offset":42,"length":11}],"58":[{"id":1270812063,"name":"Coffee Labs","offset":58,"length":14},{"id":1812562491,"name":"Sylvia
+      de Lazo","offset":58,"length":14}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/23252_100000054583201_619_q.jpg","link":"http:\/\/www.facebook.com\/albi.romero?ref=nf_fr","type":"link","created_time":"2011-10-29T00:34:19+0000","updated_time":"2011-10-29T00:34:19+0000","comments":{"count":0}},{"id":"1259046563_2538710507943","from":{"name":"Christopher
+      Nicely Abel Alameda","id":"1259046563"},"message":"This Freese kid is ridiculous.","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v27562\/23\/2231777543\/app_2_2231777543_9553.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1259046563\/posts\/2538710507943"},{"name":"Like","link":"http:\/\/www.facebook.com\/1259046563\/posts\/2538710507943"},{"name":"\u0040nicely85
+      on Twitter","link":"http:\/\/twitter.com\/nicely85?utm_source=fb&utm_medium=fb&utm_campaign=nicely85&utm_content=130078306505728003"}],"type":"status","application":{"name":"Twitter","canvas_name":"twitter","namespace":"twitter","id":"2231777543"},"created_time":"2011-10-29T00:27:40+0000","updated_time":"2011-10-29T00:27:40+0000","likes":{"data":[{"name":"Johnbruce
+      Haslett","id":"100000631143932"}],"count":3},"comments":{"count":0}},{"id":"1259046563_2538661546719","from":{"name":"Christopher
+      Nicely Abel Alameda","id":"1259046563"},"message":"First Pitch!","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v27562\/23\/2231777543\/app_2_2231777543_9553.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1259046563\/posts\/2538661546719"},{"name":"Like","link":"http:\/\/www.facebook.com\/1259046563\/posts\/2538661546719"},{"name":"\u0040nicely85
+      on Twitter","link":"http:\/\/twitter.com\/nicely85?utm_source=fb&utm_medium=fb&utm_campaign=nicely85&utm_content=130073054175969280"}],"type":"status","application":{"name":"Twitter","canvas_name":"twitter","namespace":"twitter","id":"2231777543"},"created_time":"2011-10-29T00:06:49+0000","updated_time":"2011-10-29T00:06:49+0000","comments":{"count":0}},{"id":"100000488235925_116417155135745","from":{"name":"Nanelle
+      Newbom","id":"100000488235925"},"message":"http:\/\/www.mattkruse.com\/humor\/horoscope.txt","link":"http:\/\/www.mattkruse.com\/humor\/horoscope.txt","name":"http:\/\/www.mattkruse.com\/humor\/horoscope.txt","caption":"www.mattkruse.com","description":"WHAT''S
+      YOUR SIGN?  Aquarius (Jan 23 - Feb 22) You have an inventive mind and are inclined
+      to be progressive. You lie a great deal.  You make the same mistakes repeatedly
+      because you are stupid. Everyone thinks you are a fucking jerk.  Pisces (Feb
+      23 - Mar 22) You are a pioneer type and think most pe...","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yR\/r\/23eNFy_VOig.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/100000488235925\/posts\/116417155135745"},{"name":"Like","link":"http:\/\/www.facebook.com\/100000488235925\/posts\/116417155135745"}],"type":"link","created_time":"2011-10-28T23:59:42+0000","updated_time":"2011-10-29T01:26:52+0000","comments":{"data":[{"id":"100000488235925_116417155135745_91417","from":{"name":"Nanelle
+      Newbom","id":"100000488235925"},"message":"mean mean stuff, but darned funny","created_time":"2011-10-29T01:17:45+0000"},{"id":"100000488235925_116417155135745_91424","from":{"name":"Brenda
+      Beaverhausen","id":"1742937277"},"message":"LOL! I''m gonna steal and repost!","created_time":"2011-10-29T01:21:02+0000"},{"id":"100000488235925_116417155135745_91435","from":{"name":"Nanelle
+      Newbom","id":"100000488235925"},"message":"Thanks.   I feel a little guilty
+      for liking it so much!","created_time":"2011-10-29T01:26:52+0000"}],"count":3}},{"id":"6713928_10100115056852008","from":{"name":"Matthew
+      P. Williams","id":"6713928"},"message":"I bet I just purchased the last box
+      of floppy disks SF Best Buy will ever have!","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v27562\/23\/2231777543\/app_2_2231777543_9553.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/6713928\/posts\/10100115056852008"},{"name":"Like","link":"http:\/\/www.facebook.com\/6713928\/posts\/10100115056852008"},{"name":"\u0040worstofthewurst
+      on Twitter","link":"http:\/\/twitter.com\/worstofthewurst?utm_source=fb&utm_medium=fb&utm_campaign=worstofthewurst&utm_content=130068476416102400"}],"type":"status","application":{"name":"Twitter","canvas_name":"twitter","namespace":"twitter","id":"2231777543"},"created_time":"2011-10-28T23:48:36+0000","updated_time":"2011-10-29T04:27:17+0000","likes":{"data":[{"name":"Rocky
+      Durand","id":"784796494"}],"count":2},"comments":{"data":[{"id":"6713928_10100115056852008_5313442","from":{"name":"Matthew
+      P. Williams","id":"6713928"},"message":"Not a keytar. Those usually don''t have
+      internal sounds! The more you know!\n\nThanks for all the tips! I only needed
+      one disk, so now I have 9 multi-purpose gems - and for only $1.99 a box!!","created_time":"2011-10-29T02:16:26+0000"},{"id":"6713928_10100115056852008_5314651","from":{"name":"Rocky
+      Durand","id":"784796494"},"message":"haha u can have mine! :-)","created_time":"2011-10-29T04:27:17+0000"}],"count":9}},{"id":"2524342_182410915174602","from":{"name":"Emmalinda
+      MacLean","id":"2524342"},"message":"What a creative protest against banks and
+      credit cards!  I''m gonna save up my junk mail and do this whenever I''m bored.  The
+      possibilities are limitless . . .","picture":"https:\/\/s-external.ak.fbcdn.net\/safe_image.php?d=AQAcFKH7K8HpvfNB&w=130&h=130&url=http\u00253A\u00252F\u00252Fi3.ytimg.com\u00252Fvi\u00252F2JlxbKtBkGM\u00252Fdefault.jpg","link":"http:\/\/www.youtube.com\/watch?v=2JlxbKtBkGM&sns=fb","source":"http:\/\/www.youtube.com\/v\/2JlxbKtBkGM?version=3&autohide=1&autoplay=1","name":"Keep
+      Wall Street Occupied","caption":"www.youtube.com","description":"A fast, easy,
+      free, and non-violent way to drive the big banks out of their greedy little
+      minds is sitting in your mailbox right now. You just don''t know it ...","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yi\/r\/OjzTEXM4lrQ.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/2524342\/posts\/182410915174602"},{"name":"Like","link":"http:\/\/www.facebook.com\/2524342\/posts\/182410915174602"}],"type":"video","application":{"name":"Links","id":"2309869772"},"created_time":"2011-10-28T23:38:51+0000","updated_time":"2011-10-29T01:30:10+0000","likes":{"data":[{"name":"Jonathan
+      Miltz","id":"1509953978"}],"count":4},"comments":{"data":[{"id":"2524342_182410915174602_946193","from":{"name":"Sue
+      DiMeglio Russell Kaufman","id":"756183244"},"message":"I''m sharing this big
+      time! Thanks Emmalinda :)","created_time":"2011-10-29T01:07:27+0000"},{"id":"2524342_182410915174602_946269","from":{"name":"Melinda
+      Merkel Iyer","id":"1527193659"},"message":"My first thought on seeing this is
+      that the 1\u0025 is not going to be working in the mail room... will this protest
+      ever make it into the hands of those who need to see it most?","created_time":"2011-10-29T01:30:10+0000"}],"count":2}},{"id":"1670318850_2046399014172","from":{"name":"Andy
+      Newbom","id":"1670318850"},"story":"Andy Newbom likes Hotel Mopelia El Salvador
+      and 3 other pages.","story_tags":{"0":[{"id":1670318850,"name":"Andy Newbom","offset":0,"length":11}],"18":[{"id":197046844346,"name":"Hotel
+      Mopelia El Salvador","offset":18,"length":25}],"48":[{"id":162185977130349,"name":"Clip
+      Estudio Creativo","offset":48,"length":13},{"id":255138704508237,"name":"Casa
+      Alemana","offset":48,"length":13},{"id":129684103712840,"name":"CraftBeer.com","offset":48,"length":13}]},"type":"status","application":{"name":"Pages","id":"2530096808"},"created_time":"2011-10-28T23:34:28+0000","updated_time":"2011-10-28T23:34:28+0000","comments":{"count":0}},{"id":"3227475_10100581567151593","from":{"name":"Deepti
+      Menon","id":"3227475"},"story":"Deepti Menon is now friends with Robert Balicki
+      and 5 other people.","story_tags":{"0":[{"id":3227475,"name":"Deepti Menon","offset":0,"length":12}],"33":[{"id":1238951,"name":"Robert
+      Balicki","offset":33,"length":14}],"52":[{"id":100002275943728,"name":"Tenure
+      Bait","offset":52,"length":14},{"id":570545100,"name":"Clay Tanaka","offset":52,"length":14},{"id":791394714,"name":"Jess
+      Rozek","offset":52,"length":14},{"id":1390615188,"name":"Lindsay Whittaker","offset":52,"length":14},{"id":1573620043,"name":"Holly
+      Wever","offset":52,"length":14}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/203399_1238951_8134323_q.jpg","link":"http:\/\/www.facebook.com\/robert.balicki?ref=nf_fr","type":"link","created_time":"2011-10-28T23:33:51+0000","updated_time":"2011-10-28T23:33:51+0000","comments":{"count":0}},{"id":"1670318850_193861090689731","from":{"name":"Andy
+      Newbom","id":"1670318850"},"message":"this guy is gettign SOOOOO many hubby
+      points!!!! talk about long term planning!  http:\/\/www.ebaumsworld.com\/video\/watch\/81933797\/?lt=ep","picture":"https:\/\/s-external.ak.fbcdn.net\/safe_image.php?d=AQAXE5JSi5uK8xVt&w=130&h=130&url=http\u00253A\u00252F\u00252Fmedia.ebaumsworld.com\u00252F2011\u00252F10\u00252F81933797\u00252Fpreg.jpg","link":"http:\/\/www.ebaumsworld.com\/video\/watch\/81933797\/?lt=ep","source":"http:\/\/www.ebaumsworld.com\/player.swf?id2=81933797","name":"Cute
+      Wife, Clever Editing, Total Win","caption":"www.ebaumsworld.com","description":"Stop
+      motion video...this is a must see.","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yi\/r\/OjzTEXM4lrQ.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1670318850\/posts\/193861090689731"},{"name":"Like","link":"http:\/\/www.facebook.com\/1670318850\/posts\/193861090689731"}],"type":"video","created_time":"2011-10-28T23:24:09+0000","updated_time":"2011-10-29T00:42:30+0000","likes":{"data":[{"name":"John
+      Piquet","id":"100002437652947"}],"count":3},"comments":{"data":[{"id":"1670318850_193861090689731_1250395","from":{"name":"Jim
+      Browning","id":"714815762"},"message":"Mad props","created_time":"2011-10-29T00:33:52+0000"},{"id":"1670318850_193861090689731_1250450","from":{"name":"Andy
+      Newbom","id":"1670318850"},"message":"the bar has been raised SOOOOO HIGH! how
+      can a husband EVER hope to beat that? I shold never have show it to Nanelle
+      Newbom","created_time":"2011-10-29T00:42:30+0000"}],"count":5}},{"id":"1055790142_1521134302399","from":{"name":"Andrea
+      Tham","id":"1055790142"},"message":"midterm midterm midterm midterm midterm.","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1055790142\/posts\/1521134302399"},{"name":"Like","link":"http:\/\/www.facebook.com\/1055790142\/posts\/1521134302399"}],"type":"status","created_time":"2011-10-28T23:16:22+0000","updated_time":"2011-10-29T01:04:58+0000","likes":{"data":[{"name":"Amanda
+      Hui","id":"616472895"}],"count":2},"comments":{"data":[{"id":"1055790142_1521134302399_533039","from":{"name":"Aleena
+      Malik","id":"739600114"},"message":"beast mode","created_time":"2011-10-28T23:18:53+0000"},{"id":"1055790142_1521134302399_533051","from":{"name":"Kathy
+      Kim","id":"600526192"},"message":"andreaaaaaaaaaa -_______- i wish to evolve
+      into a DOG that lives in a rich house so i dont have to deal with this evolution
+      shizzzz","created_time":"2011-10-28T23:35:23+0000"},{"id":"1055790142_1521134302399_533114","from":{"name":"Olivia
+      Cheng","id":"516959394"},"message":"Good luck!","created_time":"2011-10-29T01:04:58+0000"}],"count":3}},{"id":"122604843_971212182067","from":{"name":"Fahd
+      Butt","id":"122604843"},"story":"Fahd Butt and 2 other friends changed their
+      profile pictures.","story_tags":{"0":[{"id":122604843,"name":"Fahd Butt","offset":0,"length":9}],"14":[{"id":30901951,"name":"Sharon
+      Walsh","offset":14,"length":15},{"id":1055186112,"name":"Brad Foster","offset":14,"length":15}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-ash2\/369460_30901951_1621762951_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=30901951","type":"link","application":{"name":"Photos","id":"2305272732"},"created_time":"2011-10-28T23:11:54+0000","updated_time":"2011-10-28T23:11:54+0000","comments":{"count":0}},{"id":"1670318850_281105838587155","from":{"name":"Andy
+      Newbom","id":"1670318850"},"message":"lets get this beer party started","picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/373756_166279866799807_1407240381_s.jpg","link":"http:\/\/www.facebook.com\/event.php?eid=166279866799807","name":"Craft
+      Beer Tasting - El Salvador","description":"Friday, December 2 at 2:30am, Plaza
+      Torre Futura, San Salvador, El Salvador","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yR\/r\/23eNFy_VOig.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1670318850\/posts\/281105838587155"},{"name":"Like","link":"http:\/\/www.facebook.com\/1670318850\/posts\/281105838587155"}],"type":"link","object_id":"166279866799807","application":{"name":"Events","id":"2344061033"},"created_time":"2011-10-28T23:04:48+0000","updated_time":"2011-10-29T00:37:22+0000","comments":{"data":[{"id":"1670318850_281105838587155_3966531","from":{"name":"Brenda
+      Beaverhausen","id":"1742937277"},"message":"Woot! Woot! I am so proud of you!!","created_time":"2011-10-29T00:37:22+0000"}],"count":1}},{"id":"1453973049_2424969470985","from":{"name":"Kevin
+      Magnuson","id":"1453973049"},"message":"On my way homee!!!! :))) \n\nwhy do
+      people on the bus listen to their music so load? I really don''t want to hear
+      your music, and not to mention you''re damaging your ear drums!","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1453973049\/posts\/2424969470985"},{"name":"Like","link":"http:\/\/www.facebook.com\/1453973049\/posts\/2424969470985"}],"type":"status","application":{"name":"Mobile","id":"2915120374"},"created_time":"2011-10-28T22:16:39+0000","updated_time":"2011-10-29T17:28:46+0000","likes":{"data":[{"name":"Keith
+      Whetsel","id":"1557019489"}],"count":4},"comments":{"data":[{"id":"1453973049_2424969470985_2849964","from":{"name":"Korey
+      Thatcher","id":"1297447816"},"message":"WTH?! Why wasn''t I informed? We need
+      to hang dude. When do u go back to LA?","created_time":"2011-10-29T16:34:57+0000"},{"id":"1453973049_2424969470985_2850236","from":{"name":"Kevin
+      Magnuson","id":"1453973049"},"message":"ya man, for sure!! :) I leave tomorrow
+      at 3","created_time":"2011-10-29T17:28:46+0000"}],"count":4}},{"id":"1055790431_194413820632870","from":{"name":"Mallik
+      Reddy","id":"1055790431"},"message":"Because Porsche''s designers have so much
+      free time from not designing anything:","picture":"https:\/\/s-external.ak.fbcdn.net\/safe_image.php?d=AQDuUP_dNf-Bvrhg&w=90&h=90&url=http\u00253A\u00252F\u00252Fcache.gizmodo.com\u00252Fassets\u00252Fimages\u00252F4\u00252F2011\u00252F10\u00252Ffb_bbporsche.jpg","link":"http:\/\/gizmodo.com\/5854017\/the-first-interesting-looking-blackberry-isnt-even-made-by-rim","name":"The
+      First Interesting Looking BlackBerry Isn''t Even Made by RIM","caption":"gizmodo.com","description":"When
+      was the last time you cared about a piece of BlackBerry hardware? 2003? Never?
+      Your last malarial fever dream? Maybe today, at the sight of Porsche''s limited
+      edition, $2000 P9981.","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yR\/r\/23eNFy_VOig.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1055790431\/posts\/194413820632870"},{"name":"Like","link":"http:\/\/www.facebook.com\/1055790431\/posts\/194413820632870"}],"type":"link","created_time":"2011-10-28T22:13:34+0000","updated_time":"2011-10-28T22:13:34+0000","comments":{"count":0}},{"id":"904465491_10150910929670492","from":{"name":"Artem
+      Kreimer","id":"904465491"},"story":"Artem Kreimer is now friends with Caitlin
+      Hearns and Nicole Rosales.","story_tags":{"0":[{"id":904465491,"name":"Artem
+      Kreimer","offset":0,"length":13}],"34":[{"id":1151700046,"name":"Caitlin Hearns","offset":34,"length":14}],"53":[{"id":71905418,"name":"Nicole
+      Rosales","offset":53,"length":14}]},"type":"status","created_time":"2011-10-28T21:27:04+0000","updated_time":"2011-10-28T21:27:04+0000","comments":{"count":0}},{"id":"1357854925_2598256999861","from":{"name":"Tracy
+      Allen","id":"1357854925"},"story":"Tracy Allen is now friends with Giuseppe
+      Trovato and 9 other people.","story_tags":{"0":[{"id":1357854925,"name":"Tracy
+      Allen","offset":0,"length":11}],"32":[{"id":688761734,"name":"Giuseppe Trovato","offset":32,"length":16}],"53":[{"id":100000550082461,"name":"Rotem
+      Levin","offset":53,"length":14},{"id":1413337231,"name":"Alberto Terzetti","offset":53,"length":14},{"id":100001662175797,"name":"Ivo
+      Weller","offset":53,"length":14},{"id":100001401127361,"name":"Sakis Athanatos","offset":53,"length":14},{"id":100001840428412,"name":"David
+      Walsh","offset":53,"length":14},{"id":100002722900899,"name":"Rio Vitoria Rio","offset":53,"length":14},{"id":100002693140043,"name":"Pan
+      Canlan","offset":53,"length":14},{"id":100000355828639,"name":"Oliver Krach","offset":53,"length":14},{"id":100000079077327,"name":"Ulises
+      Chaves","offset":53,"length":14}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/70362_688761734_4127555_q.jpg","link":"http:\/\/www.facebook.com\/giuseppefound?ref=nf_fr","type":"link","created_time":"2011-10-28T21:16:52+0000","updated_time":"2011-10-28T21:16:52+0000","comments":{"count":0}},{"id":"1551263250_2489884537064","from":{"name":"Rose
+      Broome","id":"1551263250"},"story":"Rose Broome likes Heal the World, Inc. and
+      Pace University.","story_tags":{"0":[{"id":1551263250,"name":"Rose Broome","offset":0,"length":11}],"18":[{"id":137957532945733,"name":"Heal
+      the World, Inc.","offset":18,"length":20}],"43":[{"id":23489317340,"name":"Pace
+      University","offset":43,"length":15}]},"type":"status","application":{"name":"Pages","id":"2530096808"},"created_time":"2011-10-28T21:10:26+0000","updated_time":"2011-10-28T21:10:26+0000","comments":{"count":0}},{"id":"520584648_10150286714484649","from":{"name":"Alex
+      Jones","id":"520584648"},"story":"Alex Jones is now friends with Darin Maiden
+      and Franklin Paz.","story_tags":{"0":[{"id":520584648,"name":"Alex Jones","offset":0,"length":10}],"31":[{"id":1148084487,"name":"Darin
+      Maiden","offset":31,"length":12}],"48":[{"id":100002921093310,"name":"Franklin
+      Paz","offset":48,"length":12}]},"type":"status","created_time":"2011-10-28T21:04:39+0000","updated_time":"2011-10-28T21:04:39+0000","comments":{"count":0}},{"id":"1073828878_2361502351676","from":{"name":"Bruce
+      Paulson","id":"1073828878"},"story":"Bruce Paulson added a new photo.","story_tags":{"0":[{"id":1073828878,"name":"Bruce
+      Paulson","offset":0,"length":13}]},"picture":"https:\/\/fbcdn-photos-a.akamaihd.net\/hphotos-ak-ash4\/305320_2361502191672_1073828878_2613967_29644533_s.jpg","link":"http:\/\/www.facebook.com\/photo.php?fbid=2361502191672&set=a.1565661496152.2082188.1073828878&type=1","name":"Mobile
+      Uploads","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yb\/r\/FzSuxp0Kqwz.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1073828878\/posts\/2361502351676"},{"name":"Like","link":"http:\/\/www.facebook.com\/1073828878\/posts\/2361502351676"}],"type":"photo","object_id":"2361502191672","application":{"name":"Facebook
+      for Android","id":"350685531728"},"created_time":"2011-10-28T21:00:05+0000","updated_time":"2011-10-29T03:54:10+0000","comments":{"data":[{"id":"1073828878_2361502351676_1845076","from":{"name":"Ken
+      Flask","id":"682063051"},"message":"Honey Mantis?","created_time":"2011-10-28T21:13:50+0000"},{"id":"1073828878_2361502351676_1845077","from":{"name":"Audrey
+      Paulson","id":"620314203"},"message":"In the backyard?","created_time":"2011-10-28T21:15:27+0000"},{"id":"1073828878_2361502351676_1845699","from":{"name":"Harry
+      J Greenwood","id":"594866304"},"message":"Awww...he looks just like you...","created_time":"2011-10-29T03:54:10+0000"}],"count":3}},{"id":"1008498223_2321248903187","from":{"name":"Kate
+      Saturday","id":"1008498223"},"message":"i''d do a performance art piece in a
+      giant spandex bag.  wouldn''t that be fun?","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1008498223\/posts\/2321248903187"},{"name":"Like","link":"http:\/\/www.facebook.com\/1008498223\/posts\/2321248903187"}],"type":"status","created_time":"2011-10-28T20:41:45+0000","updated_time":"2011-10-28T20:41:45+0000","likes":{"data":[{"name":"Jonathan
+      Jauquet","id":"1484246975"}],"count":1},"comments":{"count":0}},{"id":"100000488235925_239221589466050","from":{"name":"Nanelle
+      Newbom","id":"100000488235925"},"message":"http:\/\/youtu.be\/p5UJjQt3bkM","picture":"https:\/\/s-external.ak.fbcdn.net\/safe_image.php?d=AQBEb3M6ZhKeK_sa&w=130&h=130&url=http\u00253A\u00252F\u00252Fi1.ytimg.com\u00252Fvi\u00252Fp5UJjQt3bkM\u00252Fdefault.jpg","link":"http:\/\/youtu.be\/p5UJjQt3bkM","source":"http:\/\/www.youtube.com\/v\/p5UJjQt3bkM?version=3&autohide=1&autoplay=1","name":"Outkast
+      Feat. Killer Mike - The Whole World","caption":"www.youtube.com","description":"This
+      is the music video for the Outkast song the whole world...","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yi\/r\/OjzTEXM4lrQ.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/100000488235925\/posts\/239221589466050"},{"name":"Like","link":"http:\/\/www.facebook.com\/100000488235925\/posts\/239221589466050"}],"type":"video","created_time":"2011-10-28T20:36:58+0000","updated_time":"2011-10-28T20:37:21+0000","likes":{"data":[{"name":"Nanelle
+      Newbom","id":"100000488235925"}],"count":1},"comments":{"data":[{"id":"100000488235925_239221589466050_2834355","from":{"name":"Nanelle
+      Newbom","id":"100000488235925"},"message":"how it is","created_time":"2011-10-28T20:37:21+0000"}],"count":1}}],"paging":{"previous":"https:\/\/graph.facebook.com\/me\/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&since=1319851254","next":"https:\/\/graph.facebook.com\/me\/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&until=1319834217"}}'
+    http_version: '1.1'
