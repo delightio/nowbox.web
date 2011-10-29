@@ -12,6 +12,21 @@ module Aji
       accounts.any? {|a| a.available?}
     end
 
+    def refresh_period
+      last_viewed = events.viewed.latest(1).first
+      return super if last_viewed.nil?
+      last_subscribed = events.subscribed.latest(1).first
+      return super if last_subscribed.nil?
+      timestamp = [last_viewed.created_at, last_subscribed.created_at].max # closet to now
+
+      period =
+        if timestamp > Time.now-super
+          super/2
+        else
+          super
+        end
+    end
+
     def refresh_content force=false
       super force do |new_videos|
         accounts_populated_at = []
