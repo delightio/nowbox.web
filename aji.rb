@@ -11,13 +11,6 @@ module Aji
     File.expand_path('..', __FILE__)
   end
 
-  # Debug mode spawns consoles bound to specific function runtimmes. To
-  # find places where this may happen use `git grep binding\.pry`
-  # Turning it on requires overriding the method.
-  def Aji.debug
-    false
-  end
-
   # Logging interface for local development and heroku.
   # There are four internal Log levels aliased to the standard SYSLOG levels.
   # The INFO level is used if no level is specified. Other options are `:DEBUG`,
@@ -58,11 +51,14 @@ module Aji
   require_relative 'config/setup.rb'
 
   # Establish Redis connection and initialize Redis-backed utilities.
-  def Aji.redis; @redis ||= Redis.new conf['REDIS']; end
+  def Aji.redis
+    @redis ||= Redis.new conf['REDIS']
+  end
+
   Resque.redis = redis
   Redis::Objects.redis = redis
   Resque.schedule = conf['RESQUE_SCHEDULE']
-  Resque.before_fork = Proc.new { ActiveRecord::Base.establish_connection(
+  Resque.before_fork = proc { ActiveRecord::Base.establish_connection(
     Aji.conf['DATABASE']) }
   Resque::Failure::MultipleWithRetrySuppression.classes =
     [Resque::Failure::Redis]
@@ -113,5 +109,7 @@ Dir.glob("queues/mention/*.rb").each { |r| require_relative r }
 
 # Add Sinatra web viewer.
 require_relative 'lib/google_auth'
-require_relative "lib/viewer/viewer"
-require_relative "lib/mailer/mailer"
+require_relative 'lib/viewer/viewer'
+require_relative 'lib/mailer/mailer'
+
+require_relative 'app'
