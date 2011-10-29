@@ -80,6 +80,7 @@ module Aji
           account.uid = auth_hash['uid']
           account.credentials = auth_hash['credentials']
           account.username = auth_hash['extra']['user_hash']['username'] || ""
+          account.auth_info = auth_hash
           account.info = auth_hash['extra']['user_hash']
           account.save!
         end
