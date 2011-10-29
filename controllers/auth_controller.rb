@@ -11,7 +11,7 @@ module Aji
 
       env_hash = request.env.dup
       Aji.log :WARN, "OAuth failure: #{env_hash.inspect}"
-      error "OAuth authentication failed", 500
+      [500, MultiJson.encode(:error => "Unable to authenticate at this time")]
     end
 
     # This is the entry point for OAuth'ing to other web services for Aji users.
@@ -62,7 +62,8 @@ module Aji
     get '/:provider/callback' do
       content_type :json
       user = Aji::User.find_by_id params[:user_id]
-      return { :error => "User[#{params[:user_id]}] does not exist." } if
+      return [404,
+        MultiJson.encode(:error => "User[#{params[:user_id]}] not found.")] if
         user.nil?
 
       begin
