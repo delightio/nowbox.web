@@ -22,9 +22,11 @@ describe Aji::Account::Twitter, :unit do
   end
 
   subject do
-    Account::Twitter.create(:uid => '178492493').tap do |a|
+    Account::Twitter.new(:uid => '178492493') do |a|
+      a.stub :id => 1
       a.stub :api => api
       a.stub :mentions => mentions
+      a.stub :save! => true
     end
   end
 
