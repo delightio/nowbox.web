@@ -98,8 +98,29 @@ module Aji
             bob.reload.settings.should == { :a_param => "a value" }
             last_response.body.should == '{"a_param":"a value"}'
           end
+
+          it "sets boolean parameters to booleans not strings" do
+            bob.settings = { :a_param => "old value" }
+            put "#{resource_uri}/#{bob.id}/settings", :settings => {
+              :a_param => true, :b_param => false }
+
+            bob.reload.settings.should == { :a_param => true,
+              :b_param => false }
+            last_response.body.should == '{"a_param":true,"b_param":false}'
+          end
+
+          it "sets numeric parameters to numerics not strings" do
+            bob.settings = { :a_param => "old value" }
+            put "#{resource_uri}/#{bob.id}/settings", :settings => {
+              :a_param => 66, :b_param => 9.9 }
+
+            bob.reload.settings.should == { :a_param => 66,
+              :b_param => 9.9 }
+            last_response.body.should == '{"a_param":66,"b_param":9.9}'
+          end
         end
       end
     end
   end
 end
+

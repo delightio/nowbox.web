@@ -29,8 +29,19 @@ module Aji
       def find_user_by_id_or_error id
         Aji::User.find_by_id(id) or not_found_error!(User, id)
       end
+
       def find_video_by_id_or_error id
         Aji::Video.find_by_id(id) or not_found_error!(Video, id)
+      end
+
+      def parse_param p
+        case
+        when p == 'false' then false
+        when p == 'true' then true
+        when p.to_i.to_s == p then p.to_i
+        when p.to_f.to_s == p then p.to_f
+        else p
+        end
       end
     end
   end

@@ -75,12 +75,14 @@ module Aji
 
       # ## PUT users/:user_id/settings
       # __Updates__ User's updated settings JSON.  
-      # __Returns__ JSON object representing the user's settings.
+      # __Returns__ JSON object representing the user's settings.  
+      # __Required params__ `settings`: The form encoded represenation of the
+      # user's settings.
       put '/:user_id/settings' do
         user = find_user_by_id_or_error params[:user_id]
         user.settings = {}.tap do|settings|
           params[:settings].each do |k,v|
-            settings[k.to_sym] = v
+            settings[k.to_sym] = parse_param v
           end
         end
 
