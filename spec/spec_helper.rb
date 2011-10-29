@@ -13,7 +13,7 @@ Spork.prefork do
 
   require './aji'
 
-  VCR.config do |c|
+  VCR.configure do |c|
     c.cassette_library_dir = "spec/cassettes"
     c.stub_with :typhoeus
     c.default_cassette_options = { :record => :new_episodes }
