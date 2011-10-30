@@ -3,8 +3,8 @@
 # Aji Beta Twitter keys.
 development:
   # TWITTER Beta
-  #CONSUMER_KEY: "Hh1MA1vXVZaN8sjIX2tkjA"
-  #CONSUMER_SECRET: "s8b7fghL0JbHfK3lBDV6nTF61TtglgMonkgAL8y790"
+  # CONSUMER_KEY: "Hh1MA1vXVZaN8sjIX2tkjA"
+  # CONSUMER_SECRET: "s8b7fghL0JbHfK3lBDV6nTF61TtglgMonkgAL8y790"
 
   # Twitter Local
   CONSUMER_KEY: "RWUyehmqjKRBMSlVTeZDw"
@@ -29,12 +29,8 @@ development:
 
 test:
   # TWITTER
-  CONSUMER_KEY: ""
-  CONSUMER_SECRET: ""
-
-  # Twitter Local
-  CONSUMER_KEY: "Hh1MA1vXVZaN8sjIX2tkjA"
-  CONSUMER_SECRET: "s8b7fghL0JbHfK3lBDV6nTF61TtglgMonkgAL8y790"
+  CONSUMER_KEY: "XDYm9fcC4Xb3XYvJpMNw"
+  CONSUMER_SECRET: "93ChiN5zfB1o04cvZgNoP6mmanVnKRfEKUY6vX03A"
 
   # FACEBOOK
   APP_ID: "147264905366497"

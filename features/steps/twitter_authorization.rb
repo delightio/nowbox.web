@@ -9,12 +9,14 @@ class TwitterAuthorization < Spinach::FeatureSteps
     OmniAuth.config.mock_auth[:twitter] = TWITTER_HASH
   end
 
+  @vcr
   When 'the callback url is triggered with a user_id' do
-    @user = Aji::User.create
-    get "auth/twitter?user_id=#{@user.id}"
-    follow_redirect!
+    VCR.use_cassette "twitter/home_feed" do
+      @user = Aji::User.create
+      get "auth/twitter/callback?user_id=#{@user.id}"
 
-    @response = last_response
+      @response = last_response
+    end
   end
 
   Then 'the status code should be 200' do
