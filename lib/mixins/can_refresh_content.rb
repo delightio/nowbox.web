@@ -11,9 +11,7 @@ module Aji
     # added content.
     def refresh_content force=false
       [].tap do |new_videos|
-        if !should_refresh? && content_video_ids.count > 0 && !force
-          return new_videos
-        end
+        next unless should_refresh? or content_video_ids.count == 0 or force
 
         refreshing_content_lock.lock do
           # Use population strategy of subclass if presented.
