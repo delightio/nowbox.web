@@ -43,10 +43,11 @@ module Aji
         Aji.redis.zincrby recent_zset.key, significance, video.id
       end
 
-      # All videos with a lower relevance than min_relevance will be removed.
-      def increment_relevance_in_all_recent_videos amount, min_relevance=0
+      # min_relevance should not be 0 as we are applying a geometric decay
+      def geometric_decay_relevance_in_all_recent_videos by_percent, min_relevance=1
         recent_video_ids.each do |vid|
-          Aji.redis.zincrby recent_zset.key, amount, vid
+          original = recent_zset.score vid
+          recent_zset[vid] = original * (100-by_percent) / 100
         end
         Aji.redis.zremrangebyscore recent_zset.key, "-inf", min_relevance
       end

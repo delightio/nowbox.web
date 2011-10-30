@@ -91,26 +91,26 @@ describe Aji::Mixins::RecentVideos do
     end
   end
 
-  describe "#increment_all_scores_in_recent_videos" do
-    let(:amount) { -10 }
+  describe "#geometric_decay_relevance_in_all_recent_videos" do
+    let(:discount) { 25 }
     before (:each) do
       # 1 + v.id so we won't have 0 relevance
       @videos.each { |v| subject.push_recent v, (1+v.id)*100 }
     end
 
-    it "adjusts all scores by given amount" do
+    it "adjusts all scores by given discount percentage" do
       before_adj = subject.recent_videos.map{ |v| subject.recent_relevance_of v }
-      subject.increment_relevance_in_all_recent_videos amount
+      subject.geometric_decay_relevance_in_all_recent_videos discount
       after_adj = subject.recent_videos.map{ |v| subject.recent_relevance_of v }
       before_adj.each_index do |i|
-        (after_adj[i]-before_adj[i]).should == amount
+        diff = before_adj[i] - after_adj[i]
+        (diff/before_adj[i]).should == discount/100.0
       end
     end
 
     it "removes videos with below minimun relevance after adjustment" do
-      min = -1 * amount
-      subject.push_recent @video, min
-      subject.increment_relevance_in_all_recent_videos amount, min
+      subject.push_recent @video, 1
+      subject.geometric_decay_relevance_in_all_recent_videos discount, 1
       subject.recent_video_ids.should_not include @video.id
     end
 

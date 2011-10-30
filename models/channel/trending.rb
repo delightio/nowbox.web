@@ -12,7 +12,8 @@ module Aji
         start = Time.now
         # We want 1 mention to have effect over 4 hours.
         # 10,000 is default for 1 mention and we refresh 4 times an hour.
-        increment_relevance_in_all_recent_videos -625
+        # 15% geometric decay will be close to having a half life of 1 hour.
+        geometric_decay_relevance_in_all_recent_videos 15
         Aji.log "Adjusted #{recent_video_id_count} recent videos in #{Time.now-start} s."
 
         start = Time.now

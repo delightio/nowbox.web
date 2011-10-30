@@ -29,7 +29,7 @@ describe Aji::Channel::Trending do
         subject.push_recent v
       end
 
-      subject.stub(:increment_relevance_in_all_recent_videos)
+      subject.stub(:geometric_decay_relevance_in_all_recent_videos)
       subject.stub(:create_channels_from_top_authors)
     end
 
@@ -39,7 +39,7 @@ describe Aji::Channel::Trending do
     end
 
     it "adjusts relevances for all recent videos and remove videos with negative relevance" do
-      subject.should_receive(:increment_relevance_in_all_recent_videos).
+      subject.should_receive(:geometric_decay_relevance_in_all_recent_videos).
         with(an_instance_of(Fixnum))
       subject.refresh_content
     end
