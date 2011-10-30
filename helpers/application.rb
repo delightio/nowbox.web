@@ -42,6 +42,9 @@ module Aji
         when p.to_f.to_s == p then p.to_f
         else p
         end
+
+      rescue
+        p
       end
     end
   end
