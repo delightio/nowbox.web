@@ -1,5 +1,7 @@
 module Aji
   class TwitterAPI
+    FARADAY_OPTIONS = { :adapter => :typhoeus }
+
     def initialize consumer_key=nil, consumer_secret=nil, user_opts
       if user_opts.key? :token and user_opts.key? :secret
         @token, @secret = user_opts[:token], user_opts[:secret]
@@ -11,9 +13,10 @@ module Aji
 
       consumer_key ||= Aji.conf['CONSUMER_KEY']
       consumer_secret ||= Aji.conf['CONSUMER_SECRET']
-      @client = Twitter::Client.new :oauth_token => @token,
-        :oauth_token_secret => @secret, :consumer_key => consumer_key,
-        :consumer_secret => consumer_secret
+      @client = Twitter::Client.new oauth_token: @token,
+        oauth_token_secret: @secret, consumer_key: consumer_key,
+        consumer_secret: consumer_secret,
+        faraday_options: { :adapter => :typhoeus }
     end
 
     def video_mentions_in_feed
@@ -71,7 +74,7 @@ module Aji
     end
 
     def self.client
-      @@singleton = TwitterAPI.new
+      @@singleton = TwitterAPI.new faraday_options: { :adapter => :typhoeus }
     end
   end
 end
