@@ -11,7 +11,7 @@ module Aji
     # added content.
     def refresh_content force=false
       [].tap do |new_videos|
-        if recently_populated? && content_video_ids.count > 0 && !force
+        if !should_refresh? && content_video_ids.count > 0 && !force
           return new_videos
         end
 

@@ -18,6 +18,53 @@ module Aji
 
     it_behaves_like "any channel"
 
+    describe "#refresh_period" do
+      subject { Channel::Account.create }
+      before :each do
+        user = User.create
+        video = Video.new
+        video.save :validate => false
+        @viewed = Event.create :user => user, :channel => subject,
+          :video => video, :action => :view
+        @subscribed = Event.create :user => user, :channel => subject,
+          :action => :subscribe, :created_at => 10.hours.ago
+      end
+
+      it "depends on the last viewed event" do
+        @viewed.update_attribute :created_at, 2.hours.ago
+        subject.refresh_period.should == 2.hours
+
+        @viewed.update_attribute :created_at, 10.minutes.ago
+        subject.refresh_period.should == 1.hours
+      end
+
+      it "always use the latest of the view or subscribe events for decision" do
+        @viewed.update_attribute :created_at, 5.hours.ago
+        @subscribed.update_attribute :created_at, 10.minutes.ago
+        subject.refresh_period.should == 1.hours
+
+        @viewed.update_attribute :created_at, 10.minutes.ago
+        @subscribed.update_attribute :created_at, 5.hours.ago
+        subject.refresh_period.should == 1.hours
+
+      end
+    end
+
+    describe "#should_refresh?" do
+      subject { Channel::Account.create }
+      it "true if we have not refreshed within the refresh period" do
+        subject.stub :refresh_period => 1.hours
+        subject.stub :populated_at => 2.hours.ago
+        subject.should_refresh?.should == true
+      end
+
+      it "false otherwise" do
+        subject.stub :refresh_period => 2.hours
+        subject.stub :populated_at => 1.hours.ago
+        subject.should_refresh?.should == false
+      end
+    end
+
     describe "#available?" do
       let(:good_account) { mock "good guy", :available? => true}
       let(:bad_account)  { mock "bad guy", :available? => false}
