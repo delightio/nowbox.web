@@ -30,6 +30,7 @@ describe Aji::Channel::Trending do
       end
 
       subject.stub(:geometric_decay_relevance_in_all_recent_videos)
+      subject.stub(:remove_non_trending_videos)
       subject.stub(:create_channels_from_top_authors)
     end
 
@@ -95,6 +96,17 @@ describe Aji::Channel::Trending do
       subject.should_receive(:increment_relevance_of_recent_video).
         with(video, trigger.significance)
       subject.promote_video(video, trigger)
+    end
+  end
+
+  describe "#remove_non_trending_videos" do
+    let(:old_trending_video_ids) { [1,2,3,10] }
+    let(:new_trending_video_ids) { [1,2,3,4,5] }
+    it "removes videos that are no longer trending." do
+      subject.stub :content_video_ids => old_trending_video_ids
+      subject.stub :recent_video_ids => new_trending_video_ids
+      subject.should_receive(:pop_by_id).with(10)
+      subject.send :remove_non_trending_videos
     end
   end
 
