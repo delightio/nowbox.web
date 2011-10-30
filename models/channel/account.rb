@@ -13,11 +13,11 @@ module Aji
     end
 
     def refresh_period
-      last_viewed = events.viewed.latest(1).first
-      return super if last_viewed.nil?
-      last_subscribed = events.subscribed.latest(1).first
-      return super if last_subscribed.nil?
-      timestamp = [last_viewed.created_at, last_subscribed.created_at].max # closet to now
+      recent_events = [events.viewed.latest(1).first,
+                       events.subscribed.latest(1).first].compact
+      return super if recent_events.empty? # they could be nil.
+
+      timestamp = (recent_events.map &:created_at).max # closet to now
 
       period =
         if timestamp > Time.now-super
