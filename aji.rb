@@ -79,12 +79,6 @@ module Aji
 
   class API < Grape::API
     version '1'
-
-    resource :info do
-      get do
-        { :current_client_version => Aji.conf['CURRENT_CLIENT_VERSION'] }
-      end
-    end
   end
 end
 
@@ -98,6 +92,7 @@ require_relative 'lib/tanker_defaults'
 require_relative 'lib/decay'
 require_relative 'lib/parsers'
 require_relative 'lib/searcher'
+require_relative 'lib/info'
 
 Dir.glob("models/*.rb").each { |r| require_relative r }
 # Must load channel subtypes after other models for dependency reasons.
