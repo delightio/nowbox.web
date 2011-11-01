@@ -79,8 +79,11 @@ module Aji
 
   class API < Grape::API
     version '1'
-    get do
-      "API Version 1 up and running!"
+
+    resource :info do
+      get do
+        { :current_client_version => Aji.conf['CURRENT_CLIENT_VERSION'] }
+      end
     end
   end
 end
@@ -89,7 +92,7 @@ end
 # Monkey Patching
 require_relative 'lib/patches/string'
 
-Mixins = Module.new
+Aji::Mixins = Module.new
 Dir.glob("lib/mixins/*.rb").each { |r| require_relative r }
 require_relative 'lib/tanker_defaults'
 require_relative 'lib/decay'
