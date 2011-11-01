@@ -84,7 +84,7 @@ module Aji
 
       rescue => e
         Aji.log :WARN, "#{e.class}: #{e.message}"
-        MultiJson.encode :error => 'Unable to authenticate'
+        MultiJson.encode :error => 'Unable to authenticate', :message => e.message
       end
     end
 
