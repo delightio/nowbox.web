@@ -50,6 +50,7 @@ describe Aji::Account::Twitter, :unit do
   end
 
   describe "#mark_spammer" do
+    before { subject.stub :blacklist }
     it "marks own mentions as spam and destroys them" do
       mentions.each {|m| m.should_receive :mark_spam }
       subject.mark_spammer
@@ -112,14 +113,16 @@ describe Aji::Account::Twitter, :unit do
            c.stub :id => 1
            c.stub :save => true
            c.stub :refresh_content
-           Channel::TwitterStream.should_receive(:create).with(
+           c.owner.stub :save => true
+           Channel::TwitterStream.stub(:create).with(
              :owner => subject, :title => subject.username).and_return(c)
          end
       end
 
       it "creates a channel for the account's twitter stream" do
-        subject.stub(:save => true)
-
+           Channel::TwitterStream.should_receive(:create).with(
+             :owner => subject, :title => subject.username).and_return(
+               stream_channel)
         subject.build_stream_channel
       end
 
@@ -144,11 +147,14 @@ describe Aji::Account::Twitter, :unit do
       end
 
       context "when the account is already in the database" do
-        let!(:existing) do
+        let(:existing) do
           Account::Twitter.create! uid: "178492493", provider: 'twitter'
         end
 
         it "finds the existing account" do
+          # invoke create! within example so it gets cleared at the end.
+          existing
+
           subject.should == existing.reload
         end
 
