@@ -17,6 +17,7 @@
           <a class="source" href="controllers/categories_controller.html">categories_controller.rb</a>
           <a class="source" href="controllers/channels_controller.html">channels_controller.rb</a>
           <a class="source" href="controllers/events_controller.html">events_controller.rb</a>
+          <a class="source" href="controllers/info_controller.html">info_controller.rb</a>
           <a class="source" href="controllers/shares_controller.html">shares_controller.rb</a>
           <a class="source" href="controllers/users_controller.html">users_controller.rb</a>
           <a class="source" href="controllers/videos_controller.html">videos_controller.rb</a>
@@ -75,21 +76,6 @@ loading and application level settings are done here.</p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-4">&#182;</a>
         </div>
-        <p>Debug mode spawns consoles bound to specific function runtimmes. To
-find places where this may happen use <code>git grep binding\.pry</code>
-Turning it on requires overriding the method.</p>
-      </td>
-      <td class=code>
-        <div class='highlight'><pre>  <span class="k">def</span> <span class="nc">Aji</span><span class="o">.</span><span class="nf">debug</span>
-    <span class="kp">false</span>
-  <span class="k">end</span></pre></div>
-      </td>
-    </tr>
-    <tr id='section-5'>
-      <td class=docs>
-        <div class="pilwrap">
-          <a class="pilcrow" href="#section-5">&#182;</a>
-        </div>
         <p>Logging interface for local development and heroku.
 There are four internal Log levels aliased to the standard SYSLOG levels.
 The INFO level is used if no level is specified. Other options are <code>:DEBUG</code>,
@@ -121,10 +107,10 @@ should not be used.</p>
   <span class="k">end</span></pre></div>
       </td>
     </tr>
-    <tr id='section-6'>
+    <tr id='section-5'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-6">&#182;</a>
+          <a class="pilcrow" href="#section-5">&#182;</a>
         </div>
         <p>Set Rack environment if not specified.</p>
       </td>
@@ -132,10 +118,10 @@ should not be used.</p>
         <div class='highlight'><pre>  <span class="no">RACK_ENV</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;RACK_ENV&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s2">&quot;development&quot;</span></pre></div>
       </td>
     </tr>
-    <tr id='section-7'>
+    <tr id='section-6'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-7">&#182;</a>
+          <a class="pilcrow" href="#section-6">&#182;</a>
         </div>
         <p>Accessor for the configuration hash. If none has been created a new hash is
 yielded. This hash is made immutable at the end of <code>config/setup.rb</code>.</p>
@@ -144,10 +130,10 @@ yielded. This hash is made immutable at the end of <code>config/setup.rb</code>.
         <div class='highlight'><pre>  <span class="k">def</span> <span class="nc">Aji</span><span class="o">.</span><span class="nf">conf</span><span class="p">;</span> <span class="vi">@conf_hash</span> <span class="o">||=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span><span class="p">;</span> <span class="k">end</span></pre></div>
       </td>
     </tr>
-    <tr id='section-8'>
+    <tr id='section-7'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-8">&#182;</a>
+          <a class="pilcrow" href="#section-7">&#182;</a>
         </div>
         <p>Handles initialization and preprocessing of application settings be they
 from Heroku&rsquo;s Environment or a local <code>settings.yml</code>.</p>
@@ -156,29 +142,32 @@ from Heroku&rsquo;s Environment or a local <code>settings.yml</code>.</p>
         <div class='highlight'><pre>  <span class="n">require_relative</span> <span class="s1">&#39;config/setup.rb&#39;</span></pre></div>
       </td>
     </tr>
-    <tr id='section-9'>
+    <tr id='section-8'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-9">&#182;</a>
+          <a class="pilcrow" href="#section-8">&#182;</a>
         </div>
         <p>Establish Redis connection and initialize Redis-backed utilities.</p>
       </td>
       <td class=code>
-        <div class='highlight'><pre>  <span class="k">def</span> <span class="nc">Aji</span><span class="o">.</span><span class="nf">redis</span><span class="p">;</span> <span class="vi">@redis</span> <span class="o">||=</span> <span class="no">Redis</span><span class="o">.</span><span class="n">new</span> <span class="n">conf</span><span class="o">[</span><span class="s1">&#39;REDIS&#39;</span><span class="o">]</span><span class="p">;</span> <span class="k">end</span>
+        <div class='highlight'><pre>  <span class="k">def</span> <span class="nc">Aji</span><span class="o">.</span><span class="nf">redis</span>
+    <span class="vi">@redis</span> <span class="o">||=</span> <span class="no">Redis</span><span class="o">.</span><span class="n">new</span> <span class="n">conf</span><span class="o">[</span><span class="s1">&#39;REDIS&#39;</span><span class="o">]</span>
+  <span class="k">end</span>
+
   <span class="no">Resque</span><span class="o">.</span><span class="n">redis</span> <span class="o">=</span> <span class="n">redis</span>
   <span class="no">Redis</span><span class="o">::</span><span class="no">Objects</span><span class="o">.</span><span class="n">redis</span> <span class="o">=</span> <span class="n">redis</span>
   <span class="no">Resque</span><span class="o">.</span><span class="n">schedule</span> <span class="o">=</span> <span class="n">conf</span><span class="o">[</span><span class="s1">&#39;RESQUE_SCHEDULE&#39;</span><span class="o">]</span>
-  <span class="no">Resque</span><span class="o">.</span><span class="n">before_fork</span> <span class="o">=</span> <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">establish_connection</span><span class="p">(</span>
+  <span class="no">Resque</span><span class="o">.</span><span class="n">before_fork</span> <span class="o">=</span> <span class="nb">proc</span> <span class="p">{</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">establish_connection</span><span class="p">(</span>
     <span class="no">Aji</span><span class="o">.</span><span class="n">conf</span><span class="o">[</span><span class="s1">&#39;DATABASE&#39;</span><span class="o">]</span><span class="p">)</span> <span class="p">}</span>
   <span class="no">Resque</span><span class="o">::</span><span class="no">Failure</span><span class="o">::</span><span class="no">MultipleWithRetrySuppression</span><span class="o">.</span><span class="n">classes</span> <span class="o">=</span>
     <span class="o">[</span><span class="no">Resque</span><span class="o">::</span><span class="no">Failure</span><span class="o">::</span><span class="no">Redis</span><span class="o">]</span>
   <span class="no">Resque</span><span class="o">::</span><span class="no">Failure</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="no">Resque</span><span class="o">::</span><span class="no">Failure</span><span class="o">::</span><span class="no">MultipleWithRetrySuppression</span></pre></div>
       </td>
     </tr>
-    <tr id='section-10'>
+    <tr id='section-9'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-10">&#182;</a>
+          <a class="pilcrow" href="#section-9">&#182;</a>
         </div>
         <p>Establish ActiveRecord conneciton and run all necessary migrations.</p>
       </td>
@@ -187,10 +176,10 @@ from Heroku&rsquo;s Environment or a local <code>settings.yml</code>.</p>
   <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">default_timezone</span> <span class="o">=</span> <span class="ss">:utc</span></pre></div>
       </td>
     </tr>
-    <tr id='section-11'>
+    <tr id='section-10'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-11">&#182;</a>
+          <a class="pilcrow" href="#section-10">&#182;</a>
         </div>
         <p>For Account and Channel search</p>
       </td>
@@ -198,10 +187,10 @@ from Heroku&rsquo;s Environment or a local <code>settings.yml</code>.</p>
         <div class='highlight'><pre>  <span class="no">Tanker</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="no">Aji</span><span class="o">.</span><span class="n">conf</span><span class="o">[</span><span class="s1">&#39;INDEXTANK_API_URL&#39;</span><span class="o">]</span> <span class="p">}</span></pre></div>
       </td>
     </tr>
-    <tr id='section-12'>
+    <tr id='section-11'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-12">&#182;</a>
+          <a class="pilcrow" href="#section-11">&#182;</a>
         </div>
         <p>An application specific error class.</p>
       </td>
@@ -209,10 +198,10 @@ from Heroku&rsquo;s Environment or a local <code>settings.yml</code>.</p>
         <div class='highlight'><pre>  <span class="k">class</span> <span class="nc">Error</span> <span class="o">&lt;</span> <span class="no">RuntimeError</span><span class="p">;</span> <span class="k">end</span></pre></div>
       </td>
     </tr>
-    <tr id='section-13'>
+    <tr id='section-12'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-13">&#182;</a>
+          <a class="pilcrow" href="#section-12">&#182;</a>
         </div>
         <p>An error to raise when a required interface method has not been overridden
 by a subclass.</p>
@@ -222,34 +211,35 @@ by a subclass.</p>
 
   <span class="k">class</span> <span class="nc">API</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
     <span class="n">version</span> <span class="s1">&#39;1&#39;</span>
-    <span class="n">get</span> <span class="k">do</span>
-      <span class="s2">&quot;API Version 1 up and running!&quot;</span>
-    <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span></pre></div>
       </td>
     </tr>
-    <tr id='section-14'>
+    <tr id='section-13'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-14">&#182;</a>
+          <a class="pilcrow" href="#section-13">&#182;</a>
         </div>
         <p>Monkey Patching</p>
       </td>
       <td class=code>
         <div class='highlight'><pre><span class="n">require_relative</span> <span class="s1">&#39;lib/patches/string&#39;</span>
 
-<span class="no">Mixins</span> <span class="o">=</span> <span class="no">Module</span><span class="o">.</span><span class="n">new</span>
+<span class="no">Aji</span><span class="o">::</span><span class="no">Mixins</span> <span class="o">=</span> <span class="no">Module</span><span class="o">.</span><span class="n">new</span>
 <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;lib/mixins/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span>
-<span class="nb">require</span> <span class="s1">&#39;./lib/tanker_defaults&#39;</span>
+<span class="n">require_relative</span> <span class="s1">&#39;lib/tanker_defaults&#39;</span>
+<span class="n">require_relative</span> <span class="s1">&#39;lib/decay&#39;</span>
+<span class="n">require_relative</span> <span class="s1">&#39;lib/parsers&#39;</span>
+<span class="n">require_relative</span> <span class="s1">&#39;lib/searcher&#39;</span>
+<span class="n">require_relative</span> <span class="s1">&#39;lib/info&#39;</span>
 
 <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;models/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span></pre></div>
       </td>
     </tr>
-    <tr id='section-15'>
+    <tr id='section-14'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-15">&#182;</a>
+          <a class="pilcrow" href="#section-14">&#182;</a>
         </div>
         <p>Must load channel subtypes after other models for dependency reasons.</p>
       </td>
@@ -264,30 +254,20 @@ by a subclass.</p>
 <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;queues/mention/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span></pre></div>
       </td>
     </tr>
-    <tr id='section-16'>
+    <tr id='section-15'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-16">&#182;</a>
+          <a class="pilcrow" href="#section-15">&#182;</a>
         </div>
         <p>Add Sinatra web viewer.</p>
-      </td>
-      <td class=code>
-        <div class='highlight'><pre><span class="n">require_relative</span> <span class="s2">&quot;lib/viewer/viewer&quot;</span>
-<span class="n">require_relative</span> <span class="s2">&quot;lib/mailer/mailer&quot;</span></pre></div>
-      </td>
-    </tr>
-    <tr id='section-17'>
-      <td class=docs>
-        <div class="pilwrap">
-          <a class="pilcrow" href="#section-17">&#182;</a>
-        </div>
-        <p>Add miscelaneous library code.</p>
 
       </td>
       <td class=code>
-        <div class='highlight'><pre><span class="nb">require</span> <span class="s1">&#39;./lib/decay&#39;</span>
-<span class="nb">require</span> <span class="s1">&#39;./lib/parsers&#39;</span>
-<span class="nb">require</span> <span class="s1">&#39;./lib/searcher&#39;</span></pre></div>
+        <div class='highlight'><pre><span class="n">require_relative</span> <span class="s1">&#39;lib/google_auth&#39;</span>
+<span class="n">require_relative</span> <span class="s1">&#39;lib/viewer/viewer&#39;</span>
+<span class="n">require_relative</span> <span class="s1">&#39;lib/mailer/mailer&#39;</span>
+
+<span class="n">require_relative</span> <span class="s1">&#39;app&#39;</span></pre></div>
       </td>
     </tr>
   </table>

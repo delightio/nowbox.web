@@ -17,6 +17,7 @@
           <a class="source" href="categories_controller.html">categories_controller.rb</a>
           <a class="source" href="channels_controller.html">channels_controller.rb</a>
           <a class="source" href="events_controller.html">events_controller.rb</a>
+          <a class="source" href="info_controller.html">info_controller.rb</a>
           <a class="source" href="shares_controller.html">shares_controller.rb</a>
           <a class="source" href="users_controller.html">users_controller.rb</a>
           <a class="source" href="videos_controller.html">videos_controller.rb</a>
@@ -69,7 +70,7 @@ eval-ing.</p>
 
       <span class="n">env_hash</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">dup</span>
       <span class="no">Aji</span><span class="o">.</span><span class="n">log</span> <span class="ss">:WARN</span><span class="p">,</span> <span class="s2">&quot;OAuth failure: </span><span class="si">#{</span><span class="n">env_hash</span><span class="o">.</span><span class="n">inspect</span><span class="si">}</span><span class="s2">&quot;</span>
-      <span class="n">error</span> <span class="s2">&quot;OAuth authentication failed&quot;</span><span class="p">,</span> <span class="mi">500</span>
+      <span class="o">[</span><span class="mi">500</span><span class="p">,</span> <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s2">&quot;Unable to authenticate at this time&quot;</span><span class="p">)</span><span class="o">]</span>
     <span class="k">end</span></pre></div>
       </td>
     </tr>
@@ -130,14 +131,24 @@ to <code>http://api.nowbox.com/auth/failure</code>.</em></p>
       <td class=code>
         <div class='highlight'><pre>    <span class="n">get</span> <span class="s1">&#39;/:provider/callback&#39;</span> <span class="k">do</span>
       <span class="n">content_type</span> <span class="ss">:json</span>
-
       <span class="n">user</span> <span class="o">=</span> <span class="no">Aji</span><span class="o">::</span><span class="no">User</span><span class="o">.</span><span class="n">find_by_id</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
-      <span class="k">return</span> <span class="p">{</span> <span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s2">&quot;User[</span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span><span class="si">}</span><span class="s2">] does not exist.&quot;</span> <span class="p">}</span> <span class="k">if</span>
+      <span class="k">return</span> <span class="o">[</span><span class="mi">404</span><span class="p">,</span>
+        <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s2">&quot;User[</span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span><span class="si">}</span><span class="s2">] not found.&quot;</span><span class="p">)</span><span class="o">]</span> <span class="k">if</span>
         <span class="n">user</span><span class="o">.</span><span class="n">nil?</span>
 
       <span class="k">begin</span>
-        <span class="n">auth_hash</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">&#39;omniauth.auth&#39;</span><span class="o">]</span>
-        <span class="n">provider_class</span> <span class="o">=</span> <span class="k">case</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;provider&#39;</span><span class="o">]</span>
+        <span class="n">auth_hash</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">&#39;omniauth.auth&#39;</span><span class="o">]</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-5'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-5">&#182;</a>
+        </div>
+        <p>TODO: Replace case-when with <code>Account.const_get</code></p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>        <span class="n">provider_class</span> <span class="o">=</span> <span class="k">case</span> <span class="n">auth_hash</span><span class="o">[</span><span class="s1">&#39;provider&#39;</span><span class="o">]</span>
                          <span class="k">when</span> <span class="s1">&#39;twitter&#39;</span> <span class="k">then</span> <span class="no">Account</span><span class="o">::</span><span class="no">Twitter</span>
                          <span class="k">when</span> <span class="s1">&#39;facebook&#39;</span> <span class="k">then</span> <span class="no">Account</span><span class="o">::</span><span class="no">Facebook</span>
                          <span class="k">when</span> <span class="s1">&#39;you_tube&#39;</span> <span class="k">then</span> <span class="no">Account</span><span class="o">::</span><span class="no">Youtube</span>
@@ -145,11 +156,13 @@ to <code>http://api.nowbox.com/auth/failure</code>.</em></p>
 
         <span class="n">account</span> <span class="o">=</span> <span class="n">provider_class</span><span class="o">.</span><span class="n">from_auth_hash</span> <span class="n">auth_hash</span>
 
-        <span class="n">user</span><span class="o">.</span><span class="n">subscribe_social</span> <span class="n">account</span><span class="o">.</span><span class="n">create_stream_channel</span>
+        <span class="n">account</span><span class="o">.</span><span class="n">sign_in_as</span> <span class="n">user</span>
+
         <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span> <span class="n">user</span><span class="o">.</span><span class="n">serializable_hash</span>
 
-      <span class="k">rescue</span>
-        <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span> <span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s1">&#39;Unable to authenticate&#39;</span>
+      <span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">e</span>
+        <span class="no">Aji</span><span class="o">.</span><span class="n">log</span> <span class="ss">:WARN</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">e</span><span class="o">.</span><span class="n">class</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span> <span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s1">&#39;Unable to authenticate&#39;</span><span class="p">,</span> <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span>
       <span class="k">end</span>
     <span class="k">end</span></pre></div>
       </td>

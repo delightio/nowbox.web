@@ -17,6 +17,7 @@
           <a class="source" href="categories_controller.html">categories_controller.rb</a>
           <a class="source" href="channels_controller.html">channels_controller.rb</a>
           <a class="source" href="events_controller.html">events_controller.rb</a>
+          <a class="source" href="info_controller.html">info_controller.rb</a>
           <a class="source" href="shares_controller.html">shares_controller.rb</a>
           <a class="source" href="users_controller.html">users_controller.rb</a>
           <a class="source" href="videos_controller.html">videos_controller.rb</a>
@@ -167,7 +168,9 @@ message
         <h2>PUT users/:user_id/settings</h2>
 
 <p><strong>Updates</strong> User&rsquo;s updated settings JSON.<br>
-<strong>Returns</strong> JSON object representing the user&rsquo;s settings.</p>
+<strong>Returns</strong> JSON object representing the user&rsquo;s settings.<br>
+<strong>Required params</strong> <code>settings</code>: The form encoded represenation of the
+user&rsquo;s settings.</p>
 
       </td>
       <td class=code>
@@ -175,7 +178,7 @@ message
         <span class="n">user</span> <span class="o">=</span> <span class="n">find_user_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
         <span class="n">user</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="p">{}</span><span class="o">.</span><span class="n">tap</span> <span class="k">do</span><span class="o">|</span><span class="n">settings</span><span class="o">|</span>
           <span class="n">params</span><span class="o">[</span><span class="ss">:settings</span><span class="o">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="o">|</span>
-            <span class="n">settings</span><span class="o">[</span><span class="n">k</span><span class="o">.</span><span class="n">to_sym</span><span class="o">]</span> <span class="o">=</span> <span class="n">v</span>
+            <span class="n">settings</span><span class="o">[</span><span class="n">k</span><span class="o">.</span><span class="n">to_sym</span><span class="o">]</span> <span class="o">=</span> <span class="n">parse_param</span> <span class="n">v</span>
           <span class="k">end</span>
         <span class="k">end</span>
 
