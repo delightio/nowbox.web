@@ -82,9 +82,14 @@ module Aji
         cooldown: 1.hour, hits_per_session: 250
     end
 
-    private
+
     def client
       @@client ||= YouTubeIt::Client.new dev_key: Aji.conf['YOUTUBE_KEY']
+    end
+    private :client
+
+    def self.api
+      @singleton ||= new
     end
 
     class DataGrabber
@@ -219,3 +224,4 @@ module Aji
     end
   end
 end
+

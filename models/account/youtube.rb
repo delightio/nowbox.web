@@ -91,15 +91,12 @@ module Aji
     end
 
     def self.create_if_existing uid
-      return found = find_by_lower_uid(uid)if found
+      account = find_by_lower_uid(uid)
+      return account unless account.nil?
 
-      new_account = new :uid => uid
-      return nil unless new_account.existing?
-
-      # Exists but we don't have it
-      # Search db again just in case the account wasn't indexed for
-      # other reasons, e.g., not enough content videos
-      Account::Youtube.find_or_create_by_lower_uid uid
+      if YoutubeAPI.api.valid_uid? uid
+        find_or_create_by_lower_uid uid
+      end
     end
 
     def blacklisted_videos

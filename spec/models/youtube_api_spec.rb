@@ -111,6 +111,19 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
       end
     end
 
+    describe ".api" do
+      it "initializes a new api instance when none is set" do
+        YoutubeAPI.should_receive :new
+
+        YoutubeAPI.api
+      end
+
+      it "uses a class instance variable to cache the singleton object" do
+        YoutubeAPI.api.object_id.
+          should == YoutubeAPI.instance_variable_get(:@singleton).object_id
+      end
+    end
+
     describe "#video_info" do
       it "hits youtube twice: 1 for video_info call and 1 for author_info" do
         subject.tracker.should_receive(:hit!).twice
