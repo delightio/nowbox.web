@@ -1,12 +1,12 @@
 # Info Controller
 # ===============
-# Info resource JSON:
-# { `current_version`: "VERSION_STRING",
-#   `minimum_version`: "VERSION_STRING",
-#   `link`: {
-#     `rel`: "latest",
-#     `url`: "APP_URL"
-#   }
+# Info resource JSON:  
+# { `current_version`: "VERSION_STRING",  
+#   `minimum_version`: "VERSION_STRING",  
+#   `link`: {  
+#     `rel`: "latest",  
+#     `url`: "APP_URL"  
+#   }  
 # }
 module Aji
   class API
@@ -22,7 +22,7 @@ module Aji
         begin
           Info.for_device params[:device]
         rescue => e
-          { :error => e.message }
+          error!({ :error => e.message }, 400)
         end
       end
     end
