@@ -59,6 +59,7 @@ gem 'pony'
 # Testing gems.
 group :test do
   gem 'vcr', '~>2.0.0.beta1'
+  gem 'webmock'
   gem 'rack-test', :require => 'rack/test'
   gem 'rspec'
   gem 'database_cleaner'
