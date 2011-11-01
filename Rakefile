@@ -22,7 +22,7 @@ end
 
 # Load the Aji environment.
 task :environment do
-  puts "Loading Aji environment."
+  puts "Loading Aji #{ENV['RACK_ENV']} environment."
   require_relative 'aji'
 end
 
