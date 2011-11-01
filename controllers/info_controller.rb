@@ -20,7 +20,7 @@ module Aji
       # `android_handset`, `ipad`, `iphone`
       get do
         begin
-          Info.for_client params[:device]
+          Info.for_device params[:device]
         rescue => e
           { :error => e.message }
         end
