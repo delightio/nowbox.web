@@ -140,7 +140,7 @@ describe Account::Facebook, :unit do
       subject.sign_in_as user
     end
 
-    it "enables autoposting of shares for this user" do
+    xit "enables autoposting of shares for this user" do
       user.should_receive :enable_facebook_post
 
       subject.sign_in_as user
