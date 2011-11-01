@@ -53,7 +53,7 @@ module Aji
         watched_video event.video, event.created_at
         favorite_video event.video, event.created_at
         # ## Pending iOS support.
-        #create_share_from_event event
+        create_share_from_event event
 
       when :unfavorite
         unfavorite_video event.video
@@ -123,12 +123,22 @@ module Aji
       end
     end
 
+    def enable_twitter_post
+      settings[:post_to_twitter] = true
+      save
+    end
+
     def facebook_account
       if c = social_channels.find{|c| c.class == Channel::FacebookStream }
         c.owner
       else
         nil
       end
+    end
+
+    def enable_facebook_post
+      settings[:post_to_facebook] = true
+      save
     end
 
     def autopost_accounts

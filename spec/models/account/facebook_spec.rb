@@ -131,11 +131,17 @@ describe Account::Facebook, :unit do
         a.stub :build_stream_channel => stream_channel
       end
     end
-    let(:user) { stub :subscribe_social => true }
+    let(:user) { stub :subscribe_social => true, :enable_facebook_post => true }
     let(:stream_channel) { stub }
 
     it "subscribes the user to this account's stream channel" do
       user.should_receive(:subscribe_social).with(stream_channel)
+
+      subject.sign_in_as user
+    end
+
+    it "enables autoposting of shares for this user" do
+      user.should_receive :enable_facebook_post
 
       subject.sign_in_as user
     end

@@ -12,6 +12,7 @@ describe Aji::User do
       u.stub(:history_channel => stub(:merge! => true))
       u.stub(:favorite_channel => stub(:merge! => true))
       u.stub(:queue_channel => stub(:merge! => true))
+      u.stub :save => true
     end
   end
 
@@ -111,7 +112,6 @@ describe Aji::User do
 
 
       specify "share favorites a video and creates a share from the event" do
-        pending "iOS Sharing support"
         event.stub :action => :share
         subject.should_receive(:favorite_video).with(video, event.created_at)
         subject.should_receive(:watched_video).with(video, event.created_at)
@@ -464,6 +464,24 @@ describe Aji::User do
       end
     end
 
+    describe "#enable_twitter_post" do
+      subject { User.new }
+      it "sets :post_to_twitter to true" do
+        subject.enable_twitter_post.should be_true
+
+        subject.reload.settings[:post_to_twitter].should be_true
+      end
+    end
+
+    describe "#enable_facebook_post" do
+      subject { User.new }
+      it "sets :post_to_facebook to true" do
+        subject.enable_facebook_post.should be_true
+
+        subject.reload.settings[:post_to_facebook].should be_true
+      end
+    end
+
     describe "#autopost_accounts" do
       let(:twitter_account) { mock "twitter account" }
       let(:facebook_account) { mock "facebook account" }
@@ -484,7 +502,6 @@ describe Aji::User do
   end
 
   describe "#create_share_from_event" do
-    #pending "Enabling of the share system"
     subject do
       User.new do |u|
         u.stub :id => 1

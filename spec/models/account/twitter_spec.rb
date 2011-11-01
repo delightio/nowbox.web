@@ -153,8 +153,10 @@ describe Aji::Account::Twitter, :unit do
         end
 
         describe "uses auth_hash information for user" do
+          its(:username) do
+            should == auth_hash['extra']['user_hash']['screen_name']
+          end
           its(:uid) { should == auth_hash['uid'] }
-          its(:username) { should == auth_hash['extra']['user_hash']['screen_name'] }
           its(:credentials) { should == auth_hash['credentials'] }
           its(:info) { should == auth_hash['extra']['user_hash'] }
         end
@@ -180,11 +182,17 @@ describe Aji::Account::Twitter, :unit do
         a.stub :build_stream_channel => stream_channel
       end
     end
-    let(:user) { stub :subscribe_social => true }
+    let(:user) { stub :subscribe_social => true, :enable_twitter_post => true }
     let(:stream_channel) { stub }
 
     it "subscribes the user to this account's stream channel" do
       user.should_receive(:subscribe_social).with(stream_channel)
+
+      subject.sign_in_as user
+    end
+
+    it "enables autoposting of shares for this user" do
+      user.should_receive :enable_twitter_post
 
       subject.sign_in_as user
     end

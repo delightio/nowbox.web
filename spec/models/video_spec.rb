@@ -121,6 +121,20 @@ module Aji
       end
     end
 
+    describe "#source_link" do
+      specify "youtu.be short links for youtube videos" do
+        subject.stub :source => :youtube
+
+        subject.source_link.should == "http://youtu.be/afakevideo1"
+      end
+
+      specify "regular vimeo links for vimeo videos" do
+        subject.stub :source => :vimeo
+
+        subject.source_link.should == "http://vimeo.com/afakevideo1"
+      end
+    end
+
     describe "#serializable_hash" do
       before :each do
         subject.stub(:author).and_return mock("author",

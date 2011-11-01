@@ -65,11 +65,9 @@ module Aji
 
     def thumbnail_uri
       case source
-             when :youtube
-               "http://img.youtube.com/vi/#{self.external_id}/0.jpg"
-             else
-               ""
-             end
+      when :youtube then "http://img.youtube.com/vi/#{self.external_id}/0.jpg"
+      else ""
+      end
     end
 
     # Since Video#relevance is usually used when calculating a large collection
@@ -82,6 +80,14 @@ module Aji
         time_diffs << mention.age(at_time_i)
       end
       Integer Decay.exponentially time_diffs
+    end
+
+    def source_link
+      case source
+      when :youtube then "http://youtu.be/#{external_id}"
+      when :vimeo then "http://vimeo.com/#{external_id}"
+      else ""
+      end
     end
 
     def serializable_hash options={}
