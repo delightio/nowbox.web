@@ -11,11 +11,17 @@ module Aji
     validates_presence_of :user
     validates_presence_of :video
 
+    before_create :default_message
+
     def link
       #"http://#{Aji.conf['TLD']}/share/#{id}"
 
       # Using source link during beta-testing phase.
       video.source_link
+    end
+
+    def default_message
+      self.message ||= video.title
     end
   end
 end
