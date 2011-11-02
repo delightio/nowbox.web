@@ -37,6 +37,11 @@ task :heroku_console do
   system "heroku run console"
 end
 
+task :cc => :client_console
+task :client_console do
+  system "ruby script/client_console.rb"
+end
+
 task :flog do
   sh %(flog --continue #{source_files * ' '})
 end
