@@ -205,10 +205,9 @@ module Aji
     end
 
     def create_share_from_event event
-      autopost_accounts.each_with_object(Share.create user: event.user,
-        video: event.video) do |account, share|
-          Aji.log "Publishing Share[#{share.id}] to Account[#{account.id}]"
-          account.background_publish share
+      share = Share.create user: event.user, video: event.video
+      autopost_accounts.each do |account|
+        account.background_publish share
       end
     end
 
