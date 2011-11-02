@@ -113,7 +113,9 @@ module Aji
 
     def sign_in_as user
       Aji.log "User[#{user.id}] authorized Account::Youtube[#{id}]"
-      YoutubeSync.new user, self
+      # TODO: Filler until youtube sync is written.
+      Channel.featured.each { |c| user.subscribe c }
+      #YoutubeSync.new user, self
     end
 
     def self.from_auth_hash auth_hash
