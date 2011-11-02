@@ -1,0 +1,185 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/videos/3307vMsCG0I?key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=entry
+      expires:
+      - Wed, 02 Nov 2011 00:55:21 GMT
+      date:
+      - Wed, 02 Nov 2011 00:55:21 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - ! '*'
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"A0MMRX47eCp7I2A9WhRTEUo."
+      last-modified:
+      - Tue, 01 Nov 2011 20:31:24 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: <?xml version='1.0' encoding='UTF-8'?><entry xmlns='http://www.w3.org/2005/Atom'
+      xmlns:media='http://search.yahoo.com/mrss/' xmlns:gd='http://schemas.google.com/g/2005'
+      xmlns:yt='http://gdata.youtube.com/schemas/2007' gd:etag='W/&quot;A0MMRX47eCp7I2A9WhRTEUo.&quot;'><id>tag:youtube.com,2008:video:3307vMsCG0I</id><published>2011-04-23T16:16:48.000Z</published><updated>2011-11-01T20:31:24.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Games' label='Gaming'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='Portal'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='Quotes'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='Corrupt'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='Adventure'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='Sphere'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='Space'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='Fact'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='Core'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='facts'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='army'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='gameplay'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='gel'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='jel'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='jelly'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='pump'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='beta'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='cave'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='johnson'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='glados'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='wheatley'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='wheetley'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='wheetly'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='wheatly'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='top'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='live'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='still'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='plays'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='jonathan'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='outer space'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='valve'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='tutorial'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='gun'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='chips'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='lego phone'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='semiconductors'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='action movie'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='fps'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='rap'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='science fiction'/><title>[Portal
+      2] Corrupt Core Quotes (Space, Fact and Adventure Spheres)</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/3307vMsCG0I?version=3&amp;f=videos&amp;d=AVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=3307vMsCG0I&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/3307vMsCG0I/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/3307vMsCG0I/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/3307vMsCG0I/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/3307vMsCG0I/related?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=3307vMsCG0I'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/3307vMsCG0I?v=2'/><author><name>lookitsmyvideo</name><uri>http://gdata.youtube.com/feeds/api/users/lookitsmyvideo</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink href='http://gdata.youtube.com/feeds/api/videos/3307vMsCG0I/comments?v=2'
+      countHint='338'/></gd:comments><media:group><media:category label='Gaming' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Games</media:category><media:content
+      url='http://www.youtube.com/v/3307vMsCG0I?version=3&amp;f=videos&amp;d=AVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='901' yt:format='5'/><media:content url='rtsp://v8.cache5.c.youtube.com/CkULENy73wIaPAlCGwLLvDt93xMYDSANFEgGUgZ2aWRlb3NyIQFbur2tyMi4XeQ975uVzH9zDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='901' yt:format='1'/><media:content
+      url='rtsp://v8.cache1.c.youtube.com/CkULENy73wIaPAlCGwLLvDt93xMYESARFEgGUgZ2aWRlb3NyIQFbur2tyMi4XeQ975uVzH9zDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='901' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>lookitsmyvideo</media:credit><media:description
+      type='plain'>Here are all the lines for the corrupt cores during the final fight
+      scene. Not gunna lie, i couldnt stop laughing during the final battle because
+      of these little bastards.   Anyways, Enjoy, Comment, Rate, Subscribe, Share!
+      :D</media:description><media:keywords>Portal, Quotes, Corrupt, Adventure, Sphere,
+      Space, Fact, Core, facts, army, video, gameplay, gel, jel, jelly, pump, beta,
+      cave, johnson, glados, wheatley, wheetley, wheetly, wheatly, top, live, still,
+      plays, jonathan, outer space, valve, tutorial, gun, chips, lego phone, semiconductors,
+      action movie, fps, rap, science fiction</media:keywords><media:license type='text/html'
+      href='http://www.youtube.com/t/terms'>youtube</media:license><media:player url='http://www.youtube.com/watch?v=3307vMsCG0I&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/3307vMsCG0I/default.jpg' height='90' width='120'
+      time='00:07:30.500' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/3307vMsCG0I/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/3307vMsCG0I/1.jpg'
+      height='90' width='120' time='00:03:45.250' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/3307vMsCG0I/2.jpg' height='90' width='120' time='00:07:30.500'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/3307vMsCG0I/3.jpg'
+      height='90' width='120' time='00:11:15.750' yt:name='end'/><media:title type='plain'>[Portal
+      2] Corrupt Core Quotes (Space, Fact and Adventure Spheres)</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+      seconds='901'/><yt:uploaded>2011-04-23T16:16:48.000Z</yt:uploaded><yt:videoid>3307vMsCG0I</yt:videoid></media:group><gd:rating
+      average='4.9365077' max='5' min='1' numRaters='378' rel='http://schemas.google.com/g/2005#overall'/><yt:statistics
+      favoriteCount='512' viewCount='55931'/><yt:rating numDislikes='6' numLikes='372'/></entry>
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/lookitsmyvideo?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Wed, 02 Nov 2011 01:00:21 GMT
+      date:
+      - Wed, 02 Nov 2011 00:55:21 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DkEESH47eCp7I2A9WhRTEUg."
+      last-modified:
+      - Tue, 01 Nov 2011 13:36:49 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"DkEESH47eCp7I2A9WhRTEUg.\"","id":{"$t":"tag:youtube.com,2008:user:lookitsmyvideo"},"published":{"$t":"2008-10-13T15:23:40.000-07:00"},"updated":{"$t":"2011-11-01T06:36:49.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Director"}],"title":{"$t":"YouTube
+      user: lookitsmyvideo"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=lookitsmyvideo"},{"rel":"http://gdata.youtube.com/schemas/2007#user.vlog","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/playlists/294528A842926182?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/DIjYF9A7mI0?v=2"},{"rel":"related","type":"text/html","href":"http://twitter.com/lookitsmyvideo"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo?v=2"}],"author":[{"name":{"$t":"lookitsmyvideo"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo"}}],"yt$aboutMe":{"$t":"Join
+      my Public Steam Group! http://steamcommunity.com/groups/lookitsmyvideo\n\nFollow
+      my Stream! http://www.justin.tv/eyeofthehawks\n\nSystem Specs:\nAMD Phenom 955
+      BE 3.2GHz Quad Core\nEVGA GeForce 9800GTX+ 512MB\n8GB DDR3 1333mhz Corsair XMS3
+      RAM\n250GB 7200 RPM OS Disk\n1.5TB 7200 RPM Recording Disk\nCoolermaster HAF
+      Case\nMSi NF750-G55 Motherboard\nCorsair H70 Water Cooler\n\n\n\nHonours: #87
+      Most Viewed this Month (May)[Canada]\n\nPersonal Twitter - http://twitter.com/#!/EyeOfTheHawks\n\n\nNOT
+      A SUB4SUB CHANNEL - Shut up about it"},"yt$age":{"$t":18},"yt$books":{"$t":"NO"},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/favorites?v=2","countHint":141},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/contacts?v=2","countHint":181},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/subscriptions?v=2","countHint":70},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/uploads?v=2","countHint":183},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Alex
+      [Hawks]"},"yt$gender":{"$t":"m"},"yt$hobbies":{"$t":"Makin z videox"},"yt$location":{"$t":"CA"},"yt$movies":{"$t":"Austin
+      Powers"},"yt$music":{"$t":"Tool, Rage Against the Machine, APC"},"yt$occupation":{"$t":"Student"},"yt$statistics":{"lastWebAccess":"2011-08-16T06:33:35.000-07:00","subscriberCount":"538","videoWatchCount":0,"viewCount":"12070","totalUploadViews":"881716"},"media$thumbnail":{"url":"http://i1.ytimg.com/i/0YcjhK7b76VDoce80SU0-w/1.jpg?v=af6c3e"},"yt$username":{"$t":"lookitsmyvideo"}}}'
+    http_version: '1.1'

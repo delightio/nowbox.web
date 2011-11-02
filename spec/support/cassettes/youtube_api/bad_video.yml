@@ -1,0 +1,35 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/videos/foobarbazqu?key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 404
+      message: Not Found
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/vnd.google.gdata.error+xml
+      transfer-encoding:
+      - chunked
+      date:
+      - Wed, 02 Nov 2011 00:55:22 GMT
+      expires:
+      - Wed, 02 Nov 2011 00:55:22 GMT
+      cache-control:
+      - private, max-age=0
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: <errors xmlns='http://schemas.google.com/g/2005'><error><domain>GData</domain><code>ResourceNotFoundException</code><internalReason>Video
+      not found</internalReason></error></errors>
+    http_version: '1.1'
