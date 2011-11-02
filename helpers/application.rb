@@ -18,6 +18,11 @@ module Aji
           possible_params * ', ', 400
       end
 
+      def invalid_params_error! param_name, param, message
+        error! "#{param.inspect} is an invalid value for #{param_name} " +
+          message, 400
+      end
+
       def find_channel_by_id_or_error id
         Aji::Channel.find_by_id(id) or not_found_error!(Channel, id)
       end

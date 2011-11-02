@@ -130,6 +130,16 @@ module Aji
               :b_param => 9.9 }
             last_response.body.should == '{"a_param":66,"b_param":9.9}'
           end
+
+          it "responds with a 400 when no settings hash is passed in" do
+            put "#{resource_uri}/#{bob.id}/settings", :oops => "forgot to nest"
+            last_response.status.should == 400
+            last_response.body.should =~ /Missing params,/
+
+            put "#{resource_uri}/#{bob.id}/settings", :settings => [:foo, :bar]
+            last_response.status.should == 400
+            last_response.body.should =~ /Settings must be dictionary\/hash/
+          end
         end
       end
     end
