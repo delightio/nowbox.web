@@ -8,6 +8,7 @@ Spork.prefork do
   require 'bundler'
   Bundler.require :test
   require './spec/factories'
+  require './features/support/omniauth_hashes'
 
   SimpleCov.start
 

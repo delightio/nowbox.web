@@ -93,16 +93,15 @@ module Aji
     end
 
     class DataGrabber
-      def initialize youtube_uid
+      def initialize youtube_uid, data=nil
         @youtube_uid = youtube_uid
         @feed_url =
           "http://gdata.youtube.com/feeds/api/users/#{youtube_uid}?alt=json&v=2"
-        @data = get_data_from_youtube
-        @hash = build_hash
+        @data = if data then data['entry'] else get_data_from_youtube end
       end
 
       def uid
-        (@data.fetch('id', {}).fetch('$t', "").split(':').last || "").downcase
+        username.downcase
       end
 
       def published

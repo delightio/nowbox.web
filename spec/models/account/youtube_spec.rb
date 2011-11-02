@@ -215,12 +215,9 @@ describe Account::Youtube do
 
   describe ".from_auth_hash" do
     subject { Account::Youtube.from_auth_hash auth_hash }
-    let(:auth_hash) do
-      {
-        'uid' => 'NucLearsaNdWicH',
-        'credentials' => { 'token' => 'sometoken', 'secret' => 'seekrit' },
-        'extra' => { 'user_hash' => { 'first_name' => 'Steven!' } }
-      }
+    let(:auth_hash) { YOUTUBE_HASH }
+    let(:data) do
+      YoutubeAPI::DataGrabber.new "me", auth_hash['extra']['user_hash']
     end
 
     context "when the account is already in the database" do
@@ -230,14 +227,15 @@ describe Account::Youtube do
       end
 
       it "finds the account if it is already in the database" do
+
         subject.should == existing.reload
       end
 
       describe "uses auth_hash information for user" do
-        its(:uid) { should == auth_hash['uid'].downcase }
-        its(:username) { should == auth_hash['uid'] }
+        its(:uid) { should == data.uid }
+        its(:username) { should == data.username }
         its(:credentials) { should == auth_hash['credentials'] }
-        its(:info) { should == auth_hash['extra']['user_hash'] }
+        its(:info) { should == data.build_hash }
       end
     end
 
@@ -247,10 +245,10 @@ describe Account::Youtube do
       end
 
       describe "uses auth_hash information for user" do
-        its(:uid) { should == auth_hash['uid'].downcase }
-        its(:username) { should == auth_hash['uid'] }
+        its(:uid) { should == data.uid }
+        its(:username) { should == data.username }
         its(:credentials) { should == auth_hash['credentials'] }
-        its(:info) { should == auth_hash['extra']['user_hash'] }
+        its(:info) { should == data.build_hash }
       end
     end
   end
