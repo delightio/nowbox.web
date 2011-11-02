@@ -36,6 +36,9 @@ module Aji
     # 5. `http://api.nowbox.com/auth/twitter/callback` will return an updated
     # JSON blob to the webkitview containing the updated user model.
     #
+    # *Youtube flow is the same as Twitter but replace `/auth/twitter?user_id`
+    # with`/auth/you_tube?user_id`. Note the '_'*
+    #
     # For Facebook Authentication the process is a little more complicated since
     # Facebook doesn't pass parameters outside of the callback url, which is
     # how we pass the user's id through Twitter.
