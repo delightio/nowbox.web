@@ -119,10 +119,11 @@ module Aji
     end
 
     def self.from_auth_hash auth_hash
-      find_or_initialize_by_uid_and_type(auth_hash['uid'].downcase,
+      info = YoutubeAPI::DataGrabber.new(auth_hash['uid'],
+        auth_hash['extra']['user_hash']).build_hash
+
+      find_or_initialize_by_uid_and_type(info['uid'],
         self.to_s).tap do |account|
-          info = YoutubeAPI::DataGrabber.new(auth_hash['uid'],
-            auth_hash['extra']['user_hash']).build_hash
           account.uid = info['uid']
           account.username = info['username']
           account.credentials = auth_hash['credentials']
