@@ -125,3 +125,131 @@ FACEBOOK_HASH = {
     }
   }
 }
+
+YOUTUBE_HASH = {
+  "provider" => "you_tube",
+  "uid" => "http://gdata.youtube.com/feeds/api/users/nuclearsandwich",
+  "credentials" => {
+    "token" => "1/HBFmbzT0OKtZNp5pWkBC8YDthTHo8s411gu7AyWQlCQ",
+    "secret" => "375Jq3_FcU93XdsUcMZonPBn"
+  },
+  "extra" => {
+    "user_hash" => {
+      "version" => "1.0",
+      "encoding" => "UTF-8",
+      "entry" => {
+        "xmlns" => "http://www.w3.org/2005/Atom",
+        "xmlns$media" => "http://search.yahoo.com/mrss/",
+        "xmlns$gd" => "http://schemas.google.com/g/2005",
+        "xmlns$yt" => "http://gdata.youtube.com/schemas/2007",
+        "id" => {
+          "$t" => "http://gdata.youtube.com/feeds/api/users/nuclearsandwich"
+        },
+        "published" => {
+          "$t" => "2008-11-23T23:38:28.000-08:00"
+        },
+        "updated" => {
+          "$t" => "2011-11-01T00:32:38.000-07:00"
+        },
+        "category" => [
+          {
+            "scheme" => "http://schemas.google.com/g/2005#kind",
+            "term" => "http://gdata.youtube.com/schemas/2007#userProfile"
+          },
+          {
+            "scheme" => "http://gdata.youtube.com/schemas/2007/channeltypes.cat",
+            "term" => "Standard"
+          }
+        ],
+          "title" => {
+            "$t" => "YouTube user: nuclearsandwich",
+            "type" => "text"
+        },
+        "link" => [
+          {
+            "rel" => "alternate",
+            "type" => "text/html",
+            "href" => "http://www.youtube.com/profile?user=nuclearsandwich"
+          },
+          {
+            "rel" => "http://gdata.youtube.com/schemas/2007#insight.views",
+            "type" => "text/html",
+            "href" => "http://insight.youtube.com/video-analytics/csvreports?query=nuclearsandwich&type=c&starttime=1235865600000&endtime=1320105600000&user_starttime=1319500800000&user_endtime=1320105600000&region=world&token=sEtnINqI4JPWbcNbB6CzBDCtoSR8MTMyMDI3MTU3N0AxMzIwMjY5Nzc3&hl=en_US"
+          },
+          {
+            "rel" => "self",
+            "type" => "application/atom+xml",
+            "href" => "http://gdata.youtube.com/feeds/api/users/nuclearsandwich"
+          }
+        ],
+          "author" => [
+            {
+              "name" => {
+                "$t" => "nuclearsandwich"
+              },
+              "uri" => {
+                "$t" => "http://gdata.youtube.com/feeds/api/users/nuclearsandwich"
+              }
+            }
+        ],
+          "yt$age" => {
+            "$t" => 23
+        },
+        "gd$feedLink" => [
+          {
+            "rel" => "http://gdata.youtube.com/schemas/2007#user.favorites",
+            "href" => "http://gdata.youtube.com/feeds/api/users/nuclearsandwich/favorites",
+            "countHint" => 76
+          },
+          {
+            "rel" => "http://gdata.youtube.com/schemas/2007#user.contacts",
+            "href" => "http://gdata.youtube.com/feeds/api/users/nuclearsandwich/contacts",
+            "countHint" => 0
+          },
+          {
+            "rel" => "http://gdata.youtube.com/schemas/2007#user.inbox",
+            "href" => "http://gdata.youtube.com/feeds/api/users/nuclearsandwich/inbox",
+            "countHint" => 0
+          },
+          {
+            "rel" => "http://gdata.youtube.com/schemas/2007#user.playlists",
+            "href" => "http://gdata.youtube.com/feeds/api/users/nuclearsandwich/playlists"
+          },
+          {
+            "rel" => "http://gdata.youtube.com/schemas/2007#user.subscriptions",
+            "href" => "http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions",
+            "countHint" => 11
+          },
+          {
+            "rel" => "http://gdata.youtube.com/schemas/2007#user.uploads",
+            "href" => "http://gdata.youtube.com/feeds/api/users/nuclearsandwich/uploads",
+            "countHint" => 0
+          },
+          {
+            "rel" => "http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos",
+            "href" => "http://gdata.youtube.com/feeds/api/users/nuclearsandwich/newsubscriptionvideos"
+          }
+        ],
+          "yt$gender" => {
+            "$t" => "m"
+        },
+        "yt$location" => {
+          "$t" => "95070, US"
+        },
+        "yt$statistics" => {
+          "lastWebAccess" => "2011-08-31T16:23:11.000-07:00",
+          "subscriberCount" => "0",
+          "videoWatchCount" => 0,
+          "viewCount" => "105",
+          "totalUploadViews" => "0"
+        },
+        "media$thumbnail" => {
+          "url" => "http://s.ytimg.com/yt/img/no_videos_140-vfl1fDI7-.png"
+        },
+        "yt$username" => {
+          "$t" => "nuclearsandwich"
+        }
+      }
+    }
+  }
+}
