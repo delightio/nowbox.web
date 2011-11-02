@@ -52,7 +52,6 @@ module Aji
       when :share
         watched_video event.video, event.created_at
         favorite_video event.video, event.created_at
-        # ## Pending iOS support.
         create_share_from_event event
 
       when :unfavorite
@@ -205,10 +204,12 @@ module Aji
     end
 
     def create_share_from_event event
-      autopost_accounts.each_with_object(Share.create! user: event.user,
-        video: event.video) do |account, share|
+      Aji.log "creating share from #{event.inspect}"
+      autopost_accounts.each_with_object(
+        Share.from_event event) do |account, share|
+          Aji.log "Publishing share"
           account.background_publish share
-      end
+        end
     end
 
     def redis_keys

@@ -23,6 +23,10 @@ module Aji
     def default_message
       self.message ||= video.title
     end
+
+    def self.from_event event
+      create! user: event.user, video: event.video
+    end
   end
 end
 

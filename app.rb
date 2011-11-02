@@ -10,8 +10,8 @@ Aji::APP = Rack::Builder.app do
     provider :facebook, Aji.conf['APP_ID'], Aji.conf['APP_SECRET'],
       { :scope => 'read_stream,publish_stream,offline_access',
         :display => :touch }
-    #provider :you_tube, Aji.conf['YOUTUBE_OA_KEY'],
-    #  Aji.conf['YOUTUBE_OA_SECRET']
+    provider :you_tube, Aji.conf['YOUTUBE_OA_KEY'],
+      Aji.conf['YOUTUBE_OA_SECRET']
     # TODO: Do want: Diaspora* integration... somehow.. someway.
   end
 

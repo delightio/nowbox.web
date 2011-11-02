@@ -78,9 +78,11 @@ module Aji
 
         account = provider_class.from_auth_hash auth_hash
 
+
         account.sign_in_as user
 
-        MultiJson.encode user.serializable_hash
+        MultiJson.encode(user.serializable_hash.merge(
+          "#{params[:provider]}_account_id" => account.id))
 
       rescue => e
         Aji.log :WARN, "#{e.class}: #{e.message}"

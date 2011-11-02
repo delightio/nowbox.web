@@ -92,11 +92,23 @@ module Aji
         describe "put #{resource_uri}/:id/settings" do
           it "updates the users settings with the parameters" do
             bob.settings = { :a_param => "old value" }
+            bob.save
             put "#{resource_uri}/#{bob.id}/settings", :settings => {
               :a_param => "a value" }
 
             bob.reload.settings.should == { :a_param => "a value" }
             last_response.body.should == '{"a_param":"a value"}'
+          end
+
+          it "doesn't touch unspecified settings" do
+            bob.settings = { :existing_param => "set", :other => "oldvalue" }
+            bob.save
+
+            put "#{resource_uri}/#{bob.id}/settings", :settings => {
+              :other => "newvalue" }
+
+            last_response.body.
+              should == '{"existing_param":"set","other":"newvalue"}'
           end
 
           it "sets boolean parameters to booleans not strings" do
@@ -117,6 +129,16 @@ module Aji
             bob.reload.settings.should == { :a_param => 66,
               :b_param => 9.9 }
             last_response.body.should == '{"a_param":66,"b_param":9.9}'
+          end
+
+          it "responds with a 400 when no settings hash is passed in" do
+            put "#{resource_uri}/#{bob.id}/settings", :oops => "forgot to nest"
+            last_response.status.should == 400
+            last_response.body.should =~ /Missing params,/
+
+            put "#{resource_uri}/#{bob.id}/settings", :settings => [:foo, :bar]
+            last_response.status.should == 400
+            last_response.body.should =~ /Settings must be dictionary\/hash/
           end
         end
       end

@@ -74,13 +74,22 @@ module Aji
       end
 
       # ## PUT users/:user_id/settings
+      # Acts as PATCH for now. When Grape gains PATCH support PUT will require
+      # a complete representation of the settings hash.
       # __Updates__ User's updated settings JSON.  
       # __Returns__ JSON object representing the user's settings.  
       # __Required params__ `settings`: The form encoded represenation of the
       # user's settings.
       put '/:user_id/settings' do
         user = find_user_by_id_or_error params[:user_id]
-        user.settings = {}.tap do|settings|
+        missing_params_error! params, [:settings] unless params[:settings]
+
+        invalid_params_error! :settings, params[:settings],
+          "Settings must be dictionary/hash" unless
+          params[:settings].kind_of? Hash
+
+
+        user.settings.tap do|settings|
           params[:settings].each do |k,v|
             settings[k.to_sym] = parse_param v
           end
