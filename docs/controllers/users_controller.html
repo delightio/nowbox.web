@@ -178,6 +178,13 @@ user&rsquo;s settings.</p>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">put</span> <span class="s1">&#39;/:user_id/settings&#39;</span> <span class="k">do</span>
         <span class="n">user</span> <span class="o">=</span> <span class="n">find_user_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
+        <span class="n">missing_params_error!</span> <span class="n">params</span><span class="p">,</span> <span class="o">[</span><span class="ss">:settings</span><span class="o">]</span> <span class="k">unless</span> <span class="n">params</span><span class="o">[</span><span class="ss">:settings</span><span class="o">]</span>
+
+        <span class="n">invalid_params_error!</span> <span class="ss">:settings</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:settings</span><span class="o">]</span><span class="p">,</span>
+          <span class="s2">&quot;Settings must be dictionary/hash&quot;</span> <span class="k">unless</span>
+          <span class="n">params</span><span class="o">[</span><span class="ss">:settings</span><span class="o">].</span><span class="n">kind_of?</span> <span class="no">Hash</span>
+
+
         <span class="n">user</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">tap</span> <span class="k">do</span><span class="o">|</span><span class="n">settings</span><span class="o">|</span>
           <span class="n">params</span><span class="o">[</span><span class="ss">:settings</span><span class="o">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="o">|</span>
             <span class="n">settings</span><span class="o">[</span><span class="n">k</span><span class="o">.</span><span class="n">to_sym</span><span class="o">]</span> <span class="o">=</span> <span class="n">parse_param</span> <span class="n">v</span>

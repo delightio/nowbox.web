@@ -156,9 +156,11 @@ to <code>http://api.nowbox.com/auth/failure</code>.</em></p>
 
         <span class="n">account</span> <span class="o">=</span> <span class="n">provider_class</span><span class="o">.</span><span class="n">from_auth_hash</span> <span class="n">auth_hash</span>
 
+
         <span class="n">account</span><span class="o">.</span><span class="n">sign_in_as</span> <span class="n">user</span>
 
-        <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span> <span class="n">user</span><span class="o">.</span><span class="n">serializable_hash</span>
+        <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">serializable_hash</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+          <span class="s2">&quot;</span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:provider</span><span class="o">]</span><span class="si">}</span><span class="s2">_account_id&quot;</span> <span class="o">=&gt;</span> <span class="n">account</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
 
       <span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">e</span>
         <span class="no">Aji</span><span class="o">.</span><span class="n">log</span> <span class="ss">:WARN</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">e</span><span class="o">.</span><span class="n">class</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span>
