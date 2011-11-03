@@ -10,9 +10,9 @@
       user-agent:
       - Twitter Ruby Gem 1.7.2
       authorization:
-      - OAuth oauth_consumer_key="RWUyehmqjKRBMSlVTeZDw", oauth_nonce="874214f9946b1f9f54d9ab6ac6f21d72",
-        oauth_signature="q%2FlxLNCBOufJjrxTf%2FrGkowfsH4%3D", oauth_signature_method="HMAC-SHA1",
-        oauth_timestamp="1320195314", oauth_token="178492493-AmMNGcEjYmK7OuCL7jNlPVv85yHGNmVmVMfJhTtN",
+      - OAuth oauth_consumer_key="RWUyehmqjKRBMSlVTeZDw", oauth_nonce="52c9a2b4105b071dfdd2a5099d2fa0f3",
+        oauth_signature="fUIEAIAlfMQ1vIXoVGfsTizLIQo%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1320346375", oauth_token="178492493-AmMNGcEjYmK7OuCL7jNlPVv85yHGNmVmVMfJhTtN",
         oauth_version="1.0"
       accept-encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -22,25 +22,27 @@
       message: OK
     headers:
       date:
-      - Wed, 02 Nov 2011 00:55:14 GMT
+      - Thu, 03 Nov 2011 18:52:55 GMT
+      server:
+      - hi
       status:
       - 200 OK
       x-ratelimit-limit:
       - '350'
       x-transaction:
-      - b788a213df0d0cd4
+      - 1320346375-61958-26587
       etag:
-      - ! '"65bd112e7f6868d9704d60b3f7752b9d"'
+      - ! '"be3d073793b4fbf6bb395491e9ae0dd0"'
       x-frame-options:
       - SAMEORIGIN
       last-modified:
-      - Wed, 02 Nov 2011 00:55:14 GMT
+      - Thu, 03 Nov 2011 18:52:55 GMT
       x-ratelimit-remaining:
-      - '345'
+      - '320'
       x-runtime:
-      - '0.02585'
+      - '0.02819'
       x-transaction-mask:
-      - a6183ffa5f8ca943ff1b53b5644ef114b410ff46
+      - a6183ffa5f8ca943ff1b53b5644ef1145155e735
       content-type:
       - application/json; charset=utf-8
       pragma:
@@ -58,15 +60,15 @@
       cache-control:
       - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
       x-ratelimit-reset:
-      - '1320198903'
+      - '1320347112'
       x-mid:
-      - 476ca8b6613de221640598a0555d07d4aa4e4302
+      - 5d07c2c96a7b78147d29c1d643a9141d980c0d5b
       set-cookie:
-      - _twitter_sess=BAh7CToHdWEwOg9jcmVhdGVkX2F0bCsI7NTFYTMBOgdpZCIlYWNlMGQ3ZGI5%250AMzE3OTVjNjIzNWUwOWU4ZGU2OWMzZTkiCmZsYXNoSUM6J0FjdGlvbkNvbnRy%250Ab2xsZXI6OkZsYXNoOjpGbGFzaEhhc2h7AAY6CkB1c2VkewA%253D--f81799b9c6c9ac82a29fa0f1f3fcf4cc20f2331a;
+      - _twitter_sess=BAh7CToPY3JlYXRlZF9hdGwrCBjUxmozAToHdWEwOgdpZCIlZTRhMWYxMDU4%250AZjUwY2NiYjgwNGExMjg2MjY3Mzk3NTEiCmZsYXNoSUM6J0FjdGlvbkNvbnRy%250Ab2xsZXI6OkZsYXNoOjpGbGFzaEhhc2h7AAY6CkB1c2VkewA%253D--6d45316d60254ce99cc9d47a77ab66178b484cdc;
         domain=.twitter.com; path=/; HttpOnly
-      - guest_id=v1%3A132019531491466272; domain=.twitter.com; path=/; expires=Fri,
-        01-Nov-2013 12:55:14 GMT
-      - k=10.34.251.113.1320195314911676; path=/; expires=Wed, 09-Nov-11 00:55:14
+      - guest_id=v1%3A132034637518485161; domain=.twitter.com; path=/; expires=Sun,
+        03-Nov-2013 06:52:55 GMT
+      - k=173.247.193.198.1320346375178362; path=/; expires=Thu, 10-Nov-11 18:52:55
         GMT; domain=.twitter.com
       - lang=en; path=/
       - twid=u%3D178492493%7Cf%2FCy9ytSF4mjQzI1srlbjag1gaQ%3D; domain=.twitter.com;
@@ -76,32 +78,31 @@
       content-encoding:
       - gzip
       content-length:
-      - '961'
-      server:
-      - tfe
+      - '1009'
     body: !binary |-
-      H4sIAAAAAAAAA7VVXY/qNhD9K24eqlalkG8CUqWyaFd96G1Xl9v2JZJlkgm4
-      ODb1B7C9uv+9YwIhvctWVaXyhJPxzDlnzkw+BlJZ3vCKWa6kCeYNEwZGgeUt
-      0D+VhGAePLPKR5AP+Ix89cuKfEmWTLKafR2Mgr1WDRdA16zabbRysqaVEkrj
-      vSRfPBSLLsZCZaHu0wtu8IiRTtpgnt1NY/EczK12GC9Z65GsLBxAfkHes41k
-      unRh2OQ7LHAAjQgH+TegKEi2FoNn1xKG17BmmuJB9FiXi8c8fsRUzlZUNY0B
-      xPVtXBRhOApqMJXme6+QD12Vk3fMbomxrgZpR+RHLt2JOAOaMFmTp59XK4Iv
-      ts5wZuyYPJ72SJ9YRQwAqVS7HxNT8TGRzlrQLyPS+nxMWl6Z0TmH3QJRdU32
-      yljC1spZskENDFGarJXamTH5TendnGyt3c/LSTmR6tiqwxizIwuhuoZ6zbjg
-      lZLkVyYEYKml70ijhFBHLjdvqrNWugbd6/P0lGVhGHgtGuaEpdd43rIN9Fmc
-      FhjcYzoej2PpKgFMG2R15NX2AhAFBZD00lfaB7Utxvj3llmHdvwYIHar+dpZ
-      pfEsnRAIVrAK+oMyhq/FCzUgDbf8cIPDJdWwx1dW0S4j5fX1ngZ7BLBXE2Kf
-      G3ZQmg99iu6TqOTgyd9SDkl0SdF417/DSO+NQWleIxwva5REWZgUxWyap9M4
-      zNMIuVcKtecSy5rPsL6F40qty9pdMcppL1LgxyRZMrLV0HxXBkPDrNXJ96MM
-      iAaB76TqjFF2lx4Xv3PyAJZ1KcpJ98ePiefyGjxi1+DlogwVDT44ID+pAwkj
-      EsfzLJ7HGfkmxB+Jw8gzvSPRkIKFk0+zqJX2o3zzukXU5eSH5xdZLN8vyYEz
-      8n1HhzQ4IPyZ1cGnV17ttRta6s01gXiG2+ji824deaM47xRzdU9SzIZtnRbp
-      LE5niXfyVh0pzh7lUnAJtIWas1fVPq9EcZKo52su82TOxA0Px/bI2825bZO3
-      bptyEmVxkkTFLC8np3XNYtZEsygNszwrpnVepcWsqlMIYVZPx3vcAzcoXvXb
-      Dn9KMU+/MbBdfzgw1s+a7Ul0/ruJEU/z6J+pDZcE+/8oNZqDrG9NSnyTDLWa
-      SSOY9Qyvlhj6dsUsWbgNiVLv2zSbZ7Obb8OBVNjQXS9V8fiAA9FLBbqvG8Xp
-      7c59DZJ7GvTE0wQlncZ5iA44fwLpna1KpdItExfq5wG92hA/CMzv+gBkcAfJ
-      vzfaf0f06S+CeHppaggAAA==
+      H4sIAAAAAAAAA7VV264iRRT9lT31YDQi9BUaEhPPEM6TjkZGjQlJp+jeDSXV
+      VVgXODiZf3cX0Fzm4DwYPS+crsu+rLXXqg/MiRbLv7RCNmE/8Uo0ooL3tAZf
+      /jKHL2DKFa/5V6zHtkY3QmIphdqUlZba0I1i9jaN89Ouw8phzSYNlxZ7rDLI
+      6bvkjs7NuYMnv4I4gySZZPkkH8PXEf1BEsXRTXTR8hWW3shy7dzW0tXj72Qx
+      WAysiPpuL9pVv9LtYnB3xS4GcZYmo+EoGUZ01OEOVal8JZEby1W9F9U63CuV
+      Ni2X/a1aUVrF29D4/Hj8DfzMV4qbhY+iZrih7RXqEhVfypu+Gr7T3giHllDw
+      irpLx8m1gSWvNitDG/UFpHT49LZ4onA1NtxLV95VfgmstAvocye0spfVB3Ed
+      fbOJM562vatK3TQWqY5vkqKIopDGVkZsQxzKPp0vBj9wtwbrfI3K9eB7ofwL
+      eIsGCBh4/nE+B9pYeyu4dX2YvWyJSnAaLCIQZts+2Er0QXnn0Bx60IZ4XDlR
+      2d4xhlsj6LqGrbYO+FJ7ByuC1oI2sNR6Y/vwmzabCQQ2j2QqvW/1LjBCwFjH
+      HdVzQZR4LAhpLaXeCyKqA2OHhiC6IaNDx4oal9yU9CEvuE+fZsNkxrpAaC7x
+      4yR/MHLnYTuWx9P/etROPbLJB7aVvCIClZeyxwy6PaLrKiP6hCoNbuWhdLok
+      IjEEP43pH9g0Bg+CV1pp9onE3q89vNM7iFKIC+pwkt1ILGaXTDfo3WU6lleK
+      mv4L4MVpEmdFPB6P4nyYjbKiYPcXwvxcjydpksZpGvJQcc6IpXfa2K7Lh5mI
+      h1dJCCdSV4CHBRmmUw5rg823iys1Nmivv9J6JfFET1hZDA7a+MZvPImEjjEw
+      KOma0if2F6d4s9/p1PP51DEBcX3aCf3ddp8XaZSmo2KUjUjhJzfo+gkmEDzg
+      BstzO/e3Ahra1EIRTw/BOKNII38GsMdI2Krit7EdvgSGv7vjnzTH1ca+gSWC
+      UKRLpEmsg2rXNIewX9MKHAhMC7VoGjR99rGTAuX/09P50mIYun8Q05Iqp+o6
+      OT0/53kUvFrqk0kF4xRSUDHwK5cSyRimweaELZ3hykruwsXuPbgZi1emej/n
+      VzG1LWnptXO+KplgvHXIs7GeLfJe2fv9vv9ArHfsj4psnGTjNMh2TXBRd6VQ
+      9PJh2WIt+Ofc+V+8YJ/eDg6TJzQMxXi4GLwsa57wJh7HWZQP82JUD6usGFd1
+      hhGO69HZX7pgYViuT89zRnHYeTy7tohCEYalMx0yQ8mDzTJU7PNN3Xnk/9dM
+      YwSq+vrCZvHHvwHzxUfYqwgAAA==
     http_version: '1.1'
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
@@ -114,9 +115,9 @@
       user-agent:
       - Twitter Ruby Gem 1.7.2
       authorization:
-      - OAuth oauth_consumer_key="RWUyehmqjKRBMSlVTeZDw", oauth_nonce="a7dd50111289d539c9c7701cf10a65d6",
-        oauth_signature="guXq2ZhqdWQb6E2wnpVXbEtC1hY%3D", oauth_signature_method="HMAC-SHA1",
-        oauth_timestamp="1320195315", oauth_token="178492493-AmMNGcEjYmK7OuCL7jNlPVv85yHGNmVmVMfJhTtN",
+      - OAuth oauth_consumer_key="RWUyehmqjKRBMSlVTeZDw", oauth_nonce="9507ba964ac1fabf7f23bb6905b9c973",
+        oauth_signature="a28XS9t6UDRabJqK%2Fi2PweFBTv4%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1320346375", oauth_token="178492493-AmMNGcEjYmK7OuCL7jNlPVv85yHGNmVmVMfJhTtN",
         oauth_version="1.0"
       accept-encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -126,19 +127,21 @@
       message: Not Found
     headers:
       date:
-      - Wed, 02 Nov 2011 00:55:15 GMT
+      - Thu, 03 Nov 2011 18:52:55 GMT
+      server:
+      - hi
       status:
       - 404 Not Found
       x-ratelimit-limit:
       - '350'
       x-transaction:
-      - 41157f0bfc30c2f1
+      - 1320346375-68144-30574
       x-frame-options:
       - SAMEORIGIN
       last-modified:
-      - Wed, 02 Nov 2011 00:55:15 GMT
+      - Thu, 03 Nov 2011 18:52:55 GMT
       x-ratelimit-remaining:
-      - '344'
+      - '319'
       content-type:
       - application/json; charset=utf-8
       pragma:
@@ -156,15 +159,15 @@
       cache-control:
       - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
       x-ratelimit-reset:
-      - '1320198903'
+      - '1320347112'
       x-mid:
-      - 098d59ec454c170cc3a5d42c4eca96ada710d7b8
+      - 127447e7b6a239d17c0526b72844f80833312f0e
       set-cookie:
-      - _twitter_sess=BAh7CToHdWEwOg9jcmVhdGVkX2F0bCsI4dXFYTMBOgdpZCIlYmUyMGYzYzY3%250AOTNmYmNjMzgyN2E1YTYxN2EzYWE2ZDciCmZsYXNoSUM6J0FjdGlvbkNvbnRy%250Ab2xsZXI6OkZsYXNoOjpGbGFzaEhhc2h7AAY6CkB1c2VkewA%253D--3cca552a4df36b80c255df232d00e5ded5e343c0;
+      - _twitter_sess=BAh7CToPY3JlYXRlZF9hdGwrCOPUxmozAToHdWEwOgdpZCIlZGFkMTUzZGJk%250AOWYyNjMxZTJlMjQ0NzFmN2QzMzdmZmIiCmZsYXNoSUM6J0FjdGlvbkNvbnRy%250Ab2xsZXI6OkZsYXNoOjpGbGFzaEhhc2h7AAY6CkB1c2VkewA%253D--04a8d02c35fa32955696d5d421d512ac6b86b888;
         domain=.twitter.com; path=/; HttpOnly
-      - guest_id=v1%3A132019531515349702; domain=.twitter.com; path=/; expires=Fri,
-        01-Nov-2013 12:55:15 GMT
-      - k=10.34.251.113.1320195315148288; path=/; expires=Wed, 09-Nov-11 00:55:15
+      - guest_id=v1%3A1320346375387527; domain=.twitter.com; path=/; expires=Sun,
+        03-Nov-2013 06:52:55 GMT
+      - k=173.247.193.198.1320346375381782; path=/; expires=Thu, 10-Nov-11 18:52:55
         GMT; domain=.twitter.com
       - lang=en; path=/
       vary:
@@ -173,8 +176,6 @@
       - gzip
       content-length:
       - '96'
-      server:
-      - tfe
     body: !binary |-
       H4sIAAAAAAAAA6tWSi0qyi9SslLyyy9RSMsvzUtR0lEqSi0sTS0uAYrG6BvG
       6JcWpxYVx+gXZ+SX62UV5+fZFycXpabmxecl5qbaJqalpeZVZSTmKdUCAFCd

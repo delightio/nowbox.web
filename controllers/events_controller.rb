@@ -24,9 +24,14 @@ module Aji
       # `video_id` unique id of the video being acted on  
       # `video_elapsed` time in seconds from `video_start` when the event is triggered  
       # __Optional params__  
-      # `video_start` time in seconds when the event starts tracking (normally 0.0)
+      # `video_start`: time in seconds when the event starts tracking (normally 0.0)  
+      # `message`: the share message passed by the user when sharing a video.
       post do
         p = params.delete_if {|k| k=="version" || k==:version}
+        if p.key? :message
+          p[:reason] = p.delete :message
+        end
+
         begin
           event = Event.create(p)
         rescue => e
