@@ -249,9 +249,9 @@ module Aji
     end
 
     describe "#description" do
-      let(:account1) { mock :title => "account1",
+      let(:account1) { mock :username => "account1",
         :description => "awesome account" }
-      let(:account2) { mock :title => "account2",
+      let(:account2) { mock :username => "account2",
         :description => "boring channel" }
 
       it "returns accounts.first.description if there is only 1 account" do
@@ -259,7 +259,7 @@ module Aji
         subject.description.should == account1.description
       end
 
-      it "returns the channel names if there are more than 1 account" do
+      it "returns the usernames if there are more than 1 account" do
         subject.stub :accounts => [account1, account2]
         subject.description.should match /account1, account2/
       end
