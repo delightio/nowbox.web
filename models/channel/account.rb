@@ -85,7 +85,8 @@ module Aji
     end
 
     def description
-      accounts.map(&:description).join('\n\n')
+      return accounts.first.description if accounts.count==1
+      "Curated channel containing videos from: #{accounts.map(&:title).join(', ')}"
     end
 
     def serializable_hash options={}
