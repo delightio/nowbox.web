@@ -1697,3 +1697,135 @@
       IoFqKu0tN7usQTVhF8PAbC2N7T8ze3eRwUwnyiGKPBTa7iODmV1zRhKR/1q2
       yyvajqXB9R/LQZDBGoYsA0Ep3IHBqdllD8mDwRCiCHt//f8BUjAorZntBwA=
     http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/videos/SIeENhc5hv4?key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=entry
+      expires:
+      - Thu, 03 Nov 2011 22:35:34 GMT
+      date:
+      - Thu, 03 Nov 2011 22:35:34 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - ! '*'
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"CUAHQ347eCp7I2A9WhRTE0k."
+      last-modified:
+      - Thu, 03 Nov 2011 18:08:52 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! "<?xml version='1.0' encoding='UTF-8'?><entry xmlns='http://www.w3.org/2005/Atom'
+      xmlns:media='http://search.yahoo.com/mrss/' xmlns:gd='http://schemas.google.com/g/2005'
+      xmlns:yt='http://gdata.youtube.com/schemas/2007' gd:etag='W/&quot;CUAHQ347eCp7I2A9WhRTE0k.&quot;'><id>tag:youtube.com,2008:video:SIeENhc5hv4</id><published>2011-11-01T12:58:14.000Z</published><updated>2011-11-03T18:08:52.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Comedy'
+      label='Comedy'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Craig Ferguson'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Neil Gaiman'/><title>4. Neil Gaiman 2011.10.31 - Craig Ferguson [HD]</title><content
+      type='application/x-shockwave-flash' src='http://www.youtube.com/v/SIeENhc5hv4?version=3&amp;f=videos&amp;d=AVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=SIeENhc5hv4&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/SIeENhc5hv4/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/SIeENhc5hv4/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/SIeENhc5hv4/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/SIeENhc5hv4/related?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=SIeENhc5hv4'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/SIeENhc5hv4?v=2'/><author><name>DrPinch2190</name><uri>http://gdata.youtube.com/feeds/api/users/drpinch2190</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink href='http://gdata.youtube.com/feeds/api/videos/SIeENhc5hv4/comments?v=2'
+      countHint='15'/></gd:comments><yt:hd/><media:group><media:category label='Comedy'
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Comedy</media:category><media:content
+      url='http://www.youtube.com/v/SIeENhc5hv4?version=3&amp;f=videos&amp;d=AVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='732' yt:format='5'/><media:content url='rtsp://v8.cache7.c.youtube.com/CkULENy73wIaPAn-hjkXNoSHSBMYDSANFEgGUgZ2aWRlb3NyIQFbur2tyMi4XeQ975uVzH9zDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='732' yt:format='1'/><media:content
+      url='rtsp://v8.cache8.c.youtube.com/CkULENy73wIaPAn-hjkXNoSHSBMYESARFEgGUgZ2aWRlb3NyIQFbur2tyMi4XeQ975uVzH9zDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='732' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>DrPinch2190</media:credit><media:description
+      type='plain'>The Late Late Show with Craig Ferguson\r\nOctober 31 2011\r\n\r\nPart
+      4: Interview with Neil Gaiman</media:description><media:keywords>Craig Ferguson,
+      Neil Gaiman</media:keywords><media:license type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=SIeENhc5hv4&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/SIeENhc5hv4/default.jpg' height='90' width='120'
+      time='00:06:06' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/SIeENhc5hv4/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/SIeENhc5hv4/1.jpg'
+      height='90' width='120' time='00:03:03' yt:name='start'/><media:thumbnail url='http://i.ytimg.com/vi/SIeENhc5hv4/2.jpg'
+      height='90' width='120' time='00:06:06' yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/SIeENhc5hv4/3.jpg'
+      height='90' width='120' time='00:09:09' yt:name='end'/><media:title type='plain'>4.
+      Neil Gaiman 2011.10.31 - Craig Ferguson [HD]</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+      seconds='732'/><yt:uploaded>2011-11-01T12:58:14.000Z</yt:uploaded><yt:videoid>SIeENhc5hv4</yt:videoid></media:group><gd:rating
+      average='4.9774013' max='5' min='1' numRaters='177' rel='http://schemas.google.com/g/2005#overall'/><yt:statistics
+      favoriteCount='67' viewCount='10069'/><yt:rating numDislikes='1' numLikes='176'/></entry>"
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/drpinch2190?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Thu, 03 Nov 2011 22:40:34 GMT
+      date:
+      - Thu, 03 Nov 2011 22:35:34 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"AkYNQX47eCp7I2A9WhRTE0g."
+      last-modified:
+      - Thu, 03 Nov 2011 22:09:50 GMT
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+      transfer-encoding:
+      - chunked
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"AkYNQX47eCp7I2A9WhRTE0g.\"","id":{"$t":"tag:youtube.com,2008:user:DrPinch2190"},"published":{"$t":"2009-05-01T09:20:48.000-07:00"},"updated":{"$t":"2011-11-03T15:09:50.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Comedian"}],"title":{"$t":"YouTube
+      user: DrPinch2190"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=DrPinch2190"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/zrQ3uXZardg?v=2"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/DrPinch2190?v=2"}],"author":[{"name":{"$t":"DrPinch2190"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/drpinch2190"}}],"yt$age":{"$t":21},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/drpinch2190/favorites?v=2","countHint":97},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/drpinch2190/contacts?v=2","countHint":104},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/drpinch2190/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/drpinch2190/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/drpinch2190/subscriptions?v=2","countHint":39},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/drpinch2190/uploads?v=2","countHint":984},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/drpinch2190/newsubscriptionvideos?v=2"}],"yt$gender":{"$t":"m"},"yt$location":{"$t":"RO"},"yt$statistics":{"lastWebAccess":"2011-05-31T06:38:26.000-07:00","subscriberCount":"3099","videoWatchCount":0,"viewCount":"137624","totalUploadViews":"1909947"},"media$thumbnail":{"url":"http://i3.ytimg.com/i/jjx6MtIYET4ht5Noyi2Q7g/1.jpg?v=a66b75"},"yt$username":{"$t":"DrPinch2190"}}}'
+    http_version: '1.1'

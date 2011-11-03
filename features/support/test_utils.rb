@@ -5,4 +5,10 @@ module TestUtils
     puts last_response.inspect
     raise
   end
+
+  def json_body response
+    MultiJson.decode response.body
+  end
+
+
 end
