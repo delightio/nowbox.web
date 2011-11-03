@@ -16,11 +16,11 @@ module Aji
     after_create :set_title
     after_destroy :delete_redis_keys
 
-    def channel_ids limit=-1
-      (channel_id_zset.revrange 0, limit).map(&:to_i)
+    def channel_ids limit=0
+      (channel_id_zset.revrange 0, (limit-1)).map(&:to_i)
     end
 
-    def channels limit=-1
+    def channels limit=0
       channel_ids(limit).map { |cid| Channel.find_by_id cid }.compact
     end
 
