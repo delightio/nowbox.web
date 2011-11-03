@@ -1,16 +1,16 @@
-class TwitterAuthorization < Spinach::FeatureSteps
+class Authorization < Spinach::FeatureSteps
   include Aji
   include TestUtils
 
-  feature 'Twitter Authorization'
+  feature 'Authorization'
 
-  Given 'this account has never been authorized before' do
+  Given 'this twitter account has never been authorized before' do
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:twitter] = TWITTER_HASH
   end
 
   @vcr
-  When 'the callback url is triggered with a user_id' do
+  When 'the twitter callback url is triggered with a user_id' do
     VCR.use_cassette "twitter/home_feed" do
       @user = Aji::User.create
       get "auth/twitter/callback?user_id=#{@user.id}"
