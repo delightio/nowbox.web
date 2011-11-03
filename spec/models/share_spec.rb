@@ -21,11 +21,11 @@ describe Aji::Share, :unit do
   describe ".from_event" do
     let(:user) { User.new }
     let(:video) { Video.new source: :youtube, title: "Video" }
-    let(:event) { stub :video => video, :user => user }
+    let(:event) { stub :video => video, :user => user, :reason => "foobar" }
     subject { Share.from_event event }
 
     its(:user) { should == user }
     its(:video) { should == video }
-    its(:message) { should == video.title }
+    its(:message) { should == event.reason }
   end
 end

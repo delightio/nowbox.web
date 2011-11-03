@@ -25,7 +25,7 @@ module Aji
     end
 
     def self.from_event event
-      create! user: event.user, video: event.video
+      create! user: event.user, video: event.video, message: event.reason
     end
   end
 end
