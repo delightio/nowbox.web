@@ -2,6 +2,7 @@ module Aji
   class Account::Facebook < Account
     include Redis::Objects
     include Mixins::CanRefreshContent
+    include Mixins::Formatters::Facebook
     include Aji::TankerDefaults::Account
 
     has_many :mentions, :foreign_key => :author_id, :dependent => :destroy

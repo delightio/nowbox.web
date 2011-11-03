@@ -33,7 +33,7 @@ describe Aji::Mixins::Formatters do
       subject.format(short_message, link_text).should include link_text
     end
 
-    it "includes the twitter coda" do
+    it "includes the facebook coda" do
       subject.format(long_message, link_text).should include coda
       subject.format(short_message, link_text).should include coda
     end
