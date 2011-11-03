@@ -197,7 +197,6 @@ GEM
     spinach (0.1.5.3)
       colorize
       gherkin
-    spork (0.8.5)
     systemu (2.2.0)
     tanker (1.1.4)
       json (>= 1.5.1)
@@ -256,6 +255,7 @@ DEPENDENCIES
   hiredis
   koala (~> 1.2.0beta)
   newrelic_rpm (~> 3.1.1)
+  oauth
   omniauth (~> 0.3.2)
   pg
   pony
@@ -274,7 +274,6 @@ DEPENDENCIES
   simplecov
   sinatra
   spinach
-  spork
   tanker
   thin
   thor
