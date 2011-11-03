@@ -6,7 +6,7 @@ require 'pry'
 
 class ClientConsole
   def initialize
-    @conn = Faraday.new("http://api.nowbox.com/1") { |f| f.adapter :typhoeus }
+    @conn = Faraday.new("http://api.nowbox.com/1")# { |f| f.adapter :typhoeus }
   end
 
   def parse_response resp
