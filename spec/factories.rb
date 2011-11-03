@@ -109,6 +109,18 @@ Factory.define :youtube_channel_with_videos, :parent => :youtube_channel do |a|
   # end
 end
 
+Factory.define :youtube_channel_with_populated_videos, :parent => :youtube_channel do |a|
+  a.after_create do |c|
+    5.times do |n|
+      video = Factory :populated_video
+      c.push video
+      c.accounts << video.author
+      c.update_relevance_in_categories
+    end
+  end
+end
+
+
 Factory.define :category, :class => 'Aji::Category' do |a|
   a.title { random_string }
   a.raw_title { random_string }

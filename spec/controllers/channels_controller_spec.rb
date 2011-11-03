@@ -59,6 +59,30 @@ module Aji
           end
         end
 
+        it "throws error if category_ids is present but not type" do
+          params = { :category_ids => "1,2,3" }
+          get "#{resource_uri}", params
+          last_response.status.should == 400
+        end
+
+        let(:channel1) { Factory :youtube_channel_with_populated_videos }
+        let(:channel2) { Factory :youtube_channel_with_populated_videos }
+        let(:channels) { [channel1, channel2] }
+        let(:categories) { channels.map {|ch| ch.content_videos(1).first.category} }
+        it "returns top 2 featured channels of given categories" do
+          category_ids = categories.map &:id
+          params = { :category_ids => category_ids.join(','),
+            :type => "featured"}
+          get "#{resource_uri}", params
+          last_response.status.should == 200
+          body_hash = JSON.parse last_response.body
+
+          returned_channels = body_hash.map{|h| h['account']}.compact
+          returned_channels.should have(channels.count).channels
+          returned_channels.should == [channel1.serializable_hash,
+            channel2.serializable_hash]
+        end
+
       end
 
       describe "get #{resource_uri}/:id" do

@@ -21,6 +21,7 @@ module Aji
       # or 404
       #
       # __Required params__ `channel_id` unique id of the channel
+      #
       # __Optional params__ `inline_videos` integer, number of videos to include
       get '/:channel_id' do
         channel = find_channel_by_id_or_error params[:channel_id]
@@ -31,15 +32,29 @@ module Aji
       # ## GET channels/
       # __Returns__ a list of channels matching the request parameters or all
       # channels if no parameters are specified.
+      #
       # __Required params__ none
+      #
       # __Optional params__
+      #
+      # - `category_ids` and `type`:  `category_ids` is a comma separated list of
+      #   category ids. Only supported `type` is 'featured'. Server then returns
+      #   featured channels from these selected categories.
+      #
       # - `user_id`:  user id. If supplied without `query`, server returns
       #   given user's subscribed channels.
+      #
       # - `query`:  comma separated list of search terms. Server returns all
       #   channels regardless of type.
       get do
         if params[:query]
           Searcher.new(params[:query]).results
+        elsif params[:category_ids]
+          missing_params_error! params, [:type] unless params[:type]=='featured'
+          category_ids = params[:category_ids].split(',')
+          categories = category_ids.map { |cat_id| Category.find_by_id cat_id }
+          channels = categories.compact.map {|cat| cat.featured_channels(2) }
+          channels.flatten.compact
         elsif (user = User.find_by_id params[:user_id])
           user.display_channels
         else
@@ -50,11 +65,17 @@ module Aji
       # ## GET channels/:channel_id/videos
       # __Returns__ all the videos of given channel and HTTP Status Code 200 or
       # 404
+      #
       # __Required params__
+      #
       # - `channel_id` unique id of the channel
+      #
       # - `user_id` unique id of the user
+      #
       # __Optional params__
+      #
       # - `limit` max. number of videos to return
+      #
       # - `page` which page of videos to return, starts at 1
       get '/:channel_id/videos' do
         channel = find_channel_by_id_or_error params[:channel_id]
