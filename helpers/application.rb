@@ -39,6 +39,12 @@ module Aji
         Aji::Video.find_by_id(id) or not_found_error!(Video, id)
       end
 
+      def force_ssl!
+        unless request.scheme == 'https'
+          error! '{"error":"Client must use HTTPS to generate tokens."}', 403
+        end
+      end
+
       def parse_param p
         case
         when p == 'false' then false
