@@ -60,13 +60,13 @@
 
 <p><strong>Returns</strong> all the featured categories for given user. Code 200 or 404</p>
 
-<p><strong>Required params</strong> <code>user_id</code> unique id of the current user
-<strong>Required params</strong> <code>type</code> type of categories to be returned</p>
+<p><strong>Required params</strong> <code>type</code> type of categories to be returned</p>
+
+<p><strong>Optional params</strong> <code>user_id</code> unique id of the current user</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">get</span> <span class="k">do</span>
         <span class="n">error!</span><span class="p">(</span><span class="s2">&quot;Missing/Invalid parameter: type != featured&quot;</span><span class="p">,</span> <span class="mi">404</span><span class="p">)</span> <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:type</span><span class="o">]!=</span><span class="s2">&quot;featured&quot;</span>
-        <span class="n">error!</span><span class="p">(</span><span class="s2">&quot;Missing parameter: user_id&quot;</span><span class="p">,</span> <span class="mi">404</span><span class="p">)</span> <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">].</span><span class="n">nil?</span>
         <span class="n">categories</span> <span class="o">=</span> <span class="no">Category</span><span class="o">.</span><span class="n">featured</span>
         <span class="n">categories</span>
       <span class="k">end</span></pre></div>
@@ -81,9 +81,11 @@
 
 <p><strong>Returns</strong> the channels associated with the specified category id. Code 200 or 404</p>
 
-<p><strong>Required params</strong> <code>category_id</code> unique id of the category
-<strong>Required params</strong> <code>user_id</code> unique id of the current user
-<strong>Optional params</strong> none</p>
+<p><strong>Required params</strong> <code>category_id</code> unique id of the category</p>
+
+<p><strong>Required params</strong> <code>user_id</code> unique id of the current user</p>
+
+<p><strong>Optional params</strong> none</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">get</span> <span class="s1">&#39;/:category_id/channels&#39;</span> <span class="k">do</span>
@@ -104,8 +106,9 @@
 
 <p><strong>Returns</strong> given cateogry object. Code 200 or 404</p>
 
-<p><strong>Required params</strong> <code>category_id</code> unique id of the category
-<strong>Optional params</strong> none</p>
+<p><strong>Required params</strong> <code>category_id</code> unique id of the category</p>
+
+<p><strong>Optional params</strong> none</p>
 
       </td>
       <td class=code>

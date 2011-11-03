@@ -29,8 +29,6 @@ module Aji
           last_response.status.should == 404
           get resource_uri, :type => random_string
           last_response.status.should == 404
-          get resource_uri, :user_id => rand(10)
-          last_response.status.should == 404
         end
 
         it "returns all featured categories when ?type=featured&user_id=UID are given" do
