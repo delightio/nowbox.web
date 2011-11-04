@@ -116,5 +116,32 @@ module Aji
       MultiJson.encode auth.user.serializable_hash
 
     end
+
+    get '/request_token' do
+      content_type :json
+
+      #force_ssl!
+      validate_secret!
+
+      user = User.find params[:user_id]
+      tg = Token::Generator.new(user)
+
+      MutliJson.encode(:token => tg.token, :expires_at => tg.expires_at)
+    end
+
+    helpers do
+      def force_ssl!
+        unless request.scheme == 'https'
+          halt [403, '{"error":"Client must use HTTPS to generate tokens."}']
+        end
+      end
+
+      def validate_secret!
+        if params[:secret] != Aji.conf['CLIENT_SECRET']
+          halt [401, '{"error":"Invalid client secret."}']
+        end
+      end
+    end
   end
 end
+
