@@ -117,16 +117,16 @@ module Aji
 
     end
 
-    get '/request_token' do
+    post '/request_token' do
       content_type :json
 
-      #force_ssl!
+      force_ssl!
       validate_secret!
 
       user = User.find params[:user_id]
       tg = Token::Generator.new(user)
 
-      MutliJson.encode(:token => tg.token, :expires_at => tg.expires_at)
+      MultiJson.encode(:token => tg.token, :expires_at => tg.expires_at)
     end
 
     helpers do

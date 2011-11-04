@@ -46,7 +46,6 @@ describe Aji::API do
           post "#{resource_uri}", :user_id => bob.id, :channel_id => channel.id,
             :video_id => video.id, :message => message,
             :action => :share
-          last_response.body.ai
 
           Event.find(MultiJson.decode(last_response.body)['id']).reason.
             should == message

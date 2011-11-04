@@ -9,14 +9,12 @@ class Authentication < Spinach::FeatureSteps
   end
 
   When 'I securely request a token' do
-    # TODO: Mock HTTPS-ness
-    post "auth/request_token", :user_id => @user.id,
-      :secret => Aji.conf['CLIENT_SECRET']
+    post "auth/request_token", { :user_id => @user.id,
+      :secret => Aji.conf['CLIENT_SECRET'] }, 'rack.url_scheme' => 'https'
     @response = last_response
   end
 
   When 'I request a token' do
-    # TODO: Mock no HTTPS
     post "auth/request_token", :user_id => @user.id,
       :secret => Aji.conf['CLIENT_SECRET']
     @response = last_response
@@ -25,8 +23,8 @@ class Authentication < Spinach::FeatureSteps
   Then 'I should receive a new token and time-to-live' do
     body = json_body @response
 
-    body.should have_key? 'token'
-    body.should have_key? 'ttl'
+    body.has_key?('token').should == true
+    body.has_key?('expires_at').should == true
   end
 
   Then 'I should receive an error' do
