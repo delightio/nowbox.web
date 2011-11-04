@@ -179,12 +179,11 @@ to <code>http://api.nowbox.com/auth/failure</code>.</em></p>
         </div>
         <h2>POST /auth/:provider/deauthorize</h2>
 
-<p>Deauthorizes an account effectively removing it from the system.
+<p>Deauthorizes an account effectively removing it from the system.<br>
 <strong>Returns</strong> an updated version of the user resource.</p>
 
 <p><strong>Required params</strong>
 &ndash; <code>uid</code>: The unique identifier of the account to be deauthorized.</p>
-
       </td>
       <td class=code>
         <div class='highlight'><pre>    <span class="n">post</span> <span class="s1">&#39;/:provider/deauthorize&#39;</span> <span class="k">do</span>
@@ -203,6 +202,54 @@ to <code>http://api.nowbox.com/auth/failure</code>.</em></p>
 
       <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span> <span class="n">auth</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">serializable_hash</span>
 
+    <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-POST_/auth/request_token'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-POST_/auth/request_token">&#182;</a>
+        </div>
+        <h2>POST /auth/request_token</h2>
+
+<p>Securely get a user authentication token.
+<strong>Returns</strong> a JSON structure with a <code>token</code> and an <code>expires_at</code> timestamp.</p>
+
+<p><strong>Required params</strong>
+&ndash; <code>secret</code>: A client secret.
+&ndash; <code>user_id</code>: identifier for the user to authenticate as.</p>
+
+<p><strong><em>NOTE:</em></strong> This request must be made via HTTPS. Not doing so will result
+in a 403 Forbidden.</p>
+
+<p>If the client secret is invalid then a 401 Unauthorized is returned.</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="n">post</span> <span class="s1">&#39;/request_token&#39;</span> <span class="k">do</span>
+      <span class="n">content_type</span> <span class="ss">:json</span>
+
+      <span class="n">force_ssl!</span>
+      <span class="n">validate_secret!</span>
+
+      <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
+      <span class="n">tg</span> <span class="o">=</span> <span class="no">Token</span><span class="o">::</span><span class="no">Generator</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+
+      <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="ss">:token</span> <span class="o">=&gt;</span> <span class="n">tg</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="ss">:expires_at</span> <span class="o">=&gt;</span> <span class="n">tg</span><span class="o">.</span><span class="n">expires_at</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="n">helpers</span> <span class="k">do</span>
+      <span class="k">def</span> <span class="nf">force_ssl!</span>
+        <span class="k">unless</span> <span class="n">request</span><span class="o">.</span><span class="n">scheme</span> <span class="o">==</span> <span class="s1">&#39;https&#39;</span>
+          <span class="n">halt</span> <span class="o">[</span><span class="mi">403</span><span class="p">,</span> <span class="s1">&#39;{&quot;error&quot;:&quot;Client must use HTTPS to generate tokens.&quot;}&#39;</span><span class="o">]</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+
+      <span class="k">def</span> <span class="nf">validate_secret!</span>
+        <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:secret</span><span class="o">]</span> <span class="o">!=</span> <span class="no">Aji</span><span class="o">.</span><span class="n">conf</span><span class="o">[</span><span class="s1">&#39;CLIENT_SECRET&#39;</span><span class="o">]</span>
+          <span class="n">halt</span> <span class="o">[</span><span class="mi">401</span><span class="p">,</span> <span class="s1">&#39;{&quot;error&quot;:&quot;Invalid client secret.&quot;}&#39;</span><span class="o">]</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span></pre></div>

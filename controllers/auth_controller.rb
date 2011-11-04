@@ -94,7 +94,7 @@ module Aji
     end
 
     # ## POST /auth/:provider/deauthorize
-    # Deauthorizes an account effectively removing it from the system.
+    # Deauthorizes an account effectively removing it from the system.  
     # __Returns__ an updated version of the user resource.
     #
     # __Required params__
@@ -117,6 +117,18 @@ module Aji
 
     end
 
+    # ## POST /auth/request_token
+    # Securely get a user authentication token.
+    # __Returns__ a JSON structure with a `token` and an `expires_at` timestamp.
+    #
+    # __Required params__
+    # - `secret`: A client secret.
+    # - `user_id`: identifier for the user to authenticate as.
+    #
+    # ***NOTE:*** This request must be made via HTTPS. Not doing so will result
+    # in a 403 Forbidden.
+    #
+    # If the client secret is invalid then a 401 Unauthorized is returned.
     post '/request_token' do
       content_type :json
 
