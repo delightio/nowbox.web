@@ -1,6 +1,10 @@
 module Aji
   class API
     helpers do
+      def current_user
+        @current_user ||= find_user_by_id_or_error params[:user_id]
+      end
+
       def not_found_error! a_class, params
         error! "Cannot find #{a_class} by #{params.inspect}", 404
       end
@@ -42,6 +46,17 @@ module Aji
       def force_ssl!
         unless request.scheme == 'https'
           error! '{"error":"Client must use HTTPS to generate tokens."}', 403
+        end
+      end
+
+      def authenticate!
+        token = Token::Validator.new request.env['HTTP_X_NB_AUTHTOKEN']
+        return if token.valid_for? current_user
+
+        unless token.valid?
+          error! MultiJson.encode({:error => "Invalid user credentials."}), 401
+        else
+          error! MultiJson.encode({:error => "Improper user credentials."}), 401
         end
       end
 

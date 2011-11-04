@@ -102,6 +102,11 @@ module Aji
         user.save or error!
         user.settings
       end
+
+      get '/:user_id/auth_test' do
+        authenticate!
+        "OK"
+      end
     end
   end
 end
