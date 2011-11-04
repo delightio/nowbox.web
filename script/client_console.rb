@@ -5,20 +5,52 @@ require 'yajl'
 require 'pry'
 
 class ClientConsole
+
+  CLIENT_SECRET =
+    "j3sBP0aRG8neHoWe7MtLDp6aPQYQUQjhtIh9cVFjmiQPvdYFpWi2PbxVZrpwa7t1YrMzWtppR1crSyNV3w"
+
   def initialize
     @domain = "api.nowbox.com"
     @scheme = "http"
     @prefix = ""
+    @headers = {}
     initialize_conn
   end
 
   def initialize_conn
-    @conn = Faraday.new "#{@scheme}://#{@domain}/#{@prefix}"
+    @conn = Faraday.new "#{@scheme}://#{@domain}/#{@prefix}",
+      :headers => @headers
+  end
+
+  def get_token user_id
+    secure_mode! do
+      r = parse_response @conn.post '/auth/request_token', :user_id => user_id,
+        :secret => CLIENT_SECRET
+      if r[0] == 200
+        @token = r[2]['token']
+      end
+    end
+  end
+
+  def authenticate! user_id
+    get_token user_id
+    @headers['X-NB-AuthToken'] = @token
+    initialize_conn
+  end
+
+  def deauthenticate!
+    @headers.delete 'X-NB-AuthToken'
+    initialize_conn
   end
 
   def secure_mode!
     @scheme = "https"
     initialize_conn
+    if block_given?
+      yield
+      @scheme = "http"
+      initialize_conn
+    end
   end
 
   def unsecure_mode!
