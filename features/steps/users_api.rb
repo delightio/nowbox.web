@@ -67,6 +67,7 @@ class UsersApi < Spinach::FeatureSteps
   Given 'a valid token for a user' do
     @user = User.create
     @token = Token::Generator.new(@user).token
+    header 'X-NB-AuthToken', @token
   end
 
   When 'getting that user\'s information' do
@@ -119,6 +120,15 @@ class UsersApi < Spinach::FeatureSteps
 
   And 'there should be an error' do
     last_response.body.should =~ /error/
+  end
+
+  When  'testing that user\'s authentication' do
+    get "/1/users/#{@user.id}/auth_test"
+  end
+
+  When  'testing another user\'s authentication' do
+    @other_user = User.create
+    get "/1/users/#{@other_user.id}/auth_test"
   end
 end
 

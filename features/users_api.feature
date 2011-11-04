@@ -57,3 +57,20 @@ Feature: Users API
     When updating that user's settings
     Then the status code should be 401
     And there should be an error
+
+  Scenario: Testing valid user authentication
+    Given a valid token for a user
+    When testing that user's authentication
+    Then the status code should be 200
+
+  Scenario: Testing user authentication with no token
+    Given a valid user id
+    When testing that user's authentication
+    Then the status code should be 401
+    And there should be an error
+
+  Scenario: Testing user authentication for a different user
+    Given a valid token for a user
+    When testing another user's authentication
+    Then the status code should be 401
+    And there should be an error
