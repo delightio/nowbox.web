@@ -37,19 +37,29 @@ describe Aji::Token do
     end
   end
 
-  describe Token::Validator do
-    specify "when the token is valid for the user" do
-      subject.should be_valid?
-    end
+  describe Aji::Token::Validator do
+    let(:token) { "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" }
+    let(:user) { mock "user", :id => 42 }
+    subject { Token::Validator.new token }
 
-    specify "when the token is not for this user" do
-      subject.should_not be_valid
-      subject.should be_incorrect
-    end
+    describe "#valid_for?" do
+      specify "true when the token is valid for the given user" do
+        Aji.redis.should_receive(:get).with("authentication:#{token}").
+          and_return(user.id.to_s)
 
-   specify "when the token is invalid" do
-      subject.should_not be_valid
-      subject.should_not be_incorrect
+        subject.should be_valid_for(user)
+      end
+
+      specify "false when the token is not found" do
+        subject.should_not be_valid_for(user)
+      end
+
+      specify "false when the token is for a different user" do
+        Aji.redis.should_receive(:get).with("authentication:#{token}").
+          and_return("3")
+
+        subject.should_not be_valid_for(user)
+      end
     end
   end
 end

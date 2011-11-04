@@ -9,6 +9,7 @@ module Aji
     class Generator < Token
 
       attr_reader :token, :expires_at
+
       def initialize user
         @user = user
         generate_token!
@@ -27,6 +28,13 @@ module Aji
     end
 
     class Validator < Token
+      def initialize token
+        @token = token
+      end
+
+      def valid_for? user
+        Aji.redis.get(token_key).to_i == user.id
+      end
     end
   end
 end
