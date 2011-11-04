@@ -9,13 +9,13 @@ class Authentication < Spinach::FeatureSteps
   end
 
   When 'I securely request a token' do
-    post "auth/request_token", { :user_id => @user.id,
+    post "/auth/request_token", { :user_id => @user.id,
       :secret => Aji.conf['CLIENT_SECRET'] }, 'rack.url_scheme' => 'https'
     @response = last_response
   end
 
   When 'I request a token' do
-    post "auth/request_token", :user_id => @user.id,
+    post "/auth/request_token", :user_id => @user.id,
       :secret => Aji.conf['CLIENT_SECRET']
     @response = last_response
   end

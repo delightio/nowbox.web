@@ -20,6 +20,7 @@ module Aji
       #
       # __Required params__ `user_id` unique id of the user
       # __Optional params__ none
+      # NEEDSAUTH
       get '/:user_id' do
         find_user_by_id_or_error params[:user_id]
       end
@@ -54,6 +55,7 @@ module Aji
       # __Required params__ (need just one of the two params)
       # - `name` name of the user
       # - `email` email address of the user
+      # NEEDSAUTH
       put '/:user_id' do
         u = find_user_by_id_or_error params[:user_id]
         updatable_params = [ :name, :email ]
@@ -69,6 +71,7 @@ module Aji
 
       # ## GET users/:user_id/settings
       # __Returns__ JSON object representing the user's settings.
+      # NEESAUTH
       get '/:user_id/settings' do
         find_user_by_id_or_error(params[:user_id]).settings
       end
@@ -80,6 +83,7 @@ module Aji
       # __Returns__ JSON object representing the user's settings.  
       # __Required params__ `settings`: The form encoded represenation of the
       # user's settings.
+      # NEESAUTH
       put '/:user_id/settings' do
         user = find_user_by_id_or_error params[:user_id]
         missing_params_error! params, [:settings] unless params[:settings]
