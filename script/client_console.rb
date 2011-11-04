@@ -6,7 +6,39 @@ require 'pry'
 
 class ClientConsole
   def initialize
-    @conn = Faraday.new("http://api.nowbox.com/1")# { |f| f.adapter :typhoeus }
+    @domain = "api.nowbox.com"
+    @scheme = "http"
+    @prefix = ""
+    initialize_conn
+  end
+
+  def initialize_conn
+    @conn = Faraday.new "#{@scheme}://#{@domain}/#{@prefix}"
+  end
+
+  def secure_mode!
+    @scheme = "https"
+    initialize_conn
+  end
+
+  def unsecure_mode!
+    @scheme = "https"
+    initialize_conn
+  end
+
+  def use_prefix p
+    @prefix = p
+    initialize_conn
+  end
+
+  def add_prefix p
+    @prefix << p
+    initialize_conn
+  end
+
+  def clear_prefix
+    @prefix = ""
+    initialize_conn
   end
 
   def parse_response resp
