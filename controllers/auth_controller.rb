@@ -139,7 +139,7 @@ module Aji
       user = User.find params[:user_id]
       tg = Token::Generator.new(user)
 
-      MultiJson.encode(:token => tg.token, :expires_at => tg.expires_at)
+      MultiJson.encode(:token => tg.token, :expires_at => tg.expires_at.to_i)
     end
 
     helpers do
