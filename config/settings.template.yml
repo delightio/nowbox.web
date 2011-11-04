@@ -20,6 +20,7 @@ development:
   YOUTUBE_OA_SECRET: "r1XvyGwsP2tUiPWBDsF55-xY"
 
   TLD: "smackaho.st"
+  CLIENT_SECRET: "j3sBP0aRG8neHoWe7MtLDp6aPQYQUQjhtIh9cVFjmiQPvdYFpWi2PbxVZrpwa7t1YrMzWtppR1crSyNV3w"
   REDISTOGO_URL: "redis://localhost/7"
   DATABASE_URL: "postgres://localhost/aji_dev"
   MAX_RECENT_VIDEO_IDS_IN_TRENDING: 1000
@@ -42,6 +43,7 @@ test:
   YOUTUBE_OA_SECRET: "r1XvyGwsP2tUiPWBDsF55-xY"
 
   TLD: "nowbox.test"
+  CLIENT_SECRET: "j3sBP0aRG8neHoWe7MtLDp6aPQYQUQjhtIh9cVFjmiQPvdYFpWi2PbxVZrpwa7t1YrMzWtppR1crSyNV3w"
   REDISTOGO_URL: "redis://localhost/9"
   DATABASE_URL: "postgres://localhost/aji_test"
   MAX_RECENT_VIDEO_IDS_IN_TRENDING: 1000
