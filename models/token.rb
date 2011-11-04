@@ -32,8 +32,16 @@ module Aji
         @token = token
       end
 
+      def get_token_data
+        Aji.redis.get(token_key)
+      end
+
+      def valid?
+        not get_token_data.nil?
+      end
+
       def valid_for? user
-        Aji.redis.get(token_key).to_i == user.id
+        get_token_data.to_i == user.id
       end
     end
   end

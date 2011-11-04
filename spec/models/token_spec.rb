@@ -42,6 +42,20 @@ describe Aji::Token do
     let(:user) { mock "user", :id => 42 }
     subject { Token::Validator.new token }
 
+    describe "#valid?" do
+      specify "true when the token still stored in redis" do
+        Aji.redis.should_receive(:get).with("authentication:#{token}").
+          and_return(user.id.to_s)
+        subject.should be_valid
+      end
+
+      specify "false when the token is not found" do
+        Aji.redis.should_receive(:get).with("authentication:#{token}").
+          and_return(nil)
+        subject.should_not be_valid
+      end
+    end
+
     describe "#valid_for?" do
       specify "true when the token is valid for the given user" do
         Aji.redis.should_receive(:get).with("authentication:#{token}").
