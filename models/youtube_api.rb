@@ -6,8 +6,8 @@ module Aji
 
     def initialize uid=nil, token=nil, secret=nil
       raise ArgumentError, "Invalid credentials" unless
-        (token && secret) || !(token || secret)
-      @uid = uid
+        (token and secret) or not (token or secret)
+      @uid, @token, @secret = uid, token, secret
     end
 
     def author_info uid=uid
@@ -86,7 +86,14 @@ module Aji
 
 
     def client
-      @@client ||= YouTubeIt::Client.new dev_key: Aji.conf['YOUTUBE_KEY']
+      @client ||=
+        if @token and @secret
+          YouTubeIt::OAuthClient.new(Aji.conf['YOUTUBE_OA_KEY'],
+            Aji.conf['YOUTUBE_OA_SECRET'], uid, Aji.conf['YOUTUBE_KEY']).
+            tap { |c| c.authorize_from_access @token, @secret }
+        else
+          @@client ||= YouTubeIt::Client.new dev_key: Aji.conf['YOUTUBE_KEY']
+        end
     end
     private :client
 

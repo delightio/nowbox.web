@@ -112,11 +112,17 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
     end
 
     context "when authenticated" do
-      let(:credentials) do
-        {
-          "token" => "1/-pfrwm0pB9BaW0vu8uElrlEhhaI7bA--5Errm8qyEvg",
-          "secret" => "KZeLtCoS9mshej1lLVrJ_Fy7"
-        }
+      let(:token) { "1/-pfrwm0pB9BaW0vu8uElrlEhhaI7bA--5Errm8qyEvg" }
+      let(:secret) { "KZeLtCoS9mshej1lLVrJ_Fy7" }
+
+      it "raises an error if partial credentials are used" do
+        expect{ YoutubeAPI.new "someuser", "sometoken" }.to raise_error(
+          ArgumentError)
+      end
+
+      it "creates an oauth client" do
+        YoutubeAPI.new("nuclearsandwich", token, secret).send(:client).
+          should be_kind_of YouTubeIt::OAuthClient
       end
     end
 
