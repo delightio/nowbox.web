@@ -12,7 +12,6 @@ body { background: url(/images/textures/aji-tiles-crosshatch-white.jpg) repeat; 
 #sharer{padding: 0px; font-size: 14px; line-height: 25px; color: #888; position: relative;}
 	#sharer .image{ position: absolute; left: 10px; }
 	#sharer .blurb{ float: left; margin-left: 40px; }
-	
-#embed{ text-align: center; height: 200px; width: 280px; margin: 0px auto; height: 200px; width: 300px;}
+
+#embed{ text-align: center; height: 200px; width: 300px; margin: 0px auto;}
 	.landscape #embed{ height: 240px;  width: 450px;}
-	
