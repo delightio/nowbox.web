@@ -71,10 +71,6 @@ module Aji
       stream_channel
     end
 
-    def sign_in_as user
-      user.subscribe_social build_stream_channel
-    end
-
     def self.from_auth_hash auth_hash
       find_or_initialize_by_uid_and_type(auth_hash['uid'],
         self.to_s).tap do |account|

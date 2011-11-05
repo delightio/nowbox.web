@@ -81,12 +81,15 @@ module Aji
 
         account = provider_class.from_auth_hash auth_hash
 
+        if account.class == Account::Youtube
+          auth = Authorization.new account, user.identity
+          auth.grant!
+          user = auth.user
+        else
+          user.subscribe_social build_stream_channel
+        end
 
-        account.sign_in_as user
-
-        MultiJson.encode(user.serializable_hash.merge(
-          "#{params[:provider]}_account_id" => account.id))
-
+        MultiJson.encode user.serializable_hash
       rescue => e
         Aji.log :WARN, "#{e.class}: #{e.message}"
         MultiJson.encode :error => 'Unable to authenticate',

@@ -253,14 +253,14 @@ describe Account::Youtube do
     end
   end
 
-  describe "#sign_in_as" do
+  describe "#authorize!" do
     subject { Account::Youtube.new }
-    let(:user) { stub }
+    let(:user) { stub :id => 42 }
 
-    xit "starts a new youtube synchronization" do
+    it "starts a new youtube synchronization" do
       YoutubeSync.should_receive(:new).with(user, subject)
 
-      subject.sign_in_as user
+      subject.authorize! user
     end
   end
 end

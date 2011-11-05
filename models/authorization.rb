@@ -19,6 +19,7 @@ module Aji
       @account.save
       @identity.save
       @user = @identity.user
+      @account.authorize! @user
     end
 
     def deauthorize!

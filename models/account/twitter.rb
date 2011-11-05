@@ -108,10 +108,6 @@ module Aji
       stream_channel
     end
 
-    def sign_in_as user
-      user.subscribe_social build_stream_channel
-    end
-
     def set_provider
       update_attribute :provider, 'twitter'
     end
