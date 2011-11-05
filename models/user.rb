@@ -98,6 +98,10 @@ module Aji
       channels
     end
 
+    def youtube_channels
+      subscribed_channels.select &:youtube_channel?
+    end
+
     def facebook_channel_id
       if c = social_channels.find{|c| c.class == Channel::FacebookStream }
         c.id
@@ -201,6 +205,14 @@ module Aji
 
     def dequeue_video video
       queue_channel.pop video
+    end
+
+    def favorite_videos
+      favorite_channel.content_videos
+    end
+
+    def queued_videos
+      queue_channel.content_videos
     end
 
     def create_share_from_event event

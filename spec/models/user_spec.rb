@@ -770,4 +770,41 @@ describe Aji::User do
       end
     end
   end
+
+  describe "#favorite_videos" do
+    it "returns videos in the user's favorites channel" do
+      subject.favorite_channel.should_receive(:content_videos)
+
+      subject.favorite_videos
+    end
+  end
+
+  describe "#queued_videos" do
+    it "returns videos in the user's favorites channel" do
+      subject.queue_channel.should_receive(:content_videos)
+
+      subject.queued_videos
+    end
+  end
+
+  describe "#youtube_channels" do
+    subject do
+      User.new.tap{ |u| u.stub :subscribed_channels => subscribed_channels }
+    end
+
+    let(:youtube_channels) do
+      [stub(:youtube_channel? => true), stub(:youtube_channel? => true)]
+    end
+
+    let(:other_channels) do
+      [stub(:youtube_channel? => false), stub(:youtube_channel? => false)]
+    end
+
+    let(:subscribed_channels) { youtube_channels + other_channels }
+
+    it "returns all subscribed channels with a single youtube author" do
+      subject.youtube_channels.should == youtube_channels
+    end
+  end
+
 end
