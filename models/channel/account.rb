@@ -93,7 +93,8 @@ module Aji
       s = super options
       h = {
         "type" => "Account::#{accounts.first.type.split('::').last}",
-        "description" => description
+        "description" => description,
+        "category_ids" => category_ids.first(2)
       }
       s.merge! h
     end
