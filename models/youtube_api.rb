@@ -4,7 +4,9 @@ module Aji
 
     attr_reader :uid
 
-    def initialize uid=nil
+    def initialize uid=nil, token=nil, secret=nil
+      raise ArgumentError, "Invalid credentials" unless
+        (token && secret) || !(token || secret)
       @uid = uid
     end
 

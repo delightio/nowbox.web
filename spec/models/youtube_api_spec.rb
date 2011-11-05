@@ -111,6 +111,15 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
       end
     end
 
+    context "when authenticated" do
+      let(:credentials) do
+        {
+          "token" => "1/-pfrwm0pB9BaW0vu8uElrlEhhaI7bA--5Errm8qyEvg",
+          "secret" => "KZeLtCoS9mshej1lLVrJ_Fy7"
+        }
+      end
+    end
+
     describe ".api" do
       it "initializes a new api instance when none is set" do
         YoutubeAPI.should_receive :new
