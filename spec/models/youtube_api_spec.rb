@@ -121,8 +121,9 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
       end
 
       it "creates an oauth client" do
-        YoutubeAPI.new("nuclearsandwich", token, secret).send(:client).
-          should be_kind_of YouTubeIt::OAuthClient
+        client = YoutubeAPI.new("nuclearsandwich", token, secret).send(:client)
+        binding.pry
+        client.should be_kind_of YouTubeIt::OAuthClient
       end
     end
 

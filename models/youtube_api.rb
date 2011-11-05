@@ -88,9 +88,11 @@ module Aji
     def client
       @client ||=
         if @token and @secret
-          YouTubeIt::OAuthClient.new(Aji.conf['YOUTUBE_OA_KEY'],
-            Aji.conf['YOUTUBE_OA_SECRET'], uid, Aji.conf['YOUTUBE_KEY']).
-            tap { |c| c.authorize_from_access @token, @secret }
+          YouTubeIt::OAuthClient.new(consumer_key: Aji.conf['YOUTUBE_OA_KEY'],
+            consumer_secret: Aji.conf['YOUTUBE_OA_SECRET'], username: uid,
+            dev_key: Aji.conf['YOUTUBE_KEY']).tap do |c|
+              c.authorize_from_access @token, @secret
+            end
         else
           @@client ||= YouTubeIt::Client.new dev_key: Aji.conf['YOUTUBE_KEY']
         end
