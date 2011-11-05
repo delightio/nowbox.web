@@ -108,6 +108,11 @@ module Aji
       new_videos[(total-limit)...total].to_a
     end
 
+    def youtube_channel?
+      self.class == Channel::Account and
+        accounts.map(&:class) == [Aji::Account::Youtube]
+    end
+
     def background_refresh_content
       Resque.enqueue Queues::RefreshChannel, id
     end
