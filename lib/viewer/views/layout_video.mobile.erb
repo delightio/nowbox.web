@@ -7,31 +7,41 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	
-	<title>Nowbox</title>
-	<meta name="description" content="Want to see the future of video entertainment? Nowbox is launching soon, signup for an early invite.">
+
+	<title>nowbox | <%= @video.title %></title>
 	<meta name="author" content="Nowbox">
-		
+  <meta property="title" content="<%= h @video.title %>" />
+  <meta property="description" content="<%= h @video.description %>" />
+  <link rel="image_src" href="<%= h @video.thumbnail_uri %>" />
+
+  <meta property="og:url" content="<%= @share_url %>" />
+  <meta property="og:title" content="<%= h @video.title %>" />
+	<meta property="og:type" content="article" />
+  <meta property="og:description" content="<%= h @video.description %>" />
+  <meta property="og:image" content="<%= h @video.thumbnail_uri %>" />
+
+  <meta name="medium" content="video" />
+
 	<link rel="shortcut icon" href="/favicon.ico">
 	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-	
+
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 <!-- 	<link rel="apple-touch-startup-image" href="startup.png" /> -->
-	
+
 	<link href='http://fonts.googleapis.com/css?family=Raleway:100&v2' rel='stylesheet' type='text/css'>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-	<script src="./js/libs/modernizr-1.7.min.js"></script>
-	
-	<script src="./js/libs/jqtouch/jqtouch/jqtouch.js"></script>
-	
-	<link type="text/css" rel="stylesheet" href="./js/libs/jqtouch/jqtouch/jqtouch.css">
-	<link type="text/css" rel="stylesheet" href="./js/libs/jqtouch/themes/aji/theme.css">
-	<link type="text/css" rel="stylesheet" href="./css/mobile.css?v=2">	
+	<script src="/js/libs/modernizr-1.7.min.js"></script>
+
+	<script src="/js/libs/jqtouch/jqtouch/jqtouch.js"></script>
+
+	<link type="text/css" rel="stylesheet" href="/js/libs/jqtouch/jqtouch/jqtouch.css">
+	<link type="text/css" rel="stylesheet" href="/js/libs/jqtouch/themes/aji/theme.css">
+	<link type="text/css" rel="stylesheet" href="/css/mobile.css?v=2">
 </head>
 <body id="mobile_layout">
 	<div id="jqt">
-		<%= yield %>	
+		<%= yield %>
 	</div>
 	<script>
 		$.jQTouch({
