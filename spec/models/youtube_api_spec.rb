@@ -114,6 +114,7 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
     context "when authenticated" do
       let(:token) { "1/-pfrwm0pB9BaW0vu8uElrlEhhaI7bA--5Errm8qyEvg" }
       let(:secret) { "KZeLtCoS9mshej1lLVrJ_Fy7" }
+      subject { YoutubeAPI.new "nuclearsandwich", token, secret }
 
       it "raises an error if partial credentials are used" do
         expect{ YoutubeAPI.new "someuser", "sometoken" }.to raise_error(
@@ -122,9 +123,39 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
 
       it "creates an oauth client" do
         client = YoutubeAPI.new("nuclearsandwich", token, secret).send(:client)
-        binding.pry
         client.should be_kind_of YouTubeIt::OAuthClient
       end
+
+      let(:subscribed_channel_names) {
+        %w[RhettandLink MerriamWebsterOnline Freddie25 taylormali
+          AlexBohnhoff Fagottron theRSAorg gamesbycolaboratory minutephysics
+          AgentXPQ rymdreglage ].map{|uid| uid.downcase}.sort}
+
+      describe "#subscriptions" do
+        subject { YoutubeAPI.new "nuclearsandwich", token, secret }
+        it "hits youtube once" do
+          subject.tracker.should_receive(:hit!).
+            exactly(1+subscribed_channel_names.count).times
+          channels = VCR.use_cassette "youtube_api/subscriptions" do
+            subject.subscriptions
+          end
+        end
+
+        it "returns subscribed channels as Aji::Channel::Account objects" do
+          channels = VCR.use_cassette "youtube_api/subscriptions" do
+            subject.subscriptions
+          end
+
+          uids = []
+          channels.each do |ch|
+            ch.should be_an_instance_of Channel::Account
+            uids << ch.accounts.first.uid
+          end
+          channels.should have(subscribed_channel_names.count).channels
+          uids.sort.should == subscribed_channel_names
+        end
+      end
+
     end
 
     describe ".api" do

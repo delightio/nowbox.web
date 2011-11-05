@@ -1,0 +1,1376 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/default/subscriptions?v=2
+    body: !!null 
+    headers:
+      x-gdata-client:
+      - youtube_it
+      x-gdata-key:
+      - key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA
+      gdata-version:
+      - '2'
+      content-type:
+      - application/atom+xml; charset=UTF-8
+      content-length:
+      - '0'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 401
+      message: User authentication required.
+    headers:
+      x-gdata-user-country:
+      - US
+      www-authenticate:
+      - GoogleLogin realm="https://accounts.google.com/ClientLogin",service="youtube"
+      content-type:
+      - text/html; charset=UTF-8
+      date:
+      - Sat, 05 Nov 2011 01:15:38 GMT
+      expires:
+      - Sat, 05 Nov 2011 01:15:38 GMT
+      cache-control:
+      - private, max-age=0
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+      transfer-encoding:
+      - chunked
+    body: ! '<HTML>
+
+      <HEAD>
+
+      <TITLE>User authentication required.</TITLE>
+
+      </HEAD>
+
+      <BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+      <H1>User authentication required.</H1>
+
+      <H2>Error 401</H2>
+
+      </BODY>
+
+      </HTML>
+
+'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/default
+    body: !!null 
+    headers:
+      authorization:
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="ad2c1a6b99a18bb33751698de1e09317",
+        oauth_signature="25mJEa2AmocDyrlbDw2zGOygtKo%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1320455851", oauth_token="1%2F-pfrwm0pB9BaW0vu8uElrlEhhaI7bA--5Errm8qyEvg",
+        oauth_version="1.0"
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8
+      expires:
+      - Sat, 05 Nov 2011 01:17:31 GMT
+      date:
+      - Sat, 05 Nov 2011 01:17:31 GMT
+      cache-control:
+      - private, max-age=0, must-revalidate, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '1.0'
+      last-modified:
+      - Thu, 03 Nov 2011 04:03:19 GMT
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+      transfer-encoding:
+      - chunked
+    body: ! '<?xml version=''1.0'' encoding=''UTF-8''?><entry xmlns=''http://www.w3.org/2005/Atom''
+      xmlns:media=''http://search.yahoo.com/mrss/'' xmlns:gd=''http://schemas.google.com/g/2005''
+      xmlns:yt=''http://gdata.youtube.com/schemas/2007''><id>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</id><published>2008-11-23T23:38:28.000-08:00</published><updated>2011-11-02T21:03:19.000-07:00</updated><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#userProfile''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/channeltypes.cat'' term=''Standard''/><title
+      type=''text''>YouTube user: nuclearsandwich</title><link rel=''alternate'' type=''text/html''
+      href=''http://www.youtube.com/profile?user=nuclearsandwich''/><link rel=''http://gdata.youtube.com/schemas/2007#insight.views''
+      type=''text/html'' href=''http://insight.youtube.com/video-analytics/csvreports?query=nuclearsandwich&amp;type=c&amp;starttime=1235865600000&amp;endtime=1320364800000&amp;user_starttime=1319760000000&amp;user_endtime=1320364800000&amp;region=world&amp;token=E6IU7ON2VYffSoXtVBvswpNpWuF8MTMyMDQ1NzY1MUAxMzIwNDU1ODUx&amp;hl=en_US''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:age>23</yt:age><gd:feedLink
+      rel=''http://gdata.youtube.com/schemas/2007#user.favorites'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/favorites''
+      countHint=''77''/><gd:feedLink rel=''http://gdata.youtube.com/schemas/2007#user.contacts''
+      href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/contacts'' countHint=''0''/><gd:feedLink
+      rel=''http://gdata.youtube.com/schemas/2007#user.inbox'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/inbox''
+      countHint=''0''/><gd:feedLink rel=''http://gdata.youtube.com/schemas/2007#user.playlists''
+      href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/playlists''/><gd:feedLink
+      rel=''http://gdata.youtube.com/schemas/2007#user.subscriptions'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions''
+      countHint=''11''/><gd:feedLink rel=''http://gdata.youtube.com/schemas/2007#user.uploads''
+      href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/uploads'' countHint=''0''/><gd:feedLink
+      rel=''http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/newsubscriptionvideos''/><yt:gender>m</yt:gender><yt:location>95070,
+      US</yt:location><yt:statistics lastWebAccess=''2011-08-31T16:23:11.000-07:00''
+      subscriberCount=''0'' videoWatchCount=''0'' viewCount=''105'' totalUploadViews=''0''/><media:thumbnail
+      url=''http://s.ytimg.com/yt/img/no_videos_140-vfl1fDI7-.png''/><yt:username>nuclearsandwich</yt:username></entry>'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/nowmovnowbox/subscriptions?v=2
+    body: !!null 
+    headers:
+      authorization:
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="a361b6b8c06f920229e47645fe7623f0",
+        oauth_signature="zfM4fbo%2B40ktnhKam4kpaWvm6hk%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1320457505", oauth_token="1%2F-pfrwm0pB9BaW0vu8uElrlEhhaI7bA--5Errm8qyEvg",
+        oauth_version="1.0"
+      x-gdata-client:
+      - youtube_it
+      x-gdata-key:
+      - key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA
+      gdata-version:
+      - '2'
+      content-type:
+      - application/atom+xml; charset=UTF-8
+      content-length:
+      - '0'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=feed
+      expires:
+      - Sat, 05 Nov 2011 01:45:05 GMT
+      date:
+      - Sat, 05 Nov 2011 01:45:05 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DUIERHY_eSp7I2A9WhRTFEg."
+      last-modified:
+      - Sat, 05 Nov 2011 01:45:05 GMT
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+      transfer-encoding:
+      - chunked
+    body: ! '<?xml version=''1.0'' encoding=''UTF-8''?><feed xmlns=''http://www.w3.org/2005/Atom''
+      xmlns:openSearch=''http://a9.com/-/spec/opensearch/1.1/'' xmlns:gd=''http://schemas.google.com/g/2005''
+      xmlns:yt=''http://gdata.youtube.com/schemas/2007'' gd:etag=''W/&quot;DUIERHY_eSp7I2A9WhRTFEg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscriptions</id><updated>2011-11-05T01:45:05.841Z</updated><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><title>Subscriptions
+      of nowmovnowbox</title><logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/profile?user=nowmovnowbox&amp;view=subscriptions''/><link
+      rel=''hub'' href=''http://pubsubhubbub.appspot.com''/><link rel=''http://schemas.google.com/g/2005#feed''
+      type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions?client=youtube_it''/><link
+      rel=''http://schemas.google.com/g/2005#batch'' type=''application/atom+xml''
+      href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/batch?client=youtube_it''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions?start-index=1&amp;max-results=25&amp;client=youtube_it''/><link
+      rel=''service'' type=''application/atomsvc+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions?alt=atom-service''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><generator
+      version=''2.1'' uri=''http://gdata.youtube.com''>YouTube data API</generator><openSearch:totalResults>6</openSearch:totalResults><openSearch:startIndex>1</openSearch:startIndex><openSearch:itemsPerPage>25</openSearch:itemsPerPage><entry
+      gd:etag=''W/&quot;DkYNSH47eCp7I2A9WhRTFEg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJpJORJA5pacTXFiBcHGmUbo</id><published>2011-11-04T17:49:59.000-07:00</published><updated>2011-11-04T17:49:59.000-07:00</updated><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : RoosterTeeth</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/roosterteeth/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/roosterteeth?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/RoosterTeeth''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJpJORJA5pacTXFiBcHGmUbo?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:username>RoosterTeeth</yt:username></entry><entry
+      gd:etag=''W/&quot;DkUEQH47eCp7I2A9WhRTFEg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJmo38L-unFc7axHavBtEXtk</id><published>2011-11-04T17:50:01.000-07:00</published><updated>2011-11-04T17:50:01.000-07:00</updated><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : BlueXephos</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/bluexephos/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/bluexephos?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/BlueXephos''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJmo38L-unFc7axHavBtEXtk?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:username>BlueXephos</yt:username></entry><entry
+      gd:etag=''W/&quot;CEEMQn47eCp7I2A9WhRTFEg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA</id><published>2011-11-04T17:24:43.000-07:00</published><updated>2011-11-04T17:24:43.000-07:00</updated><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : freddiew</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/freddiew/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/freddiew?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/freddiew''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:username>freddiew</yt:username></entry><entry
+      gd:etag=''W/&quot;CEEMRn47eCp7I2A9WhRTFEg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY</id><published>2011-11-04T17:24:47.000-07:00</published><updated>2011-11-04T17:24:47.000-07:00</updated><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : LisaNova</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/lisanova/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/lisanova?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/LisaNova''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:username>LisaNova</yt:username></entry><entry
+      gd:etag=''W/&quot;DkUARH47eCp7I2A9WhRTFEg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJgLVbkdt4YuOxJPw1PQAZHs</id><published>2011-11-04T17:50:45.000-07:00</published><updated>2011-11-04T17:50:45.000-07:00</updated><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''channel''/><title>Videos
+      published by : AmandaRussell</title><content type=''application/atom+xml;type=feed''
+      src=''http://gdata.youtube.com/feeds/api/users/amandarussell/uploads''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/amandarussell?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/profile?user=AmandaRussell#p/u''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJgLVbkdt4YuOxJPw1PQAZHs?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:countHint>6</yt:countHint><yt:username>AmandaRussell</yt:username></entry><entry
+      gd:etag=''W/&quot;DkYNSH47eCp7I2A9WhRTFEg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJsgE4tf68CH8_JnkZ0u2ts4</id><published>2011-11-04T17:49:59.000-07:00</published><updated>2011-11-04T17:49:59.000-07:00</updated><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : DSPGaming</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/dspgaming/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/dspgaming?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/DSPGaming''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJsgE4tf68CH8_JnkZ0u2ts4?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:username>DSPGaming</yt:username></entry></feed>'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/nuclearsandwich/subscriptions?v=2
+    body: !!null 
+    headers:
+      authorization:
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="351bac58134d8a272e10eb9a61cf208e",
+        oauth_signature="MkuNeSvStKcX%2BfFTyZwm7b8BPFU%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1320457517", oauth_token="1%2F-pfrwm0pB9BaW0vu8uElrlEhhaI7bA--5Errm8qyEvg",
+        oauth_version="1.0"
+      x-gdata-client:
+      - youtube_it
+      x-gdata-key:
+      - key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA
+      gdata-version:
+      - '2'
+      content-type:
+      - application/atom+xml; charset=UTF-8
+      content-length:
+      - '0'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=feed
+      expires:
+      - Sat, 05 Nov 2011 01:45:18 GMT
+      date:
+      - Sat, 05 Nov 2011 01:45:18 GMT
+      cache-control:
+      - private, max-age=0, must-revalidate, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DUIFSX44cSp7I2A9WhRTFEg."
+      last-modified:
+      - Sat, 05 Nov 2011 01:45:18 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '<?xml version=''1.0'' encoding=''UTF-8''?><feed xmlns=''http://www.w3.org/2005/Atom''
+      xmlns:app=''http://www.w3.org/2007/app'' xmlns:openSearch=''http://a9.com/-/spec/opensearch/1.1/''
+      xmlns:gd=''http://schemas.google.com/g/2005'' xmlns:yt=''http://gdata.youtube.com/schemas/2007''
+      gd:etag=''W/&quot;DUIFSX44cSp7I2A9WhRTFEg.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscriptions</id><updated>2011-11-05T01:45:18.039Z</updated><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><title>Subscriptions
+      of nuclearsandwich</title><logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/profile?user=nuclearsandwich&amp;view=subscriptions''/><link
+      rel=''hub'' href=''http://pubsubhubbub.appspot.com''/><link rel=''http://schemas.google.com/g/2005#feed''
+      type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions?client=youtube_it''/><link
+      rel=''http://schemas.google.com/g/2005#post'' type=''application/atom+xml''
+      href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions?client=youtube_it''/><link
+      rel=''http://schemas.google.com/g/2005#batch'' type=''application/atom+xml''
+      href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/batch?client=youtube_it''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions?start-index=1&amp;max-results=25&amp;client=youtube_it''/><link
+      rel=''service'' type=''application/atomsvc+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions?alt=atom-service''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><generator
+      version=''2.1'' uri=''http://gdata.youtube.com''>YouTube data API</generator><openSearch:totalResults>11</openSearch:totalResults><openSearch:startIndex>1</openSearch:startIndex><openSearch:itemsPerPage>25</openSearch:itemsPerPage><entry
+      gd:etag=''W/&quot;Ak4ERX47eCp7I2A9Wx9WF00.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWkgmSV1xZQgEj3yzjOXGj_k</id><published>2011-01-22T07:08:24.000-08:00</published><updated>2011-01-22T07:08:24.000-08:00</updated><app:edited>2011-01-22T07:08:24.000-08:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : RhettandLink</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/rhettandlink/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/rhettandlink?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/RhettandLink''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWkgmSV1xZQgEj3yzjOXGj_k?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWkgmSV1xZQgEj3yzjOXGj_k?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>RhettandLink</yt:username></entry><entry
+      gd:etag=''W/&quot;C0AERH47eCp7I2A9Wx9XEUU.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWvhSzKQVxaAdqr2fPBn_sH8</id><published>2011-01-04T14:55:05.000-08:00</published><updated>2011-01-04T14:55:05.000-08:00</updated><app:edited>2011-01-04T14:55:05.000-08:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : MerriamWebsterOnline</title><content type=''application/atom+xml;type=feed''
+      src=''http://gdata.youtube.com/feeds/api/users/merriamwebsteronline/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/merriamwebsteronline?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/MerriamWebsterOnline''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWvhSzKQVxaAdqr2fPBn_sH8?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWvhSzKQVxaAdqr2fPBn_sH8?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>MerriamWebsterOnline</yt:username></entry><entry
+      gd:etag=''W/&quot;A0ANSX47eCp7I2A9WhdRGUQ.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWptT7NWXqc4svz1YGXui0n8</id><published>2011-08-10T11:09:58.000-07:00</published><updated>2011-08-10T11:09:58.000-07:00</updated><app:edited>2011-08-10T11:09:58.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : Freddie25</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/freddie25/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/freddie25?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/Freddie25''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWptT7NWXqc4svz1YGXui0n8?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWptT7NWXqc4svz1YGXui0n8?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>Freddie25</yt:username></entry><entry
+      gd:etag=''W/&quot;CU8BQH47eCp7I2A9WhdRF0s.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWkaKrA21G43cCR3ocmXndJg</id><published>2011-08-07T17:37:31.000-07:00</published><updated>2011-08-07T17:37:31.000-07:00</updated><app:edited>2011-08-07T17:37:31.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : taylormali</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/taylormali/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/taylormali?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/taylormali''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWkaKrA21G43cCR3ocmXndJg?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWkaKrA21G43cCR3ocmXndJg?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>taylormali</yt:username></entry><entry
+      gd:etag=''W/&quot;DkYNR347eCp7I2A9Wx5TF0s.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWvN89_xbdzsuZr16ZPlqMtw</id><published>2010-08-02T08:49:56.000-07:00</published><updated>2010-08-02T08:49:56.000-07:00</updated><app:edited>2010-08-02T08:49:56.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : AlexBohnhoff</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/alexbohnhoff/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/alexbohnhoff?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/AlexBohnhoff''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWvN89_xbdzsuZr16ZPlqMtw?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWvN89_xbdzsuZr16ZPlqMtw?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>AlexBohnhoff</yt:username></entry><entry
+      gd:etag=''W/&quot;A0MGSX47eCp7I2A9Wx9SFUo.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWrCzinl2x0-Fz-VTBHhgBmQ</id><published>2010-12-05T12:03:48.000-08:00</published><updated>2010-12-05T12:03:48.000-08:00</updated><app:edited>2010-12-05T12:03:48.000-08:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : Fagottron</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/fagottron/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/fagottron?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/Fagottron''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWrCzinl2x0-Fz-VTBHhgBmQ?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWrCzinl2x0-Fz-VTBHhgBmQ?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>Fagottron</yt:username></entry><entry
+      gd:etag=''W/&quot;DU4NRH47eCp7I2A9WhdaF08.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWpcUbZBOYgdulsHxTBdaQHE</id><published>2011-10-27T08:06:35.000-07:00</published><updated>2011-10-27T08:06:35.000-07:00</updated><app:edited>2011-10-27T08:06:35.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : theRSAorg</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/thersaorg/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/thersaorg?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/theRSAorg''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWpcUbZBOYgdulsHxTBdaQHE?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWpcUbZBOYgdulsHxTBdaQHE?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>theRSAorg</yt:username></entry><entry
+      gd:etag=''W/&quot;DkADSX47eCp7I2A9WhdVEUw.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWtNFuSOCH6baZe0LiOEpirc</id><published>2011-09-15T12:26:18.000-07:00</published><updated>2011-09-15T12:26:18.000-07:00</updated><app:edited>2011-09-15T12:26:18.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : gamesbycolaboratory</title><content type=''application/atom+xml;type=feed''
+      src=''http://gdata.youtube.com/feeds/api/users/gamesbycolaboratory/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/gamesbycolaboratory?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/gamesbycolaboratory''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWtNFuSOCH6baZe0LiOEpirc?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWtNFuSOCH6baZe0LiOEpirc?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>gamesbycolaboratory</yt:username></entry><entry
+      gd:etag=''W/&quot;DkYAQX47eCp7I2A9WhRTEU4.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWmNOkrbvPACg6xGn8EELajI</id><published>2011-11-01T00:55:40.000-07:00</published><updated>2011-11-01T00:55:40.000-07:00</updated><app:edited>2011-11-01T00:55:40.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : minutephysics</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/minutephysics/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/minutephysics?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/minutephysics''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWmNOkrbvPACg6xGn8EELajI?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWmNOkrbvPACg6xGn8EELajI?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>minutephysics</yt:username></entry><entry
+      gd:etag=''W/&quot;DUMBRX47eCp7I2A9WhdaFkQ.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWt9IEFdkM62k6dAXEL75dTo</id><published>2011-10-26T23:37:34.000-07:00</published><updated>2011-10-26T23:37:34.000-07:00</updated><app:edited>2011-10-26T23:37:34.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : AgentXPQ</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/agentxpq/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/agentxpq?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/AgentXPQ''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWt9IEFdkM62k6dAXEL75dTo?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWt9IEFdkM62k6dAXEL75dTo?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>AgentXPQ</yt:username></entry><entry
+      gd:etag=''W/&quot;D0MERH47eCp7I2A9WhZbGU4.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWtSVobktRr9i1VGzPxR1_bo</id><published>2011-06-24T10:10:05.000-07:00</published><updated>2011-06-24T10:10:05.000-07:00</updated><app:edited>2011-06-24T10:10:05.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : rymdreglage</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/rymdreglage/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/rymdreglage?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/rymdreglage''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWtSVobktRr9i1VGzPxR1_bo?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWtSVobktRr9i1VGzPxR1_bo?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>rymdreglage</yt:username></entry></feed>'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/nowmovnowbox/subscriptions?v=2
+    body: !!null 
+    headers:
+      authorization:
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="9898e4e754dc6597cb98348df8fe81c0",
+        oauth_signature="pxc31i2xeJG1YMjDSOJdGagiTu4%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1320457658", oauth_token="1%2F-pfrwm0pB9BaW0vu8uElrlEhhaI7bA--5Errm8qyEvg",
+        oauth_version="1.0"
+      x-gdata-client:
+      - youtube_it
+      x-gdata-key:
+      - key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA
+      gdata-version:
+      - '2'
+      content-type:
+      - application/atom+xml; charset=UTF-8
+      content-length:
+      - '0'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=feed
+      expires:
+      - Sat, 05 Nov 2011 01:47:38 GMT
+      date:
+      - Sat, 05 Nov 2011 01:47:38 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DUEBSXY5eCp7I2A9WhRTFEg."
+      last-modified:
+      - Sat, 05 Nov 2011 01:47:38 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '<?xml version=''1.0'' encoding=''UTF-8''?><feed xmlns=''http://www.w3.org/2005/Atom''
+      xmlns:openSearch=''http://a9.com/-/spec/opensearch/1.1/'' xmlns:gd=''http://schemas.google.com/g/2005''
+      xmlns:yt=''http://gdata.youtube.com/schemas/2007'' gd:etag=''W/&quot;DUEBSXY5eCp7I2A9WhRTFEg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscriptions</id><updated>2011-11-05T01:47:38.820Z</updated><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><title>Subscriptions
+      of nowmovnowbox</title><logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/profile?user=nowmovnowbox&amp;view=subscriptions''/><link
+      rel=''hub'' href=''http://pubsubhubbub.appspot.com''/><link rel=''http://schemas.google.com/g/2005#feed''
+      type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions?client=youtube_it''/><link
+      rel=''http://schemas.google.com/g/2005#batch'' type=''application/atom+xml''
+      href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/batch?client=youtube_it''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions?start-index=1&amp;max-results=25&amp;client=youtube_it''/><link
+      rel=''service'' type=''application/atomsvc+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions?alt=atom-service''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><generator
+      version=''2.1'' uri=''http://gdata.youtube.com''>YouTube data API</generator><openSearch:totalResults>6</openSearch:totalResults><openSearch:startIndex>1</openSearch:startIndex><openSearch:itemsPerPage>25</openSearch:itemsPerPage><entry
+      gd:etag=''W/&quot;DkYNSH47eCp7I2A9WhRTFEg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJpJORJA5pacTXFiBcHGmUbo</id><published>2011-11-04T17:49:59.000-07:00</published><updated>2011-11-04T17:49:59.000-07:00</updated><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : RoosterTeeth</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/roosterteeth/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/roosterteeth?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/RoosterTeeth''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJpJORJA5pacTXFiBcHGmUbo?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:username>RoosterTeeth</yt:username></entry><entry
+      gd:etag=''W/&quot;DkUEQH47eCp7I2A9WhRTFEg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJmo38L-unFc7axHavBtEXtk</id><published>2011-11-04T17:50:01.000-07:00</published><updated>2011-11-04T17:50:01.000-07:00</updated><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : BlueXephos</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/bluexephos/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/bluexephos?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/BlueXephos''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJmo38L-unFc7axHavBtEXtk?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:username>BlueXephos</yt:username></entry><entry
+      gd:etag=''W/&quot;CEEMQn47eCp7I2A9WhRTFEg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA</id><published>2011-11-04T17:24:43.000-07:00</published><updated>2011-11-04T17:24:43.000-07:00</updated><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : freddiew</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/freddiew/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/freddiew?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/freddiew''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:username>freddiew</yt:username></entry><entry
+      gd:etag=''W/&quot;CEEMRn47eCp7I2A9WhRTFEg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY</id><published>2011-11-04T17:24:47.000-07:00</published><updated>2011-11-04T17:24:47.000-07:00</updated><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : LisaNova</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/lisanova/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/lisanova?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/LisaNova''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:username>LisaNova</yt:username></entry><entry
+      gd:etag=''W/&quot;DkUARH47eCp7I2A9WhRTFEg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJgLVbkdt4YuOxJPw1PQAZHs</id><published>2011-11-04T17:50:45.000-07:00</published><updated>2011-11-04T17:50:45.000-07:00</updated><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''channel''/><title>Videos
+      published by : AmandaRussell</title><content type=''application/atom+xml;type=feed''
+      src=''http://gdata.youtube.com/feeds/api/users/amandarussell/uploads''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/amandarussell?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/profile?user=AmandaRussell#p/u''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJgLVbkdt4YuOxJPw1PQAZHs?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:countHint>6</yt:countHint><yt:username>AmandaRussell</yt:username></entry><entry
+      gd:etag=''W/&quot;DkYNSH47eCp7I2A9WhRTFEg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJsgE4tf68CH8_JnkZ0u2ts4</id><published>2011-11-04T17:49:59.000-07:00</published><updated>2011-11-04T17:49:59.000-07:00</updated><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : DSPGaming</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/dspgaming/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/dspgaming?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/DSPGaming''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJsgE4tf68CH8_JnkZ0u2ts4?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:username>DSPGaming</yt:username></entry></feed>'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/nuclearsandwich/subscriptions?v=2
+    body: !!null 
+    headers:
+      authorization:
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="f892d4b7211dc98326c2e307707ac9a1",
+        oauth_signature="mE0Ttq3x1TaY3y7pyBUgMG01E9U%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1320457761", oauth_token="1%2F-pfrwm0pB9BaW0vu8uElrlEhhaI7bA--5Errm8qyEvg",
+        oauth_version="1.0"
+      x-gdata-client:
+      - youtube_it
+      x-gdata-key:
+      - key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA
+      gdata-version:
+      - '2'
+      content-type:
+      - application/atom+xml; charset=UTF-8
+      content-length:
+      - '0'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=feed
+      expires:
+      - Sat, 05 Nov 2011 01:49:21 GMT
+      date:
+      - Sat, 05 Nov 2011 01:49:21 GMT
+      cache-control:
+      - private, max-age=0, must-revalidate, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DUACQHY4fyp7I2A9WhRTFEg."
+      last-modified:
+      - Sat, 05 Nov 2011 01:49:21 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '<?xml version=''1.0'' encoding=''UTF-8''?><feed xmlns=''http://www.w3.org/2005/Atom''
+      xmlns:app=''http://www.w3.org/2007/app'' xmlns:openSearch=''http://a9.com/-/spec/opensearch/1.1/''
+      xmlns:gd=''http://schemas.google.com/g/2005'' xmlns:yt=''http://gdata.youtube.com/schemas/2007''
+      gd:etag=''W/&quot;DUACQHY4fyp7I2A9WhRTFEg.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscriptions</id><updated>2011-11-05T01:49:21.837Z</updated><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><title>Subscriptions
+      of nuclearsandwich</title><logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/profile?user=nuclearsandwich&amp;view=subscriptions''/><link
+      rel=''hub'' href=''http://pubsubhubbub.appspot.com''/><link rel=''http://schemas.google.com/g/2005#feed''
+      type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions?client=youtube_it''/><link
+      rel=''http://schemas.google.com/g/2005#post'' type=''application/atom+xml''
+      href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions?client=youtube_it''/><link
+      rel=''http://schemas.google.com/g/2005#batch'' type=''application/atom+xml''
+      href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/batch?client=youtube_it''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions?start-index=1&amp;max-results=25&amp;client=youtube_it''/><link
+      rel=''service'' type=''application/atomsvc+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions?alt=atom-service''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><generator
+      version=''2.1'' uri=''http://gdata.youtube.com''>YouTube data API</generator><openSearch:totalResults>11</openSearch:totalResults><openSearch:startIndex>1</openSearch:startIndex><openSearch:itemsPerPage>25</openSearch:itemsPerPage><entry
+      gd:etag=''W/&quot;Ak4ERX47eCp7I2A9Wx9WF00.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWkgmSV1xZQgEj3yzjOXGj_k</id><published>2011-01-22T07:08:24.000-08:00</published><updated>2011-01-22T07:08:24.000-08:00</updated><app:edited>2011-01-22T07:08:24.000-08:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : RhettandLink</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/rhettandlink/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/rhettandlink?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/RhettandLink''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWkgmSV1xZQgEj3yzjOXGj_k?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWkgmSV1xZQgEj3yzjOXGj_k?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>RhettandLink</yt:username></entry><entry
+      gd:etag=''W/&quot;C0AERH47eCp7I2A9Wx9XEUU.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWvhSzKQVxaAdqr2fPBn_sH8</id><published>2011-01-04T14:55:05.000-08:00</published><updated>2011-01-04T14:55:05.000-08:00</updated><app:edited>2011-01-04T14:55:05.000-08:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : MerriamWebsterOnline</title><content type=''application/atom+xml;type=feed''
+      src=''http://gdata.youtube.com/feeds/api/users/merriamwebsteronline/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/merriamwebsteronline?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/MerriamWebsterOnline''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWvhSzKQVxaAdqr2fPBn_sH8?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWvhSzKQVxaAdqr2fPBn_sH8?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>MerriamWebsterOnline</yt:username></entry><entry
+      gd:etag=''W/&quot;A0ANSX47eCp7I2A9WhdRGUQ.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWptT7NWXqc4svz1YGXui0n8</id><published>2011-08-10T11:09:58.000-07:00</published><updated>2011-08-10T11:09:58.000-07:00</updated><app:edited>2011-08-10T11:09:58.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : Freddie25</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/freddie25/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/freddie25?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/Freddie25''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWptT7NWXqc4svz1YGXui0n8?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWptT7NWXqc4svz1YGXui0n8?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>Freddie25</yt:username></entry><entry
+      gd:etag=''W/&quot;CU8BQH47eCp7I2A9WhdRF0s.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWkaKrA21G43cCR3ocmXndJg</id><published>2011-08-07T17:37:31.000-07:00</published><updated>2011-08-07T17:37:31.000-07:00</updated><app:edited>2011-08-07T17:37:31.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : taylormali</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/taylormali/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/taylormali?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/taylormali''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWkaKrA21G43cCR3ocmXndJg?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWkaKrA21G43cCR3ocmXndJg?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>taylormali</yt:username></entry><entry
+      gd:etag=''W/&quot;DkYNR347eCp7I2A9Wx5TF0s.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWvN89_xbdzsuZr16ZPlqMtw</id><published>2010-08-02T08:49:56.000-07:00</published><updated>2010-08-02T08:49:56.000-07:00</updated><app:edited>2010-08-02T08:49:56.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : AlexBohnhoff</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/alexbohnhoff/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/alexbohnhoff?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/AlexBohnhoff''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWvN89_xbdzsuZr16ZPlqMtw?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWvN89_xbdzsuZr16ZPlqMtw?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>AlexBohnhoff</yt:username></entry><entry
+      gd:etag=''W/&quot;A0MGSX47eCp7I2A9Wx9SFUo.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWrCzinl2x0-Fz-VTBHhgBmQ</id><published>2010-12-05T12:03:48.000-08:00</published><updated>2010-12-05T12:03:48.000-08:00</updated><app:edited>2010-12-05T12:03:48.000-08:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : Fagottron</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/fagottron/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/fagottron?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/Fagottron''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWrCzinl2x0-Fz-VTBHhgBmQ?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWrCzinl2x0-Fz-VTBHhgBmQ?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>Fagottron</yt:username></entry><entry
+      gd:etag=''W/&quot;DU4NRH47eCp7I2A9WhdaF08.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWpcUbZBOYgdulsHxTBdaQHE</id><published>2011-10-27T08:06:35.000-07:00</published><updated>2011-10-27T08:06:35.000-07:00</updated><app:edited>2011-10-27T08:06:35.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : theRSAorg</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/thersaorg/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/thersaorg?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/theRSAorg''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWpcUbZBOYgdulsHxTBdaQHE?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWpcUbZBOYgdulsHxTBdaQHE?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>theRSAorg</yt:username></entry><entry
+      gd:etag=''W/&quot;DkADSX47eCp7I2A9WhdVEUw.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWtNFuSOCH6baZe0LiOEpirc</id><published>2011-09-15T12:26:18.000-07:00</published><updated>2011-09-15T12:26:18.000-07:00</updated><app:edited>2011-09-15T12:26:18.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : gamesbycolaboratory</title><content type=''application/atom+xml;type=feed''
+      src=''http://gdata.youtube.com/feeds/api/users/gamesbycolaboratory/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/gamesbycolaboratory?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/gamesbycolaboratory''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWtNFuSOCH6baZe0LiOEpirc?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWtNFuSOCH6baZe0LiOEpirc?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>gamesbycolaboratory</yt:username></entry><entry
+      gd:etag=''W/&quot;DkYAQX47eCp7I2A9WhRTEU4.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWmNOkrbvPACg6xGn8EELajI</id><published>2011-11-01T00:55:40.000-07:00</published><updated>2011-11-01T00:55:40.000-07:00</updated><app:edited>2011-11-01T00:55:40.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : minutephysics</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/minutephysics/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/minutephysics?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/minutephysics''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWmNOkrbvPACg6xGn8EELajI?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWmNOkrbvPACg6xGn8EELajI?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>minutephysics</yt:username></entry><entry
+      gd:etag=''W/&quot;DUMBRX47eCp7I2A9WhdaFkQ.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWt9IEFdkM62k6dAXEL75dTo</id><published>2011-10-26T23:37:34.000-07:00</published><updated>2011-10-26T23:37:34.000-07:00</updated><app:edited>2011-10-26T23:37:34.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : AgentXPQ</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/agentxpq/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/agentxpq?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/AgentXPQ''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWt9IEFdkM62k6dAXEL75dTo?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWt9IEFdkM62k6dAXEL75dTo?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>AgentXPQ</yt:username></entry><entry
+      gd:etag=''W/&quot;D0MERH47eCp7I2A9WhZbGU4.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWtSVobktRr9i1VGzPxR1_bo</id><published>2011-06-24T10:10:05.000-07:00</published><updated>2011-06-24T10:10:05.000-07:00</updated><app:edited>2011-06-24T10:10:05.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : rymdreglage</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/rymdreglage/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/rymdreglage?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/rymdreglage''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWtSVobktRr9i1VGzPxR1_bo?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWtSVobktRr9i1VGzPxR1_bo?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>rymdreglage</yt:username></entry></feed>'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/default/subscriptions?v=2
+    body: !!null 
+    headers:
+      authorization:
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="7460ee6d5637f90c52b07a7f19f2cac7",
+        oauth_signature="pTXfrHUC1KkZoYgUH8rTqkezz5Q%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1320457962", oauth_token="1%2F-pfrwm0pB9BaW0vu8uElrlEhhaI7bA--5Errm8qyEvg",
+        oauth_version="1.0"
+      x-gdata-client:
+      - youtube_it
+      x-gdata-key:
+      - key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA
+      gdata-version:
+      - '2'
+      content-type:
+      - application/atom+xml; charset=UTF-8
+      content-length:
+      - '0'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=feed
+      expires:
+      - Sat, 05 Nov 2011 01:52:42 GMT
+      date:
+      - Sat, 05 Nov 2011 01:52:42 GMT
+      cache-control:
+      - private, max-age=0, must-revalidate, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DU4CQ3k-fSp7I2A9WhRTFEg."
+      last-modified:
+      - Sat, 05 Nov 2011 01:52:42 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '<?xml version=''1.0'' encoding=''UTF-8''?><feed xmlns=''http://www.w3.org/2005/Atom''
+      xmlns:app=''http://www.w3.org/2007/app'' xmlns:openSearch=''http://a9.com/-/spec/opensearch/1.1/''
+      xmlns:gd=''http://schemas.google.com/g/2005'' xmlns:yt=''http://gdata.youtube.com/schemas/2007''
+      gd:etag=''W/&quot;DU4CQ3k-fSp7I2A9WhRTFEg.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscriptions</id><updated>2011-11-05T01:52:42.755Z</updated><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><title>Subscriptions
+      of nuclearsandwich</title><logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/profile?user=nuclearsandwich&amp;view=subscriptions''/><link
+      rel=''hub'' href=''http://pubsubhubbub.appspot.com''/><link rel=''http://schemas.google.com/g/2005#feed''
+      type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions?client=youtube_it''/><link
+      rel=''http://schemas.google.com/g/2005#post'' type=''application/atom+xml''
+      href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions?client=youtube_it''/><link
+      rel=''http://schemas.google.com/g/2005#batch'' type=''application/atom+xml''
+      href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/batch?client=youtube_it''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions?start-index=1&amp;max-results=25&amp;client=youtube_it''/><link
+      rel=''service'' type=''application/atomsvc+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions?alt=atom-service''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><generator
+      version=''2.1'' uri=''http://gdata.youtube.com''>YouTube data API</generator><openSearch:totalResults>11</openSearch:totalResults><openSearch:startIndex>1</openSearch:startIndex><openSearch:itemsPerPage>25</openSearch:itemsPerPage><entry
+      gd:etag=''W/&quot;Ak4ERX47eCp7I2A9Wx9WF00.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWkgmSV1xZQgEj3yzjOXGj_k</id><published>2011-01-22T07:08:24.000-08:00</published><updated>2011-01-22T07:08:24.000-08:00</updated><app:edited>2011-01-22T07:08:24.000-08:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : RhettandLink</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/rhettandlink/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/rhettandlink?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/RhettandLink''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWkgmSV1xZQgEj3yzjOXGj_k?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWkgmSV1xZQgEj3yzjOXGj_k?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>RhettandLink</yt:username></entry><entry
+      gd:etag=''W/&quot;C0AERH47eCp7I2A9Wx9XEUU.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWvhSzKQVxaAdqr2fPBn_sH8</id><published>2011-01-04T14:55:05.000-08:00</published><updated>2011-01-04T14:55:05.000-08:00</updated><app:edited>2011-01-04T14:55:05.000-08:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : MerriamWebsterOnline</title><content type=''application/atom+xml;type=feed''
+      src=''http://gdata.youtube.com/feeds/api/users/merriamwebsteronline/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/merriamwebsteronline?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/MerriamWebsterOnline''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWvhSzKQVxaAdqr2fPBn_sH8?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWvhSzKQVxaAdqr2fPBn_sH8?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>MerriamWebsterOnline</yt:username></entry><entry
+      gd:etag=''W/&quot;A0ANSX47eCp7I2A9WhdRGUQ.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWptT7NWXqc4svz1YGXui0n8</id><published>2011-08-10T11:09:58.000-07:00</published><updated>2011-08-10T11:09:58.000-07:00</updated><app:edited>2011-08-10T11:09:58.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : Freddie25</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/freddie25/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/freddie25?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/Freddie25''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWptT7NWXqc4svz1YGXui0n8?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWptT7NWXqc4svz1YGXui0n8?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>Freddie25</yt:username></entry><entry
+      gd:etag=''W/&quot;CU8BQH47eCp7I2A9WhdRF0s.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWkaKrA21G43cCR3ocmXndJg</id><published>2011-08-07T17:37:31.000-07:00</published><updated>2011-08-07T17:37:31.000-07:00</updated><app:edited>2011-08-07T17:37:31.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : taylormali</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/taylormali/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/taylormali?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/taylormali''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWkaKrA21G43cCR3ocmXndJg?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWkaKrA21G43cCR3ocmXndJg?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>taylormali</yt:username></entry><entry
+      gd:etag=''W/&quot;DkYNR347eCp7I2A9Wx5TF0s.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWvN89_xbdzsuZr16ZPlqMtw</id><published>2010-08-02T08:49:56.000-07:00</published><updated>2010-08-02T08:49:56.000-07:00</updated><app:edited>2010-08-02T08:49:56.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : AlexBohnhoff</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/alexbohnhoff/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/alexbohnhoff?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/AlexBohnhoff''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWvN89_xbdzsuZr16ZPlqMtw?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWvN89_xbdzsuZr16ZPlqMtw?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>AlexBohnhoff</yt:username></entry><entry
+      gd:etag=''W/&quot;A0MGSX47eCp7I2A9Wx9SFUo.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWrCzinl2x0-Fz-VTBHhgBmQ</id><published>2010-12-05T12:03:48.000-08:00</published><updated>2010-12-05T12:03:48.000-08:00</updated><app:edited>2010-12-05T12:03:48.000-08:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : Fagottron</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/fagottron/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/fagottron?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/Fagottron''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWrCzinl2x0-Fz-VTBHhgBmQ?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWrCzinl2x0-Fz-VTBHhgBmQ?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>Fagottron</yt:username></entry><entry
+      gd:etag=''W/&quot;DU4NRH47eCp7I2A9WhdaF08.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWpcUbZBOYgdulsHxTBdaQHE</id><published>2011-10-27T08:06:35.000-07:00</published><updated>2011-10-27T08:06:35.000-07:00</updated><app:edited>2011-10-27T08:06:35.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : theRSAorg</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/thersaorg/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/thersaorg?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/theRSAorg''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWpcUbZBOYgdulsHxTBdaQHE?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWpcUbZBOYgdulsHxTBdaQHE?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>theRSAorg</yt:username></entry><entry
+      gd:etag=''W/&quot;DkADSX47eCp7I2A9WhdVEUw.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWtNFuSOCH6baZe0LiOEpirc</id><published>2011-09-15T12:26:18.000-07:00</published><updated>2011-09-15T12:26:18.000-07:00</updated><app:edited>2011-09-15T12:26:18.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : gamesbycolaboratory</title><content type=''application/atom+xml;type=feed''
+      src=''http://gdata.youtube.com/feeds/api/users/gamesbycolaboratory/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/gamesbycolaboratory?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/gamesbycolaboratory''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWtNFuSOCH6baZe0LiOEpirc?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWtNFuSOCH6baZe0LiOEpirc?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>gamesbycolaboratory</yt:username></entry><entry
+      gd:etag=''W/&quot;DkYAQX47eCp7I2A9WhRTEU4.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWmNOkrbvPACg6xGn8EELajI</id><published>2011-11-01T00:55:40.000-07:00</published><updated>2011-11-01T00:55:40.000-07:00</updated><app:edited>2011-11-01T00:55:40.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : minutephysics</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/minutephysics/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/minutephysics?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/minutephysics''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWmNOkrbvPACg6xGn8EELajI?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWmNOkrbvPACg6xGn8EELajI?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>minutephysics</yt:username></entry><entry
+      gd:etag=''W/&quot;DUMBRX47eCp7I2A9WhdaFkQ.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWt9IEFdkM62k6dAXEL75dTo</id><published>2011-10-26T23:37:34.000-07:00</published><updated>2011-10-26T23:37:34.000-07:00</updated><app:edited>2011-10-26T23:37:34.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : AgentXPQ</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/agentxpq/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/agentxpq?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/AgentXPQ''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWt9IEFdkM62k6dAXEL75dTo?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWt9IEFdkM62k6dAXEL75dTo?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>AgentXPQ</yt:username></entry><entry
+      gd:etag=''W/&quot;D0MERH47eCp7I2A9WhZbGU4.&quot;''><id>tag:youtube.com,2008:user:nuclearsandwich:subscription:OOa8z13bpKL5lI60dw4bWtSVobktRr9i1VGzPxR1_bo</id><published>2011-06-24T10:10:05.000-07:00</published><updated>2011-06-24T10:10:05.000-07:00</updated><app:edited>2011-06-24T10:10:05.000-07:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''user''/><title>Activity
+      of : rymdreglage</title><content type=''application/atom+xml;type=feed'' src=''http://gdata.youtube.com/feeds/api/users/rymdreglage/events?inline=true''/><link
+      rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/rymdreglage?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/user/rymdreglage''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWtSVobktRr9i1VGzPxR1_bo?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nuclearsandwich/subscriptions/OOa8z13bpKL5lI60dw4bWtSVobktRr9i1VGzPxR1_bo?client=youtube_it''/><author><name>nuclearsandwich</name><uri>http://gdata.youtube.com/feeds/api/users/nuclearsandwich</uri></author><yt:username>rymdreglage</yt:username></entry></feed>'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/rhettandlink?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Sat, 05 Nov 2011 01:58:01 GMT
+      date:
+      - Sat, 05 Nov 2011 01:53:01 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"CE4HR347eCp7I2A9WhRTFEg."
+      last-modified:
+      - Sat, 05 Nov 2011 00:28:56 GMT
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+      transfer-encoding:
+      - chunked
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"CE4HR347eCp7I2A9WhRTFEg.\"","id":{"$t":"tag:youtube.com,2008:user:RhettandLink"},"published":{"$t":"2006-06-05T12:57:07.000-07:00"},"updated":{"$t":"2011-11-04T17:28:56.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Comedian"}],"title":{"$t":"YouTube
+      user: RhettandLink"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=RhettandLink"},{"rel":"related","type":"text/html","href":"http://www.rhettandlink.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/RhettandLink?v=2"}],"author":[{"name":{"$t":"RhettandLink"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/rhettandlink"}}],"yt$aboutMe":{"$t":"http://rhettandlink.com/about/"},"yt$age":{"$t":33},"yt$company":{"$t":"Rhett
+      & Link, Inc."},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.liveevent","href":"http://gdata.youtube.com/feeds/api/users/rhettandlink/live/events?v=2","countHint":12},{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/rhettandlink/favorites?v=2","countHint":481},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/rhettandlink/contacts?v=2","countHint":37068},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/rhettandlink/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/rhettandlink/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/rhettandlink/subscriptions?v=2","countHint":197},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/rhettandlink/uploads?v=2","countHint":284},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/rhettandlink/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Rhett
+      & Link"},"yt$gender":{"$t":"m"},"yt$hometown":{"$t":"Buies Creek"},"yt$location":{"$t":"Los
+      Angeles, US"},"yt$occupation":{"$t":"Internetainers"},"yt$statistics":{"lastWebAccess":"2011-11-01T13:22:37.000-07:00","subscriberCount":"815151","videoWatchCount":0,"viewCount":"8802697","totalUploadViews":"111720462"},"media$thumbnail":{"url":"http://i3.ytimg.com/i/bochVIwBCzJb9I2lLGXGjQ/1.jpg?v=d541ab"},"yt$username":{"$t":"RhettandLink"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/merriamwebsteronline?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Sat, 05 Nov 2011 01:58:01 GMT
+      date:
+      - Sat, 05 Nov 2011 01:53:01 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"CU8CSH47eCp7I2A9WhRTE0Q."
+      last-modified:
+      - Fri, 04 Nov 2011 08:04:29 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"CU8CSH47eCp7I2A9WhRTE0Q.\"","id":{"$t":"tag:youtube.com,2008:user:MerriamWebsterOnline"},"published":{"$t":"2009-08-26T12:16:38.000-07:00"},"updated":{"$t":"2011-11-04T01:04:29.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"YouTube
+      user: MerriamWebsterOnline"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=MerriamWebsterOnline"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/5EeQEqqj-dI?v=2"},{"rel":"related","type":"text/html","href":"http://www.merriam-webster.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/MerriamWebsterOnline?v=2"}],"author":[{"name":{"$t":"MerriamWebsterOnline"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/merriamwebsteronline"}}],"yt$aboutMe":{"$t":"The
+      dictionary people"},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/merriamwebsteronline/favorites?v=2","countHint":6},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/merriamwebsteronline/contacts?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/merriamwebsteronline/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/merriamwebsteronline/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/merriamwebsteronline/subscriptions?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/merriamwebsteronline/uploads?v=2","countHint":33},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/merriamwebsteronline/newsubscriptionvideos?v=2"}],"yt$gender":{"$t":"f"},"yt$location":{"$t":"Springfield,
+      MA, US"},"yt$statistics":{"lastWebAccess":"2011-06-08T12:39:44.000-07:00","subscriberCount":"2016","videoWatchCount":0,"viewCount":"20197","totalUploadViews":"349703"},"media$thumbnail":{"url":"http://i1.ytimg.com/i/LGx1Xl1Nd1iJ37dWeNnp-A/1.jpg?v=987964"},"yt$username":{"$t":"MerriamWebsterOnline"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/freddie25?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Sat, 05 Nov 2011 01:58:01 GMT
+      date:
+      - Sat, 05 Nov 2011 01:53:01 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"Dk4HRn47eCp7I2A9WhRTFE4."
+      last-modified:
+      - Fri, 04 Nov 2011 19:28:57 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"Dk4HRn47eCp7I2A9WhRTFE4.\"","id":{"$t":"tag:youtube.com,2008:user:Freddie25"},"published":{"$t":"2006-05-11T03:30:07.000-07:00"},"updated":{"$t":"2011-11-04T12:28:57.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Musician"}],"title":{"$t":"YouTube
+      user: Freddie25"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=Freddie25"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/o57xEVHrYvE?v=2"},{"rel":"related","type":"text/html","href":"http://freddegredde.com/"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/Freddie25?v=2"}],"author":[{"name":{"$t":"Freddie25"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/freddie25"}}],"yt$aboutMe":{"$t":"I''m
+      really trying to do different things every time, but my favorite type of music
+      is progressive rock."},"yt$age":{"$t":26},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/freddie25/favorites?v=2","countHint":1},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/freddie25/contacts?v=2","countHint":213},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/freddie25/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/freddie25/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/freddie25/subscriptions?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/freddie25/uploads?v=2","countHint":20},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/freddie25/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Fredrik
+      Larsson"},"yt$gender":{"$t":"m"},"yt$hobbies":{"$t":"Music, movies, video games,
+      sports, reading etc."},"yt$hometown":{"$t":"Gävle"},"yt$lastName":{"$t":"Larsson"},"yt$location":{"$t":"Gävle,
+      SE"},"yt$statistics":{"lastWebAccess":"2011-06-07T03:34:14.000-07:00","subscriberCount":"136139","videoWatchCount":0,"viewCount":"2163128","totalUploadViews":"24839320"},"media$thumbnail":{"url":"http://i3.ytimg.com/i/2sAK1NBZ6MeQJiAPp6sWKQ/1.jpg?v=a0c0e0"},"yt$username":{"$t":"Freddie25"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/taylormali?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Sat, 05 Nov 2011 01:58:01 GMT
+      date:
+      - Sat, 05 Nov 2011 01:53:01 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"C0YERH47eCp7I2A9WhRTFE0."
+      last-modified:
+      - Fri, 04 Nov 2011 10:05:05 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"C0YERH47eCp7I2A9WhRTFE0.\"","id":{"$t":"tag:youtube.com,2008:user:taylormali"},"published":{"$t":"2006-11-11T17:07:21.000-08:00"},"updated":{"$t":"2011-11-04T03:05:05.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"YouTube
+      user: taylormali"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=taylormali"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/sKjzEHqPHQs?v=2"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/taylormali?v=2"}],"author":[{"name":{"$t":"taylormali"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/taylormali"}}],"yt$age":{"$t":46},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/taylormali/favorites?v=2","countHint":4},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/taylormali/contacts?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/taylormali/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/taylormali/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/taylormali/subscriptions?v=2","countHint":5},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/taylormali/uploads?v=2","countHint":71},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/taylormali/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Taylor"},"yt$gender":{"$t":"m"},"yt$lastName":{"$t":"Mali"},"yt$location":{"$t":"US"},"yt$relationship":{"$t":"taken"},"yt$statistics":{"lastWebAccess":"2011-09-05T13:20:50.000-07:00","subscriberCount":"10097","videoWatchCount":0,"viewCount":"110207","totalUploadViews":"3856657"},"media$thumbnail":{"url":"http://i1.ytimg.com/vi/XlesVwn3k38/default.jpg"},"yt$username":{"$t":"taylormali"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/alexbohnhoff?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Sat, 05 Nov 2011 01:58:01 GMT
+      date:
+      - Sat, 05 Nov 2011 01:53:01 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"CkYDQ347eCp7I2A9WhdaEks."
+      last-modified:
+      - Sat, 22 Oct 2011 05:09:32 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"CkYDQ347eCp7I2A9WhdaEks.\"","id":{"$t":"tag:youtube.com,2008:user:AlexBohnhoff"},"published":{"$t":"2008-11-24T18:42:31.000-08:00"},"updated":{"$t":"2011-10-21T22:09:32.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"YouTube
+      user: AlexBohnhoff"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=AlexBohnhoff"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/AlexBohnhoff?v=2"}],"author":[{"name":{"$t":"AlexBohnhoff"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/alexbohnhoff"}}],"yt$age":{"$t":26},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/alexbohnhoff/favorites?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/alexbohnhoff/contacts?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/alexbohnhoff/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/alexbohnhoff/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/alexbohnhoff/subscriptions?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/alexbohnhoff/uploads?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/alexbohnhoff/newsubscriptionvideos?v=2"}],"yt$gender":{"$t":"m"},"yt$location":{"$t":"US"},"yt$statistics":{"lastWebAccess":"2010-02-19T13:23:45.000-08:00","subscriberCount":"5","videoWatchCount":0,"viewCount":"41","totalUploadViews":"82"},"media$thumbnail":{"url":"http://s.ytimg.com/yt/img/no_videos_140-vfl1fDI7-.png"},"yt$username":{"$t":"AlexBohnhoff"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/fagottron?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Sat, 05 Nov 2011 01:58:01 GMT
+      date:
+      - Sat, 05 Nov 2011 01:53:01 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"C0ACRH47eCp7I2A9WhRTFEg."
+      last-modified:
+      - Sat, 05 Nov 2011 00:09:25 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"C0ACRH47eCp7I2A9WhRTFEg.\"","id":{"$t":"tag:youtube.com,2008:user:Fagottron"},"published":{"$t":"2007-06-07T08:36:59.000-07:00"},"updated":{"$t":"2011-11-04T17:09:25.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"YouTube
+      user: Fagottron"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=Fagottron"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/P4jmB9fdZc8?v=2"},{"rel":"related","type":"text/html","href":"http://www.pogomix.net/"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/Fagottron?v=2"}],"author":[{"name":{"$t":"Fagottron"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/fagottron"}}],"yt$aboutMe":{"$t":"My
+      name is Nick Bertke, better known as Pogo. I''m the chap behind such movie remixes
+      as Alice, Upular and Skynet Symphonic, and I''ve spent so much time making music
+      that it''s now all I do with my life."},"yt$age":{"$t":23},"yt$company":{"$t":"City
+      Of Perth, Reverse Enginears LLC, Leader Group"},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/fagottron/favorites?v=2","countHint":111},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/fagottron/contacts?v=2","countHint":3903},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/fagottron/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/fagottron/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/fagottron/subscriptions?v=2","countHint":70},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/fagottron/uploads?v=2","countHint":23},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/fagottron/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Nick"},"yt$gender":{"$t":"m"},"yt$hobbies":{"$t":"I
+      love remixing movies and making music. Composing anything from classical to
+      hardcore electronic feels like my purpose on this planet. I have a knack for
+      drawing that I rarely use, I enjoy blogging and web design, and I have a complete
+      love affair with motorbikes. Photography is fun from time to time, and occasionally
+      I''ll shoot the odd film or interview for people around Perth."},"yt$hometown":{"$t":"Capetown"},"yt$lastName":{"$t":"Bertke"},"yt$location":{"$t":"Perth,
+      AU"},"yt$movies":{"$t":"The Party, Paranormal Activity, Gladiator, Casablanca,
+      The Aviator, The Good The Bad & The Ugly, The Shawshank Redemption, Rocky, Requiem
+      for a Dream, Children Of Men, One Hour Photo, Eternal Sunshine Of The Spotless
+      Mind, Rabbit Proof Fence, Arthur, Waterworld, Dumb & Dumber, Russian Ark, Minority
+      Report, 2001: A Space Odyssey, Cube, Contact, Flight Of The Navigator, Close
+      Encounters Of The Third Kind, Schindler''s List, The Apartment, The Magic Box,
+      Terminator 2: Judgement Day, Snuffbox, The Carry On Series, Big Train, The I.T
+      Crowd, Little House On The Prairie, The Mighty Boosh, Darkplace"},"yt$music":{"$t":"Akufen,
+      Floating Points, Theo Parrish, Alex Cortiz, Ian Pooley, Farben, Prefuse 73,
+      Champagne, Commix, Ganja Kru, High Contrast, Carl Craig, Ras G, Kraftwerk, Portable,
+      Todd Terry, Todd Edwards, Weekend Players, Windy & Carl, DJ Sonix, DJ Tonka,
+      Jon Brion, Uyama Hiroto, Koji Kondo, Nujabes"},"yt$occupation":{"$t":"Music
+      Producer, Editor and Graphic Designer"},"yt$school":{"$t":"The industrial revolution
+      is over. Academicism is obsolete."},"yt$statistics":{"lastWebAccess":"2011-08-09T22:19:18.000-07:00","subscriberCount":"149699","videoWatchCount":0,"viewCount":"3716277","totalUploadViews":"40122624"},"media$thumbnail":{"url":"http://i3.ytimg.com/i/n-K7GIs62ENvdQe6ZZk9-w/1.jpg?v=c0c76f"},"yt$username":{"$t":"Fagottron"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/thersaorg?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Sat, 05 Nov 2011 01:58:02 GMT
+      date:
+      - Sat, 05 Nov 2011 01:53:02 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"C0IMQH47eCp7I2A9WhRTFEg."
+      last-modified:
+      - Sat, 05 Nov 2011 00:06:21 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"C0IMQH47eCp7I2A9WhRTFEg.\"","id":{"$t":"tag:youtube.com,2008:user:theRSAorg"},"published":{"$t":"2009-08-06T03:21:23.000-07:00"},"updated":{"$t":"2011-11-04T17:06:21.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Non-Profit"}],"title":{"$t":"YouTube
+      user: theRSAorg"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=theRSAorg"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/jfybu_KJGo4?v=2"},{"rel":"related","type":"text/html","href":"http://www.theRSA.org"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/theRSAorg?v=2"}],"author":[{"name":{"$t":"theRSAorg"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/thersaorg"}}],"yt$aboutMe":{"$t":"The
+      RSA shares videos from our public events programme for free. Topics cover business,
+      enterprise, science, economics, politics, arts, design and society. RSA Vision
+      videos are licensed under Creative Commons. Share our speakers'' ideas with
+      people you know by linking, sharing and embedding our videos.\r\n\r\nYou can
+      follow @theRSAorg on twitter for information about the RSA''s work.\r\n\r\nAdditionally
+      you can visit http://comment.rsablogs.org.uk/ to consider, comment, and contribute
+      to a rich debate on a dynamic platform.\r\n\r\nIf the issues covered in our
+      videos are of interest to you, visit the http://www.thersa.org/fellowship to
+      find out how you can get involved with our work."},"yt$age":{"$t":110},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/thersaorg/favorites?v=2","countHint":88},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/thersaorg/contacts?v=2","countHint":3958},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/thersaorg/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/thersaorg/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/thersaorg/subscriptions?v=2","countHint":73},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/thersaorg/uploads?v=2","countHint":430},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/thersaorg/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"The
+      RSA"},"yt$gender":{"$t":"f"},"yt$hobbies":{"$t":"business, enterprise, science,
+      economics, politics, arts, design and society"},"yt$hometown":{"$t":"London"},"yt$location":{"$t":"London,
+      GB"},"yt$occupation":{"$t":"Think Tank"},"yt$statistics":{"lastWebAccess":"2011-10-23T08:11:27.000-07:00","subscriberCount":"127384","videoWatchCount":0,"viewCount":"1416474","totalUploadViews":"24170972"},"media$thumbnail":{"url":"http://i3.ytimg.com/i/vhsiQGy_zcNCiSbeXEjhLg/1.jpg?v=bec333"},"yt$username":{"$t":"theRSAorg"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/gamesbycolaboratory?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Sat, 05 Nov 2011 01:58:02 GMT
+      date:
+      - Sat, 05 Nov 2011 01:53:02 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DUIFRn47eCp7I2A9WhRTE0Q."
+      last-modified:
+      - Fri, 04 Nov 2011 09:05:17 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"DUIFRn47eCp7I2A9WhRTE0Q.\"","id":{"$t":"tag:youtube.com,2008:user:gamesbycolaboratory"},"published":{"$t":"2011-05-28T18:07:57.000-07:00"},"updated":{"$t":"2011-11-04T02:05:17.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"YouTube
+      user: gamesbycolaboratory"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=gamesbycolaboratory"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/gamesbycolaboratory?v=2"}],"author":[{"name":{"$t":"gamesbycolaboratory"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/gamesbycolaboratory"}}],"yt$age":{"$t":22},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/gamesbycolaboratory/favorites?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/gamesbycolaboratory/contacts?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/gamesbycolaboratory/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/gamesbycolaboratory/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/gamesbycolaboratory/subscriptions?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/gamesbycolaboratory/uploads?v=2","countHint":6},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/gamesbycolaboratory/newsubscriptionvideos?v=2"}],"yt$gender":{"$t":"m"},"yt$location":{"$t":"US"},"yt$statistics":{"lastWebAccess":"2011-10-15T19:32:16.000-07:00","subscriberCount":"1383","videoWatchCount":0,"viewCount":"3187","totalUploadViews":"30409"},"media$thumbnail":{"url":"http://s.ytimg.com/yt/img/no_videos_140-vfl1fDI7-.png"},"yt$username":{"$t":"gamesbycolaboratory"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/minutephysics?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Sat, 05 Nov 2011 01:58:02 GMT
+      date:
+      - Sat, 05 Nov 2011 01:53:02 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DUENR347eCp7I2A9WhRTFEg."
+      last-modified:
+      - Sat, 05 Nov 2011 01:48:16 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"DUENR347eCp7I2A9WhRTFEg.\"","id":{"$t":"tag:youtube.com,2008:user:minutephysics"},"published":{"$t":"2011-06-20T11:20:09.000-07:00"},"updated":{"$t":"2011-11-04T18:48:16.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Guru"}],"title":{"$t":"YouTube
+      user: minutephysics"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=minutephysics"},{"rel":"related","type":"text/html","href":"http://www.minutephysics.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/minutephysics?v=2"}],"author":[{"name":{"$t":"minutephysics"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/minutephysics"}}],"yt$aboutMe":{"$t":"facebook.com/minutephysics\ntwitter.com/#!/minutephysics\n\nemail:
+      minutephysics@gmail.com\n\nOh yeah, I work with freddiew too! (youtube.com/freddiew)"},"yt$age":{"$t":24},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/minutephysics/favorites?v=2","countHint":2},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/minutephysics/contacts?v=2","countHint":1570},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/minutephysics/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/minutephysics/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/minutephysics/subscriptions?v=2","countHint":2},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/minutephysics/uploads?v=2","countHint":19},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/minutephysics/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Henry"},"yt$gender":{"$t":"m"},"yt$hometown":{"$t":"Mahtomedi,
+      MN"},"yt$lastName":{"$t":"Reich"},"yt$location":{"$t":"Los Angeles, US"},"yt$school":{"$t":"Grinnell
+      College, Perimeter Institute for Theoretical Physics (@the University of Waterloo),"},"yt$statistics":{"lastWebAccess":"2011-10-30T12:28:14.000-07:00","subscriberCount":"108924","videoWatchCount":0,"viewCount":"320636","totalUploadViews":"8309322"},"media$thumbnail":{"url":"http://i2.ytimg.com/i/UHW94eEFW7hkUMVaZz4eDg/1.jpg?v=c03fef"},"yt$username":{"$t":"minutephysics"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/agentxpq?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Sat, 05 Nov 2011 01:58:02 GMT
+      date:
+      - Sat, 05 Nov 2011 01:53:02 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"CUYBSX47eCp7I2A9WhRTFEk."
+      last-modified:
+      - Fri, 04 Nov 2011 21:45:58 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"CUYBSX47eCp7I2A9WhRTFEk.\"","id":{"$t":"tag:youtube.com,2008:user:AgentXPQ"},"published":{"$t":"2006-09-07T01:56:05.000-07:00"},"updated":{"$t":"2011-11-04T14:45:58.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"YouTube
+      user: AgentXPQ"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=AgentXPQ"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/rctt-a04khE?v=2"},{"rel":"related","type":"text/html","href":"http://www.ingredientx.com/"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/AgentXPQ?v=2"}],"author":[{"name":{"$t":"AgentXPQ"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/agentxpq"}}],"yt$aboutMe":{"$t":"New
+      Video every 2 weeks.\n\nCOMIC BOOK WITH DVD OF ANIMATIONS FOR SALE ON MY WEBSITE,
+      www.ingredientx.com\n\nFacebook:\nhttp://www.facebook.com/TalesOfMereExistence\n\nAnd  MySpace,
+      under: tales_of_mere_existence"},"yt$age":{"$t":38},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.liveevent","href":"http://gdata.youtube.com/feeds/api/users/agentxpq/live/events?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/agentxpq/favorites?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/agentxpq/contacts?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/agentxpq/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/agentxpq/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/agentxpq/subscriptions?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/agentxpq/uploads?v=2","countHint":58},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/agentxpq/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Levni
+      (Lev) Yilmaz"},"yt$gender":{"$t":"m"},"yt$hobbies":{"$t":"Navelgazing"},"yt$lastName":{"$t":"Yilmaz"},"yt$location":{"$t":"US"},"yt$occupation":{"$t":"Ambassador
+      to the Alienated"},"yt$statistics":{"lastWebAccess":"2011-05-30T17:50:35.000-07:00","subscriberCount":"196054","videoWatchCount":0,"viewCount":"2307194","totalUploadViews":"33473717"},"media$thumbnail":{"url":"http://i3.ytimg.com/i/VoCnQ2-CdhVlK8RqEehSKQ/1.jpg?v=79acfb"},"yt$username":{"$t":"AgentXPQ"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/rymdreglage?alt=json&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Sat, 05 Nov 2011 01:58:02 GMT
+      date:
+      - Sat, 05 Nov 2011 01:53:02 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"CEYFSX47eCp7I2A9WhRTFEg."
+      last-modified:
+      - Sat, 05 Nov 2011 00:15:18 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"CEYFSX47eCp7I2A9WhRTFEg.\"","id":{"$t":"tag:youtube.com,2008:user:rymdreglage"},"published":{"$t":"2007-07-30T09:07:20.000-07:00"},"updated":{"$t":"2011-11-04T17:15:18.000-07:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Musician"}],"title":{"$t":"YouTube
+      user: rymdreglage"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=rymdreglage"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/nhJj13iChCk?v=2"},{"rel":"related","type":"text/html","href":"http://www.rymdreglage.se"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/rymdreglage?v=2"}],"author":[{"name":{"$t":"rymdreglage"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/rymdreglage"}}],"yt$age":{"$t":31},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/rymdreglage/favorites?v=2","countHint":31},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/rymdreglage/contacts?v=2","countHint":4811},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/rymdreglage/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/rymdreglage/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/rymdreglage/subscriptions?v=2","countHint":10},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/rymdreglage/uploads?v=2","countHint":137},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/rymdreglage/newsubscriptionvideos?v=2"}],"yt$gender":{"$t":"m"},"yt$location":{"$t":"SE"},"yt$statistics":{"lastWebAccess":"2011-06-08T08:15:23.000-07:00","subscriberCount":"21450","videoWatchCount":0,"viewCount":"344486","totalUploadViews":"12923162"},"media$thumbnail":{"url":"http://i1.ytimg.com/vi/4GU6bpwvjfw/default.jpg"},"yt$username":{"$t":"rymdreglage"}}}'
+    http_version: '1.1'

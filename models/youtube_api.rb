@@ -10,6 +10,16 @@ module Aji
       @uid, @token, @secret = uid, token, secret
     end
 
+    def subscriptions uid=uid
+      tracker.hit!
+      client.subscriptions(uid).map do |sub|
+        # TODO: We should follow the unique subscription id.
+        uid = sub.title.split(" ").last
+        account = Account::Youtube.find_or_create_by_lower_uid uid
+        account.to_channel
+      end
+    end
+
     def author_info uid=uid
       tracker.hit!
       DataGrabber.new(uid).build_hash
@@ -89,7 +99,7 @@ module Aji
       @client ||=
         if @token and @secret
           YouTubeIt::OAuthClient.new(consumer_key: Aji.conf['YOUTUBE_OA_KEY'],
-            consumer_secret: Aji.conf['YOUTUBE_OA_SECRET'], username: uid,
+            consumer_secret: Aji.conf['YOUTUBE_OA_SECRET'], username: @uid,
             dev_key: Aji.conf['YOUTUBE_KEY']).tap do |c|
               c.authorize_from_access @token, @secret
             end
