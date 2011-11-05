@@ -2,11 +2,13 @@ require './models/youtube_sync'
 require 'active_support/core_ext/numeric/time'
 require 'pry'
 
-Resque = Module.new
-Aji::Queues = Module.new
-Aji::Queues::YoutubeSync = Class.new
+unless Aji.respond_to? :conf
+  Resque = Module.new
+  Aji::Queues = Module.new
+  Aji::Queues::SynchronizeWithYoutube = Class.new
+end
 
-describe Aji::YoutubeSync do
+describe Aji::YoutubeSync, :unit do
   before do
     Resque.stub :enqueue_in
   end
@@ -172,8 +174,8 @@ describe Aji::YoutubeSync do
 
   describe "#enqueue_resync" do
     it "sets up a delayed resque job to run again in 24 hours" do
-      Resque.should_receive(:enqueue_in).with(1.day, Aji::Queues::YoutubeSync,
-        account.id)
+      Resque.should_receive(:enqueue_in).with(1.day,
+        Aji::Queues::SynchronizeWithYoutube, account.id)
 
       subject.enqueue_resync
     end

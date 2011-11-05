@@ -63,7 +63,7 @@ module Aji
     end
 
     def enqueue_resync
-      Resque.enqueue_in 1.day, Queues::YoutubeSync, account.id
+      Resque.enqueue_in 1.day, Queues::SynchronizeWithYoutube, account.id
     end
   end
 end
