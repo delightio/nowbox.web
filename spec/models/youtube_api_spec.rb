@@ -133,7 +133,8 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
 
       describe "#subscriptions" do
         subject { YoutubeAPI.new "nuclearsandwich", token, secret }
-        it "hits youtube once" do
+
+        it "hits youtube once on #subscription and once per new channels" do
           subject.tracker.should_receive(:hit!).
             exactly(1+subscribed_channel_names.count).times
           channels = VCR.use_cassette "youtube_api/subscriptions" do
