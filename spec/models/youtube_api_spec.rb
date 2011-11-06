@@ -126,9 +126,9 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
     end
 
     context "when authenticated" do
-      let(:token) { "1/-pfrwm0pB9BaW0vu8uElrlEhhaI7bA--5Errm8qyEvg" }
-      let(:secret) { "KZeLtCoS9mshej1lLVrJ_Fy7" }
-      subject { YoutubeAPI.new "nuclearsandwich", token, secret }
+      let(:token) { "1/MVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk" }
+      let(:secret) { "G5B41-A-uFesmokk1n1tbyor" }
+      subject { YoutubeAPI.new "nowmovnowbox", token, secret }
 
       it "raises an error if partial credentials are used" do
         expect{ YoutubeAPI.new "someuser", "sometoken" }.to raise_error(
@@ -136,14 +136,12 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
       end
 
       it "creates an oauth client" do
-        client = YoutubeAPI.new("nuclearsandwich", token, secret).send(:client)
+        client = YoutubeAPI.new("nowmovnowbox", token, secret).send(:client)
         client.should be_kind_of YouTubeIt::OAuthClient
       end
 
       let(:subscribed_channel_names) {
-        %w[RhettandLink MerriamWebsterOnline Freddie25 taylormali
-          AlexBohnhoff Fagottron theRSAorg gamesbycolaboratory minutephysics
-          AgentXPQ rymdreglage ].map{|uid| uid.downcase}.sort}
+        %w[ freddiew LisaNova ].map{|uid| uid.downcase}.sort}
 
       describe "#subscriptions" do
 
@@ -171,12 +169,7 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
       end
 
       describe "#favorite_videos" do
-        let(:favorite_video_ids) { %w[ 3s4Czla6tXc dFs9WO2B8uI tzaNi0dNZxE
-          UZvqvNYJmC4 D5xIJAD-Mec ZuunY8BTqNs Ws6AAhTw7RA 0t71cexWzvM
-          juMFNBOOu-w ctJJrBw7e-c 0b2U5r7Jwkc TZwhzf8NC4o h_bmPbPHCOY
-          2qtlvr6LLV8 aP3gzee1cps FeLLR3LWtv4 9S75Rfva9O8 snPQ1z5FoqQ
-          XKcChGsDqnU 0vmoZEaN_-o JfIgzSoTMOs 6qho3So_erc tYoO9XkCCHg
-          tDGHgrf2WZw TKF6nFzpHBU ]}
+        let(:favorite_video_ids) { ["zxmObqXYgI8"] }
         it "returns user's favorite videos" do
           favorite_videos = VCR.use_cassette "youtube_api/favorite_videos" do
             subject.favorite_videos
@@ -235,13 +228,13 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
           subject.tracker.should_receive(:hit!)
 
           VCR.use_cassette 'youtube_api/valid_author' do
-            subject.valid_uid?("nuclearsandwich").should be_true
+            subject.valid_uid?("nowmovnowbox").should be_true
           end
         end
 
         specify "true if the uid belongs to a valid youtube account" do
           VCR.use_cassette 'youtube_api/valid_author' do
-            subject.valid_uid?("nuclearsandwich").should be_true
+            subject.valid_uid?("nowmovnowbox").should be_true
           end
         end
 
