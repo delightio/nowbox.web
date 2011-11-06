@@ -189,6 +189,32 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
         end
       end
 
+      describe "#watch_later_videos" do
+        let(:watch_later_video_ids) { ["IsLwVoZqEjk"] }
+
+        it "hits youtube once on #watch_later_videos and once per new videos" do
+          pending "YoutubeAPI#watch_later_videos not implemented"
+
+          subject.tracker.should_receive(:hit!).
+            exactly(1+watch_later_video_ids.count).times
+          watch_later_videos = VCR.use_cassette "youtube_api/watch_later_videos" do
+            subject.watch_later_videos
+          end
+        end
+
+        it "returns user's watch later videos as Aji::Video objects" do
+          pending "YoutubeAPI#watch_later_videos not implemented"
+
+          watch_later_videos = VCR.use_cassette "youtube_api/watch_later_videos" do
+            subject.watch_later_videos
+          end
+          laters = watch_later_videos
+          laters.map(&:external_id).should == watch_later_videos
+          laters.each { |v| v.should be_an_instance_of(Video) }
+        end
+      end
+
+
     end
 
     describe ".api" do

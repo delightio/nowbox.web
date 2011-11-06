@@ -27,6 +27,14 @@ module Aji
       end
     end
 
+    def watch_later_videos
+      Aji.log :ERROR, "YoutubeAPI#watch_later_videos not implemented yet."
+      # tracker.hit!
+      # client.playlist('watch_later').videos.map do |h|
+      #   youtube_it_to_video h
+      # end
+    end
+
     def author_info uid=uid
       tracker.hit!
       DataGrabber.new(uid).build_hash
