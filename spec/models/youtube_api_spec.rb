@@ -170,6 +170,15 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
 
       describe "#favorite_videos" do
         let(:favorite_video_ids) { ["zxmObqXYgI8"] }
+
+        it "hits youtube once on #favorites and once per new videos" do
+          subject.tracker.should_receive(:hit!).
+            exactly(1+favorite_video_ids.count).times
+          favorite_videos = VCR.use_cassette "youtube_api/favorite_videos" do
+            subject.favorite_videos
+          end
+        end
+
         it "returns user's favorite videos as Aji::Video objects" do
           favorite_videos = VCR.use_cassette "youtube_api/favorite_videos" do
             subject.favorite_videos
