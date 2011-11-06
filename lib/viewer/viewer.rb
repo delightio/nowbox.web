@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'erubis'
+require_relative 'route_helper'
 
 module Aji
 
