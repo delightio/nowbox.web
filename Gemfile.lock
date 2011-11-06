@@ -59,12 +59,19 @@ GEM
     gherkin (2.5.4)
       json (>= 1.4.6)
     hashie (1.1.0)
+    heroku (2.11.1)
+      launchy (>= 0.3.2)
+      rest-client (~> 1.6.1)
+      rubyzip
+      term-ansicolor (~> 1.0.5)
     hiredis (0.3.2)
     i18n (0.5.0)
     json (1.5.4)
     koala (1.2.0beta3)
       faraday (~> 0.7.0)
       multi_json (~> 1.0)
+    launchy (2.0.5)
+      addressable (~> 2.2.6)
     log4r (1.1.9)
     macaddr (1.4.0)
       systemu (~> 2.2.0)
@@ -183,6 +190,7 @@ GEM
     ruby_parser (2.2.0)
       sexp_processor (~> 3.0)
     rubyntlm (0.1.1)
+    rubyzip (0.9.4)
     rufus-scheduler (2.0.10)
       tzinfo (>= 0.3.23)
     sexp_processor (3.0.6)
@@ -252,6 +260,7 @@ DEPENDENCIES
   flog
   foreman
   grape!
+  heroku
   hiredis
   koala (~> 1.2.0beta)
   newrelic_rpm (~> 3.1.1)
