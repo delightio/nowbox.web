@@ -110,8 +110,8 @@ module Aji
     end
 
     get '/random' do
-      random =  Share.offset(rand(Share.count)).first
-      redirect to("/video/#{random.video.id}/#{random.id}")
+      random_share =  Share.offset(rand(Share.count)).first
+      redirect to("/share/#{random_share.id}")
     end
 
     get '/channel/:channel_id' do
@@ -120,36 +120,33 @@ module Aji
       deliver('channel', 'layout_channel')
     end
 
-    get '/video/:video_id/:share_id' do
-       begin
-        @video = Video.find(params[:video_id])
-        if(params[:share_id])
-          @share = Share.find(params[:share_id])
-          @user = @share.user
-          @rec_videos = Share.where("user_id = ? AND id <> ?", @user.id, @share.id).limit(3 * 3)
-          @share_url = "http://nowbox.com/video/#{@video.id}/#{@share.id}"
-        else
-          @rec_videos = Share.find(:all, :order => "id desc", :limit => 3 * 3)
-          @share_url = "http://nowbox.com/video/#{@video.id}"
-        end
-
-        deliver('video', 'layout_video')
-      rescue
-        Aji.log :WARN, "#{e.class}: #{e.message}"
-        erb :'404', {:layout => :layout_error}
-      end
-    end
+    # this should not be used anymore?
+    # get '/video/:video_id/:share_id' do
+    #    begin
+    #     @video = Video.find(params[:video_id])
+    #     if(params[:share_id])
+    #       @share = Share.find(params[:share_id])
+    #       @user = @share.user
+    #       @rec_videos = Share.where("user_id = ? AND id <> ?", @user.id, @share.id).limit(3 * 3)
+    #       @share_url = "http://nowbox.com/video/#{@video.id}/#{@share.id}"
+    #     else
+    #       @rec_videos = Share.find(:all, :order => "id desc", :limit => 3 * 3)
+    #       @share_url = "http://nowbox.com/video/#{@video.id}"
+    #     end
+    #
+    #     deliver('video', 'layout_video')
+    #   rescue
+    #     Aji.log :WARN, "#{e.class}: #{e.message}"
+    #     erb :'404', {:layout => :layout_error}
+    #   end
+    # end
 
     get '/share/:share_id' do
        begin
-        @share = Share.find(params[:share_id])
-        @user = @share.user
-        @video = @share.video
-
-        @rec_videos = Share.where("user_id = ? AND id <> ?", @user.id,
-          @share.id).limit(3 * 3)
-
-        @share_url = "http://nowbox.com/share/#{@share.id}"
+        @share      = Share.find(params[:share_id])
+        @user       = @share.user
+        @video      = @share.video
+        @rec_videos = Share.where("user_id = ? AND id <> ?", @user.id, @share.id).limit(9)
 
         deliver('video', 'layout_video')
       rescue => e
