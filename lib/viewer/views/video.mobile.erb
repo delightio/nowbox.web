@@ -7,8 +7,8 @@
     <ul class="simple rounded">
       <li class="blue arrow">
         <a href="/download" rel="external" style="font-size: 12px; font-weight: normal;">
-          <B><%= @user.name %> shared this on nowbox</B>
-          <BR/>
+          <strong><%= @user.name %> shared this on nowbox</strong>
+          <br/>
           Download nowbox from the appstore
         </a>
       </li>
@@ -47,10 +47,10 @@
   </div>
   <ul class="simple rounded">
     <li class="mobile_twitter_share arrow">
-      <a href="http://twitter.com/share?url=http://nowbox.com/<%= params[:share_id] %>&via=nowbox&related=fahdoo:Nowbox UX Engineer&text=<%= "Watch this video now!" %>" target="_blank">Twitter</a>
+      <a href="http://twitter.com/share?url=<%= share_url(params[:share_id]) %>&via=nowbox&related=fahdoo:Nowbox UX Engineer&text=<%= "Watch this video now!" %>" target="_blank">Twitter</a>
     </li>
     <li class="mobile_facebook_share arrow">
-      <a class="fb_share" href="http://www.facebook.com/sharer.php?u=http://nowbox.com/<%= params[:share_id] %>" target="_blank">Facebook</a>
+      <a class="fb_share" href="http://www.facebook.com/sharer.php?u=<%= share_url(params[:share_id]) %>" target="_blank">Facebook</a>
     </li>
   </ul>
 </div>

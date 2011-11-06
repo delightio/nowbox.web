@@ -4,8 +4,8 @@ require 'erubis'
 module Aji
 
   class Viewer < Sinatra::Base
-    set :raise_errors, false 
-    set :show_exceptions, true if development? 
+    set :raise_errors, false
+    set :show_exceptions, true if development?
 
     # Use Erubis for template generation. Essentially a faster ERB.
     Tilt.register :erb, Tilt[:erubis]
@@ -16,7 +16,7 @@ module Aji
     set :public, File.dirname(__FILE__) + "/public"
 
     not_found do
-      erb :'404', {:layout => :layout_error} 
+      erb :'404', {:layout => :layout_error}
     end
 
     error do
@@ -25,6 +25,7 @@ module Aji
 
     helpers do
       include Rack::Utils
+      include Aji::RouteHelper
       alias_method :h, :escape_html
 
       ### MOBILE ###
@@ -39,7 +40,7 @@ module Aji
       end
 
       # Compares User Agent string against regexes of designated mobile devices
-      def mobile_request? 
+      def mobile_request?
         mobile_user_agent_patterns.any? {|r| request.env['HTTP_USER_AGENT'] =~ r}
       end
 
