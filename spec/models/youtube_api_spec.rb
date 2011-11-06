@@ -146,7 +146,6 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
           AgentXPQ rymdreglage ].map{|uid| uid.downcase}.sort}
 
       describe "#subscriptions" do
-        subject { YoutubeAPI.new "nuclearsandwich", token, secret }
 
         it "hits youtube once on #subscription and once per new channels" do
           subject.tracker.should_receive(:hit!).
@@ -169,6 +168,22 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
           channels.should have(subscribed_channel_names.count).channels
           uids.sort.should == subscribed_channel_names
         end
+      end
+
+      describe "#favorite_videos" do
+        let(:favorite_video_ids) { %w[ 3s4Czla6tXc dFs9WO2B8uI tzaNi0dNZxE
+          UZvqvNYJmC4 D5xIJAD-Mec ZuunY8BTqNs Ws6AAhTw7RA 0t71cexWzvM
+          juMFNBOOu-w ctJJrBw7e-c 0b2U5r7Jwkc TZwhzf8NC4o h_bmPbPHCOY
+          2qtlvr6LLV8 aP3gzee1cps FeLLR3LWtv4 9S75Rfva9O8 snPQ1z5FoqQ
+          XKcChGsDqnU 0vmoZEaN_-o JfIgzSoTMOs 6qho3So_erc tYoO9XkCCHg
+          tDGHgrf2WZw TKF6nFzpHBU ]}
+        it "returns user's favorite videos" do
+          favorite_videos = VCR.use_cassette "youtube_api/favorite_videos" do
+            subject.favorite_videos
+          end
+          favorite_videos.map(&:external_id).should == favorite_video_ids
+        end
+
       end
 
     end

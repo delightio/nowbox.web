@@ -20,6 +20,13 @@ module Aji
       end
     end
 
+    def favorite_videos uid=uid
+      tracker.hit!
+      client.favorites(uid).videos.map do |h|
+        youtube_it_to_video h
+      end
+    end
+
     def author_info uid=uid
       tracker.hit!
       DataGrabber.new(uid).build_hash
