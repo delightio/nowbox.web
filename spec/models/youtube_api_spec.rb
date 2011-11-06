@@ -170,13 +170,14 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
 
       describe "#favorite_videos" do
         let(:favorite_video_ids) { ["zxmObqXYgI8"] }
-        it "returns user's favorite videos" do
+        it "returns user's favorite videos as Aji::Video objects" do
           favorite_videos = VCR.use_cassette "youtube_api/favorite_videos" do
             subject.favorite_videos
           end
-          favorite_videos.map(&:external_id).should == favorite_video_ids
+          favs = favorite_videos
+          favs.map(&:external_id).should == favorite_video_ids
+          favs.each { |v| v.should be_an_instance_of(Video) }
         end
-
       end
 
     end
