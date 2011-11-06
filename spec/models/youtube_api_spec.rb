@@ -40,6 +40,20 @@ module Aji
       it "returns a valid hash of video attributes" do
         subject.youtube_it_to_hash(video).keys.should == video_attributes
       end
+
+      let(:youtube_video_id) { 'OzVPDiy4P9I' }
+      subject { YoutubeAPI.new }
+      it "uses player_url for extracting external_id" do
+        subject.video youtube_video_id
+
+        client = YouTubeIt::Client.new dev_key: Aji.conf['YOUTUBE_KEY']
+        response = VCR.use_cassette "youtube_api/video_by_youtube_it" do
+          client.video_by youtube_video_id
+        end
+        hash = subject.youtube_it_to_hash response
+        hash[:external_id].should == youtube_video_id
+      end
+
     end
 
     describe "#youtube_it_to_video" do

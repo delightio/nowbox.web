@@ -69,7 +69,7 @@ module Aji
 
       {
         :title => video.title,
-        :external_id => video.video_id.split(':').last,
+        :external_id => Link.new(video.player_url).external_id,
         :description => video.description,
         :duration => video.duration,
         :viewable_mobile => (not video.noembed),
