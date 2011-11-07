@@ -7,6 +7,10 @@ module Aji
   describe API do
     describe "resource: #{resource}" do
       let(:bob) { Factory :user, name: "Bob" }
+      before do
+        tg = Token::Generator.new bob
+        header 'X-NB-AuthToken', tg.token
+      end
 
       describe "get #{resource_uri}/:id" do
         it "should return 404 if not found" do
@@ -15,19 +19,20 @@ module Aji
         end
 
         it "should return user info if found" do
-          user = User.create
           channel = Channel.create
-          user.subscribe channel
+          bob.subscribe channel
 
-          get "#{resource_uri}/#{user.id}"
+
+          get "#{resource_uri}/#{bob.id}"
+
           last_response.status.should == 200
           body_hash = JSON.parse last_response.body
-          body_hash.should == user.serializable_hash
+          body_hash.should == bob.serializable_hash
           body_hash["subscribed_channel_ids"].should ==
-            user.subscribed_channel_ids
+            bob.subscribed_channel_ids
           [:queue_channel_id, :favorite_channel_id,
             :history_channel_id].each do |c|
-            body_hash[c.to_s].should == (user.send c)
+            body_hash[c.to_s].should == (bob.send c)
           end
         end
       end
@@ -61,6 +66,7 @@ module Aji
       describe "put #{resource_uri}/:id" do
         it "updates given parameters" do
           user = Aji::User.create
+          header 'X-NB-AuthToken', Token::Generator.new(user).token
           params = { name: "Thomas Pun", email: "dapunster@gmail.com" }
           put "#{resource_uri}/#{user.id}", params
           last_response.status.should == 200
@@ -70,7 +76,7 @@ module Aji
         end
 
         it "returns error if missing email parameter" do
-          put "#{resource_uri}/#{Aji::User.create.id}"
+          put "#{resource_uri}/#{bob.id}"
           last_response.status.should == 400
         end
       end
