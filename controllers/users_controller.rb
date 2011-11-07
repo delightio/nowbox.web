@@ -1,5 +1,5 @@
 # Users Controller
-# =================
+# ================
 # User object json:
 #
 # {`id`:1,
@@ -15,18 +15,19 @@ module Aji
     resource :users do
 
       # ## GET users/:user_id
+      # *Requires authentication*  
       # __Returns__ the user with the specified id and HTTP Status Code 200 or
       # 404
       #
-      # __Required params__ `user_id` unique id of the user
+      # __Required params__ `user_id` unique id of the user  
       # __Optional params__ none
-      # NEEDSAUTH
       get '/:user_id' do
-        find_user_by_id_or_error params[:user_id]
+        authenticate!
+        current_user
       end
 
       # ## POST users
-      # __Creates__ a user with the specified parameters.
+      # __Creates__ a user with the specified parameters.  
       # __Returns__ the created user and HTTP Status Code 201 if successful or
       # a JSON encoded error message if not.
       #
@@ -49,15 +50,16 @@ module Aji
       end
 
       # ## PUT users/:user_id
-      # __Updates__ given user's attributes
+      # *Requires authentication*  
+      # __Updates__ given user's attributes  
       # __Returns__ HTTP Status Code 200 if successful or a JSON encoded error
-      # message
+      # message  
       # __Required params__ (need just one of the two params)
       # - `name` name of the user
       # - `email` email address of the user
-      # NEEDSAUTH
       put '/:user_id' do
-        u = find_user_by_id_or_error params[:user_id]
+        authenticate!
+
         updatable_params = [ :name, :email ]
         params_to_update = params.select do |key|
           updatable_params.include? key.to_sym
@@ -66,26 +68,35 @@ module Aji
         if params_to_update.empty?
           must_supply_params_error! updatable_params
         end
-        u.update_attributes(params_to_update)
+
+        if current_user.update_attributes(params_to_update)
+          current_user
+        else
+          error! current_user.errors, 400
+        end
       end
 
       # ## GET users/:user_id/settings
+      # *Requires authentication*  
       # __Returns__ JSON object representing the user's settings.
-      # NEESAUTH
       get '/:user_id/settings' do
-        find_user_by_id_or_error(params[:user_id]).settings
+        authenticate!
+
+        current_user.settings
       end
 
       # ## PUT users/:user_id/settings
+      # *Requires authentication*  
       # Acts as PATCH for now. When Grape gains PATCH support PUT will require
-      # a complete representation of the settings hash.
+      # a complete representation of the settings hash.  
       # __Updates__ User's updated settings JSON.  
       # __Returns__ JSON object representing the user's settings.  
       # __Required params__ `settings`: The form encoded represenation of the
       # user's settings.
       # NEESAUTH
       put '/:user_id/settings' do
-        user = find_user_by_id_or_error params[:user_id]
+        authenticate!
+
         missing_params_error! params, [:settings] unless params[:settings]
 
         invalid_params_error! :settings, params[:settings],
@@ -93,16 +104,18 @@ module Aji
           params[:settings].kind_of? Hash
 
 
-        user.settings.tap do|settings|
+        current_user.settings.tap do|settings|
           params[:settings].each do |k,v|
             settings[k.to_sym] = parse_param v
           end
         end
 
-        user.save or error!
-        user.settings
+        current_user.save or error!
+        current_user.settings
       end
 
+      # ## GET users/:user_id/auth_test
+      # *Requires authentication*
       get '/:user_id/auth_test' do
         authenticate!
         "OK"

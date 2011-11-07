@@ -32,13 +32,12 @@ class UsersApi < Spinach::FeatureSteps
     User.count.should == 1
   end
 
-  And 'the user should have no name, email, or timezone' do
+  And 'the user should have no name or email' do
     body = json_body last_response
     user = User.find body['id']
 
     user.name.should == nil
     user.email.should == nil
-    user.timezone.should == nil
   end
 
   But 'the user should have favorites, queue, and history channels' do
@@ -50,9 +49,9 @@ class UsersApi < Spinach::FeatureSteps
     Channel.find(body['history_channel_id']).should == user.history_channel
   end
 
-  Given 'a user\'s name, email, and timezone' do
+  Given 'a user\'s name and email' do
     (@parameters ||= {}).merge!({:name => "Bob",
-      :email => "bob@example.com", :timezone => "-0700"})
+      :email => "bob@example.com" })
   end
 
   And 'the user should have that name, email, and region' do
@@ -61,7 +60,6 @@ class UsersApi < Spinach::FeatureSteps
 
     user.name.should == @parameters[:name]
     user.email.should == @parameters[:email]
-    user.timezone.should == @parameters[:timezone]
   end
 
   Given 'a valid token for a user' do
@@ -77,9 +75,21 @@ class UsersApi < Spinach::FeatureSteps
   And 'the user\'s information should be present' do
     body = json_body last_response
 
-    body.keys
+    %w[id subscribed_channel_ids queue_channel_id favorite_channel_id
+       history_channel_id name email].each do |attribute|
+         body.keys.include?(attribute).should == true
+       end
+  end
 
-    raise 'step not implemented'
+  When  'updating that user\'s info' do
+    @user_attributes = { :name => "Bob", :email => "bob@bits.com" }
+    put "/1/users/#{@user.id}", @user_attributes
+  end
+
+  When  'updating another user\'s info' do
+    @other_user = User.create
+    @user_attributes = { :name => "Sally", :email => "sall@sparrow.com" }
+    put "/1/users/#{@other_user.id}", @user_attributes
   end
 
   When 'getting another user\'s information' do
@@ -99,7 +109,9 @@ class UsersApi < Spinach::FeatureSteps
 
   Then 'the new settings should be present' do
     body = json_body last_response
+
     @settings.each do |key, value|
+      key = key.to_s
       body.has_key?(key).should == true
       body[key].should == value
     end
