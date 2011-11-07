@@ -76,7 +76,8 @@
 404</p>
 
 <p><strong>Required params</strong> <code>user_id</code> unique id of the user
-<strong>Optional params</strong> none</p>
+<strong>Optional params</strong> none
+NEEDSAUTH</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">get</span> <span class="s1">&#39;/:user_id&#39;</span> <span class="k">do</span>
@@ -128,7 +129,8 @@ a JSON encoded error message if not.</p>
 message
 <strong>Required params</strong> (need just one of the two params)
 &ndash; <code>name</code> name of the user
-&ndash; <code>email</code> email address of the user</p>
+&ndash; <code>email</code> email address of the user
+NEEDSAUTH</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">put</span> <span class="s1">&#39;/:user_id&#39;</span> <span class="k">do</span>
@@ -152,7 +154,8 @@ message
         </div>
         <h2>GET users/:user_id/settings</h2>
 
-<p><strong>Returns</strong> JSON object representing the user&rsquo;s settings.</p>
+<p><strong>Returns</strong> JSON object representing the user&rsquo;s settings.
+NEESAUTH</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">get</span> <span class="s1">&#39;/:user_id/settings&#39;</span> <span class="k">do</span>
@@ -172,7 +175,8 @@ a complete representation of the settings hash.
 <strong>Updates</strong> User&rsquo;s updated settings JSON.<br>
 <strong>Returns</strong> JSON object representing the user&rsquo;s settings.<br>
 <strong>Required params</strong> <code>settings</code>: The form encoded represenation of the
-user&rsquo;s settings.</p>
+user&rsquo;s settings.
+NEESAUTH</p>
 
       </td>
       <td class=code>
@@ -193,6 +197,11 @@ user&rsquo;s settings.</p>
 
         <span class="n">user</span><span class="o">.</span><span class="n">save</span> <span class="ow">or</span> <span class="n">error!</span>
         <span class="n">user</span><span class="o">.</span><span class="n">settings</span>
+      <span class="k">end</span>
+
+      <span class="n">get</span> <span class="s1">&#39;/:user_id/auth_test&#39;</span> <span class="k">do</span>
+        <span class="n">authenticate!</span>
+        <span class="s2">&quot;OK&quot;</span>
       <span class="k">end</span>
     <span class="k">end</span>
   <span class="k">end</span>
