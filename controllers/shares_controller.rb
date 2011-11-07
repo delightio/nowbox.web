@@ -38,9 +38,10 @@ module Aji
       #   `twitter` currently. `facebook` and others coming later. Default is
       #   all services for which the user is associated.
       post do
-        user = find_user_by_id_or_error params[:user_id]
+        authenticate!
+
         video = find_video_by_id_or_error params[:video_id]
-        share = Share.create(:user => user, :video => video,
+        share = Share.create(:user => current_user, :video => video,
                      :message => params[:message],
                      :publish_to => params[:publish_to])
         if share.errors.empty?

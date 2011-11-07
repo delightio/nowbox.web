@@ -12,6 +12,8 @@ describe Aji::API do
       @user = Factory :user
       @channel = Factory :youtube_channel_with_videos
       @video = @channel.content_videos.sample
+
+      header 'X-NB-AuthToken', Token::Generator.new(@user).token
     end
 
     describe "POST #{resource_uri}/" do
@@ -32,11 +34,15 @@ describe Aji::API do
       end
 
       it "returns 400 if missing parameters" do
-        post "#{resource_uri}/"
+        post "#{resource_uri}", :user_id => @user.id
         last_response.status.should == 400
       end
 
       describe "sharing" do
+        before do
+          header 'X-NB-AuthToken', Token::Generator.new(bob).token
+        end
+
         let(:bob) { Factory :user }
         let(:video) { Factory :video }
         let(:channel) { Factory :channel }

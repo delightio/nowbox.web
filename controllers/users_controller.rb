@@ -22,6 +22,7 @@ module Aji
       # __Required params__ `user_id` unique id of the user  
       # __Optional params__ none
       get '/:user_id' do
+        not_found_error! User, params unless current_user
         authenticate!
         current_user
       end
