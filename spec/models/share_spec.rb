@@ -3,29 +3,35 @@ require File.expand_path("../../spec_helper", __FILE__)
 include Aji
 
 describe Aji::Share, :unit do
-  describe "#link" do
-    xit "returns the user facing link for this share" do
-      subject.stub :id => 1
+  let(:user) { User.create }
+  let(:video) { Video.create :source => 'youtube',
+    :external_id => "3307vMsCG0I" }
+  let(:network) { "twitter" }
+  subject { Share.create user: user, video: video, network: network }
 
-      subject.link.should == "http://#{Aji.conf['TLD']}/share/1"
+  describe "#link" do
+    it "returns the user facing link for this share" do
+      subject.link.should == video.source_link
     end
   end
 
   describe "#default_message" do
-    subject { Share.new { |s| s.stub :video => stub(:title => "foobar") } }
     it "sets the message to the video title if none is specified" do
-      subject.default_message.should == "foobar"
+      video.stub :title => "blah"
+      subject.default_message.should == video.title
     end
   end
 
   describe ".from_event" do
     let(:user) { User.new }
     let(:video) { Video.new source: :youtube, title: "Video" }
+    let(:network) { "twitter" }
     let(:event) { stub :video => video, :user => user, :reason => "foobar" }
-    subject { Share.from_event event }
+    subject { Share.from_event event, network }
 
     its(:user) { should == user }
     its(:video) { should == video }
     its(:message) { should == event.reason }
+    its(:network) { should == network }
   end
 end

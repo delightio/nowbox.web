@@ -510,16 +510,18 @@ describe Aji::User do
     end
 
     let(:share) do
-      mock("share", :id => 1).tap do |share|
-        Share.stub(:from_event).with(event).and_return(share)
+      mock("share", :id => 1, :network => "twitter").tap do |share|
+        Share.stub(:from_event).with(event, "twitter").and_return(share)
       end
     end
 
     let(:event) { mock "event", :video => stub, :user => stub }
-    let(:autopost_accounts) { [mock("account", :background_publish => [])] }
+    let(:autopost_accounts) { [mock("account", :background_publish => [],
+                                    :provider => "twitter")] }
 
     it "creates a share object with the user and share from the event" do
-      Share.should_receive(:from_event).with(event).and_return(share)
+      Share.should_receive(:from_event).with(event, "twitter").
+        and_return(share)
 
       subject.create_share_from_event event
     end

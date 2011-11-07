@@ -205,11 +205,11 @@ module Aji
 
     def create_share_from_event event
       Aji.log "creating share from #{event.inspect}"
-      autopost_accounts.each_with_object(
-        Share.from_event event) do |account, share|
-          Aji.log "Publishing share"
-          account.background_publish share
-        end
+      autopost_accounts.each do |account|
+        share = Share.from_event event, account.provider
+        Aji.log "Publishing Share[#{share.id}] to #{share.network}"
+        account.background_publish share
+      end
     end
 
     def redis_keys

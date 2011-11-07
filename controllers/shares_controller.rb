@@ -17,14 +17,14 @@ module Aji
       # __Returns__ the share with the specified id and HTTP Status Code 200 or
       # 404
       #
-      # __Required params__ `share_id` unique id of the share  
+      # __Required params__ `share_id` unique id of the share
       # __Optional params__ none
       get '/:share_id' do
         find_share_by_id_or_error params[:share_id]
       end
 
       # ## POST shares
-      # __Creates__ a share object with the specified parameters.  
+      # __Creates__ a share object with the specified parameters.
       # __Returns__ the created user and HTTP Status Code 201 if successful or
       # a JSON encoded error message if not.
       #
@@ -34,15 +34,14 @@ module Aji
       #
       # __Optional params__
       # - `message`: Text of the share message.
-      # - `publish_to`: list of services to publish the share to. Can be
-      #   `twitter` currently. `facebook` and others coming later. Default is
-      #   all services for which the user is associated.
+      # - `network`: list of services to publish the share to.
+      #   Can be `twitter` or `facebook`.
       post do
         user = find_user_by_id_or_error params[:user_id]
         video = find_video_by_id_or_error params[:video_id]
-        share = Share.create(:user => user, :video => video,
-                     :message => params[:message],
-                     :publish_to => params[:publish_to])
+        share = Share.create( :user => user, :video => video,
+                              :message => params[:message],
+                              :network => params[:network] )
         if share.errors.empty?
           share
         else
