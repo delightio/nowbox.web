@@ -39,7 +39,7 @@ Aji::APP = Rack::Builder.app do
     run Aji::API
   end
 
-  map "http://api.#{Aji.conf['TLD']}/google217e8f968a51d67c.html" do
+  map "http://api.#{Aji.conf['TLD']}/google90a33d3762d05419.html" do
     run GoogleAuth
   end
 
