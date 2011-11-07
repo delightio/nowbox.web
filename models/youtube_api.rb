@@ -27,6 +27,16 @@ module Aji
       end
     end
 
+    def favorite_video video
+      tracker.hit!
+      client.add_favorite video.external_id
+    end
+
+    def unfavorite_video video
+      tracker.hit!
+      client.delete_favorite video.external_id
+    end
+
     def watch_later_videos
       Aji.log :ERROR, "YoutubeAPI#watch_later_videos not implemented yet."
       # tracker.hit!

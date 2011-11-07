@@ -166,6 +166,7 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
           channels.should have(subscribed_channel_names.count).channels
           uids.sort.should == subscribed_channel_names
         end
+
       end
 
       describe "#favorite_videos" do
@@ -186,6 +187,34 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
           favs = favorite_videos
           favs.map(&:external_id).should == favorite_video_ids
           favs.each { |v| v.should be_an_instance_of(Video) }
+        end
+
+      end
+
+      describe "#favorite_video" do
+        let(:video) { mock "video", :external_id => "dYCLXDtvrbs" }
+        after(:each) do # ensure video isn't already in the favorite list.
+          subject.unfavorite_video video
+        end
+
+        it "adds given video to user's YouTube's favorite list" do
+          subject.favorite_video video
+
+          subject.favorite_videos.map(&:external_id).
+            should include video.external_id
+        end
+      end
+
+      describe "#unfavorite_video" do
+        let(:video) { mock "video", :external_id => "zxmObqXYgI8" }
+        after(:each) do
+          subject.favorite_video video
+        end
+
+        it "removes given video from user's YouTube's favorite list" do
+          subject.unfavorite_video video
+          subject.favorite_videos.map(&:external_id).
+            should_not include video.external_id
         end
       end
 
