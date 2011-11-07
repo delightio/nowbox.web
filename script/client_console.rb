@@ -58,6 +58,16 @@ class ClientConsole
     initialize_conn
   end
 
+  def staging!
+    @domain = "api.staging.nowbox.com"
+    initialize_conn
+  end
+
+  def production!
+    @domain = "api.nowbox.com"
+    initialize_conn
+  end
+
   def use_prefix p
     @prefix = p
     initialize_conn
