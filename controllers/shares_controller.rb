@@ -31,15 +31,19 @@ module Aji
       # __Required params__
       # - `user_id`: unique id of the current user
       # - `video_id`: unique id of the shared video
+      # - `channel_id`: unique channel id of which shared video is in.
+      # - `network`: list of services to publish the share to.
+      #     Can be `twitter` or `facebook`.
       #
       # __Optional params__
       # - `message`: Text of the share message.
-      # - `network`: list of services to publish the share to.
-      #   Can be `twitter` or `facebook`.
       post do
         user = find_user_by_id_or_error params[:user_id]
         video = find_video_by_id_or_error params[:video_id]
-        share = Share.create( :user => user, :video => video,
+        channel = find_channel_by_id_or_error params[:channel_id]
+        share = Share.create( :user => user,
+                              :video => video,
+                              :channel => channel,
                               :message => params[:message],
                               :network => params[:network] )
         if share.errors.empty?

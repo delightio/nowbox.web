@@ -6,6 +6,7 @@ describe Aji::Share, :unit do
   let(:user) { User.create }
   let(:video) { Video.create :source => 'youtube',
     :external_id => "3307vMsCG0I" }
+  let(:channel) { Channel.create }
   let(:network) { "twitter" }
   subject { Share.create user: user, video: video, network: network }
 
@@ -31,14 +32,13 @@ describe Aji::Share, :unit do
   end
 
   describe ".from_event" do
-    let(:user) { User.new }
-    let(:video) { Video.new source: :youtube, title: "Video" }
-    let(:network) { "twitter" }
-    let(:event) { stub :video => video, :user => user, :reason => "foobar" }
+    let(:event) { stub :video => video, :channel => channel,
+      :user => user, :reason => "foobar" }
     subject { Share.from_event event, network }
 
     its(:user) { should == user }
     its(:video) { should == video }
+    its(:channel) { should == channel }
     its(:message) { should == event.reason }
     its(:network) { should == network }
   end

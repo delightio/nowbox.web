@@ -4,15 +4,18 @@ module Aji
   # - message: Text
   # - user_id: Integer (Foreign Key)
   # - video_id: Integer (Foreign Key)
+  # - channel_id: Integer (Foreign Key)
   # - network: String
   class Share < ActiveRecord::Base
     NETWORKS = ["twitter", "facebook"]
 
     belongs_to :user
     belongs_to :video
+    belongs_to :channel
 
     validates_presence_of :user
     validates_presence_of :video
+    validates_presence_of :channel
     validates_inclusion_of :network, :in => NETWORKS
 
     before_create :default_message
@@ -33,7 +36,8 @@ module Aji
     end
 
     def self.from_event event, network
-      create! user: event.user, video: event.video,
+      create! user: event.user,
+        video: event.video, channel: event.channel,
         message: event.reason, network: network
     end
   end
