@@ -2,7 +2,7 @@ module Aji
   class API
     helpers do
       def current_user
-        @current_user ||= find_user_by_id_or_error params[:user_id]
+        @current_user ||= Aji::User.find_by_id params[:user_id]
       end
 
       def not_found_error! a_class, params
@@ -50,6 +50,10 @@ module Aji
       end
 
       def authenticate!
+        if request.env['HTTP_X_NB_AUTHTOKEN'].nil? or current_user.nil?
+          error! MultiJson.encode({:error => "Missing user credentials"}), 401
+        end
+
         token = Token::Validator.new request.env['HTTP_X_NB_AUTHTOKEN']
         return if token.valid_for? current_user
 
