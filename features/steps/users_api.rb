@@ -44,7 +44,7 @@ class UsersApi < Spinach::FeatureSteps
     body = json_body last_response
     user = User.find body['id']
 
-    Channel.find(body['favorites_channel_id']).should == user.favorites_channel
+    Channel.find(body['favorite_channel_id']).should == user.favorite_channel
     Channel.find(body['queue_channel_id']).should == user.queue_channel
     Channel.find(body['history_channel_id']).should == user.history_channel
   end

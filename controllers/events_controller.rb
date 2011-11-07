@@ -18,7 +18,7 @@ module Aji
       #   video: `view`, `share`, `enqueue`, `dequeue`, `examine`, `unfavorite`  
       # __Optional params__  
       # `reason` string containing the reason for examination
-      #   
+      #
       # When an video action is sent,  
       # __Required params__  
       # `video_id` unique id of the video being acted on  
@@ -27,11 +27,9 @@ module Aji
       # `video_start`: time in seconds when the event starts tracking (normally 0.0)  
       # `message`: the share message passed by the user when sharing a video.
       post do
-        p = params.delete_if {|k| k=="version" || k==:version}
-        if p.key? :message
-          p[:reason] = p.delete :message
-        end
+        authenticate!
 
+        p = params.delete_if {|k| k=="version" || k==:version}
         begin
           event = Event.create(p)
         rescue => e

@@ -22,6 +22,7 @@ describe Aji::API do
     # So I had to do it this way.
     before(:each) do
       Share.any_instance.stub(:publisher).and_return(twitter_account)
+      header 'X-NB-AuthToken', Token::Generator.new(user).token
     end
 
     describe "POST #{resource_uri}/" do
@@ -38,15 +39,20 @@ describe Aji::API do
         last_response.status.should == 201
       end
 
-      it "returns 404 if missing parameters" do
+      it "returns 401 if missing user authentication" do
         post "#{resource_uri}/"
-        last_response.status.should == 404
+        last_response.status.should == 401
+      end
+
+      it "returns 400 if missing parameters" do
+        post "#{resource_uri}", :user_id => user.id
+        last_response.status.should == 400
       end
 
       it "only supports twitter and facebook" do
         params[:network] = "youtube"
         post("#{resource_uri}/", params)
-        last_response.status.should == 500
+        last_response.status.should == 400
       end
 
     end

@@ -42,7 +42,8 @@ module Aji
       #   featured channels from these selected categories.
       #
       # - `user_id`:  user id. If supplied without `query`, server returns
-      #   given user's subscribed channels.
+      #   given user's subscribed channels. Providing this parameter *requires
+      #   authentication*.
       #
       # - `query`:  comma separated list of search terms. Server returns all
       #   channels regardless of type.
@@ -55,8 +56,10 @@ module Aji
           categories = category_ids.map { |cat_id| Category.find_by_id cat_id }
           channels = categories.compact.map {|cat| cat.featured_channels(2) }
           channels.flatten.compact
-        elsif (user = User.find_by_id params[:user_id])
-          user.display_channels
+        elsif (current_user)
+          authenticate!
+
+          current_user.display_channels
         else
           Channel::Account.all.sample(10)
         end

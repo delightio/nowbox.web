@@ -27,6 +27,10 @@ module Aji
           message, 400
       end
 
+      def validation_error! object, params
+        error! "#{object.errors} from #{params}", 400
+      end
+
       def find_channel_by_id_or_error id
         Aji::Channel.find_by_id(id) or not_found_error!(Channel, id)
       end

@@ -10,11 +10,11 @@ Feature: Users API
     When a user is created with those parameters
     Then the status code should be 201
     And the user should be created
-    And the user should have no name, email, or timezone
+    And the user should have no name or email
     But the user should have favorites, queue, and history channels
 
   Scenario: Creating a user with details
-    Given a user's name, email, and timezone
+    Given a user's name and email
     And a user's locale and region
     When a user is created with those parameters
     Then the status code should be 201

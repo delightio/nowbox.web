@@ -51,26 +51,35 @@ module Aji
       post do
         authenticate!
 
-        video = Video.find_by_id params[:video_id]
-        channel = Channel.find_by_id params[:channel_id]
-
-        invalid_params_error! :video_id, params[:video_id],
-          "No video with this id" if video.nil?
-        invalid_params_error! :channel_id, params[:channel_id],
-          "No channel with this id" if channel.nil?
+        video = find_video_by_id_or_error params[:video_id]
+<<<<<<< HEAD
+        channel = find_channel_by_id_or_error params[:channel_id]
 
         # keep track of the share event since client will only do
         # one POST /shares for triggering a share
-        event = Event.create(:user => current_user, :action => :share,
-          :video=> video, :channel => channel,
-          :video_start => params[:video_start].to_i,
-          :video_elapsed => (params[:video_elapsed] || video.duration).to_i)
+        event = Event.create( :user => user, :action => :share,
+                              :video=> video, :channel => channel,
+                              :video_start => params[:video_start].to_i,
+                              :video_elapsed => (params[:video_elapsed] ||
+                                                 video.duration).to_i )
 
+         share = Share.create( :user => user,
+                               :video => video,
+                               :channel => channel,
+                               :message => params[:message],
+                               :network => params[:network],
+                               :event => event )
+
+=======
         share = Share.create(:user => current_user, :video => video,
-          :channel => channel, :message => params[:message],
-          :network => params[:network], :event => event)
-
-        if share.valid? then share else validation_error! share, params end
+                     :message => params[:message],
+                     :publish_to => params[:publish_to])
+>>>>>>> Adds authentication to all appropriate method calls.
+        if share.errors.empty?
+          share
+        else
+          creation_error! Share, params
+        end
       end
     end
   end

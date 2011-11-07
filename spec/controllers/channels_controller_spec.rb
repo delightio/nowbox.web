@@ -35,20 +35,10 @@ module Aji
           returned_channels.should have(total).channels
         end
 
-        it "returns subscribed channels if given user id" do
-          channel = Factory :youtube_channel_with_videos
-          event = Factory :event, :channel => channel, :action => :subscribe
-          params = { :user_id => event.user.id }
-          get "#{resource_uri}", params
-          last_response.status.should == 200
-          body_hash = JSON.parse last_response.body
-          returned_channels = body_hash.map{|h| h["account"]}.compact
-          returned_channels.should include channel.serializable_hash
-        end
-
         it "returns user channels if given user id" do
           user = Factory :user
           params = { :user_id => user.id }
+          header 'X-NB-AuthToken', Token::Generator.new(user).token
           get "#{resource_uri}", params
           last_response.status.should == 200
           body_hash = JSON.parse last_response.body
