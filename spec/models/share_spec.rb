@@ -22,6 +22,14 @@ describe Aji::Share, :unit do
     end
   end
 
+  describe "#publisher" do
+    let(:publisher) { mock }
+    it "returns the account which publishes the share" do
+      subject.user.stub :twitter_account => publisher
+      subject.publisher == publisher
+    end
+  end
+
   describe ".from_event" do
     let(:user) { User.new }
     let(:video) { Video.new source: :youtube, title: "Video" }

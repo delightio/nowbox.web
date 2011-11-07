@@ -28,6 +28,10 @@ module Aji
       self.message ||= video.title
     end
 
+    def publisher
+      user.send "#{network}_account".to_sym
+    end
+
     def self.from_event event, network
       create! user: event.user, video: event.video,
         message: event.reason, network: network
