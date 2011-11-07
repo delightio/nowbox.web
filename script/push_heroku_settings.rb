@@ -7,9 +7,8 @@ raise ArgumentError unless
   %w[development test production staging].include? ARGV[0]
 
 settings = CONFIG[ARGV[0]].map do |setting, value|
-  "#{setting}=#{value}"
+  %Q(#{setting}="#{value}")
 end
-settings << %Q(RESQUE_SCHEDULE='#{`cat config/resque_schedule.yml`}')
 
 
 

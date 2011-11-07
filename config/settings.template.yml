@@ -65,8 +65,6 @@ production:
   NEW_RELIC_ID: 55570
   NEW_RELIC_LICENSE_KEY: "fb27287c0be0229a4ea3436028662bf75120b1ff"
   NEW_RELIC_LOG: "stdout"
-  OAUTH_TOKEN: "110236362-LzWL0bqF7DUt2MFQpADEZIfYmY0eNQwZtsOYCwAz"
-  OAUTH_TOKEN_SECRET: "2x3Lr42ddi6XsC3cX6Wn25298ZypSCrjxiwuqZr5DtI"
   RACK_ENV: "production"
   RAILS_ENV: "production"
   RESQUE_SCHEDULE: "refresh_all_channels:
@@ -93,14 +91,12 @@ description: \"Remove Bill's test twitter and facebook accounts for debugging.\"
   YOUTUBE_OA_SECRET: "r1XvyGwsP2tUiPWBDsF55-xY"
 
 staging:
-  APP_ID: "147264905366497"
-  APP_SECRET: "69e12456a7c11a35c653e325c7e8c249"
+  APP_ID: "220704664661437"
+  APP_SECRET: "da9f5422fba3f8caf554d6bd927dc430"
   BUNDLE_WITHOUT: "test"
   CLIENT_SECRET: "j3sBP0aRG8neHoWe7MtLDp6aPQYQUQjhtIh9cVFjmiQPvdYFpWi2PbxVZrpwa7t1YrMzWtppR1crSyNV3w"
-  CONSUMER_KEY: "XDYm9fcC4Xb3XYvJpMNw"
-  CONSUMER_SECRET: "93ChiN5zfB1o04cvZgNoP6mmanVnKRfEKUY6vX03A"
-  EXCEPTIONAL_API_KEY: "a3bb570da188cfa8ed81a1b357b46e5d364bf0ee"
-  HIREFIREAPP_TOKEN: "726261a639c5f3790bcd790e4019283d02acb6cc"
+  CONSUMER_KEY: "wUhKhUtZKz39SvGRvcEXQ"
+  CONSUMER_SECRET: "rJ0XLCxMChhcO0GK3vhRRLTg42T24m5rMov30Oav4ww"
   INDEXTANK_API_URL: "http://:vHq8sbT7949Laz@d7voe.api.indextank.com"
   LANG: "en_US.UTF-8"
   MAX_RECENT_VIDEO_IDS_IN_TRENDING: 10000
@@ -109,29 +105,10 @@ staging:
   NEW_RELIC_ID: 55570
   NEW_RELIC_LICENSE_KEY: "fb27287c0be0229a4ea3436028662bf75120b1ff"
   NEW_RELIC_LOG: "stdout"
-  OAUTH_TOKEN: "110236362-LzWL0bqF7DUt2MFQpADEZIfYmY0eNQwZtsOYCwAz"
-  OAUTH_TOKEN_SECRET: "2x3Lr42ddi6XsC3cX6Wn25298ZypSCrjxiwuqZr5DtI"
   RACK_ENV: "production"
   RAILS_ENV: "production"
-  RESQUE_SCHEDULE: "refresh_all_channels:
-  class: Aji::Queues::RefreshAllChannels
-         cron: \"0 * * * *\"
-         args:
-  description: \"Update all channels.\"
-
-       refresh_trending_channels:
-class: Aji::Queues::RefreshTrendingChannels
-       cron: \"*/15 * * * *\"
-       args:
-description: \"Update all trending channels.\"
-
-       kill_bill:
-class: Aji::Queues::KillBill
-       cron: \"* * * * * 2000\"
-       args:
-description: \"Remove Bill's test twitter and facebook accounts for debugging.\""
   TLD: "staging.nowbox.com"
   TZ: "America/Los_Angeles"
   YOUTUBE_KEY: "AI39si5Oncssqpn1TmPzhe9fokClsXttVRjtaAuPC_8lqYq28sFjwRCkxuMAXWGg_Qd7whCjz64FYW_MPoWu4dPrXpPPMHSM1w"
-  YOUTUBE_OA_KEY: "api.nowbox.com"
-  YOUTUBE_OA_SECRET: "r1XvyGwsP2tUiPWBDsF55-xY"
+  YOUTUBE_OA_KEY: "api.staging.nowbox.com"
+  YOUTUBE_OA_SECRET: "qE3pU7ttofm-VR82pycH7YM-"
