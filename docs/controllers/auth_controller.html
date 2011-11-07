@@ -167,7 +167,8 @@ to <code>http://api.nowbox.com/auth/failure</code>.</em></p>
 
       <span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">e</span>
         <span class="no">Aji</span><span class="o">.</span><span class="n">log</span> <span class="ss">:WARN</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">e</span><span class="o">.</span><span class="n">class</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span> <span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s1">&#39;Unable to authenticate&#39;</span><span class="p">,</span> <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span>
+        <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span> <span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s1">&#39;Unable to authenticate&#39;</span><span class="p">,</span>
+          <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span>
       <span class="k">end</span>
     <span class="k">end</span></pre></div>
       </td>
@@ -235,7 +236,7 @@ in a 403 Forbidden.</p>
       <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
       <span class="n">tg</span> <span class="o">=</span> <span class="no">Token</span><span class="o">::</span><span class="no">Generator</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
 
-      <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="ss">:token</span> <span class="o">=&gt;</span> <span class="n">tg</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="ss">:expires_at</span> <span class="o">=&gt;</span> <span class="n">tg</span><span class="o">.</span><span class="n">expires_at</span><span class="p">)</span>
+      <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="ss">:token</span> <span class="o">=&gt;</span> <span class="n">tg</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="ss">:expires_at</span> <span class="o">=&gt;</span> <span class="n">tg</span><span class="o">.</span><span class="n">expires_at</span><span class="o">.</span><span class="n">to_i</span><span class="p">)</span>
     <span class="k">end</span>
 
     <span class="n">helpers</span> <span class="k">do</span>
