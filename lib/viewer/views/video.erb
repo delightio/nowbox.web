@@ -6,32 +6,32 @@
 		<% else %>
 			<%= erb :_call_to_action_download %>
 		<% end %>
-	</div>	
-	
+	</div>
+
   <div id="embed">
   	<% if @video.source == :youtube %>
 			<iframe width="900" height="510" src="http://www.youtube.com/embed/<%= @video.external_id %>?rel=0&hd=1&modestbranding=1&autohide=1&showinfo=0&fs=1&autoplay=1" frameborder="0" allowfullscreen></iframe>
 		<% end %>
   </div>
- 
+
 	<div id="info" class="wrapper">
 		<div id="video_info">
 			<div class="title"><%=h @video.title %></div>
-			<div class="description truncateme"><%=h @video.description %></div>		
+			<div class="description truncateme"><%=h @video.description %></div>
 		</div>
-		
+
 		<div id="share_button">
 			<button onclick="$(this).hide(); $('#share_buttons').show();" class="minimal">Share</button>
 		</div>
 		<div id="share_buttons">
 			<div class="fblike">
-				<iframe src="http://www.facebook.com/plugins/like.php?app_id=196334653750817&amp;href=<%=h @share_url%>&amp;send=false&amp;layout=box_count&amp;width=90&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:60px; height:70px;" allowTransparency="true"></iframe>				
+				<iframe src="http://www.facebook.com/plugins/like.php?app_id=196334653750817&amp;href=<%=h share_url(@video.id) %>&amp;send=false&amp;layout=box_count&amp;width=90&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:60px; height:70px;" allowTransparency="true"></iframe>
 			</div>
 			<div class="plusone" style="width: 60px; height: 70px;">
 				<g:plusone size="tall" href="<%= @share.link %>"></g:plusone>
 			</div>
 			<div class="tweet">
-				<iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url=<%= @share_url %>&count=vertical&via=nowbox&related=fahdoo:Nowbox UX Engineer&text=<%=h "Watch this video! '" + @video.title + "'" %>" style="width:60px; height:70px;"></iframe>
+				<iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url=<%=h share_url(@video.id) %>&count=vertical&via=nowbox&related=fahdoo:Nowbox UX Engineer&text=<%=h "Watch this video! '" + @video.title + "'" %>" style="width:60px; height:70px;"></iframe>
 			</div>
 		</div>
 
@@ -40,8 +40,8 @@
 
 	<div class="wrapper" style="display: none;">
 		<%= erb :_appstore %>
-	</div>	
-	
+	</div>
+
 	<% if @rec_videos.count > 0 %>
 	<ul id="user_videos" class="wrapper">
 		<h2>Suggested videos</h2>
@@ -49,7 +49,7 @@
 			<a href="/random" class="opacity_transition">
 				<img src="/images/graphics/aji-icons_shuffle.png" width="50px">
 			</a>
-		</div>	
+		</div>
 		<% @rec_videos.each do |rec_video| %>
 			<li>
 				<a href="<%= "/video/#{rec_video.video.id}/#{rec_video.id}" %>">
@@ -63,13 +63,13 @@
 			</li>
 		<% end %>
 		<div class="clearfix"></div>
-	</ul>		
+	</ul>
 	<% end %>
-	
+
 
 	<div class="wrapper">
 		<a id="logo" href="/">
 			<img src="/images/logos/nowbox-logotype-redorange.png" height="30px"/>
 		</a>
-	</div>		
+	</div>
 </div>

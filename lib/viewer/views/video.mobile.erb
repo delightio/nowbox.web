@@ -1,41 +1,44 @@
 <div id="video">
-	<div class="toolbar logo">
-		<img src="./images/logos/nowbox-logotype-white.png" height="25px"/>
-	</div>
-
-	<div id="sharer" class="">	
-		<ul class="simple rounded">
-			<li class="blue arrow">
-				<a href="/download" rel="external" style="font-size: 12px; font-weight: normal;">
-					<B><%= @user.name %> shared this on nowbox</B>
-					<BR/>
-					Download nowbox from the appstore
-				</a>	
-			</li>
-		</ul>
-	</div>		
-	
-  <div id="embed">
-		<iframe width="100%" height="100%" src="http://www.youtube.com/embed/<%= @video.external_id %>?rel=0&hd=1&modestbranding=1&autohide=1&showinfo=0&fs=1" frameborder="0" allowfullscreen></iframe>
+  <div class="toolbar logo">
+    <img src="/images/logos/nowbox-new-logotype-yellow.png" height="25px"/>
   </div>
 
-	<div id="video_title"><%= @video.title %></div>
+  <div id="sharer" class="">
+    <ul class="simple rounded">
+      <li class="blue arrow">
+        <a href="/download" rel="external" style="font-size: 12px; font-weight: normal;">
+          <strong><%= @user.name %> shared this on nowbox</strong>
+          <br/>
+          Download NOWBOX from the appstore
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div id="embed">
+    <iframe width="100%" height="100%" src="http://www.youtube.com/embed/<%= @video.external_id %>?rel=0&hd=1&modestbranding=1&autohide=1&showinfo=0&fs=1" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <div id="video_title"><%= @video.title %></div>
 
 
-	<ul class="simple rounded">
-		<li class="arrow">
-			<a class="slide" href="#share">Share</a>
-		</li>					
-	</ul>
+  <ul class="simple rounded">
+    <li class="arrow">
+      <a class="slide" href="#share">Share</a>
+    </li>
+    <li class="arrow">
+      <a href="<%= random_url %>" rel="external">Next Video</a>
+    </li>
+  </ul>
 
-	<ul class="individual rounded">
-		<li class="blue">
-			<a href="/download" rel="external">Download App</a>
-		</li>						
-		<li>
-			<a href="/" rel="external">About nowbox</a>
-		</li>				
-	</ul>
+  <ul class="individual rounded">
+    <li class="blue">
+      <a href="/download" rel="external">Download App</a>
+    </li>
+    <li>
+      <a href="/" rel="external">About NOWBOX</a>
+    </li>
+  </ul>
 </div>
 
 
@@ -45,12 +48,12 @@
       <h1>Share</h1>
       <a class="button back" href="#"><span class="pointer"></span><span>Back</span></a>
   </div>
-	<ul class="simple rounded">
+  <ul class="simple rounded">
     <li class="mobile_twitter_share arrow">
-			<a href="http://twitter.com/share?url=http://nowbox.com/<%= params[:share_id] %>&via=nowbox&related=fahdoo:Nowbox UX Engineer&text=<%= "Watch this video now!" %>" target="_blank">Twitter</a>
-		</li>
-		<li class="mobile_facebook_share arrow">
-     	<a class="fb_share" href="http://www.facebook.com/sharer.php?u=http://nowbox.com/<%= params[:share_id] %>" target="_blank">Facebook</a>
-    </li>		      
-  </ul>    
+      <a href="http://twitter.com/share?url=<%= share_url(params[:share_id]) %>&via=nowbox&related=fahdoo:Nowbox UX Engineer&text=<%= "Watch this video now!" %>" target="_blank">Twitter</a>
+    </li>
+    <li class="mobile_facebook_share arrow">
+      <a class="fb_share" href="http://www.facebook.com/sharer.php?u=<%= share_url(params[:share_id]) %>" target="_blank">Facebook</a>
+    </li>
+  </ul>
 </div>

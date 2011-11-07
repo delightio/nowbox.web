@@ -67,3 +67,7 @@ group :test do
   gem 'factory_girl'
   gem 'simplecov'
 end
+
+group :development do
+  gem 'heroku'
+end

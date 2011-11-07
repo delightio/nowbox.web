@@ -1,11 +1,12 @@
 require 'sinatra/base'
 require 'erubis'
+require_relative 'route_helper'
 
 module Aji
 
   class Viewer < Sinatra::Base
-    set :raise_errors, false 
-    set :show_exceptions, true if development? 
+    set :raise_errors, false
+    set :show_exceptions, true if development?
 
     # Use Erubis for template generation. Essentially a faster ERB.
     Tilt.register :erb, Tilt[:erubis]
@@ -16,7 +17,7 @@ module Aji
     set :public, File.dirname(__FILE__) + "/public"
 
     not_found do
-      erb :'404', {:layout => :layout_error} 
+      erb :'404', {:layout => :layout_error}
     end
 
     error do
@@ -25,6 +26,7 @@ module Aji
 
     helpers do
       include Rack::Utils
+      include Aji::RouteHelper
       alias_method :h, :escape_html
 
       ### MOBILE ###
@@ -39,7 +41,7 @@ module Aji
       end
 
       # Compares User Agent string against regexes of designated mobile devices
-      def mobile_request? 
+      def mobile_request?
         mobile_user_agent_patterns.any? {|r| request.env['HTTP_USER_AGENT'] =~ r}
       end
 
@@ -108,8 +110,8 @@ module Aji
     end
 
     get '/random' do
-      random =  Share.offset(rand(Share.count)).first
-      redirect to("/video/#{random.video.id}/#{random.id}")
+      random_share =  Share.offset(rand(Share.count)).first
+      redirect to("/share/#{random_share.id}")
     end
 
     get '/channel/:channel_id' do
@@ -118,36 +120,33 @@ module Aji
       deliver('channel', 'layout_channel')
     end
 
-    get '/video/:video_id/:share_id' do
-       begin
-        @video = Video.find(params[:video_id])
-        if(params[:share_id])
-          @share = Share.find(params[:share_id])
-          @user = @share.user
-          @rec_videos = Share.where("user_id = ? AND id <> ?", @user.id, @share.id).limit(3 * 3)
-          @share_url = "http://nowbox.com/video/#{@video.id}/#{@share.id}"
-        else
-          @rec_videos = Share.find(:all, :order => "id desc", :limit => 3 * 3)
-          @share_url = "http://nowbox.com/video/#{@video.id}"
-        end
-
-        deliver('video', 'layout_video')
-      rescue
-        Aji.log :WARN, "#{e.class}: #{e.message}"
-        erb :'404', {:layout => :layout_error}
-      end
-    end
+    # this should not be used anymore?
+    # get '/video/:video_id/:share_id' do
+    #    begin
+    #     @video = Video.find(params[:video_id])
+    #     if(params[:share_id])
+    #       @share = Share.find(params[:share_id])
+    #       @user = @share.user
+    #       @rec_videos = Share.where("user_id = ? AND id <> ?", @user.id, @share.id).limit(3 * 3)
+    #       @share_url = "http://nowbox.com/video/#{@video.id}/#{@share.id}"
+    #     else
+    #       @rec_videos = Share.find(:all, :order => "id desc", :limit => 3 * 3)
+    #       @share_url = "http://nowbox.com/video/#{@video.id}"
+    #     end
+    #
+    #     deliver('video', 'layout_video')
+    #   rescue
+    #     Aji.log :WARN, "#{e.class}: #{e.message}"
+    #     erb :'404', {:layout => :layout_error}
+    #   end
+    # end
 
     get '/share/:share_id' do
        begin
-        @share = Share.find(params[:share_id])
-        @user = @share.user
-        @video = @share.video
-
-        @rec_videos = Share.where("user_id = ? AND id <> ?", @user.id,
-          @share.id).limit(3 * 3)
-
-        @share_url = "http://nowbox.com/share/#{@share.id}"
+        @share      = Share.find(params[:share_id])
+        @user       = @share.user
+        @video      = @share.video
+        @rec_videos = Share.where("user_id = ? AND id <> ?", @user.id, @share.id).limit(9)
 
         deliver('video', 'layout_video')
       rescue => e
