@@ -5,6 +5,7 @@ module Aji
   # - user_id: Integer (Foreign Key)
   # - video_id: Integer (Foreign Key)
   # - channel_id: Integer (Foreign Key)
+  # - event_id: Integer (Foreign Key)
   # - network: String
   class Share < ActiveRecord::Base
     NETWORKS = ["twitter", "facebook"]
@@ -12,6 +13,7 @@ module Aji
     belongs_to :user
     belongs_to :video
     belongs_to :channel
+    belongs_to :event
 
     validates_presence_of :user
     validates_presence_of :video
@@ -19,6 +21,7 @@ module Aji
     validates_inclusion_of :network, :in => NETWORKS
 
     before_create :default_message
+    after_create :publish
 
     def link
       #"http://#{Aji.conf['TLD']}/share/#{id}"
@@ -35,11 +38,10 @@ module Aji
       user.send "#{network}_account".to_sym
     end
 
-    def self.from_event event, network
-      create! user: event.user,
-        video: event.video, channel: event.channel,
-        message: event.reason, network: network
+    def publish
+      publisher.background_publish self
     end
+
   end
 end
 

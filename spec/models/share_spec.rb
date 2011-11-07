@@ -3,12 +3,18 @@ require File.expand_path("../../spec_helper", __FILE__)
 include Aji
 
 describe Aji::Share, :unit do
-  let(:user) { User.create }
+  let(:twitter_account) { stub.as_null_object }
+  let(:user) do
+    u = User.create
+    u.stub :twitter_account => twitter_account
+    u
+  end
   let(:video) { Video.create :source => 'youtube',
     :external_id => "3307vMsCG0I" }
   let(:channel) { Channel.create }
   let(:network) { "twitter" }
-  subject { Share.create user: user, video: video, network: network }
+  subject { Share.create user: user,
+    video: video, channel: channel, network: network }
 
   describe "#link" do
     it "returns the user facing link for this share" do
@@ -24,22 +30,16 @@ describe Aji::Share, :unit do
   end
 
   describe "#publisher" do
-    let(:publisher) { mock }
     it "returns the account which publishes the share" do
-      subject.user.stub :twitter_account => publisher
-      subject.publisher == publisher
+      subject.publisher == twitter_account
     end
   end
 
-  describe ".from_event" do
-    let(:event) { stub :video => video, :channel => channel,
-      :user => user, :reason => "foobar" }
-    subject { Share.from_event event, network }
-
-    its(:user) { should == user }
-    its(:video) { should == video }
-    its(:channel) { should == channel }
-    its(:message) { should == event.reason }
-    its(:network) { should == network }
+  describe "#publish" do
+    it "calls publish in background after object creation" do
+      twitter_account.should_receive :background_publish
+      subject
+    end
   end
+
 end

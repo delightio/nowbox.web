@@ -36,23 +36,6 @@ describe Aji::API do
         last_response.status.should == 400
       end
 
-      describe "sharing" do
-        let(:bob) { Factory :user }
-        let(:video) { Factory :video }
-        let(:channel) { Factory :channel }
-        let(:message) { "ZOMG I LOVE THIS VIDEO!!!One" }
-
-        it "takes a message parameter and makes it the reason" do
-          post "#{resource_uri}", :user_id => bob.id, :channel_id => channel.id,
-            :video_id => video.id, :message => message,
-            :action => :share
-
-          Event.find(MultiJson.decode(last_response.body)['id']).reason.
-            should == message
-
-          Share.last.message.should == message
-        end
-      end
     end
   end
 end

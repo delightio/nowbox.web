@@ -115,7 +115,6 @@ describe Aji::User do
         event.stub :action => :share
         subject.should_receive(:favorite_video).with(video, event.created_at)
         subject.should_receive(:watched_video).with(video, event.created_at)
-        subject.should_receive(:create_share_from_event).with(event)
 
         subject.process_event event
       end
@@ -498,40 +497,6 @@ describe Aji::User do
       it "returns a user's social accounts which are set to autopost" do
         subject.autopost_accounts.should == [twitter_account]
       end
-    end
-  end
-
-  describe "#create_share_from_event" do
-    subject do
-      User.new do |u|
-        u.stub :id => 1
-        u.stub :autopost_accounts => autopost_accounts
-      end
-    end
-
-    let(:share) do
-      mock("share", :id => 1, :network => "twitter").tap do |share|
-        Share.stub(:from_event).with(event, "twitter").and_return(share)
-      end
-    end
-
-    let(:event) { mock "event", :video => stub, :user => stub }
-    let(:autopost_accounts) { [mock("account", :background_publish => [],
-                                    :provider => "twitter")] }
-
-    it "creates a share object with the user and share from the event" do
-      Share.should_receive(:from_event).with(event, "twitter").
-        and_return(share)
-
-      subject.create_share_from_event event
-    end
-
-    it "publishes the share to all autopost accounts" do
-      autopost_accounts.each do |a|
-        a.should_receive(:background_publish).with(share)
-      end
-
-      subject.create_share_from_event event
     end
   end
 

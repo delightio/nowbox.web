@@ -52,7 +52,6 @@ module Aji
       when :share
         watched_video event.video, event.created_at
         favorite_video event.video, event.created_at
-        create_share_from_event event
 
       when :unfavorite
         unfavorite_video event.video
@@ -201,15 +200,6 @@ module Aji
 
     def dequeue_video video
       queue_channel.pop video
-    end
-
-    def create_share_from_event event
-      Aji.log "creating share from #{event.inspect}"
-      autopost_accounts.each do |account|
-        share = Share.from_event event, account.provider
-        Aji.log "Publishing Share[#{share.id}] to #{share.network}"
-        account.background_publish share
-      end
     end
 
     def redis_keys

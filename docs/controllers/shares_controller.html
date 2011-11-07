@@ -74,8 +74,9 @@
 <p><strong>Returns</strong> the share with the specified id and HTTP Status Code 200 or
 404</p>
 
-<p><strong>Required params</strong> <code>share_id</code> unique id of the share<br>
-<strong>Optional params</strong> none</p>
+<p><strong>Required params</strong> <code>share_id</code> unique id of the share</p>
+
+<p><strong>Optional params</strong> none</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">get</span> <span class="s1">&#39;/:share_id&#39;</span> <span class="k">do</span>
@@ -90,28 +91,59 @@
         </div>
         <h2>POST shares</h2>
 
-<p><strong>Creates</strong> a share object with the specified parameters.<br>
-<strong>Returns</strong> the created user and HTTP Status Code 201 if successful or
+<p><strong>Creates</strong> a share object with the specified parameters.</p>
+
+<p><strong>Returns</strong> the created user and HTTP Status Code 201 if successful or
 a JSON encoded error message if not.</p>
 
-<p><strong>Required params</strong>
-&ndash; <code>user_id</code>: unique id of the current user
-&ndash; <code>video_id</code>: unique id of the shared video</p>
+<p><strong>Required params</strong></p>
 
-<p><strong>Optional params</strong>
-&ndash; <code>message</code>: Text of the share message.
-&ndash; <code>publish_to</code>: list of services to publish the share to. Can be
-  <code>twitter</code> currently. <code>facebook</code> and others coming later. Default is
-  all services for which the user is associated.</p>
+<ul>
+<li><p><code>user_id</code>: unique id of the current user</p></li>
+<li><p><code>video_id</code>: unique id of the shared video</p></li>
+<li><p><code>channel_id</code>: unique channel id of which shared video is in.</p></li>
+<li><p><code>network</code>: list of services to publish the share to.
+Can be <code>twitter</code> or <code>facebook</code>.</p></li>
+</ul>
 
+<p><strong>Optional params</strong></p>
+
+<ul>
+<li><p><code>message</code>: Text of the share message.</p></li>
+<li><p><code>video_start</code>: time in seconds, start of share segement (default to 0.0)</p></li>
+<li><p><code>video_elapsed</code> time in seconds, end of share segment (default to video duration)</p></li>
+</ul>
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">post</span> <span class="k">do</span>
         <span class="n">user</span> <span class="o">=</span> <span class="n">find_user_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
         <span class="n">video</span> <span class="o">=</span> <span class="n">find_video_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:video_id</span><span class="o">]</span>
-        <span class="n">share</span> <span class="o">=</span> <span class="no">Share</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="p">,</span> <span class="ss">:video</span> <span class="o">=&gt;</span> <span class="n">video</span><span class="p">,</span>
-                     <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:message</span><span class="o">]</span><span class="p">,</span>
-                     <span class="ss">:publish_to</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:publish_to</span><span class="o">]</span><span class="p">)</span>
+        <span class="n">channel</span> <span class="o">=</span> <span class="n">find_channel_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:channel_id</span><span class="o">]</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-5'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-5">&#182;</a>
+        </div>
+        <p>keep track of the share event since client will only do
+one POST /shares for triggering a share</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>        <span class="n">event</span> <span class="o">=</span> <span class="no">Event</span><span class="o">.</span><span class="n">create</span><span class="p">(</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="p">,</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:share</span><span class="p">,</span>
+                              <span class="ss">:video</span><span class="o">=&gt;</span> <span class="n">video</span><span class="p">,</span> <span class="ss">:channel</span> <span class="o">=&gt;</span> <span class="n">channel</span><span class="p">,</span>
+                              <span class="ss">:video_start</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:video_start</span><span class="o">].</span><span class="n">to_i</span><span class="p">,</span>
+                              <span class="ss">:video_elapsed</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:video_elapsed</span><span class="o">]</span> <span class="o">||</span>
+                                                 <span class="n">video</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span><span class="o">.</span><span class="n">to_i</span> <span class="p">)</span>
+
+         <span class="n">share</span> <span class="o">=</span> <span class="no">Share</span><span class="o">.</span><span class="n">create</span><span class="p">(</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="p">,</span>
+                               <span class="ss">:video</span> <span class="o">=&gt;</span> <span class="n">video</span><span class="p">,</span>
+                               <span class="ss">:channel</span> <span class="o">=&gt;</span> <span class="n">channel</span><span class="p">,</span>
+                               <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:message</span><span class="o">]</span><span class="p">,</span>
+                               <span class="ss">:network</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:network</span><span class="o">]</span><span class="p">,</span>
+                               <span class="ss">:event</span> <span class="o">=&gt;</span> <span class="n">event</span> <span class="p">)</span>
+
         <span class="k">if</span> <span class="n">share</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">empty?</span>
           <span class="n">share</span>
         <span class="k">else</span>
