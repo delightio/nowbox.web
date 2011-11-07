@@ -10,13 +10,35 @@ module Aji
       @uid, @token, @secret = uid, token, secret
     end
 
-    def subscriptions uid=uid
+    def subscriptions uid=uid, uid_subscription_id_hash={}
       tracker.hit!
       client.subscriptions(uid).map do |sub|
         # TODO: We should follow the unique subscription id.
-        uid = sub.title.split(" ").last
+        uid = sub.title.split(" ").last.downcase
+        uid_subscription_id_hash.merge! "#{uid}" => sub.id
+
         account = Account::Youtube.find_or_create_by_lower_uid uid
         account.to_channel
+      end
+    end
+
+    def subscribe channel_uid
+      begin
+        tracker.hit!
+        client.subscribe_channel channel_uid
+      rescue => e
+        Aji.log "YoutubeAPI#subscribe(#{channel_uid}) => #{e}"
+      end
+    end
+
+    def unsubscribe channel_uid
+      uid_subscription_id_hash = {} # mapping of uid and subscription id
+      subscriptions uid, uid_subscription_id_hash
+
+      begin
+        client.unsubscribe_channel uid_subscription_id_hash[channel_uid.downcase]
+      rescue => e
+          Aji.log "YoutubeAPI#unsubscribe(#{channel_uid}) => #{e}"
       end
     end
 

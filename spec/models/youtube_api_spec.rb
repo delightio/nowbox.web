@@ -141,7 +141,7 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
       end
 
       let(:subscribed_channel_names) {
-        %w[ freddiew LisaNova ].map{|uid| uid.downcase}.sort}
+        %w[ freddiew LisaNova ].map{|uid| uid.downcase} }
 
       describe "#subscriptions" do
 
@@ -164,9 +164,35 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
             uids << ch.accounts.first.uid
           end
           channels.should have(subscribed_channel_names.count).channels
-          uids.sort.should == subscribed_channel_names
+          uids.sort.should == subscribed_channel_names.sort
         end
 
+      end
+
+      describe "#subscribe" do
+        let(:channel_uid) { "RayWilliamJohnson".downcase }
+        after(:each) do
+          subject.unsubscribe channel_uid
+        end
+
+        it "subscribes given channel on YouTube" do
+          subject.subscribe channel_uid
+          subject.subscriptions.map{ |ch| ch.accounts.first.uid }.
+            should include channel_uid
+        end
+      end
+
+      describe "#unsubscribe" do
+        let(:channel_uid) { "freddiew" }
+        after(:each) do
+          subject.subscribe channel_uid
+        end
+
+        it "unsubscribes given channel" do
+          subject.unsubscribe channel_uid
+          subject.subscriptions.map{ |ch| ch.accounts.first.uid }.
+            should_not include channel_uid
+        end
       end
 
       describe "#favorite_videos" do
