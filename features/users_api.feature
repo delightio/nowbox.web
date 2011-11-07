@@ -28,7 +28,7 @@ Feature: Users API
     Then the status code should be 200
     And the user's information should be present
 
-  Scenario: Getting user info when authenticated as another user
+   Scenario: Getting user info when authenticated as another user
     Given a valid token for a user
     When getting another user's information
     Then the status code should be 401
@@ -40,11 +40,29 @@ Feature: Users API
     Then the status code should be 401
     And there should be an error
 
+  Scenario: Updating user info when authenticated
+    Given a valid token for a user
+    When updating that user's info
+    Then the status code should be 200
+    And the user's information should be present
+
+ Scenario: Updating user info when authenticated as another user
+    Given a valid token for a user
+    When updating another user's info
+    Then the status code should be 401
+    And there should be an error
+
+  Scenario: Updating user info when not authenticated
+    Given a valid user id
+    When updating that user's info
+    Then the status code should be 401
+    And there should be an error
+
   Scenario: Updating user settings when authenticated
     Given a valid token for a user
     When updating that user's settings
     Then the status code should be 200
-    Then the new settings should be present
+    And the new settings should be present
 
   Scenario: Updating user settings when authenticated as another user
     Given a valid token for a user
@@ -74,3 +92,4 @@ Feature: Users API
     When testing another user's authentication
     Then the status code should be 401
     And there should be an error
+
