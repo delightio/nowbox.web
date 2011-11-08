@@ -15,3 +15,9 @@ kill_bill:
   cron: "* * * * * 2000"
   args:
   description: "Remove Bill's test twitter and facebook accounts for debugging."
+
+ invalidate_tokens:
+  class: Aji::Queues::InvalidateTokens
+  cron: "* * * * * 2000"
+  args:
+  description: "Invalidate all user tokens for testing purposes."
