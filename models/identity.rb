@@ -33,5 +33,12 @@ module Aji
     def twitter_account
       accounts.where(:type => 'Aji::Account::Twitter').first
     end
+
+    def hook action, object
+      accounts.each do |a|
+        a.send :"on_#{action}", object if a.respond_to? :"on_#{action}"
+      end
+    end
   end
 end
+
