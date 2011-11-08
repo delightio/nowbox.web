@@ -64,6 +64,21 @@ module Aji
         end
       end
 
+      def authenticate_as_token_holder!
+        if request.env['HTTP_X_NB_AUTHTOKEN'].nil?
+          error! MultiJson.encode({:error => "Missing user credentials"}), 401
+        end
+
+        token = Token::Validator.new request.env['HTTP_X_NB_AUTHTOKEN']
+
+        if token.valid?
+          params[:user_id] = token.user_id
+          current_user
+        else
+          error! MultiJson.encode({:error => "Missing user credentials"}), 401
+        end
+      end
+
       def parse_param p
         case
         when p == 'false' then false

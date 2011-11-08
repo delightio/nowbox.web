@@ -223,11 +223,15 @@ module Aji
     end
 
     def user_channels
-      [ queue_channel, favorite_channel ]
+      [history_channel, queue_channel, favorite_channel]
+    end
+
+    def displayable_user_channels
+      [queue_channel, favorite_channel]
     end
 
     def display_channels
-      user_channels + social_channels + subscribed_channels
+      displayable_user_channels + social_channels + subscribed_channels
     end
 
     def first_name
