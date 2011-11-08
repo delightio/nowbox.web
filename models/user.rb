@@ -165,6 +165,7 @@ module Aji
 
     def subscribe channel
       subscribed_list << channel.id unless subscribed? channel
+      identity.hook :subscribe, channel
       subscribed? channel
     end
 
@@ -175,6 +176,7 @@ module Aji
 
     def unsubscribe channel
       subscribed_list.delete channel.id
+      identity.hook :unsubscribe, channel
       not subscribed? channel
     end
 
@@ -193,18 +195,22 @@ module Aji
 
     def favorite_video video, favorited_time
       favorite_channel.push video, favorited_time.to_i
+      identity.hook :favorite, video
     end
 
     def unfavorite_video video
       favorite_channel.pop video
+      identity.hook :unfavorite, video
     end
 
     def enqueue_video video, enqueued_time
       queue_channel.push video, enqueued_time.to_i
+      identity.hook :enqueue, video
     end
 
     def dequeue_video video
       queue_channel.pop video
+      identity.hook :dequeue, video
     end
 
     def favorite_videos
