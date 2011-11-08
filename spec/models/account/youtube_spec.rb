@@ -182,6 +182,59 @@ describe Account::Youtube do
     end
   end
 
+  describe "user action hooks" do
+    let(:video) { mock "video" }
+    let(:channel) { mock "channel" }
+
+    describe "#on_favorite" do
+      it "favorites video via the youtube api" do
+        api.should_receive(:add_to_favorites).with(video)
+
+        subject.on_favorite video
+      end
+    end
+
+    describe "#on_unfavorite" do
+      it "unfavorites the video via the youtube api" do
+        api.should_receive(:remove_from_favorites).with(video)
+
+        subject.on_unfavorite video
+      end
+    end
+
+    describe "#on_enqueue" do
+      it "adds the video to watch later via the youtube api" do
+        api.should_receive(:add_to_watch_later).with(video)
+
+        subject.on_enqueue video
+      end
+    end
+
+    describe "#on_dequeue" do
+      it "removes the video from watch later via the youtube api" do
+        api.should_receive(:remove_from_watch_later).with(video)
+
+        subject.on_dequeue video
+      end
+    end
+
+    describe "#on_subscribe" do
+      it "subscribes to the channel on youtube via the youtube api" do
+        api.should_receive(:subscribe_to).with(channel)
+
+        subject.on_subscribe channel
+      end
+    end
+
+    describe "#on_unsubscribe" do
+      it "unsubscribes from the channel on youtube via the youtube api" do
+        api.should_receive(:unsubscribe_from).with(channel)
+
+        subject.on_unsubscribe channel
+      end
+    end
+  end
+
   describe "#refresh_info" do
     it "updates from youtube and save" do
       subject.should_receive :get_info_from_youtube_api

@@ -94,6 +94,30 @@ module Aji
       true
     end
 
+    def on_favorite video
+      api.add_to_favorites video
+    end
+
+    def on_unfavorite video
+      api.remove_from_favorites video
+    end
+
+    def on_enqueue video
+      api.add_to_watch_later video
+    end
+
+    def on_dequeue video
+      api.remove_from_watch_later video
+    end
+
+    def on_subscribe channel
+      api.subscribe_to channel
+    end
+
+    def on_unsubscribe channel
+      api.unsubscribe_from channel
+    end
+
     def self.create_if_existing uid
       account = find_by_lower_uid(uid)
       return account unless account.nil?

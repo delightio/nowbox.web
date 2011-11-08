@@ -278,7 +278,7 @@ describe Aji::User do
         end
       end
 
-      describe "#favorite_video", :wip do
+      describe "#favorite_video" do
         it "adds the video to the user's favorites channel" do
           favorite_channel.should_receive(:push).with(video, time.to_i)
 
