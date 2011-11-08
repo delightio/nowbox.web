@@ -2,12 +2,12 @@ Feature: Youtube Synchronization
   Scenario: Favoriting a video
     Given a user authorized with youtube
     When favoriting a video
-    Then that video should be a yotube favorite
+    Then that video should be a youtube favorite
 
   Scenario: Unfavoriting a video
     Given a user authorized with youtube
-    When unfavoriting a video
-    Then that video should not be a yotube favorite
+    When unfavoriting a currently favorited video
+    Then that video should not be a youtube favorite
 
   Scenario: Queueing a video to watch later
     Given a user authorized with youtube

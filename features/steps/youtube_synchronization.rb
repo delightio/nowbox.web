@@ -10,69 +10,91 @@ class YoutubeSynchronization < Spinach::FeatureSteps
   end
 
   When 'favoriting a video' do
-    @video = Video.create! source: :youtube, external_id: 'zxmObqXYgI8<D-'
-    @video.populate
+    VCR.use_cassette "youtube/atomic_interactions" do
+      @video = Video.create! source: :youtube, external_id: 'y4sOfO8Ei1g'
+      @video.populate
 
-    @user.favorite_video @video, Time.now
+      @user.favorite_video @video, Time.now
+    end
   end
 
-  Then 'that video should be a yotube favorite' do
-    @account.api.favorite_videos.include?(@video).should == true
+  Then 'that video should be a youtube favorite' do
+    VCR.use_cassette "youtube/atomic_interactions" do
+      @account.api.favorite_videos.include?(@video).should == true
+    end
   end
 
-  When 'unfavoriting a video' do
-    @video = Video.create! source: :youtube, external_id: 'zxmObqXYgI8<D-'
-    @video.populate
-    @user.favorite_video @video, Time.now
-    @user.unfavorite_video @video
+  When  'unfavoriting a currently favorited video' do
+    VCR.use_cassette "youtube/atomic_interactions" do
+      @video = Video.create! source: :youtube, external_id: 'y4sOfO8Ei1g'
+      @video.populate
+      @user.favorite_video @video, Time.now
+      @user.unfavorite_video @video
+    end
   end
 
-  Then 'that video should not be a yotube favorite' do
+  Then 'that video should not be a youtube favorite' do
     @account.api.favorite_videos.include?(@video).should == false
   end
 
   When 'enqueueing a video' do
-    @video = Video.create! source: :youtube, external_id: 'zxmObqXYgI8<D-'
-    @video.populate
-    @user.enqueue_video @video, Time.now
+    VCR.use_cassette "youtube/atomic_interactions" do
+      @video = Video.create! source: :youtube, external_id: 'y4sOfO8Ei1g'
+      @video.populate
+      @user.enqueue_video @video, Time.now
+    end
   end
 
   Then 'that video should be in the watch later playlist on youtube' do
-    @account.api.watch_later_videos.include?(@video).should == true
+    VCR.use_cassette "youtube/atomic_interactions" do
+      @account.api.watch_later_videos.include?(@video).should == true
+    end
   end
 
   When 'dequeueing a video' do
-    @video = Video.create! source: :youtube, external_id: 'zxmObqXYgI8<D-'
-    @video.populate
-    @user.enqueue_video @video, Time.now
-    @user.dequeue_video @video
+    @video = Video.create! source: :youtube, external_id: 'y4sOfO8Ei1g'
+    VCR.use_cassette "youtube/atomic_interactions" do
+      @video.populate
+      @user.enqueue_video @video, Time.now
+      @user.dequeue_video @video
+    end
   end
 
   Then 'that video should not be in the watch later playlist on youtube' do
-    @account.api.watch_later_videos.include?(@video).should == false
+    VCR.use_cassette "youtube/atomic_interactions" do
+      @account.api.watch_later_videos.include?(@video).should == false
+    end
   end
 
   When 'subscribing to a channel' do
-    @channel = Channel::Account.create!(
-     accounts: [Account::Youtube.create(uid: "freddiew")])
+    VCR.use_cassette "youtube/atomic_interactions" do
+      @channel = Channel::Account.create!(
+        accounts: [Account::Youtube.create(uid: "thedoctorwhomedia")])
 
-     @user.subscribe @channel
+        @user.subscribe @channel
+      end
   end
 
   Then 'that channel should be subscribed on youtube' do
-    @account.subscriptions.include?(@channel).should == true
+    VCR.use_cassette "youtube/atomic_interactions" do
+      @account.api.subscriptions.include?(@channel).should == true
+    end
   end
 
   When 'unsubscribing from a channel' do
-    @channel = Channel::Account.create!(
-     accounts: [Account::Youtube.create(uid: "freddiew")])
+    VCR.use_cassette "youtube/atomic_interactions" do
+      @channel = Channel::Account.create!(
+        accounts: [Account::Youtube.create(uid: "freddiew")])
 
-     @user.subscribe @channel
-     @user.unsubscribe @channel
+      @user.subscribe @channel
+      @user.unsubscribe @channel
+    end
   end
 
   Then 'that channel should not be subscribed on youtube' do
-    @account.subscriptions.include?(@channel).should == false
+    VCR.use_cassette "youtube/atomic_interactions" do
+      @account.api.subscriptions.include?(@channel).should == false
+    end
   end
 
   When 'a synchronization occurs' do
