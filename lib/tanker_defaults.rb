@@ -2,7 +2,7 @@ module Aji
 
   # Please note that you would need to create the index ahead of time
   def Aji.tanker_index_suffix
-    return "staging" if Aji.conf['STAGING']==true
+    return "staging" if Aji.conf['STAGING']
     if RACK_ENV == "production" then "production" else "sandbox" end
   end
 
