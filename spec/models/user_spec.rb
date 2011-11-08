@@ -502,21 +502,23 @@ describe Aji::User do
 
   describe "#user_channels" do
     it "returns all user channels" do
-      pending "Current name conflict with method"
+      subject.user_channels.should include subject.history_channel
+      subject.user_channels.should include subject.queue_channel
+      subject.user_channels.should include subject.favorite_channel
     end
   end
 
   describe "#display_channels" do
-    let(:user_channels) { [ mock("fav channel"), mock("queue_channel") ] }
-    let(:subscribed_channels) { [ mock("hilarious channel") ] }
-    let(:social_channels) { [ mock("fb channel"), mock("twitter channel") ] }
+    let(:displayable_user_channels) { [mock("fav channel"), mock("queue channel")] }
+    let(:subscribed_channels) { [mock("hilarious channel")] }
+    let(:social_channels) { [mock("fb channel"), mock("twitter channel")] }
 
     it "returns an array of of all displayable channels" do
-      subject.stub(:user_channels).and_return(user_channels)
+      subject.stub(:displayable_user_channels).and_return(displayable_user_channels)
       subject.stub(:subscribed_channels).and_return(subscribed_channels)
       subject.stub(:social_channels).and_return(social_channels)
-      subject.display_channels.should == user_channels + social_channels +
-        subscribed_channels
+      subject.display_channels.should == displayable_user_channels +
+        social_channels + subscribed_channels
     end
   end
 

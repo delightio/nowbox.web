@@ -1,6 +1,8 @@
 module Aji
   class Channel::User < Channel
 
+    has_one :user, :class_name => 'Aji::User'
+
     def thumbnail_uri # LH 220
       case title
       when "Watch Later"

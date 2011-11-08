@@ -45,6 +45,10 @@ module Aji
       def valid_for? user
         get_token_data.to_i == user.id
       end
+
+      def user_id
+        get_token_data.to_i
+      end
     end
   end
 end

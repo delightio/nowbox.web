@@ -20,11 +20,20 @@ module Aji
       # __Returns__ the channel with the specified id and HTTP Status Code 200
       # or 404
       #
+      # *Requires authentication* when getting a user channel.
+      #
       # __Required params__ `channel_id` unique id of the channel
       #
       # __Optional params__ `inline_videos` integer, number of videos to include
       get '/:channel_id' do
         channel = find_channel_by_id_or_error params[:channel_id]
+
+        if channel.class == Channel::User
+          authenticate_as_token_holder!
+          error! "Unathorized channel access", 401 unless
+            user.user_channels.include? channel
+        end
+
         channel.serializable_hash(
           :inline_videos => params[:inline_videos].to_i)
       end
@@ -98,7 +107,7 @@ module Aji
         new_channel = Channel::Keyword.find_or_create_by_query params[:query]
         new_channel
       end
-
     end
   end
 end
+
