@@ -258,7 +258,7 @@ describe Account::Youtube do
     let(:user) { stub :id => 42 }
 
     it "starts a new youtube synchronization" do
-      YoutubeSync.should_receive(:new).with(user, subject)
+      YoutubeSync.should_receive(:new).with(subject)
 
       subject.authorize! user
     end
