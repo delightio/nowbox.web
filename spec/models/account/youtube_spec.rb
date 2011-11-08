@@ -213,6 +213,25 @@ describe Account::Youtube do
     end
   end
 
+  describe "#api" do
+    subject { Account::Youtube.new uid: "nuclearsandwich" }
+    let(:token) { "token" }
+    let(:secret) { "secret" }
+
+    it "uses the token and secret to build an oauth client when authorized" do
+      subject.credentials = { 'token' => token, 'secret' => secret }
+      YoutubeAPI.should_receive(:new).with(subject.uid, token, secret)
+
+      subject.api
+    end
+
+    it "uses the user's uid for user operations when not authorized" do
+      YoutubeAPI.should_receive(:new).with(subject.uid)
+
+      subject.api
+    end
+  end
+
   describe ".from_auth_hash" do
     subject { Account::Youtube.from_auth_hash auth_hash }
     let(:auth_hash) { YOUTUBE_HASH }

@@ -71,7 +71,11 @@ module Aji
     end
 
     def api
-      @api ||= YoutubeAPI.new uid
+      @api ||=  if authorized?
+                  YoutubeAPI.new uid, credentials['token'], credentials['secret']
+                else
+                  YoutubeAPI.new uid
+                end
     end
 
     def set_provider
