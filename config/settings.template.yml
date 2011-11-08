@@ -112,3 +112,4 @@ staging:
   YOUTUBE_KEY: "AI39si5Oncssqpn1TmPzhe9fokClsXttVRjtaAuPC_8lqYq28sFjwRCkxuMAXWGg_Qd7whCjz64FYW_MPoWu4dPrXpPPMHSM1w"
   YOUTUBE_OA_KEY: "api.staging.nowbox.com"
   YOUTUBE_OA_SECRET: "qE3pU7ttofm-VR82pycH7YM-"
+  STAGING: true
