@@ -2,7 +2,7 @@ module Aji
   class Token
     include OAuth::Helper
 
-    LIFESPAN = 5.minutes
+    LIFESPAN = 1.hour
 
     def token_key
       "authentication:#{@token}"

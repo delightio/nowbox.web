@@ -2,7 +2,7 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 include Aji
 
-describe Aji::Token do
+describe Aji::Token, :unit do
   describe Aji::Token::Generator do
     subject { Token::Generator.new user } 
     let(:user) { mock "user", :id => 11 }
