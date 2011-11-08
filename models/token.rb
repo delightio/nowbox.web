@@ -2,6 +2,8 @@ module Aji
   class Token
     include OAuth::Helper
 
+    LIFESPAN = 5.minutes
+
     def token_key
       "authentication:#{@token}"
     end
@@ -22,8 +24,8 @@ module Aji
 
       def store_token
         Aji.redis.set token_key, @user.id
-        @expires_at = 1.hour.from_now
-        Aji.redis.expire token_key, 1.hour
+        @expires_at = Token::LIFESPAN.from_now
+        Aji.redis.expire token_key, Token::LIFESPAN
       end
     end
 
