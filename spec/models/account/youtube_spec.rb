@@ -183,12 +183,19 @@ describe Account::Youtube do
   end
 
   describe "user action hooks" do
-    let(:video) { mock "video" }
-    let(:channel) { mock "channel" }
+    let(:video) { mock "video", :source => :youtube }
+    let(:channel) { mock "channel", :youtube_channel? => true }
 
     describe "#on_favorite" do
       it "favorites video via the youtube api" do
         api.should_receive(:add_to_favorites).with(video)
+
+        subject.on_favorite video
+      end
+
+      it "ignores non-youtube videos" do
+        video = mock "video", :source => :vimeo
+        api.should_not_receive(:add_to_favorites).with(video)
 
         subject.on_favorite video
       end
@@ -200,11 +207,25 @@ describe Account::Youtube do
 
         subject.on_unfavorite video
       end
+
+      it "ignores non-youtube videos" do
+        video = mock "video", :source => :vimeo
+        api.should_not_receive(:remove_from_favorites).with(video)
+
+        subject.on_unfavorite video
+      end
     end
 
     describe "#on_enqueue" do
       it "adds the video to watch later via the youtube api" do
         api.should_receive(:add_to_watch_later).with(video)
+
+        subject.on_enqueue video
+      end
+
+      it "ignores non-youtube videos" do
+        video = mock "video", :source => :vimeo
+        api.should_not_receive(:add_to_watch_later).with(video)
 
         subject.on_enqueue video
       end
@@ -216,6 +237,13 @@ describe Account::Youtube do
 
         subject.on_dequeue video
       end
+
+      it "ignores non-youtube videos" do
+        video = mock "video", :source => :vimeo
+        api.should_not_receive(:remove_from_watch_later).with(video)
+
+        subject.on_dequeue video
+      end
     end
 
     describe "#on_subscribe" do
@@ -224,11 +252,25 @@ describe Account::Youtube do
 
         subject.on_subscribe channel
       end
+
+      it "ignores non-youtube channels" do
+        channel = mock "channel", :youtube_channel? => false
+        api.should_not_receive(:subscribe_to).with(channel)
+
+        subject.on_subscribe channel
+      end
     end
 
     describe "#on_unsubscribe" do
       it "unsubscribes from the channel on youtube via the youtube api" do
         api.should_receive(:unsubscribe_from).with(channel)
+
+        subject.on_unsubscribe channel
+      end
+
+      it "ignores non-youtube channels" do
+        channel = mock "channel", :youtube_channel? => false
+        api.should_not_receive(:unsubscribe_from).with(channel)
 
         subject.on_unsubscribe channel
       end

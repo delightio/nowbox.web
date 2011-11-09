@@ -95,27 +95,27 @@ module Aji
     end
 
     def on_favorite video
-      api.add_to_favorites video
+      api.add_to_favorites video if video.source == :youtube
     end
 
     def on_unfavorite video
-      api.remove_from_favorites video
+      api.remove_from_favorites video if video.source == :youtube
     end
 
     def on_enqueue video
-      api.add_to_watch_later video
+      api.add_to_watch_later video if video.source == :youtube
     end
 
     def on_dequeue video
-      api.remove_from_watch_later video
+      api.remove_from_watch_later video if video.source == :youtube
     end
 
     def on_subscribe channel
-      api.subscribe_to channel
+      api.subscribe_to channel if channel.youtube_channel?
     end
 
     def on_unsubscribe channel
-      api.unsubscribe_from channel
+      api.unsubscribe_from channel if channel.youtube_channel?
     end
 
     def self.create_if_existing uid
