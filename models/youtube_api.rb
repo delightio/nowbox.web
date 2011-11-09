@@ -67,6 +67,7 @@ module Aji
       # client.playlist('watch_later').videos.map do |h|
       #   youtube_it_to_video h
       # end
+      []
     end
 
     def author_info uid=uid
