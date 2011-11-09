@@ -7,6 +7,8 @@ module Aji
     end
 
     def synchronize!
+      return if account.nil? or user.nil?
+
       sync_subscribed_channels
       sync_watch_later
       sync_favorites

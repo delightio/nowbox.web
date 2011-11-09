@@ -60,6 +60,16 @@ describe Aji::YoutubeSync, :unit do
   let(:favorite_videos) { remotely_unfavorited_videos + other_favorite_videos }
 
   describe "#synchronize!" do
+    it "returns and does not re enqueue if @account or @user is no longer valid" do
+      subject.stub :account => nil
+      subject.should_not_receive(:enqueue_resync)
+      subject.synchronize!
+
+      subject.stub :user => nil
+      subject.should_not_receive(:enqueue_resync)
+      subject.synchronize!
+    end
+
     it "runs subscribed channel sync" do
       subject.should_receive(:sync_subscribed_channels)
 
