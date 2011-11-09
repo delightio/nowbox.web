@@ -21,6 +21,8 @@ module Aji
 
       yt = Account::Youtube.find_by_uid bills_yt_uid
       unless yt.nil?
+        Aji.log "Destroying Account::Youtube[#{bills_yt_uid}]..."
+
         Aji.log "Removing Account::Youtube[#{yt.id}]"
         user = yt.user
         Aji.log "Can't find linked user" if user.nil?
