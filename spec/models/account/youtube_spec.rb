@@ -370,9 +370,12 @@ describe Account::Youtube do
   describe "#authorize!" do
     subject { Account::Youtube.new }
     let(:user) { stub :id => 42 }
+    let(:sync) do
+      stub.tap{ |s| s.should_receive :background_synchronize! }
+    end
 
     it "starts a new youtube synchronization" do
-      YoutubeSync.should_receive(:new).with(subject)
+      YoutubeSync.should_receive(:new).with(subject).and_return(sync)
 
       subject.authorize! user
     end

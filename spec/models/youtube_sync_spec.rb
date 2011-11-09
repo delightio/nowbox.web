@@ -191,6 +191,15 @@ describe Aji::YoutubeSync, :unit do
     end
   end
 
+  describe "#background_synchronize!" do
+    it "sets up a resque job to run synchronization" do
+      Resque.should_receive(:enqueue).with(
+        Aji::Queues::SynchronizeWithYoutube, account.id)
+
+      subject.background_synchronize!
+    end
+  end
+
   describe "#youtube_subscriptions" do
     it "returns cached subscriptions from the api" do
       api.should_receive(:subscriptions).exactly(1)

@@ -141,7 +141,7 @@ module Aji
 
     def authorize! user
       Aji.log "User[#{user.id}] authorized Account::Youtube[#{id}]"
-      YoutubeSync.new self
+      YoutubeSync.new(self).background_synchronize!
     end
 
     def self.from_auth_hash auth_hash
