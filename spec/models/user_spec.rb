@@ -714,6 +714,17 @@ describe Aji::User do
     end
   end
 
+  describe "#copy_from!" do
+    let(:social1) { mock }
+    let(:other_user) { stub :social_channels => [ social1 ] }
+
+    it "merges and copies social channels" do
+      subject.should_receive :merge!
+      subject.should_receive(:subscribe_social).with(social1)
+      subject.copy_from! other_user
+    end
+  end
+
   describe "#merge!" do
     let(:other_user) do
       User.new.tap do |u|

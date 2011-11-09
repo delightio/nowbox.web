@@ -97,8 +97,38 @@ module Aji
       end
     end
 
+    # ## POST /auth/you_tube/signout
+    # Creates a new user id and copies all exisiting channels
+    # __Returns__ an updated version of the user resource.
+    #
+    # __Required params__
+    # - `user_id`: The unique identifier of the user to be signed out of YouTube.
+    post '/you_tube/signout' do
+      content_type :json
+      user = User.find_by_uid params[:user_id]
+      if user.nil?
+        return MultiJson.encode(
+          :error => "User[#{params[:user_id]}] not found.")
+      end
+      if user.identity.nil?
+        return MultiJson.encode(
+          :error => "User[#{params[:user_id]}] has not been linked to any external accounts.")
+      end
+
+      accounts = user.identity.accounts.select { |a| a.class==Account::Youtube }
+      if accounts.count != 1
+        return MultiJson.encode(
+          :error => "User[#{params[:user_id]}] has #{accounts.count} YouTube: #{accounts.inspect}")
+      end
+
+      new_user = User.create
+      new_user.copy_from! user
+      MultiJson.encode new_user.serializable_hash
+    end
+
+
     # ## POST /auth/:provider/deauthorize
-    # Deauthorizes an account effectively removing it from the system.  
+    # Deauthorizes an account effectively removing it from the system.
     # __Returns__ an updated version of the user resource.
     #
     # __Required params__

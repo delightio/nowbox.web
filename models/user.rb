@@ -256,6 +256,13 @@ module Aji
       self.name.split(' ').last
     end
 
+    def copy_from! other
+      merge! other
+      other.social_channels.each do |c|
+        subscribe_social c
+      end
+    end
+
     def merge! other
       other.subscribed_channels.each do |c|
         subscribe c
@@ -265,6 +272,8 @@ module Aji
       favorite_channel.merge! other.favorite_channel
       queue_channel.merge! other.queue_channel
 
+      self.region = other.region
+      self.settings = other.settings
       self.name = other.name if name == ""
       self.email = other.email if email == ""
 
@@ -272,6 +281,8 @@ module Aji
         self.name = other.name unless other.name == ""
         self.email = other.email unless other.email == ""
       end
+      # TODO: don't we need to do a save?
+      save
     end
 
     private
