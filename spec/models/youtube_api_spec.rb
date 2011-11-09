@@ -168,10 +168,7 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
     end
 
     describe "#subscribe_to" do
-      before(:each) do
-        subject.unsubscribe_from channel
-      end
-
+      before(:each) { subject.unsubscribe_from channel }
       let(:uid) { "raywilliamjohnson" }
       let(:channel) { mock "channel", :accounts => [stub(:uid => uid)] }
 
@@ -183,10 +180,7 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
     end
 
     describe "#unsubscribe_from" do
-      before(:each) do
-        subject.subscribe_to channel
-      end
-
+      before(:each) { subject.subscribe_to channel }
       let(:uid) { "freddiew" }
       let(:channel) { mock "channel", :accounts => [stub(:uid => uid)] }
 
@@ -212,6 +206,7 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
         favorite_videos = VCR.use_cassette "youtube_api/favorite_videos" do
           subject.favorite_videos
         end
+
         favs = favorite_videos
         favs.map(&:external_id).should == favorite_video_ids
         favs.each { |v| v.should be_an_instance_of(Video) }
@@ -220,39 +215,35 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
     end
 
     describe "#add_to_favorites" do
-      it { fail }
-      let(:video) { mock "video", :external_id => "dYCLXDtvrbs" }
-      after(:each) do # ensure video isn't already in the favorite list.
-        subject.unfavorite_video video
-      end
+      before(:each) { subject.remove_from_favorites video }
+      let(:external_id) { "dYCLXDtvrbs" }
+      let(:video) { mock "video", :external_id => external_id }
 
       it "adds given video to user's YouTube's favorite list" do
-        subject.favorite_video video
+        subject.add_to_favorites video
 
-        subject.favorite_videos.map(&:external_id).
-          should include video.external_id
+        subject.favorite_videos.map(&:external_id).should include external_id
       end
     end
 
     describe "#remove_from_favorites" do
-      it { fail }
-      let(:video) { mock "video", :external_id => "zxmObqXYgI8" }
-      after(:each) do
-        subject.favorite_video video
-      end
+      before(:each) { subject.add_to_favorites video }
+      let(:external_id) { "zxmObqXYgI8" }
+      let(:video) { mock "video", :external_id => external_id }
 
       it "removes given video from user's YouTube's favorite list" do
-        subject.unfavorite_video video
-        subject.favorite_videos.map(&:external_id).
-          should_not include video.external_id
+        subject.remove_from_favorites video
+        subject.favorite_videos.map(&:external_id).should_not include external_id
       end
     end
 
     describe "#add_to_watch_later" do
+      pending
       it { fail }
     end
 
     describe "#remove_from_watch_later" do
+      pending
       it { fail }
     end
 

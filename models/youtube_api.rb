@@ -51,12 +51,12 @@ module Aji
       end
     end
 
-    def favorite_video video
+    def add_to_favorites video
       tracker.hit!
       client.add_favorite video.external_id
     end
 
-    def unfavorite_video video
+    def remove_from_favorites video
       tracker.hit!
       client.delete_favorite video.external_id
     end
