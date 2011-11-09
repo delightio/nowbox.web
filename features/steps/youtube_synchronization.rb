@@ -13,8 +13,7 @@ class YoutubeSynchronization < Spinach::FeatureSteps
     VCR.use_cassette "youtube/atomic_interactions" do
       @video = Video.create! source: :youtube, external_id: 'y4sOfO8Ei1g'
       @video.populate
-      @account.api.remove_from_favorites @video if @account.api.favorite_videos.
-        include? @video
+      @account.api.remove_from_favorites @video
 
       @user.favorite_video @video, Time.now
     end
@@ -30,8 +29,7 @@ class YoutubeSynchronization < Spinach::FeatureSteps
     VCR.use_cassette "youtube/atomic_interactions" do
       @video = Video.create! source: :youtube, external_id: 'y4sOfO8Ei1g'
       @video.populate
-      @account.api.add_to_favorites @video unless @account.api.favorite_videos.
-        include? @video
+      @account.api.add_to_favorites @video
 
       @user.unfavorite_video @video
     end
@@ -109,7 +107,7 @@ class YoutubeSynchronization < Spinach::FeatureSteps
   end
 
   When 'a synchronization occurs' do
-    YoutubeSync.new(@account)
+    YoutubeSync.new(@account).synchronize!
   end
 
   Then 'all channels from youtube should be in the user\'s subscribed channels' do
