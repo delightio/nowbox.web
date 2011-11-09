@@ -19,6 +19,7 @@
           <a class="source" href="events_controller.html">events_controller.rb</a>
           <a class="source" href="info_controller.html">info_controller.rb</a>
           <a class="source" href="shares_controller.html">shares_controller.rb</a>
+          <a class="source" href="shares_controller.rb.html">shares_controller.rb.orig</a>
           <a class="source" href="users_controller.html">users_controller.rb</a>
           <a class="source" href="videos_controller.html">videos_controller.rb</a>
       </div>
@@ -77,6 +78,8 @@
 <p><strong>Returns</strong> the channel with the specified id and HTTP Status Code 200
 or 404</p>
 
+<p><em>Requires authentication</em> when getting a user channel.</p>
+
 <p><strong>Required params</strong> <code>channel_id</code> unique id of the channel</p>
 
 <p><strong>Optional params</strong> <code>inline_videos</code> integer, number of videos to include</p>
@@ -84,6 +87,13 @@ or 404</p>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">get</span> <span class="s1">&#39;/:channel_id&#39;</span> <span class="k">do</span>
         <span class="n">channel</span> <span class="o">=</span> <span class="n">find_channel_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:channel_id</span><span class="o">]</span>
+
+        <span class="k">if</span> <span class="n">channel</span><span class="o">.</span><span class="n">class</span> <span class="o">==</span> <span class="no">Channel</span><span class="o">::</span><span class="no">User</span>
+          <span class="n">authenticate_as_token_holder!</span>
+          <span class="n">error!</span> <span class="s2">&quot;Unathorized channel access&quot;</span><span class="p">,</span> <span class="mi">401</span> <span class="k">unless</span>
+            <span class="n">user</span><span class="o">.</span><span class="n">user_channels</span><span class="o">.</span><span class="n">include?</span> <span class="n">channel</span>
+        <span class="k">end</span>
+
         <span class="n">channel</span><span class="o">.</span><span class="n">serializable_hash</span><span class="p">(</span>
           <span class="ss">:inline_videos</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:inline_videos</span><span class="o">].</span><span class="n">to_i</span><span class="p">)</span>
       <span class="k">end</span></pre></div>
@@ -108,7 +118,8 @@ channels if no parameters are specified.</p>
 category ids. Only supported <code>type</code> is &lsquo;featured&rsquo;. Server then returns
 featured channels from these selected categories.</p></li>
 <li><p><code>user_id</code>:  user id. If supplied without <code>query</code>, server returns
-given user&rsquo;s subscribed channels.</p></li>
+given user&rsquo;s subscribed channels. Providing this parameter <em>requires
+authentication</em>.</p></li>
 <li><p><code>query</code>:  comma separated list of search terms. Server returns all
 channels regardless of type.</p></li>
 </ul>
@@ -123,8 +134,10 @@ channels regardless of type.</p></li>
           <span class="n">categories</span> <span class="o">=</span> <span class="n">category_ids</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">cat_id</span><span class="o">|</span> <span class="no">Category</span><span class="o">.</span><span class="n">find_by_id</span> <span class="n">cat_id</span> <span class="p">}</span>
           <span class="n">channels</span> <span class="o">=</span> <span class="n">categories</span><span class="o">.</span><span class="n">compact</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span><span class="o">|</span><span class="n">cat</span><span class="o">|</span> <span class="n">cat</span><span class="o">.</span><span class="n">featured_channels</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">}</span>
           <span class="n">channels</span><span class="o">.</span><span class="n">flatten</span><span class="o">.</span><span class="n">compact</span>
-        <span class="k">elsif</span> <span class="p">(</span><span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_id</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span><span class="p">)</span>
-          <span class="n">user</span><span class="o">.</span><span class="n">display_channels</span>
+        <span class="k">elsif</span> <span class="p">(</span><span class="n">current_user</span><span class="p">)</span>
+          <span class="n">authenticate!</span>
+
+          <span class="n">current_user</span><span class="o">.</span><span class="n">display_channels</span>
         <span class="k">else</span>
           <span class="no">Channel</span><span class="o">::</span><span class="no">Account</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
         <span class="k">end</span>
@@ -140,6 +153,8 @@ channels regardless of type.</p></li>
 
 <p><strong>Returns</strong> all the videos of given channel and HTTP Status Code 200 or
 404</p>
+
+<p><em>Requires authentication</em></p>
 
 <p><strong>Required params</strong></p>
 
@@ -157,9 +172,10 @@ channels regardless of type.</p></li>
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">get</span> <span class="s1">&#39;/:channel_id/videos&#39;</span> <span class="k">do</span>
+        <span class="n">authenticate!</span>
         <span class="n">channel</span> <span class="o">=</span> <span class="n">find_channel_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:channel_id</span><span class="o">]</span>
-        <span class="n">user</span> <span class="o">=</span> <span class="n">find_user_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
-        <span class="n">channel</span><span class="o">.</span><span class="n">personalized_content_videos</span> <span class="n">params</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">:user</span><span class="o">=&gt;</span><span class="n">user</span><span class="p">)</span>
+        <span class="n">channel</span><span class="o">.</span><span class="n">personalized_content_videos</span> <span class="n">params</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+          <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">current_user</span><span class="p">)</span>
       <span class="k">end</span></pre></div>
       </td>
     </tr>
@@ -183,7 +199,6 @@ channels regardless of type.</p></li>
         <span class="n">new_channel</span> <span class="o">=</span> <span class="no">Channel</span><span class="o">::</span><span class="no">Keyword</span><span class="o">.</span><span class="n">find_or_create_by_query</span> <span class="n">params</span><span class="o">[</span><span class="ss">:query</span><span class="o">]</span>
         <span class="n">new_channel</span>
       <span class="k">end</span>
-
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span></pre></div>

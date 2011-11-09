@@ -19,6 +19,7 @@
           <a class="source" href="events_controller.html">events_controller.rb</a>
           <a class="source" href="info_controller.html">info_controller.rb</a>
           <a class="source" href="shares_controller.html">shares_controller.rb</a>
+          <a class="source" href="shares_controller.rb.html">shares_controller.rb.orig</a>
           <a class="source" href="users_controller.html">users_controller.rb</a>
           <a class="source" href="videos_controller.html">videos_controller.rb</a>
       </div>
@@ -77,11 +78,9 @@ a JSON encoded error message if not.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">post</span> <span class="k">do</span>
-        <span class="nb">p</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">delete_if</span> <span class="p">{</span><span class="o">|</span><span class="n">k</span><span class="o">|</span> <span class="n">k</span><span class="o">==</span><span class="s2">&quot;version&quot;</span> <span class="o">||</span> <span class="n">k</span><span class="o">==</span><span class="ss">:version</span><span class="p">}</span>
-        <span class="k">if</span> <span class="nb">p</span><span class="o">.</span><span class="n">key?</span> <span class="ss">:message</span>
-          <span class="nb">p</span><span class="o">[</span><span class="ss">:reason</span><span class="o">]</span> <span class="o">=</span> <span class="nb">p</span><span class="o">.</span><span class="n">delete</span> <span class="ss">:message</span>
-        <span class="k">end</span>
+        <span class="n">authenticate!</span>
 
+        <span class="nb">p</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">delete_if</span> <span class="p">{</span><span class="o">|</span><span class="n">k</span><span class="o">|</span> <span class="n">k</span><span class="o">==</span><span class="s2">&quot;version&quot;</span> <span class="o">||</span> <span class="n">k</span><span class="o">==</span><span class="ss">:version</span><span class="p">}</span>
         <span class="k">begin</span>
           <span class="n">event</span> <span class="o">=</span> <span class="no">Event</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="nb">p</span><span class="p">)</span>
         <span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">e</span>

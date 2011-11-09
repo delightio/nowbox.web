@@ -25,10 +25,12 @@ module Aji
       end
 
       # ## POST shares
+      # *Requires authentication"
+      #
       # __Creates__ a share object with the specified parameters.
       #
       # __Returns__ the created user and HTTP Status Code 201 if successful or
-      # a JSON encoded error message if not.
+      # an error message and status code 400 or 401 if not.
       #
       # __Required params__
       #

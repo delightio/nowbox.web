@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html;charset=utf-8">
-  <title>shares_controller.rb</title>
+  <title>shares_controller.rb.orig</title>
   <link rel="stylesheet" href="http://jashkenas.github.com/docco/resources/docco.css">
 </head>
 <body>
@@ -28,7 +28,7 @@
   <table cellspacing=0 cellpadding=0>
   <thead>
     <tr>
-      <th class=docs><h1>shares_controller.rb</h1></th>
+      <th class=docs><h1>shares_controller.rb.orig</h1></th>
       <th class=code></th>
     </tr>
   </thead>
@@ -92,12 +92,10 @@
         </div>
         <h2>POST shares</h2>
 
-<p>*Requires authentication&quot;</p>
-
 <p><strong>Creates</strong> a share object with the specified parameters.</p>
 
 <p><strong>Returns</strong> the created user and HTTP Status Code 201 if successful or
-an error message and status code 400 or 401 if not.</p>
+a JSON encoded error message if not.</p>
 
 <p><strong>Required params</strong></p>
 
@@ -121,13 +119,9 @@ Can be <code>twitter</code> or <code>facebook</code>.</p></li>
         <div class='highlight'><pre>      <span class="n">post</span> <span class="k">do</span>
         <span class="n">authenticate!</span>
 
-        <span class="n">video</span> <span class="o">=</span> <span class="no">Video</span><span class="o">.</span><span class="n">find_by_id</span> <span class="n">params</span><span class="o">[</span><span class="ss">:video_id</span><span class="o">]</span>
-        <span class="n">channel</span> <span class="o">=</span> <span class="no">Channel</span><span class="o">.</span><span class="n">find_by_id</span> <span class="n">params</span><span class="o">[</span><span class="ss">:channel_id</span><span class="o">]</span>
-
-        <span class="n">invalid_params_error!</span> <span class="ss">:video_id</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:video_id</span><span class="o">]</span><span class="p">,</span>
-          <span class="s2">&quot;No video with this id&quot;</span> <span class="k">if</span> <span class="n">video</span><span class="o">.</span><span class="n">nil?</span>
-        <span class="n">invalid_params_error!</span> <span class="ss">:channel_id</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:channel_id</span><span class="o">]</span><span class="p">,</span>
-          <span class="s2">&quot;No channel with this id&quot;</span> <span class="k">if</span> <span class="n">channel</span><span class="o">.</span><span class="n">nil?</span></pre></div>
+        <span class="n">video</span> <span class="o">=</span> <span class="n">find_video_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:video_id</span><span class="o">]</span>
+<span class="o">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> <span class="no">HEAD</span>
+        <span class="n">channel</span> <span class="o">=</span> <span class="n">find_channel_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:channel_id</span><span class="o">]</span></pre></div>
       </td>
     </tr>
     <tr id='section-5'>
@@ -140,16 +134,29 @@ one POST /shares for triggering a share</p>
 
       </td>
       <td class=code>
-        <div class='highlight'><pre>        <span class="n">event</span> <span class="o">=</span> <span class="no">Event</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">current_user</span><span class="p">,</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:share</span><span class="p">,</span>
-          <span class="ss">:video</span><span class="o">=&gt;</span> <span class="n">video</span><span class="p">,</span> <span class="ss">:channel</span> <span class="o">=&gt;</span> <span class="n">channel</span><span class="p">,</span>
-          <span class="ss">:video_start</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:video_start</span><span class="o">].</span><span class="n">to_i</span><span class="p">,</span>
-          <span class="ss">:video_elapsed</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:video_elapsed</span><span class="o">]</span> <span class="o">||</span> <span class="n">video</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span><span class="o">.</span><span class="n">to_i</span><span class="p">)</span>
+        <div class='highlight'><pre>        <span class="n">event</span> <span class="o">=</span> <span class="no">Event</span><span class="o">.</span><span class="n">create</span><span class="p">(</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="p">,</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:share</span><span class="p">,</span>
+                              <span class="ss">:video</span><span class="o">=&gt;</span> <span class="n">video</span><span class="p">,</span> <span class="ss">:channel</span> <span class="o">=&gt;</span> <span class="n">channel</span><span class="p">,</span>
+                              <span class="ss">:video_start</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:video_start</span><span class="o">].</span><span class="n">to_i</span><span class="p">,</span>
+                              <span class="ss">:video_elapsed</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:video_elapsed</span><span class="o">]</span> <span class="o">||</span>
+                                                 <span class="n">video</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span><span class="o">.</span><span class="n">to_i</span> <span class="p">)</span>
 
+         <span class="n">share</span> <span class="o">=</span> <span class="no">Share</span><span class="o">.</span><span class="n">create</span><span class="p">(</span> <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="p">,</span>
+                               <span class="ss">:video</span> <span class="o">=&gt;</span> <span class="n">video</span><span class="p">,</span>
+                               <span class="ss">:channel</span> <span class="o">=&gt;</span> <span class="n">channel</span><span class="p">,</span>
+                               <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:message</span><span class="o">]</span><span class="p">,</span>
+                               <span class="ss">:network</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:network</span><span class="o">]</span><span class="p">,</span>
+                               <span class="ss">:event</span> <span class="o">=&gt;</span> <span class="n">event</span> <span class="p">)</span>
+
+<span class="o">=======</span>
         <span class="n">share</span> <span class="o">=</span> <span class="no">Share</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">current_user</span><span class="p">,</span> <span class="ss">:video</span> <span class="o">=&gt;</span> <span class="n">video</span><span class="p">,</span>
-          <span class="ss">:channel</span> <span class="o">=&gt;</span> <span class="n">channel</span><span class="p">,</span> <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:message</span><span class="o">]</span><span class="p">,</span>
-          <span class="ss">:network</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:network</span><span class="o">]</span><span class="p">,</span> <span class="ss">:event</span> <span class="o">=&gt;</span> <span class="n">event</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">share</span><span class="o">.</span><span class="n">valid?</span> <span class="k">then</span> <span class="n">share</span> <span class="k">else</span> <span class="n">validation_error!</span> <span class="n">share</span><span class="p">,</span> <span class="n">params</span> <span class="k">end</span>
+                     <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:message</span><span class="o">]</span><span class="p">,</span>
+                     <span class="ss">:publish_to</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:publish_to</span><span class="o">]</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> <span class="no">Adds</span> <span class="n">authentication</span> <span class="n">to</span> <span class="n">all</span> <span class="n">appropriate</span> <span class="nb">method</span> <span class="n">calls</span><span class="o">.</span>
+        <span class="k">if</span> <span class="n">share</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">empty?</span>
+          <span class="n">share</span>
+        <span class="k">else</span>
+          <span class="n">creation_error!</span> <span class="no">Share</span><span class="p">,</span> <span class="n">params</span>
+        <span class="k">end</span>
       <span class="k">end</span>
     <span class="k">end</span>
   <span class="k">end</span>

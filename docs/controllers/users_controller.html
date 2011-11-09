@@ -19,6 +19,7 @@
           <a class="source" href="events_controller.html">events_controller.rb</a>
           <a class="source" href="info_controller.html">info_controller.rb</a>
           <a class="source" href="shares_controller.html">shares_controller.rb</a>
+          <a class="source" href="shares_controller.rb.html">shares_controller.rb.orig</a>
           <a class="source" href="users_controller.html">users_controller.rb</a>
           <a class="source" href="videos_controller.html">videos_controller.rb</a>
       </div>
@@ -72,16 +73,18 @@
         </div>
         <h2>GET users/:user_id</h2>
 
-<p><strong>Returns</strong> the user with the specified id and HTTP Status Code 200 or
+<p><em>Requires authentication</em><br>
+<strong>Returns</strong> the user with the specified id and HTTP Status Code 200 or
 404</p>
 
-<p><strong>Required params</strong> <code>user_id</code> unique id of the user
-<strong>Optional params</strong> none
-NEEDSAUTH</p>
+<p><strong>Required params</strong> <code>user_id</code> unique id of the user<br>
+<strong>Optional params</strong> none</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">get</span> <span class="s1">&#39;/:user_id&#39;</span> <span class="k">do</span>
-        <span class="n">find_user_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
+        <span class="n">not_found_error!</span> <span class="no">User</span><span class="p">,</span> <span class="n">params</span> <span class="k">unless</span> <span class="n">current_user</span>
+        <span class="n">authenticate!</span>
+        <span class="n">current_user</span>
       <span class="k">end</span></pre></div>
       </td>
     </tr>
@@ -92,7 +95,7 @@ NEEDSAUTH</p>
         </div>
         <h2>POST users</h2>
 
-<p><strong>Creates</strong> a user with the specified parameters.
+<p><strong>Creates</strong> a user with the specified parameters.<br>
 <strong>Returns</strong> the created user and HTTP Status Code 201 if successful or
 a JSON encoded error message if not.</p>
 
@@ -124,17 +127,18 @@ a JSON encoded error message if not.</p>
         </div>
         <h2>PUT users/:user_id</h2>
 
-<p><strong>Updates</strong> given user&rsquo;s attributes
+<p><em>Requires authentication</em><br>
+<strong>Updates</strong> given user&rsquo;s attributes<br>
 <strong>Returns</strong> HTTP Status Code 200 if successful or a JSON encoded error
-message
+message<br>
 <strong>Required params</strong> (need just one of the two params)
 &ndash; <code>name</code> name of the user
-&ndash; <code>email</code> email address of the user
-NEEDSAUTH</p>
+&ndash; <code>email</code> email address of the user</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">put</span> <span class="s1">&#39;/:user_id&#39;</span> <span class="k">do</span>
-        <span class="n">u</span> <span class="o">=</span> <span class="n">find_user_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
+        <span class="n">authenticate!</span>
+
         <span class="n">updatable_params</span> <span class="o">=</span> <span class="o">[</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span> <span class="o">]</span>
         <span class="n">params_to_update</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">select</span> <span class="k">do</span> <span class="o">|</span><span class="n">key</span><span class="o">|</span>
           <span class="n">updatable_params</span><span class="o">.</span><span class="n">include?</span> <span class="n">key</span><span class="o">.</span><span class="n">to_sym</span>
@@ -143,7 +147,12 @@ NEEDSAUTH</p>
         <span class="k">if</span> <span class="n">params_to_update</span><span class="o">.</span><span class="n">empty?</span>
           <span class="n">must_supply_params_error!</span> <span class="n">updatable_params</span>
         <span class="k">end</span>
-        <span class="n">u</span><span class="o">.</span><span class="n">update_attributes</span><span class="p">(</span><span class="n">params_to_update</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">update_attributes</span><span class="p">(</span><span class="n">params_to_update</span><span class="p">)</span>
+          <span class="n">current_user</span>
+        <span class="k">else</span>
+          <span class="n">error!</span> <span class="n">current_user</span><span class="o">.</span><span class="n">errors</span><span class="p">,</span> <span class="mi">400</span>
+        <span class="k">end</span>
       <span class="k">end</span></pre></div>
       </td>
     </tr>
@@ -154,12 +163,14 @@ NEEDSAUTH</p>
         </div>
         <h2>GET users/:user_id/settings</h2>
 
-<p><strong>Returns</strong> JSON object representing the user&rsquo;s settings.
-NEESAUTH</p>
+<p><em>Requires authentication</em><br>
+<strong>Returns</strong> JSON object representing the user&rsquo;s settings.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">get</span> <span class="s1">&#39;/:user_id/settings&#39;</span> <span class="k">do</span>
-        <span class="n">find_user_by_id_or_error</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">settings</span>
+        <span class="n">authenticate!</span>
+
+        <span class="n">current_user</span><span class="o">.</span><span class="n">settings</span>
       <span class="k">end</span></pre></div>
       </td>
     </tr>
@@ -170,18 +181,19 @@ NEESAUTH</p>
         </div>
         <h2>PUT users/:user_id/settings</h2>
 
-<p>Acts as PATCH for now. When Grape gains PATCH support PUT will require
-a complete representation of the settings hash.
+<p><em>Requires authentication</em><br>
+Acts as PATCH for now. When Grape gains PATCH support PUT will require
+a complete representation of the settings hash.<br>
 <strong>Updates</strong> User&rsquo;s updated settings JSON.<br>
 <strong>Returns</strong> JSON object representing the user&rsquo;s settings.<br>
 <strong>Required params</strong> <code>settings</code>: The form encoded represenation of the
 user&rsquo;s settings.
 NEESAUTH</p>
-
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">put</span> <span class="s1">&#39;/:user_id/settings&#39;</span> <span class="k">do</span>
-        <span class="n">user</span> <span class="o">=</span> <span class="n">find_user_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
+        <span class="n">authenticate!</span>
+
         <span class="n">missing_params_error!</span> <span class="n">params</span><span class="p">,</span> <span class="o">[</span><span class="ss">:settings</span><span class="o">]</span> <span class="k">unless</span> <span class="n">params</span><span class="o">[</span><span class="ss">:settings</span><span class="o">]</span>
 
         <span class="n">invalid_params_error!</span> <span class="ss">:settings</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:settings</span><span class="o">]</span><span class="p">,</span>
@@ -189,17 +201,29 @@ NEESAUTH</p>
           <span class="n">params</span><span class="o">[</span><span class="ss">:settings</span><span class="o">].</span><span class="n">kind_of?</span> <span class="no">Hash</span>
 
 
-        <span class="n">user</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">tap</span> <span class="k">do</span><span class="o">|</span><span class="n">settings</span><span class="o">|</span>
+        <span class="n">current_user</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">tap</span> <span class="k">do</span><span class="o">|</span><span class="n">settings</span><span class="o">|</span>
           <span class="n">params</span><span class="o">[</span><span class="ss">:settings</span><span class="o">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="o">|</span>
             <span class="n">settings</span><span class="o">[</span><span class="n">k</span><span class="o">.</span><span class="n">to_sym</span><span class="o">]</span> <span class="o">=</span> <span class="n">parse_param</span> <span class="n">v</span>
           <span class="k">end</span>
         <span class="k">end</span>
 
-        <span class="n">user</span><span class="o">.</span><span class="n">save</span> <span class="ow">or</span> <span class="n">error!</span>
-        <span class="n">user</span><span class="o">.</span><span class="n">settings</span>
-      <span class="k">end</span>
+        <span class="n">current_user</span><span class="o">.</span><span class="n">save</span> <span class="ow">or</span> <span class="n">error!</span>
+        <span class="n">current_user</span><span class="o">.</span><span class="n">settings</span>
+      <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-GET_users/:user&lt;em&gt;id/auth&lt;/em&gt;test'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-GET_users/:user&lt;em&gt;id/auth&lt;/em&gt;test">&#182;</a>
+        </div>
+        <h2>GET users/:user<em>id/auth</em>test</h2>
 
-      <span class="n">get</span> <span class="s1">&#39;/:user_id/auth_test&#39;</span> <span class="k">do</span>
+<p><em>Requires authentication</em></p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      <span class="n">get</span> <span class="s1">&#39;/:user_id/auth_test&#39;</span> <span class="k">do</span>
         <span class="n">authenticate!</span>
         <span class="s2">&quot;OK&quot;</span>
       <span class="k">end</span>
