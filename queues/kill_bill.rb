@@ -27,6 +27,11 @@ module Aji
 
         user.unlink yt
         yt.destroy
+        if Account::Youtube.find_by_uid(bills_yt_uid).nil?
+          Aji.log "Destroyed: #{bills_yt_uid}"
+        else
+          Aji.log "Failed to destroy"
+        end
       end
     end
   end
