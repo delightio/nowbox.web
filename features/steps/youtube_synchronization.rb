@@ -107,15 +107,14 @@ class YoutubeSynchronization < Spinach::FeatureSteps
   end
 
   When 'a synchronization occurs' do
-    YoutubeSync.new(@account).synchronize!
+    VCR.use_cassette "youtube/atomic_interactions" do
+      YoutubeSync.new(@account).synchronize!
+    end
   end
 
   Then 'all channels from youtube should be in the user\'s subscribed channels' do
     VCR.use_cassette "youtube/atomic_interactions" do
       @account.api.subscriptions.each do |subscribed_channel|
-        puts "!!!", subscribed_channel, "!!!"
-        puts @user.youtube_channels.count
-        puts @user.youtube_channels
         @user.youtube_channels.include?(subscribed_channel).should == true
       end
     end
