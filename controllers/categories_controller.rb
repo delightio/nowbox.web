@@ -15,11 +15,11 @@ module Aji
       # __Required params__ `type` type of categories to be returned
       #
       # __Optional params__ `user_id` unique id of the current user
-
       get do
-        error!("Missing/Invalid parameter: type != featured", 404) if params[:type]!="featured"
-        categories = Category.featured
-        categories
+        error!("Missing/Invalid parameter: type != featured", 400) unless
+          params[:type] == "featured"
+
+        Category.featured
       end
 
       # ## GET categories/:category_id/channels
@@ -31,9 +31,11 @@ module Aji
       #
       # __Optional params__ none
       get '/:category_id/channels' do
-        error!("Missing parameter: category_id", 404) if params[:category_id].nil?
-        error!("Missing/Invalid parameter: type != featured", 404) if params[:type]!="featured"
-        error!("Missing parameter: user_id", 404) if params[:user_id].nil?
+        authenticate!
+        error!("Missing parameter: category_id", 400) if params[:category_id].nil?
+        error!("Missing/Invalid parameter: type != featured", 400) if params[:type]!="featured"
+        error!("Missing parameter: user_id", 400) if current_user.nil?
+
         c = Category.find_by_id params[:category_id]
         c.featured_channels if c
       end
