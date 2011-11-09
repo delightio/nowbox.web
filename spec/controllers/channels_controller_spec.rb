@@ -6,6 +6,8 @@ module Aji
 
   describe API do
     describe "resource: #{resource}" do
+      let(:user) { Factory :user }
+      before { header 'X-NB-AuthToken', Token::Generator.new(user).token }
 
       describe "get #{resource_uri}/:id" do
         it "returns 404 if not found" do
@@ -36,15 +38,14 @@ module Aji
         end
 
         it "returns user channels if given user id" do
-          user = Factory :user
           params = { :user_id => user.id }
-          header 'X-NB-AuthToken', Token::Generator.new(user).token
           get "#{resource_uri}", params
           last_response.status.should == 200
           body_hash = JSON.parse last_response.body
           returned_channels = body_hash.map{|h| h["user"]}.compact
-          returned_channels.should have(user.user_channels.count).channels
-          user.user_channels.each do | channel |
+          returned_channels.should have(user.displayable_user_channels.count).
+            channels
+          user.displayable_user_channels.each do | channel |
             returned_channels.should include channel.serializable_hash
           end
         end
@@ -104,14 +105,14 @@ module Aji
         it "requires a user_id" do
           channel = Factory :youtube_channel_with_videos
           get "#{resource_uri}/#{channel.id}/videos", {}
-          last_response.status.should == 404
+          last_response.status.should == 401
         end
 
         it "respects limit params" do
           limit = 3
           channel = Factory :youtube_channel
           channel.content_videos.count.should be > limit
-          params = {:user_id=>(Factory :user).id, :limit=>3}
+          params = { :user_id => user.id, :limit => 3 }
           get "#{resource_uri}/#{channel.id}/videos", params
           last_response.status.should == 200
           body_hash = JSON.parse last_response.body
@@ -121,7 +122,7 @@ module Aji
         it "does paging and returns new videos" do
           channel = Factory :youtube_channel_with_videos
           n = channel.content_video_ids.count
-          params = { :user_id => (Factory :user).id, :limit => n/2 }
+          params = { :user_id => user.id, :limit => n/2 }
           get "#{resource_uri}/#{channel.id}/videos", params
           last_response.status.should == 200
           first_page = JSON.parse last_response.body
@@ -139,7 +140,7 @@ module Aji
         it "returns empty array when asked for more than given channel has" do
           channel = Factory :youtube_channel_with_videos
           n = channel.content_video_ids.count
-          params = { :user_id => (Factory :user).id, :limit => n, :page => 10 }
+          params = { :user_id => user.id, :limit => n, :page => 10 }
           get "#{resource_uri}/#{channel.id}/videos", params
           last_response.status.should == 200
           results = JSON.parse last_response.body
@@ -149,7 +150,6 @@ module Aji
         it "should not returned viewed videos" do
           channel = Factory :youtube_channel_with_videos
           viewed_video = channel.content_videos.sample
-          user = Factory :user
           event = Factory :event, :action => :view, :user => user, :video => viewed_video
           params = {:user_id => user.id }
           get "#{resource_uri}/#{channel.id}/videos", params

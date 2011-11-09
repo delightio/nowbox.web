@@ -78,6 +78,8 @@ module Aji
       # __Returns__ all the videos of given channel and HTTP Status Code 200 or
       # 404
       #
+      # *Requires authentication*
+      #
       # __Required params__
       #
       # - `channel_id` unique id of the channel
@@ -90,9 +92,10 @@ module Aji
       #
       # - `page` which page of videos to return, starts at 1
       get '/:channel_id/videos' do
+        authenticate!
         channel = find_channel_by_id_or_error params[:channel_id]
-        user = find_user_by_id_or_error params[:user_id]
-        channel.personalized_content_videos params.merge(:user=>user)
+        channel.personalized_content_videos params.merge(
+          :user => current_user)
       end
 
       # ## POST channels/
