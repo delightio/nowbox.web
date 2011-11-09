@@ -11,7 +11,7 @@ module Aji
     def self.perform
       bills_tw_uid = '274048697'
       bills_fb_uid = '100002238372309'
-      bills_yt_uid = 'nowmovnowbox'
+      bills_yt_uid = 'testnb1'
 
       [ Account::Twitter.find_by_uid(bills_tw_uid),
         Account::Facebook.find_by_uid(bills_fb_uid) ].each do |bill|
