@@ -53,12 +53,14 @@ module Aji
 
     def add_to_favorites video
       tracker.hit!
-      client.add_favorite video.external_id
+      client.add_favorite video.external_id unless
+        favorite_videos.map(&:external_id).include? video.external_id
     end
 
     def remove_from_favorites video
       tracker.hit!
-      client.delete_favorite video.external_id
+      client.delete_favorite video.external_id if
+        favorite_videos.map(&:external_id).include? video.external_id
     end
 
     def watch_later_videos

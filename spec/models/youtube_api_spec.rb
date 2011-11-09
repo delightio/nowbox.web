@@ -220,6 +220,7 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
       let(:video) { mock "video", :external_id => external_id }
 
       it "adds given video to user's YouTube's favorite list" do
+        subject.favorite_videos.should_not include video
         subject.add_to_favorites video
 
         subject.favorite_videos.map(&:external_id).should include external_id
@@ -239,13 +240,15 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
 
       it "removes given video from user's YouTube's favorite list" do
         subject.remove_from_favorites video
-        subject.favorite_videos.map(&:external_id).should_not include external_id
+
+        subject.favorite_videos.map(&:external_id).
+          should_not include external_id
       end
 
       it "doesn't remove a video that is not in favorites" do
-        subject.add_to_favorites video
+        subject.remove_from_favorites video
 
-        expect{ subject.add_to_favorites video }.not_to raise_error
+        expect{ subject.remove_from_favorites video }.not_to raise_error
       end
     end
 
