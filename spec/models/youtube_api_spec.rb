@@ -110,17 +110,17 @@ describe Aji::YoutubeAPI, :unit, :net do
           info['about_me'].should ==%(I grew up playing Starcraft with my brother, Nick (Tasteless). With the launch of Starcraft 2, I'm dedicated to helping the eSports movement grow in popularity around the world.
 
 Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
-info['featured_video_id'].should match Link::YOUTUBE_ID_REGEXP
-info['first_name'].should == "Sean Day[9] Plott"
-info['last_name'].should == "Plott"
-info['location'].should == "Los Angeles, CA, US"
-info['hobbies'].should == "Starcraft 2"
-info['occupation'].should == "Starcraft 2 Player and Commentator"
-info['school'].should == "Harvey Mudd College, USC"
-info['subscriber_count'].should > 21000
-info['thumbnail'].should == "http://i2.ytimg.com/i/axar6TBM-94_ezoS00fLkA/1.jpg?v=b5d95a"
-info['username'].should == "day9tv"
-info['total_upload_views'].should > 27000000
+          info['featured_video_id'].should match Link::YOUTUBE_ID_REGEXP
+          info['first_name'].should == "Sean Day[9] Plott"
+          info['last_name'].should == "Plott"
+          info['location'].should == "Los Angeles, CA, US"
+          info['hobbies'].should == "Starcraft 2"
+          info['occupation'].should == "Starcraft 2 Player and Commentator"
+          info['school'].should == "Harvey Mudd College, USC"
+          info['subscriber_count'].should > 21000
+          info['thumbnail'].should == "http://i2.ytimg.com/i/axar6TBM-94_ezoS00fLkA/1.jpg?v=b5d95a"
+          info['username'].should == "day9tv"
+          info['total_upload_views'].should > 27000000
     end
   end
 
@@ -139,9 +139,7 @@ info['total_upload_views'].should > 27000000
       client.should be_kind_of YouTubeIt::OAuthClient
     end
 
-    let(:subscribed_channel_names) do
-      %w[ freddiew LisaNova ].map{ |uid| uid.downcase }
-    end
+    let(:subscribed_channel_names) { %w[freddiew LisaNova].map &:downcase }
 
     describe "#subscriptions" do
 
@@ -170,35 +168,37 @@ info['total_upload_views'].should > 27000000
     end
 
     describe "#subscribe_to" do
-      it { fail }
-      let(:channel_uid) { "RayWilliamJohnson".downcase }
-      after(:each) do
-        subject.unsubscribe channel_uid
+      before(:each) do
+        subject.unsubscribe_from channel
       end
 
+      let(:uid) { "raywilliamjohnson" }
+      let(:channel) { mock "channel", :accounts => [stub(:uid => uid)] }
+
       it "subscribes given channel on YouTube" do
-        subject.subscribe channel_uid
-        subject.subscriptions.map{ |ch| ch.accounts.first.uid }.
-          should include channel_uid
+        subject.subscribe_to channel
+        subject.subscriptions.map{ |c| c.accounts.first.uid }.
+          should include uid
       end
     end
 
     describe "#unsubscribe_from" do
-      it { fail }
-      let(:channel_uid) { "freddiew" }
-      after(:each) do
-        subject.subscribe channel_uid
+      before(:each) do
+        subject.subscribe_to channel
       end
 
+      let(:uid) { "freddiew" }
+      let(:channel) { mock "channel", :accounts => [stub(:uid => uid)] }
+
       it "unsubscribes given channel" do
-        subject.unsubscribe channel_uid
-        subject.subscriptions.map{ |ch| ch.accounts.first.uid }.
-          should_not include channel_uid
+        subject.unsubscribe_from channel
+        subject.subscriptions.map{ |c| c.accounts.first.uid }.
+          should_not include uid
       end
     end
 
     describe "#favorite_videos" do
-      let(:favorite_video_ids) { ["zxmObqXYgI8"] }
+      let(:favorite_video_ids) { %w[zxmObqXYgI8] }
 
       it "hits youtube once on #favorites and once per new videos" do
         subject.tracker.should_receive(:hit!).

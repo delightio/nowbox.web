@@ -22,21 +22,23 @@ module Aji
       end
     end
 
-    def subscribe channel_uid
+    def subscribe_to channel
       begin
         tracker.hit!
+        channel_uid = uid_from_channel channel
         client.subscribe_channel channel_uid
       rescue => e
         Aji.log "YoutubeAPI#subscribe(#{channel_uid}) => #{e}"
       end
     end
 
-    def unsubscribe channel_uid
+    def unsubscribe_from channel
+      channel_uid = uid_from_channel channel
       uid_subscription_id_hash = {} # mapping of uid and subscription id
       subscriptions uid, uid_subscription_id_hash
 
       begin
-        client.unsubscribe_channel uid_subscription_id_hash[channel_uid.downcase]
+        client.unsubscribe_channel uid_subscription_id_hash[channel_uid]
       rescue => e
           Aji.log "YoutubeAPI#unsubscribe(#{channel_uid}) => #{e}"
       end
@@ -141,6 +143,9 @@ module Aji
         cooldown: 1.hour, hits_per_session: 250
     end
 
+    def uid_from_channel channel
+      channel.accounts.first.uid
+    end
 
     def client
       @client ||=
