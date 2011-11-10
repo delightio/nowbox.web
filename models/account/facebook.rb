@@ -59,6 +59,10 @@ module Aji
       api.publish format share.message, share.link
     end
 
+    def synchronized_at
+      if stream_channel.nil? then nil else stream_channel.populated_at end
+    end
+
     def api
       @api ||= FacebookAPI.new credentials['token']
     end

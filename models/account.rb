@@ -146,6 +146,10 @@ module Aji
       self.uid = uid.downcase unless uid.nil?
     end
 
+    def provider
+      self.class.to_s.split('::').last.downcase
+    end
+
     # Class Methods follow
     def self.find_or_create_by_param string, params
       username, provider = from_param string

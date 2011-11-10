@@ -53,27 +53,6 @@ module Aji
       api.publish format share.message, share.link
     end
 
-    def refresh_influencers
-      # TODO: This method is very Java. We should find a Better Way (tm)
-      # We get users from twitter 100 at a time, so we crawl over their API
-      # until we get every full page, then pull the final page.
-      resp_struct = ::Twitter.friends username
-      while resp_struct.users.length == 100
-        resp_struct.users.each do |user|
-          influencer_set << Account::Twitter.find_or_create_by_uid(
-            user.id.to_s, :info => user.to_hash,
-            :username => user.screen_name).id
-        end
-        resp_struct = ::Twitter.friends username,
-          :cursor => resp_struct.next_cursor
-      end
-      resp_struct.users.each do |user|
-        influencer_set << Account::Twitter.find_or_create_by_uid(
-          user.id.to_s, :info => user.to_hash,
-          :username => user.screen_name).id
-      end
-    end
-
     def mark_spammer
       Aji.redis.sadd "spammers", id
       mentions.each { |m| m.mark_spam }
@@ -99,6 +78,10 @@ module Aji
                else
                  TwitterAPI.new uid: uid
                end
+    end
+
+    def synchronized_at
+      if stream_channel.nil? then nil else stream_channel.populated_at end
     end
 
     def build_stream_channel

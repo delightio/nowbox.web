@@ -41,6 +41,15 @@ module Aji
       end
     end
 
+    describe "#provider" do
+      it "returns the downcased unqualified class name" do
+        subject.provider.should == 'account'
+        Account::Facebook.new.provider.should == 'facebook'
+        Account::Twitter.new.provider.should == 'twitter'
+        Account::Youtube.new.provider.should == 'youtube'
+      end
+    end
+
     describe "#available?" do
       it "is false by default" do
         subject.should_not be_available

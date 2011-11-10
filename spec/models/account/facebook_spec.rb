@@ -109,6 +109,15 @@ describe Account::Facebook, :unit do
       end
     end
 
+    describe "#synchronized_at" do
+      subject { Account::Facebook.new { |a| a.stub :stream_channel => stub } }
+      it "returns the time at which the stream channel was last populated" do
+        subject.stream_channel.should_receive(:populated_at)
+
+        subject.synchronized_at
+      end
+    end
+
     context "when the account is not in the database" do
       it "creates a new account" do
         subject.should_not be_new_record

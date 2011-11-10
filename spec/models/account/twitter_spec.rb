@@ -106,18 +106,27 @@ describe Aji::Account::Twitter, :unit do
     end
   end
 
-    describe "#build_stream_channel" do
-      let!(:stream_channel) do
-        Channel::TwitterStream.new(:owner => subject,
-         :title => "Twitter Stream").tap do |c|
-           c.stub :id => 1
-           c.stub :save => true
-           c.stub :refresh_content
-           c.owner.stub :save => true
-           Channel::TwitterStream.stub(:create).with(
-             :owner => subject, :title => subject.username).and_return(c)
-         end
-      end
+  describe "#synchronized_at" do
+    subject { Account::Twitter.new { |a| a.stub :stream_channel => stub } }
+    it "returns the time at which the stream channel was last populated" do
+      subject.stream_channel.should_receive(:populated_at)
+
+      subject.synchronized_at
+    end
+  end
+
+  describe "#build_stream_channel" do
+    let!(:stream_channel) do
+      Channel::TwitterStream.new(:owner => subject,
+                                 :title => "Twitter Stream").tap do |c|
+                                   c.stub :id => 1
+                                   c.stub :save => true
+                                   c.stub :refresh_content
+                                   c.owner.stub :save => true
+                                   Channel::TwitterStream.stub(:create).with(
+                                     :owner => subject, :title => subject.username).and_return(c)
+                                 end
+    end
 
       it "creates a channel for the account's twitter stream" do
            Channel::TwitterStream.should_receive(:create).with(
