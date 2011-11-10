@@ -10,7 +10,7 @@ module Aji
       return if account.nil? or user.nil?
 
       sync_subscribed_channels
-      sync_watch_later
+      #sync_watch_later
       sync_favorites
       enqueue_resync
 
