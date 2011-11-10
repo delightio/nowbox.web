@@ -149,7 +149,7 @@ describe Aji::Identity, :unit => true do
         'provider' => account.provider,
         'uid' => account.uid,
         'username' => account.username,
-        'synchronized_at' => account.synchronized_at.to_i
+        'synchronized_at' => account.synchronized_at
       }]
     end
   end

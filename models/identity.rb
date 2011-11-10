@@ -40,7 +40,7 @@ module Aji
           'provider' => a.provider,
           'uid' => a.uid,
           'username' => a.username,
-          'synchronized_at' => a.synchronized_at.to_i
+          'synchronized_at' => a.synchronized_at
         }
       end
     end
