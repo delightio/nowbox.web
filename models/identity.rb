@@ -34,6 +34,17 @@ module Aji
       accounts.where(:type => 'Aji::Account::Twitter').first
     end
 
+    def account_info
+      accounts.map do |a|
+        {
+          'provider' => a.provider,
+          'uid' => a.uid,
+          'username' => a.username,
+          'synchronized_at' => a.synchronized_at
+        }
+      end
+    end
+
     def hook action, object
       accounts.each do |a|
         a.send :"on_#{action}", object if a.respond_to? :"on_#{action}"

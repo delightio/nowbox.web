@@ -14,7 +14,12 @@ describe Aji::YoutubeSync, :unit do
   end
 
   subject { Aji::YoutubeSync.new account }
-  let(:account) { mock "account", :api => api, :id => 11, :user => user }
+
+  let(:account) do
+    mock "account", :api => api, :id => 11, :user => user, :save => true,
+      :synchronized_at= => true
+  end
+
   let(:user) do
     mock "user", :subscribe => true, :unsubscribe => true,
       :youtube_channels => remotely_unsubscribed_channels + other_channels,
@@ -90,6 +95,13 @@ describe Aji::YoutubeSync, :unit do
 
     it "enqueues the next synchronization" do
       subject.should_receive(:enqueue_resync)
+
+      subject.synchronize!
+    end
+
+    it "updates the time at which the account was synchronized" do
+      account.should_receive(:synchronized_at=).with(anything)
+      account.should_receive(:save)
 
       subject.synchronize!
     end

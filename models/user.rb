@@ -79,6 +79,7 @@ module Aji
         "twitter_channel_id" => twitter_channel_id,
         "facebook_channel_id" => facebook_channel_id,
         "subscribed_channel_ids" => subscribed_channel_ids,
+        "accounts" => identity.account_info
       }
     end
 

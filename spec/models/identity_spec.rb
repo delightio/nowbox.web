@@ -137,6 +137,23 @@ describe Aji::Identity, :unit => true do
     end
   end
 
+  describe "#account_info" do
+    subject { Identity.new { |i| i.stub :accounts => [account] } }
+    let(:account) do
+      mock("youtube account", :provider => "Youtube", :uid => "nuclearsandwich",
+        :username => "nuclearsandwich", :synchronized_at => 1.hour.ago)
+    end
+
+    it "returns a hash of information on authorized accounts" do
+      subject.account_info.should == [{
+        'provider' => account.provider,
+        'uid' => account.uid,
+        'username' => account.username,
+        'synchronized_at' => account.synchronized_at
+      }]
+    end
+  end
+
   describe "#hook" do
     subject { Identity.new { |i| i.stub :accounts => accounts } }
 

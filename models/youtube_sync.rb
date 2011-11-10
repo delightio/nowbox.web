@@ -13,6 +13,9 @@ module Aji
       sync_watch_later
       sync_favorites
       enqueue_resync
+
+      account.synchronized_at = Time.now
+      account.save
     end
 
     def sync_subscribed_channels

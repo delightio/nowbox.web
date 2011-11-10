@@ -610,6 +610,10 @@ describe Aji::User do
         u.stub :twitter_channel_id => nil
         u.stub :facebook_channel_id => 5
         u.stub :subscribed_channel_ids => [6,7,8,9,10]
+        u.stub :identity => stub(:account_info => [{
+          'provider' => 'youtube', 'uid' => 'nuclearsandwich',
+          'username' => 'nuclearsandwich', 'synchronized_at' => Time.new(2011)
+        }])
       end
     end
 
@@ -623,7 +627,10 @@ describe Aji::User do
         'history_channel_id' => 3,
         'twitter_channel_id' => nil,
         'facebook_channel_id' => 5,
-        'subscribed_channel_ids' => [6,7,8,9,10]
+        'subscribed_channel_ids' => [6,7,8,9,10],
+        'accounts' => [{ 'provider' => 'youtube', 'uid' => 'nuclearsandwich',
+          'username' => 'nuclearsandwich', 'synchronized_at' => Time.new(2011)
+        }]
       }
     end
   end
