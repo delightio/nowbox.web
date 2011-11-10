@@ -149,8 +149,14 @@ describe Aji::Identity, :unit => true do
         'provider' => account.provider,
         'uid' => account.uid,
         'username' => account.username,
-        'synchronized_at' => account.synchronized_at
+        'synchronized_at' => account.synchronized_at.to_i
       }]
+    end
+
+    it "doesn't cast nil to 0" do
+      account.stub :synchronized_at => nil
+
+      subject.account_info.first['synchronized_at'].should be_nil
     end
   end
 
