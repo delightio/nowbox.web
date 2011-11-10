@@ -220,15 +220,12 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
       let(:video) { mock "video", :external_id => external_id }
 
       it "adds given video to user's YouTube's favorite list" do
-        subject.favorite_videos.should_not include video
         subject.add_to_favorites video
-
         subject.favorite_videos.map(&:external_id).should include external_id
       end
 
-      it "doesn't add a video that is already in favorites" do
+      it "doesn't raise an error if video is already in favorites" do
         subject.add_to_favorites video
-
         expect{ subject.add_to_favorites video }.not_to raise_error
       end
     end
@@ -245,7 +242,7 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
           should_not include external_id
       end
 
-      it "doesn't remove a video that is not in favorites" do
+      it "doesn't raise an error if the video is not in favorites" do
         subject.remove_from_favorites video
 
         expect{ subject.remove_from_favorites video }.not_to raise_error
@@ -264,7 +261,7 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
         subject.watch_later_videos.map(&:external_id).should include external_id
       end
 
-      it "doesn't add a video that is already in watch later" do
+      it "doesn't raise an error if the video is already in watch later" do
         subject.remove_from_watch_later video
 
         expect{ subject.add_to_watch_later video }.not_to raise_error
@@ -284,7 +281,7 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
           should_not include external_id
       end
 
-      it "doesn't remove a video that is not in watch later" do
+      it "doesn't raise an error if the video is not in watch later" do
         subject.remove_from_watch_later video
 
         expect{ subject.remove_from_watch_later video }.not_to raise_error

@@ -46,30 +46,45 @@ module Aji
 
     def favorite_videos uid=uid
       tracker.hit!
-      client.favorites(uid).videos.map do |h|
-        youtube_it_to_video h
+      client.favorites(uid).videos.map do |v|
+        youtube_it_to_video v
       end
     end
 
     def add_to_favorites video
       tracker.hit!
-      client.add_favorite video.external_id unless
-        favorite_videos.map(&:external_id).include? video.external_id
+      client.add_favorite video.external_id
+    rescue UploadError => e
+      raise unless e.message =~ /Favorite already exists/
     end
 
     def remove_from_favorites video
       tracker.hit!
-      client.delete_favorite video.external_id if
-        favorite_videos.map(&:external_id).include? video.external_id
+      client.delete_favorite video.external_id
+    rescue UploadError
+      # I want to see what type of error is thrown.
+      raise
     end
 
     def watch_later_videos
-      Aji.log :ERROR, "YoutubeAPI#watch_later_videos not implemented yet."
-      # tracker.hit!
-      # client.playlist('watch_later').videos.map do |h|
-      #   youtube_it_to_video h
-      # end
-      []
+      tracker.hit!
+      client.watch_later.videos.map do |v|
+        youtube_it_to_video v
+      end
+    end
+
+    def add_to_watch_later video
+      tracker.hit!
+      client.add_watch_later video.external_id
+    rescue UploadError
+      raise
+    end
+
+    def remove_from_watch_later video
+      tracker.hit!
+      client.delete_watch_later video.external_id
+    rescue UploadError
+      raise
     end
 
     def author_info uid=uid
