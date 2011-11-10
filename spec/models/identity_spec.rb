@@ -154,6 +154,8 @@ describe Aji::Identity, :unit => true do
     end
 
     it "doesn't cast nil to 0" do
+      pending "iOS wants nil to be 0"
+
       account.stub :synchronized_at => nil
 
       subject.account_info.first['synchronized_at'].should be_nil

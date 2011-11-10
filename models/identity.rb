@@ -40,11 +40,7 @@ module Aji
           'provider' => a.provider,
           'uid' => a.uid,
           'username' => a.username,
-          'synchronized_at' => if a.synchronized_at.nil?
-                                nil
-                              else
-                                a.synchronized_at.to_i
-                              end
+          'synchronized_at' => a.synchronized_at.to_i
         }
       end
     end
