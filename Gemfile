@@ -33,7 +33,7 @@ gem 'resque-scheduler', '~>2.0.0.d',
   :require => ['resque_scheduler', 'resque/scheduler']
 gem 'resque-retry', :require => [ 'resque-retry', 'resque-retry/server' ]
 gem 'omniauth', '~>0.3.2', :require => 'oa-oauth'
-gem 'youtube_it', '~>2.0.0'
+gem 'youtube_it', :git => 'git://github.com/nuclearsandwich/youtube_it'
 gem 'erubis'
 gem 'yajl-ruby'
 gem 'twitter', '~>1.7.2'

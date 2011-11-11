@@ -10,6 +10,16 @@ GIT
       rack-jsonp
       rack-mount
 
+GIT
+  remote: git://github.com/nuclearsandwich/youtube_it
+  revision: e820babeadf892dd8fe2e773b69a57d909980a64
+  specs:
+    youtube_it (2.0.0)
+      builder
+      faraday (>= 0.7.3)
+      oauth (>= 0.4.4)
+      simple_oauth (>= 0.1.5)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -240,11 +250,6 @@ GEM
     will_paginate (3.0.1)
     yajl-ruby (0.8.3)
     yard (0.7.2)
-    youtube_it (2.0.1)
-      builder
-      faraday (>= 0.7.3)
-      oauth (>= 0.4.4)
-      simple_oauth (>= 0.1.5)
 
 PLATFORMS
   ruby
@@ -291,4 +296,4 @@ DEPENDENCIES
   webmock
   will_paginate
   yajl-ruby
-  youtube_it (~> 2.0.0)
+  youtube_it!
