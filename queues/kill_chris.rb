@@ -10,8 +10,8 @@ module Aji
 
     def self.perform
       tw_uid = '408090392' # ChrisNowbox
-      fb_uid = '100002238372309'
-      yt_uid = 'DoctorSbaitso'
+      fb_uid = '100003142007323'
+      yt_uid = 'DoctorSbaitso'.downcase
 
       [ Account::Twitter.find_by_uid(tw_uid),
         Account::Facebook.find_by_uid(fb_uid) ].each do |bill|
