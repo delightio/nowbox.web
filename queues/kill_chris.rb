@@ -10,7 +10,7 @@ module Aji
 
     def self.perform
       tw_uid = '408090392' # ChrisNowbox
-      fb_uid = '100003142007323'
+      fb_uid = '100001264467114' # Thomas Mov
       yt_uid = 'DoctorSbaitso'.downcase
 
       [ Account::Twitter.find_by_uid(tw_uid),
