@@ -124,10 +124,6 @@ module Aji
       end
       account = accounts.first
 
-      # Because we only allow 1 to 1 mapping of user and external accounts
-      # like YouTube, i.e., a YouTube account always maps to the same user ID
-      # We have no way of knowing when we can actually delete the
-      # YouTube AND User objects. As a result, we always create a new one here.
       auth = Authorization.new account, account.identity
       new_user = auth.deauthorize!
 
