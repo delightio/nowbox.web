@@ -1,6 +1,7 @@
-spec/*
-coverage/*
-.cuke_features/*
-features/*
-docs/
+spec
+coverage
+.cuke_features
+features
+docs
+
 
