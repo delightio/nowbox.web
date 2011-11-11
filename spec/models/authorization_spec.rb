@@ -63,6 +63,11 @@ describe Aji::Authorization do
       stub :identity => stub, :user => stub, :deauthorize! => true,
         :save => true
     end
+    before :each do
+      @new_user = stub
+      User.should_receive(:create_from).with(account.user).
+        and_return(@new_user)
+    end
 
     subject { Authorization.new account, account.identity }
 
@@ -72,9 +77,8 @@ describe Aji::Authorization do
       subject.deauthorize!
     end
 
-    it "sets the user to the given identity's user" do
-      expect{ subject.deauthorize! }.to change{ subject.user }.from(nil).to(
-        account.user)
+    it "returns a new user account which has a copy of the linked user's data" do
+      (subject.deauthorize!).should == @new_user
     end
   end
 end

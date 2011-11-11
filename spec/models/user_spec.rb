@@ -31,6 +31,16 @@ describe Aji::User do
     end
   end
 
+  describe ".create_from" do
+    it "creates a new object and copies from existing" do
+      new_user = stub
+      User.should_receive(:create).and_return(new_user)
+      new_user.should_receive(:copy_from!).with(subject)
+
+      User.create_from(subject).should == new_user
+    end
+  end
+
   describe "#initialize_settings" do
     subject { User.new }
 

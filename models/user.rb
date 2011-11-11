@@ -29,6 +29,12 @@ module Aji
     after_create :create_identity, :subscribe_featured_channels
     after_destroy :delete_redis_keys
 
+    def self.create_from other
+      user = User.create
+      user.copy_from! other
+      user
+    end
+
     def subscribe_featured_channels
       if region.nil?
         Aji.log "User[#{id}] is not assigned to any region."

@@ -23,9 +23,10 @@ module Aji
     end
 
     def deauthorize!
-      @user = @account.user
-
+      new_user = User.create_from @account.user
       @account.deauthorize!
+
+      new_user
     end
   end
 end

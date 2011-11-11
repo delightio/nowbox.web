@@ -97,7 +97,7 @@ module Aji
       end
     end
 
-    # ## POST /auth/you_tube/signout
+    # ## POST /auth/you_tube/deauthorize
     # Creates a new user id and copies all exisiting channels
     # __Returns__ an updated version of the user resource.
     #
@@ -106,7 +106,8 @@ module Aji
 
     post '/you_tube/deauthorize' do
       content_type :json
-      user = User.find_by_uid params[:user_id]
+
+      user = User.find_by_id params[:user_id]
       if user.nil?
         return MultiJson.encode(
           :error => "User[#{params[:user_id]}] not found.")
@@ -121,9 +122,15 @@ module Aji
         return MultiJson.encode(
           :error => "User[#{params[:user_id]}] has #{accounts.count} YouTube: #{accounts.inspect}")
       end
+      account = accounts.first
 
-      new_user = User.create
-      new_user.copy_from! user
+      # Because we only allow 1 to 1 mapping of user and external accounts
+      # like YouTube, i.e., a YouTube account always maps to the same user ID
+      # We have no way of knowing when we can actually delete the
+      # YouTube AND User objects. As a result, we always create a new one here.
+      auth = Authorization.new account, account.identity
+      new_user = auth.deauthorize!
+
       MultiJson.encode new_user.serializable_hash
     end
 
