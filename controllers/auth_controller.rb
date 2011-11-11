@@ -86,7 +86,7 @@ module Aji
           auth.grant!
           user = auth.user
         else
-          user.subscribe_social build_stream_channel
+          user.subscribe_social account.build_stream_channel
         end
 
         MultiJson.encode user.serializable_hash
