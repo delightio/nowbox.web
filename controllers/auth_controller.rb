@@ -103,7 +103,8 @@ module Aji
     #
     # __Required params__
     # - `user_id`: The unique identifier of the user to be signed out of YouTube.
-    post '/you_tube/signout' do
+
+    post '/you_tube/deauthorize' do
       content_type :json
       user = User.find_by_uid params[:user_id]
       if user.nil?
@@ -127,29 +128,29 @@ module Aji
     end
 
 
-    # ## POST /auth/:provider/deauthorize
-    # Deauthorizes an account effectively removing it from the system.
-    # __Returns__ an updated version of the user resource.
+    # # ## POST /auth/:provider/deauthorize
+    # # Deauthorizes an account effectively removing it from the system.
+    # # __Returns__ an updated version of the user resource.
+    # #
+    # # __Required params__
+    # # - `uid`: The unique identifier of the account to be deauthorized.
+    # post '/:provider/deauthorize' do
+    #   content_type :json
     #
-    # __Required params__
-    # - `uid`: The unique identifier of the account to be deauthorized.
-    post '/:provider/deauthorize' do
-      content_type :json
-
-      account = Account.find_by_uid_and_provider params[:uid], params[:provider]
-
-      if account.nil?
-        return MultiJson.encode(:error => "No #{params[:provider]} account " +
-                                "with uid:#{params[:uid]} known")
-      end
-
-      auth = Authorization.new account, account.identity
-
-      auth.deauthorize!
-
-      MultiJson.encode auth.user.serializable_hash
-
-    end
+    #   account = Account.find_by_uid_and_provider params[:uid], params[:provider]
+    #
+    #   if account.nil?
+    #     return MultiJson.encode(:error => "No #{params[:provider]} account " +
+    #                             "with uid:#{params[:uid]} known")
+    #   end
+    #
+    #   auth = Authorization.new account, account.identity
+    #
+    #   auth.deauthorize!
+    #
+    #   MultiJson.encode auth.user.serializable_hash
+    #
+    # end
 
     # ## POST /auth/request_token
     # Securely get a user authentication token.
