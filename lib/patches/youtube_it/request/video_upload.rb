@@ -23,6 +23,13 @@ class YouTubeIt
 
         YouTubeIt::Parser::VideosFeedParser.new(response.body).parse
       end
+
+      def favorites(user, opts = {})
+        favorite_url = "/feeds/api/users/%s/favorites#{opts.empty? ? '' : "?#{opts.to_param}"}" % (user ? user : "default")
+        response     = yt_session.get(favorite_url)
+
+        return YouTubeIt::Parser::VideosFeedParser.new(response.body).parse
+      end
     end
   end
 end

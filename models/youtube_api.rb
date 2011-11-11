@@ -45,9 +45,26 @@ module Aji
     end
 
     def favorite_videos uid=uid
-      tracker.hit!
-      client.favorites(uid).videos.map do |v|
-        youtube_it_to_video v
+      options = { 'max-results' => 50, 'start-index' => 1 }
+
+      [].tap do |favorites|
+        tracker.hit!
+        videos = client.favorites(uid, options).videos
+        options['start-index'] += options['max-results']
+
+        while videos.length == options['max-results'] do
+          videos.each do |v|
+            favorites << youtube_it_to_video(v)
+          end
+
+          tracker.hit!
+          videos = client.favorites(uid, options).videos
+          options['start-index'] += options['max-results']
+        end
+
+        videos.each do |v|
+          favorites << youtube_it_to_video(v)
+        end
       end
     end
 
@@ -61,15 +78,31 @@ module Aji
     def remove_from_favorites video
       tracker.hit!
       client.delete_favorite video.external_id
-    rescue UploadError
-      # I want to see what type of error is thrown.
-      raise
+    rescue UploadError => e
+      raise unless e.message =~ /Video favorite not found/
     end
 
     def watch_later_videos
-      tracker.hit!
-      client.watch_later.videos.map do |v|
-        youtube_it_to_video v
+      options = { 'max-results' => 50, 'start-index' => 1 }
+
+      [].tap do |watch_later|
+        tracker.hit!
+        videos = client.watch_later(uid, options).videos
+        options['start-index'] += options['max-results']
+
+        while videos.length == options['max-results'] do
+          videos.each do |v|
+            watch_later << youtube_it_to_video(v)
+          end
+
+          tracker.hit!
+          videos = client.watch_later(uid, options).videos
+          options['start-index'] += options['max-results']
+        end
+
+        videos.each do |v|
+          watch_later << youtube_it_to_video(v)
+        end
       end
     end
 
