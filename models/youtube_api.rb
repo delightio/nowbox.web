@@ -8,40 +8,42 @@ module Aji
       raise ArgumentError, "Invalid credentials" unless
         (token and secret) or not (token or secret)
       @uid, @token, @secret = uid, token, secret
+      @subscription_ids = {}
+      @watch_later_entry_ids = {}
     end
 
-    def subscriptions uid=uid, uid_subscription_id_hash={}
+    def subscription_ids
+      subscriptions if @subscription_ids.empty?
+      @subscription_ids
+    end
+
+    def subscriptions uid=uid
       tracker.hit!
       client.subscriptions(uid).map do |sub|
-        # TODO: We should follow the unique subscription id.
-        uid = sub.title.split(" ").last.downcase
-        uid_subscription_id_hash.merge! "#{uid}" => sub.id
+        channel_uid = sub.title.split(" ").last.downcase
+        @subscription_ids[channel_uid] = sub.id
 
-        account = Account::Youtube.find_or_create_by_lower_uid uid
+        account = Account::Youtube.find_or_create_by_lower_uid channel_uid
         account.to_channel
       end
     end
 
     def subscribe_to channel
-      begin
-        tracker.hit!
-        channel_uid = uid_from_channel channel
-        client.subscribe_channel channel_uid
-      rescue => e
-        Aji.log "YoutubeAPI#subscribe(#{channel_uid}) => #{e}"
-      end
+      tracker.hit!
+      channel_uid = uid_from_channel channel
+      client.subscribe_channel channel_uid
+      subscription_ids.clear
+    rescue UploadError => e
+      raise e
     end
 
     def unsubscribe_from channel
       channel_uid = uid_from_channel channel
-      uid_subscription_id_hash = {} # mapping of uid and subscription id
-      subscriptions uid, uid_subscription_id_hash
 
-      begin
-        client.unsubscribe_channel uid_subscription_id_hash[channel_uid]
-      rescue => e
-          Aji.log "YoutubeAPI#unsubscribe(#{channel_uid}) => #{e}"
-      end
+      client.unsubscribe_channel subscription_ids[channel_uid]
+      subscription_ids.delete channel_uid
+    rescue UploadError => e
+      raise e
     end
 
     def favorite_videos uid=uid
@@ -72,14 +74,19 @@ module Aji
       tracker.hit!
       client.add_favorite video.external_id
     rescue UploadError => e
-      raise unless e.message =~ /Favorite already exists/
+      raise e unless e.message =~ /Favorite already exists/
     end
 
     def remove_from_favorites video
       tracker.hit!
       client.delete_favorite video.external_id
     rescue UploadError => e
-      raise unless e.message =~ /Video favorite not found/
+      raise e unless e.message =~ /Video favorite not found/
+    end
+
+    def watch_later_entry_ids
+      watch_later_videos if @watch_later_entry_ids.empty?
+      @watch_later_entry_ids
     end
 
     def watch_later_videos
@@ -87,21 +94,28 @@ module Aji
 
       [].tap do |watch_later|
         tracker.hit!
-        videos = client.watch_later(uid, options).videos
+        youtube_videos = client.watch_later(uid, options).videos
         options['start-index'] += options['max-results']
 
-        while videos.length == options['max-results'] do
-          videos.each do |v|
-            watch_later << youtube_it_to_video(v)
+        while youtube_videos.length == options['max-results'] do
+          youtube_videos.each do |v|
+            video = youtube_it_to_video(v)
+            watch_later << video
+            @watch_later_entry_ids[video.external_id] =
+              v.video_id.split(':').last
           end
 
           tracker.hit!
-          videos = client.watch_later(uid, options).videos
+          youtube_videos = client.watch_later(uid, options).videos
+          puts youtube_videos.ai, options.ai
           options['start-index'] += options['max-results']
         end
 
-        videos.each do |v|
-          watch_later << youtube_it_to_video(v)
+        youtube_videos.each do |v|
+          video = youtube_it_to_video(v)
+          watch_later << video
+          @watch_later_entry_ids[video.external_id] =
+            v.video_id.split(':').last
         end
       end
     end
@@ -109,15 +123,15 @@ module Aji
     def add_to_watch_later video
       tracker.hit!
       client.add_watch_later video.external_id
-    rescue UploadError
-      raise
+    rescue UploadError => e
+      raise e unless e.message =~ /This resource already exists/
     end
 
     def remove_from_watch_later video
       tracker.hit!
-      client.delete_watch_later video.external_id
-    rescue UploadError
-      raise
+      client.delete_watch_later watch_later_entry_ids[video.external_id]
+    rescue UploadError => e
+      raise e unless e.message =~ /Playlist video not found/
     end
 
     def author_info uid=uid

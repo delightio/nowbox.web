@@ -107,14 +107,12 @@ describe Aji::YoutubeAPI, :unit, :net do
           info['title'].should == "YouTube user: day9tv"
           info['profile'].should == "http://www.youtube.com/profile?user=day9tv"
           info['homepage'].should == "http://day9.tv"
-          info['about_me'].should ==%(I grew up playing Starcraft with my brother, Nick (Tasteless). With the launch of Starcraft 2, I'm dedicated to helping the eSports movement grow in popularity around the world.
-
-Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
+          info['about_me'].should ==%(I've qualified for the WCG USA finals 7 times, the WCG Grand Finals 3 times, and won the Pan American Championship in 2007 for StarCraft. In StarCraft 2 I play as random.\n\nI grew up playing Starcraft with my brother, Nick (Tasteless). With the launch of Starcraft 2, I'm dedicated to helping the eSports movement grow in popularity around the world.\n\nWatch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
           info['featured_video_id'].should match Link::YOUTUBE_ID_REGEXP
-          info['first_name'].should == "Sean Day[9] Plott"
+          info['first_name'].should == "Sean Day[9]"
           info['last_name'].should == "Plott"
           info['location'].should == "Los Angeles, CA, US"
-          info['hobbies'].should == "Starcraft 2"
+          info['hobbies'].should == "Starcraft 2, Diablo 3, and other video games!"
           info['occupation'].should == "Starcraft 2 Player and Commentator"
           info['school'].should == "Harvey Mudd College, USC"
           info['subscriber_count'].should > 21000
@@ -139,37 +137,31 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
       client.should be_kind_of YouTubeIt::OAuthClient
     end
 
-    let(:subscribed_channel_names) { %w[freddiew LisaNova].map &:downcase }
+    let(:subscribed_channels) { %w[raywilliamjohnson lisanova] }
 
     describe "#subscriptions" do
-
-      it "hits youtube once on #subscription and once per new channels" do
+      it "hits youtube once per page of subscriptions and once per author" do
         subject.tracker.should_receive(:hit!).
-          exactly(1+subscribed_channel_names.count).times
+          exactly(subscribed_channels.length / 25 +
+                  1 + subscribed_channels.length)
+
+        subject.subscriptions
+      end
+
+      it "returns subscribed channels" do
         channels = VCR.use_cassette "youtube_api/subscriptions" do
           subject.subscriptions
         end
+
+        channels.should have(subscribed_channels.length).channels
+        channels.map{|c| c.accounts.first.uid }.sort.
+          should == subscribed_channels.sort
       end
-
-      it "returns subscribed channels as Aji::Channel::Account objects" do
-        channels = VCR.use_cassette "youtube_api/subscriptions" do
-          subject.subscriptions
-        end
-
-        uids = []
-        channels.each do |ch|
-          ch.should be_an_instance_of Channel::Account
-          uids << ch.accounts.first.uid
-        end
-        channels.should have(subscribed_channel_names.count).channels
-        uids.sort.should == subscribed_channel_names.sort
-      end
-
     end
 
     describe "#subscribe_to" do
       before(:each) { subject.unsubscribe_from channel }
-      let(:uid) { "raywilliamjohnson" }
+      let(:uid) { "lisanova" }
       let(:channel) { mock "channel", :accounts => [stub(:uid => uid)] }
 
       it "subscribes given channel on YouTube" do
@@ -192,24 +184,22 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
     end
 
     describe "#favorite_videos" do
-      let(:favorite_video_ids) { %w[zxmObqXYgI8] }
+      let(:favorite_video_ids) { %w[dYCLXDtvrbs] }
 
       it "hits youtube once on #favorites and once per new videos" do
         subject.tracker.should_receive(:hit!).
-          exactly(1+favorite_video_ids.count).times
+          exactly(1+favorite_video_ids.length).times
         favorite_videos = VCR.use_cassette "youtube_api/favorite_videos" do
           subject.favorite_videos
         end
       end
 
-      it "returns user's favorite videos as Aji::Video objects" do
+      it "returns user's favorite videos" do
         favorite_videos = VCR.use_cassette "youtube_api/favorite_videos" do
           subject.favorite_videos
         end
 
-        favs = favorite_videos
-        favs.map(&:external_id).should == favorite_video_ids
-        favs.each { |v| v.should be_an_instance_of(Video) }
+        favorite_videos.map(&:external_id).should == favorite_video_ids
       end
 
     end
@@ -250,9 +240,8 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
     end
 
     describe "#add_to_watch_later" do
-      pending
-      before(:each) { subject.add_to_watch_later video }
-      let(:external_id) { "" }
+      before(:each) { subject.remove_from_watch_later video }
+      let(:external_id) { "rqweCwAMan0" }
       let(:video) { mock "video", :external_id => external_id }
 
       it "adds a video to the watch later list" do
@@ -269,13 +258,12 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
     end
 
     describe "#remove_from_watch_later" do
-      pending
       before(:each) { subject.add_to_watch_later video }
-      let(:external_id) { "" }
+      let(:external_id) { "rqweCwAMan0" }
       let(:video) { mock "video", :external_id => external_id }
 
       it "removes the video from watch later" do
-        subject.remove_from_favorites video
+        subject.remove_from_watch_later video
 
         subject.watch_later_videos.map(&:external_id).
           should_not include external_id
@@ -292,24 +280,19 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
       let(:watch_later_video_ids) { ["IsLwVoZqEjk"] }
 
       it "hits youtube once on #watch_later_videos and once per new videos" do
-        pending "YoutubeAPI#watch_later_videos not implemented"
-
         subject.tracker.should_receive(:hit!).
-          exactly(1+watch_later_video_ids.count).times
+          exactly(1+watch_later_video_ids.length).times
         watch_later_videos = VCR.use_cassette "youtube_api/watch_later_videos" do
           subject.watch_later_videos
         end
       end
 
       it "returns user's watch later videos as Aji::Video objects" do
-        pending "YoutubeAPI#watch_later_videos not implemented"
-
         watch_later_videos = VCR.use_cassette "youtube_api/watch_later_videos" do
           subject.watch_later_videos
         end
-        laters = watch_later_videos
-        laters.map(&:external_id).should == watch_later_videos
-        laters.each { |v| v.should be_an_instance_of(Video) }
+
+        watch_later_videos.map(&:external_id).should == watch_later_video_ids
       end
     end
 
@@ -390,7 +373,7 @@ Watch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
       end
 
       unique_author = Set.new result.map &:author
-      subject.tracker.hit_count.should == (1+unique_author.count)
+      subject.tracker.hit_count.should == (1+unique_author.length)
     end
 
     it "returns a nonempty collection of populated videos from db" do
