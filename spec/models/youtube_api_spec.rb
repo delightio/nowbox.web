@@ -2,7 +2,6 @@ require File.expand_path("../../spec_helper", __FILE__)
 
 include Aji
 describe Aji::YoutubeAPI, :unit, :net do
-
   describe "#youtube_it_to_hash" do
     before :each do
       Account::Youtube.stub :find_or_create_by_lower_uid
@@ -10,7 +9,25 @@ describe Aji::YoutubeAPI, :unit, :net do
       Category.stub :undefined
     end
 
+    subject { YoutubeAPI.new }
+
     let(:video) { stub.as_null_object }
+
+    let(:youtube_it_video_id) { "foobar12345" }
+
+    let(:youtube_it_video) do
+      mock :youtube_it_video,
+        :categories => stub.as_null_object,
+        :author => stub(:name => "foobar"),
+        :title => "Foobar",
+        :player_url => "http://youtube.com/v/#{youtube_it_video_id}",
+        :description => "A Foobar video",
+        :duration => 512431,
+        :noembed => false,
+        :view_count => 125152,
+        :published_at => Time.now,
+    end
+
     let(:video_attributes) do
       [:title, :external_id, :description, :duration, :viewable_mobile,
        :view_count, :category, :author, :published_at, :source,
@@ -41,17 +58,9 @@ describe Aji::YoutubeAPI, :unit, :net do
       subject.youtube_it_to_hash(video).keys.should == video_attributes
     end
 
-    let(:youtube_video_id) { 'OzVPDiy4P9I' }
-    subject { YoutubeAPI.new }
     it "uses player_url for extracting external_id" do
-      subject.video youtube_video_id
-
-      client = YouTubeIt::Client.new dev_key: Aji.conf['YOUTUBE_KEY']
-      response = VCR.use_cassette "youtube_api/video_by_youtube_it" do
-        client.video_by youtube_video_id
-      end
-      hash = subject.youtube_it_to_hash response
-      hash[:external_id].should == youtube_video_id
+      subject.youtube_it_to_hash(youtube_it_video)[:external_id].
+        should == youtube_it_video_id
     end
   end
 
@@ -240,39 +249,56 @@ describe Aji::YoutubeAPI, :unit, :net do
     end
 
     describe "#add_to_watch_later" do
-      before(:each) { subject.remove_from_watch_later video }
+      before(:each) do
+        VCR.use_cassette 'youtube_api/add_to_from_watch_later' do
+          subject.remove_from_watch_later video
+        end
+      end
+
       let(:external_id) { "rqweCwAMan0" }
       let(:video) { mock "video", :external_id => external_id }
 
       it "adds a video to the watch later list" do
-        subject.add_to_watch_later video
+        VCR.use_cassette 'youtube_api/add_to_watch_later' do
+          subject.add_to_watch_later video
 
-        subject.watch_later_videos.map(&:external_id).should include external_id
+          subject.watch_later_videos.map(&:external_id)
+        end.should include external_id
       end
 
       it "doesn't raise an error if the video is already in watch later" do
-        subject.remove_from_watch_later video
+        VCR.use_cassette 'youtube_api/add_to_watch_later' do
+          subject.add_to_watch_later video
 
-        expect{ subject.add_to_watch_later video }.not_to raise_error
+          expect{ subject.add_to_watch_later video }.not_to raise_error
+        end
       end
     end
 
     describe "#remove_from_watch_later" do
-      before(:each) { subject.add_to_watch_later video }
+      before(:each) do
+        VCR.use_cassette 'youtube_api/remove_from_watch_later' do
+          subject.add_to_watch_later video
+        end
+      end
+
       let(:external_id) { "rqweCwAMan0" }
       let(:video) { mock "video", :external_id => external_id }
 
       it "removes the video from watch later" do
-        subject.remove_from_watch_later video
+        VCR.use_cassette 'youtube_api/remove_from_watch_later' do
+          subject.remove_from_watch_later video
 
-        subject.watch_later_videos.map(&:external_id).
-          should_not include external_id
+          subject.watch_later_videos
+        end.map(&:external_id).should_not include external_id
       end
 
       it "doesn't raise an error if the video is not in watch later" do
-        subject.remove_from_watch_later video
+        VCR.use_cassette 'youtube_api/remove_from_watch_later' do
+          subject.remove_from_watch_later video
 
-        expect{ subject.remove_from_watch_later video }.not_to raise_error
+          expect{ subject.remove_from_watch_later video }.not_to raise_error
+        end
       end
     end
 
@@ -282,17 +308,17 @@ describe Aji::YoutubeAPI, :unit, :net do
       it "hits youtube once on #watch_later_videos and once per new videos" do
         subject.tracker.should_receive(:hit!).
           exactly(1+watch_later_video_ids.length).times
-        watch_later_videos = VCR.use_cassette "youtube_api/watch_later_videos" do
+        VCR.use_cassette "youtube_api/watch_later_videos" do
           subject.watch_later_videos
         end
       end
 
       it "returns user's watch later videos as Aji::Video objects" do
-        watch_later_videos = VCR.use_cassette "youtube_api/watch_later_videos" do
+        videos = VCR.use_cassette "youtube_api/watch_later_videos" do
           subject.watch_later_videos
         end
 
-        watch_later_videos.map(&:external_id).should == watch_later_video_ids
+        videos.map(&:external_id).should == watch_later_video_ids
       end
     end
 
@@ -341,8 +367,6 @@ describe Aji::YoutubeAPI, :unit, :net do
 
     describe "#valid_uid?" do
       it "hits youtube only once" do
-        #pending "please check actual hits required since we always create author object in db"
-
         subject.tracker.should_receive(:hit!)
 
         VCR.use_cassette 'youtube_api/valid_author' do
