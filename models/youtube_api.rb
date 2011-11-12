@@ -129,7 +129,8 @@ module Aji
 
     def remove_from_watch_later video
       tracker.hit!
-      client.delete_watch_later watch_later_entry_ids[video.external_id]
+      client.delete_watch_later watch_later_entry_ids[video.external_id] if
+        watch_later_entry_ids.has_key? video.external_id
     rescue UploadError => e
       raise e unless e.message =~ /Playlist video not found/
     end
