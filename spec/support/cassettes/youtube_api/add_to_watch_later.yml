@@ -1,0 +1,359 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/nowmovnowbox/watch_later?max-results=50&start-index=1
+    body: !!null 
+    headers:
+      authorization:
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="7de3087c9d8ad7b2a36764fe34f84fa7",
+        oauth_signature="LtX3MYgimIu89qROs2pu2GM9Q8A%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1321132198", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
+        oauth_version="1.0"
+      x-gdata-client:
+      - youtube_it
+      x-gdata-key:
+      - key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA
+      gdata-version:
+      - '2'
+      content-type:
+      - application/atom+xml; charset=UTF-8
+      content-length:
+      - '0'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=feed
+      expires:
+      - Sat, 12 Nov 2011 21:09:59 GMT
+      date:
+      - Sat, 12 Nov 2011 21:09:59 GMT
+      cache-control:
+      - private, max-age=0, must-revalidate, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"CEYNSH47eCp7I2A9WhRSEU4."
+      last-modified:
+      - Sat, 12 Nov 2011 21:09:59 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! "<?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom'
+      xmlns:app='http://www.w3.org/2007/app' xmlns:media='http://search.yahoo.com/mrss/'
+      xmlns:openSearch='http://a9.com/-/spec/opensearch/1.1/' xmlns:gd='http://schemas.google.com/g/2005'
+      xmlns:yt='http://gdata.youtube.com/schemas/2007' gd:etag='W/&quot;CEYNSH47eCp7I2A9WhRSEU4.&quot;'><id>tag:youtube.com,2008:user:nowmovnowbox:watch_later</id><updated>2011-11-12T21:09:59.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlist'/><title>Watch
+      Later</title><subtitle/><logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=3A81BB29CC626DD0'/><link
+      rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/watch_later?client=youtube_it'/><link
+      rel='http://schemas.google.com/g/2005#post' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/watch_later?client=youtube_it'/><link
+      rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/watch_later/batch?client=youtube_it'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/watch_later?start-index=1&amp;max-results=50&amp;client=youtube_it'/><link
+      rel='service' type='application/atomsvc+xml' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/watch_later?alt=atom-service'/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><generator
+      version='2.1' uri='http://gdata.youtube.com'>YouTube data API</generator><openSearch:totalResults>2</openSearch:totalResults><openSearch:startIndex>1</openSearch:startIndex><openSearch:itemsPerPage>50</openSearch:itemsPerPage><media:group><media:content
+      url='http://www.youtube.com/p/3A81BB29CC626DD0' type='application/x-shockwave-flash'
+      yt:format='5'/><media:description type='plain'/><media:thumbnail url='http://i.ytimg.com/vi/IsLwVoZqEjk/default.jpg'
+      height='90' width='120' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/IsLwVoZqEjk/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:title type='plain'>Watch
+      Later</media:title><yt:duration seconds='167'/></media:group><yt:playlistId>3A81BB29CC626DD0</yt:playlistId><yt:private/><entry
+      gd:etag='W/&quot;CEYNSHk4fip7I2A9WhRSEU4.&quot;'><id>tag:youtube.com,2008:user:nowmovnowbox:watch_later:CmvO_imj0-Cq_pWdOmqjrCMA_8DeqSMA</id><updated>2011-11-12T21:09:59.736Z</updated><app:edited>2011-11-12T21:09:59.736Z</app:edited><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlist'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Film' label='Film
+      &amp; Animation'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='summer'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='wars'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='funimation'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='anime'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='girl'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='leapt'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='through'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='time'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Mamoru Hosoda'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Digimon'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Secret of Kells'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Gkids'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Sita Sings the Blues'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='trailer'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='theatrical'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='full'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='length'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='english'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='dub'/><title>Summer Wars - Theatrical Trailer - In Select Theaters Dec
+      '10 - DVD/BD Spring '11</title><link rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=IsLwVoZqEjk&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/IsLwVoZqEjk/responses?client=youtube_it'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/IsLwVoZqEjk/ratings?client=youtube_it'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/IsLwVoZqEjk/complaints?client=youtube_it'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/IsLwVoZqEjk/related?client=youtube_it'/><link
+      rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=IsLwVoZqEjk'/><link
+      rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/IsLwVoZqEjk?client=youtube_it'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/watch_later/CmvO_imj0-Cq_pWdOmqjrCMA_8DeqSMA?client=youtube_it'/><link
+      rel='edit' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/watch_later/CmvO_imj0-Cq_pWdOmqjrCMA_8DeqSMA?client=youtube_it'/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink href='http://gdata.youtube.com/feeds/api/videos/IsLwVoZqEjk/comments?client=youtube_it'
+      countHint='1946'/></gd:comments><yt:hd/><media:group><media:category label='Film
+      &amp; Animation' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Film</media:category><media:content
+      url='http://www.youtube.com/v/IsLwVoZqEjk?version=3&amp;f=watch_later&amp;c=youtube_it&amp;d=AVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='148' yt:format='5'/><media:content url='rtsp://v5.cache7.c.youtube.com/ClYLENy73wIaTQk5EmqGVvDCIhMYDSANFEIKeW91dHViZV9pdEgGUgt3YXRjaF9sYXRlcnIhAVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDmDA==/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='148' yt:format='1'/><media:content
+      url='rtsp://v4.cache8.c.youtube.com/ClYLENy73wIaTQk5EmqGVvDCIhMYESARFEIKeW91dHViZV9pdEgGUgt3YXRjaF9sYXRlcnIhAVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDmDA==/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='148' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube' yt:type='partner'>FUNimation</media:credit><media:description
+      type='plain'>http://www.funimation.com/summerwars\r\nSummer Wars- Coming to
+      theaters in select cities December 2010 and on DVD/Blu-ray Spring 2011\r\n\r\nFrom
+      the visionary directory of The Girl Who Leapt Through Time (2007 Japanese Academy
+      Award winner, Best Animated Feature) comes the story of an ordinary family going
+      to extraordinary lengths to avert the impending cyber apocalypse!\r\n\r\nKenji
+      is your typical teenage misfit. He's good at math, bad with girls, and spends
+      most of his time hanging out in the all-powerful, online community known as
+      OZ. His second life is the only life he has -- until the girl of his dreams,
+      Natsuki, hijacks him for a starring role as a fake fiancé at her family reunion.
+      Things only get stranger from there. A late-night email containing a cryptic
+      mathematic riddle leads to the unleashing of a rogue AI intent on using the
+      virtual word of OZ to destroy the real world, literarily.  As Armageddon looms
+      on the horizon, Kenji and his new \"family\" set aside their differences and
+      band together to save the worlds they inhabit in this \"near-perfect blend of
+      social satire and science fiction\". (AnimeNewsNetwork.com)\r\n\r\nAwards:\r\n\r\nAward
+      of the Japanese Academy- Best Animated Film\r\nTokyo Anime Awards- Animation
+      of the Year\r\nMainichi Film Concours- Best Animated Film\r\nSitges International
+      Film Festival of Catalonia -- Best Animated Film\r\nFantasia Film Festival-
+      Best Animated Film</media:description><media:keywords>summer, wars, funimation,
+      anime, girl, leapt, through, time, Mamoru Hosoda, Digimon, Secret of Kells,
+      Gkids, Sita Sings the Blues, trailer, theatrical, full, length, english, dub</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=IsLwVoZqEjk&amp;feature=youtube_gdata_player'/><media:restriction
+      type='country' relationship='allow'>CA US</media:restriction><media:thumbnail
+      url='http://i.ytimg.com/vi/IsLwVoZqEjk/default.jpg' height='90' width='120'
+      time='00:01:14' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/IsLwVoZqEjk/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/IsLwVoZqEjk/1.jpg'
+      height='90' width='120' time='00:00:37' yt:name='start'/><media:thumbnail url='http://i.ytimg.com/vi/IsLwVoZqEjk/2.jpg'
+      height='90' width='120' time='00:01:14' yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/IsLwVoZqEjk/3.jpg'
+      height='90' width='120' time='00:01:51' yt:name='end'/><media:title type='plain'>Summer
+      Wars - Theatrical Trailer - In Select Theaters Dec '10 - DVD/BD Spring '11</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+      seconds='148'/><yt:uploaded>2010-10-13T16:01:48.000Z</yt:uploaded><yt:videoid>IsLwVoZqEjk</yt:videoid></media:group><gd:rating
+      average='4.9663033' max='5' min='1' numRaters='2018' rel='http://schemas.google.com/g/2005#overall'/><yt:statistics
+      favoriteCount='2803' viewCount='163344'/><yt:rating numDislikes='17' numLikes='2001'/><yt:position>1</yt:position></entry><entry
+      gd:etag='W/&quot;CEYNSHk4fip7I2A9WhRSEU4.&quot;'><id>tag:youtube.com,2008:user:nowmovnowbox:watch_later:CmvO_imj0-BGYyMMVl3QQfzxl9YJfe6q</id><updated>2011-11-12T21:09:59.736Z</updated><app:edited>2011-11-12T21:09:59.736Z</app:edited><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlist'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Tech' label='Science
+      &amp; Technology'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Vim'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Clojure'/><title>VimClojure Setup</title><link rel='alternate' type='text/html'
+      href='http://www.youtube.com/watch?v=rqweCwAMan0&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/rqweCwAMan0/responses?client=youtube_it'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/rqweCwAMan0/ratings?client=youtube_it'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/rqweCwAMan0/complaints?client=youtube_it'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/rqweCwAMan0/related?client=youtube_it'/><link
+      rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/rqweCwAMan0?client=youtube_it'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/watch_later/CmvO_imj0-BGYyMMVl3QQfzxl9YJfe6q?client=youtube_it'/><link
+      rel='edit' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/watch_later/CmvO_imj0-BGYyMMVl3QQfzxl9YJfe6q?client=youtube_it'/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink href='http://gdata.youtube.com/feeds/api/videos/rqweCwAMan0/comments?client=youtube_it'
+      countHint='2'/></gd:comments><media:group><media:category label='Science &amp;
+      Technology' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Tech</media:category><media:content
+      url='http://www.youtube.com/v/rqweCwAMan0?version=3&amp;f=watch_later&amp;c=youtube_it&amp;d=AVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='167' yt:format='5'/><media:content url='rtsp://v6.cache6.c.youtube.com/ClYLENy73wIaTQl9agwACx6srhMYDSANFEIKeW91dHViZV9pdEgGUgt3YXRjaF9sYXRlcnIhAVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDmDA==/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='167' yt:format='1'/><media:content
+      url='rtsp://v4.cache1.c.youtube.com/ClYLENy73wIaTQl9agwACx6srhMYESARFEIKeW91dHViZV9pdEgGUgt3YXRjaF9sYXRlcnIhAVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDmDA==/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='167' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>kotarakmikesh</media:credit><media:description
+      type='plain'>How to set up Vim for editing Clojure files with VimClojure</media:description><media:keywords>Vim,
+      Clojure</media:keywords><media:license type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=rqweCwAMan0&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/rqweCwAMan0/default.jpg' height='90' width='120'
+      time='00:01:23.500' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/rqweCwAMan0/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/rqweCwAMan0/1.jpg'
+      height='90' width='120' time='00:00:41.750' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/rqweCwAMan0/2.jpg' height='90' width='120' time='00:01:23.500'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/rqweCwAMan0/3.jpg'
+      height='90' width='120' time='00:02:05.250' yt:name='end'/><media:title type='plain'>VimClojure
+      Setup</media:title><yt:duration seconds='167'/><yt:uploaded>2008-11-19T21:59:09.000Z</yt:uploaded><yt:videoid>rqweCwAMan0</yt:videoid></media:group><gd:rating
+      average='5.0' max='5' min='1' numRaters='9' rel='http://schemas.google.com/g/2005#overall'/><yt:statistics
+      favoriteCount='5' viewCount='3029'/><yt:rating numDislikes='0' numLikes='9'/><yt:position>2</yt:position></entry></feed>"
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://gdata.youtube.com:80/feeds/api/users/default/watch_later
+    body: <?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom"
+      xmlns:yt="http://gdata.youtube.com/schemas/2007"><id>rqweCwAMan0</id></entry>
+    headers:
+      authorization:
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="c3415d5db5fed31862f2945526af4f20",
+        oauth_signature="KFpubJfXkCV%2B28riOPCx%2FMH%2BcfY%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1321132200", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
+        oauth_version="1.0"
+      x-gdata-client:
+      - youtube_it
+      x-gdata-key:
+      - key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA
+      gdata-version:
+      - '2'
+      content-type:
+      - application/atom+xml; charset=UTF-8
+      content-length:
+      - '158'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 201
+      message: Created
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=entry
+      expires:
+      - Sat, 12 Nov 2011 21:10:01 GMT
+      date:
+      - Sat, 12 Nov 2011 21:10:01 GMT
+      cache-control:
+      - private, max-age=0, must-revalidate, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"CEUEQHoycSp7I2A9WhRSEU4."
+      location:
+      - http://gdata.youtube.com/feeds/api/users/nowmovnowbox/watch_later/CmvO_imj0-DeTzQni8_0WFF-ps2rxzLb?client=youtube_it
+      content-location:
+      - http://gdata.youtube.com/feeds/api/users/nowmovnowbox/watch_later/CmvO_imj0-DeTzQni8_0WFF-ps2rxzLb?client=youtube_it
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: <?xml version='1.0' encoding='UTF-8'?><entry xmlns='http://www.w3.org/2005/Atom'
+      xmlns:app='http://www.w3.org/2007/app' xmlns:media='http://search.yahoo.com/mrss/'
+      xmlns:gd='http://schemas.google.com/g/2005' xmlns:yt='http://gdata.youtube.com/schemas/2007'
+      gd:etag='W/&quot;CEUEQHoycSp7I2A9WhRSEU4.&quot;'><id>tag:youtube.com,2008:user:nowmovnowbox:watch_later:CmvO_imj0-DeTzQni8_0WFF-ps2rxzLb</id><updated>2011-11-12T21:10:01.499Z</updated><app:edited>2011-11-12T21:10:01.499Z</app:edited><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlist'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Tech' label='Science
+      &amp; Technology'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Vim'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Clojure'/><title>VimClojure Setup</title><link rel='alternate' type='text/html'
+      href='http://www.youtube.com/watch?v=rqweCwAMan0&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/rqweCwAMan0/responses?client=youtube_it'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/rqweCwAMan0/ratings?client=youtube_it'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/rqweCwAMan0/complaints?client=youtube_it'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/rqweCwAMan0/related?client=youtube_it'/><link
+      rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/rqweCwAMan0?client=youtube_it'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/watch_later/CmvO_imj0-DeTzQni8_0WFF-ps2rxzLb?client=youtube_it'/><link
+      rel='edit' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/watch_later/CmvO_imj0-DeTzQni8_0WFF-ps2rxzLb?client=youtube_it'/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink href='http://gdata.youtube.com/feeds/api/videos/rqweCwAMan0/comments?client=youtube_it'
+      countHint='2'/></gd:comments><media:group><media:category label='Science &amp;
+      Technology' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Tech</media:category><media:content
+      url='http://www.youtube.com/v/rqweCwAMan0?version=3&amp;f=watch_later&amp;c=youtube_it&amp;d=AVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='167' yt:format='5'/><media:content url='rtsp://v6.cache6.c.youtube.com/ClYLENy73wIaTQl9agwACx6srhMYDSANFEIKeW91dHViZV9pdEgGUgt3YXRjaF9sYXRlcnIhAVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDmDA==/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='167' yt:format='1'/><media:content
+      url='rtsp://v4.cache1.c.youtube.com/ClYLENy73wIaTQl9agwACx6srhMYESARFEIKeW91dHViZV9pdEgGUgt3YXRjaF9sYXRlcnIhAVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDmDA==/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='167' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>kotarakmikesh</media:credit><media:description
+      type='plain'>How to set up Vim for editing Clojure files with VimClojure</media:description><media:keywords>Vim,
+      Clojure</media:keywords><media:license type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=rqweCwAMan0&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/rqweCwAMan0/default.jpg' height='90' width='120'
+      time='00:01:23.500' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/rqweCwAMan0/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/rqweCwAMan0/1.jpg'
+      height='90' width='120' time='00:00:41.750' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/rqweCwAMan0/2.jpg' height='90' width='120' time='00:01:23.500'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/rqweCwAMan0/3.jpg'
+      height='90' width='120' time='00:02:05.250' yt:name='end'/><media:title type='plain'>VimClojure
+      Setup</media:title><yt:duration seconds='167'/><yt:uploaded>2008-11-19T21:59:09.000Z</yt:uploaded><yt:videoid>rqweCwAMan0</yt:videoid></media:group><gd:rating
+      average='5.0' max='5' min='1' numRaters='9' rel='http://schemas.google.com/g/2005#overall'/><yt:statistics
+      favoriteCount='5' viewCount='3029'/><yt:rating numDislikes='0' numLikes='9'/><yt:position>2</yt:position></entry>
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://gdata.youtube.com:80/feeds/api/users/default/watch_later
+    body: <?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom"
+      xmlns:yt="http://gdata.youtube.com/schemas/2007"><id>rqweCwAMan0</id></entry>
+    headers:
+      authorization:
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="4d7d53cd13652bc959a184fa49f4d88e",
+        oauth_signature="Hr8XI5MWc3mxhhdZEVfw6jURzqw%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1321132200", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
+        oauth_version="1.0"
+      x-gdata-client:
+      - youtube_it
+      x-gdata-key:
+      - key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA
+      gdata-version:
+      - '2'
+      content-type:
+      - application/atom+xml; charset=UTF-8
+      content-length:
+      - '158'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 400
+      message: Bad Request
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/vnd.google.gdata.error+xml
+      transfer-encoding:
+      - chunked
+      date:
+      - Sat, 12 Nov 2011 21:10:01 GMT
+      expires:
+      - Sat, 12 Nov 2011 21:10:01 GMT
+      cache-control:
+      - private, max-age=0
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: <errors xmlns='http://schemas.google.com/g/2005'><error><domain>GData</domain><code>InvalidEntryException</code><internalReason>This
+      resource already exists</internalReason></error></errors>
+    http_version: '1.1'

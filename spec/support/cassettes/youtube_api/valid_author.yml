@@ -15,9 +15,9 @@
       content-type:
       - application/atom+xml; charset=UTF-8
       expires:
-      - Sun, 06 Nov 2011 18:20:31 GMT
+      - Sat, 12 Nov 2011 21:30:48 GMT
       date:
-      - Sun, 06 Nov 2011 18:15:31 GMT
+      - Sat, 12 Nov 2011 21:25:48 GMT
       cache-control:
       - public, max-age=300, no-transform
       vary:
@@ -25,7 +25,7 @@
       gdata-version:
       - '1.0'
       last-modified:
-      - Sun, 06 Nov 2011 08:55:30 GMT
+      - Sat, 12 Nov 2011 21:14:50 GMT
       transfer-encoding:
       - chunked
       x-content-type-options:
@@ -38,7 +38,7 @@
       - GSE
     body: ! '<?xml version=''1.0'' encoding=''UTF-8''?><entry xmlns=''http://www.w3.org/2005/Atom''
       xmlns:media=''http://search.yahoo.com/mrss/'' xmlns:gd=''http://schemas.google.com/g/2005''
-      xmlns:yt=''http://gdata.youtube.com/schemas/2007''><id>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</id><published>2011-11-04T17:18:01.000-07:00</published><updated>2011-11-06T01:55:30.000-07:00</updated><category
+      xmlns:yt=''http://gdata.youtube.com/schemas/2007''><id>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</id><published>2011-11-04T17:18:01.000-07:00</published><updated>2011-11-12T13:14:50.000-08:00</updated><category
       scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#userProfile''/><category
       scheme=''http://gdata.youtube.com/schemas/2007/channeltypes.cat'' term=''Standard''/><title
       type=''text''>YouTube user: nowmovnowbox</title><link rel=''alternate'' type=''text/html''
@@ -50,7 +50,7 @@
       rel=''http://gdata.youtube.com/schemas/2007#user.inbox'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/inbox''/><gd:feedLink
       rel=''http://gdata.youtube.com/schemas/2007#user.playlists'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/playlists''/><gd:feedLink
       rel=''http://gdata.youtube.com/schemas/2007#user.subscriptions'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions''
-      countHint=''2''/><gd:feedLink rel=''http://gdata.youtube.com/schemas/2007#user.uploads''
+      countHint=''4''/><gd:feedLink rel=''http://gdata.youtube.com/schemas/2007#user.uploads''
       href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/uploads'' countHint=''0''/><gd:feedLink
       rel=''http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/newsubscriptionvideos''/><yt:gender>m</yt:gender><yt:location>US</yt:location><yt:statistics
       lastWebAccess=''2011-11-04T17:18:01.000-07:00'' subscriberCount=''0'' videoWatchCount=''0''

@@ -15,9 +15,9 @@
       content-type:
       - application/atom+xml; charset=UTF-8; type=entry
       expires:
-      - Sun, 06 Nov 2011 00:42:48 GMT
+      - Sat, 12 Nov 2011 19:56:34 GMT
       date:
-      - Sun, 06 Nov 2011 00:42:48 GMT
+      - Sat, 12 Nov 2011 19:56:34 GMT
       cache-control:
       - private, max-age=300, no-transform
       vary:
@@ -82,5 +82,5 @@
       height='90' width='120' time='00:00:02' yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/OzVPDiy4P9I/3.jpg'
       height='90' width='120' time='00:00:03' yt:name='end'/><media:title type='plain'>Channel
       Transition</media:title><yt:duration seconds='4'/><yt:uploaded>2010-08-20T08:49:37.000Z</yt:uploaded><yt:videoid>OzVPDiy4P9I</yt:videoid></media:group><yt:statistics
-      favoriteCount='0' viewCount='24'/></entry>
+      favoriteCount='0' viewCount='27'/></entry>
     http_version: '1.1'
