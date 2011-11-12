@@ -42,7 +42,6 @@ class YoutubeSynchronization < Spinach::FeatureSteps
   end
 
   When 'enqueueing a video that is not currently in watch later' do
-    fail "Not yet implemented"
     VCR.use_cassette "youtube/atomic_interactions" do
       @video = Video.create! source: :youtube, external_id: 'y4sOfO8Ei1g'
       @video.populate
@@ -51,19 +50,17 @@ class YoutubeSynchronization < Spinach::FeatureSteps
   end
 
   Then 'that video should be in the watch later playlist on youtube' do
-    fail "Not yet implemented"
     VCR.use_cassette "youtube/atomic_interactions" do
       @account.api.watch_later_videos.include?(@video).should == true
     end
   end
 
   When 'dequeueing a video that is currently in watch later' do
-    fail "Not yet implemented"
     @video = Video.create! source: :youtube, external_id: 'y4sOfO8Ei1g'
+
     VCR.use_cassette "youtube/atomic_interactions" do
       @video.populate
-      # PENDING Watch Later impelementation in YouTubeIt.
-      #@account.api.add_to_watch_later @video
+      @account.api.add_to_watch_later @video
 
       @user.dequeue_video @video
     end
@@ -134,7 +131,11 @@ class YoutubeSynchronization < Spinach::FeatureSteps
     j['args'].should == @account.id
   end
 
-  And 'all videos in the watch later playlist should be in the user\'s favorites' do
-    fail "Not yet implemented"
+  And 'all videos in the watch later playlist should be in the user\'s queue' do
+    VCR.use_cassette 'youtube/atomic_interactions' do
+      @account.api.watch_later_videos.each do |watch_later_video|
+        @user.queued_videos.include?(watch_later_video).should == true
+      end
+    end
   end
 end

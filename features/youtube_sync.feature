@@ -34,5 +34,5 @@ Feature: Youtube Synchronization
     When a synchronization occurs
     Then all channels from youtube should be in the user's subscribed channels
     Then all videos favorited on youtube should be in the user's favorites
-    And all videos in the watch later playlist should be in the user's favorites
+    And all videos in the watch later playlist should be in the user's queue
     And the next synchronization should be scheduled
