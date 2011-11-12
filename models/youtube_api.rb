@@ -34,7 +34,7 @@ module Aji
       client.subscribe_channel channel_uid
       subscription_ids.clear
     rescue UploadError => e
-      raise e
+      raise e unless e.message =~ /Subscription already exists/
     end
 
     def unsubscribe_from channel
@@ -43,7 +43,7 @@ module Aji
       client.unsubscribe_channel subscription_ids[channel_uid]
       subscription_ids.delete channel_uid
     rescue UploadError => e
-      raise e
+      Aji.log :WARN, "#{e.class}:#{e.message}"
     end
 
     def favorite_videos uid=uid
@@ -107,7 +107,6 @@ module Aji
 
           tracker.hit!
           youtube_videos = client.watch_later(uid, options).videos
-          puts youtube_videos.ai, options.ai
           options['start-index'] += options['max-results']
         end
 

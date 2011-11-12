@@ -343,3 +343,143 @@
       Pants"},"yt$lastName":{"$t":"Johnson"},"yt$location":{"$t":"New York, US"},"yt$occupation":{"$t":"I
       work part time as a garden gnome."},"yt$statistics":{"lastWebAccess":"2011-07-20T23:59:18.000-07:00","subscriberCount":"4984721","videoWatchCount":0,"viewCount":"322815824","totalUploadViews":"1426977350"},"media$thumbnail":{"url":"http://i4.ytimg.com/i/Gt7X90Au6BV8rf49BiM6Dg/1.jpg?v=d46c71"},"yt$username":{"$t":"RayWilliamJohnson"}}}'
     http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://gdata.youtube.com:80/feeds/api/users/default/subscriptions
+    body: <?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom"
+      xmlns:yt="http://gdata.youtube.com/schemas/2007"><category scheme="http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat"
+      term="channel"/><yt:username>lisanova</yt:username></entry>
+    headers:
+      authorization:
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="ab44cf0469bcaf31b90eb7f73b374dbb",
+        oauth_signature="Hqww2b8GrUKF4YyXbSL79AhtuTQ%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1321134671", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
+        oauth_version="1.0"
+      x-gdata-client:
+      - youtube_it
+      x-gdata-key:
+      - key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA
+      gdata-version:
+      - '2'
+      content-type:
+      - application/atom+xml; charset=UTF-8
+      content-length:
+      - '268'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 201
+      message: Created
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=entry
+      expires:
+      - Sat, 12 Nov 2011 21:51:12 GMT
+      date:
+      - Sat, 12 Nov 2011 21:51:12 GMT
+      cache-control:
+      - private, max-age=0, must-revalidate, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DkEDQ347eCp7I2A9WhRSEU4."
+      location:
+      - http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY?client=youtube_it
+      content-location:
+      - http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY?client=youtube_it
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '<?xml version=''1.0'' encoding=''UTF-8''?><entry xmlns=''http://www.w3.org/2005/Atom''
+      xmlns:app=''http://www.w3.org/2007/app'' xmlns:gd=''http://schemas.google.com/g/2005''
+      xmlns:yt=''http://gdata.youtube.com/schemas/2007'' gd:etag=''W/&quot;DkEDQ347eCp7I2A9WhRSEU4.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY</id><published>2011-11-12T13:51:12.000-08:00</published><updated>2011-11-12T13:51:12.000-08:00</updated><app:edited>2011-11-12T13:51:12.000-08:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''channel''/><title>Videos
+      published by : lisanova</title><content type=''application/atom+xml;type=feed''
+      src=''http://gdata.youtube.com/feeds/api/users/lisanova/uploads''/><link rel=''related''
+      type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/lisanova?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/profile?user=lisanova#p/u''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:username>lisanova</yt:username></entry>'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://gdata.youtube.com:80/feeds/api/users/default/subscriptions
+    body: <?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom"
+      xmlns:yt="http://gdata.youtube.com/schemas/2007"><category scheme="http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat"
+      term="channel"/><yt:username>lisanova</yt:username></entry>
+    headers:
+      authorization:
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="95b2e066565be5a22a93d14f3df807ab",
+        oauth_signature="TXyyUc0WEmSWXoD3uNuyjE3TypQ%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1321134675", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
+        oauth_version="1.0"
+      x-gdata-client:
+      - youtube_it
+      x-gdata-key:
+      - key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA
+      gdata-version:
+      - '2'
+      content-type:
+      - application/atom+xml; charset=UTF-8
+      content-length:
+      - '268'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 201
+      message: Created
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=entry
+      expires:
+      - Sat, 12 Nov 2011 21:51:16 GMT
+      date:
+      - Sat, 12 Nov 2011 21:51:16 GMT
+      cache-control:
+      - private, max-age=0, must-revalidate, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DkEDR347eCp7I2A9WhRSEU4."
+      location:
+      - http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY?client=youtube_it
+      content-location:
+      - http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY?client=youtube_it
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '<?xml version=''1.0'' encoding=''UTF-8''?><entry xmlns=''http://www.w3.org/2005/Atom''
+      xmlns:app=''http://www.w3.org/2007/app'' xmlns:gd=''http://schemas.google.com/g/2005''
+      xmlns:yt=''http://gdata.youtube.com/schemas/2007'' gd:etag=''W/&quot;DkEDR347eCp7I2A9WhRSEU4.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY</id><published>2011-11-12T13:51:16.000-08:00</published><updated>2011-11-12T13:51:16.000-08:00</updated><app:edited>2011-11-12T13:51:16.000-08:00</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''channel''/><title>Videos
+      published by : lisanova</title><content type=''application/atom+xml;type=feed''
+      src=''http://gdata.youtube.com/feeds/api/users/lisanova/uploads''/><link rel=''related''
+      type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/lisanova?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/profile?user=lisanova#p/u''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:username>lisanova</yt:username></entry>'
+    http_version: '1.1'

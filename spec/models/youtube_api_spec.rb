@@ -174,9 +174,19 @@ describe Aji::YoutubeAPI, :unit, :net do
       let(:channel) { mock "channel", :accounts => [stub(:uid => uid)] }
 
       it "subscribes given channel on YouTube" do
-        subject.subscribe_to channel
-        subject.subscriptions.map{ |c| c.accounts.first.uid }.
-          should include uid
+        VCR.use_cassette "youtube_api/subscriptions" do
+          subject.subscribe_to channel
+          subject.subscriptions.map{ |c| c.accounts.first.uid }.
+            should include uid
+        end
+      end
+
+      it "does not raise an error when subscribing to a channel twice" do
+        VCR.use_cassette "youtube_api/subscriptions" do
+          subject.subscribe_to channel
+
+          expect{ subject.subscribe_to channel }.not_to raise_error
+        end
       end
     end
 
