@@ -9,10 +9,7 @@ module Aji
           youtube_uids = ["dapunster"]
           youtube_uids.each do |yt_uid|
             account = Account::Youtube.find_by_uid yt_uid
-            if account.nil?
-              Aji.log "Can't find YouTuber: #{yt_uid}"
-              next
-            end
+            next if account.nil?
 
             YoutubeSync.new(account).synchronize!
           end

@@ -10,15 +10,7 @@ module Aji
           youtube_uids.each do |yt_uid|
             account = Account::Youtube.find_by_uid yt_uid
             user = account.user
-
-            if account.nil?
-              Aji.log "Can't find YouTuber: #{yt_uid}"
-              next
-            end
-            if user.nil?
-              Aji.log "Can't find user associated with: #{yt_uid}"
-              next
-            end
+            next if account.nil? or user.nil?
 
             # Favorites
             del = user.favorite_videos.first
