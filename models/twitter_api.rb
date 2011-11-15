@@ -20,21 +20,27 @@ module Aji
     end
 
     def video_mentions_in_feed
-      tracker.hit!
-      tweets_with_videos = filter_links @client.home_timeline(:count => 200,
-       :include_entities => true)
-      tweets_with_videos.map{|t| Parsers::Tweet.parse t }.reject do |mention|
-        processor = MentionProcessor.new mention
-        processor.perform
-        processor.failed? || processor.no_videos?
+      [].tap do |mentions|
+        2.times do |page|
+          tracker.hit!
+          link_tweets = filter_links @client.home_timeline(:count => 100,
+            :include_entities => true, :page => page)
+          link_tweets.map{|t| Parsers::Tweet.parse t }.reject do |mention|
+            processor = MentionProcessor.new mention
+            processor.perform
+            processor.failed? || processor.no_videos?
+          end.each do |video_mention|
+            mentions << video_mention
+          end
+        end
       end
     end
 
     def video_mentions_i_post
       tracker.hit!
-      tweets_with_videos = filter_links @client.user_timeline(@uid,
+      link_tweets = filter_links @client.user_timeline(@uid,
         :count => 200, :include_entities => true)
-      tweets_with_videos.map{|t| Parsers::Tweet.parse t }.reject do |mention|
+      link_tweets.map{|t| Parsers::Tweet.parse t }.reject do |mention|
         processor = MentionProcessor.new mention
         processor.perform
         processor.failed? || processor.no_videos?
