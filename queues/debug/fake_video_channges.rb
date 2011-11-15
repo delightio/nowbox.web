@@ -39,7 +39,7 @@ module Aji
             end
 
             new_wl = Video.first :offset=>100
-            user.queue_video new_wl, 3.hours.ago
+            user.enqueue_video new_wl, 3.hours.ago
             Aji.log "Added to Watch Later: #{new_wl.id}, #{new_wl.title}"
           end
         end
