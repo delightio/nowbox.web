@@ -9,6 +9,7 @@ module Aji
           Aji.log "Automatic channel population is off."
           return
         end
+
         if RefreshAllChannels.backlogging?
           Aji.log "Skip RefreshAllChannels since #{Resque.size(@queue)} channels are still refreshing."
           return
@@ -28,7 +29,7 @@ module Aji
       def self.backlogging?
         Resque.size(@queue) > Channel.count/2
       end
-
     end
   end
 end
+
