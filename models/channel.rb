@@ -108,8 +108,12 @@ module Aji
       new_videos[(total-limit)...total].to_a
     end
 
-    def background_refresh_content
-      Resque.enqueue Queues::RefreshChannel, id
+    def background_refresh_content time = nil
+      if time.nil?
+        Resque.enqueue Queues::RefreshChannel, id
+      else
+        Resque.enqueue_in time, Queues::RefreshChannel, id
+      end
     end
 
     def redis_keys
@@ -130,6 +134,10 @@ module Aji
       Channel::Trending.singleton
     end
 
+    def self.refreshable_types
+      [ Channel::Account, Channel::Keyword, Channel::FacebookStream,
+        Channel::TwitterStream ]
+    end
   end
-
 end
+
