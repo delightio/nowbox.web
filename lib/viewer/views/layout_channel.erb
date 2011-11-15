@@ -5,23 +5,23 @@
 <!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 <head>
-		<title>nowbox | <%= @channel['title'] %></title>
+		<title>NOWBOX | <%= @channel['title'] %></title>
 		<%= erb :_layout_head %>
-		
+
 	  <meta property="title" content="<%= h @channel['title'] %>" />
 	  <meta property="description" content="<%= h @channel['description'] %>" />
 	  <link rel="image_src" href="<%= h @channel['thumbnail_uri'] %>" />
-	  
+
 	  <meta property="og:url" content="http://<%= Aji.conf['TLD'] %>/channel/<%= @channel['id'] %>" />
 	  <meta property="og:title" content="<%= h @channel['title'] %>" />
 		<meta property="og:type" content="article" />
 	  <meta property="og:description" content="<%= h @channel['description'] %>" />
 	  <meta property="og:image" content="<%= h @channel['thumbnail_uri'] %>" />
-	  
-	  <meta name="medium" content="channel" />	
-	  	
+
+	  <meta name="medium" content="channel" />
+
 		<meta name="viewport" content="width=960">
-		
+
 </head>
 <body id="channel_layout">
 	<header>
@@ -30,6 +30,6 @@
 	<div id="channel_page" role="main">
 		<%= yield %>
 	</div>
-	<%= erb :_layout_scripts %>	
+	<%= erb :_layout_scripts %>
 </body>
 </html>
