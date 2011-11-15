@@ -1,8 +1,8 @@
-refresh_all_channels:
-  class: Aji::Queues::RefreshAllChannels
+distributed_channel_refresh:
+  class: Aji::Queues::DistributedChannelRefresh
   cron: "0 * * * *"
   args:
-  description: "Update all channels."
+  description: "Update all channels across 24 hours' time."
 
 refresh_trending_channels:
   class: Aji::Queues::RefreshTrendingChannels
