@@ -94,8 +94,8 @@ describe Aji::TwitterAPI, :unit, :net do
   end
 
   describe "#video_mentions_in_feed" do
-    it "hits twitter only once" do
-      subject.tracker.should_receive(:hit!)
+    it "hits twitter once per page" do
+      subject.tracker.should_receive(:hit!).exactly(2).times
 
       VCR.use_cassette "twitter_api/home_timeline" do
         subject.video_mentions_in_feed
