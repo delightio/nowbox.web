@@ -1,7 +1,7 @@
 module Aji
   module Queues
     module Debug
-      class FakeVideoChanges
+      class FakeChannelChanges
         extend WithDatabaseConnection
         @queue = :debug
 
