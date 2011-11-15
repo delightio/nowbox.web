@@ -34,6 +34,10 @@ module Aji
       accounts.where(:type => 'Aji::Account::Twitter').first
     end
 
+    def youtube_account
+      accounts.where(:type => 'Aji::Account::Youtube').first
+    end
+
     def account_info
       accounts.map do |a|
         {

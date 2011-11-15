@@ -68,7 +68,8 @@ module Aji
     end
 
     def enqueue_resync
-      Resque.enqueue_in 1.day, Queues::SynchronizeWithYoutube, account.id
+      Resque.enqueue_in 1.day, Queues::SynchronizeWithYoutube, account.id if
+        30.minutes.ago > account.synchronized_at
     end
 
     def background_synchronize!

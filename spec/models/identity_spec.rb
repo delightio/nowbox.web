@@ -123,7 +123,7 @@ describe Aji::Identity, :unit => true do
         :type => 'Aji::Account::Facebook').and_return(
           (accounts = stub).should_receive(:first) && accounts)
 
-          subject.facebook_account
+      subject.facebook_account
     end
   end
 
@@ -133,7 +133,17 @@ describe Aji::Identity, :unit => true do
         :type => 'Aji::Account::Twitter').and_return(
           (accounts = stub).should_receive(:first) && accounts)
 
-          subject.twitter_account
+      subject.twitter_account
+    end
+  end
+
+  describe "#youtube_account" do
+    it "gets the identity's youtube account from accounts list" do
+      subject.accounts.should_receive(:where).with(
+        :type => 'Aji::Account::Youtube').and_return(
+          (accounts = stub).should_receive(:first) && accounts)
+
+      subject.youtube_account
     end
   end
 

@@ -1,5 +1,8 @@
 require './models/youtube_sync'
 require 'active_support/core_ext/numeric/time'
+require 'active_support/core_ext/time/calculations'
+require 'active_support/core_ext/time/acts_like'
+require 'active_support/duration'
 require 'pry'
 
 unless Aji.respond_to? :conf
@@ -17,7 +20,7 @@ describe Aji::YoutubeSync, :unit do
 
   let(:account) do
     mock "account", :api => api, :id => 11, :user => user, :save => true,
-      :synchronized_at= => true
+      :synchronized_at= => true, :synchronized_at => 1.hour.ago
   end
 
   let(:user) do
@@ -198,6 +201,13 @@ describe Aji::YoutubeSync, :unit do
     it "sets up a delayed resque job to run again in 24 hours" do
       Resque.should_receive(:enqueue_in).with(1.day,
         Aji::Queues::SynchronizeWithYoutube, account.id)
+
+      subject.enqueue_resync
+    end
+
+    it "doesn't reenqueue when synchronized less than 30 minutes ago" do
+      Resque.should_not_receive(:enqueue_in)
+      account.stub :synchronized_at => 2.minutes.ago
 
       subject.enqueue_resync
     end
