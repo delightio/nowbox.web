@@ -18,13 +18,30 @@ module Aji
     end
 
     def subscriptions uid=uid
-      tracker.hit!
-      client.subscriptions(uid).map do |sub|
-        channel_uid = sub.title.split(" ").last.downcase
-        @subscription_ids[channel_uid] = sub.id
+      options = { 'max-results' => 50, 'start-index' => 1 }
 
-        account = Account::Youtube.find_or_create_by_lower_uid channel_uid
-        account.to_channel
+      [].tap do |subs|
+        tracker.hit!
+        sub_feed = client.subscriptions(uid, options)
+
+        while sub_feed.length == options['max-results'] do
+          sub_feed.each do |sub|
+            cid = sub.title.split(" ").last.downcase
+            @subscription_ids[cid] = sub.id
+            subs.push(
+              Account::Youtube.find_or_create_by_lower_uid(cid).to_channel)
+          end 
+
+          tracker.hit!
+          options['start-index'] += options['max-results']
+          sub_feed = client.subscriptions(uid, options)
+        end
+
+        sub_feed.each do |sub|
+          cid = sub.title.split(" ").last.downcase
+          @subscription_ids[cid] = sub.id
+          subs.push(Account::Youtube.find_or_create_by_lower_uid(cid).to_channel)
+        end 
       end
     end
 
@@ -129,7 +146,7 @@ module Aji
     def remove_from_watch_later video
       tracker.hit!
       client.delete_watch_later watch_later_entry_ids[video.external_id] if
-        watch_later_entry_ids.has_key? video.external_id
+      watch_later_entry_ids.has_key? video.external_id
     rescue UploadError => e
       raise e unless e.message =~ /Playlist video not found/
     end
@@ -160,7 +177,7 @@ module Aji
     def uploaded_videos uid=uid
       tracker.hit!
       client.videos_by(:author => uid, :order_by => 'published',
-       :per_page => 50).videos.map{ |v| youtube_it_to_video v }
+                       :per_page => 50).videos.map{ |v| youtube_it_to_video v }
     end
 
     def keyword_search keywords, per_page=50
@@ -168,7 +185,7 @@ module Aji
       client.videos_by(
         :query => Array(keywords).join(' '),
         :per_page => per_page).
-          videos.map{ |v| youtube_it_to_video v }
+        videos.map{ |v| youtube_it_to_video v }
     end
 
     def youtube_it_to_hash video
@@ -216,10 +233,10 @@ module Aji
       @client ||=
         if @token and @secret
           YouTubeIt::OAuthClient.new(consumer_key: Aji.conf['YOUTUBE_OA_KEY'],
-            consumer_secret: Aji.conf['YOUTUBE_OA_SECRET'], username: @uid,
-            dev_key: Aji.conf['YOUTUBE_KEY']).tap do |c|
-              c.authorize_from_access @token, @secret
-            end
+                                     consumer_secret: Aji.conf['YOUTUBE_OA_SECRET'], username: @uid,
+                                     dev_key: Aji.conf['YOUTUBE_KEY']).tap do |c|
+                                       c.authorize_from_access @token, @secret
+                                     end
         else
           @@client ||= YouTubeIt::Client.new dev_key: Aji.conf['YOUTUBE_KEY']
         end

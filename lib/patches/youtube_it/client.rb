@@ -11,5 +11,9 @@ class YouTubeIt
     def watch_later user = nil, opts = {}
       client.watch_later user, opts
     end
+
+    def subscriptions user = nil, opts = {}
+      client.subscriptions user, opts
+    end
   end
 end

@@ -169,12 +169,17 @@ describe Aji::YoutubeAPI, :unit, :net do
     end
 
     describe "#subscribe_to" do
-      before(:each) { subject.unsubscribe_from channel }
+      before(:each) do
+        VCR.use_cassette 'youtube_api/subscribe_to' do
+          subject.unsubscribe_from channel
+        end
+      end
+
       let(:uid) { "lisanova" }
       let(:channel) { mock "channel", :accounts => [stub(:uid => uid)] }
 
       it "subscribes given channel on YouTube" do
-        VCR.use_cassette "youtube_api/subscriptions" do
+        VCR.use_cassette "youtube_api/subscribe_to" do
           subject.subscribe_to channel
           subject.subscriptions.map{ |c| c.accounts.first.uid }.
             should include uid
@@ -182,7 +187,7 @@ describe Aji::YoutubeAPI, :unit, :net do
       end
 
       it "does not raise an error when subscribing to a channel twice" do
-        VCR.use_cassette "youtube_api/subscriptions" do
+        VCR.use_cassette "youtube_api/subscribe_to" do
           subject.subscribe_to channel
 
           expect{ subject.subscribe_to channel }.not_to raise_error
@@ -191,14 +196,21 @@ describe Aji::YoutubeAPI, :unit, :net do
     end
 
     describe "#unsubscribe_from" do
-      before(:each) { subject.subscribe_to channel }
+      before(:each) do
+       VCR.use_cassette 'youtube_api/unsubscribe_from' do
+         subject.subscribe_to channel
+       end
+      end
+
       let(:uid) { "freddiew" }
       let(:channel) { mock "channel", :accounts => [stub(:uid => uid)] }
 
       it "unsubscribes given channel" do
-        subject.unsubscribe_from channel
-        subject.subscriptions.map{ |c| c.accounts.first.uid }.
-          should_not include uid
+        VCR.use_cassette 'youtube_api/unsubscribe_from' do
+          subject.unsubscribe_from channel
+          subject.subscriptions.map{ |c| c.accounts.first.uid }.
+            should_not include uid
+        end
       end
     end
 
