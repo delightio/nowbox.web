@@ -6,7 +6,7 @@ module Aji
         @queue = :debug
 
         def self.perform
-          youtube_uids = ["dapunster"]
+          youtube_uids = ["testnb1"]
           youtube_uids.each do |yt_uid|
             account = Account::Youtube.find_by_uid yt_uid
             user = account.user
