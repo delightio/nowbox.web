@@ -2,7 +2,7 @@ distributed_channel_refresh:
   class: Aji::Queues::DistributedChannelRefresh
   cron: "0 * * * *"
   args:
-  description: "Update all channels across 24 hours' time."
+  description: "Update all channels across 24 hours time."
 
 refresh_trending_channels:
   class: Aji::Queues::RefreshTrendingChannels
@@ -16,7 +16,7 @@ kill_bill:
   args:
   description: "Remove Bill's test twitter and facebook accounts for debugging."
 
- invalidate_tokens:
+invalidate_tokens:
   class: Aji::Queues::InvalidateTokens
   cron: "* * * * * 2000"
   args:
