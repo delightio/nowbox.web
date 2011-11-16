@@ -326,6 +326,11 @@ module Aji
         @data.fetch('yt$statistics', {}).fetch('subscriberCount', 0).to_i
       end
 
+      def video_upload_count
+        link = @data.fetch('gd$feedLink', []).find{ |l| l['rel'] =~ /uploads/ }
+        link and link['countHint'] or 0
+      end
+
       def thumbnail
         @data.fetch("media$thumbnail", {}).fetch('url', "")
       end
@@ -370,6 +375,7 @@ module Aji
           'occupation' => occupation,
           'school' => school,
           'subscriber_count' => subscriber_count,
+          'video_upload_count' => video_upload_count,
           'thumbnail' => thumbnail,
           'username' => username,
           'total_upload_views' => total_upload_views

@@ -26,6 +26,10 @@ module Aji
       info['subscriber_count'] || 0
     end
 
+    def video_upload_count
+      info['video_upload_count']
+    end
+
     def refresh_content force = false
       super force do |new_videos|
         api.uploaded_videos.each do |video|

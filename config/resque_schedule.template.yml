@@ -1,6 +1,6 @@
 distributed_channel_refresh:
   class: Aji::Queues::DistributedChannelRefresh
-  cron: "* 2 * * *"
+  cron: "0 2 * * *"
   args:
   description: "Update all channels across 24 hours time."
 

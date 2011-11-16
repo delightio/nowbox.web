@@ -34,7 +34,12 @@ end
 
 task :h => :heroku_console
 task :heroku_console do
-  system "heroku run console"
+  system "heroku run console --app aji"
+end
+
+task :s => :staging_console
+task :staging_console do
+  system "heroku run console --app aji-staging"
 end
 
 task :cc => :client_console

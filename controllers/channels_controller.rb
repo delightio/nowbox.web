@@ -31,7 +31,7 @@ module Aji
         if channel.class == Channel::User
           authenticate_as_token_holder!
           error! "Unathorized channel access", 401 unless
-            user.user_channels.include? channel
+            current_user.user_channels.include? channel
         end
 
         channel.serializable_hash(
