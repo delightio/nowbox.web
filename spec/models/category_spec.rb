@@ -31,13 +31,16 @@ module Aji
     end
 
     describe "#featured_channels" do
-      it "returns channels which top categories are also self" do
-        ch1 = mock "channel1", :available? => true,
-          :category_ids => [subject.id]
-        ch2 = mock "channel1", :available? => true,
-          :category_ids => [4]
-        subject.stub(:channels).and_return([ch1, ch2])
+      let(:ch1) { mock "channel1", :available? => true,
+        :category_ids => [subject.id], :single_youtube_source? => true }
+      let(:ch2) { mock "channel2", :available? => true,
+        :category_ids => [4], :single_youtube_source? => true  }
 
+      before :each do
+        subject.stub(:channels).and_return([ch1, ch2])
+      end
+
+      it "returns channels which top categories are also self" do
         featured = subject.featured_channels
         featured.should include ch1
         featured.should_not include ch2
@@ -46,7 +49,13 @@ module Aji
       it "skips unavailable channels" do
         ch1 = mock "unavailable channel",
           :category_ids => [subject.id], :available? => false
-        subject.stub(:channels).and_return([ch1])
+
+        subject.featured_channels.should_not include ch1
+      end
+
+      it "only features single source YouTube channels" do
+        ch1.stub :single_youtube_source? => false
+
         subject.featured_channels.should_not include ch1
       end
 
