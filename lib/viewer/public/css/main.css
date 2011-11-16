@@ -54,29 +54,29 @@ ul.section { list-style: none; }
 
 }
 
-#launch.photo1{
-	 background: url(/images/photos/89100014.jpg) no-repeat center center ;
+/*#launch.photo1{
+   background: url(/images/photos/89100014.jpg) no-repeat center center ;
   filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100014.jpg', sizingMethod='scale');
-	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100014.jpg', sizingMethod='scale')";
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100014.jpg', sizingMethod='scale')";
 }
 
 #launch.photo2{
-	 background: url(/images/photos/89100009.jpg) no-repeat center center;
+   background: url(/images/photos/89100009.jpg) no-repeat center center;
   filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100009.jpg', sizingMethod='scale');
-	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100009.jpg', sizingMethod='scale')";
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100009.jpg', sizingMethod='scale')";
 }
-
+*/
 #launch.photo3{
 	 background: url(/images/photos/89100017.jpg) no-repeat center center;
   filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100017.jpg', sizingMethod='scale');
 	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100017.jpg', sizingMethod='scale')";
 }
-
+/*
 #launch.photo4{
-	 background: url(/images/photos/89100022.jpg) no-repeat center center;
+   background: url(/images/photos/89100022.jpg) no-repeat center center;
   filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100022.jpg', sizingMethod='scale');
-	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100022.jpg', sizingMethod='scale')";
-}
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/photos/89100022.jpg', sizingMethod='scale')";
+}*/
 
 #announcement{ background: url(/images/textures/aji-tiles-darkgray.jpg) repeat; color: #AAA; position: absolute; top: 0px; height: 30px; 	line-height: 30px; text-align: center; width: 100%; opacity: 0.7; }
 	#announcement a{ color: #EEE; }
