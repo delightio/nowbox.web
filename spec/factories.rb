@@ -120,6 +120,12 @@ Factory.define :youtube_channel_with_populated_videos, :parent => :youtube_chann
   end
 end
 
+Factory.define :single_youtube_account_channel, :parent => :youtube_channel do |a|
+  a.after_create do |c|
+    c.accounts = [Factory(:youtube_account_with_videos)]
+    c.refresh_content
+  end
+end
 
 Factory.define :category, :class => 'Aji::Category' do |a|
   a.title { random_string }
@@ -185,7 +191,7 @@ Factory.define :twitter_account,
 Factory.define :youtube_account_with_videos,
   :parent => :youtube_account do |a|
     a.after_create do |ea|
-      3.times { ea.push(Factory :video) }
+      3.times { ea.push(Factory :populated_video, author: ea) }
     end
   end
 

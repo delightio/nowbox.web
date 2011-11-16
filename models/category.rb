@@ -41,7 +41,7 @@ module Aji
       channels(n).each do |channel|
         if channel &&
            channel.available? &&
-           channel.single_youtube_source? &&
+           channel.youtube_channel? &&
            channel.category_ids.first(2).include?(self.id)
           results << channel
         end

@@ -173,8 +173,12 @@ module Aji
       force_ssl!
       validate_secret!
 
+      Aji.log "Received token request for User#{params[:user_id]}"
+
       user = User.find params[:user_id]
       tg = Token::Generator.new(user)
+
+      Aji.log "Token #{tg.token} issued for User[#{user.id}"
 
       MultiJson.encode(:token => tg.token, :expires_at => tg.expires_at.to_i)
     end

@@ -32,9 +32,9 @@ module Aji
 
     describe "#featured_channels" do
       let(:ch1) { mock "channel1", :available? => true,
-        :category_ids => [subject.id], :single_youtube_source? => true }
+        :category_ids => [subject.id], :youtube_channel? => true }
       let(:ch2) { mock "channel2", :available? => true,
-        :category_ids => [4], :single_youtube_source? => true  }
+        :category_ids => [4], :youtube_channel? => true  }
 
       before :each do
         subject.stub(:channels).and_return([ch1, ch2])
@@ -53,8 +53,8 @@ module Aji
         subject.featured_channels.should_not include ch1
       end
 
-      it "only features single source YouTube channels" do
-        ch1.stub :single_youtube_source? => false
+      it "only features YouTube channels" do
+        ch1.stub :youtube_channel? => false
 
         subject.featured_channels.should_not include ch1
       end
