@@ -20,7 +20,10 @@ module Aji
             end
 
             # Add a channel
-            ch = Channel.find 862
+            chs = Channel.first(200)
+            begin
+              ch = chs.sample
+            end until ch.accounts.count==1 && !user.subscribed?(ch)
             if ch
               user.subscribe ch
               Aji.log "Subscribed: #{ch.id}, #{ch.title}"
