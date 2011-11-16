@@ -6,14 +6,16 @@ module Aji
       @account, @user = account, account.user
     end
 
-    def synchronize!
+    def synchronize! disable_resync = false
       return if account.nil? or user.nil?
 
-      sync_subscribed_channels
-      sync_watch_later
-      sync_favorites
-      enqueue_resync
+      user.suppress_hooks! do
+        sync_subscribed_channels
+        sync_watch_later
+        sync_favorites
+      end
 
+      enqueue_resync unless disable_resync
       account.synchronized_at = Time.now
       account.save
     end
@@ -68,12 +70,13 @@ module Aji
     end
 
     def enqueue_resync
-      Resque.enqueue_in 1.day, Queues::SynchronizeWithYoutube, account.id if
-        30.minutes.ago > account.synchronized_at
+      unless account.synchronized_at && account.synchronized_at > 30.minutes.ago
+        Resque.enqueue_in 1.day, Queues::SynchronizeWithYoutube, account.id 
+      end
     end
 
-    def background_synchronize!
-      Resque.enqueue Queues::SynchronizeWithYoutube, account.id
+    def background_synchronize! disable_resync = false
+      Resque.enqueue Queues::SynchronizeWithYoutube, account.id, disable_resync
     end
   end
 end

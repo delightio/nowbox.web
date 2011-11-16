@@ -114,7 +114,7 @@ module Aji
         authenticate!
 
         if account = current_user.identity.youtube_account
-          YoutubeSync.new(account).background_synchronize!
+          YoutubeSync.new(account).background_synchronize! :disable_resync
           status 202
           current_user
         else
