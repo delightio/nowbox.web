@@ -233,6 +233,13 @@ describe Aji::YoutubeAPI, :unit, :net do
         favorite_videos.map(&:external_id).should == favorite_video_ids
       end
 
+      it "filters videos with nil ids" do
+        favorite_videos = VCR.use_cassette "youtube_api/favorite_videos" do
+          subject.favorite_videos
+        end
+
+        favorite_videos.select{ |v| v.external_id.nil? }.should be_empty
+      end
     end
 
     describe "#add_to_favorites" do
@@ -341,6 +348,14 @@ describe Aji::YoutubeAPI, :unit, :net do
         end
 
         videos.map(&:external_id).should == watch_later_video_ids
+      end
+
+      it "filters videos with nil ids" do
+        videos = VCR.use_cassette "youtube_api/watch_later_videos" do
+          subject.watch_later_videos
+        end
+
+        videos.select{ |v| v.external_id.nil? }.should be_empty
       end
     end
 
