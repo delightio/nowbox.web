@@ -8,12 +8,6 @@ module Aji
       :foreign_key => :channel_id, :association_foreign_key => :account_id,
       :autosave => true
 
-    def single_youtube_source?
-      return false if accounts.count != 1
-      return false if accounts.first.class != Account::Youtube
-      true
-    end
-
     def available?
       accounts.any? {|a| a.available?}
     end

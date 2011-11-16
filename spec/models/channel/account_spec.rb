@@ -10,24 +10,6 @@ module Aji
 
     it_behaves_like "any channel"
 
-    describe "#single_youtube_source?" do
-      it "is true if it contains only 1 YouTube account" do
-        account = Account::Youtube.create uid: 'nowmov'
-        subject = Channel::Account.create accounts: [account]
-        subject.should be_single_youtube_source
-      end
-
-      it "is false if it has more than 1 accounts" do
-        subject.should_not be_single_youtube_source
-      end
-
-      it "is false if account isn't YouTube" do
-        account = Account::Twitter.create uid: 'dapunster'
-        subject = Channel::Account.create accounts: [account]
-        subject.should_not be_single_youtube_source
-      end
-    end
-
     describe "#available?" do
       let(:good_account) { mock "good guy", :available? => true}
       let(:bad_account)  { mock "bad guy", :available? => false}
