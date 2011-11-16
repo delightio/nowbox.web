@@ -212,7 +212,9 @@ by a subclass.</p>
   <span class="k">class</span> <span class="nc">API</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
     <span class="n">version</span> <span class="s1">&#39;1&#39;</span>
   <span class="k">end</span>
-<span class="k">end</span></pre></div>
+<span class="k">end</span>
+
+<span class="nb">require</span> <span class="s1">&#39;active_support/core_ext/object&#39;</span></pre></div>
       </td>
     </tr>
     <tr id='section-13'>
@@ -224,6 +226,8 @@ by a subclass.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre><span class="n">require_relative</span> <span class="s1">&#39;lib/patches/string&#39;</span>
+<span class="n">require_relative</span> <span class="s1">&#39;lib/patches/youtube_it/client&#39;</span>
+<span class="n">require_relative</span> <span class="s1">&#39;lib/patches/youtube_it/request/video_upload&#39;</span>
 
 <span class="no">Aji</span><span class="o">::</span><span class="no">Mixins</span> <span class="o">=</span> <span class="no">Module</span><span class="o">.</span><span class="n">new</span>
 <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;lib/mixins/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span>
@@ -251,7 +255,8 @@ by a subclass.</p>
 <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;controllers/*_controller.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span>
 <span class="n">require_relative</span> <span class="s1">&#39;queues/with_database_connection.rb&#39;</span>
 <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;queues/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span>
-<span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;queues/mention/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span></pre></div>
+<span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;queues/mention/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span>
+<span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;queues/debug/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span></pre></div>
       </td>
     </tr>
     <tr id='section-15'>

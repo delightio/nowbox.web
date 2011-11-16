@@ -1,5 +1,8 @@
 require './models/youtube_sync'
 require 'active_support/core_ext/numeric/time'
+require 'active_support/core_ext/time/calculations'
+require 'active_support/core_ext/time/acts_like'
+require 'active_support/duration'
 require 'pry'
 
 unless Aji.respond_to? :conf
@@ -11,13 +14,17 @@ end
 describe Aji::YoutubeSync, :unit do
   before do
     Resque.stub :enqueue_in
+
+    def user.suppress_hooks!
+      yield
+    end
   end
 
   subject { Aji::YoutubeSync.new account }
 
   let(:account) do
     mock "account", :api => api, :id => 11, :user => user, :save => true,
-      :synchronized_at= => true
+      :synchronized_at= => true, :synchronized_at => 1.hour.ago
   end
 
   let(:user) do
@@ -25,7 +32,7 @@ describe Aji::YoutubeSync, :unit do
       :youtube_channels => remotely_unsubscribed_channels + other_channels,
       :queued_videos => queued_videos, :favorite_videos => favorite_videos,
       :enqueue_video => true, :dequeue_video => true, :favorite_video => true,
-      :unfavorite_video => true,
+      :unfavorite_video => true
   end
 
   let(:api) do
@@ -65,13 +72,21 @@ describe Aji::YoutubeSync, :unit do
   let(:favorite_videos) { remotely_unfavorited_videos + other_favorite_videos }
 
   describe "#synchronize!" do
-    it "returns and does not re enqueue if @account or @user is no longer valid" do
+    it "suppresses atomic user hooks when running" do
+      user.should_receive(:suppress_hooks!)
+
+      subject.synchronize!
+    end
+
+    it "exits without enqueueing resync if account or user is invalid" do
       subject.stub :account => nil
       subject.should_not_receive(:enqueue_resync)
+
       subject.synchronize!
 
       subject.stub :user => nil
       subject.should_not_receive(:enqueue_resync)
+
       subject.synchronize!
     end
 
@@ -97,6 +112,12 @@ describe Aji::YoutubeSync, :unit do
       subject.should_receive(:enqueue_resync)
 
       subject.synchronize!
+    end
+
+    it "doesn't enqueue a resync when doing so is disabled" do
+      subject.should_not_receive(:enqueue_resync)
+
+      subject.synchronize! :disable_resync
     end
 
     it "updates the time at which the account was synchronized" do
@@ -201,14 +222,28 @@ describe Aji::YoutubeSync, :unit do
 
       subject.enqueue_resync
     end
+
+    it "doesn't reenqueue when synchronized less than 30 minutes ago" do
+      Resque.should_not_receive(:enqueue_in)
+      account.stub :synchronized_at => 2.minutes.ago
+
+      subject.enqueue_resync
+    end
   end
 
   describe "#background_synchronize!" do
     it "sets up a resque job to run synchronization" do
       Resque.should_receive(:enqueue).with(
-        Aji::Queues::SynchronizeWithYoutube, account.id)
+        Aji::Queues::SynchronizeWithYoutube, account.id, false)
 
       subject.background_synchronize!
+    end
+
+    it "passes it's argument down to resque" do
+      Resque.should_receive(:enqueue).with(
+        Aji::Queues::SynchronizeWithYoutube, account.id, :disable_resync)
+
+      subject.background_synchronize! :disable_resync
     end
   end
 

@@ -4,18 +4,20 @@ include Aji
 
 describe Aji::User do
   subject do
-    User.new.tap do |u|
+    User.new do |u|
       u.stub(:id => 1)
       u.subscribed_list << 1
       u.name = "George"
       u.email = "george@thejungle.com"
-      u.stub :history_channel => stub(:merge! => true)
-      u.stub :favorite_channel => stub(:merge! => true)
-      u.stub :queue_channel => stub(:merge! => true)
+      u.stub :history_channel => stub(:merge! => true, :push => true)
+      u.stub :favorite_channel => stub(:merge! => true, :push => true)
+      u.stub :queue_channel => stub(:merge! => true, :push => true)
       u.stub :save => true
-      u.stub :identity => stub(:hook => true)
+      u.stub :identity => identity
     end
   end
+
+  let(:identity) { mock :identity, :hook => true }
 
   it_behaves_like "any redis object model" do
     subject do
@@ -877,6 +879,25 @@ describe Aji::User do
 
     it "returns all subscribed channels with a single youtube author" do
       subject.youtube_channels.should == youtube_channels
+    end
+  end
+
+  describe "#suppress_hooks!" do
+    let(:video) { stub.as_null_object }
+
+    it "prevents hooks from being sent to the identity" do
+      identity.should_not_receive(:hook)
+
+      subject.suppress_hooks! do
+        subject.favorite_video video, Time.now
+      end
+    end
+
+    it "only lasts the duration of the given block" do
+      identity.should_receive(:hook).with(:favorite, video)
+
+      subject.suppress_hooks! {}
+      subject.favorite_video video, Time.now
     end
   end
 end

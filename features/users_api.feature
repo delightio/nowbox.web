@@ -74,3 +74,23 @@ Feature: Users API
     When testing another user's authentication
     Then the status code should be 401
     And there should be an error
+
+  Scenario: Start synchronization of a user's youtube account
+    Given a user with an authorized youtube account
+    And a valid token for the user
+    When requesting a synchronization occur
+    Then the status code should be 202
+    And the synchronization should be enqueued
+
+  Scenario: Start synchronization of user's youtube account when unauthorized
+    Given a user with an authorized youtube account
+    When requesting a synchronization occur
+    Then the status code should be 401
+    And there should be an error
+
+  Scenario: Start synchronization of a user with no youtube account
+    Given a valid token for a user
+    When requesting a synchronization occur
+    Then the status code should be 400
+    And there should be an error
+

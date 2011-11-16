@@ -30,6 +30,14 @@ class YouTubeIt
 
         return YouTubeIt::Parser::VideosFeedParser.new(response.body).parse
       end
+
+      def subscriptions user, opts
+        opts['v'] = '2'
+        subscription_url = "/feeds/api/users/#{user || 'default'}/subscriptions?#{opts.to_param}"
+        response = yt_session.get subscription_url
+
+        YouTubeIt::Parser::SubscriptionFeedParser.new(response).parse
+      end
     end
   end
 end

@@ -164,7 +164,7 @@ to <code>http://api.nowbox.com/auth/failure</code>.</em></p>
           <span class="n">auth</span><span class="o">.</span><span class="n">grant!</span>
           <span class="n">user</span> <span class="o">=</span> <span class="n">auth</span><span class="o">.</span><span class="n">user</span>
         <span class="k">else</span>
-          <span class="n">user</span><span class="o">.</span><span class="n">subscribe_social</span> <span class="n">build_stream_channel</span>
+          <span class="n">user</span><span class="o">.</span><span class="n">subscribe_social</span> <span class="n">account</span><span class="o">.</span><span class="n">build_stream_channel</span>
         <span class="k">end</span>
 
         <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span> <span class="n">user</span><span class="o">.</span><span class="n">serializable_hash</span>
@@ -176,37 +176,82 @@ to <code>http://api.nowbox.com/auth/failure</code>.</em></p>
     <span class="k">end</span></pre></div>
       </td>
     </tr>
-    <tr id='section-POST_/auth/:provider/deauthorize'>
+    <tr id='section-POST_/auth/you_tube/deauthorize'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-POST_/auth/:provider/deauthorize">&#182;</a>
+          <a class="pilcrow" href="#section-POST_/auth/you_tube/deauthorize">&#182;</a>
         </div>
-        <h2>POST /auth/:provider/deauthorize</h2>
+        <h2>POST /auth/you_tube/deauthorize</h2>
 
-<p>Deauthorizes an account effectively removing it from the system.<br>
+<p>Creates a new user id and copies all exisiting channels
 <strong>Returns</strong> an updated version of the user resource.</p>
 
 <p><strong>Required params</strong>
-&ndash; <code>uid</code>: The unique identifier of the account to be deauthorized.</p>
+&ndash; <code>user_id</code>: The unique identifier of the user to be signed out of YouTube.</p>
       </td>
       <td class=code>
-        <div class='highlight'><pre>    <span class="n">post</span> <span class="s1">&#39;/:provider/deauthorize&#39;</span> <span class="k">do</span>
+        <div class='highlight'><pre>    <span class="n">post</span> <span class="s1">&#39;/you_tube/deauthorize&#39;</span> <span class="k">do</span>
       <span class="n">content_type</span> <span class="ss">:json</span>
 
-      <span class="n">account</span> <span class="o">=</span> <span class="no">Account</span><span class="o">.</span><span class="n">find_by_uid_and_provider</span> <span class="n">params</span><span class="o">[</span><span class="ss">:uid</span><span class="o">]</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:provider</span><span class="o">]</span>
-
-      <span class="k">if</span> <span class="n">account</span><span class="o">.</span><span class="n">nil?</span>
-        <span class="k">return</span> <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s2">&quot;No </span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:provider</span><span class="o">]</span><span class="si">}</span><span class="s2"> account &quot;</span> <span class="o">+</span>
-                                <span class="s2">&quot;with uid:</span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:uid</span><span class="o">]</span><span class="si">}</span><span class="s2"> known&quot;</span><span class="p">)</span>
+      <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_id</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span>
+      <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">nil?</span>
+        <span class="k">return</span> <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+          <span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s2">&quot;User[</span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span><span class="si">}</span><span class="s2">] not found.&quot;</span><span class="p">)</span>
+      <span class="k">end</span>
+      <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">nil?</span>
+        <span class="k">return</span> <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+          <span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s2">&quot;User[</span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span><span class="si">}</span><span class="s2">] has not been linked to any external accounts.&quot;</span><span class="p">)</span>
       <span class="k">end</span>
 
+      <span class="n">accounts</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span> <span class="n">a</span><span class="o">.</span><span class="n">class</span><span class="o">==</span><span class="no">Account</span><span class="o">::</span><span class="no">Youtube</span> <span class="p">}</span>
+      <span class="k">if</span> <span class="n">accounts</span><span class="o">.</span><span class="n">count</span> <span class="o">!=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+          <span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s2">&quot;User[</span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span><span class="si">}</span><span class="s2">] has </span><span class="si">#{</span><span class="n">accounts</span><span class="o">.</span><span class="n">count</span><span class="si">}</span><span class="s2"> YouTube: </span><span class="si">#{</span><span class="n">accounts</span><span class="o">.</span><span class="n">inspect</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+      <span class="k">end</span>
+      <span class="n">account</span> <span class="o">=</span> <span class="n">accounts</span><span class="o">.</span><span class="n">first</span>
+
       <span class="n">auth</span> <span class="o">=</span> <span class="no">Authorization</span><span class="o">.</span><span class="n">new</span> <span class="n">account</span><span class="p">,</span> <span class="n">account</span><span class="o">.</span><span class="n">identity</span>
+      <span class="n">new_user</span> <span class="o">=</span> <span class="n">auth</span><span class="o">.</span><span class="n">deauthorize!</span>
 
-      <span class="n">auth</span><span class="o">.</span><span class="n">deauthorize!</span>
-
-      <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span> <span class="n">auth</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">serializable_hash</span>
-
+      <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span> <span class="n">new_user</span><span class="o">.</span><span class="n">serializable_hash</span>
     <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-##_POST_/auth/:provider/deauthorize'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-##_POST_/auth/:provider/deauthorize">&#182;</a>
+        </div>
+        <h1>## POST /auth/:provider/deauthorize</h1>
+
+<h1>Deauthorizes an account effectively removing it from the system.</h1>
+
+<h1><strong>Returns</strong> an updated version of the user resource.</h1>
+
+<h1><strong>Required params</strong></h1>
+
+<h1>&ndash; <code>uid</code>: The unique identifier of the account to be deauthorized.</h1>
+
+<p>post &lsquo;/:provider/deauthorize&rsquo; do
+  content_type :json</p>
+
+<p>account = Account.find<em>by</em>uid<em>and</em>provider params[:uid], params[:provider]</p>
+
+<p>if account.nil?
+    return MultiJson.encode(:error =&gt; &ldquo;No #{params[:provider]} account &rdquo; +
+                            &ldquo;with uid:#{params[:uid]} known&rdquo;)
+  end</p>
+
+<p>auth = Authorization.new account, account.identity</p>
+
+<p>auth.deauthorize!</p>
+
+<p>MultiJson.encode auth.user.serializable_hash</p>
+
+<p>end</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
       </td>
     </tr>
     <tr id='section-POST_/auth/request_token'>

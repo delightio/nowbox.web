@@ -4,10 +4,10 @@ module Aji
 
     @queue = :youtube_sync
 
-    def self.perform account_id
+    def self.perform account_id, disable_resync = false
       account = Account.find(account_id)
 
-      YoutubeSync.new(account).synchronize!
+      YoutubeSync.new(account).synchronize! disable_resync
     end
   end
 end

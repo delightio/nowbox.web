@@ -128,7 +128,7 @@ class YoutubeSynchronization < Spinach::FeatureSteps
   And 'the next synchronization should be scheduled' do
     j = MultiJson.decode Aji.redis.lpop(Aji.redis.keys("resque:delayed:*")[0])
     j['queue'].should == 'youtube_sync'
-    j['args'].should == @account.id
+    j['args'].should == [@account.id]
   end
 
   And 'all videos in the watch later playlist should be in the user\'s queue' do
