@@ -108,7 +108,7 @@ describe Aji::YoutubeAPI, :unit, :net do
       info.keys.should == %w[uid published updated
           category title profile homepage featured_video_id about_me first_name
           last_name hobbies location occupation school subscriber_count
-          thumbnail username total_upload_views]
+          video_upload_count thumbnail username total_upload_views]
           info['uid'].should == "day9tv"
           info['published'].should == Time.new(2010, 4, 22, 14, 48, 11, '-07:00')
           info['updated'].should > Time.new(2011, 9, 29, 07, 30, 00, '-07:00')
@@ -125,6 +125,7 @@ describe Aji::YoutubeAPI, :unit, :net do
           info['occupation'].should == "Starcraft 2 Player and Commentator"
           info['school'].should == "Harvey Mudd College, USC"
           info['subscriber_count'].should > 21000
+          info['video_upload_count'].should >= 950
           info['thumbnail'].should == "http://i2.ytimg.com/i/axar6TBM-94_ezoS00fLkA/1.jpg?v=b5d95a"
           info['username'].should == "day9tv"
           info['total_upload_views'].should > 27000000
