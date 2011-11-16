@@ -20,7 +20,7 @@ module Aji
             end
 
             # Add a channel
-            chs = Channel.first(200)
+            chs = Channel::Account.first(200)
             ch = chs.sample
             until ch.accounts.count==1 && !user.subscribed?(ch)
               Aji.log "Subscribing: #{ch.id}, #{ch.title} is curated ch or user subscribed to it already."
