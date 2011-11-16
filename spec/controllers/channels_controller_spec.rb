@@ -56,10 +56,11 @@ module Aji
           last_response.status.should == 400
         end
 
-        let(:channel1) { Factory :youtube_channel_with_populated_videos }
-        let(:channel2) { Factory :youtube_channel_with_populated_videos }
+        let(:channel1) { Factory :single_youtube_account_channel }
+        let(:channel2) { Factory :single_youtube_account_channel }
         let(:channels) { [channel1, channel2] }
         let(:categories) { channels.map {|ch| ch.content_videos(1).first.category} }
+
         it "returns top 2 featured channels of given categories" do
           category_ids = categories.map &:id
           params = { :category_ids => category_ids.join(','),
@@ -99,6 +100,13 @@ module Aji
           body_hash.should == channel.serializable_hash(params)
         end
 
+        it "responds with 401 when given an improper token for user channels" do
+          bob = Factory :user, name: "Bob"
+
+          get "/1/channels/#{bob.favorite_channel.id}"
+          last_response.status.should == 401
+          last_response.body.should =~ /error/
+        end
       end
 
       describe "get #{resource_uri}/:id/videos" do
