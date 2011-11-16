@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'erubis'
 require_relative 'route_helper'
+require_relative 'view_helper'
 
 module Aji
 
@@ -27,6 +28,8 @@ module Aji
     helpers do
       include Rack::Utils
       include Aji::RouteHelper
+      include Aji::ViewHelper
+
       alias_method :h, :escape_html
 
       ### MOBILE ###

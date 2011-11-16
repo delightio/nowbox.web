@@ -3,14 +3,15 @@
 		<a href="/download"><img src="/images/graphics/ipad-chrome-small.png" height="48px" /></a>
 	</div>
 	<div style="float: left; margin-right: 10px; height: 50px;">
-		<img src="/images/graphics/ipad_minimal.png" height ="48px" style="margin-top: 1px;"/>
-	</div>	
-	<div class="blurb">
-		<p><span class="social_sharer"><%= @user.name %></span> shared a video using the <span style="font-weight: bold; color: #FFF;">nowbox</span> iPad app - join them!</p>
-		<p>nowbox is your personal entertainment guide to the best online videos</p>
+	  <img src="<%= nil_on_fail("/images/graphics/ipad_minimal.png") { @share.publisher.try(:thumbnail_uri) } %>" height ="48px" style="margin-top: 1px;" />
+    <!-- <img src="/images/graphics/ipad_minimal.png" height ="48px" style="margin-top: 1px;"/> -->
 	</div>
-	<a class="download button round-corners-10" href="/download">
-		Free Download
+	<div class="blurb">
+		<p><span class="social_sharer"><%= @user.name %></span> shared a video using the <span style="font-weight: bold; color: #FFF;">NOWBOX</span> iPad app - join them!</p>
+		<p><%= @share.message %></p>
+	</div>
+	<a class="button" style="float: right; margin-right:7px" href="/download">
+    <img src="/images/icons/coming-soon-app-store.png" height="50px" />
 	</a>
 	<div class="clearfix"></div>
 </div>

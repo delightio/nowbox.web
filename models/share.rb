@@ -36,6 +36,8 @@ module Aji
 
     def publisher
       user.send "#{network}_account".to_sym
+    rescue
+      nil
     end
 
     def publish
