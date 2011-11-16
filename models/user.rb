@@ -26,7 +26,7 @@ module Aji
 
     after_initialize :initialize_settings
     before_create :create_user_channels
-    after_create :create_identity, :subscribe_featured_channels
+    after_create :create_identity
     after_destroy :delete_redis_keys
 
     def self.create_from other
