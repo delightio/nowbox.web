@@ -3,7 +3,7 @@ require File.expand_path("../../../spec_helper", __FILE__)
 describe Aji::Mixins::Formatters do
   let(:long_message) { "A really #{"long" * 15} string" }
   let(:short_message) { "Hah this video!" }
-  let(:link_text) { "http://nowbox.com/share/51232" }
+  let(:link_text) { "http://nowbox.com/shares/51232" }
   let(:coda) { " #{link_text} via @nowbox for iPad" }
 
   describe Aji::Mixins::Formatters::Twitter do
