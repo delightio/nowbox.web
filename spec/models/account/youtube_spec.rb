@@ -38,6 +38,14 @@ describe Account::Youtube do
     end
   end
 
+  describe "#video_upload_count" do
+    it "returns the number of video uploads from the info hash" do
+      subject.info['video_upload_count'] = 411
+
+      subject.video_upload_count.should == subject.info['video_upload_count']
+    end
+  end
+
   describe "#existing?" do
     it "is false for non existing youtube account" do
       a = Account::Youtube.new :uid => "doesntexist"

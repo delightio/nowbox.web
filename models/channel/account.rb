@@ -67,6 +67,14 @@ module Aji
       most_significant_account.subscriber_count
     end
 
+    def video_count
+      if accounts.all? { |a| a.provider == 'youtube' }
+        accounts.map(&:video_upload_count).inject(&:+)
+      else
+        accounts.map { |a| a.content_videos.count }.inject(&:+)
+      end
+    end
+
     def thumbnail_uri
       return "http://#{Aji.conf['TLD']}/images/icons/#{title.downcase}.png" if default_listing
       accounts.first.thumbnail_uri
@@ -91,8 +99,10 @@ module Aji
     end
 
     def description
-      return accounts.first.description if accounts.count==1
-      "Curated channel containing videos from: #{accounts.map(&:username).join(', ')}"
+      return accounts.first.description if accounts.count == 1
+
+      "Curated channel containing videos from: " +
+        accounts.map(&:username).join(', ')
     end
 
     def serializable_hash options={}
@@ -100,7 +110,8 @@ module Aji
       h = {
         "type" => "Account::#{accounts.first.type.split('::').last}",
         "description" => description,
-        "category_ids" => category_ids.first(2)
+        "category_ids" => category_ids.first(2),
+        "video_count" => video_count,
       }
       s.merge! h
     end

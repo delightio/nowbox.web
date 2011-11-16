@@ -91,18 +91,65 @@ module Aji
     end
 
     describe "#serializable_hash" do
-      it "returns an hash of account types" do
+      subject do
+        Channel::Account.new do |c|
+        c.stub :category_ids => []
+        c.stub :subscriber_count => 0
+        c.stub :content_video_id_count => 0
+        c.stub :accounts => accounts
+        c.stub :description => "foobar videos"
+        end
+      end
 
-        channel = Channel::Account.new
-        # TODO: Too bad we can't stub super
-        channel.stub(:category_ids).and_return([])
-        channel.stub(:subscriber_count).and_return(0)
-        channel.stub(:content_video_id_count).and_return(0)
-        channel.stub(:accounts).and_return([Account::Youtube.new])
-        channel.serializable_hash['type'].should == "Account::Youtube"
+      let(:accounts) do
+       [mock("youtube account", :video_upload_count => 5,
+         :thumbnail_uri => "thumbs",
+         :type => 'Aji::Account::Youtube', :provider => 'youtube'),
+        mock("youtube account", :video_upload_count => 6,
+         :provider => 'youtube')]
+      end
 
-        channel.stub(:accounts).and_return([Account::Twitter.new])
-        channel.serializable_hash['type'].should == "Account::Twitter"
+      it "displays the account type in the channel" do
+        subject.serializable_hash['type'].should == "Account::Youtube"
+      end
+
+      it "displays the hinted video count for youtube" do
+        subject.serializable_hash['video_count'] == accounts.map(
+          &:video_upload_count).inject(:+)
+      end
+    end
+
+    describe "#video_count" do
+      subject do
+        Channel::Account.new do |c|
+          c.stub :accounts => accounts
+        end
+      end
+
+      context "when accounts are from youtube" do
+        let(:accounts) do
+         [mock("youtube account", :video_upload_count => 5,
+           :provider => 'youtube'),
+          mock("youtube account", :video_upload_count => 6,
+           :provider => 'youtube')]
+        end
+
+        it "returns the sum of the uploaded video count in each account" do
+          subject.video_count.should == 11
+        end
+      end
+
+      context "when accounts are not all from youtube" do
+        let(:accounts) do
+         [mock("twitter account", :content_videos => [stub, stub],
+               :provider => 'twitter'),
+          mock("facebook account", :content_videos => [stub, stub, stub],
+               :provider => 'facebook')]
+        end
+
+        it "returns the sum of the count of content videos" do
+          subject.video_count.should == 5
+        end
       end
     end
 
