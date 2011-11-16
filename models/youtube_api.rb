@@ -4,8 +4,151 @@ module Aji
 
     attr_reader :uid
 
-    def initialize uid=nil
-      @uid = uid
+    def initialize uid=nil, token=nil, secret=nil
+      raise ArgumentError, "Invalid credentials" unless
+        (token and secret) or not (token or secret)
+      @uid, @token, @secret = uid, token, secret
+      @subscription_ids = {}
+      @watch_later_entry_ids = {}
+    end
+
+    def subscription_ids
+      subscriptions if @subscription_ids.empty?
+      @subscription_ids
+    end
+
+    def subscriptions uid=uid
+      options = { 'max-results' => 50, 'start-index' => 1 }
+
+      [].tap do |subs|
+        tracker.hit!
+        sub_feed = client.subscriptions(uid, options)
+
+        while sub_feed.length == options['max-results'] do
+          sub_feed.each do |sub|
+            cid = sub.title.split(" ").last.downcase
+            @subscription_ids[cid] = sub.id
+            subs.push(
+              Account::Youtube.find_or_create_by_lower_uid(cid).to_channel)
+          end 
+
+          tracker.hit!
+          options['start-index'] += options['max-results']
+          sub_feed = client.subscriptions(uid, options)
+        end
+
+        sub_feed.each do |sub|
+          cid = sub.title.split(" ").last.downcase
+          @subscription_ids[cid] = sub.id
+          subs.push(Account::Youtube.find_or_create_by_lower_uid(cid).to_channel)
+        end 
+      end
+    end
+
+    def subscribe_to channel
+      tracker.hit!
+      channel_uid = uid_from_channel channel
+      client.subscribe_channel channel_uid
+      subscription_ids.clear
+    rescue UploadError => e
+      raise e unless e.message =~ /Subscription already exists/
+    end
+
+    def unsubscribe_from channel
+      channel_uid = uid_from_channel channel
+
+      client.unsubscribe_channel subscription_ids[channel_uid]
+      subscription_ids.delete channel_uid
+    rescue UploadError => e
+      Aji.log :WARN, "#{e.class}:#{e.message}"
+    end
+
+    def favorite_videos uid=uid
+      options = { 'max-results' => 50, 'start-index' => 1 }
+
+      [].tap do |favorites|
+        tracker.hit!
+        videos = client.favorites(uid, options).videos
+        options['start-index'] += options['max-results']
+
+        while videos.length == options['max-results'] do
+          videos.each do |v|
+            favorites << youtube_it_to_video(v)
+          end
+
+          tracker.hit!
+          videos = client.favorites(uid, options).videos
+          options['start-index'] += options['max-results']
+        end
+
+        videos.each do |v|
+          favorites << youtube_it_to_video(v)
+        end
+      end.reject{ |v| v.external_id.nil? }
+    end
+
+    def add_to_favorites video
+      tracker.hit!
+      client.add_favorite video.external_id
+    rescue UploadError => e
+      raise e unless e.message =~ /Favorite already exists/
+    end
+
+    def remove_from_favorites video
+      tracker.hit!
+      client.delete_favorite video.external_id
+    rescue UploadError => e
+      raise e unless e.message =~ /Video favorite not found/
+    end
+
+    def watch_later_entry_ids
+      watch_later_videos if @watch_later_entry_ids.empty?
+      @watch_later_entry_ids
+    end
+
+    def watch_later_videos
+      options = { 'max-results' => 50, 'start-index' => 1 }
+
+      [].tap do |watch_later|
+        tracker.hit!
+        youtube_videos = client.watch_later(uid, options).videos
+        options['start-index'] += options['max-results']
+
+        while youtube_videos.length == options['max-results'] do
+          youtube_videos.each do |v|
+            video = youtube_it_to_video(v)
+            watch_later << video
+            @watch_later_entry_ids[video.external_id] =
+              v.video_id.split(':').last
+          end
+
+          tracker.hit!
+          youtube_videos = client.watch_later(uid, options).videos
+          options['start-index'] += options['max-results']
+        end
+
+        youtube_videos.each do |v|
+          video = youtube_it_to_video(v)
+          watch_later << video
+          @watch_later_entry_ids[video.external_id] =
+            v.video_id.split(':').last
+        end
+      end.reject{ |v| v.external_id.nil? }
+    end
+
+    def add_to_watch_later video
+      tracker.hit!
+      client.add_watch_later video.external_id
+    rescue UploadError => e
+      raise e unless e.message =~ /This resource already exists/
+    end
+
+    def remove_from_watch_later video
+      tracker.hit!
+      client.delete_watch_later watch_later_entry_ids[video.external_id] if
+      watch_later_entry_ids.has_key? video.external_id
+    rescue UploadError => e
+      raise e unless e.message =~ /Playlist video not found/
     end
 
     def author_info uid=uid
@@ -34,7 +177,7 @@ module Aji
     def uploaded_videos uid=uid
       tracker.hit!
       client.videos_by(:author => uid, :order_by => 'published',
-       :per_page => 50).videos.map{ |v| youtube_it_to_video v }
+                       :per_page => 50).videos.map{ |v| youtube_it_to_video v }
     end
 
     def keyword_search keywords, per_page=50
@@ -42,7 +185,7 @@ module Aji
       client.videos_by(
         :query => Array(keywords).join(' '),
         :per_page => per_page).
-          videos.map{ |v| youtube_it_to_video v }
+        videos.map{ |v| youtube_it_to_video v }
     end
 
     def youtube_it_to_hash video
@@ -57,7 +200,7 @@ module Aji
 
       {
         :title => video.title,
-        :external_id => video.video_id.split(':').last,
+        :external_id => Link.new(video.player_url).external_id,
         :description => video.description,
         :duration => video.duration,
         :viewable_mobile => (not video.noembed),
@@ -82,9 +225,21 @@ module Aji
         cooldown: 1.hour, hits_per_session: 250
     end
 
+    def uid_from_channel channel
+      channel.accounts.first.uid
+    end
 
     def client
-      @@client ||= YouTubeIt::Client.new dev_key: Aji.conf['YOUTUBE_KEY']
+      @client ||=
+        if @token and @secret
+          YouTubeIt::OAuthClient.new(consumer_key: Aji.conf['YOUTUBE_OA_KEY'],
+                                     consumer_secret: Aji.conf['YOUTUBE_OA_SECRET'], username: @uid,
+                                     dev_key: Aji.conf['YOUTUBE_KEY']).tap do |c|
+                                       c.authorize_from_access @token, @secret
+                                     end
+        else
+          @@client ||= YouTubeIt::Client.new dev_key: Aji.conf['YOUTUBE_KEY']
+        end
     end
     private :client
 

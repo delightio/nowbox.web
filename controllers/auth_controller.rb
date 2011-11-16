@@ -81,12 +81,15 @@ module Aji
 
         account = provider_class.from_auth_hash auth_hash
 
+        if account.class == Account::Youtube
+          auth = Authorization.new account, user.identity
+          auth.grant!
+          user = auth.user
+        else
+          user.subscribe_social account.build_stream_channel
+        end
 
-        account.sign_in_as user
-
-        MultiJson.encode(user.serializable_hash.merge(
-          "#{params[:provider]}_account_id" => account.id))
-
+        MultiJson.encode user.serializable_hash
       rescue => e
         Aji.log :WARN, "#{e.class}: #{e.message}"
         MultiJson.encode :error => 'Unable to authenticate',
@@ -94,29 +97,63 @@ module Aji
       end
     end
 
-    # ## POST /auth/:provider/deauthorize
-    # Deauthorizes an account effectively removing it from the system.  
+    # ## POST /auth/you_tube/deauthorize
+    # Creates a new user id and copies all exisiting channels
     # __Returns__ an updated version of the user resource.
     #
     # __Required params__
-    # - `uid`: The unique identifier of the account to be deauthorized.
-    post '/:provider/deauthorize' do
+    # - `user_id`: The unique identifier of the user to be signed out of YouTube.
+
+    post '/you_tube/deauthorize' do
       content_type :json
 
-      account = Account.find_by_uid_and_provider params[:uid], params[:provider]
-
-      if account.nil?
-        return MultiJson.encode(:error => "No #{params[:provider]} account " +
-                                "with uid:#{params[:uid]} known")
+      user = User.find_by_id params[:user_id]
+      if user.nil?
+        return MultiJson.encode(
+          :error => "User[#{params[:user_id]}] not found.")
+      end
+      if user.identity.nil?
+        return MultiJson.encode(
+          :error => "User[#{params[:user_id]}] has not been linked to any external accounts.")
       end
 
+      accounts = user.identity.accounts.select { |a| a.class==Account::Youtube }
+      if accounts.count != 1
+        return MultiJson.encode(
+          :error => "User[#{params[:user_id]}] has #{accounts.count} YouTube: #{accounts.inspect}")
+      end
+      account = accounts.first
+
       auth = Authorization.new account, account.identity
+      new_user = auth.deauthorize!
 
-      auth.deauthorize!
-
-      MultiJson.encode auth.user.serializable_hash
-
+      MultiJson.encode new_user.serializable_hash
     end
+
+
+    # # ## POST /auth/:provider/deauthorize
+    # # Deauthorizes an account effectively removing it from the system.
+    # # __Returns__ an updated version of the user resource.
+    # #
+    # # __Required params__
+    # # - `uid`: The unique identifier of the account to be deauthorized.
+    # post '/:provider/deauthorize' do
+    #   content_type :json
+    #
+    #   account = Account.find_by_uid_and_provider params[:uid], params[:provider]
+    #
+    #   if account.nil?
+    #     return MultiJson.encode(:error => "No #{params[:provider]} account " +
+    #                             "with uid:#{params[:uid]} known")
+    #   end
+    #
+    #   auth = Authorization.new account, account.identity
+    #
+    #   auth.deauthorize!
+    #
+    #   MultiJson.encode auth.user.serializable_hash
+    #
+    # end
 
     # ## POST /auth/request_token
     # Securely get a user authentication token.

@@ -3,7 +3,6 @@ class UsersApi < Spinach::FeatureSteps
   include TestUtils
   #include HTTPSteps #TODO: figure out how to factor steps into modules.
 
-
   use_api_subdomain!
 
   def subdomain
@@ -124,7 +123,7 @@ class UsersApi < Spinach::FeatureSteps
     put "/1/users/#{@other_user.id}/settings", @settings
   end
 
-  [200, 201, 400, 401, 403, 404].each do |code|
+  [200, 201, 202, 400, 401, 403, 404].each do |code|
     Then "the status code should be #{code}" do
       last_response.status.should == code
     end
@@ -141,6 +140,27 @@ class UsersApi < Spinach::FeatureSteps
   When  'testing another user\'s authentication' do
     @other_user = User.create
     get "/1/users/#{@other_user.id}/auth_test"
+  end
+  
+  Given 'a user with an authorized youtube account' do
+    @user = User.create
+    @account = Account::Youtube.from_auth_hash YOUTUBE_HASH
+    @user.identity.accounts << @account
+  end
+
+  Given 'a valid token for the user' do
+    @token = Token::Generator.new(@user).token
+    header 'X-NB-AuthToken', @token
+  end
+
+  When 'requesting a synchronization occur' do
+    post "/1/users/#{@user.id}/synchronize"
+  end
+
+  Then 'the synchronization should be enqueued' do
+    j = MultiJson.decode Aji.redis.lpop("resque:queue:youtube_sync")
+    j['class'].should == 'Aji::Queues::SynchronizeWithYoutube'
+    j['args'].should == [@account.id, "disable_resync"]
   end
 end
 

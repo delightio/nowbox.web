@@ -7,9 +7,14 @@ describe Aji::Authorization do
   subject { Authorization.new account, given_identity }
 
   describe "#grant!" do
-    context "when the account is not associated with an identity" do
-      let(:account) { OpenStruct.new :identity => nil, :save => true }
+    let(:account) do
+      OpenStruct.new(:identity => nil).tap do |a|
+        a.stub :save => true
+        a.stub :authorize! => true
+      end
+    end
 
+    context "when the account is not associated with an identity" do
       it "assigns the given identity to the account" do
         expect{ subject.grant! }.to change{ account.identity }.from(nil).to(
           given_identity)
@@ -17,7 +22,10 @@ describe Aji::Authorization do
     end
 
     context "when the account identity matches the given identity" do
-      let(:account) { stub :identity => given_identity, :save => true }
+      let(:account) do
+        mock "account", :identity => given_identity, :save => true,
+          :authorize! => true
+      end
 
       it "sets the user to the given identity's user" do
         expect{ subject.grant! }.to change{ subject.user }.from(nil).to(
@@ -27,8 +35,8 @@ describe Aji::Authorization do
 
     context "when the account identity is not the given identity" do
       let(:account) do
-        stub :identity => stub(:merge! => true, :user => stub, :save => true),
-          :save => true
+        mock "account", :identity => stub(:merge! => true, :user => stub,
+          :save => true), :save => true, :authorize! => true
       end
 
       it "merges the given identity into the account identity" do
@@ -42,6 +50,12 @@ describe Aji::Authorization do
           account.identity.user)
       end
     end
+
+    it "authorizes the user to interact with this account" do
+      account.should_receive(:authorize!).with(given_identity.user)
+
+      subject.grant!
+    end
   end
 
   describe "#deauthorize!" do
@@ -49,18 +63,22 @@ describe Aji::Authorization do
       stub :identity => stub, :user => stub, :deauthorize! => true,
         :save => true
     end
+    before :each do
+      @new_user = stub
+    end
 
     subject { Authorization.new account, account.identity }
 
-    it "deauthorizes the given account" do
+    xit "deauthorizes the given account" do
       account.should_receive(:deauthorize!)
 
       subject.deauthorize!
     end
 
-    it "sets the user to the given identity's user" do
-      expect{ subject.deauthorize! }.to change{ subject.user }.from(nil).to(
-        account.user)
+    it "creates a new user from the one associated with the account" do
+      User.should_receive(:create_from).with(account.user)
+
+      subject.deauthorize!
     end
   end
 end

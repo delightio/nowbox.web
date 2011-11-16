@@ -2,14 +2,6 @@ require File.expand_path("../../../spec_helper", __FILE__)
 
 module Aji
   describe Channel::Account, :net do
-   # before :all do
-     # VCR.config do |c|
-     #   c.cassette_library_dir = "spec/cassettes"
-     #   c.stub_with :typhoeus
-     #   c.default_cassette_options = { :record => :all }
-     # end
-   # end
-
     subject { Channel::Account.create accounts: accounts }
 
     let(:accounts) do

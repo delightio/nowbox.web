@@ -115,6 +115,26 @@ module Aji
         current_user.settings
       end
 
+      # ## POST users/:user_id/synchronize
+      # *Requires authentication*
+      #
+      # __Returns__ 202 when a sync has been successfully enqueued. 401 if
+      # unauthorized or 400 if the user has no youtube account.
+      #
+      # __Parameters__ none
+      post '/:user_id/synchronize' do
+        authenticate!
+
+        if account = current_user.identity.youtube_account
+          YoutubeSync.new(account).background_synchronize! :disable_resync
+          status 202
+          current_user
+        else
+          status 400
+          {:error => "No youtube account associated with the current user"}
+        end
+      end
+
       # ## GET users/:user_id/auth_test
       # *Requires authentication*
       get '/:user_id/auth_test' do
@@ -124,3 +144,4 @@ module Aji
     end
   end
 end
+

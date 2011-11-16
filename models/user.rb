@@ -29,6 +29,12 @@ module Aji
     after_create :create_identity, :subscribe_featured_channels
     after_destroy :delete_redis_keys
 
+    def self.create_from other
+      user = User.create
+      user.copy_from! other
+      user
+    end
+
     def subscribe_featured_channels
       if region.nil?
         Aji.log "User[#{id}] is not assigned to any region."
@@ -78,6 +84,7 @@ module Aji
         "twitter_channel_id" => twitter_channel_id,
         "facebook_channel_id" => facebook_channel_id,
         "subscribed_channel_ids" => subscribed_channel_ids,
+        "accounts" => identity.account_info
       }
     end
 
@@ -95,6 +102,10 @@ module Aji
         social_channel_list.length
 
       channels
+    end
+
+    def youtube_channels
+      subscribed_channels.select &:youtube_channel?
     end
 
     def facebook_channel_id
@@ -160,6 +171,7 @@ module Aji
 
     def subscribe channel
       subscribed_list << channel.id unless subscribed? channel
+      identity.hook :subscribe, channel unless @no_hooks
       subscribed? channel
     end
 
@@ -170,6 +182,7 @@ module Aji
 
     def unsubscribe channel
       subscribed_list.delete channel.id
+      identity.hook :unsubscribe, channel unless @no_hooks
       not subscribed? channel
     end
 
@@ -188,18 +201,36 @@ module Aji
 
     def favorite_video video, favorited_time
       favorite_channel.push video, favorited_time.to_i
+      identity.hook :favorite, video unless @no_hooks
     end
 
     def unfavorite_video video
       favorite_channel.pop video
+      identity.hook :unfavorite, video unless @no_hooks
     end
 
     def enqueue_video video, enqueued_time
       queue_channel.push video, enqueued_time.to_i
+      identity.hook :enqueue, video unless @no_hooks
     end
 
     def dequeue_video video
       queue_channel.pop video
+      identity.hook :dequeue, video unless @no_hooks
+    end
+
+    def suppress_hooks!
+      @no_hooks = true
+      yield
+      @no_hooks = nil
+    end
+
+    def favorite_videos
+      favorite_channel.content_videos
+    end
+
+    def queued_videos
+      queue_channel.content_videos
     end
 
     def redis_keys
@@ -232,6 +263,13 @@ module Aji
       self.name.split(' ').last
     end
 
+    def copy_from! other
+      merge! other
+      other.social_channels.each do |c|
+        subscribe_social c
+      end
+    end
+
     def merge! other
       other.subscribed_channels.each do |c|
         subscribe c
@@ -241,6 +279,8 @@ module Aji
       favorite_channel.merge! other.favorite_channel
       queue_channel.merge! other.queue_channel
 
+      self.region = other.region
+      self.settings = other.settings
       self.name = other.name if name == ""
       self.email = other.email if email == ""
 
@@ -248,6 +288,8 @@ module Aji
         self.name = other.name unless other.name == ""
         self.email = other.email unless other.email == ""
       end
+      # TODO: don't we need to do a save?
+      save
     end
 
     private

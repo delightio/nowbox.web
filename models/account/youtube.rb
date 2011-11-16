@@ -71,7 +71,11 @@ module Aji
     end
 
     def api
-      @api ||= YoutubeAPI.new uid
+      @api ||=  if authorized?
+                  YoutubeAPI.new uid, credentials['token'], credentials['secret']
+                else
+                  YoutubeAPI.new uid
+                end
     end
 
     def set_provider
@@ -88,6 +92,30 @@ module Aji
       return false if blacklisted? ||
                       forbidden_words_in_username?
       true
+    end
+
+    def on_favorite video
+      api.add_to_favorites video if video.source == :youtube
+    end
+
+    def on_unfavorite video
+      api.remove_from_favorites video if video.source == :youtube
+    end
+
+    def on_enqueue video
+      api.add_to_watch_later video if video.source == :youtube
+    end
+
+    def on_dequeue video
+      api.remove_from_watch_later video if video.source == :youtube
+    end
+
+    def on_subscribe channel
+      api.subscribe_to channel if channel.youtube_channel?
+    end
+
+    def on_unsubscribe channel
+      api.unsubscribe_from channel if channel.youtube_channel?
     end
 
     def self.create_if_existing uid
@@ -111,11 +139,9 @@ module Aji
       end
     end
 
-    def sign_in_as user
+    def authorize! user
       Aji.log "User[#{user.id}] authorized Account::Youtube[#{id}]"
-      # TODO: Filler until youtube sync is written.
-      Channel::Account.last(5).each { |c| user.subscribe c }
-      #YoutubeSync.new user, self
+      YoutubeSync.new(self).background_synchronize!
     end
 
     def self.from_auth_hash auth_hash

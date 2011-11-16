@@ -116,6 +116,11 @@ module Aji
       end
     end
 
+    def youtube_channel?
+      self.class == Channel::Account and
+        accounts.map(&:class) == [Aji::Account::Youtube]
+    end
+
     def redis_keys
       [ content_zset, category_id_zset ].map &:key
     end

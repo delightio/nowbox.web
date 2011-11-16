@@ -82,9 +82,11 @@ module Aji
   end
 end
 
-
+require 'active_support/core_ext/object'
 # Monkey Patching
 require_relative 'lib/patches/string'
+require_relative 'lib/patches/youtube_it/client'
+require_relative 'lib/patches/youtube_it/request/video_upload'
 
 Aji::Mixins = Module.new
 Dir.glob("lib/mixins/*.rb").each { |r| require_relative r }
@@ -104,6 +106,7 @@ Dir.glob("controllers/*_controller.rb").each { |r| require_relative r }
 require_relative 'queues/with_database_connection.rb'
 Dir.glob("queues/*.rb").each { |r| require_relative r }
 Dir.glob("queues/mention/*.rb").each { |r| require_relative r }
+Dir.glob("queues/debug/*.rb").each { |r| require_relative r }
 
 # Add Sinatra web viewer.
 require_relative 'lib/google_auth'

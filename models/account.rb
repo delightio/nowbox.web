@@ -105,17 +105,6 @@ module Aji
             # "description" => description
     end
 
-    def deauthorize!
-      self.identity = nil
-      self.credentials.clear
-      self.mentions.each{ |m| m.destroy }
-      self.mentions.clear
-      content_zset.clear
-      influencer_set.clear
-      self.stream_channel.destroy if self.respond_to? :stream_channel
-      save
-    end
-
     def to_channel
       Channel::Account.find_or_create_by_accounts Array(self)
     end
@@ -144,6 +133,10 @@ module Aji
 
     def downcase_uid
       self.uid = uid.downcase unless uid.nil?
+    end
+
+    def provider
+      self.class.to_s.split('::').last.downcase
     end
 
     # Class Methods follow

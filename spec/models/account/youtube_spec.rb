@@ -182,6 +182,101 @@ describe Account::Youtube do
     end
   end
 
+  describe "user action hooks" do
+    let(:video) { mock "video", :source => :youtube }
+    let(:channel) { mock "channel", :youtube_channel? => true }
+
+    describe "#on_favorite" do
+      it "favorites video via the youtube api" do
+        api.should_receive(:add_to_favorites).with(video)
+
+        subject.on_favorite video
+      end
+
+      it "ignores non-youtube videos" do
+        video = mock "video", :source => :vimeo
+        api.should_not_receive(:add_to_favorites).with(video)
+
+        subject.on_favorite video
+      end
+    end
+
+    describe "#on_unfavorite" do
+      it "unfavorites the video via the youtube api" do
+        api.should_receive(:remove_from_favorites).with(video)
+
+        subject.on_unfavorite video
+      end
+
+      it "ignores non-youtube videos" do
+        video = mock "video", :source => :vimeo
+        api.should_not_receive(:remove_from_favorites).with(video)
+
+        subject.on_unfavorite video
+      end
+    end
+
+    describe "#on_enqueue" do
+      it "adds the video to watch later via the youtube api" do
+        api.should_receive(:add_to_watch_later).with(video)
+
+        subject.on_enqueue video
+      end
+
+      it "ignores non-youtube videos" do
+        video = mock "video", :source => :vimeo
+        api.should_not_receive(:add_to_watch_later).with(video)
+
+        subject.on_enqueue video
+      end
+    end
+
+    describe "#on_dequeue" do
+      it "removes the video from watch later via the youtube api" do
+        api.should_receive(:remove_from_watch_later).with(video)
+
+        subject.on_dequeue video
+      end
+
+      it "ignores non-youtube videos" do
+        video = mock "video", :source => :vimeo
+        api.should_not_receive(:remove_from_watch_later).with(video)
+
+        subject.on_dequeue video
+      end
+    end
+
+    describe "#on_subscribe" do
+      it "subscribes to the channel on youtube via the youtube api" do
+        api.should_receive(:subscribe_to).with(channel)
+
+        subject.on_subscribe channel
+      end
+
+      it "ignores non-youtube channels" do
+        channel = mock "channel", :youtube_channel? => false
+        api.should_not_receive(:subscribe_to).with(channel)
+
+        subject.on_subscribe channel
+      end
+    end
+
+    describe "#on_unsubscribe" do
+      it "unsubscribes from the channel on youtube via the youtube api" do
+        api.should_receive(:unsubscribe_from).with(channel)
+
+        subject.on_unsubscribe channel
+      end
+
+      it "ignores non-youtube channels" do
+        channel = mock "channel", :youtube_channel? => false
+        api.should_not_receive(:unsubscribe_from).with(channel)
+
+        subject.on_unsubscribe channel
+      end
+    end
+  end
+
   describe "#refresh_info" do
     it "updates from youtube and save" do
       subject.should_receive :get_info_from_youtube_api
@@ -210,6 +305,25 @@ describe Account::Youtube do
       subject.stub(:videos).and_return(Array.new(6,mock))
       subject.should_receive(:blacklist).once
       subject.blacklist_repeated_offender
+    end
+  end
+
+  describe "#api" do
+    subject { Account::Youtube.new uid: "nuclearsandwich" }
+    let(:token) { "token" }
+    let(:secret) { "secret" }
+
+    it "uses the token and secret to build an oauth client when authorized" do
+      subject.credentials = { 'token' => token, 'secret' => secret }
+      YoutubeAPI.should_receive(:new).with(subject.uid, token, secret)
+
+      subject.api
+    end
+
+    it "uses the user's uid for user operations when not authorized" do
+      YoutubeAPI.should_receive(:new).with(subject.uid)
+
+      subject.api
     end
   end
 
@@ -253,14 +367,17 @@ describe Account::Youtube do
     end
   end
 
-  describe "#sign_in_as" do
+  describe "#authorize!" do
     subject { Account::Youtube.new }
-    let(:user) { stub }
+    let(:user) { stub :id => 42 }
+    let(:sync) do
+      stub.tap{ |s| s.should_receive :background_synchronize! }
+    end
 
-    xit "starts a new youtube synchronization" do
-      YoutubeSync.should_receive(:new).with(user, subject)
+    it "starts a new youtube synchronization" do
+      YoutubeSync.should_receive(:new).with(subject).and_return(sync)
 
-      subject.sign_in_as user
+      subject.authorize! user
     end
   end
 end

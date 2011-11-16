@@ -212,6 +212,35 @@ NEESAUTH</p>
       <span class="k">end</span></pre></div>
       </td>
     </tr>
+    <tr id='section-POST_users/:user_id/synchronize'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-POST_users/:user_id/synchronize">&#182;</a>
+        </div>
+        <h2>POST users/:user_id/synchronize</h2>
+
+<p><em>Requires authentication</em></p>
+
+<p><strong>Returns</strong> 202 when a sync has been successfully enqueued. 401 if
+unauthorized or 400 if the user has no youtube account.</p>
+
+<p><strong>Parameters</strong> none</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      <span class="n">post</span> <span class="s1">&#39;/:user_id/synchronize&#39;</span> <span class="k">do</span>
+        <span class="n">authenticate!</span>
+
+        <span class="k">if</span> <span class="n">account</span> <span class="o">=</span> <span class="n">current_user</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">youtube_account</span>
+          <span class="no">YoutubeSync</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">account</span><span class="p">)</span><span class="o">.</span><span class="n">background_synchronize!</span> <span class="ss">:disable_resync</span>
+          <span class="n">status</span> <span class="mi">202</span>
+          <span class="n">current_user</span>
+        <span class="k">else</span>
+          <span class="n">status</span> <span class="mi">400</span>
+          <span class="p">{</span><span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s2">&quot;No youtube account associated with the current user&quot;</span><span class="p">}</span>
+        <span class="k">end</span>
+      <span class="k">end</span></pre></div>
+      </td>
+    </tr>
     <tr id='section-GET_users/:user&lt;em&gt;id/auth&lt;/em&gt;test'>
       <td class=docs>
         <div class="pilwrap">

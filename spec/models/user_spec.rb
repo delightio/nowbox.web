@@ -4,17 +4,20 @@ include Aji
 
 describe Aji::User do
   subject do
-    User.new.tap do |u|
+    User.new do |u|
       u.stub(:id => 1)
       u.subscribed_list << 1
       u.name = "George"
       u.email = "george@thejungle.com"
-      u.stub(:history_channel => stub(:merge! => true))
-      u.stub(:favorite_channel => stub(:merge! => true))
-      u.stub(:queue_channel => stub(:merge! => true))
+      u.stub :history_channel => stub(:merge! => true, :push => true)
+      u.stub :favorite_channel => stub(:merge! => true, :push => true)
+      u.stub :queue_channel => stub(:merge! => true, :push => true)
       u.stub :save => true
+      u.stub :identity => identity
     end
   end
+
+  let(:identity) { mock :identity, :hook => true }
 
   it_behaves_like "any redis object model" do
     subject do
@@ -27,6 +30,16 @@ describe Aji::User do
         u.stub(:favorite_channel).as_null_object
         u.stub(:queue_channel).as_null_object
       end
+    end
+  end
+
+  describe ".create_from" do
+    it "creates a new object and copies from existing" do
+      new_user = stub
+      User.should_receive(:create).and_return(new_user)
+      new_user.should_receive(:copy_from!).with(subject)
+
+      User.create_from(subject).should == new_user
     end
   end
 
@@ -251,10 +264,11 @@ describe Aji::User do
 
     describe "video actions" do
       let(:time) { 3.seconds.ago }
-      let(:history_channel) { mock "history channel" }
-      let(:favorite_channel) { mock "favorite channel" }
-      let(:queue_channel) { mock "queue channel" }
+      let(:history_channel) { mock "history channel", push: true, pop: true }
+      let(:favorite_channel) { mock "favorite channel", push: true, pop: true }
+      let(:queue_channel) { mock "queue channel", push: true, pop: true }
       let(:video) { mock "video" }
+      let(:identity) { mock "identity", :hook => true }
 
       subject do
         User.new do |u|
@@ -262,6 +276,7 @@ describe Aji::User do
           u.stub :history_channel => history_channel
           u.stub :favorite_channel => favorite_channel
           u.stub :queue_channel => queue_channel
+          u.stub :identity => identity
         end
       end
 
@@ -280,11 +295,23 @@ describe Aji::User do
 
           subject.favorite_video video, time
         end
+
+        it "triggers the identity's :favorite hook" do
+          identity.should_receive(:hook).with(:favorite, video)
+
+          subject.favorite_video video, time
+        end
       end
 
       describe "#unfavorite_video" do
         it "removes the video from the user's favorites channel" do
           favorite_channel.should_receive(:pop).with(video)
+
+          subject.unfavorite_video video
+        end
+
+        it "triggers the identity's :unfavorite hook" do
+          identity.should_receive(:hook).with(:unfavorite, video)
 
           subject.unfavorite_video video
         end
@@ -296,11 +323,23 @@ describe Aji::User do
 
           subject.enqueue_video video, time
         end
+
+        it "triggers the identity's :enqueue hook" do
+          identity.should_receive(:hook).with(:enqueue, video)
+
+          subject.enqueue_video video, time
+        end
       end
 
       describe "#dequeue_video" do
         it "removes the video from the user's queueu channel" do
           queue_channel.should_receive(:pop).with(video)
+
+          subject.dequeue_video video
+        end
+
+        it "triggers the identity's :dequeue hook" do
+          identity.should_receive(:hook).with(:dequeue, video)
 
           subject.dequeue_video video
         end
@@ -332,6 +371,9 @@ describe Aji::User do
     end
 
     describe "#subscribe" do
+      let(:identity) { mock "identity", :hook => true }
+      before { subject.stub :identity => identity }
+
       it "puts the channel id into the user's social_channel_list" do
         subject.subscribed_list.should_receive(:<<).with(channel.id)
 
@@ -354,6 +396,12 @@ describe Aji::User do
 
         subject.subscribe(channel).should be_false
       end
+
+        it "triggers the identity's :subscribe hook" do
+          identity.should_receive(:hook).with(:subscribe, channel)
+
+          subject.subscribe channel
+        end
     end
 
     describe "#subscribe_social" do
@@ -382,12 +430,15 @@ describe Aji::User do
     end
 
     describe "#unsubscribe" do
+      let(:identity) { mock "identity", :hook => true }
+      before { subject.stub :identity => identity }
+
       it "deletetes the channel id from the subscribed_list" do
         subject.subscribed_list.should_receive(:delete).with(
           channel.id)
 
-          subject.unsubscribe channel
-          subject.subscribed_list.should_not include channel.id
+        subject.unsubscribe channel
+        subject.subscribed_list.should_not include channel.id
       end
 
       specify "returns true when the channel is no longer in the list" do
@@ -400,6 +451,12 @@ describe Aji::User do
         subject.stub(:subscribed?).with(channel).and_return(true)
 
         subject.unsubscribe(channel).should be_false
+      end
+
+      it "triggers the identity's :unsubscribe hook" do
+        identity.should_receive(:hook).with(:unsubscribe, channel)
+
+        subject.unsubscribe channel
       end
     end
 
@@ -534,6 +591,10 @@ describe Aji::User do
         u.stub :twitter_channel_id => nil
         u.stub :facebook_channel_id => 5
         u.stub :subscribed_channel_ids => [6,7,8,9,10]
+        u.stub :identity => stub(:account_info => [{
+          'provider' => 'youtube', 'uid' => 'nuclearsandwich',
+          'username' => 'nuclearsandwich', 'synchronized_at' => Time.new(2011)
+        }])
       end
     end
 
@@ -547,7 +608,10 @@ describe Aji::User do
         'history_channel_id' => 3,
         'twitter_channel_id' => nil,
         'facebook_channel_id' => 5,
-        'subscribed_channel_ids' => [6,7,8,9,10]
+        'subscribed_channel_ids' => [6,7,8,9,10],
+        'accounts' => [{ 'provider' => 'youtube', 'uid' => 'nuclearsandwich',
+          'username' => 'nuclearsandwich', 'synchronized_at' => Time.new(2011)
+        }]
       }
     end
   end
@@ -635,6 +699,17 @@ describe Aji::User do
       end
 
       subject.send :remove_missing_channels, valid_ids
+    end
+  end
+
+  describe "#copy_from!" do
+    let(:social1) { mock }
+    let(:other_user) { stub :social_channels => [ social1 ] }
+
+    it "merges and copies social channels" do
+      subject.should_receive :merge!
+      subject.should_receive(:subscribe_social).with(social1)
+      subject.copy_from! other_user
     end
   end
 
@@ -739,4 +814,60 @@ describe Aji::User do
       end
     end
   end
+
+  describe "#favorite_videos" do
+    it "returns videos in the user's favorites channel" do
+      subject.favorite_channel.should_receive(:content_videos)
+
+      subject.favorite_videos
+    end
+  end
+
+  describe "#queued_videos" do
+    it "returns videos in the user's favorites channel" do
+      subject.queue_channel.should_receive(:content_videos)
+
+      subject.queued_videos
+    end
+  end
+
+  describe "#youtube_channels" do
+    subject do
+      User.new.tap{ |u| u.stub :subscribed_channels => subscribed_channels }
+    end
+
+    let(:youtube_channels) do
+      [stub(:youtube_channel? => true), stub(:youtube_channel? => true)]
+    end
+
+    let(:other_channels) do
+      [stub(:youtube_channel? => false), stub(:youtube_channel? => false)]
+    end
+
+    let(:subscribed_channels) { youtube_channels + other_channels }
+
+    it "returns all subscribed channels with a single youtube author" do
+      subject.youtube_channels.should == youtube_channels
+    end
+  end
+
+  describe "#suppress_hooks!" do
+    let(:video) { stub.as_null_object }
+
+    it "prevents hooks from being sent to the identity" do
+      identity.should_not_receive(:hook)
+
+      subject.suppress_hooks! do
+        subject.favorite_video video, Time.now
+      end
+    end
+
+    it "only lasts the duration of the given block" do
+      identity.should_receive(:hook).with(:favorite, video)
+
+      subject.suppress_hooks! {}
+      subject.favorite_video video, Time.now
+    end
+  end
 end
+

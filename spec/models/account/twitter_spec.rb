@@ -106,18 +106,27 @@ describe Aji::Account::Twitter, :unit do
     end
   end
 
-    describe "#build_stream_channel" do
-      let!(:stream_channel) do
-        Channel::TwitterStream.new(:owner => subject,
-         :title => "Twitter Stream").tap do |c|
-           c.stub :id => 1
-           c.stub :save => true
-           c.stub :refresh_content
-           c.owner.stub :save => true
-           Channel::TwitterStream.stub(:create).with(
-             :owner => subject, :title => subject.username).and_return(c)
-         end
-      end
+  describe "#synchronized_at" do
+    subject { Account::Twitter.new { |a| a.stub :stream_channel => stub } }
+    it "returns the time at which the stream channel was last populated" do
+      subject.stream_channel.should_receive(:populated_at)
+
+      subject.synchronized_at
+    end
+  end
+
+  describe "#build_stream_channel" do
+    let!(:stream_channel) do
+      Channel::TwitterStream.new(:owner => subject,
+                                 :title => "Twitter Stream").tap do |c|
+                                   c.stub :id => 1
+                                   c.stub :save => true
+                                   c.stub :refresh_content
+                                   c.owner.stub :save => true
+                                   Channel::TwitterStream.stub(:create).with(
+                                     :owner => subject, :title => subject.username).and_return(c)
+                                 end
+    end
 
       it "creates a channel for the account's twitter stream" do
            Channel::TwitterStream.should_receive(:create).with(
@@ -181,34 +190,5 @@ describe Aji::Account::Twitter, :unit do
       end
     end
   end
-
-  describe "#sign_in_as" do
-    subject do
-      Account::Twitter.new do |a|
-        a.stub :build_stream_channel => stream_channel
-      end
-    end
-    let(:user) { stub :subscribe_social => true, :enable_twitter_post => true }
-    let(:stream_channel) { stub }
-
-    it "subscribes the user to this account's stream channel" do
-      user.should_receive(:subscribe_social).with(stream_channel)
-
-      subject.sign_in_as user
-    end
-
-    xit "enables autoposting of shares for this user" do
-      user.should_receive :enable_twitter_post
-
-      subject.sign_in_as user
-    end
-
-    it "builds the account's stream channel" do
-      subject.should_receive(:build_stream_channel)
-
-      subject.sign_in_as user
-    end
-  end
-
 end
 

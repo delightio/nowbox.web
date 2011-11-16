@@ -14,10 +14,16 @@ kill_bill:
   class: Aji::Queues::KillBill
   cron: "* * * * * 2000"
   args:
-  description: "Remove Bill's test twitter and facebook accounts for debugging."
+  description: "Remove Bill's test youtube, twitter and facebook accounts for debugging."
 
 invalidate_tokens:
   class: Aji::Queues::InvalidateTokens
   cron: "* * * * * 2000"
   args:
   description: "Invalidate all user tokens for testing purposes."
+
+kill_chris:
+  class: Aji::Queues::KillChris
+  cron: "* * * * * 2000"
+  args:
+  description: "Remove Chris' test youtube, twitter and facebook accounts for debugging."
