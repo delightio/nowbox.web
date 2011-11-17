@@ -78,6 +78,7 @@ module Aji
   class InterfaceMethodNotImplemented < Aji::Error; end
 
   class API < Grape::API
+    NewRelic::Agent.manual_start
     version '1'
   end
 end

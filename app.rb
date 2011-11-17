@@ -52,3 +52,4 @@ Aji::APP = Rack::Builder.app do
     run Rack::Directory.new('docs')
   end
 end
+
