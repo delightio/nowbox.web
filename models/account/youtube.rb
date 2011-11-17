@@ -93,8 +93,8 @@ module Aji
     end
 
     def available?
-      return false if blacklisted? ||
-                      forbidden_words_in_username?
+      return false if blacklisted? || forbidden_words_in_username?
+
       true
     end
 
