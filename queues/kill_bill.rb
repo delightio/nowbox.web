@@ -25,8 +25,8 @@ module Aji
         Aji.log "Removing Account::Youtube[#{yt.id}]"
         user = yt.user
         Aji.log "Can't find linked user" if user.nil?
+        user.unlink yt unless user.nil?
 
-        user.unlink yt
         yt.destroy
         if Account::Youtube.find_by_uid(bills_yt_uid).nil?
           Aji.log "Destroyed: #{bills_yt_uid}"
