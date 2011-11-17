@@ -91,6 +91,8 @@ module Aji
 
         MultiJson.encode user.serializable_hash
       rescue => e
+        redirect "/auth/#{provider}/failure" if
+          e.message['Requires extended permission']
         Aji.log :WARN, "#{e.class}: #{e.message}"
         MultiJson.encode :error => 'Unable to authenticate',
           :message => e.message
