@@ -24,10 +24,7 @@ module Aji
     after_create :publish
 
     def link
-      #"http://#{Aji.conf['TLD']}/share/#{id}"
-
-      # Using source link during beta-testing phase.
-      video.source_link
+      "http://#{Aji.conf['TLD']}/shares/#{id}"
     end
 
     def default_message

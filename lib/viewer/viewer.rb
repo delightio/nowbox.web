@@ -114,14 +114,14 @@ module Aji
 
     get '/random' do
       random_share =  Share.offset(rand(Share.count)).first
-      redirect to("/share/#{random_share.id}")
+      redirect to("/shares/#{random_share.id}")
     end
 
-    get '/channel/:channel_id' do
-      @channel = Channel.find(params[:channel_id]).serializable_hash(:inline_videos => 3 * 6)
-
-      deliver('channel', 'layout_channel')
-    end
+    # get '/channel/:channel_id' do
+    #   @channel = Channel.find(params[:channel_id]).serializable_hash(:inline_videos => 3 * 6)
+    #
+    #   deliver('channel', 'layout_channel')
+    # end
 
     # this should not be used anymore?
     # get '/video/:video_id/:share_id' do
@@ -144,12 +144,12 @@ module Aji
     #   end
     # end
 
-    get '/share/:share_id' do
+    get '/shares/:share_id' do
        begin
         @share      = Share.find(params[:share_id])
         @user       = @share.user
         @video      = @share.video
-        @rec_videos = Share.where("user_id = ? AND id <> ?", @user.id, @share.id).limit(9)
+        @rec_videos = [] # Don't show recommended videos
 
         deliver('video', 'layout_video')
       rescue => e
