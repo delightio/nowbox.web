@@ -9,7 +9,7 @@ module Aji
         @channel = Channel::Account.new
         @channel.save :validate => false
         Channel.stub(:find_by_id).with(@channel.id).and_return(@channel)
-        @account = mock "account", :class => Account::Youtube, :id =>1, :refreshed? => false
+        @account = mock "account", :class => Account::Youtube, :id =>1, :valid_info? => false
         @channel.stub(:accounts).and_return([@account])
       end
 
@@ -31,7 +31,7 @@ module Aji
       end
 
       it "skips if accounts are all refreshed." do
-        @account.stub(:refreshed?).and_return(true)
+        @account.stub(:valid_info?).and_return(true)
         @account.should_not_receive(:refresh_info)
         subject.perform @channel.id
       end

@@ -271,14 +271,9 @@ module Aji
     end
 
     def merge! other
-      Aji.log "User[#{id}].merge! otherUser[#{other.id}]"
-      Aji.log "  User[#{id}].subscribed_channels: #{subscribed_channels.map(&:id)}"
-      Aji.log "  otherUser[#{other.id}].subscribed_channels: #{othersubscribed_channels.map(&:id)}"
-
       other.subscribed_channels.each do |c|
         subscribe c
       end
-      Aji.log "  * User[#{id}].subscribed_channels: #{subscribed_channels.map(&:id)}"
 
       history_channel.merge! other.history_channel
       favorite_channel.merge! other.favorite_channel
