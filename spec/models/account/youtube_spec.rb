@@ -178,15 +178,16 @@ describe Account::Youtube do
     end
   end
 
-  describe "#refreshed?" do
+  describe "#valid_info?" do
     it "true if it has a thumbnail_uri" do
       subject.stub(:thumbnail_uri).and_return("jlkjlk")
-      subject.should be_refreshed
+      subject.should be_valid_info
     end
 
-    it "false otherwise" do
+    it "false when thumbnail is blank" do
       subject.stub(:thumbnail_uri).and_return("")
-      subject.should_not be_refreshed
+
+      subject.should_not be_valid_info
     end
   end
 
@@ -286,17 +287,45 @@ describe Account::Youtube do
   end
 
   describe "#refresh_info" do
-    it "updates from youtube and save" do
+    subject do
+      Account::Youtube.new do |a|
+        a.stub :save => true
+        a.stub :valid_info? => true
+        a.stub :get_info_from_youtube_api
+      end
+    end
+
+    it "updates from youtube and saves if info is valid" do
       subject.should_receive :get_info_from_youtube_api
       subject.should_receive :save
+
       subject.refresh_info
+    end
+
+    it "doesn't save invalid info" do
+      subject.stub :valid_info? => false
+      subject.should_not_receive(:save)
+
+      subject.refresh_info
+    end
+
+    specify "true if info is valid" do
+      subject.stub :valid_info? => true
+
+      subject.refresh_info.should be_true
+    end
+
+    specify "false if the info collected was not valid" do
+      subject.stub :valid_info? => false
+
+      subject.refresh_info.should be_false
     end
   end
 
   describe "#background_refresh_info" do
     it "enqueues to refresh info" do
       Resque.should_receive(:enqueue).
-        with(Aji::Queues::RefreshChannelInfo, subject.id)
+        with(Aji::Queues::RefreshAccountInfo, subject.id)
       subject.background_refresh_info
     end
   end

@@ -46,7 +46,7 @@ module Aji
       api.valid_uid?
     end
 
-    def refreshed?
+    def valid_info?
       not thumbnail_uri.empty?
     end
 
@@ -56,11 +56,11 @@ module Aji
 
     def refresh_info
       get_info_from_youtube_api
-      save
+      if valid_info? then save else false end
     end
 
     def background_refresh_info
-      Resque.enqueue Queues::RefreshChannelInfo, id
+      Resque.enqueue Queues::RefreshAccountInfo, id
     end
 
     # Fetch information from youtube, returns the new info hash upon success
