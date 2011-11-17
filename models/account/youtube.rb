@@ -144,7 +144,7 @@ module Aji
     end
 
     def authorize! user
-      Aji.log "User[#{user.id}] authorized Account::Youtube[#{id}]"
+      Aji.log "User[#{user.id}] authorized Account::Youtube[#{id}] (last sync'ed: #{synchronized_at})"
       YoutubeSync.new(self).background_synchronize!
     end
 

@@ -6,8 +6,36 @@ module Aji
       @account, @user = account, account.user
     end
 
+    def first_sync?
+      synchronized_at.nil?
+    end
+
+    def merge!
+      Aji.log "First time sync: User[#{user.id}] => YouTube[#{account.username}]"
+
+      user.youtube_channels.each do |c|
+        unless youtube_subscriptions.include? c
+          user.identity.hook :subscribe, c
+        end
+      end
+
+      user.queued_videos.select{ |v| v.source == :youtube }.each do |v|
+        unless youtube_watch_later_videos.include? v
+          user.identify.hook :enqueue, v
+        end
+      end
+
+      user.favorite_videos.select{ |v| v.source == :youtube }.each do |v|
+        unless youtube_favorite_videos.include? v
+          user.identity.hook :favorite, v
+        end
+      end
+    end
+
     def synchronize! disable_resync = false
       return if account.nil? or user.nil?
+
+      merge! if first_sync?
 
       user.suppress_hooks! do
         sync_subscribed_channels
@@ -71,7 +99,7 @@ module Aji
 
     def enqueue_resync
       unless account.synchronized_at && account.synchronized_at > 30.minutes.ago
-        Resque.enqueue_in 1.day, Queues::SynchronizeWithYoutube, account.id 
+        Resque.enqueue_in 1.day, Queues::SynchronizeWithYoutube, account.id
       end
     end
 
