@@ -36,6 +36,8 @@ Aji::APP = Rack::Builder.app do
   end
 
   map "http://api.#{Aji.conf['TLD']}/" do
+    Aji::API.send :include,
+      NewRelic::Agent::Instrumentation::ControllerInstrumentation
     run Aji::API
   end
 
