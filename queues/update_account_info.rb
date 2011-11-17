@@ -1,16 +1,15 @@
 module Aji
   class Queues::UpdateAccountInfo
-    @queue = :update_account_info
+    @queue = :refresh_info
 
-    def self.perform
+    def self.perform run_on_all = false
       Aji.log "Updating info for Youtube accounts."
 
       offset = Aji.redis.get("update_youtube_info:offset").to_i
       limit = 1000
 
       Aji::Account::Youtube.order(:id).offset(offset).limit(1000).each do |a|
-        a.get_info_from_youtube_api
-        a.save
+        a.background_refresh_info if run_on_all or !a.valid_info?
       end
 
       Aji.log "Updated Youtube accounts #{offset} - #{offset + limit}"
