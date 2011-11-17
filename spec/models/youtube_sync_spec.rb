@@ -231,22 +231,6 @@ describe Aji::YoutubeSync, :unit do
     end
   end
 
-  describe "#background_synchronize!" do
-    it "sets up a resque job to run synchronization" do
-      Resque.should_receive(:enqueue).with(
-        Aji::Queues::SynchronizeWithYoutube, account.id, false)
-
-      subject.background_synchronize!
-    end
-
-    it "passes it's argument down to resque" do
-      Resque.should_receive(:enqueue).with(
-        Aji::Queues::SynchronizeWithYoutube, account.id, :disable_resync)
-
-      subject.background_synchronize! :disable_resync
-    end
-  end
-
   describe "#youtube_subscriptions" do
     it "returns cached subscriptions from the api" do
       api.should_receive(:subscriptions).exactly(1)
@@ -276,11 +260,80 @@ describe Aji::YoutubeSync, :unit do
       subject.youtube_favorite_videos
     end
   end
+
+  describe "#push_and_synchronize!" do
+    it "pushes videos and channels to youtube before sync" do
+      subject.should_receive(:push_subscribed_channels)
+      subject.should_receive(:push_favorite_videos)
+      subject.should_receive(:push_watch_later_videos)
+
+      subject.should_receive(:synchronize!)
+
+      subject.push_and_synchronize!
+    end
+  end
+
+  describe "#push_subscribed_channels" do
+    it "subscribes to all locally subscribed youtube channels on youtube" do
+      remotely_unsubscribed_channels.each do |channel|
+        api.should_receive(:subscribe_to).with(channel)
+      end
+
+      subject.push_subscribed_channels
+    end
+  end
+
+  describe "#push_favorite_videos" do
+    it "adds all locally favorited youtube videos to youtube favorites" do
+      remotely_unfavorited_videos.each do |video|
+        api.should_receive(:add_to_favorites).with(video)
+      end
+
+      subject.push_favorite_videos
+    end
+  end
+
+  describe "#push_watch_later_videos" do
+    it "adds all locally enqueued youtube videos to youtube watch later" do
+      remotely_watched_videos.each do |video|
+        api.should_receive(:add_to_watch_later).with(video)
+      end
+
+      subject.push_watch_later_videos
+    end
+  end
+
+  describe "#background_synchronize!" do
+    it "sets up a resque job to run synchronization" do
+      Resque.should_receive(:enqueue).with(
+        Aji::Queues::SynchronizeWithYoutube, account.id, false)
+
+      subject.background_synchronize!
+    end
+
+    it "passes it's argument down to resque" do
+      Resque.should_receive(:enqueue).with(
+        Aji::Queues::SynchronizeWithYoutube, account.id, :disable_resync)
+
+      subject.background_synchronize! :disable_resync
+    end
+  end
+
+  describe "#background_push_and_synchronize!" do
+    it "sets up a resque job to run push and synchronization" do
+      Resque.should_receive(:enqueue).with(
+        Aji::Queues::SynchronizeWithYoutube, account.id, false, :push_first)
+
+      subject.background_push_and_synchronize!
+    end
+
+    it "passes it's argument down to resque" do
+      Resque.should_receive(:enqueue).with(
+        Aji::Queues::SynchronizeWithYoutube, account.id, :disable_resync,
+        :push_first)
+
+      subject.background_push_and_synchronize! :disable_resync
+    end
+  end
 end
 
-
-# TODO: These will happen atomically and should be tested elsewhere.
-#  it "favorites videos from the user's favorites channel on youtube"
-#  it "subscribes the account to all the user's youtube channels"
-#  it "adds videos from the user's queue channel to watch later"
-#  it "unsubscribes from youtube channels when they're unsubscribed locally"

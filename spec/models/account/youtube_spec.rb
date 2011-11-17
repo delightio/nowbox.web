@@ -408,7 +408,7 @@ describe Account::Youtube do
     subject { Account::Youtube.new }
     let(:user) { stub :id => 42 }
     let(:sync) do
-      stub.tap{ |s| s.should_receive :background_synchronize! }
+      stub.tap{ |s| s.should_receive(:background_push_and_synchronize!) }
     end
 
     it "starts a new youtube synchronization" do

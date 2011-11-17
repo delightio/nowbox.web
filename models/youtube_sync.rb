@@ -6,36 +6,8 @@ module Aji
       @account, @user = account, account.user
     end
 
-    def first_sync?
-      synchronized_at.nil?
-    end
-
-    def merge!
-      Aji.log "First time sync: User[#{user.id}] => YouTube[#{account.username}]"
-
-      user.youtube_channels.each do |c|
-        unless youtube_subscriptions.include? c
-          user.identity.hook :subscribe, c
-        end
-      end
-
-      user.queued_videos.select{ |v| v.source == :youtube }.each do |v|
-        unless youtube_watch_later_videos.include? v
-          user.identify.hook :enqueue, v
-        end
-      end
-
-      user.favorite_videos.select{ |v| v.source == :youtube }.each do |v|
-        unless youtube_favorite_videos.include? v
-          user.identity.hook :favorite, v
-        end
-      end
-    end
-
     def synchronize! disable_resync = false
       return if account.nil? or user.nil?
-
-      merge! if first_sync?
 
       user.suppress_hooks! do
         sync_subscribed_channels
@@ -46,6 +18,39 @@ module Aji
       enqueue_resync unless disable_resync
       account.synchronized_at = Time.now
       account.save
+    end
+
+    def push_and_synchronize! disable_resync = false
+      push_subscribed_channels
+      push_favorite_videos
+      push_watch_later_videos
+
+      synchronize! disable_resync
+    end
+
+
+    def push_subscribed_channels
+      user.youtube_channels.each do |c|
+        unless youtube_subscriptions.include? c
+          account.api.subscribe_to c
+        end
+      end
+    end
+
+    def push_watch_later_videos
+      user.queued_videos.select{ |v| v.source == :youtube }.each do |v|
+        unless youtube_watch_later_videos.include? v
+          account.api.add_to_watch_later v
+        end
+      end
+    end
+
+    def push_favorite_videos
+      user.favorite_videos.select{ |v| v.source == :youtube }.each do |v|
+        unless youtube_favorite_videos.include? v
+          account.api.add_to_favorites v
+        end
+      end
     end
 
     def sync_subscribed_channels
@@ -105,6 +110,11 @@ module Aji
 
     def background_synchronize! disable_resync = false
       Resque.enqueue Queues::SynchronizeWithYoutube, account.id, disable_resync
+    end
+
+    def background_push_and_synchronize! disable_resync = false
+      Resque.enqueue Queues::SynchronizeWithYoutube, account.id,
+        disable_resync, :push_first
     end
   end
 end
