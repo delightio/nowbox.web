@@ -60,10 +60,10 @@ module Aji
       channels = filtered_authors.first(7).map(&:to_channel)
 
       # TODO: hack to make NowPopular searchable
-      splits = @query.split ' '
-      if (splits.include? "now") || (splits.include? "popular")
-        channels = [Channel.trending] + channels
-      end
+      # splits = @query.split ' '
+      # if (splits.include? "now") || (splits.include? "popular")
+      #   channels = [Channel.trending] + channels
+      # end
 
       channels.each { |ch| ch.background_refresh_content }
       channels
