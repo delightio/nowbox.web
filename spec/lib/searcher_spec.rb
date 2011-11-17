@@ -145,7 +145,7 @@ describe Searcher, :net do
 
     end
 
-    it "allows NowPopular channel to be searched" do
+    xit "allows NowPopular channel to be searched" do
       query = 'now popular'
       subject = Searcher.new query
 

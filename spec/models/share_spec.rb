@@ -18,7 +18,7 @@ describe Aji::Share, :unit do
 
   describe "#link" do
     it "returns the user facing link for this share" do
-      subject.link.should == video.source_link
+      subject.link.should == "http://#{Aji.tld}/shares/#{subject}"
     end
   end
 
