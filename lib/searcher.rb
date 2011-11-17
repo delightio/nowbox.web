@@ -46,8 +46,11 @@ module Aji
     end
 
     def unique_and_sorted authors
-      authors = authors.uniq.select {|a| a.available?}
-      authors = authors.sort do |x,y|
+      authors.compact!
+      authors.reject!{ |a| a.username.nil? }
+      authors.uniq!
+      authors.select! &:available?
+      authors.sort! do |x,y|
         y.subscriber_count <=> x.subscriber_count
       end
     end

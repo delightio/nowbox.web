@@ -84,15 +84,22 @@ describe Searcher, :net do
   end
 
   describe "#unique_and_sorted" do
-    let(:author1) { mock "author 1", :available? => true,
+    subject { Searcher.new "" }
+    let(:author1) { mock "author 1", :available? => true, :username => "bar",
                     :subscriber_count => 10 }
-    let(:author2) { mock "author 2", :available? => true,
+    let(:author2) { mock "author 2", :available? => true, :username => "foo",
                     :subscriber_count => 100 }
-    let(:author3) { mock "author 3", :available? => false}
+    let(:author3) { mock "author 3", :available? => false, :username => "baz" }
     let(:authors) {[author1, author1, author2, author3 ]}
 
     it "sorts the input and return unique and availabe results" do
-      Searcher.new("").unique_and_sorted(authors).should == [author2, author1]
+      subject.unique_and_sorted(authors).should == [author2, author1]
+    end
+
+    it "removes authors with nil usernames" do
+      authors << mock("empty author", :username => nil)
+
+      subject.unique_and_sorted(authors).should == [author2, author1]
     end
   end
 
