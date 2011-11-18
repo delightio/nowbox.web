@@ -29,8 +29,7 @@ module RPMContrib
         def call_with_newrelic(env)
           @request = Rack::Request.new(env)
           name = "#{@request.request_method} #{@request.path_info}"
-
-          perform_action_with_newrelic_trace(:category => :controller,
+          perform_action_with_newrelic_trace(:category => :sinatra,
             :name => name, :path => request.path, :params => @request.params) do
             call_without_newrelic(env)
           end

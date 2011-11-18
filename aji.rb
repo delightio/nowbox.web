@@ -3,12 +3,6 @@ require 'bundler'
 # Must be required before NewRelic Agent (in Bundler.require)
 require_relative 'lib/rpm_contrib/instrumentation/grape'
 Bundler.require
-#Grape::Endpoint.class_eval do
-#  include RPMContrib::Instrumentation::Grape
-#
-#  alias call_without_newrelic call
-#  alias call call_with_newrelic
-#end
 
 Faraday.default_adapter = :typhoeus
 
