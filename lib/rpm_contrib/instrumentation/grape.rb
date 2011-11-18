@@ -29,6 +29,10 @@ module RPMContrib
         def call_with_newrelic(env)
           @request = Rack::Request.new(env)
           name = "#{@request.request_method} #{@request.path_info}"
+          if name =~ %r{/(\w+)/(\d+)}
+            name[$2] = ":#{$1.singularize}_id"
+          end
+
           perform_action_with_newrelic_trace(:category => :controller, :name => name,
             :class_name => "Aji::API", :params => @request.params) do
             call_without_newrelic(env)
