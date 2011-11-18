@@ -4,10 +4,10 @@ module Aji
       case device
       when "ipad"
         {
-          :current_version => "1.0.14b10",
-          :minimum_version => "1.0.12b1",
+          :current_version => "1.0.18",
+          :minimum_version => "1.0.18",
           :link => { :rel => "latest",
-                     :url => "http://itunes.com/apps/googlesearch?" }
+                     :url => "http://tflig.ht/tb9sfs" }
         }
       else
         raise Aji::Error, "Unknown device type #{device}"
