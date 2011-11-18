@@ -1,5 +1,14 @@
 require 'bundler'
+
+# Must be required before NewRelic Agent (in Bundler.require)
 Bundler.require
+require_relative 'lib/rpm_contrib/instrumentation/grape'
+#Grape::Endpoint.class_eval do
+#  include RPMContrib::Instrumentation::Grape
+#
+#  alias call_without_newrelic call
+#  alias call call_with_newrelic
+#end
 
 Faraday.default_adapter = :typhoeus
 
@@ -76,6 +85,8 @@ module Aji
   # An error to raise when a required interface method has not been overridden
   # by a subclass.
   class InterfaceMethodNotImplemented < Aji::Error; end
+
+  Grape.send :include, RPMContrib::Instrumentation::Grape
 
   class API < Grape::API
     version '1'
