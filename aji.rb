@@ -1,8 +1,8 @@
 require 'bundler'
 
 # Must be required before NewRelic Agent (in Bundler.require)
-Bundler.require
 require_relative 'lib/rpm_contrib/instrumentation/grape'
+Bundler.require
 #Grape::Endpoint.class_eval do
 #  include RPMContrib::Instrumentation::Grape
 #
