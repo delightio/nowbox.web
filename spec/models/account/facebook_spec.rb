@@ -68,12 +68,12 @@ describe Account::Facebook, :unit do
 
   describe "#publish" do
     let(:share) { stub :message => "A message", :link => "http://link.io" }
-    let(:formatted_message) { "A formatted message" }
+    let(:formatted_share_info) { [share.message, {"link" => share.link }] }
 
-    it "publishes the formatted share message to the twitter api" do
-      subject.should_receive(:format).with(share.message, share.link).
-        and_return(formatted_message)
-      subject.api.should_receive(:publish).with(formatted_message)
+    it "publishes the formatted share message to the facebook api" do
+      subject.should_receive(:format).with(share).
+        and_return(formatted_share_info)
+      subject.api.should_receive(:publish).with(*formatted_share_info)
 
       subject.publish share
     end

@@ -20,9 +20,9 @@ module Aji
       end
     end
 
-    def publish body_text
+    def publish message, attachment = {}
       tracker.hit!
-      @koala.put_wall_post body_text
+      @koala.put_wall_post message, attachment
     end
 
     def tracker

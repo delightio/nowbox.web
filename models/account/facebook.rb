@@ -56,7 +56,7 @@ module Aji
     end
 
     def publish share
-      api.publish format share.message, share.link
+      api.publish *format(share)
     end
 
     def synchronized_at

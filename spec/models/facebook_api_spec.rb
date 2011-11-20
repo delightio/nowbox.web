@@ -39,7 +39,6 @@ describe FacebookAPI, :net do
   describe "#publish" do
     let(:koala) { stub.as_null_object }
     let(:body_text) { "I really hope this doesn't actually post to facebook" }
-
     it "hits facebook only once" do
       subject.instance_variable_set :@koala, koala
       subject.tracker.should_receive(:hit!)
@@ -49,7 +48,7 @@ describe FacebookAPI, :net do
 
     it "posts text to facebook" do
       subject.instance_variable_set :@koala, koala
-      koala.should_receive(:put_wall_post).with(body_text)
+      koala.should_receive(:put_wall_post).with(body_text, instance_of(Hash))
 
       subject.publish body_text
     end

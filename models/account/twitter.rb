@@ -50,7 +50,7 @@ module Aji
     end
 
     def publish share
-      api.publish format share.message, share.link
+      api.publish format(share)
     end
 
     def mark_spammer

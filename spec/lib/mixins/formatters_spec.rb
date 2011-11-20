@@ -28,15 +28,25 @@ describe Aji::Mixins::Formatters do
   describe Aji::Mixins::Formatters::Facebook do
     subject { Class.new { include Aji::Mixins::Formatters::Facebook }.new }
 
-    it "includes the link text no matter the message length" do
-      subject.format(long_message, link_text).should include link_text
-      subject.format(short_message, link_text).should include link_text
+    let(:video)   { stub :title => stub, :thumbnail_uri => stub }
+    let(:channel) { stub :title => stub }
+    let(:share)   { stub :message => "A message",
+                        :link => "http://link.io",
+                        :video => video,
+                        :channel => channel }
+
+    it "returns a message" do
+      message, attachment = *subject.format(share)
+      message.should be_present
     end
 
-    it "includes the facebook coda" do
-      subject.format(long_message, link_text).should include coda
-      subject.format(short_message, link_text).should include coda
+    it "returns an attachment hash with specific keys" do
+      message, attachment = *subject.format(share)
+      ["name", "link", "caption", "description", "picture"].each do |required_key|
+        attachment.should have_key(required_key)
+      end
     end
+
   end
 end
 
