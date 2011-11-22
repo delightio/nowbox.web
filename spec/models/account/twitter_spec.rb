@@ -98,7 +98,7 @@ describe Aji::Account::Twitter, :unit do
     let(:formatted_message) { "A formatted message" }
 
     it "publishes the formatted share message to the facebook api" do
-      subject.should_receive(:format).with(share.message, share.link).
+      subject.should_receive(:format).with(share).
         and_return(formatted_message)
       subject.api.should_receive(:publish).with(formatted_message)
 
