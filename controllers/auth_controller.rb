@@ -177,7 +177,9 @@ module Aji
 
       Aji.log "Received token request for User#{params[:user_id]}"
 
-      user = User.find params[:user_id]
+      user = User.find_by_id params[:user_id]
+      halt [404, '{"error":"User not found"}'] unless user
+
       tg = Token::Generator.new(user)
 
       Aji.log "Token #{tg.token} issued for User[#{user.id}"
