@@ -141,7 +141,7 @@ describe Account::Youtube do
     end
   end
 
-  describe "#authorized?" do
+  describe "#has_token?" do
     specify "true when we have their token and secret" do
       subject.stub :credentials => { 'token' => "token", 'secret' => "shh" }
 
@@ -153,6 +153,16 @@ describe Account::Youtube do
 
       subject.should_not be_authorized
     end
+  end
+
+  describe "#authorized?" do
+    it "is false when account doesn't have a token" do
+      subject.stub :has_token? => false
+      subject.should_not be_authorized
+    end
+
+    it "is false when token is expired"
+    it "is true when account has token and token has not been expired"
   end
 
   describe ".create_if_existing" do

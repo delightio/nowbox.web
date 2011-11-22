@@ -50,8 +50,12 @@ module Aji
       not thumbnail_uri.empty?
     end
 
-    def authorized?
+    def has_token?
       credentials.has_key? 'token' and credentials.has_key? 'secret'
+    end
+
+    def authorized?
+      has_token?
     end
 
     def refresh_info

@@ -66,6 +66,28 @@ describe Account::Facebook, :unit do
     end
   end
 
+  describe "#has_token?" do
+    it "is true when user has token and secret credentials" do
+      subject.stub(:credentials).and_return({ 'token' => "tokenstring" })
+      subject.should have_token
+    end
+
+    it "is false when account has no credentials" do
+      subject.stub(:credentials).and_return Hash.new
+      subject.should_not have_token
+    end
+  end
+
+  describe "#authorized?" do
+    it "is false when account doesn't have a token" do
+      subject.stub :has_token? => false
+      subject.should_not be_authorized
+    end
+
+    it "is false when token is expired"
+    it "is true when account has token and token has not been expired"
+  end
+
   describe "#publish" do
     let(:share) { stub :message => "A message", :link => "http://link.io" }
     let(:formatted_share_info) { [share.message, {"link" => share.link }] }

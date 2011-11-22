@@ -63,8 +63,12 @@ module Aji
       mentions.latest.select{ |m| m.has_video? video }.count > SPAM_THRESHOLD
     end
 
-    def authorized?
+    def has_token?
       credentials.has_key? 'token' and credentials.has_key? 'secret'
+    end
+
+    def authorized?
+      has_token?
     end
 
     def existing?

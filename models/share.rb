@@ -1,4 +1,16 @@
 module Aji
+  class AuthorizationValidator < ActiveModel::Validator
+    def validate(record)
+      publisher = record.publisher
+      unless publisher.authorized?
+        error_message = if publisher.has_token? then
+                          "has an expired token." else
+                          "has no token." end
+        record.errors[:publisher] << error_message
+      end
+    end
+  end
+  
   # ## Share Schema
   # - id: Integer
   # - message: Text
@@ -20,15 +32,12 @@ module Aji
     validates_presence_of :channel
     validates_inclusion_of :network, :in => NETWORKS
 
-    before_create :default_message
+    validates_with AuthorizationValidator
+
     after_create :publish
 
     def link
       "http://#{Aji.conf['TLD']}/shares/#{id}"
-    end
-
-    def default_message
-      self.message ||= video.title
     end
 
     def publisher

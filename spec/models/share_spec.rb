@@ -16,16 +16,34 @@ describe Aji::Share, :unit do
   subject { Share.create user: user,
     video: video, channel: channel, network: network }
 
-  describe "#link" do
-    it "returns the user facing link for this share" do
-      subject.link.should == "http://#{Aji.conf['TLD']}/shares/#{subject.id}"
+  describe ".create" do
+    let(:valid_publisher) { stub :authorized? => true,
+      :background_publish => nil }
+    it "validates if publisher is authorized" do
+      user.stub :twitter_account => valid_publisher
+      subject.should be_valid
+    end
+
+    let(:no_token) { stub :authorized? => false,
+      :has_token? => false }
+    it "is invalid with invalid token" do
+      user.stub :twitter_account => no_token
+      subject.should_not be_valid
+      subject.errors.should include :publisher => ["has no token."]
+    end
+
+    let(:expired_token) { stub :authorized? => false,
+      :has_token? => true }
+    it "reports expired token" do
+      user.stub :twitter_account => expired_token
+      subject.should_not be_valid
+      subject.errors.should include :publisher => ["has an expired token."]
     end
   end
 
-  describe "#default_message" do
-    it "sets the message to the video title if none is specified" do
-      video.stub :title => "blah"
-      subject.default_message.should == video.title
+  describe "#link" do
+    it "returns the user facing link for this share" do
+      subject.link.should == "http://#{Aji.conf['TLD']}/shares/#{subject.id}"
     end
   end
 

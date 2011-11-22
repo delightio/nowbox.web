@@ -80,17 +80,27 @@ describe Aji::Account::Twitter, :unit do
     end
   end
 
-  describe "#authorized?" do
+  describe "#has_token?" do
     it "is true when user has token and secret credentials" do
       subject.stub(:credentials).and_return({ 'token' => "tokenstring",
                                               'secret' => "secretstring" })
-      subject.should be_authorized
+      subject.should have_token
     end
 
     it "is false when account has no credentials" do
       subject.stub(:credentials).and_return Hash.new
+      subject.should_not have_token
+    end
+  end
+
+  describe "#authorized?" do
+    it "is false when account doesn't have a token" do
+      subject.stub :has_token? => false
       subject.should_not be_authorized
     end
+
+    it "is false when token is expired"
+    it "is true when account has token and token has not been expired"
   end
 
   describe "#publish" do

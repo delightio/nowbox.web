@@ -47,8 +47,12 @@ module Aji
       0 # TODO: don't we get number of friends back?
     end
 
-    def authorized?
+    def has_token?
       credentials.key? 'token'
+    end
+
+    def authorized?
+      has_token?
     end
 
     def spamming_video? video
