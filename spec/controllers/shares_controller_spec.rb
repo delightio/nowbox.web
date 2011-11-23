@@ -55,6 +55,22 @@ describe Aji::API do
         last_response.status.should == 400
       end
 
+      it "creates event object even if we can't publish the share" do
+        twitter_account.should_receive(:publish).
+          and_raise(stub)
+        expect { post("#{resource_uri}/", params) }.
+          to change { Event.count }.by(1)
+        last_response.status.should == 400
+      end
+
+      it "returns 400 if we can't publish the share" do
+        twitter_account.should_receive(:publish).
+          and_raise(stub)
+        expect { post("#{resource_uri}/", params) }.
+          to_not change { Share.count }
+        last_response.status.should == 400
+      end
+
     end
   end
 end

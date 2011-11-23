@@ -22,13 +22,6 @@ describe Aji::Share, :unit do
     end
   end
 
-  describe "#default_message" do
-    it "sets the message to the video title if none is specified" do
-      video.stub :title => "blah"
-      subject.default_message.should == video.title
-    end
-  end
-
   describe "#publisher" do
     it "returns the account which publishes the share" do
       subject.publisher == twitter_account
@@ -36,9 +29,20 @@ describe Aji::Share, :unit do
   end
 
   describe "#publish" do
-    it "calls publish in background after object creation" do
-      twitter_account.should_receive :background_publish
+    it "calls publish before object creation" do
+      twitter_account.should_receive(:publish).with(subject)
       subject
+    end
+  end
+
+  describe ".create" do
+    it "rolls back if publish fails" do
+      twitter_account.should_receive(:publish).and_raise(stub)
+      subject.should be_new_record
+    end
+
+    it "succeeds if publish succeeded" do
+      subject.should_not be_new_record
     end
   end
 

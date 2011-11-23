@@ -20,15 +20,10 @@ module Aji
     validates_presence_of :channel
     validates_inclusion_of :network, :in => NETWORKS
 
-    before_create :default_message
-    after_create :publish
+    before_create :publish
 
     def link
       "http://#{Aji.conf['TLD']}/shares/#{id}"
-    end
-
-    def default_message
-      self.message ||= video.title
     end
 
     def publisher
@@ -38,7 +33,10 @@ module Aji
     end
 
     def publish
-      publisher.background_publish self
+      publisher.publish self
+    rescue => e
+      Aji.log :ERROR, "Account[#{publisher.id}] can't share Video[#{video.id}] on #{network}"
+      false # to cancel the callback chain and roll back the transaction
     end
 
   end

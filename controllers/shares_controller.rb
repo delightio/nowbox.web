@@ -64,7 +64,7 @@ module Aji
         # keep track of the share event since client will only do
         # one POST /shares for triggering a share
         event = Event.create(:user => current_user, :action => :share,
-          :video=> video, :channel => channel,
+          :video => video, :channel => channel,
           :video_start => params[:video_start].to_i,
           :video_elapsed => (params[:video_elapsed] || video.duration).to_i)
 
@@ -72,7 +72,13 @@ module Aji
           :channel => channel, :message => params[:message],
           :network => params[:network], :event => event)
 
-        if share.valid? then share else validation_error! share, params end
+        validation_error!(share, params) unless share.valid?
+        if share.new_record? # passed validation but couldn't save to db
+          error! "Unable to publish", 400
+        else
+          share
+        end
+
       end
     end
   end
