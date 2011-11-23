@@ -28,18 +28,24 @@ class ClientConsole
         :secret => CLIENT_SECRET
       if r[0] == 200
         @token = r[2]['token']
+      else
+        @token = nil
       end
     end
   end
 
   def authenticate! user_id
     get_token user_id
-    @headers['X-NB-AuthToken'] = @token
-    initialize_conn
+    if @token
+      @headers['X-NB-AuthToken'] = @token
+      initialize_conn
+    end
   end
+
 
   def deauthenticate!
     @headers.delete 'X-NB-AuthToken'
+    @token = nil
     initialize_conn
   end
 
