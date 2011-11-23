@@ -40,16 +40,27 @@
         
       </td>
       <td class=code>
-        <div class='highlight'><pre><span class="nb">require</span> <span class="s1">&#39;bundler&#39;</span>
-<span class="no">Bundler</span><span class="o">.</span><span class="n">require</span>
-
-<span class="no">Faraday</span><span class="o">.</span><span class="n">default_adapter</span> <span class="o">=</span> <span class="ss">:typhoeus</span></pre></div>
+        <div class='highlight'><pre><span class="nb">require</span> <span class="s1">&#39;bundler&#39;</span></pre></div>
       </td>
     </tr>
     <tr id='section-2'>
       <td class=docs>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-2">&#182;</a>
+        </div>
+        <p>Must be required before NewRelic Agent (in Bundler.require)</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="n">require_relative</span> <span class="s1">&#39;lib/rpm_contrib/instrumentation/grape&#39;</span>
+<span class="no">Bundler</span><span class="o">.</span><span class="n">require</span>
+
+<span class="no">Faraday</span><span class="o">.</span><span class="n">default_adapter</span> <span class="o">=</span> <span class="ss">:typhoeus</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-3'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-3">&#182;</a>
         </div>
         <p>This is the initilization file for the Aji API. All set up, library
 loading and application level settings are done here.</p>
@@ -58,10 +69,10 @@ loading and application level settings are done here.</p>
         <div class='highlight'><pre><span class="k">module</span> <span class="nn">Aji</span></pre></div>
       </td>
     </tr>
-    <tr id='section-3'>
+    <tr id='section-4'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-3">&#182;</a>
+          <a class="pilcrow" href="#section-4">&#182;</a>
         </div>
         <p>Set the application root directory.</p>
       </td>
@@ -71,10 +82,10 @@ loading and application level settings are done here.</p>
   <span class="k">end</span></pre></div>
       </td>
     </tr>
-    <tr id='section-4'>
+    <tr id='section-5'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-4">&#182;</a>
+          <a class="pilcrow" href="#section-5">&#182;</a>
         </div>
         <p>Logging interface for local development and heroku.
 There are four internal Log levels aliased to the standard SYSLOG levels.
@@ -107,10 +118,10 @@ should not be used.</p>
   <span class="k">end</span></pre></div>
       </td>
     </tr>
-    <tr id='section-5'>
+    <tr id='section-6'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-5">&#182;</a>
+          <a class="pilcrow" href="#section-6">&#182;</a>
         </div>
         <p>Set Rack environment if not specified.</p>
       </td>
@@ -118,10 +129,10 @@ should not be used.</p>
         <div class='highlight'><pre>  <span class="no">RACK_ENV</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;RACK_ENV&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s2">&quot;development&quot;</span></pre></div>
       </td>
     </tr>
-    <tr id='section-6'>
+    <tr id='section-7'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-6">&#182;</a>
+          <a class="pilcrow" href="#section-7">&#182;</a>
         </div>
         <p>Accessor for the configuration hash. If none has been created a new hash is
 yielded. This hash is made immutable at the end of <code>config/setup.rb</code>.</p>
@@ -130,10 +141,10 @@ yielded. This hash is made immutable at the end of <code>config/setup.rb</code>.
         <div class='highlight'><pre>  <span class="k">def</span> <span class="nc">Aji</span><span class="o">.</span><span class="nf">conf</span><span class="p">;</span> <span class="vi">@conf_hash</span> <span class="o">||=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span><span class="p">;</span> <span class="k">end</span></pre></div>
       </td>
     </tr>
-    <tr id='section-7'>
+    <tr id='section-8'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-7">&#182;</a>
+          <a class="pilcrow" href="#section-8">&#182;</a>
         </div>
         <p>Handles initialization and preprocessing of application settings be they
 from Heroku&rsquo;s Environment or a local <code>settings.yml</code>.</p>
@@ -142,10 +153,10 @@ from Heroku&rsquo;s Environment or a local <code>settings.yml</code>.</p>
         <div class='highlight'><pre>  <span class="n">require_relative</span> <span class="s1">&#39;config/setup.rb&#39;</span></pre></div>
       </td>
     </tr>
-    <tr id='section-8'>
+    <tr id='section-9'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-8">&#182;</a>
+          <a class="pilcrow" href="#section-9">&#182;</a>
         </div>
         <p>Establish Redis connection and initialize Redis-backed utilities.</p>
       </td>
@@ -164,10 +175,10 @@ from Heroku&rsquo;s Environment or a local <code>settings.yml</code>.</p>
   <span class="no">Resque</span><span class="o">::</span><span class="no">Failure</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="no">Resque</span><span class="o">::</span><span class="no">Failure</span><span class="o">::</span><span class="no">MultipleWithRetrySuppression</span></pre></div>
       </td>
     </tr>
-    <tr id='section-9'>
+    <tr id='section-10'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-9">&#182;</a>
+          <a class="pilcrow" href="#section-10">&#182;</a>
         </div>
         <p>Establish ActiveRecord conneciton and run all necessary migrations.</p>
       </td>
@@ -176,10 +187,10 @@ from Heroku&rsquo;s Environment or a local <code>settings.yml</code>.</p>
   <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">default_timezone</span> <span class="o">=</span> <span class="ss">:utc</span></pre></div>
       </td>
     </tr>
-    <tr id='section-10'>
+    <tr id='section-11'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-10">&#182;</a>
+          <a class="pilcrow" href="#section-11">&#182;</a>
         </div>
         <p>For Account and Channel search</p>
       </td>
@@ -187,10 +198,10 @@ from Heroku&rsquo;s Environment or a local <code>settings.yml</code>.</p>
         <div class='highlight'><pre>  <span class="no">Tanker</span><span class="o">.</span><span class="n">configuration</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="no">Aji</span><span class="o">.</span><span class="n">conf</span><span class="o">[</span><span class="s1">&#39;INDEXTANK_API_URL&#39;</span><span class="o">]</span> <span class="p">}</span></pre></div>
       </td>
     </tr>
-    <tr id='section-11'>
+    <tr id='section-12'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-11">&#182;</a>
+          <a class="pilcrow" href="#section-12">&#182;</a>
         </div>
         <p>An application specific error class.</p>
       </td>
@@ -198,16 +209,18 @@ from Heroku&rsquo;s Environment or a local <code>settings.yml</code>.</p>
         <div class='highlight'><pre>  <span class="k">class</span> <span class="nc">Error</span> <span class="o">&lt;</span> <span class="no">RuntimeError</span><span class="p">;</span> <span class="k">end</span></pre></div>
       </td>
     </tr>
-    <tr id='section-12'>
+    <tr id='section-13'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-12">&#182;</a>
+          <a class="pilcrow" href="#section-13">&#182;</a>
         </div>
         <p>An error to raise when a required interface method has not been overridden
 by a subclass.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>  <span class="k">class</span> <span class="nc">InterfaceMethodNotImplemented</span> <span class="o">&lt;</span> <span class="no">Aji</span><span class="o">::</span><span class="no">Error</span><span class="p">;</span> <span class="k">end</span>
+
+  <span class="no">Grape</span><span class="o">.</span><span class="n">send</span> <span class="ss">:include</span><span class="p">,</span> <span class="no">RPMContrib</span><span class="o">::</span><span class="no">Instrumentation</span><span class="o">::</span><span class="no">Grape</span>
 
   <span class="k">class</span> <span class="nc">API</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
     <span class="n">version</span> <span class="s1">&#39;1&#39;</span>
@@ -217,10 +230,10 @@ by a subclass.</p>
 <span class="nb">require</span> <span class="s1">&#39;active_support/core_ext/object&#39;</span></pre></div>
       </td>
     </tr>
-    <tr id='section-13'>
+    <tr id='section-14'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-13">&#182;</a>
+          <a class="pilcrow" href="#section-14">&#182;</a>
         </div>
         <p>Monkey Patching</p>
       </td>
@@ -240,10 +253,10 @@ by a subclass.</p>
 <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;models/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span></pre></div>
       </td>
     </tr>
-    <tr id='section-14'>
+    <tr id='section-15'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-14">&#182;</a>
+          <a class="pilcrow" href="#section-15">&#182;</a>
         </div>
         <p>Must load channel subtypes after other models for dependency reasons.</p>
       </td>
@@ -259,10 +272,10 @@ by a subclass.</p>
 <span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;queues/debug/*.rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">require_relative</span> <span class="n">r</span> <span class="p">}</span></pre></div>
       </td>
     </tr>
-    <tr id='section-15'>
+    <tr id='section-16'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-15">&#182;</a>
+          <a class="pilcrow" href="#section-16">&#182;</a>
         </div>
         <p>Add Sinatra web viewer.</p>
 

@@ -89,8 +89,8 @@ or 404</p>
 
         <span class="k">if</span> <span class="n">channel</span><span class="o">.</span><span class="n">class</span> <span class="o">==</span> <span class="no">Channel</span><span class="o">::</span><span class="no">User</span>
           <span class="n">authenticate_as_token_holder!</span>
-          <span class="n">error!</span> <span class="s2">&quot;Unathorized channel access&quot;</span><span class="p">,</span> <span class="mi">401</span> <span class="k">unless</span>
-            <span class="n">user</span><span class="o">.</span><span class="n">user_channels</span><span class="o">.</span><span class="n">include?</span> <span class="n">channel</span>
+          <span class="n">error!</span> <span class="no">MultiJson</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s2">&quot;Unathorized channel access&quot;</span><span class="p">),</span>
+            <span class="mi">401</span> <span class="k">unless</span> <span class="n">current_user</span><span class="o">.</span><span class="n">user_channels</span><span class="o">.</span><span class="n">include?</span> <span class="n">channel</span>
         <span class="k">end</span>
 
         <span class="n">channel</span><span class="o">.</span><span class="n">serializable_hash</span><span class="p">(</span>
@@ -131,7 +131,7 @@ channels regardless of type.</p></li>
           <span class="n">missing_params_error!</span> <span class="n">params</span><span class="p">,</span> <span class="o">[</span><span class="ss">:type</span><span class="o">]</span> <span class="k">unless</span> <span class="n">params</span><span class="o">[</span><span class="ss">:type</span><span class="o">]==</span><span class="s1">&#39;featured&#39;</span>
           <span class="n">category_ids</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:category_ids</span><span class="o">].</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
           <span class="n">categories</span> <span class="o">=</span> <span class="n">category_ids</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">cat_id</span><span class="o">|</span> <span class="no">Category</span><span class="o">.</span><span class="n">find_by_id</span> <span class="n">cat_id</span> <span class="p">}</span>
-          <span class="n">channels</span> <span class="o">=</span> <span class="n">categories</span><span class="o">.</span><span class="n">compact</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span><span class="o">|</span><span class="n">cat</span><span class="o">|</span> <span class="n">cat</span><span class="o">.</span><span class="n">featured_channels</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">}</span>
+          <span class="n">channels</span> <span class="o">=</span> <span class="n">categories</span><span class="o">.</span><span class="n">compact</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span><span class="o">|</span><span class="n">cat</span><span class="o">|</span> <span class="n">cat</span><span class="o">.</span><span class="n">featured_channels</span><span class="o">.</span><span class="n">first</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">}</span>
           <span class="n">channels</span><span class="o">.</span><span class="n">flatten</span><span class="o">.</span><span class="n">compact</span>
         <span class="k">elsif</span> <span class="p">(</span><span class="n">current_user</span><span class="p">)</span>
           <span class="n">authenticate!</span>
