@@ -68,16 +68,17 @@ module Aji
           :video_start => params[:video_start].to_i,
           :video_elapsed => (params[:video_elapsed] || video.duration).to_i)
 
-        share = Share.create(:user => current_user, :video => video,
-          :channel => channel, :message => params[:message],
-          :network => params[:network], :event => event)
+        begin
+          share = Share.create(:user => current_user, :video => video,
+            :channel => channel, :message => params[:message],
+            :network => params[:network], :event => event)
+        rescue => e
+          # We couldn't publish the share to the given social network
+          error! "User[#{current_user.id}] is unable to share Video[#{video.id}] to #{params[:network]}: #{e.message}", 400
+        end
 
         validation_error!(share, params) unless share.valid?
-        if share.new_record? # passed validation but couldn't save to db
-          error! "Unable to publish", 400
-        else
-          share
-        end
+        share
 
       end
     end

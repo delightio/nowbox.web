@@ -29,20 +29,9 @@ describe Aji::Share, :unit do
   end
 
   describe "#publish" do
-    it "calls publish before object creation" do
+    it "calls publish after object creation" do
       twitter_account.should_receive(:publish).with(subject)
       subject
-    end
-  end
-
-  describe ".create" do
-    it "rolls back if publish fails" do
-      twitter_account.should_receive(:publish).and_raise(stub)
-      subject.should be_new_record
-    end
-
-    it "succeeds if publish succeeded" do
-      subject.should_not be_new_record
     end
   end
 
