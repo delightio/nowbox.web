@@ -74,7 +74,7 @@ module Aji
             :network => params[:network], :event => event)
         rescue => e
           # We couldn't publish the share to the given social network
-          error! "User[#{current_user.id}] is unable to share Video[#{video.id}] to #{params[:network]}: #{e.message}", 400
+          error! "User[#{current_user.id}] is not authorized to share Video[#{video.id}] to #{params[:network]}: #{e.message}", 400
         end
 
         validation_error!(share, params) unless share.valid?
