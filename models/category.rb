@@ -28,10 +28,15 @@ module Aji
       channel_id_zset[channel.id] = relevance
     end
 
+    def thumbnail_uri
+      "http://#{Aji.conf['TLD']}/images/icons/nowcelebrity.png"
+    end
+
     def serializable_hash options={}
       {
         "id" => id,
-        "title" => title
+        "title" => title,
+        "thumbnail_uri" => thumbnail_uri
       }
     end
 

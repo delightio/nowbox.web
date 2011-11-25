@@ -19,6 +19,24 @@ module Aji
       c.title.should_not be_nil
     end
 
+    describe "#thumbnail_uri" do
+      it "returns corresponding thumbnail"
+
+      it "returns default thumbnail otherwise" do
+        thumbnail = subject.thumbnail_uri
+        thumbnail.split('/').last.should == 'nowcelebrity.png'
+      end
+    end
+
+    describe "#serializable_hash" do
+      it "contains specific keys" do
+        returned = subject.serializable_hash
+        ['id', 'title', 'thumbnail_uri'].each do |key|
+          returned.should have_key key
+        end
+      end
+    end
+
     describe "#update_channel_relevance" do
       let(:channel) { mock "channel", :id=>1 }
       it "overwrites previous relevance with new one" do
