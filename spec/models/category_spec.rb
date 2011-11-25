@@ -27,9 +27,10 @@ module Aji
           "http://#{Aji.conf['TLD']}/images/icons/now#{subject.title.downcase}.png"
       end
 
-      it "returns empty path otherwise" do
+      it "returns default thumbnail otherwise" do
         subject.stub title: random_string
-        subject.thumbnail_uri.should be_empty
+        thumbnail = subject.thumbnail_uri
+        thumbnail.split('/').last.should == 'nowfilm.png'
       end
     end
 

@@ -33,7 +33,7 @@ module Aji
       if File.exists? "lib/viewer/public/#{expected_path}"
         return  "http://#{Aji.conf['TLD']}/#{expected_path}"
       end
-      "" # return empty string to use iOS default
+      "http://#{Aji.conf['TLD']}/images/icons/nowfilm.png"
     end
 
     def serializable_hash options={}
