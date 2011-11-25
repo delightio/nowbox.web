@@ -5,6 +5,7 @@ module Aji
     subject do
       Category.new.tap do |c|
         c.stub :id => 1
+        c.stub :title => 'News'
         Category.stub(:find).with(c.id).and_return(c)
         Category.stub(:find_by_id).with(c.id).and_return(c)
         Category.stub(:find_by_title).and_return(c)
@@ -20,9 +21,14 @@ module Aji
     end
 
     describe "#thumbnail_uri" do
-      it "returns corresponding thumbnail"
+      it "returns corresponding thumbnail" do
+        subject.stub title: 'Comedy'
+        subject.thumbnail_uri.should ==
+          "http://#{Aji.conf['TLD']}/images/icons/now#{subject.title.downcase}.png"
+      end
 
       it "returns default thumbnail otherwise" do
+        subject.stub title: random_string
         thumbnail = subject.thumbnail_uri
         thumbnail.split('/').last.should == 'nowcelebrity.png'
       end

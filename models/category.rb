@@ -29,6 +29,10 @@ module Aji
     end
 
     def thumbnail_uri
+      expected_path = "images/icons/now#{title.downcase}.png"
+      if File.exists? "lib/viewer/public/#{expected_path}"
+        return  "http://#{Aji.conf['TLD']}/#{expected_path}"
+      end
       "http://#{Aji.conf['TLD']}/images/icons/nowcelebrity.png"
     end
 
