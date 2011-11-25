@@ -48,7 +48,8 @@ module Aji
       #
       # - `category_ids` and `type`:  `category_ids` is a comma separated list of
       #   category ids. Only supported `type` is 'featured'. Server then returns
-      #   featured channels from these selected categories.
+      #   featured channels from these selected categories. `user_id` is required
+      #   if `category_ids` is present.
       #
       # - `user_id`:  user id. If supplied without `query`, server returns
       #   given user's subscribed channels. Providing this parameter *requires
@@ -60,6 +61,11 @@ module Aji
         if params[:query]
           Searcher.new(params[:query]).results
         elsif params[:category_ids]
+          # TODO: we will user user.region later to determine the featured channels
+          # to subscribe the user to given the selected categories
+          missing_params_error! params, [:user_id] if current_user.nil?
+          authenticate!
+
           missing_params_error! params, [:type] unless params[:type]=='featured'
           category_ids = params[:category_ids].split(',')
           categories = category_ids.map { |cat_id| Category.find_by_id cat_id }
