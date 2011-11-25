@@ -14,7 +14,7 @@ module Aji
           recommended << video
         end
       end
-      recommended
+      recommended.sample(50)
     end
 
     def refresh_videos
