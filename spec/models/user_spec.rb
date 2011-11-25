@@ -68,6 +68,13 @@ describe Aji::User do
     end
   end
 
+  describe "#create_recommended_channel" do
+    it "creates recommended channel" do
+      Channel::Recommended.should_receive(:create).once
+      subject.send :create_recommended_channel
+    end
+  end
+
   describe "#subscribe_featured_channels" do
     let(:featured_channels) do
       (1..3).map do |i|
