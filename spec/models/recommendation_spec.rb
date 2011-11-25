@@ -24,12 +24,14 @@ describe Recommendation do
       subject.videos.each do |v|
         user.recommended_channel.should_receive(:push).with(v).once
       end
+
       subject.refresh_videos
     end
 
     it "does not update given channel if channel has been recently refreshed" do
       user.recommended_channel.stub :recently_populated? => true
       user.recommended_channel.should_not_receive(:push)
+
       subject.refresh_videos
     end
   end
