@@ -30,7 +30,7 @@ module Aji
       it "returns default thumbnail otherwise" do
         subject.stub title: random_string
         thumbnail = subject.thumbnail_uri
-        thumbnail.split('/').last.should == 'nowcelebrity.png'
+        thumbnail.split('/').last.should == 'nowfilm.png'
       end
     end
 
