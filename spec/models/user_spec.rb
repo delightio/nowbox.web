@@ -595,6 +595,7 @@ describe Aji::User do
         u.stub :queue_channel_id => 1
         u.stub :favorite_channel_id => 2
         u.stub :history_channel_id => 3
+        u.stub :recommended_channel_id => 4
         u.stub :twitter_channel_id => nil
         u.stub :facebook_channel_id => 5
         u.stub :subscribed_channel_ids => [6,7,8,9,10]
@@ -613,6 +614,7 @@ describe Aji::User do
         'queue_channel_id' => 1,
         'favorite_channel_id' => 2,
         'history_channel_id' => 3,
+        'recommended_channel_id' => 4,
         'twitter_channel_id' => nil,
         'facebook_channel_id' => 5,
         'subscribed_channel_ids' => [6,7,8,9,10],
