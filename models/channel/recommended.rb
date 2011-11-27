@@ -14,4 +14,3 @@ module Aji
 
   end
 end
-

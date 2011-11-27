@@ -18,7 +18,9 @@ module Aji
     def refresh_videos
       destination = @user.recommended_channel
       return if destination.recently_populated?
+
       videos.each { |v| destination.push v }
+      destination.update_attribute :populated_at, Time.now
     end
 
     def enqueue

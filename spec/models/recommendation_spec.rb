@@ -24,6 +24,8 @@ describe Recommendation do
       subject.videos.each do |v|
         user.recommended_channel.should_receive(:push).with(v).once
       end
+      user.recommended_channel.should_receive(:update_attribute).
+        with(:populated_at, an_instance_of(Time))
 
       subject.refresh_videos
     end
