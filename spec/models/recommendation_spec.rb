@@ -38,12 +38,12 @@ describe Recommendation do
     end
   end
 
-  describe "#enqueue" do
+  describe "#background_refresh" do
     it "sets up a resque job to run recommendation" do
       Resque.should_receive(:enqueue_in).with(
         1.hour, Aji::Queues::RefreshRecommendedVideos, user.id)
 
-      subject.enqueue
+      subject.background_refresh
     end
   end
 

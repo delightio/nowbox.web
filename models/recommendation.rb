@@ -23,7 +23,7 @@ module Aji
       destination.update_attribute :populated_at, Time.now
     end
 
-    def enqueue
+    def background_refresh
       Resque.enqueue_in 1.hour, Queues::RefreshRecommendedVideos, @user.id
     end
 
