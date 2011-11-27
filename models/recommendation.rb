@@ -1,7 +1,5 @@
 module Aji
   class Recommendation
-    include Redis::Objects
-    include Mixins::ContentVideos
 
     def initialize user
       @user = user
