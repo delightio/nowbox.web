@@ -34,6 +34,7 @@ module Aji
         unless youtube_subscriptions.include? c
           account.api.subscribe_to c
         end
+        @youtube_subscriptions = nil
       end
     end
 
@@ -42,6 +43,7 @@ module Aji
         unless youtube_watch_later_videos.include? v
           account.api.add_to_watch_later v
         end
+        @youtube_watch_later_videos = nil
       end
     end
 
@@ -50,6 +52,7 @@ module Aji
         unless youtube_favorite_videos.include? v
           account.api.add_to_favorites v
         end
+        @youtube_favorite_videos = nil
       end
     end
 

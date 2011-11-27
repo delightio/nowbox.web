@@ -5,8 +5,6 @@ module Aji
     attr_reader :cooldown, :hits_per_session, :redis, :namespace
 
     def initialize api_name, redis, options
-
-
       @namespace = api_name.strip.downcase.gsub(/[-\s]+/,'_')
       @redis = redis
 
