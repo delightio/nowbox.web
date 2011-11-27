@@ -103,6 +103,16 @@ describe Aji::User do
       end
     end
 
+    it "updates recommendation engine" do
+      recommendation = stub
+      Recommendation.should_receive(:new).
+        with(subject).and_return(recommendation)
+      recommendation.should_receive :background_refresh
+
+      event = stub.as_null_object
+      subject.process_event event
+    end
+
     describe "channel actions" do
       specify "subscribe subscribes to the channel" do
         event.stub :action => :subscribe
