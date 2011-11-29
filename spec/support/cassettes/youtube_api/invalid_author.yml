@@ -32,3 +32,36 @@
       - GSE
     body: User not found
     http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/noaosldfads?dev_key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 404
+      message: Not Found
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - text/html; charset=UTF-8
+      transfer-encoding:
+      - chunked
+      date:
+      - Tue, 29 Nov 2011 21:33:29 GMT
+      expires:
+      - Tue, 29 Nov 2011 21:33:29 GMT
+      cache-control:
+      - private, max-age=0
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: User not found
+    http_version: '1.1'
