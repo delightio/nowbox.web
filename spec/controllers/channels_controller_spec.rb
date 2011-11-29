@@ -70,7 +70,7 @@ module Aji
         it "returns top 2 featured channels of given categories" do
           category_ids = categories.map &:id
           params = { :category_ids => category_ids.join(','),
-            :type => "featured"}
+            :type => "featured", :user_id => user.id}
           get "#{resource_uri}", params
           last_response.status.should == 200
           body_hash = JSON.parse last_response.body
