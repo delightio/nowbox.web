@@ -158,7 +158,8 @@ module Aji
 
     def valid_uid? uid=uid
       tracker.hit!
-      Faraday.get("#{USER_FEED_URL}/#{uid}").status == 200
+      feed_url = "#{USER_FEED_URL}/#{uid}?dev_key=#{Aji.conf['YOUTUBE_KEY']}"
+      Faraday.get(feed_url).status == 200
     end
 
     def video_info youtube_id
@@ -251,7 +252,7 @@ module Aji
       def initialize youtube_uid, data=nil
         @youtube_uid = youtube_uid
         @feed_url =
-          "http://gdata.youtube.com/feeds/api/users/#{youtube_uid}?alt=json&v=2"
+          "http://gdata.youtube.com/feeds/api/users/#{youtube_uid}?alt=json&v=2&dev_key=#{Aji.conf['YOUTUBE_KEY']}"
         @data = if data then data['entry'] else get_data_from_youtube end
       end
 
