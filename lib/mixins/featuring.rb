@@ -14,7 +14,10 @@ module Aji
         end
 
         def featured_ids
-          redis.lrange(featured_key, 0, -1).map(&:to_i)
+          # Simulate time out error for LH 716
+          sleep(1)
+          raise Timeout::Error, "simulated time out error"
+          # redis.lrange(featured_key, 0, -1).map(&:to_i)
         end
 
         def featured
