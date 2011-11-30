@@ -135,7 +135,9 @@ describe Aji::YoutubeAPI, :unit, :net do
   context "when authenticated" do
     let(:token) { "1/MVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk" }
     let(:secret) { "G5B41-A-uFesmokk1n1tbyor" }
-    subject { YoutubeAPI.new "nowmovnowbox", token, secret }
+    let(:account_uid) { "nowmovnowbox" }
+
+    subject { YoutubeAPI.new account_uid, token, secret }
 
     it "raises an error if partial credentials are used" do
       expect{ YoutubeAPI.new "someuser", "sometoken" }.to raise_error(
@@ -218,9 +220,13 @@ describe Aji::YoutubeAPI, :unit, :net do
     describe "#favorite_videos" do
       let(:favorite_video_ids) { %w[dYCLXDtvrbs] }
 
-      it "hits youtube once on #favorites and once per new videos" do
-        subject.tracker.should_receive(:hit!).
-          exactly(1+favorite_video_ids.length).times
+      it "hits youtube once per page, per video, and per new author" do
+        subject.tracker.should_receive(:hit!).exactly(
+          # There's an extra time for the account object created by the first
+          # pass through all the favorites for the playlist author. In
+          # production this account will always already exist in the database.
+          favorite_video_ids.length / 50 + 1 + favorite_video_ids.length *
+          2 + 1).times
         favorite_videos = VCR.use_cassette "youtube_api/favorite_videos" do
           subject.favorite_videos
         end
@@ -232,6 +238,16 @@ describe Aji::YoutubeAPI, :unit, :net do
         end
 
         favorite_videos.map(&:external_id).should == favorite_video_ids
+      end
+
+      it "gets the real author from the youtube api" do
+        favorite_videos = VCR.use_cassette "youtube_api/favorite_videos" do
+          subject.favorite_videos
+        end
+
+        favorite_videos.each do |v|
+          v.author.uid.should_not == account_uid
+        end
       end
 
       it "filters videos with nil ids" do
@@ -333,11 +349,16 @@ describe Aji::YoutubeAPI, :unit, :net do
     end
 
     describe "#watch_later_videos" do
-      let(:watch_later_video_ids) { ["IsLwVoZqEjk"] }
+      let(:watch_later_video_ids) { %w[IsLwVoZqEjk] }
 
       it "hits youtube once on #watch_later_videos and once per new videos" do
-        subject.tracker.should_receive(:hit!).
-          exactly(1+watch_later_video_ids.length).times
+        subject.tracker.should_receive(:hit!).exactly(
+          # There's an extra time for the account object created by the first
+          # pass through all the favorites for the playlist author. In
+          # production this account will always already exist in the database.
+          watch_later_video_ids.length / 2 + 1 + watch_later_video_ids.length *
+          2 + 1).times
+
         VCR.use_cassette "youtube_api/watch_later_videos" do
           subject.watch_later_videos
         end
@@ -349,6 +370,16 @@ describe Aji::YoutubeAPI, :unit, :net do
         end
 
         videos.map(&:external_id).should == watch_later_video_ids
+      end
+
+      it "gets the real author from the youtube api" do
+        watch_later_videos = VCR.use_cassette "youtube_api/watch_later_videos" do
+          subject.watch_later_videos
+        end
+
+        watch_later_videos.each do |v|
+          v.author.uid.should_not == account_uid
+        end
       end
 
       it "filters videos with nil ids" do
