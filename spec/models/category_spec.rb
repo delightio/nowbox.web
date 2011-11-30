@@ -24,13 +24,13 @@ module Aji
       it "returns corresponding thumbnail" do
         subject.stub title: 'Comedy'
         subject.thumbnail_uri.should ==
-          "http://#{Aji.conf['TLD']}/images/icons/now#{subject.title.downcase}.png"
+          "http://#{Aji.conf['TLD']}/images/icons/categories/#{subject.title.downcase}.png"
       end
 
       it "returns default thumbnail otherwise" do
         subject.stub title: random_string
         thumbnail = subject.thumbnail_uri
-        thumbnail.split('/').last.should == 'nowfilm.png'
+        thumbnail.split('/').last.should == 'film.png'
       end
     end
 
