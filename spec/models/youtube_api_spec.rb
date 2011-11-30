@@ -220,13 +220,9 @@ describe Aji::YoutubeAPI, :unit, :net do
     describe "#favorite_videos" do
       let(:favorite_video_ids) { %w[dYCLXDtvrbs] }
 
-      it "hits youtube once per page, per video, and per new author" do
+      it "hits youtube once per page and once per new author" do
         subject.tracker.should_receive(:hit!).exactly(
-          # There's an extra time for the account object created by the first
-          # pass through all the favorites for the playlist author. In
-          # production this account will always already exist in the database.
-          favorite_video_ids.length / 50 + 1 + favorite_video_ids.length *
-          2 + 1).times
+          favorite_video_ids.length / 50 + 1 + favorite_video_ids.length).times
         favorite_videos = VCR.use_cassette "youtube_api/favorite_videos" do
           subject.favorite_videos
         end
@@ -351,13 +347,9 @@ describe Aji::YoutubeAPI, :unit, :net do
     describe "#watch_later_videos" do
       let(:watch_later_video_ids) { %w[IsLwVoZqEjk] }
 
-      it "hits youtube once on #watch_later_videos and once per new videos" do
+      it "hits youtube once per page and once per new author" do
         subject.tracker.should_receive(:hit!).exactly(
-          # There's an extra time for the account object created by the first
-          # pass through all the favorites for the playlist author. In
-          # production this account will always already exist in the database.
-          watch_later_video_ids.length / 2 + 1 + watch_later_video_ids.length *
-          2 + 1).times
+          watch_later_video_ids.length / 50 + 1 + watch_later_video_ids.length).times
 
         VCR.use_cassette "youtube_api/watch_later_videos" do
           subject.watch_later_videos

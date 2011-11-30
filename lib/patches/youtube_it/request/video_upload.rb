@@ -21,14 +21,14 @@ class YouTubeIt
         watch_later_url = "/feeds/api/users/%s/watch_later#{opts.empty? ? '' : "?#{opts.to_param}"}" % (user ? user : "default")
         response = yt_session.get(watch_later_url)
 
-        YouTubeIt::Parser::VideosFeedParser.new(response.body).parse
+        YouTubeIt::Parser::PlaylistVideosFeedParser.new(response.body).parse
       end
 
       def favorites(user, opts = {})
         favorite_url = "/feeds/api/users/%s/favorites#{opts.empty? ? '' : "?#{opts.to_param}"}" % (user ? user : "default")
         response     = yt_session.get(favorite_url)
 
-        return YouTubeIt::Parser::VideosFeedParser.new(response.body).parse
+        return YouTubeIt::Parser::PlaylistVideosFeedParser.new(response.body).parse
       end
 
       def subscriptions user, opts
