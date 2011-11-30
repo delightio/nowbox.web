@@ -357,3 +357,215 @@
     body: <errors xmlns='http://schemas.google.com/g/2005'><error><domain>GData</domain><code>InvalidEntryException</code><internalReason>This
       resource already exists</internalReason></error></errors>
     http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/videos/IsLwVoZqEjk?key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=entry
+      expires:
+      - Wed, 30 Nov 2011 20:40:48 GMT
+      date:
+      - Wed, 30 Nov 2011 20:40:48 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - ! '*'
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DUEDRH47eCp7I2A9WhRRFkg."
+      last-modified:
+      - Wed, 30 Nov 2011 12:54:35 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! "<?xml version='1.0' encoding='UTF-8'?><entry xmlns='http://www.w3.org/2005/Atom'
+      xmlns:media='http://search.yahoo.com/mrss/' xmlns:gd='http://schemas.google.com/g/2005'
+      xmlns:yt='http://gdata.youtube.com/schemas/2007' gd:etag='W/&quot;DUEDRH47eCp7I2A9WhRRFkg.&quot;'><id>tag:youtube.com,2008:video:IsLwVoZqEjk</id><published>2010-10-13T16:01:48.000Z</published><updated>2011-11-30T12:54:35.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Film' label='Film
+      &amp; Animation'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='summer'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='wars'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='funimation'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='anime'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='girl'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='leapt'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='through'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='time'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Mamoru Hosoda'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Digimon'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Secret of Kells'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Gkids'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Sita Sings the Blues'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='trailer'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='theatrical'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='full'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='length'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='english'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='dub'/><title>Summer Wars - Theatrical Trailer - In Select Theaters Dec
+      '10 - DVD/BD Spring '11</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/IsLwVoZqEjk?version=3&amp;f=videos&amp;d=AVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=IsLwVoZqEjk&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/IsLwVoZqEjk/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/IsLwVoZqEjk/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/IsLwVoZqEjk/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/IsLwVoZqEjk/related?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=IsLwVoZqEjk'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/IsLwVoZqEjk?v=2'/><author><name>FUNimation</name><uri>http://gdata.youtube.com/feeds/api/users/funimation</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink href='http://gdata.youtube.com/feeds/api/videos/IsLwVoZqEjk/comments?v=2'
+      countHint='1989'/></gd:comments><yt:hd/><media:group><media:category label='Film
+      &amp; Animation' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Film</media:category><media:content
+      url='http://www.youtube.com/v/IsLwVoZqEjk?version=3&amp;f=videos&amp;d=AVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='148' yt:format='5'/><media:content url='rtsp://v5.cache7.c.youtube.com/CkULENy73wIaPAk5EmqGVvDCIhMYDSANFEgGUgZ2aWRlb3NyIQFbur2tyMi4XeQ975uVzH9zDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='148' yt:format='1'/><media:content
+      url='rtsp://v4.cache8.c.youtube.com/CkULENy73wIaPAk5EmqGVvDCIhMYESARFEgGUgZ2aWRlb3NyIQFbur2tyMi4XeQ975uVzH9zDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='148' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube' yt:type='partner'>FUNimation</media:credit><media:description
+      type='plain'>http://www.funimation.com/summerwars\r\nSummer Wars- Coming to
+      theaters in select cities December 2010 and on DVD/Blu-ray Spring 2011\r\n\r\nFrom
+      the visionary directory of The Girl Who Leapt Through Time (2007 Japanese Academy
+      Award winner, Best Animated Feature) comes the story of an ordinary family going
+      to extraordinary lengths to avert the impending cyber apocalypse!\r\n\r\nKenji
+      is your typical teenage misfit. He's good at math, bad with girls, and spends
+      most of his time hanging out in the all-powerful, online community known as
+      OZ. His second life is the only life he has -- until the girl of his dreams,
+      Natsuki, hijacks him for a starring role as a fake fiancé at her family reunion.
+      Things only get stranger from there. A late-night email containing a cryptic
+      mathematic riddle leads to the unleashing of a rogue AI intent on using the
+      virtual word of OZ to destroy the real world, literarily.  As Armageddon looms
+      on the horizon, Kenji and his new \"family\" set aside their differences and
+      band together to save the worlds they inhabit in this \"near-perfect blend of
+      social satire and science fiction\". (AnimeNewsNetwork.com)\r\n\r\nAwards:\r\n\r\nAward
+      of the Japanese Academy- Best Animated Film\r\nTokyo Anime Awards- Animation
+      of the Year\r\nMainichi Film Concours- Best Animated Film\r\nSitges International
+      Film Festival of Catalonia -- Best Animated Film\r\nFantasia Film Festival-
+      Best Animated Film</media:description><media:keywords>summer, wars, funimation,
+      anime, girl, leapt, through, time, Mamoru Hosoda, Digimon, Secret of Kells,
+      Gkids, Sita Sings the Blues, trailer, theatrical, full, length, english, dub</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=IsLwVoZqEjk&amp;feature=youtube_gdata_player'/><media:restriction
+      type='country' relationship='allow'>CA US</media:restriction><media:thumbnail
+      url='http://i.ytimg.com/vi/IsLwVoZqEjk/default.jpg' height='90' width='120'
+      time='00:01:14' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/IsLwVoZqEjk/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/IsLwVoZqEjk/1.jpg'
+      height='90' width='120' time='00:00:37' yt:name='start'/><media:thumbnail url='http://i.ytimg.com/vi/IsLwVoZqEjk/2.jpg'
+      height='90' width='120' time='00:01:14' yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/IsLwVoZqEjk/3.jpg'
+      height='90' width='120' time='00:01:51' yt:name='end'/><media:title type='plain'>Summer
+      Wars - Theatrical Trailer - In Select Theaters Dec '10 - DVD/BD Spring '11</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+      seconds='148'/><yt:uploaded>2010-10-13T16:01:48.000Z</yt:uploaded><yt:videoid>IsLwVoZqEjk</yt:videoid></media:group><gd:rating
+      average='4.9648266' max='5' min='1' numRaters='2047' rel='http://schemas.google.com/g/2005#overall'/><yt:statistics
+      favoriteCount='2846' viewCount='168012'/><yt:rating numDislikes='18' numLikes='2029'/></entry>"
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/videos/rqweCwAMan0?key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=entry
+      expires:
+      - Wed, 30 Nov 2011 20:40:48 GMT
+      date:
+      - Wed, 30 Nov 2011 20:40:48 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - ! '*'
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DEAMSH47eCp7I2A9WhdaEU8."
+      last-modified:
+      - Thu, 20 Oct 2011 16:06:29 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: <?xml version='1.0' encoding='UTF-8'?><entry xmlns='http://www.w3.org/2005/Atom'
+      xmlns:media='http://search.yahoo.com/mrss/' xmlns:gd='http://schemas.google.com/g/2005'
+      xmlns:yt='http://gdata.youtube.com/schemas/2007' gd:etag='W/&quot;DEAMSH47eCp7I2A9WhdaEU8.&quot;'><id>tag:youtube.com,2008:video:rqweCwAMan0</id><published>2008-11-19T21:59:09.000Z</published><updated>2011-10-20T16:06:29.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Tech' label='Science
+      &amp; Technology'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Vim'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Clojure'/><title>VimClojure Setup</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/rqweCwAMan0?version=3&amp;f=videos&amp;d=AVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=rqweCwAMan0&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/rqweCwAMan0/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/rqweCwAMan0/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/rqweCwAMan0/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/rqweCwAMan0/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/rqweCwAMan0?v=2'/><author><name>kotarakmikesh</name><uri>http://gdata.youtube.com/feeds/api/users/kotarakmikesh</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink href='http://gdata.youtube.com/feeds/api/videos/rqweCwAMan0/comments?v=2'
+      countHint='2'/></gd:comments><media:group><media:category label='Science &amp;
+      Technology' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Tech</media:category><media:content
+      url='http://www.youtube.com/v/rqweCwAMan0?version=3&amp;f=videos&amp;d=AVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='167' yt:format='5'/><media:content url='rtsp://v6.cache6.c.youtube.com/CkULENy73wIaPAl9agwACx6srhMYDSANFEgGUgZ2aWRlb3NyIQFbur2tyMi4XeQ975uVzH9zDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='167' yt:format='1'/><media:content
+      url='rtsp://v4.cache1.c.youtube.com/CkULENy73wIaPAl9agwACx6srhMYESARFEgGUgZ2aWRlb3NyIQFbur2tyMi4XeQ975uVzH9zDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='167' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>kotarakmikesh</media:credit><media:description
+      type='plain'>How to set up Vim for editing Clojure files with VimClojure</media:description><media:keywords>Vim,
+      Clojure</media:keywords><media:license type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=rqweCwAMan0&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/rqweCwAMan0/default.jpg' height='90' width='120'
+      time='00:01:23.500' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/rqweCwAMan0/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/rqweCwAMan0/1.jpg'
+      height='90' width='120' time='00:00:41.750' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/rqweCwAMan0/2.jpg' height='90' width='120' time='00:01:23.500'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/rqweCwAMan0/3.jpg'
+      height='90' width='120' time='00:02:05.250' yt:name='end'/><media:title type='plain'>VimClojure
+      Setup</media:title><yt:duration seconds='167'/><yt:uploaded>2008-11-19T21:59:09.000Z</yt:uploaded><yt:videoid>rqweCwAMan0</yt:videoid></media:group><gd:rating
+      average='5.0' max='5' min='1' numRaters='9' rel='http://schemas.google.com/g/2005#overall'/><yt:statistics
+      favoriteCount='6' viewCount='3091'/><yt:rating numDislikes='0' numLikes='9'/></entry>
+    http_version: '1.1'
