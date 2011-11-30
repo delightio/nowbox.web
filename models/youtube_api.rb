@@ -84,7 +84,10 @@ module Aji
         videos.each do |v|
           favorites << youtube_it_to_video(v)
         end
-      end.reject{ |v| v.external_id.nil? }
+      end.reject{ |v| v.external_id.nil? }.each do |v|
+        v.author = video_info(v.external_id).fetch :author
+        v.save
+      end
     end
 
     def add_to_favorites video
@@ -133,7 +136,9 @@ module Aji
           @watch_later_entry_ids[video.external_id] =
             v.video_id.split(':').last
         end
-      end.reject{ |v| v.external_id.nil? }
+      end.reject{ |v| v.external_id.nil? }.each do |v|
+        v.author = video_info(v.external_id).fetch :author
+      end
     end
 
     def add_to_watch_later video
