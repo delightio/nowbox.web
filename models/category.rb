@@ -29,11 +29,11 @@ module Aji
     end
 
     def thumbnail_uri
-      expected_path = "images/icons/now#{title.downcase}.png"
+      expected_path = "images/icons/categories/#{title.downcase}.png"
       if File.exists? "lib/viewer/public/#{expected_path}"
         return  "http://#{Aji.conf['TLD']}/#{expected_path}"
       end
-      "http://#{Aji.conf['TLD']}/images/icons/nowfilm.png"
+      "http://#{Aji.conf['TLD']}/images/icons/cateogries/film.png"
     end
 
     def serializable_hash options={}

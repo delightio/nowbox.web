@@ -90,8 +90,9 @@ end
 require 'active_support/core_ext/object'
 # Monkey Patching
 require_relative 'lib/patches/string'
-require_relative 'lib/patches/youtube_it/client'
+require_relative 'lib/patches/youtube_it/parser'
 require_relative 'lib/patches/youtube_it/request/video_upload'
+require_relative 'lib/patches/youtube_it/client'
 
 Aji::Mixins = Module.new
 Dir.glob("lib/mixins/*.rb").each { |r| require_relative r }
