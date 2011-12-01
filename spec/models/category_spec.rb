@@ -5,6 +5,7 @@ module Aji
     subject do
       Category.new.tap do |c|
         c.stub :id => 1
+        c.stub :title => 'News'
         Category.stub(:find).with(c.id).and_return(c)
         Category.stub(:find_by_id).with(c.id).and_return(c)
         Category.stub(:find_by_title).and_return(c)
@@ -17,6 +18,29 @@ module Aji
     it "sets title as raw_title after create" do
       c = Category.create :raw_title => "raw title"
       c.title.should_not be_nil
+    end
+
+    describe "#thumbnail_uri" do
+      it "returns corresponding thumbnail" do
+        subject.stub title: 'Comedy'
+        subject.thumbnail_uri.should ==
+          "http://#{Aji.conf['TLD']}/images/icons/now#{subject.title.downcase}.png"
+      end
+
+      it "returns default thumbnail otherwise" do
+        subject.stub title: random_string
+        thumbnail = subject.thumbnail_uri
+        thumbnail.split('/').last.should == 'nowfilm.png'
+      end
+    end
+
+    describe "#serializable_hash" do
+      it "contains specific keys" do
+        returned = subject.serializable_hash
+        ['id', 'title', 'thumbnail_uri'].each do |key|
+          returned.should have_key key
+        end
+      end
     end
 
     describe "#update_channel_relevance" do

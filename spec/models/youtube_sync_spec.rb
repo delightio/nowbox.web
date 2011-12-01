@@ -40,6 +40,9 @@ describe Aji::YoutubeSync, :unit do
       a.stub :subscriptions => youtube_subscriptions
       a.stub :watch_later_videos => youtube_watch_later_videos
       a.stub :favorite_videos => youtube_favorite_videos
+      a.stub :add_to_favorites => true
+      a.stub :add_to_watch_later => true
+      a.stub :subscribe_to => true
     end
   end
 
@@ -281,6 +284,11 @@ describe Aji::YoutubeSync, :unit do
 
       subject.push_subscribed_channels
     end
+
+    it "clears the youtube subscriptions cache" do
+      subject.push_subscribed_channels
+      subject.instance_variable_get(:@youtube_subscriptions).should be_nil
+    end
   end
 
   describe "#push_favorite_videos" do
@@ -291,6 +299,11 @@ describe Aji::YoutubeSync, :unit do
 
       subject.push_favorite_videos
     end
+
+    it "clears the youtube favorites cache" do
+      subject.push_favorite_videos
+      subject.instance_variable_get(:@youtube_favorite_videos).should be_nil
+    end
   end
 
   describe "#push_watch_later_videos" do
@@ -300,6 +313,11 @@ describe Aji::YoutubeSync, :unit do
       end
 
       subject.push_watch_later_videos
+    end
+
+    it "clears the youtube watch later cache" do
+      subject.push_watch_later_videos
+      subject.instance_variable_get(:@youtube_watch_later_videos).should be_nil
     end
   end
 

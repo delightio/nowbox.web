@@ -115,7 +115,8 @@ channels if no parameters are specified.</p>
 <ul>
 <li><p><code>category_ids</code> and <code>type</code>:  <code>category_ids</code> is a comma separated list of
 category ids. Only supported <code>type</code> is &lsquo;featured&rsquo;. Server then returns
-featured channels from these selected categories.</p></li>
+featured channels from these selected categories. <code>user_id</code> is required
+if <code>category_ids</code> is present.</p></li>
 <li><p><code>user_id</code>:  user id. If supplied without <code>query</code>, server returns
 given user&rsquo;s subscribed channels. Providing this parameter <em>requires
 authentication</em>.</p></li>
@@ -127,7 +128,21 @@ channels regardless of type.</p></li>
         <div class='highlight'><pre>      <span class="n">get</span> <span class="k">do</span>
         <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="ss">:query</span><span class="o">]</span>
           <span class="no">Searcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:query</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">results</span>
-        <span class="k">elsif</span> <span class="n">params</span><span class="o">[</span><span class="ss">:category_ids</span><span class="o">]</span>
+        <span class="k">elsif</span> <span class="n">params</span><span class="o">[</span><span class="ss">:category_ids</span><span class="o">]</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-5'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-5">&#182;</a>
+        </div>
+        <p>TODO: we will user user.region later to determine the featured channels
+to subscribe the user to given the selected categories</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>          <span class="n">missing_params_error!</span> <span class="n">params</span><span class="p">,</span> <span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span> <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">nil?</span>
+          <span class="n">authenticate!</span>
+
           <span class="n">missing_params_error!</span> <span class="n">params</span><span class="p">,</span> <span class="o">[</span><span class="ss">:type</span><span class="o">]</span> <span class="k">unless</span> <span class="n">params</span><span class="o">[</span><span class="ss">:type</span><span class="o">]==</span><span class="s1">&#39;featured&#39;</span>
           <span class="n">category_ids</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:category_ids</span><span class="o">].</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
           <span class="n">categories</span> <span class="o">=</span> <span class="n">category_ids</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">cat_id</span><span class="o">|</span> <span class="no">Category</span><span class="o">.</span><span class="n">find_by_id</span> <span class="n">cat_id</span> <span class="p">}</span>

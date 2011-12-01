@@ -56,6 +56,12 @@ module Aji
           last_response.status.should == 400
         end
 
+        it "throws error if user_id is not present but category_ids is" do
+          params = { :category_ids => "1,2,3", :type => 'featured' }
+          get "#{resource_uri}", params
+          last_response.status.should == 400
+        end
+
         let(:channel1) { Factory :single_youtube_account_channel }
         let(:channel2) { Factory :single_youtube_account_channel }
         let(:channels) { [channel1, channel2] }

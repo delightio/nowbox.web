@@ -63,8 +63,8 @@ module Aji
     end
 
     def tracker
-      @tracker ||= APITracker.new "#{self.class}:#{@token}", Aji.redis,
-        cooldown: 1.hour, hits_per_session: 350
+      @tracker ||= APITracker.new [self.class.to_s,@token].compact.join(':'),
+        Aji.redis, cooldown: 1.hour, hits_per_session: 350
     end
 
     def publish body_text
