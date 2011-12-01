@@ -21,7 +21,7 @@
   the mean inter-arrival time between new clients and the phase
   duration -->
    <arrivalphase duration="1" unit="hour" phase="1">
-     <users interarrival="2" unit="minute" maxnumber="1"></users>
+     <users interarrival="2" unit="second"></users>
    </arrivalphase>
   </load>
 
