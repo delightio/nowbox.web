@@ -47,8 +47,6 @@ module Aji
     end
 
     def process_event event
-      Recommendation.new(self).background_refresh
-
       at_time = event.created_at.to_i
       video = event.video
 
@@ -257,7 +255,8 @@ module Aji
     end
 
     def display_channels
-      displayable_user_channels + social_channels + subscribed_channels
+      displayable_user_channels + social_channels +
+        [recommended_channel] + subscribed_channels
     end
 
     def first_name
