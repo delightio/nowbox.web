@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE tsung SYSTEM "/usr/local/Cellar/tsung/1.4.1/share/tsung/tsung-1.0.dtd">
-<tsung loglevel="debug" version="1.0">
+<tsung loglevel="notice" version="1.0">
 
   <!-- Client side setup -->
   <clients>
@@ -9,19 +9,19 @@
 
   <!-- Server side setup -->
 <servers>
-  <server host="api.nowbox.com" port="80" type="tcp"></server>
+  <server host="api.staging.nowbox.com" port="80" type="tcp"></server>
 </servers>
 
 <!-- <servers>
   <server host="api.nowbox.com" port="80" type="tcp"></server>
 </servers> -->
 
-  <load duration="1" unit="hour">
+  <load duration="15" unit="minute">
   <!-- several arrival phases can be set: for each phase, you can set
   the mean inter-arrival time between new clients and the phase
   duration -->
-   <arrivalphase duration="1" unit="hour" phase="1">
-     <users interarrival="2" unit="second"></users>
+   <arrivalphase duration="15" unit="minute" phase="1">
+     <users interarrival="1" unit="second"></users>
    </arrivalphase>
   </load>
 
@@ -57,7 +57,7 @@
     <!-- full url with server name, this overrides the "server" config value -->
     <request subst="true">
       <dyn_variable name="token" jsonpath="$.token"/>
-      <http url="https://api.nowbox.com/auth/request_token"
+      <http url="https://api.staging.nowbox.com/auth/request_token"
         method="POST" version="1.1"
         contents="user_id=%%_user_id%%&amp;secret=j3sBP0aRG8neHoWe7MtLDp6aPQYQUQjhtIh9cVFjmiQPvdYFpWi2PbxVZrpwa7t1YrMzWtppR1crSyNV3w">
       </http>
@@ -65,7 +65,7 @@
 
     <!-- full url with server name, this overrides the "server" config value -->
     <request subst="true">
-      <http url="http://api.nowbox.com/1/categories/1/channels?type=featured&amp;user_id=%%_user_id%%"
+      <http url="http://api.staging.nowbox.com/1/categories/1/channels?type=featured&amp;user_id=%%_user_id%%"
         method="GET" version="1.1">
         <http_header name="X-NB-AuthToken" value="%%_token%%" />
 
@@ -73,55 +73,7 @@
     </request>
 
     <request subst="true">
-      <http url="/1/categories/2/channels?type=featured&amp;user_id=%%_user_id%%"
-        method="GET" version="1.1"> <http_header name="X-NB-AuthToken" value="%%_token%%" />
-      </http>
-    </request>
-
-    <request subst="true">
-      <http url="/1/categories/3/channels?type=featured&amp;user_id=%%_user_id%%"
-        method="GET" version="1.1"> <http_header name="X-NB-AuthToken" value="%%_token%%" />
-      </http>
-    </request>
-
-    <request subst="true">
-      <http url="/1/categories/7/channels?type=featured&amp;user_id=%%_user_id%%"
-        method="GET" version="1.1"> <http_header name="X-NB-AuthToken" value="%%_token%%" />
-      </http>
-    </request>
-
-    <request subst="true">
-      <http url="/1/categories/8/channels?type=featured&amp;user_id=%%_user_id%%"
-        method="GET" version="1.1"> <http_header name="X-NB-AuthToken" value="%%_token%%" />
-      </http>
-    </request>
-
-    <request subst="true">
-      <http url="/1/categories/12/channels?type=featured&amp;user_id=%%_user_id%%"
-        method="GET" version="1.1"> <http_header name="X-NB-AuthToken" value="%%_token%%" />
-      </http>
-    </request>
-
-    <request subst="true">
-      <http url="/1/categories/13/channels?type=featured&amp;user_id=%%_user_id%%"
-        method="GET" version="1.1"> <http_header name="X-NB-AuthToken" value="%%_token%%" />
-      </http>
-    </request>
-
-    <request subst="true">
-      <http url="/1/categories/14/channels?type=featured&amp;user_id=%%_user_id%%"
-        method="GET" version="1.1"> <http_header name="X-NB-AuthToken" value="%%_token%%" />
-      </http>
-    </request>
-
-    <request subst="true">
-      <http url="/1/categories/16/channels?type=featured&amp;user_id=%%_user_id%%"
-        method="GET" version="1.1"> <http_header name="X-NB-AuthToken" value="%%_token%%" />
-      </http>
-    </request>
-
-    <request subst="true">
-      <http url="/1/categories/6/channels?type=featured&amp;user_id=%%_user_id%%"
+      <http url="/1/categories/10/channels?type=featured&amp;user_id=%%_user_id%%"
         method="GET" version="1.1"> <http_header name="X-NB-AuthToken" value="%%_token%%" />
       </http>
     </request>
@@ -133,35 +85,83 @@
     </request>
 
     <request subst="true">
-      <http url="/1/categories/10/channels?type=featured&amp;user_id=%%_user_id%%"
+      <http url="/1/categories/16/channels?type=featured&amp;user_id=%%_user_id%%"
+        method="GET" version="1.1"> <http_header name="X-NB-AuthToken" value="%%_token%%" />
+      </http>
+    </request>
+
+    <request subst="true">
+      <http url="/1/categories/14/channels?type=featured&amp;user_id=%%_user_id%%"
+        method="GET" version="1.1"> <http_header name="X-NB-AuthToken" value="%%_token%%" />
+      </http>
+    </request>
+
+    <request subst="true">
+      <http url="/1/categories/13/channels?type=featured&amp;user_id=%%_user_id%%"
+        method="GET" version="1.1"> <http_header name="X-NB-AuthToken" value="%%_token%%" />
+      </http>
+    </request>
+
+    <request subst="true">
+      <http url="/1/categories/12/channels?type=featured&amp;user_id=%%_user_id%%"
+        method="GET" version="1.1"> <http_header name="X-NB-AuthToken" value="%%_token%%" />
+      </http>
+    </request>
+
+    <request subst="true">
+      <http url="/1/categories/8/channels?type=featured&amp;user_id=%%_user_id%%"
+        method="GET" version="1.1"> <http_header name="X-NB-AuthToken" value="%%_token%%" />
+      </http>
+    </request>
+
+    <request subst="true">
+      <http url="/1/categories/7/channels?type=featured&amp;user_id=%%_user_id%%"
+        method="GET" version="1.1"> <http_header name="X-NB-AuthToken" value="%%_token%%" />
+      </http>
+    </request>
+
+    <request subst="true">
+      <http url="/1/categories/3/channels?type=featured&amp;user_id=%%_user_id%%"
+        method="GET" version="1.1"> <http_header name="X-NB-AuthToken" value="%%_token%%" />
+      </http>
+    </request>
+
+    <request subst="true">
+      <http url="/1/categories/2/channels?type=featured&amp;user_id=%%_user_id%%"
+        method="GET" version="1.1"> <http_header name="X-NB-AuthToken" value="%%_token%%" />
+      </http>
+    </request>
+
+    <request subst="true">
+      <http url="/1/categories/1/channels?type=featured&amp;user_id=%%_user_id%%"
         method="GET" version="1.1"> <http_header name="X-NB-AuthToken" value="%%_token%%" />
       </http>
     </request>
 
     <request subst="true">
       <http url="/1/events" method="POST" version="1.1"
-        contents="user_id=%%_user_id%%&amp;channel_id=740&amp;action=subscribe">
+        contents="user_id=%%_user_id%%&amp;channel_id=156&amp;action=subscribe">
         <http_header name="X-NB-AuthToken" value="%%_token%%" />
       </http>
     </request>
 
     <request subst="true">
       <http url="/1/events" method="POST" version="1.1"
-        contents="user_id=%%_user_id%%&amp;channel_id=4487&amp;action=subscribe">
+        contents="user_id=%%_user_id%%&amp;channel_id=31&amp;action=subscribe">
         <http_header name="X-NB-AuthToken" value="%%_token%%" />
       </http>
     </request>
 
     <request subst="true">
       <http url="/1/events" method="POST" version="1.1"
-        contents="user_id=%%_user_id%%&amp;channel_id=46&amp;action=subscribe">
+        contents="user_id=%%_user_id%%&amp;channel_id=8&amp;action=subscribe">
         <http_header name="X-NB-AuthToken" value="%%_token%%" />
       </http>
     </request>
 
     <request subst="true">
       <http url="/1/events" method="POST" version="1.1"
-        contents="user_id=%%_user_id%%&amp;channel_id=998&amp;action=subscribe">
+        contents="user_id=%%_user_id%%&amp;channel_id=20&amp;action=subscribe">
         <http_header name="X-NB-AuthToken" value="%%_token%%" />
       </http>
     </request>
@@ -203,28 +203,84 @@
     </request>
 
     <request subst="true">
-      <http url="/1/channels/740/videos?user_id=%%_user_id%%"
+      <http url="/1/channels/156/videos?user_id=%%_user_id%%"
         method="GET" version="1.1">
         <http_header name="X-NB-AuthToken" value="%%_token%%" />
       </http>
     </request>
 
     <request subst="true">
-      <http url="/1/channels/4487/videos?user_id=%%_user_id%%"
+      <http url="/1/channels/31/videos?user_id=%%_user_id%%"
         method="GET" version="1.1">
         <http_header name="X-NB-AuthToken" value="%%_token%%" />
       </http>
     </request>
 
     <request subst="true">
-      <http url="/1/channels/46/videos?user_id=%%_user_id%%"
+      <http url="/1/channels/8/videos?user_id=%%_user_id%%"
         method="GET" version="1.1">
         <http_header name="X-NB-AuthToken" value="%%_token%%" />
       </http>
     </request>
 
     <request subst="true">
-      <http url="/1/channels/998/videos?user_id=%%_user_id%%"
+      <http url="/1/channels/20/videos?user_id=%%_user_id%%"
+        method="GET" version="1.1">
+        <http_header name="X-NB-AuthToken" value="%%_token%%" />
+      </http>
+    </request>
+
+    <request subst="true">
+      <http url="/1/channels/156/videos?user_id=%%_user_id%%"
+        method="GET" version="1.1">
+        <http_header name="X-NB-AuthToken" value="%%_token%%" />
+      </http>
+    </request>
+
+    <request subst="true">
+      <http url="/1/channels/31/videos?user_id=%%_user_id%%"
+        method="GET" version="1.1">
+        <http_header name="X-NB-AuthToken" value="%%_token%%" />
+      </http>
+    </request>
+
+    <request subst="true">
+      <http url="/1/channels/8/videos?user_id=%%_user_id%%"
+        method="GET" version="1.1">
+        <http_header name="X-NB-AuthToken" value="%%_token%%" />
+      </http>
+    </request>
+
+    <request subst="true">
+      <http url="/1/channels/20/videos?user_id=%%_user_id%%"
+        method="GET" version="1.1">
+        <http_header name="X-NB-AuthToken" value="%%_token%%" />
+      </http>
+    </request>
+
+    <request subst="true">
+      <http url="/1/channels/156/videos?user_id=%%_user_id%%"
+        method="GET" version="1.1">
+        <http_header name="X-NB-AuthToken" value="%%_token%%" />
+      </http>
+    </request>
+
+    <request subst="true">
+      <http url="/1/channels/31/videos?user_id=%%_user_id%%"
+        method="GET" version="1.1">
+        <http_header name="X-NB-AuthToken" value="%%_token%%" />
+      </http>
+    </request>
+
+    <request subst="true">
+      <http url="/1/channels/8/videos?user_id=%%_user_id%%"
+        method="GET" version="1.1">
+        <http_header name="X-NB-AuthToken" value="%%_token%%" />
+      </http>
+    </request>
+
+    <request subst="true">
+      <http url="/1/channels/20/videos?user_id=%%_user_id%%"
         method="GET" version="1.1">
         <http_header name="X-NB-AuthToken" value="%%_token%%" />
       </http>
