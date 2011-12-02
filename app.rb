@@ -43,7 +43,7 @@ Aji::APP = Rack::Builder.app do
     run GoogleAuth
   end
 
-  map "http://api.#{Aji.conf['TLD']}/loadstorm-34094.htm" do
+  map "http://api.#{Aji.conf['TLD']}/loadstorm-34094.html" do
     run LoadAuth
   end
 
