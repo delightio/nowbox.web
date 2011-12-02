@@ -47,6 +47,10 @@ module Aji
         Aji::Video.find_by_id(id) or not_found_error!(Video, id)
       end
 
+      def publicly_cacheable! seconds
+        header 'Cache-Control', "public, max-age=#{seconds}"
+      end
+
       def force_ssl!
         unless request.scheme == 'https'
           error! '{"error":"Client must use HTTPS to generate tokens."}', 403

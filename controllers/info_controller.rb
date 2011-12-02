@@ -19,6 +19,8 @@ module Aji
       # __Optional params__ `device`: must be one of `android_tablet`,
       # `android_handset`, `ipad`, `iphone`
       get do
+        publicly_cacheable! 43200
+
         begin
           Info.for_device params[:device]
         rescue => e
