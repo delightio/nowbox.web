@@ -43,6 +43,10 @@ Aji::APP = Rack::Builder.app do
     run GoogleAuth
   end
 
+  map "http://api.#{Aji.conf['TLD']}/loadstorm-34094.htm" do
+    run LoadAuth
+  end
+
   map "http://apidoc.#{Aji.conf['TLD']}/" do
     use Rack::Auth::Basic do |username, password|
       [ username, password ] == [ "apidoc", "water" ]

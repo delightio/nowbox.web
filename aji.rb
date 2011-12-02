@@ -116,6 +116,7 @@ Dir.glob("queues/debug/*.rb").each { |r| require_relative r }
 
 # Add Sinatra web viewer.
 require_relative 'lib/google_auth'
+require_relative 'lib/load_auth'
 require_relative 'lib/viewer/viewer'
 require_relative 'lib/mailer/mailer'
 
