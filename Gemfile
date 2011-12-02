@@ -6,7 +6,7 @@ gem 'thor' # Better command line utility than rake.
 gem 'foreman' # Local process monitor.
 gem 'grape', :git => 'git://github.com/intridea/grape.git'
 gem 'sinatra', :require => 'sinatra/base'
-gem 'thin' # Heroku recommends the Thin web server.
+gem 'unicorn'
 gem 'resque', :require => [ 'resque', 'resque/failure/redis' ]
 gem 'typhoeus' # Better, Faster HTTP API for Faraday connections
 

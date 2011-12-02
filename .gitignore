@@ -11,3 +11,4 @@ tmp/
 .keys/*
 bin/heroku
 bin/launchy
+bin/unicorn_rails
