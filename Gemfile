@@ -7,6 +7,7 @@ gem 'foreman' # Local process monitor.
 gem 'grape', :git => 'git://github.com/intridea/grape.git'
 gem 'sinatra', :require => 'sinatra/base'
 gem 'unicorn'
+gem 'thin'
 gem 'resque', :require => [ 'resque', 'resque/failure/redis' ]
 gem 'typhoeus' # Better, Faster HTTP API for Faraday connections
 

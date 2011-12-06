@@ -6,6 +6,8 @@ Bundler.require
 
 Faraday.default_adapter = :typhoeus
 
+$stdout.sync = true
+
 # This is the initilization file for the Aji API. All set up, library
 # loading and application level settings are done here.
 module Aji
