@@ -19,7 +19,15 @@ end
 module TestMixin
   include Rack::Test::Methods
   def app
-    Aji::API
+    Aji::APP
+  end
+
+  def host
+    "api.#{Aji.conf['TLD']}"
+  end
+
+  def build_rack_mock_session
+    Rack::MockSession.new app, host
   end
 end
 

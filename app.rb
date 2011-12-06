@@ -12,7 +12,6 @@ Aji::APP = Rack::Builder.app do
         :display => :touch }
     provider :you_tube, Aji.conf['YOUTUBE_OA_KEY'],
       Aji.conf['YOUTUBE_OA_SECRET']
-    # TODO: Do want: Diaspora* integration... somehow.. someway.
   end
 
   map "http://#{Aji.conf['TLD']}/" do
@@ -33,6 +32,10 @@ Aji::APP = Rack::Builder.app do
     end
 
     run Resque::Server
+  end
+
+  map "http://api.#{Aji.conf['TLD']}/1/shares" do
+    run Aji::SharesController
   end
 
   map "http://api.#{Aji.conf['TLD']}/" do
