@@ -16,12 +16,12 @@
   <server host="api.nowbox.com" port="80" type="tcp"></server>
 </servers> -->
 
-  <load duration="15" unit="minute">
+  <load duration="5" unit="minute">
   <!-- several arrival phases can be set: for each phase, you can set
   the mean inter-arrival time between new clients and the phase
   duration -->
-   <arrivalphase duration="15" unit="minute" phase="1">
-     <users interarrival="1" unit="second"></users>
+   <arrivalphase duration="5" unit="minute" phase="1">
+     <users interarrival="0.2" unit="second"></users>
    </arrivalphase>
   </load>
 
