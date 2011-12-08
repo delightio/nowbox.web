@@ -17,7 +17,9 @@ gem 'redis', :require => [ 'redis/connection/hiredis', 'redis' ]
 gem 'redis-objects', :require => 'redis/objects'
 gem 'pg'
 gem 'activerecord', '~>3.0.9', :require => 'active_record'
-gem 'newrelic_rpm', '~>3.3.0'
+#gem 'newrelic_rpm', '~>3.3.0'
+gem "newrelic_rpm", :git => "git://github.com/newrelic/rpm.git",
+  :branch => '3.3.1_dev'
 
 # Literate comments, generating lovely documentation HTML.
 gem 'rdiscount' # Required for Rocco.
