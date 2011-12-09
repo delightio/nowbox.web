@@ -2,8 +2,8 @@ require './aji'
 require 'benchmark'
 include Aji
 
-user = User.find 1
-channel = Channel.find 218
+user = User.find 8841
+channel = Channel.find 46
 
 Benchmark.bm(7) do |b|
   b.report("page01") {10.times {  channel.personalized_content_videos(user: user, limit: 5, page: 1) } }
