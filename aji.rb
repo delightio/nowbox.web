@@ -1,8 +1,9 @@
 require 'bundler'
 
 # Must be required before NewRelic Agent (in Bundler.require)
-require_relative 'lib/rpm_contrib/instrumentation/grape'
+
 Bundler.require
+require_relative 'lib/rpm_contrib/instrumentation/grape'
 
 Faraday.default_adapter = :typhoeus
 
