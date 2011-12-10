@@ -149,6 +149,7 @@ describe Aji::YoutubeSync, :unit do
     end
 
     it "unsubscribes the local user from removed youtube subscriptions" do
+      pending "removed feature until we unsubscribe using activity feed"
       remotely_unsubscribed_channels.each do |c|
         user.should_receive(:unsubscribe).with(c)
       end
@@ -175,6 +176,7 @@ describe Aji::YoutubeSync, :unit do
     end
 
     it "removes remotely watched videos" do
+      pending "removed feature until we unsubscribe using activity feed"
       remotely_watched_videos.each do |v|
         user.should_receive(:dequeue_video).with(v)
       end
@@ -202,6 +204,7 @@ describe Aji::YoutubeSync, :unit do
     end
 
     it "removes unfavorited videos" do
+      pending "removed feature until we unsubscribe using activity feed"
       remotely_unfavorited_videos.each do |v|
         user.should_receive(:unfavorite_video).with(v)
       end
