@@ -35,9 +35,21 @@ GEM
     addressable (2.2.6)
     arel (2.0.10)
     awesome_print (0.4.0)
+    blitz (0.1.12)
+      couchrest (~> 1.0.1)
+      hexy (~> 0.1.1)
+      json (~> 1.5.1)
+      json_pure (~> 1.5.1)
+      rest-client (~> 1.6.1)
+      rspec (= 2.6.0)
+      rspec-core (= 2.6.4)
     builder (2.1.2)
     coderay (0.9.8)
     colorize (0.5.8)
+    couchrest (1.0.2)
+      json (~> 1.5.1)
+      mime-types (~> 1.15)
+      rest-client (~> 1.6.1)
     crack (0.3.1)
     daemons (1.1.4)
     database_cleaner (0.6.7)
@@ -63,6 +75,9 @@ GEM
     foreman (0.20.0)
       term-ansicolor (~> 1.0.5)
       thor (>= 0.13.6)
+    formatador (0.2.1)
+    gestalt (0.0.11)
+      formatador (>= 0.0.12)
     gherkin (2.5.4)
       json (>= 1.4.6)
     hashie (1.1.0)
@@ -71,9 +86,12 @@ GEM
       rest-client (~> 1.6.1)
       rubyzip
       term-ansicolor (~> 1.0.5)
+    hexy (0.1.1)
     hiredis (0.3.2)
     i18n (0.5.0)
     json (1.5.4)
+    json_pure (1.5.4)
+      spruz (~> 0.2.8)
     koala (1.2.0beta3)
       faraday (~> 0.7.0)
       multi_json (~> 1.0)
@@ -211,6 +229,7 @@ GEM
     spinach (0.1.5.3)
       colorize
       gherkin
+    spruz (0.2.13)
     systemu (2.2.0)
     tanker (1.1.4)
       json (>= 1.5.1)
@@ -258,6 +277,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord (~> 3.0.9)
   awesome_print
+  blitz
   database_cleaner
   erubis
   exceptional
@@ -265,6 +285,7 @@ DEPENDENCIES
   flay
   flog
   foreman
+  gestalt
   grape!
   heroku
   hiredis

@@ -21,9 +21,14 @@ gem "newrelic_rpm", :git => "git://github.com/newrelic/rpm.git",
 
 # Literate comments, generating lovely documentation HTML.
 gem 'rdiscount' # Required for Rocco.
-gem 'rocco', '~>0.8.2', :group => :development
-gem 'flog', :group => :development
-gem 'flay', :group => :development
+group :development do
+  gem 'rocco', '~>0.8.2'
+  gem 'flog'
+  gem 'flay'
+  gem 'gestalt'
+  gem 'blitz'
+  gem 'heroku'
+end
 
 gem 'awesome_print'
 gem 'pry'
@@ -69,6 +74,3 @@ group :test do
   gem 'simplecov'
 end
 
-group :development do
-  gem 'heroku'
-end
