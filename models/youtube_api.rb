@@ -1,5 +1,6 @@
 module Aji
   class YoutubeAPI
+    THROTTLE_KEY = "background_youtube_api:throttled"
     USER_FEED_URL = "http://gdata.youtube.com/feeds/api/users"
 
     attr_reader :uid
@@ -223,7 +224,10 @@ module Aji
 
     def tracker
       @@tracker ||= APITracker.new self.class.to_s, Aji.redis,
-        cooldown: 1.hour, hits_per_session: 250
+        cooldown: 1.hour, hits_per_session: 250 do
+          Aji.redis.set THROTTLE_KEY, true
+          Aji.redis.expire THROTTLE_KEY, 10.minutes
+        end
     end
 
     def uid_from_channel channel
