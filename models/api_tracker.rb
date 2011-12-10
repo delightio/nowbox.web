@@ -4,7 +4,7 @@ module Aji
 
     attr_reader :cooldown, :hits_per_session, :redis, :namespace
 
-    def initialize api_name, redis, options
+    def initialize api_name, redis, options, &throttling_action
       @namespace = api_name.strip.downcase.gsub(/[-\s]+/,'_')
       @redis = redis
 
@@ -15,6 +15,8 @@ module Aji
       @cooldown = options.fetch :cooldown do
         raise ArgumentError, "Must supply :cooldown"
       end
+
+      @throttling_action = throttling_action
     end
 
     def hit
@@ -28,7 +30,7 @@ module Aji
     end
 
     def available?
-      hit_count < hits_per_session
+      hit_count < hits_per_session and not @closed
     end
 
     def hit!
@@ -51,6 +53,15 @@ module Aji
 
     def hit_count
       redis.hget(key, count_field).to_i
+    end
+
+    def on_throttling &throttling_action
+      @throttling_action = throttling_action
+    end
+
+    def close_session!
+      @throttling_action.call unless @throttling_action.nil? or @closed
+      @closed = true
     end
 
     def count_field
