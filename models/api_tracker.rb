@@ -24,6 +24,7 @@ module Aji
         hit!
         if block_given? then yield else true end
       else
+        close_session! unless @closed
         raise LimitReached,
           "Exceeded #{hits_per_session} #{namespace} hits before #{cooldown}"
       end
