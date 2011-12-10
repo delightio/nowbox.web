@@ -192,19 +192,24 @@ describe Account::Youtube do
   end
 
   describe "user action hooks" do
-    let(:video) { mock "video", :source => :youtube }
-    let(:channel) { mock "channel", :youtube_channel? => true }
+    let(:video) { mock "video", :source => :youtube, :external_id => external_id }
+    let(:external_id) { "foobar12345" }
+    let(:channel_uid) { "somechannel" }
+    let(:channel) do
+      mock "channel", :youtube_channel? => true,
+        :accounts => [stub(:account, :uid => channel_uid)]
+    end
 
     describe "#on_favorite" do
       it "favorites video via the youtube api" do
-        api.should_receive(:add_to_favorites).with(video)
+        api.should_receive(:add_to_favorites).with(external_id)
 
         subject.on_favorite video
       end
 
       it "ignores non-youtube videos" do
         video = mock "video", :source => :vimeo
-        api.should_not_receive(:add_to_favorites).with(video)
+        api.should_not_receive(:add_to_favorites).with(external_id)
 
         subject.on_favorite video
       end
@@ -212,14 +217,14 @@ describe Account::Youtube do
 
     describe "#on_unfavorite" do
       it "unfavorites the video via the youtube api" do
-        api.should_receive(:remove_from_favorites).with(video)
+        api.should_receive(:remove_from_favorites).with(external_id)
 
         subject.on_unfavorite video
       end
 
       it "ignores non-youtube videos" do
         video = mock "video", :source => :vimeo
-        api.should_not_receive(:remove_from_favorites).with(video)
+        api.should_not_receive(:remove_from_favorites).with(external_id)
 
         subject.on_unfavorite video
       end
@@ -227,14 +232,14 @@ describe Account::Youtube do
 
     describe "#on_enqueue" do
       it "adds the video to watch later via the youtube api" do
-        api.should_receive(:add_to_watch_later).with(video)
+        api.should_receive(:add_to_watch_later).with(external_id)
 
         subject.on_enqueue video
       end
 
       it "ignores non-youtube videos" do
         video = mock "video", :source => :vimeo
-        api.should_not_receive(:add_to_watch_later).with(video)
+        api.should_not_receive(:add_to_watch_later).with(external_id)
 
         subject.on_enqueue video
       end
@@ -242,14 +247,14 @@ describe Account::Youtube do
 
     describe "#on_dequeue" do
       it "removes the video from watch later via the youtube api" do
-        api.should_receive(:remove_from_watch_later).with(video)
+        api.should_receive(:remove_from_watch_later).with(external_id)
 
         subject.on_dequeue video
       end
 
       it "ignores non-youtube videos" do
         video = mock "video", :source => :vimeo
-        api.should_not_receive(:remove_from_watch_later).with(video)
+        api.should_not_receive(:remove_from_watch_later).with(external_id)
 
         subject.on_dequeue video
       end
@@ -257,14 +262,14 @@ describe Account::Youtube do
 
     describe "#on_subscribe" do
       it "subscribes to the channel on youtube via the youtube api" do
-        api.should_receive(:subscribe_to).with(channel)
+        api.should_receive(:subscribe_to).with(channel_uid)
 
         subject.on_subscribe channel
       end
 
       it "ignores non-youtube channels" do
         channel = mock "channel", :youtube_channel? => false
-        api.should_not_receive(:subscribe_to).with(channel)
+        api.should_not_receive(:subscribe_to).with(channel_uid)
 
         subject.on_subscribe channel
       end
@@ -272,14 +277,14 @@ describe Account::Youtube do
 
     describe "#on_unsubscribe" do
       it "unsubscribes from the channel on youtube via the youtube api" do
-        api.should_receive(:unsubscribe_from).with(channel)
+        api.should_receive(:unsubscribe_from).with(channel_uid)
 
         subject.on_unsubscribe channel
       end
 
       it "ignores non-youtube channels" do
         channel = mock "channel", :youtube_channel? => false
-        api.should_not_receive(:unsubscribe_from).with(channel)
+        api.should_not_receive(:unsubscribe_from).with(channel_uid)
 
         subject.on_unsubscribe channel
       end
