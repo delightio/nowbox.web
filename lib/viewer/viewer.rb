@@ -83,7 +83,7 @@ module Aji
     get '/' do
       @ref = params[:ref] || ""
       @path = "home"
-      erb :home
+      erb :home, {:layout => :layout_homepage}
     end
 
     get '/about/?' do

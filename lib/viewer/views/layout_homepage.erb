@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>NOWBOX - iPad app for watching YouTube videos.</title>
+  <meta name="description" content="Personalized TV guide with best of YouTube. NOWBOX App is downloadable on iPad.">
+  <meta name="author" content="NOWBOX">
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <script type="text/javascript" src="http://use.typekit.com/qqz7uva.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <link href="/css/main_new.css" type="text/css" rel="stylesheet" >
+
+	<meta name="viewport" content="width=960">
+</head>
+<body class="<%= @path %>">
+	<div class="wrapper">
+		<header>
+			<%= erb :_header %>
+		</header>
+		<div id="main">
+			<%= yield %>
+		</div>
+		<div class="push"></div>
+	<footer>
+      <%= erb :_footer %>
+	</footer>
+	</div>
+	<%= erb :_layout_scripts %>
+</body>
+</html>
