@@ -84,7 +84,7 @@ module Aji
     end
 
     def youtube_watch_later_videos
-      @youtube_watch_later_videos ||= if (laters = ccount.api.watch_later_videos)
+      @youtube_watch_later_videos ||= if (laters = account.api.watch_later_videos)
                                         laters
                                       else
                                         []
