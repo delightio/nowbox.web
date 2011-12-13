@@ -121,6 +121,12 @@ module Aji
         accounts.map(&:class) == [Aji::Account::Youtube]
     end
 
+    def youtube_id
+      if youtube_channel?
+        accounts.first.uid
+      end
+    end
+
     def redis_keys
       [ content_zset, category_id_zset ].map &:key
     end
