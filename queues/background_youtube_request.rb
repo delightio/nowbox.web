@@ -6,6 +6,7 @@ module Aji
 
     def self.perform api_info, api_method, *args
       api = YoutubeAPI.new api_info[:uid], api_info[:token], api_info[:secret]
+      api.authorize_from_access
       api.send api_method, *args
     rescue UploadError => e
       api.tracker.close_session! if e.message =~ /too_many_recent_calls/
