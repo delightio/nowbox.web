@@ -16,7 +16,7 @@ module Aji
         Resque.enqueue Queues::BackgroundYoutubeRequest, @api_info, method_name,
           *args
       else
-        return nil if @api.tracker.exceeded_limit?
+        return nil unless @api.tracker.available?
         @api.send method_name, *args, &block
       end
 
