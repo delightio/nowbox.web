@@ -1,7 +1,7 @@
 module Aji
   module ResqueEnqueueInFront
     # Enqueues a job at the front of the queue rather than the back.
-    def enqueue_in_front
+    def enqueue_in_front klass, *args
       Job.create_in_front queue_from_class(klass), klass, *args
     end
 
