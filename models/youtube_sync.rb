@@ -49,7 +49,7 @@ module Aji
 
     def push_favorite_videos
       user.favorite_videos.select{ |v| v.source == :youtube }.each do |v|
-        unless youtube_favorite_videos.include? v
+        unless youtube_favorite_videos? v
           account.api.add_to_favorites v.external_id
         end
         @youtube_favorite_videos = nil
@@ -76,15 +76,27 @@ module Aji
     end
 
     def youtube_subscriptions
-      @youtube_subscriptions ||= account.api.subscriptions
+      @youtube_subscriptions ||= if (subs = account.api.subscriptions)
+                                   subs
+                                 else
+                                   []
+                                 end
     end
 
     def youtube_watch_later_videos
-      @youtube_watch_later_videos ||= account.api.watch_later_videos
+      @youtube_watch_later_videos ||= if (laters = ccount.api.watch_later_videos)
+                                        laters
+                                      else
+                                        []
+                                      end
     end
 
     def youtube_favorite_videos
-      @youtube_favorite_videos ||= account.api.favorite_videos
+      @youtube_favorite_videos ||= if (favs = account.api.favorite_videos)
+                                     favs
+                                   else
+                                     []
+                                   end
     end
 
     def enqueue_resync
