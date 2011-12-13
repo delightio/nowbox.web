@@ -12,7 +12,7 @@ module Aji
     def method_missing method_name, *args, &block
       super unless @api.respond_to? method_name
 
-      if post_method?
+      if post_method? method_name
         Resque.enqueue Queues::BackgroundYoutubeRequest, @api_info, method_name,
           *args
       else
