@@ -32,7 +32,7 @@ module Aji
     def push_subscribed_channels
       user.youtube_channels.each do |c|
         unless youtube_subscriptions.include? c
-          account.api.subscribe_to c
+          account.api.subscribe_to c.youtube_id
         end
         @youtube_subscriptions = nil
       end
@@ -41,7 +41,7 @@ module Aji
     def push_watch_later_videos
       user.queued_videos.select{ |v| v.source == :youtube }.each do |v|
         unless youtube_watch_later_videos.include? v
-          account.api.add_to_watch_later v
+          account.api.add_to_watch_later v.external_id
         end
         @youtube_watch_later_videos = nil
       end
@@ -50,7 +50,7 @@ module Aji
     def push_favorite_videos
       user.favorite_videos.select{ |v| v.source == :youtube }.each do |v|
         unless youtube_favorite_videos.include? v
-          account.api.add_to_favorites v
+          account.api.add_to_favorites v.external_id
         end
         @youtube_favorite_videos = nil
       end
