@@ -49,7 +49,7 @@ module Aji
 
     def push_favorite_videos
       user.favorite_videos.select{ |v| v.source == :youtube }.each do |v|
-        unless youtube_favorite_videos? v
+        unless youtube_favorite_videos.include? v
           account.api.add_to_favorites v.external_id
         end
         @youtube_favorite_videos = nil
