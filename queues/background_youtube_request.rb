@@ -8,7 +8,7 @@ module Aji
       api = YoutubeAPI.new api_info['uid'], api_info['token'],
         api_info['secret']
       api.send api_method, *args
-    rescue UploadError => e
+    rescue AuthenticationError, UploadError => e
       api.tracker.close_session! if e.message =~ /too_many_recent_calls/
     end
 

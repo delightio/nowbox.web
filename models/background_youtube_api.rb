@@ -20,7 +20,7 @@ module Aji
         @api.send method_name, *args, &block
       end
 
-    rescue UploadError => e
+    rescue AuthenticationError, UploadError => e
       api.tracker.close_session! if e.message =~ /too_many_recent_calls/
     end
 
