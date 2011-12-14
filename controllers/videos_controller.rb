@@ -28,6 +28,7 @@ module Aji
       # __Required params__ `video_id` unique id of the video  
       # __Optional params__ none
       get '/:video_id' do
+        publicly_cacheable! 1.hour
         find_video_by_id_or_error params[:video_id]
       end
     end

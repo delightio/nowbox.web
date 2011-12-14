@@ -16,7 +16,7 @@ module Aji
       #
       # __Optional params__ `user_id` unique id of the current user
       get do
-        publicly_cacheable! 1.day
+        publicly_cacheable! 1.hour
         error!("Missing/Invalid parameter: type != featured", 400) unless
           params[:type] == "featured"
 
