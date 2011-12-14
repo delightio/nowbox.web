@@ -4,10 +4,6 @@ Aji::APP = Rack::Builder.app do
   Aji::RACK_ENV == 'production'
 
   use Rack::Deflater
-  use Rack::Cache,
-    :verbose => true,
-    :metastore   => "memcached://localhost:11211/meta",
-    :entitystore => "memcached://localhost:11211/body"
 
   use OmniAuth::Builder do
     use Rack::Session::Cookie
@@ -21,6 +17,10 @@ Aji::APP = Rack::Builder.app do
   end
 
   map "http://#{Aji.conf['TLD']}/" do
+    use Rack::Cache,
+      :verbose => true,
+      :metastore   => "memcached://localhost:11211/www/meta",
+      :entitystore => "memcached://localhost:11211/www/body"
     run Aji::Viewer
   end
 
@@ -41,6 +41,10 @@ Aji::APP = Rack::Builder.app do
   end
 
   map "http://api.#{Aji.conf['TLD']}/" do
+    use Rack::Cache,
+      :verbose => true,
+      :metastore   => "memcached://localhost:11211/api/meta",
+      :entitystore => "memcached://localhost:11211/api/body"
     run Aji::API
   end
 
