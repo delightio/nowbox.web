@@ -71,6 +71,7 @@ module Aji
 
     # Before responding to each request, verify if it came from a designated mobile device and set @mobile appropriately
     before do
+      cache_control :public, :max_age => 1.day
       mobile_request? ? @mobile = ".mobile" : @mobile = ""
       @path = request.path_info
       @path.slice!(0)
