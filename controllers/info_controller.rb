@@ -19,7 +19,7 @@ module Aji
       # __Optional params__ `device`: must be one of `android_tablet`,
       # `android_handset`, `ipad`, `iphone`
       get do
-        publicly_cacheable! 43200
+        publicly_cacheable! 1.day
 
         begin
           Info.for_device params[:device]
