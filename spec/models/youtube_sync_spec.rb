@@ -48,15 +48,25 @@ describe Aji::YoutubeSync, :unit do
 
   let(:youtube_subscriptions) { other_channels }
   let(:youtube_watch_later_videos) do
-    other_queued_videos.select{ |v| v.source == :youtube }
+    other_queued_videos.select{ |v| v.source == :youtubei }
   end
+
   let(:youtube_favorite_videos) do
     other_favorite_videos.select{ |v| v.source == :youtube }
   end
 
-  let(:remotely_unsubscribed_channels) { [stub, stub, stub] }
-  let(:remotely_unfavorited_videos) { [stub(:source => :youtube)] }
-  let(:remotely_watched_videos) { [stub(:source => :youtube)] }
+  let(:remotely_unsubscribed_channels) do
+    [stub(:youtube_id => "channel1"), stub(:youtube_id => "channel2"),
+     stub(:youtube_id => "channel3")]
+  end
+
+  let(:remotely_unfavorited_videos) do
+    [stub(:external_id => "video1", :source => :youtube)]
+  end
+
+  let(:remotely_watched_videos) do
+    [stub(:external_id => "video2", :source => :youtube)]
+  end
 
   let(:other_channels) do
     [ stub(:background_refresh_content => []),
@@ -64,11 +74,11 @@ describe Aji::YoutubeSync, :unit do
   end
 
   let(:other_queued_videos) do
-    [stub(:source => :youtube), stub(:source => :vimeo)]
+    [stub(:external_id => "video3", :source => :youtube), stub(:source => :vimeo)]
   end
 
   let(:other_favorite_videos) do
-    [stub(:source => :youtube), stub(:source => :vimeo)]
+    [stub(:external_id => "video4", :source => :youtube), stub(:source => :vimeo)]
   end
 
   let(:queued_videos) { remotely_watched_videos + other_queued_videos }
@@ -282,7 +292,7 @@ describe Aji::YoutubeSync, :unit do
   describe "#push_subscribed_channels" do
     it "subscribes to all locally subscribed youtube channels on youtube" do
       remotely_unsubscribed_channels.each do |channel|
-        api.should_receive(:subscribe_to).with(channel)
+        api.should_receive(:subscribe_to).with(channel.youtube_id)
       end
 
       subject.push_subscribed_channels
@@ -297,7 +307,7 @@ describe Aji::YoutubeSync, :unit do
   describe "#push_favorite_videos" do
     it "adds all locally favorited youtube videos to youtube favorites" do
       remotely_unfavorited_videos.each do |video|
-        api.should_receive(:add_to_favorites).with(video)
+        api.should_receive(:add_to_favorites).with(video.external_id)
       end
 
       subject.push_favorite_videos
@@ -312,7 +322,7 @@ describe Aji::YoutubeSync, :unit do
   describe "#push_watch_later_videos" do
     it "adds all locally enqueued youtube videos to youtube watch later" do
       remotely_watched_videos.each do |video|
-        api.should_receive(:add_to_watch_later).with(video)
+        api.should_receive(:add_to_watch_later).with(video.external_id)
       end
 
       subject.push_watch_later_videos
