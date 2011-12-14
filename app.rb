@@ -4,8 +4,13 @@ Aji::APP = Rack::Builder.app do
   Aji::RACK_ENV == 'production'
 
   use Rack::Deflater
-  use Rack::Session::Cookie
+  use Rack::Cache,
+    :verbose => true,
+    :metastore   => "memcached://localhost:11211/meta",
+    :entitystore => "memcached://localhost:11211/body"
+
   use OmniAuth::Builder do
+    use Rack::Session::Cookie
     provider :twitter, Aji.conf['CONSUMER_KEY'], Aji.conf['CONSUMER_SECRET']
     provider :facebook, Aji.conf['APP_ID'], Aji.conf['APP_SECRET'],
       { :scope => 'email,read_stream,publish_stream,offline_access',

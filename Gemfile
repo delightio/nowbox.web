@@ -9,6 +9,9 @@ gem 'sinatra', :require => 'sinatra/base'
 gem 'thin' # Heroku recommends the Thin web server.
 gem 'resque', :require => [ 'resque', 'resque/failure/redis' ]
 gem 'typhoeus' # Better, Faster HTTP API for Faraday connections
+gem 'rack-cache', :require => 'rack/cache'
+gem 'kgio' # Kinder, Gentler IO for dalli
+gem 'dalli' # Memcache interface for caching.
 
 # Data persistence and related.
 gem 'hiredis' # Fast C Interface to Redis.
