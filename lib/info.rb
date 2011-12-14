@@ -8,8 +8,10 @@ module Aji
           :minimum_version => "1.0.21",
           :link => { :rel => "latest",
                      :url => "http://tflig.ht/rwxYEk" },
-          :rate_link => { :rel => "ratings",
-                          :url => "itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=464416202" }
+          :links => [{ :rel => "latest",
+                     :url => "http://tflig.ht/rwxYEk" },
+                     { :rel => "ratings",
+                       :url => "itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=464416202" }]
 
         }
       else
