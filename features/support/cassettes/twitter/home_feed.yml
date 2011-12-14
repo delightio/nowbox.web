@@ -2300,3 +2300,90 @@
       average='4.9439044' max='5' min='1' numRaters='5348' rel='http://schemas.google.com/g/2005#overall'/><yt:statistics
       favoriteCount='2893' viewCount='56756'/><yt:rating numDislikes='75' numLikes='5273'/></entry>"
     http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/bargainbinofoblivion?alt=json&dev_key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Wed, 14 Dec 2011 23:01:14 GMT
+      date:
+      - Wed, 14 Dec 2011 22:56:14 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"C0AAQH47eCp7I2A9WhRQGEs."
+      last-modified:
+      - Wed, 14 Dec 2011 11:22:21 GMT
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+      transfer-encoding:
+      - chunked
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"C0AAQH47eCp7I2A9WhRQGEs.\"","id":{"$t":"tag:youtube.com,2008:user:BargainBinofOblivion"},"published":{"$t":"2008-12-19T13:36:07.000-08:00"},"updated":{"$t":"2011-12-14T03:22:21.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Comedian"}],"title":{"$t":"BargainBinofOblivion"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=BargainBinofOblivion"},{"rel":"related","type":"text/html","href":"http://www.everythingisterrible.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/BargainBinofOblivion?v=2"}],"author":[{"name":{"$t":"BargainBinofOblivion"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/bargainbinofoblivion"}}],"yt$aboutMe":{"$t":"Booya!"},"yt$age":{"$t":111},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/bargainbinofoblivion/favorites?v=2","countHint":62},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/bargainbinofoblivion/contacts?v=2","countHint":1123},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/bargainbinofoblivion/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/bargainbinofoblivion/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/bargainbinofoblivion/subscriptions?v=2","countHint":64},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/bargainbinofoblivion/uploads?v=2","countHint":403},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/bargainbinofoblivion/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Everything
+      is Terrible!"},"yt$location":{"$t":"Chicago, KY"},"yt$statistics":{"lastWebAccess":"2011-10-25T09:51:14.000-07:00","subscriberCount":"20244","videoWatchCount":0,"viewCount":"488092","totalUploadViews":"17274850"},"media$thumbnail":{"url":"http://i2.ytimg.com/i/YfUgnvN8uqK4cWXDBGlAWA/1.jpg?v=739ff7"},"yt$username":{"$t":"BargainBinofOblivion"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/marceltheshell?alt=json&dev_key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Wed, 14 Dec 2011 23:01:15 GMT
+      date:
+      - Wed, 14 Dec 2011 22:56:15 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"AkMHQX47eCp7I2A9WhRQGEo."
+      last-modified:
+      - Wed, 14 Dec 2011 16:00:30 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"AkMHQX47eCp7I2A9WhRQGEo.\"","id":{"$t":"tag:youtube.com,2008:user:MARCELTHESHELL"},"published":{"$t":"2010-10-15T21:21:11.000-07:00"},"updated":{"$t":"2011-12-14T08:00:30.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"MARCELTHESHELL"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=MARCELTHESHELL"},{"rel":"related","type":"text/html","href":"http://www.deanfleischercamp.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/MARCELTHESHELL?v=2"}],"author":[{"name":{"$t":"MARCELTHESHELL"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/marceltheshell"}}],"yt$age":{"$t":27},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/marceltheshell/favorites?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/marceltheshell/contacts?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/marceltheshell/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/marceltheshell/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/marceltheshell/subscriptions?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/marceltheshell/uploads?v=2","countHint":2},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/marceltheshell/newsubscriptionvideos?v=2"}],"yt$gender":{"$t":"m"},"yt$location":{"$t":"US"},"yt$statistics":{"lastWebAccess":"2011-11-22T20:41:31.000-08:00","subscriberCount":"40876","videoWatchCount":0,"viewCount":"756300","totalUploadViews":"17906274"},"media$thumbnail":{"url":"http://s.ytimg.com/yt/img/no_videos_140-vfl1fDI7-.png"},"yt$username":{"$t":"MARCELTHESHELL"}}}'
+    http_version: '1.1'

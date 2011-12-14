@@ -13,32 +13,28 @@ class YoutubeSynchronization < Spinach::FeatureSteps
     VCR.use_cassette "youtube/atomic_interactions" do
       @video = Video.create! source: :youtube, external_id: 'y4sOfO8Ei1g'
       @video.populate
-      @account.api.remove_from_favorites @video
-
       @user.favorite_video @video, Time.now
     end
   end
 
-  Then 'that video should be a youtube favorite' do
-    VCR.use_cassette "youtube/atomic_interactions" do
-      @account.api.favorite_videos.include?(@video).should == true
-    end
+  Then 'that video should be queued to be added to favorites' do
+    j = MultiJson.decode Aji.redis.lpop("resque:queue:background_youtube_request")
+    j['class'].should == 'Aji::Queues::BackgroundYoutubeRequest'
+    j['args'][1..-1].should == ['add_to_favorites', 'y4sOfO8Ei1g']
   end
 
   When  'unfavoriting a currently favorited video' do
     VCR.use_cassette "youtube/atomic_interactions" do
       @video = Video.create! source: :youtube, external_id: 'y4sOfO8Ei1g'
       @video.populate
-      @account.api.add_to_favorites @video
-
       @user.unfavorite_video @video
     end
   end
 
-  Then 'that video should not be a youtube favorite' do
-    VCR.use_cassette "youtube/atomic_interactions" do
-      @account.api.favorite_videos.include?(@video).should == false
-    end
+  Then 'that video should be queued to be removed from favorites' do
+    j = MultiJson.decode Aji.redis.lpop("resque:queue:background_youtube_request")
+    j['class'].should == 'Aji::Queues::BackgroundYoutubeRequest'
+    j['args'][1..-1].should == ['remove_from_favorites', 'y4sOfO8Ei1g']
   end
 
   When 'enqueueing a video that is not currently in watch later' do
@@ -49,10 +45,10 @@ class YoutubeSynchronization < Spinach::FeatureSteps
     end
   end
 
-  Then 'that video should be in the watch later playlist on youtube' do
-    VCR.use_cassette "youtube/atomic_interactions" do
-      @account.api.watch_later_videos.include?(@video).should == true
-    end
+  Then 'that video should be queued to be added to watch later' do
+    j = MultiJson.decode Aji.redis.lpop("resque:queue:background_youtube_request")
+    j['class'].should == 'Aji::Queues::BackgroundYoutubeRequest'
+    j['args'][1..-1].should == ['add_to_watch_later', 'y4sOfO8Ei1g']
   end
 
   When 'dequeueing a video that is currently in watch later' do
@@ -60,16 +56,14 @@ class YoutubeSynchronization < Spinach::FeatureSteps
 
     VCR.use_cassette "youtube/atomic_interactions" do
       @video.populate
-      @account.api.add_to_watch_later @video
-
       @user.dequeue_video @video
     end
   end
 
-  Then 'that video should not be in the watch later playlist on youtube' do
-    VCR.use_cassette "youtube/atomic_interactions" do
-      @account.api.watch_later_videos.include?(@video).should == false
-    end
+  Then 'that video should be queued to be removed from watch later' do
+    j = MultiJson.decode Aji.redis.lpop("resque:queue:background_youtube_request")
+    j['class'].should == 'Aji::Queues::BackgroundYoutubeRequest'
+    j['args'][1..-1].should == ['remove_from_watch_later', 'y4sOfO8Ei1g']
   end
 
   When 'subscribing to a channel' do
@@ -81,26 +75,25 @@ class YoutubeSynchronization < Spinach::FeatureSteps
       end
   end
 
-  Then 'that channel should be subscribed on youtube' do
-    VCR.use_cassette "youtube/atomic_interactions" do
-      @account.api.subscriptions.include?(@channel).should == true
-    end
+  Then 'that channel should be queued to be added to subscriptions' do
+    j = MultiJson.decode Aji.redis.lpop("resque:queue:background_youtube_request")
+    j['class'].should == 'Aji::Queues::BackgroundYoutubeRequest'
+    j['args'][1..-1].should == ['subscribe_to', 'thedoctorwhomedia']
   end
 
   When 'unsubscribing from a channel' do
     VCR.use_cassette "youtube/atomic_interactions" do
       @channel = Channel::Account.create!(
         accounts: [Account::Youtube.create(uid: "freddiew")])
-      @account.api.subscribe_to @channel
 
       @user.unsubscribe @channel
     end
   end
 
-  Then 'that channel should not be subscribed on youtube' do
-    VCR.use_cassette "youtube/atomic_interactions" do
-      @account.api.subscriptions.include?(@channel).should == false
-    end
+  Then 'that channel should be queued to be removed from subscriptions' do
+    j = MultiJson.decode Aji.redis.lpop("resque:queue:background_youtube_request")
+    j['class'].should == 'Aji::Queues::BackgroundYoutubeRequest'
+    j['args'][1..-1].should == ['unsubscribe_from', 'freddiew']
   end
 
   When 'a synchronization occurs' do
