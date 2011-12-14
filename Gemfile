@@ -11,6 +11,9 @@ gem 'resque',
   :require => ['resque', 'resque/failure/multiple', 'resque/failure/redis']
 gem 'resque-exceptional'
 gem 'typhoeus' # Better, Faster HTTP API for Faraday connections
+gem 'rack-cache', :require => 'rack/cache'
+gem 'kgio' # Kinder, Gentler IO for dalli
+gem 'dalli' # Memcache interface for caching.
 
 # Data persistence and related.
 gem 'hiredis' # Fast C Interface to Redis.
