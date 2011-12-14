@@ -7,7 +7,10 @@ module Aji
           :current_version => "1.0.23",
           :minimum_version => "1.0.21",
           :link => { :rel => "latest",
-                     :url => "http://tflig.ht/rwxYEk" }
+                     :url => "http://tflig.ht/rwxYEk" },
+          :rate_link => { :rel => "ratings",
+                          :url => "itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=464416202" }
+
         }
       else
         raise Aji::Error, "Unknown device type #{device}"
