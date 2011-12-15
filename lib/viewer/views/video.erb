@@ -52,13 +52,13 @@
           </a>
           <div id="share_buttons">
             <div class="fblike">
-              <iframe src="http://www.facebook.com/plugins/like.php?app_id=196334653750817&amp;href=http:&#x2F;&#x2F;nowbox.com&#x2F;shares&#x2F;<%= @share.id %>&amp;send=false&amp;layout=box_count&amp;width=90&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:60px; height:70px;" allowTransparency="true"></iframe>
+              <iframe src="http://www.facebook.com/plugins/like.php?app_id=196334653750817&amp;href=http:&#x2F;&#x2F;<%= Aji.conf['TLD'] %>&#x2F;shares&#x2F;<%= @share.id %>&amp;send=false&amp;layout=box_count&amp;width=90&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:60px; height:70px;" allowTransparency="true"></iframe>
             </div>
             <div class="plusone" style="width: 60px; height: 70px;">
               <g:plusone size="tall" href="/shares/<%= @share.id %>"></g:plusone>
             </div>
             <div class="tweet">
-              <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url=http:&#x2F;&#x2F;nowbox.com&#x2F;shares&#x2F;<%= @share.id %>&count=vertical&via=nowbox&related=nowbox:Your Personalized TV Guide&text=Watch this video! &#x27;<%= @video.title %>&#x27;" style="width:60px; height:70px;"></iframe>
+              <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url=http:&#x2F;&#x2F;<%= Aji.conf['TLD'] %>&#x2F;shares&#x2F;<%= @share.id %>&count=vertical&via=nowbox&related=nowbox:Your Personalized TV Guide&text=Watch this video! &#x27;<%= @video.title %>&#x27;" style="width:60px; height:70px;"></iframe>
             </div>
             <div class="close">
               <a href="#" onClick="$('#share_buttons').hide(); $('#share_button > a').show();">
@@ -69,7 +69,7 @@
           </div>
         </div>
         <div id="shuffle_button">
-          <a href="#">
+          <a href="/random">
             <img src="/images/new/shuffle_button.png">
           </a>
         </div>
