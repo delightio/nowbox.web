@@ -49,14 +49,12 @@ module Aji
     def subscribe_to channel_uid
       tracker.hit!
       client.subscribe_channel channel_uid
-      subscription_ids.clear
     rescue UploadError => e
       raise e unless e.message =~ /Subscription already exists/
     end
 
     def unsubscribe_from channel_uid
       client.unsubscribe_channel subscription_ids[channel_uid]
-      subscription_ids.delete channel_uid
     rescue UploadError => e
       Aji.log :WARN, "#{e.class}:#{e.message}"
     end
