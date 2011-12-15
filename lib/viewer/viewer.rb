@@ -155,7 +155,7 @@ module Aji
         @video      = @share.video
         @rec_videos = [] # Don't show recommended videos
 
-        erb :layout_video
+        erb :video, { :layout => :layout_video }
 
       rescue => e
         Aji.log :WARN, "#{e.class}: #{e.message}"
