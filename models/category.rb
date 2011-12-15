@@ -47,7 +47,7 @@ module Aji
 
     def onboard_channels
       ids = onboard_channel_ids.values
-      channels = ids.map { |cid| Channel.find_by_id cid }.compact
+      channels = ids.map { |cid| Channel.find_by_id cid }.compact.sample(2)
       channels = featured_channels(2) if channels.empty?
       channels
     end
