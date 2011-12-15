@@ -10,6 +10,7 @@ module Aji
     include Mixins::Featuring
 
     sorted_set :channel_id_zset
+    list :onboard_channel_ids
 
     has_many :videos
 
@@ -42,6 +43,13 @@ module Aji
         "title" => title,
         "thumbnail_uri" => thumbnail_uri
       }
+    end
+
+    def onboard_channels
+      ids = onboard_channel_ids.values
+      channels = ids.map { |cid| Channel.find_by_id cid }.compact.sample(2)
+      channels = featured_channels(2) if channels.empty?
+      channels
     end
 
     # Only returns channels which their top categories are also self.

@@ -54,6 +54,29 @@ module Aji
       end
     end
 
+    describe "#onboard_channels" do
+
+      let(:featured_channels) { [mock] }
+      it "returns #featured_channels if not not set previously" do
+        subject.onboard_channel_ids.should be_empty
+        subject.should_receive(:featured_channels).and_return featured_channels
+
+        subject.onboard_channels.should == featured_channels
+      end
+
+      let(:ch) {
+        c = mock "channel1", :id => "10" # since redis returns string
+        Channel.stub(:find_by_id).with(c.id).and_return c
+        c
+      }
+      it "returns from pre set list" do
+        subject.onboard_channel_ids << ch.id
+
+        subject.onboard_channels.should == [ch]
+      end
+
+    end
+
     describe "#featured_channels" do
       let(:ch1) { mock "channel1", :available? => true,
         :category_ids => [subject.id], :youtube_channel? => true }
