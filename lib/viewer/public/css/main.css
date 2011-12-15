@@ -1,8 +1,19 @@
+
 body { background: url(/images/textures/aji-tiles-crosshatch-white.jpg) repeat; color: #090909; }
-body#video_layout, body#channel_layout { background-color: #333; background: url(/images/textures/aji-tiles-darkgray.jpg) repeat; color: #090909; }
+
+/* body#video_layout, *//* removing original background  --patrick */
+body#channel_layout {
+  background-color: #333;
+  background: url(http://nowbox.com/images/textures/aji-tiles-darkgray.jpg) repeat; color: #090909;
+}
+
+/* changing video page background  --patrick */
+body#video_layout {
+  background: #333 url(../images/new/video_layout_bg.png);
+}
 
 header { position: relative; padding: 25px 0px 25px; line-height: 30px; text-align: left;  font-size: 14px; z-index: 10;
-	background-color: #DD7924; background: url(/images/textures/aji-tiles-darkgray.jpg) repeat;
+	background-color: #DD7924; background: url(http://nowbox.com/images/textures/aji-tiles-darkgray.jpg) repeat;
 }
 	.home header{ background-color: transparent; background: none;}
 	header > .wrapper { padding: 0px; }
@@ -14,7 +25,7 @@ header { position: relative; padding: 25px 0px 25px; line-height: 30px; text-ali
 			header ul a, header ul a:active, header ul a:visited{ color: #DDD;  font-weight: normal;}
 				header ul a:hover { color: #00bfff;}
 
-footer {   background: url(/images/textures/aji-tiles-darkgray.jpg) repeat; position: relative; padding: 20px 0px 20px; margin: auto; font-size: 14px; }
+footer {   background: url(http://nowbox.com/images/textures/aji-tiles-darkgray.jpg) repeat; position: relative; padding: 20px 0px 20px; margin: auto; font-size: 14px; }
 	footer > .wrapper { padding: 0px;}
 footer ul{ float: right; list-style: none; padding: 0px; margin: 0px auto; }
 	footer ul li { float: right; display: block; padding: 2px 5px;}
@@ -36,7 +47,7 @@ ul.section { list-style: none; }
 .section li{ margin: 10px;  color: #444;}
 .section p{ margin: 10px 0px; font-size: 15px; line-height: 2;}
 
-.ipad-chrome{ position: relative; height: 469px; width: 600px; background-repeat: no-repeat; background-image: url(/images/graphics/ipad-chrome.png); }
+.ipad-chrome{ position: relative; height: 469px; width: 600px; background-repeat: no-repeat; background-image: url(http://nowbox.com/images/graphics/ipad-chrome.png); }
 .ipad-chrome img{ position: absolute; top: 59px; left: 66px; width: 469px;}
 .ipad-chrome iframe{ position: absolute; top: 59px; left: 66px; }
 
