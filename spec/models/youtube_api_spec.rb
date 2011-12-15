@@ -174,26 +174,25 @@ describe Aji::YoutubeAPI, :unit, :net do
     describe "#subscribe_to" do
       before(:each) do
         VCR.use_cassette 'youtube_api/subscribe_to' do
-          subject.unsubscribe_from channel
+          subject.unsubscribe_from channel_uid
         end
       end
 
-      let(:uid) { "lisanova" }
-      let(:channel) { mock "channel", :accounts => [stub(:uid => uid)] }
+      let(:channel_uid) { "lisanova" }
 
       it "subscribes given channel on YouTube" do
         VCR.use_cassette "youtube_api/subscribe_to" do
-          subject.subscribe_to channel
+          subject.subscribe_to channel_uid
           subject.subscriptions.map{ |c| c.accounts.first.uid }.
-            should include uid
+            should include channel_uid
         end
       end
 
       it "does not raise an error when subscribing to a channel twice" do
         VCR.use_cassette "youtube_api/subscribe_to" do
-          subject.subscribe_to channel
+          subject.subscribe_to channel_uid
 
-          expect{ subject.subscribe_to channel }.not_to raise_error
+          expect{ subject.subscribe_to channel_uid }.not_to raise_error
         end
       end
     end
@@ -201,18 +200,17 @@ describe Aji::YoutubeAPI, :unit, :net do
     describe "#unsubscribe_from" do
       before(:each) do
        VCR.use_cassette 'youtube_api/unsubscribe_from' do
-         subject.subscribe_to channel
+         subject.subscribe_to channel_uid
        end
       end
 
-      let(:uid) { "freddiew" }
-      let(:channel) { mock "channel", :accounts => [stub(:uid => uid)] }
+      let(:channel_uid) { "freddiew" }
 
       it "unsubscribes given channel" do
         VCR.use_cassette 'youtube_api/unsubscribe_from' do
-          subject.unsubscribe_from channel
+          subject.unsubscribe_from channel_uid
           subject.subscriptions.map{ |c| c.accounts.first.uid }.
-            should_not include uid
+            should_not include channel_uid
         end
       end
     end
@@ -257,53 +255,50 @@ describe Aji::YoutubeAPI, :unit, :net do
     end
 
     describe "#add_to_favorites" do
-      before(:each) { subject.remove_from_favorites video }
+      before(:each) { subject.remove_from_favorites external_id }
       let(:external_id) { "dYCLXDtvrbs" }
-      let(:video) { mock "video", :external_id => external_id }
 
       it "adds given video to user's YouTube's favorite list" do
-        subject.add_to_favorites video
+        subject.add_to_favorites external_id
         subject.favorite_videos.map(&:external_id).should include external_id
       end
 
       it "doesn't raise an error if video is already in favorites" do
-        subject.add_to_favorites video
-        expect{ subject.add_to_favorites video }.not_to raise_error
+        subject.add_to_favorites external_id
+        expect{ subject.add_to_favorites external_id }.not_to raise_error
       end
     end
 
     describe "#remove_from_favorites" do
-      before(:each) { subject.add_to_favorites video }
+      before(:each) { subject.add_to_favorites external_id }
       let(:external_id) { "zxmObqXYgI8" }
-      let(:video) { mock "video", :external_id => external_id }
 
       it "removes given video from user's YouTube's favorite list" do
-        subject.remove_from_favorites video
+        subject.remove_from_favorites external_id
 
         subject.favorite_videos.map(&:external_id).
           should_not include external_id
       end
 
       it "doesn't raise an error if the video is not in favorites" do
-        subject.remove_from_favorites video
+        subject.remove_from_favorites external_id
 
-        expect{ subject.remove_from_favorites video }.not_to raise_error
+        expect{ subject.remove_from_favorites external_id }.not_to raise_error
       end
     end
 
     describe "#add_to_watch_later" do
       before(:each) do
         VCR.use_cassette 'youtube_api/add_to_from_watch_later' do
-          subject.remove_from_watch_later video
+          subject.remove_from_watch_later external_id
         end
       end
 
       let(:external_id) { "rqweCwAMan0" }
-      let(:video) { mock "video", :external_id => external_id }
 
       it "adds a video to the watch later list" do
         VCR.use_cassette 'youtube_api/add_to_watch_later' do
-          subject.add_to_watch_later video
+          subject.add_to_watch_later external_id
 
           subject.watch_later_videos.map(&:external_id)
         end.should include external_id
@@ -311,9 +306,9 @@ describe Aji::YoutubeAPI, :unit, :net do
 
       it "doesn't raise an error if the video is already in watch later" do
         VCR.use_cassette 'youtube_api/add_to_watch_later' do
-          subject.add_to_watch_later video
+          subject.add_to_watch_later external_id
 
-          expect{ subject.add_to_watch_later video }.not_to raise_error
+          expect{ subject.add_to_watch_later external_id }.not_to raise_error
         end
       end
     end
@@ -321,16 +316,15 @@ describe Aji::YoutubeAPI, :unit, :net do
     describe "#remove_from_watch_later" do
       before(:each) do
         VCR.use_cassette 'youtube_api/remove_from_watch_later' do
-          subject.add_to_watch_later video
+          subject.add_to_watch_later external_id
         end
       end
 
       let(:external_id) { "rqweCwAMan0" }
-      let(:video) { mock "video", :external_id => external_id }
 
       it "removes the video from watch later" do
         VCR.use_cassette 'youtube_api/remove_from_watch_later' do
-          subject.remove_from_watch_later video
+          subject.remove_from_watch_later external_id
 
           subject.watch_later_videos
         end.map(&:external_id).should_not include external_id
@@ -338,9 +332,9 @@ describe Aji::YoutubeAPI, :unit, :net do
 
       it "doesn't raise an error if the video is not in watch later" do
         VCR.use_cassette 'youtube_api/remove_from_watch_later' do
-          subject.remove_from_watch_later video
+          subject.remove_from_watch_later external_id
 
-          expect{ subject.remove_from_watch_later video }.not_to raise_error
+          expect{ subject.remove_from_watch_later external_id }.not_to raise_error
         end
       end
     end

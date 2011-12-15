@@ -42,6 +42,6 @@ class Authorization < Spinach::FeatureSteps
   And 'a synchronization job should be enqueued' do
     j = MultiJson.decode Aji.redis.lpop("resque:queue:youtube_sync")
     j['class'].should == 'Aji::Queues::SynchronizeWithYoutube'
-    j['args'].should == [@user.identity.youtube_account.id, false]
+    j['args'].should == [@user.identity.youtube_account.id, false, "push_first"]
   end
 end

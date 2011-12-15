@@ -1,5 +1,6 @@
 module Aji
   class YoutubeAPI
+    THROTTLE_KEY = "background_youtube_api:throttled"
     USER_FEED_URL = "http://gdata.youtube.com/feeds/api/users"
 
     attr_reader :uid
@@ -45,18 +46,15 @@ module Aji
       end
     end
 
-    def subscribe_to channel
+    def subscribe_to channel_uid
       tracker.hit!
-      channel_uid = uid_from_channel channel
       client.subscribe_channel channel_uid
       subscription_ids.clear
     rescue UploadError => e
       raise e unless e.message =~ /Subscription already exists/
     end
 
-    def unsubscribe_from channel
-      channel_uid = uid_from_channel channel
-
+    def unsubscribe_from channel_uid
       client.unsubscribe_channel subscription_ids[channel_uid]
       subscription_ids.delete channel_uid
     rescue UploadError => e
@@ -87,16 +85,16 @@ module Aji
       end.reject{ |v| v.external_id.nil? }
     end
 
-    def add_to_favorites video
+    def add_to_favorites video_external_id
       tracker.hit!
-      client.add_favorite video.external_id
+      client.add_favorite video_external_id
     rescue UploadError => e
       raise e unless e.message =~ /Favorite already exists/
     end
 
-    def remove_from_favorites video
+    def remove_from_favorites video_external_id
       tracker.hit!
-      client.delete_favorite video.external_id
+      client.delete_favorite video_external_id
     rescue UploadError => e
       raise e unless e.message =~ /Video favorite not found/
     end
@@ -136,17 +134,17 @@ module Aji
       end.reject{ |v| v.external_id.nil? }
     end
 
-    def add_to_watch_later video
+    def add_to_watch_later video_external_id
       tracker.hit!
-      client.add_watch_later video.external_id
+      client.add_watch_later video_external_id
     rescue UploadError => e
       raise e unless e.message =~ /This resource already exists/
     end
 
-    def remove_from_watch_later video
+    def remove_from_watch_later video_external_id
       tracker.hit!
-      client.delete_watch_later watch_later_entry_ids[video.external_id] if
-      watch_later_entry_ids.has_key? video.external_id
+      client.delete_watch_later watch_later_entry_ids[video_external_id] if
+      watch_later_entry_ids.has_key? video_external_id
     rescue UploadError => e
       raise e unless e.message =~ /Playlist video not found/
     end
@@ -223,7 +221,10 @@ module Aji
 
     def tracker
       @@tracker ||= APITracker.new self.class.to_s, Aji.redis,
-        cooldown: 1.hour, hits_per_session: 250
+        cooldown: 1.hour, hits_per_session: 500 do
+          Aji.redis.set THROTTLE_KEY, true
+          Aji.redis.expire THROTTLE_KEY, 10.minutes
+        end
     end
 
     def uid_from_channel channel

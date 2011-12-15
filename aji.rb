@@ -1,7 +1,5 @@
 require 'bundler'
 
-# Must be required before NewRelic Agent (in Bundler.require)
-
 Bundler.require
 require_relative 'lib/rpm_contrib/instrumentation/grape'
 
@@ -64,8 +62,12 @@ module Aji
   Resque.schedule = conf['RESQUE_SCHEDULE']
   Resque.before_fork = proc { ActiveRecord::Base.establish_connection(
     Aji.conf['DATABASE']) }
+
+  Resque::Failure::Exceptional.configure do |config|
+    config.api_key = Aji.conf['EXCEPTIONAL_API_KEY']
+  end if RACK_ENV == 'production'
   Resque::Failure::MultipleWithRetrySuppression.classes =
-    [Resque::Failure::Redis]
+    [Resque::Failure::Redis, Resque::Failure::Exceptional]
   Resque::Failure.backend = Resque::Failure::MultipleWithRetrySuppression
 
   # Establish ActiveRecord conneciton and run all necessary migrations.
@@ -91,6 +93,7 @@ end
 require 'active_support/core_ext/object'
 # Monkey Patching
 require_relative 'lib/patches/string'
+require_relative 'lib/patches/resque'
 require_relative 'lib/patches/youtube_it/parser'
 require_relative 'lib/patches/youtube_it/request/video_upload'
 require_relative 'lib/patches/youtube_it/client'

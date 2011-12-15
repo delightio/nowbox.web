@@ -32,7 +32,7 @@ module Aji
     def push_subscribed_channels
       user.youtube_channels.each do |c|
         unless youtube_subscriptions.include? c
-          account.api.subscribe_to c
+          account.api.subscribe_to c.youtube_id
         end
         @youtube_subscriptions = nil
       end
@@ -41,7 +41,7 @@ module Aji
     def push_watch_later_videos
       user.queued_videos.select{ |v| v.source == :youtube }.each do |v|
         unless youtube_watch_later_videos.include? v
-          account.api.add_to_watch_later v
+          account.api.add_to_watch_later v.external_id
         end
         @youtube_watch_later_videos = nil
       end
@@ -50,7 +50,7 @@ module Aji
     def push_favorite_videos
       user.favorite_videos.select{ |v| v.source == :youtube }.each do |v|
         unless youtube_favorite_videos.include? v
-          account.api.add_to_favorites v
+          account.api.add_to_favorites v.external_id
         end
         @youtube_favorite_videos = nil
       end
@@ -61,23 +61,11 @@ module Aji
         c.background_refresh_content
         user.subscribe c
       end
-
-      user.youtube_channels.each do |c|
-        unless youtube_subscriptions.include? c
-          user.unsubscribe c
-        end
-      end
     end
 
     def sync_watch_later
       youtube_watch_later_videos.each do |v|
         user.enqueue_video v, Time.now
-      end
-
-      user.queued_videos.select{ |v| v.source == :youtube }.each do |v|
-        unless youtube_watch_later_videos.include? v
-          user.dequeue_video v
-        end
       end
     end
 
@@ -85,24 +73,30 @@ module Aji
       youtube_favorite_videos.each do |v|
         user.favorite_video v, Time.now
       end
-
-      user.favorite_videos.select{ |v| v.source == :youtube }.each do |v|
-        unless youtube_favorite_videos.include? v
-          user.unfavorite_video v
-        end
-      end
     end
 
     def youtube_subscriptions
-      @youtube_subscriptions ||= account.api.subscriptions
+      @youtube_subscriptions ||= if (subs = account.api.subscriptions)
+                                   subs
+                                 else
+                                   []
+                                 end
     end
 
     def youtube_watch_later_videos
-      @youtube_watch_later_videos ||= account.api.watch_later_videos
+      @youtube_watch_later_videos ||= if (laters = account.api.watch_later_videos)
+                                        laters
+                                      else
+                                        []
+                                      end
     end
 
     def youtube_favorite_videos
-      @youtube_favorite_videos ||= account.api.favorite_videos
+      @youtube_favorite_videos ||= if (favs = account.api.favorite_videos)
+                                     favs
+                                   else
+                                     []
+                                   end
     end
 
     def enqueue_resync

@@ -7,7 +7,9 @@ gem 'foreman' # Local process monitor.
 gem 'grape', :git => 'git://github.com/intridea/grape.git'
 gem 'sinatra', :require => 'sinatra/base'
 gem 'thin' # Heroku recommends the Thin web server.
-gem 'resque', :require => [ 'resque', 'resque/failure/redis' ]
+gem 'resque',
+  :require => ['resque', 'resque/failure/multiple', 'resque/failure/redis']
+gem 'resque-exceptional'
 gem 'typhoeus' # Better, Faster HTTP API for Faraday connections
 
 # Data persistence and related.
