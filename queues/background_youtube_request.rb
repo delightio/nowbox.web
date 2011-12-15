@@ -9,6 +9,7 @@ module Aji
         api_info['secret']
       api.send api_method, *args
     rescue AuthenticationError, UploadError => e
+      Resque.enqueue_in_front self, api_info, api_method, *args
       api.tracker.close_session! if e.message =~ /too_many_recent_calls/
     end
 
