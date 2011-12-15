@@ -32,6 +32,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
 input, select { vertical-align: middle; }
 /* end css reset */
+.clearfix { clear: both}
 
 body .wrapper{
   width: 825px;
@@ -43,11 +44,23 @@ body .wrapper{
 #logo { display: block; float: left; height: 80px; margin: 0px;}
 #logo img{ vertical-align: middle; margin-top: 30px; }
 
-header .fblike{ float: right; }
-header ul{ float: right; list-style: none; padding: 30px 0px; margin: 0px; }
+header .fblike { float: right; }
+header ul { float: right; list-style: none; padding: 30px 0px; margin: 0px; }
 header ul li { float: right; display: block; padding-left: 30px; text-transform:uppercase;}
-header ul a, header ul a:active, header ul a:visited{ color: #DDD;  font-weight: normal; text-decoration:none; font-size: 11px}
-header ul a:hover { color: #ffcd3d;}
+header ul a, header ul a:active, header ul a:visited {
+  color: #DDD;  font-weight: normal; text-decoration:none; font-size: 11px
+  }
+header ul a:hover{ color: #ffcd3d;}
+
+footer {padding-top: 15px; position: relative;}
+footer ul{ float: right; list-style: none; padding: 0px; margin: 0px auto; }
+	footer ul li { float: right; display: block; padding-left:30px; text-transform:uppercase;}
+		footer ul a, footer ul a:active, footer ul a:visited{ color: #DDD;  font-weight: normal; text-decoration:none; font-size: 11px }
+		footer ul a:hover { color: #ffcd3d;}
+
+	#mixpanel { float: right; margin: 10px 0px;}
+.follow, .fblike, .tweet, .plusone { float: left; }
+
 
 .home {background:#2a2a2a url("/images/home/background.jpg"); color: white;}
 .home .ipad-background {position:absolute; top:80px; background:url("/images/home/ipad_background_shadow.jpg") no-repeat;width:1179px; height: 165px; }
@@ -57,7 +70,7 @@ header ul a:hover { color: #ffcd3d;}
 /*  font-family: futura-pt;*/
   font-weight: 500;
   }
-.home #main .appstore  { text-indent:-10000px; background:url("/images/home/yellow_appstore.png") no-repeat; display: block; height: 55px; width: 180px; margin-top: 10px }
+.home #main .appstore  { text-indent:-10000px; background:url("/images/home/yellow_appstore.png") no-repeat; display: block; height: 55px; width: 180px; margin-top: 5px }
 .home #main .quote { position: absolute; top: 800px; text-align: center; width: 100%;
   text-transform: uppercase;
   font-size: 36px;
