@@ -118,7 +118,7 @@ module Aji
     end
 
     get '/giveaway' do
-      erb :giveaway
+      erb :giveaway, { :layout => :layout_giveaway }
     end
 
     # get '/channel/:channel_id' do
