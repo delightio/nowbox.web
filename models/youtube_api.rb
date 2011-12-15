@@ -154,7 +154,7 @@ module Aji
 
     def valid_uid? uid=uid
       tracker.hit!
-      feed_url = "#{USER_FEED_URL}/#{uid}?dev_key=#{Aji.conf['YOUTUBE_KEY']}"
+      feed_url = "#{USER_FEED_URL}/#{uid}?dev_key=#{Aji.conf['YOUTUBE_KEY_GLOBAL']}"
       Faraday.get(feed_url).status == 200
     end
 
@@ -234,11 +234,11 @@ module Aji
         if @token and @secret
           YouTubeIt::OAuthClient.new(consumer_key: Aji.conf['YOUTUBE_OA_KEY'],
                                      consumer_secret: Aji.conf['YOUTUBE_OA_SECRET'], username: @uid,
-                                     dev_key: Aji.conf['YOUTUBE_KEY']).tap do |c|
+                                     dev_key: Aji.conf['YOUTUBE_KEY_AUTH']).tap do |c|
                                        c.authorize_from_access @token, @secret
                                      end
         else
-          @@client ||= YouTubeIt::Client.new dev_key: Aji.conf['YOUTUBE_KEY']
+          @@client ||= YouTubeIt::Client.new dev_key: Aji.conf['YOUTUBE_KEY_GLOBAL']
         end
     end
     private :client
@@ -251,7 +251,7 @@ module Aji
       def initialize youtube_uid, data=nil
         @youtube_uid = youtube_uid
         @feed_url =
-          "http://gdata.youtube.com/feeds/api/users/#{youtube_uid}?alt=json&v=2&dev_key=#{Aji.conf['YOUTUBE_KEY']}"
+          "http://gdata.youtube.com/feeds/api/users/#{youtube_uid}?alt=json&v=2&dev_key=#{Aji.conf['YOUTUBE_KEY_GLOBAL']}"
         @data = if data then data['entry'] else get_data_from_youtube end
       end
 

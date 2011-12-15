@@ -113,7 +113,7 @@ describe Aji::YoutubeAPI, :unit, :net do
           info['published'].should == Time.new(2010, 4, 22, 14, 48, 11, '-07:00')
           info['updated'].should > Time.new(2011, 9, 29, 07, 30, 00, '-07:00')
           info['category'].should == "Guru"
-          info['title'].should == "YouTube user: day9tv"
+          info['title'].should == "day9tv"
           info['profile'].should == "http://www.youtube.com/profile?user=day9tv"
           info['homepage'].should == "http://day9.tv"
           info['about_me'].should ==%(I've qualified for the WCG USA finals 7 times, the WCG Grand Finals 3 times, and won the Pan American Championship in 2007 for StarCraft. In StarCraft 2 I play as random.\n\nI grew up playing Starcraft with my brother, Nick (Tasteless). With the launch of Starcraft 2, I'm dedicated to helping the eSports movement grow in popularity around the world.\n\nWatch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ)
