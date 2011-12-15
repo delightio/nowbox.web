@@ -69,7 +69,7 @@ module Aji
           missing_params_error! params, [:type] unless params[:type]=='featured'
           category_ids = params[:category_ids].split(',')
           categories = category_ids.map { |cat_id| Category.find_by_id cat_id }
-          channels = categories.compact.map {|cat| cat.featured_channels.first(2) }
+          channels = categories.compact.map {|cat| cat.onboard_channels }
           channels.flatten.compact
         elsif (current_user)
           authenticate!
