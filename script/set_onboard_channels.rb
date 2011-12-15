@@ -28,7 +28,7 @@ chs.each do |category_title, channel_names|
 		if account.nil?
 			puts "Couldn't find YouTube account: #{name}"
 			account = Account::Youtube.find_or_create_by_lower_uid uid
-			account.background_refresh
+			account.to_channel.background_refresh_content
 		end
 
 		puts "  added: #{name}"
