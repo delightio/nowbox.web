@@ -20,7 +20,7 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
-
+a, a:active, a:visited { color: #607890; text-decoration: none; }
 blockquote, q { quotes: none; }
 blockquote:before, blockquote:after,
 q:before, q:after { content: ''; content: none; }
@@ -66,7 +66,7 @@ footer ul{ float: right; list-style: none; padding: 0px; margin: 0px auto; }
 .home .ipad-background {position:absolute; top:80px; background:url("/images/home/ipad_background_shadow.jpg") no-repeat;width:1179px; height: 165px; }
 .home #main { position: relative; background:url("/images/home/ipad_background.jpg") no-repeat; width: 847px; height:868px;}
 .home #main .description { position: absolute; top: 220px; left:620px; width: 170px; height:164px; text-align: center;
-  text-transform: uppercase;
+/*  text-transform: uppercase;*/
 /*  font-family: futura-pt;*/
   font-weight: 500;
   }
