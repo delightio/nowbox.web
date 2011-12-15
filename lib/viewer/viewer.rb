@@ -155,7 +155,8 @@ module Aji
         @video      = @share.video
         @rec_videos = [] # Don't show recommended videos
 
-        deliver('video', 'layout_video')
+        erb :layout_video
+
       rescue => e
         Aji.log :WARN, "#{e.class}: #{e.message}"
         erb :'404', {:layout => :layout_error}
