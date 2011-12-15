@@ -55,6 +55,11 @@ task :flay do
   sh %(flay #{source_files * ' '})
 end
 
+task :flush_memcache do
+  require 'dalli'
+  Dalli::Client.new.flush_all
+end
+
 namespace :resque do
   task :setup => :environment
 end
