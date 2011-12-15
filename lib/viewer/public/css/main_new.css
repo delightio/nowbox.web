@@ -57,7 +57,7 @@ header ul a:hover { color: #ffcd3d;}
 /*  font-family: futura-pt;*/
   font-weight: 500;
   }
-.home #main .appstore  { text-indent:-10000px; background:url("/images/home/appstore.png") no-repeat; display: block; height: 55px; width: 180px; margin-top: 10px }
+.home #main .appstore  { text-indent:-10000px; background:url("/images/home/yellow_appstore.png") no-repeat; display: block; height: 55px; width: 180px; margin-top: 10px }
 .home #main .quote { position: absolute; top: 800px; text-align: center; width: 100%;
   text-transform: uppercase;
   font-size: 36px;
