@@ -104,8 +104,7 @@ module Aji
     end
 
     get '/download/?' do
-      @ref = params[:ref] || ""
-      erb :launch, {:layout => :layout_splash}
+      redirect to("http://itunes.apple.com/us/app/nowbox/id464416202?mt=8&uo=4")
     end
 
     get '/launch/?' do
