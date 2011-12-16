@@ -12,7 +12,7 @@ module Aji
       if api.tracker.available? :post
         api.send api_method, *args
       else
-        Resque.enqueue_in_front self, *args
+        Resque.enqueue_in_front self, api_info, api_method, *args
         sleep 10
       end
 
