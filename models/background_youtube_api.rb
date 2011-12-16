@@ -16,8 +16,13 @@ module Aji
         Resque.enqueue Queues::BackgroundYoutubeRequest, @api_info, method_name,
           *args
       else
-        return nil unless @api.tracker.available?
-        @api.send method_name, *args, &block
+        if @api.tracker.available?
+          @api.send method_name, *args, &block
+        else
+          Aji.redis.zadd "youtube_api:dropped_gets", Time.now.to_i,
+            "#{@api_info[:uid]}:#{method_name}:#{args * ","}"
+          nil
+        end
       end
 
     rescue AuthenticationError, UploadError => e
