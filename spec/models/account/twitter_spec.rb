@@ -121,7 +121,7 @@ describe Aji::Account::Twitter, :unit do
                                  :title => "Twitter Stream").tap do |c|
                                    c.stub :id => 1
                                    c.stub :save => true
-                                   c.stub :refresh_content
+                                   c.stub :background_refresh_content
                                    c.owner.stub :save => true
                                    Channel::TwitterStream.stub(:create).with(
                                      :owner => subject, :title => subject.username).and_return(c)
@@ -137,7 +137,7 @@ describe Aji::Account::Twitter, :unit do
 
       it "refreshes the channel's content" do
         subject.stub(:save => true)
-        stream_channel.should_receive(:refresh_content)
+        stream_channel.should_receive(:background_refresh_content)
 
         subject.build_stream_channel
       end

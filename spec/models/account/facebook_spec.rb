@@ -47,7 +47,7 @@ describe Account::Facebook, :unit do
         :title => "Facebook Stream").tap do |c|
           c.stub :id => 1
           c.stub :save => true
-          c.stub :refresh_content
+          c.stub :background_refresh_content
           Channel.should_receive(:create).with(:owner => subject,
            :title => subject.realname).and_return(c)
         end
@@ -60,7 +60,7 @@ describe Account::Facebook, :unit do
     end
 
     it "refreshes the channel's content" do
-      stream_channel.should_receive(:refresh_content)
+      stream_channel.should_receive(:background_refresh_content)
 
       subject.build_stream_channel
     end
