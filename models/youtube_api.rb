@@ -219,8 +219,8 @@ module Aji
 
     def tracker
       @@tracker ||= APITracker.new self.class.to_s, Aji.redis,
-        cooldown: 1.hour, hits_per_session: 1000, method_limits: {
-          post: 0.4 }
+        cooldown: 1.hour, hits_per_session: 4000, method_limits: {
+          post: 0.2 }
     end
 
     def uid_from_channel channel
