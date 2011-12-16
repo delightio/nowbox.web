@@ -9,6 +9,14 @@ module Aji
       @api.respond_to? method_name
     end
 
+    def empty_response_for method_name
+      if array_method? method_name
+        []
+      else
+        nil
+      end
+    end
+
     def method_missing method_name, *args, &block
       super unless @api.respond_to? method_name
 
@@ -16,8 +24,12 @@ module Aji
         Resque.enqueue Queues::BackgroundYoutubeRequest, @api_info, method_name,
           *args
       else
-        return nil unless @api.tracker.available?
-        @api.send method_name, *args, &block
+        if @api.tracker.available?
+          @api.send method_name, *args, &block
+        else
+          Aji.redis.zadd("youtube_api:dropped_gets", Time.now.to_i, "#{uid}:method_name")
+          empty_response_for method_name
+        end
       end
 
     rescue AuthenticationError, UploadError => e
@@ -29,6 +41,12 @@ module Aji
        :remove_from_favorites, :remove_from_watch_later].include? method_name
     end
     private :post_method?
+
+    def array_method?
+      [:subscriptions, :favorite_videos,
+       :watch_later_videos].include? method_name
+    end
+    private :array_method?
   end
 end
 
