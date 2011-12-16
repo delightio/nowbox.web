@@ -219,7 +219,7 @@ module Aji
 
     def tracker
       @@tracker ||= APITracker.new self.class.to_s, Aji.redis,
-        cooldown: 1.hour, hits_per_session: 500 do
+        cooldown: 1.hour, hits_per_session: 1000 do
           Aji.redis.set THROTTLE_KEY, true
           Aji.redis.expire THROTTLE_KEY, 10.minutes
         end
