@@ -157,5 +157,11 @@ module Aji
     def self.find_or_create_by_lower_uid uid, attributes={}
       find_or_create_by_uid uid.downcase, attributes
     end
+
+    def self.create_or_find_by_lower_uid uid, attributes={}
+      create! attributes.merge! uid: uid
+    rescue
+      find_by_lower_uid uid
+    end
   end
 end

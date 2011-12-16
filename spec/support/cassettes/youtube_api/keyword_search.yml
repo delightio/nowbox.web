@@ -14685,3 +14685,228 @@
       - GSE
     body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"A0ACRn47eCp7I2A9WhRQGU8.\"","id":{"$t":"tag:youtube.com,2008:user:jvic76"},"published":{"$t":"2006-10-10T19:16:39.000-07:00"},"updated":{"$t":"2011-12-14T22:16:07.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"jvic76"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=jvic76"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/jvic76?v=2"}],"author":[{"name":{"$t":"jvic76"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/jvic76"}}],"yt$age":{"$t":35},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/jvic76/favorites?v=2","countHint":22},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/jvic76/contacts?v=2","countHint":2},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/jvic76/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/jvic76/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/jvic76/subscriptions?v=2","countHint":4},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/jvic76/uploads?v=2","countHint":7},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/jvic76/newsubscriptionvideos?v=2"}],"yt$gender":{"$t":"m"},"yt$location":{"$t":"US"},"yt$statistics":{"lastWebAccess":"2011-11-24T18:59:59.000-08:00","subscriberCount":"40","videoWatchCount":0,"viewCount":"1010","totalUploadViews":"225589"},"media$thumbnail":{"url":"http://i4.ytimg.com/vi/sV-0byI3eCM/default.jpg"},"yt$username":{"$t":"jvic76"}}}'
     http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/cappynj?alt=json&dev_key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Fri, 16 Dec 2011 01:37:25 GMT
+      date:
+      - Fri, 16 Dec 2011 01:32:25 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DkUERX47eCp7I2A9WhRQGU4."
+      last-modified:
+      - Thu, 15 Dec 2011 07:30:04 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"DkUERX47eCp7I2A9WhRQGU4.\"","id":{"$t":"tag:youtube.com,2008:user:CappyNJ"},"published":{"$t":"2006-04-21T22:32:24.000-07:00"},"updated":{"$t":"2011-12-14T23:30:04.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"CappyNJ"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=CappyNJ"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/EAXxhKiXoGk?v=2"},{"rel":"related","type":"text/html","href":"http://HaphazardStuff.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/CappyNJ?v=2"}],"author":[{"name":{"$t":"CappyNJ"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/cappynj"}}],"yt$age":{"$t":38},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/cappynj/favorites?v=2","countHint":245},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/cappynj/contacts?v=2","countHint":73},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/cappynj/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/cappynj/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/cappynj/subscriptions?v=2","countHint":25},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/cappynj/uploads?v=2","countHint":52},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/cappynj/newsubscriptionvideos?v=2"}],"yt$gender":{"$t":"m"},"yt$location":{"$t":"US"},"yt$statistics":{"lastWebAccess":"2011-08-26T21:06:25.000-07:00","subscriberCount":"2110","videoWatchCount":0,"viewCount":"70636","totalUploadViews":"17008096"},"media$thumbnail":{"url":"http://i1.ytimg.com/i/pDTWJvHIZG6tAcVet1vTag/1.jpg?v=712111"},"yt$username":{"$t":"CappyNJ"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/cappynj?alt=json&dev_key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Fri, 16 Dec 2011 01:37:25 GMT
+      date:
+      - Fri, 16 Dec 2011 01:32:25 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DkUERX47eCp7I2A9WhRQGU4."
+      last-modified:
+      - Thu, 15 Dec 2011 07:30:04 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"DkUERX47eCp7I2A9WhRQGU4.\"","id":{"$t":"tag:youtube.com,2008:user:CappyNJ"},"published":{"$t":"2006-04-21T22:32:24.000-07:00"},"updated":{"$t":"2011-12-14T23:30:04.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"CappyNJ"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=CappyNJ"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/EAXxhKiXoGk?v=2"},{"rel":"related","type":"text/html","href":"http://HaphazardStuff.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/CappyNJ?v=2"}],"author":[{"name":{"$t":"CappyNJ"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/cappynj"}}],"yt$age":{"$t":38},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/cappynj/favorites?v=2","countHint":245},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/cappynj/contacts?v=2","countHint":73},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/cappynj/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/cappynj/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/cappynj/subscriptions?v=2","countHint":25},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/cappynj/uploads?v=2","countHint":52},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/cappynj/newsubscriptionvideos?v=2"}],"yt$gender":{"$t":"m"},"yt$location":{"$t":"US"},"yt$statistics":{"lastWebAccess":"2011-08-26T21:06:25.000-07:00","subscriberCount":"2110","videoWatchCount":0,"viewCount":"70636","totalUploadViews":"17008096"},"media$thumbnail":{"url":"http://i1.ytimg.com/i/pDTWJvHIZG6tAcVet1vTag/1.jpg?v=712111"},"yt$username":{"$t":"CappyNJ"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/cappynj?alt=json&dev_key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json;charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Fri, 16 Dec 2011 01:37:25 GMT
+      date:
+      - Fri, 16 Dec 2011 01:32:25 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DkUERX47eCp7I2A9WhRQGU4."
+      last-modified:
+      - Thu, 15 Dec 2011 07:30:04 GMT
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '2581'
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"DkUERX47eCp7I2A9WhRQGU4.\"","id":{"$t":"tag:youtube.com,2008:user:CappyNJ"},"published":{"$t":"2006-04-21T22:32:24.000-07:00"},"updated":{"$t":"2011-12-14T23:30:04.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"CappyNJ"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=CappyNJ"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/EAXxhKiXoGk?v=2"},{"rel":"related","type":"text/html","href":"http://HaphazardStuff.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/CappyNJ?v=2"}],"author":[{"name":{"$t":"CappyNJ"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/cappynj"}}],"yt$age":{"$t":38},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/cappynj/favorites?v=2","countHint":245},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/cappynj/contacts?v=2","countHint":73},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/cappynj/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/cappynj/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/cappynj/subscriptions?v=2","countHint":25},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/cappynj/uploads?v=2","countHint":52},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/cappynj/newsubscriptionvideos?v=2"}],"yt$gender":{"$t":"m"},"yt$location":{"$t":"US"},"yt$statistics":{"lastWebAccess":"2011-08-26T21:06:25.000-07:00","subscriberCount":"2110","videoWatchCount":0,"viewCount":"70636","totalUploadViews":"17008096"},"media$thumbnail":{"url":"http://i1.ytimg.com/i/pDTWJvHIZG6tAcVet1vTag/1.jpg?v=712111"},"yt$username":{"$t":"CappyNJ"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/tvlegends?alt=json&dev_key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Fri, 16 Dec 2011 01:37:26 GMT
+      date:
+      - Fri, 16 Dec 2011 01:32:26 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"CkUCRH47eCp7I2A9WhRQGUo."
+      last-modified:
+      - Thu, 15 Dec 2011 17:31:05 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"CkUCRH47eCp7I2A9WhRQGUo.\"","id":{"$t":"tag:youtube.com,2008:user:TVLEGENDS"},"published":{"$t":"2008-03-12T09:26:09.000-07:00"},"updated":{"$t":"2011-12-15T09:31:05.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Director"}],"title":{"$t":"TVLEGENDS"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=TVLEGENDS"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/uca2zUm9zk8?v=2"},{"rel":"related","type":"text/html","href":"http://emmytvlegends.org"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/TVLEGENDS?v=2"}],"author":[{"name":{"$t":"TVLEGENDS"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/tvlegends"}}],"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.liveevent","href":"http://gdata.youtube.com/feeds/api/users/tvlegends/live/events?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/tvlegends/favorites?v=2","countHint":74},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/tvlegends/contacts?v=2","countHint":6},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/tvlegends/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/tvlegends/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/tvlegends/subscriptions?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/tvlegends/uploads?v=2","countHint":3599},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/tvlegends/newsubscriptionvideos?v=2"}],"yt$hobbies":{"$t":"TV
+      History, Pop Culture, 20th Century History, Television Shows"},"yt$location":{"$t":"US"},"yt$movies":{"$t":"Primetime
+      Emmy Awards"},"yt$statistics":{"lastWebAccess":"2011-12-11T17:01:28.000-08:00","subscriberCount":"12860","videoWatchCount":0,"viewCount":"381914","totalUploadViews":"13645879"},"media$thumbnail":{"url":"http://i3.ytimg.com/i/j4PxzfWBNV9vIdEPkglrrg/1.jpg?v=db41b4"},"yt$username":{"$t":"TVLEGENDS"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/hollywise23?alt=json&dev_key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Fri, 16 Dec 2011 01:37:27 GMT
+      date:
+      - Fri, 16 Dec 2011 01:32:27 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DE8BQX47eCp7I2A9WhRQGUU."
+      last-modified:
+      - Thu, 15 Dec 2011 22:07:30 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"DE8BQX47eCp7I2A9WhRQGUU.\"","id":{"$t":"tag:youtube.com,2008:user:Hollywise23"},"published":{"$t":"2008-05-31T20:30:13.000-07:00"},"updated":{"$t":"2011-12-15T14:07:30.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"Hollywise23"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=Hollywise23"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/mEWicbxgiog?v=2"},{"rel":"related","type":"text/html","href":"http://mafiamatrix.com/signup.asp?referrer=31607"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/Hollywise23?v=2"}],"author":[{"name":{"$t":"Hollywise23"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/hollywise23"}}],"yt$aboutMe":{"$t":"One
+      year. \\o/"},"yt$age":{"$t":21},"yt$books":{"$t":"I am the Messenger has to
+      be one of the best books I have read in a really long time."},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/hollywise23/favorites?v=2","countHint":146},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/hollywise23/contacts?v=2","countHint":41},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/hollywise23/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/hollywise23/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/hollywise23/subscriptions?v=2","countHint":24},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/hollywise23/uploads?v=2","countHint":13},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/hollywise23/newsubscriptionvideos?v=2"}],"yt$gender":{"$t":"m"},"yt$hobbies":{"$t":"..."},"yt$hometown":{"$t":"Carmel,
+      IN"},"yt$location":{"$t":"Indianapolis, IN, US"},"yt$movies":{"$t":"Anything
+      with the mafia, aliens, ninjas, or a combination of all three.\n\nThe Office,
+      My Name is Earl (It got canceled, wah!), Arrested Development, Curb your Enthusiasm."},"yt$music":{"$t":"Disturbed,
+      Blacktop Manhattan, ACDC, Led Zeppelin, Queen, The Who, Beastie Boys, Aerosmith,
+      Metallica, Rolling Stones, Pearl Jam, Coldplay, Smashing Pumpkins, Black Sabbath,
+      Alice in Chains, Guns n'' Roses, System of a Down."},"yt$occupation":{"$t":"..."},"yt$statistics":{"lastWebAccess":"2011-05-01T21:00:32.000-07:00","subscriberCount":"145","videoWatchCount":0,"viewCount":"3873","totalUploadViews":"786993"},"media$thumbnail":{"url":"http://i2.ytimg.com/vi/yuHQ5ZXRWew/default.jpg"},"yt$username":{"$t":"Hollywise23"}}}'
+    http_version: '1.1'

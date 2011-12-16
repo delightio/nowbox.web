@@ -30,7 +30,7 @@ module Aji
             cid = sub.title.split(" ").last.downcase
             @subscription_ids[cid] = sub.id
             subs.push(
-              Account::Youtube.find_or_create_by_lower_uid(cid).to_channel)
+              Account::Youtube.create_or_find_by_lower_uid(cid).to_channel)
           end 
 
           tracker.hit!
@@ -41,7 +41,7 @@ module Aji
         sub_feed.each do |sub|
           cid = sub.title.split(" ").last.downcase
           @subscription_ids[cid] = sub.id
-          subs.push(Account::Youtube.find_or_create_by_lower_uid(cid).to_channel)
+          subs.push(Account::Youtube.create_or_find_by_lower_uid(cid).to_channel)
         end 
       end
     end
@@ -193,7 +193,7 @@ module Aji
         category = Category.undefined
       end
 
-      author = Account::Youtube.find_or_create_by_lower_uid video.author.name
+      author = Account::Youtube.create_or_find_by_lower_uid video.author.name
 
       {
         :title => video.title,

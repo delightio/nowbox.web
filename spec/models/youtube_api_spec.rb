@@ -4,7 +4,7 @@ include Aji
 describe Aji::YoutubeAPI, :unit, :net do
   describe "#youtube_it_to_hash" do
     before :each do
-      Account::Youtube.stub :find_or_create_by_lower_uid
+      Account::Youtube.stub :create_or_find_by_lower_uid
       Category.stub :find_or_create_by_raw_title
       Category.stub :undefined
     end
@@ -49,7 +49,7 @@ describe Aji::YoutubeAPI, :unit, :net do
     end
 
     it "creates Account::Youtube object if needed" do
-      Account::Youtube.should_receive :find_or_create_by_lower_uid
+      Account::Youtube.should_receive :create_or_find_by_lower_uid
 
       subject.youtube_it_to_hash video
     end
