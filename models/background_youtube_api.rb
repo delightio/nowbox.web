@@ -21,7 +21,7 @@ module Aji
         else
           Aji.redis.zadd "youtube_api:dropped_gets", Time.now.to_i,
             "#{@api_info[:uid]}:#{method_name}:#{args * ","}"
-          nil
+          array_method? method_name ? [] : nil
         end
       end
 
@@ -34,6 +34,12 @@ module Aji
        :remove_from_favorites, :remove_from_watch_later].include? method_name
     end
     private :post_method?
+
+    def array_method? method_name
+      [:subscriptions, :favorite_videos,
+       :watch_later_videos].include? method_name
+    end
+    private :array_method?
   end
 end
 
