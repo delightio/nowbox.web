@@ -27,7 +27,8 @@ module Aji
         if @api.tracker.available?
           @api.send method_name, *args, &block
         else
-          Aji.redis.zadd("youtube_api:dropped_gets", Time.now.to_i, "#{uid}:method_name")
+          Aji.redis.zadd "youtube_api:dropped_gets", Time.now.to_i,
+                         "#{uid}:#{method_name}:#{args * ","}"
           empty_response_for method_name
         end
       end
