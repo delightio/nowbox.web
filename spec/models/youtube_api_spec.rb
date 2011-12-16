@@ -152,14 +152,6 @@ describe Aji::YoutubeAPI, :unit, :net do
     let(:subscribed_channels) { %w[raywilliamjohnson lisanova] }
 
     describe "#subscriptions" do
-      it "hits youtube once per page of subscriptions and once per author" do
-        subject.tracker.should_receive(:hit!).
-          exactly(subscribed_channels.length / 25 +
-                  1 + subscribed_channels.length)
-
-        subject.subscriptions
-      end
-
       it "returns subscribed channels" do
         channels = VCR.use_cassette "youtube_api/subscriptions" do
           subject.subscriptions
@@ -179,6 +171,13 @@ describe Aji::YoutubeAPI, :unit, :net do
       end
 
       let(:channel_uid) { "lisanova" }
+
+      it "hits youtube once" do
+        subject.tracker.should_receive(:hit!).with(:post)
+        VCR.use_cassette "youtube_api/subscribe_to" do
+          subject.subscribe_to channel_uid
+        end
+      end
 
       it "subscribes given channel on YouTube" do
         VCR.use_cassette "youtube_api/subscribe_to" do
@@ -258,6 +257,13 @@ describe Aji::YoutubeAPI, :unit, :net do
       before(:each) { subject.remove_from_favorites external_id }
       let(:external_id) { "dYCLXDtvrbs" }
 
+      it "hits youtube once" do
+        subject.tracker.should_receive(:hit!).with(:post)
+        VCR.use_cassette "youtube_api/add_to_favorites" do
+          subject.add_to_favorites external_id
+        end
+      end
+
       it "adds given video to user's YouTube's favorite list" do
         subject.add_to_favorites external_id
         subject.favorite_videos.map(&:external_id).should include external_id
@@ -265,7 +271,11 @@ describe Aji::YoutubeAPI, :unit, :net do
 
       it "doesn't raise an error if video is already in favorites" do
         subject.add_to_favorites external_id
-        expect{ subject.add_to_favorites external_id }.not_to raise_error
+        expect do
+          VCR.use_cassette "youtube_api/add_to_favorites" do
+            subject.add_to_favorites external_id
+          end
+        end.not_to raise_error
       end
     end
 
@@ -295,6 +305,13 @@ describe Aji::YoutubeAPI, :unit, :net do
       end
 
       let(:external_id) { "rqweCwAMan0" }
+
+      it "hits youtube once" do
+        subject.tracker.should_receive(:hit!).with(:post)
+        VCR.use_cassette "youtube_api/add_to_watch_later" do
+          subject.add_to_watch_later external_id
+        end
+      end
 
       it "adds a video to the watch later list" do
         VCR.use_cassette 'youtube_api/add_to_watch_later' do
@@ -341,15 +358,6 @@ describe Aji::YoutubeAPI, :unit, :net do
 
     describe "#watch_later_videos" do
       let(:watch_later_video_ids) { %w[IsLwVoZqEjk] }
-
-      it "hits youtube once per page and once per new author" do
-        subject.tracker.should_receive(:hit!).exactly(
-          watch_later_video_ids.length / 50 + 1 + watch_later_video_ids.length).times
-
-        VCR.use_cassette "youtube_api/watch_later_videos" do
-          subject.watch_later_videos
-        end
-      end
 
       it "returns user's watch later videos as Aji::Video objects" do
         videos = VCR.use_cassette "youtube_api/watch_later_videos" do

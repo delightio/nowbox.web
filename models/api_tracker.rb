@@ -2,9 +2,18 @@ module Aji
   class APITracker
     LimitReached = Class.new Aji::Error
 
-    attr_reader :cooldown, :hits_per_session, :redis, :namespace
+    attr_reader :cooldown, :hits_per_session, :redis, :namespace, :method_limits
 
-    def initialize api_name, redis, options, &throttling_action
+    # Mandatory options are `hits_per_session`, the number of of hits of any kind
+    # allowable during a single session. And `cooldown`, the time in seconds
+    # before a session expires.
+    # Additional options are method limits. #hit, #hit!, and #available? all
+    # take an optional method name. You can prioritize types of methods using
+    # this feature. Create a hash specifiying the proportion 0 < x < 1 of the
+    # total hits per session which can be taken up by this method. The sum total
+    # of proportions need not equal 1. The feature merely limits the method to
+    # at most that proportion of the full quota.
+    def initialize api_name, redis, options
       @namespace = api_name.strip.downcase.gsub(/[-\s]+/,'_')
       @redis = redis
 
@@ -16,31 +25,48 @@ module Aji
         raise ArgumentError, "Must supply :cooldown"
       end
 
-      @throttling_action = throttling_action
+      # Process method limits as a proportion of total hits.
+      if options[:method_limits]
+        # If no methods are limited, each has the complete quota available.
+        @method_limits = Hash.new @hits_per_session
+        options[:method_limits].each do |method, proportion|
+          @method_limits[method] = (@hits_per_session * proportion).floor
+        end
+      end
     end
 
-    def hit
-      if available?
-        hit!
+    def hit api_method = nil
+      if available? api_method
+        hit! api_method
         if block_given? then yield else true end
       else
-        close_session! unless @closed
+        close_session! unless throttle_set?
         raise LimitReached,
           "Exceeded #{hits_per_session} #{namespace} hits before #{cooldown}"
       end
     end
 
-    def available?
-      hit_count < hits_per_session and not @closed
+    def available? api_method = nil
+      if api_method
+        #return false unless hit_count < hits_per_session
+        return false unless hit_count(api_method) < method_limits[api_method]
+        return false if throttle_set?
+      else
+        return false unless hit_count < hits_per_session
+        return false if throttle_set?
+      end
+
+      true
     end
 
-    def hit!
+    def hit! api_method = nil
       unless redis.exists key
-        redis.hset key, count_field, 0
+        redis.hset key, count_key, 0
         redis.expire key, cooldown
       end
 
-      redis.hincrby key, count_field, 1
+      redis.hincrby key, api_method, 1 if api_method
+      redis.hincrby key, count_key, 1
     end
 
     def seconds_until_available
@@ -48,25 +74,32 @@ module Aji
     end
 
     def reset_session!
-      redis.hset(key, count_field, 0)
+      redis.hset(key, count_key, 0)
       redis.expire(key, cooldown)
     end
 
-    def hit_count
-      redis.hget(key, count_field).to_i
+    def hit_count api_method = nil
+      if api_method
+        redis.hget(key, api_method).to_i
+      else
+        redis.hget(key, count_key).to_i
+      end
     end
 
-    def on_throttling &throttling_action
-      @throttling_action = throttling_action
+    def throttle_set?
+      redis.hexists(key, throttle_key)
     end
 
     def close_session!
-      @throttling_action.call unless @throttling_action.nil? or @closed
-      @closed = true
+      redis.hset(key, throttle_key, "yes")
     end
 
-    def count_field
+    def count_key
       'count'
+    end
+
+    def throttle_key
+      'throttled'
     end
 
     def key

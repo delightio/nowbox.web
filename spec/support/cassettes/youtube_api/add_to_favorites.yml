@@ -1,0 +1,124 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://gdata.youtube.com:80/feeds/api/users/default/favorites
+    body: <?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom"
+      xmlns:yt="http://gdata.youtube.com/schemas/2007"><id>dYCLXDtvrbs</id></entry>
+    headers:
+      authorization:
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="cb7dd568d60846e1cd629f0cfb85b781",
+        oauth_signature="vKAjfkzS5ADzL%2BOazpESJLp%2BTrE%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1324071490", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
+        oauth_version="1.0"
+      x-gdata-client:
+      - youtube_it
+      x-gdata-key:
+      - key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA
+      gdata-version:
+      - '2'
+      content-type:
+      - application/atom+xml; charset=UTF-8
+      content-length:
+      - '158'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 201
+      message: Created
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=entry
+      expires:
+      - Fri, 16 Dec 2011 21:38:09 GMT
+      date:
+      - Fri, 16 Dec 2011 21:38:09 GMT
+      cache-control:
+      - private, max-age=0, must-revalidate, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"C0MMSH47eCp7I2A9WhRXEEo."
+      location:
+      - http://gdata.youtube.com/feeds/api/users/nowmovnowbox/favorites/vjVQa1PpcFOwQxSyRZ3jkaWYRFSCEN47ZwGG_NlOiJs?client=youtube_it
+      content-location:
+      - http://gdata.youtube.com/feeds/api/users/nowmovnowbox/favorites/vjVQa1PpcFOwQxSyRZ3jkaWYRFSCEN47ZwGG_NlOiJs?client=youtube_it
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! "<?xml version='1.0' encoding='UTF-8'?><entry xmlns='http://www.w3.org/2005/Atom'
+      xmlns:app='http://www.w3.org/2007/app' xmlns:media='http://search.yahoo.com/mrss/'
+      xmlns:gd='http://schemas.google.com/g/2005' xmlns:yt='http://gdata.youtube.com/schemas/2007'
+      gd:etag='W/&quot;C0MMSH47eCp7I2A9WhRXEEo.&quot;'><id>tag:youtube.com,2008:favorite:vjVQa1PpcFOwQxSyRZ3jkaWYRFSCEN47ZwGG_NlOiJs</id><published>2011-12-16T21:38:09.000Z</published><updated>2011-12-16T21:38:09.000Z</updated><app:edited>2011-12-16T21:38:09.000Z</app:edited><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#favorite'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+      label='Entertainment'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='ray william johnson'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='raywilliamjohnson'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='rwj'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='equals three'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='equalsthree'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='cat vs. dog'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='hurricane streaking'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='jimcarrey emma stone'/><title>CONFESSING MY LOVE</title><link rel='alternate'
+      type='text/html' href='http://www.youtube.com/watch?v=dYCLXDtvrbs&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/dYCLXDtvrbs/responses?client=youtube_it'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/dYCLXDtvrbs/ratings?client=youtube_it'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/dYCLXDtvrbs/complaints?client=youtube_it'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/dYCLXDtvrbs/related?client=youtube_it'/><link
+      rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=dYCLXDtvrbs'/><link
+      rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/dYCLXDtvrbs?client=youtube_it'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/favorites/vjVQa1PpcFOwQxSyRZ3jkaWYRFSCEN47ZwGG_NlOiJs?client=youtube_it'/><link
+      rel='edit' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/favorites/vjVQa1PpcFOwQxSyRZ3jkaWYRFSCEN47ZwGG_NlOiJs?client=youtube_it'/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:accessControl
+      action='comment' permission='denied'/><yt:accessControl action='commentVote'
+      permission='denied'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><yt:hd/><media:group><media:category
+      label='Entertainment' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+      url='http://www.youtube.com/v/dYCLXDtvrbs?version=3&amp;f=user_favorites&amp;c=youtube_it&amp;d=AVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='404' yt:format='5'/><media:content url='rtsp://v2.cache1.c.youtube.com/ClkLENy73wIaUAm7rW87XIuAdRMYDSANFEIKeW91dHViZV9pdEgGUg51c2VyX2Zhdm9yaXRlc3IhAVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDmDA==/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='404' yt:format='1'/><media:content
+      url='rtsp://v4.cache5.c.youtube.com/ClkLENy73wIaUAm7rW87XIuAdRMYESARFEIKeW91dHViZV9pdEgGUg51c2VyX2Zhdm9yaXRlc3IhAVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDmDA==/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='404' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube' yt:type='partner'>RayWilliamJohnson</media:credit><media:description
+      type='plain'>RAY'S PERSONAL VIDEO: http://www.youtube.com/watch?v=Jkg2HTqUPKg\r\n\r\nRAY'S
+      GOOGLE+  http://Gplus.to/RayWJ\r\n\r\nRAY'S FACEBOOK: ‪‪http://www.facebook.com/raywilliamjohnson\r\n\r\nRAY'S
+      TWITTER: ‪‪https://twitter.com/RayWJ\r\n\r\n=3 IN SPANISH: ‪http://www.youtube.com/igualatres\r\n\r\n WEBSITE:
+      ‪http://raywj.com\r\n\r\n OUTRO SONG: ‪http://www.youtube.com/yourfavoritemartian‬\r\n\r\n**********************************************************************\r\n 
+       Here are the links to the full reviews of the content discussed in this video.
+      Please don't harass the content creators or send them hate-messages. If you
+      like what you see on each of their channels, feel free to subscribe to them. \r\n:)
+      Thanx:\r\n\r\nCat Vs. Dog:\r\nhttp://www.raywj.com/?p=11566\r\n\r\nHurricane
+      Streaking:\r\nhttp://www.youtube.com/watch?v=UaceMZIqF3I\r\n\r\nJim Carrey Emma
+      Stone:\r\nhttp://www.raywj.com/?p=11352</media:description><media:keywords>ray
+      william johnson, raywilliamjohnson, rwj, equals three, equalsthree, cat vs.
+      dog, hurricane streaking, jimcarrey emma stone</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=dYCLXDtvrbs&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/dYCLXDtvrbs/default.jpg' height='90' width='120'
+      time='00:03:22' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/dYCLXDtvrbs/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/dYCLXDtvrbs/1.jpg'
+      height='90' width='120' time='00:01:41' yt:name='start'/><media:thumbnail url='http://i.ytimg.com/vi/dYCLXDtvrbs/2.jpg'
+      height='90' width='120' time='00:03:22' yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/dYCLXDtvrbs/3.jpg'
+      height='90' width='120' time='00:05:03' yt:name='end'/><media:title type='plain'>CONFESSING
+      MY LOVE</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+      seconds='404'/><yt:uploaded>2011-08-30T00:34:54.000Z</yt:uploaded><yt:videoid>dYCLXDtvrbs</yt:videoid></media:group><gd:rating
+      average='4.7422647' max='5' min='1' numRaters='61893' rel='http://schemas.google.com/g/2005#overall'/><yt:statistics
+      favoriteCount='9690' viewCount='6448950'/><yt:rating numDislikes='3988' numLikes='57905'/><yt:favoriteId>vjVQa1PpcFOwQxSyRZ3jkaWYRFSCEN47ZwGG_NlOiJs</yt:favoriteId></entry>"
+    http_version: '1.1'

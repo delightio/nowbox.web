@@ -1,6 +1,5 @@
 module Aji
   class YoutubeAPI
-    THROTTLE_KEY = "background_youtube_api:throttled"
     USER_FEED_URL = "http://gdata.youtube.com/feeds/api/users"
 
     attr_reader :uid
@@ -20,9 +19,9 @@ module Aji
 
     def subscriptions uid=uid
       options = { 'max-results' => 50, 'start-index' => 1 }
+      tracker.hit! :get
 
       [].tap do |subs|
-        tracker.hit!
         sub_feed = client.subscriptions(uid, options)
 
         while sub_feed.length == options['max-results'] do
@@ -33,7 +32,7 @@ module Aji
               Account::Youtube.create_or_find_by_lower_uid(cid).to_channel)
           end 
 
-          tracker.hit!
+          tracker.hit! :get
           options['start-index'] += options['max-results']
           sub_feed = client.subscriptions(uid, options)
         end
@@ -47,13 +46,14 @@ module Aji
     end
 
     def subscribe_to channel_uid
-      tracker.hit!
+      tracker.hit! :post
       client.subscribe_channel channel_uid
     rescue UploadError => e
       raise e unless e.message =~ /Subscription already exists/
     end
 
     def unsubscribe_from channel_uid
+      tracker.hit! :post
       client.unsubscribe_channel subscription_ids[channel_uid]
     rescue UploadError => e
       Aji.log :WARN, "#{e.class}:#{e.message}"
@@ -63,7 +63,7 @@ module Aji
       options = { 'max-results' => 50, 'start-index' => 1 }
 
       [].tap do |favorites|
-        tracker.hit!
+        tracker.hit! :get
         videos = client.favorites(uid, options).videos
         options['start-index'] += options['max-results']
 
@@ -72,7 +72,7 @@ module Aji
             favorites << youtube_it_to_video(v)
           end
 
-          tracker.hit!
+          tracker.hit! :get
           videos = client.favorites(uid, options).videos
           options['start-index'] += options['max-results']
         end
@@ -84,14 +84,14 @@ module Aji
     end
 
     def add_to_favorites video_external_id
-      tracker.hit!
+      tracker.hit! :post
       client.add_favorite video_external_id
     rescue UploadError => e
       raise e unless e.message =~ /Favorite already exists/
     end
 
     def remove_from_favorites video_external_id
-      tracker.hit!
+      tracker.hit! :post
       client.delete_favorite video_external_id
     rescue UploadError => e
       raise e unless e.message =~ /Video favorite not found/
@@ -106,7 +106,7 @@ module Aji
       options = { 'max-results' => 50, 'start-index' => 1 }
 
       [].tap do |watch_later|
-        tracker.hit!
+        tracker.hit! :get
         youtube_videos = client.watch_later(uid, options).videos
         options['start-index'] += options['max-results']
 
@@ -118,7 +118,7 @@ module Aji
               v.video_id.split(':').last
           end
 
-          tracker.hit!
+          tracker.hit! :get
           youtube_videos = client.watch_later(uid, options).videos
           options['start-index'] += options['max-results']
         end
@@ -133,14 +133,14 @@ module Aji
     end
 
     def add_to_watch_later video_external_id
-      tracker.hit!
+      tracker.hit! :post
       client.add_watch_later video_external_id
     rescue UploadError => e
       raise e unless e.message =~ /This resource already exists/
     end
 
     def remove_from_watch_later video_external_id
-      tracker.hit!
+      tracker.hit! :post
       client.delete_watch_later watch_later_entry_ids[video_external_id] if
       watch_later_entry_ids.has_key? video_external_id
     rescue UploadError => e
@@ -148,7 +148,7 @@ module Aji
     end
 
     def author_info uid=uid
-      tracker.hit!
+      tracker.hit! :get
       DataGrabber.new(uid).build_hash
     end
 
@@ -219,10 +219,8 @@ module Aji
 
     def tracker
       @@tracker ||= APITracker.new self.class.to_s, Aji.redis,
-        cooldown: 1.hour, hits_per_session: 1000 do
-          Aji.redis.set THROTTLE_KEY, true
-          Aji.redis.expire THROTTLE_KEY, 10.minutes
-        end
+        cooldown: 1.hour, hits_per_session: 1000, method_limits: {
+          post: 0.4 }
     end
 
     def uid_from_channel channel

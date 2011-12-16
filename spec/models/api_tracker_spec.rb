@@ -4,11 +4,12 @@ module Aji
   describe Aji::APITracker, :unit do
     let(:cooldown) { 100 }
     let(:hits_per_session) { 10 }
+    let(:method_limits) { { post: 0.1 } }
     let(:key_name) { "api_tracker:spec" }
     let(:redis) { Aji.redis }
     subject do
       APITracker.new "spec", redis, cooldown: cooldown,
-      hits_per_session: hits_per_session
+      hits_per_session: hits_per_session, method_limits: method_limits
     end
 
     describe "#hit" do
@@ -40,6 +41,12 @@ module Aji
         redis.should_receive(:hincrby).with(key_name, "count", 1)
         subject.hit!
       end
+
+      it "increments the count field for an api method if given" do
+        redis.should_receive(:hincrby).with(key_name, :get, 1)
+
+        subject.hit! :get
+      end
     end
 
     describe "#available?" do
@@ -50,8 +57,21 @@ module Aji
         end
       end
 
-      specify "false otherwise" do
+      specify "false when the api method has reached its quota" do
+        subject.should_receive(:hit_count).with(:post).and_return(2)
+
+        subject.should_not be_available(:post)
+      end
+
+      specify "false when the throttle key is set" do
+        subject.close_session!
+
+        subject.should_not be_available
+      end
+
+      specify "false when the hit count is greater than the hits per session" do
         subject.stub :hit_count => hits_per_session
+
         subject.should_not be_available
       end
     end
@@ -80,6 +100,14 @@ module Aji
       it "resets the cooldown counters" do
         subject.redis.should_receive(:expire).with(key_name, cooldown)
         subject.reset_session!
+      end
+    end
+
+    describe "#close_session!" do
+      it "sets the throttle key" do
+        subject.redis.should_receive(:hset).with(key_name, 'throttled', 'yes')
+
+        subject.close_session!
       end
     end
 

@@ -1,0 +1,51 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :delete
+    uri: http://gdata.youtube.com:80/feeds/api/users/default/favorites/zxmObqXYgI8
+    body: !!null 
+    headers:
+      gdata-version:
+      - '1'
+      authorization:
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="2b10982a1fead466475c2ec2676d1c5a",
+        oauth_signature="cwBUqhJX6L1eRMe7wa6ql%2F2ykU8%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1324071496", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
+        oauth_version="1.0"
+      x-gdata-client:
+      - youtube_it
+      x-gdata-key:
+      - key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA
+      content-type:
+      - application/atom+xml; charset=UTF-8
+      content-length:
+      - '0'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      gdata-version:
+      - '1.0'
+      date:
+      - Fri, 16 Dec 2011 21:38:14 GMT
+      expires:
+      - Fri, 16 Dec 2011 21:38:14 GMT
+      cache-control:
+      - private, max-age=0
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '0'
+      server:
+      - GSE
+      content-type:
+      - text/html
+    body: !!null 
+    http_version: '1.1'
