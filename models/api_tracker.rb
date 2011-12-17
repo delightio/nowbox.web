@@ -74,8 +74,7 @@ module Aji
     end
 
     def reset_session!
-      redis.hset(key, count_key, 0)
-      redis.expire(key, cooldown)
+      redis.del(key)
     end
 
     def hit_count api_method = nil
