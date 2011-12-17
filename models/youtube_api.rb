@@ -250,6 +250,14 @@ module Aji
       @singleton ||= new
     end
 
+    def self.global_tracker
+      @global_tracker ||= new.tracker
+    end
+
+    def self.authed_tracker
+      @authed_tracker ||= new("foo","bar","baz").tracker
+    end
+
     class DataGrabber
       def initialize youtube_uid, data=nil
         @youtube_uid = youtube_uid
