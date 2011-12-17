@@ -21,7 +21,11 @@ module Aji
         else
           Aji.redis.zadd "youtube_api:dropped_gets", Time.now.to_i,
             "#{@api_info[:uid]}:#{method_name}:#{args * ","}"
-          array_method? method_name ? [] : nil
+          if array_method? method_name
+            []
+          else
+            nil
+          end
         end
       end
 
