@@ -40,7 +40,7 @@ module Aji
     private :post_method?
 
     def array_method? method_name
-      [:subscriptions, :favorite_videos,
+      [:subscriptions, :favorite_videos, :uploaded_videos,
        :watch_later_videos].include? method_name
     end
     private :array_method?
