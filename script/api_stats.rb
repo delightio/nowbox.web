@@ -48,3 +48,7 @@ print_stats @youtube_at
 
 print_aggregate_stats @twitter_trackers
 
+# Welcome to the interactive stats console. You have access to all the functions
+# and ivars of script/api_stats.rb
+binding.pry if ARGV.first == '-i'
+
