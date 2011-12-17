@@ -38,6 +38,16 @@ module Aji
 
         subject.perform
       end
+
+      it "doesn't mark any spam from personal channels" do
+        mention.stub :spam? => true
+        internal_processor = MentionProcessor.new mention
+        Resque.should_not_receive(:enqueue).with(Queues::RemoveSpammer,
+           mention.author.id)
+
+        internal_processor.perform
+        internal_processor.errors.should be_empty
+      end
     end
 
     describe ".video_filters" do
