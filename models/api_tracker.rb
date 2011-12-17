@@ -91,6 +91,8 @@ module Aji
 
     def close_session!
       redis.hset(key, throttle_key, "yes")
+      redis.zadd(throttle_count_key, Time.now.to_i,
+                 MultiJson.encode(redis.hgetall(key)))
     end
 
     def count_key
@@ -99,6 +101,10 @@ module Aji
 
     def throttle_key
       'throttled'
+    end
+
+    def throttle_count_key
+      "#{key}:throttle_count"
     end
 
     def key
