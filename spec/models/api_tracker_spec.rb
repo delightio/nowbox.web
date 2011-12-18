@@ -92,13 +92,8 @@ module Aji
     end
 
     describe "#reset_session!" do
-      it "resets the session counter" do
-        subject.redis.should_receive(:hset).with(key_name, "count", 0)
-        subject.reset_session!
-      end
-
-      it "resets the cooldown counters" do
-        subject.redis.should_receive(:expire).with(key_name, cooldown)
+      it "deletes the entire session hash" do
+        subject.redis.should_receive(:del).with(key_name)
         subject.reset_session!
       end
     end

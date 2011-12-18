@@ -20,7 +20,8 @@ def print_aggregate_stats apis
 end
 
 @facebook_tracker = FacebookAPI.new("dummy token").tracker
-@youtube_tracker = YoutubeAPI.new.tracker
+@youtube_gt = YoutubeAPI.global_tracker
+@youtube_at = YoutubeAPI.authed_tracker
 
 @default_twitter_tracker = TwitterAPI.new(uid: "dummy id").tracker
 
@@ -42,7 +43,12 @@ end
 end
 
 print_stats @facebook_tracker
-print_stats @youtube_tracker
+print_stats @youtube_gt
+print_stats @youtube_at
 
 print_aggregate_stats @twitter_trackers
+
+# Welcome to the interactive stats console. You have access to all the functions
+# and ivars of script/api_stats.rb
+binding.pry if ARGV.first == '-i'
 

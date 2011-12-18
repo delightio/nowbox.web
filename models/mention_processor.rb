@@ -30,7 +30,7 @@ module Aji
             @mention.errors.inspect
         end
 
-        if @mention.spam?
+        if @destination and @mention.spam?
           Resque.enqueue Queues::RemoveSpammer, @mention.author.id
           @errors << "Mention is spammy"
           return
