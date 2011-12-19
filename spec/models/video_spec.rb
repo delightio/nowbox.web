@@ -3,7 +3,7 @@ require File.expand_path("../../spec_helper", __FILE__)
 module Aji
   describe Aji::Video, :unit do
     let :api do
-      mock("api").tap do |api|
+      mock(:api).tap do |api|
         api.stub(:video_info).and_return(:title => 'A Video',
         :external_id => 'afakevideo1', :description => 'Hilarious video',
         :duration => 1024, :viewable_mobile => true, :view_count => 11,
@@ -15,7 +15,8 @@ module Aji
 
     subject do
       Video.new(:source => :youtube, :external_id => 'afakevideo1').tap do |v|
-        v.stub(:api).and_return api
+        v.stub :api => api
+        v.id = 42
       end
     end
 
@@ -72,9 +73,10 @@ module Aji
         end
 
         subject do
-          Video.new(:id => 666, :external_id => 'adudosucvdd',
+          Video.new(:external_id => 'adudosucvdd',
             :source => 'youtube').tap do |v|
-              v.stub(:api).and_return api
+              v.stub :api => api
+              v.id = 42
           end
         end
 
@@ -144,7 +146,7 @@ module Aji
       end
 
       it "contains only source, external_id, and id when not populated" do
-        subject.serializable_hash.should == { "id" => nil,
+        subject.serializable_hash.should == { "id" => 42,
           "external_id" => "afakevideo1", "source" => 'youtube' }
       end
 
@@ -178,7 +180,7 @@ module Aji
 
     describe "#failed" do
       it "increases the number of failures by one" do
-        expect { subject.send :failed }.to change(subject, :failures).by(1)
+        expect { subject.send :failed }.to change{subject.failures.value}.by(1)
       end
     end
 

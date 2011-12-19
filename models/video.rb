@@ -17,8 +17,11 @@ module Aji
   class Video < ActiveRecord::Base
     SOURCES = [:youtube]
 
+    include Redis::Objects
     include Mixins::Blacklisting
     include Mixins::Populating
+
+    counter :failures
 
     validates_presence_of :external_id, :source
     validates_inclusion_of :source, :in => SOURCES
@@ -42,7 +45,7 @@ module Aji
       end
     rescue Aji::VideoAPI::Error
       failed
-      blacklist if failures >= MAX_FAILED_ATTEMPTS
+      blacklist if failures.value >= MAX_FAILED_ATTEMPTS
     else
       populated_at = Time.now
       save and if block_given? then yield self else true end
@@ -119,16 +122,8 @@ module Aji
     private
     MAX_FAILED_ATTEMPTS = 10
 
-    def failures_key
-      "video:#{id}:failures"
-    end
-
-    def failures
-      Aji.redis.get(failures_key).to_i
-    end
-
     def failed
-      Aji.redis.set failures_key, failures+1
+      failures.increment
     end
 
     def api
