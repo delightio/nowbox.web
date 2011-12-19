@@ -3,7 +3,7 @@ require File.expand_path("../../spec_helper", __FILE__)
 module Aji
   describe Aji::Video, :unit do
     let :api do
-      mock("api").tap do |api|
+      mock(:api).tap do |api|
         api.stub(:video_info).and_return(:title => 'A Video',
         :external_id => 'afakevideo1', :description => 'Hilarious video',
         :duration => 1024, :viewable_mobile => true, :view_count => 11,
@@ -15,7 +15,8 @@ module Aji
 
     subject do
       Video.new(:source => :youtube, :external_id => 'afakevideo1').tap do |v|
-        v.stub(:api).and_return api
+        v.stub :api => api
+        v.stub :id => 42
       end
     end
 
