@@ -15,7 +15,7 @@ describe Aji::YoutubeSync, :unit do
   before do
     Resque.stub :enqueue_in
 
-    def user.suppress_hooks!
+    def user.without_hooks!
       yield
     end
   end
@@ -85,8 +85,8 @@ describe Aji::YoutubeSync, :unit do
   let(:favorite_videos) { remotely_unfavorited_videos + other_favorite_videos }
 
   describe "#synchronize!" do
-    it "suppresses atomic user hooks when running" do
-      user.should_receive(:suppress_hooks!)
+    it "withoutes atomic user hooks when running" do
+      user.should_receive(:without_hooks!)
 
       subject.synchronize!
     end

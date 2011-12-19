@@ -9,7 +9,7 @@ module Aji
     def synchronize! disable_resync = false
       return if account.nil? or user.nil?
 
-      user.suppress_hooks! do
+      user.without_hooks! do
         sync_subscribed_channels
         sync_watch_later
         sync_favorites

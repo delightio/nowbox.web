@@ -851,13 +851,13 @@ describe Aji::User do
     end
   end
 
-  describe "#suppress_hooks!" do
+  describe "#without_hooks!" do
     let(:video) { stub.as_null_object }
 
     it "prevents hooks from being sent to the identity" do
       identity.should_not_receive(:hook)
 
-      subject.suppress_hooks! do
+      subject.without_hooks! do
         subject.favorite_video video, Time.now
       end
     end
@@ -865,7 +865,7 @@ describe Aji::User do
     it "only lasts the duration of the given block" do
       identity.should_receive(:hook).with(:favorite, video)
 
-      subject.suppress_hooks! {}
+      subject.without_hooks! {}
       subject.favorite_video video, Time.now
     end
   end

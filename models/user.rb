@@ -219,7 +219,7 @@ module Aji
       identity.hook :dequeue, video unless @no_hooks
     end
 
-    def suppress_hooks!
+    def without_hooks!
       @no_hooks = true
       yield
       @no_hooks = nil
