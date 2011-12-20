@@ -7,7 +7,7 @@ module Aji
           :current_version => "1.1.2",
           :minimum_version => "1.1.2",
           :link => { :rel => "latest",
-                     :url => "" },
+                     :url => "http://itunes.apple.com/app/nowbox/id464416202?mt=8&uo=4" },
           :links => [{ :rel => "latest",
                      :url => "http://itunes.apple.com/app/nowbox/id464416202?mt=8&uo=4" },
                      { :rel => "ratings",
