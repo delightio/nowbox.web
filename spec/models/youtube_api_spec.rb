@@ -219,7 +219,7 @@ describe Aji::YoutubeAPI, :unit, :net do
 
       it "hits youtube once per page and once per new author" do
         subject.tracker.should_receive(:hit!).exactly(
-          favorite_video_ids.length / 50 + 1 + favorite_video_ids.length).times
+          favorite_video_ids.length / 50 + 1).times
 
         favorite_videos = VCR.use_cassette "youtube_api/favorite_videos" do
           subject.favorite_videos
@@ -403,8 +403,8 @@ describe Aji::YoutubeAPI, :unit, :net do
   end
 
   describe "#video_info" do
-    it "hits youtube twice: 1 for video_info call and 1 for author_info" do
-      subject.tracker.should_receive(:hit!).twice
+    it "hits youtube twice: 1 for video_info" do
+      subject.tracker.should_receive(:hit!).once
 
       hash = VCR.use_cassette "youtube_api/video" do
         subject.video_info '3307vMsCG0I'
@@ -457,7 +457,7 @@ describe Aji::YoutubeAPI, :unit, :net do
       # TODO: VCR is giving us different results from our cache.
       # subject.tracker.should_receive(:hit!).exactly(1+unique_author_count).times
       result = VCR.use_cassette "youtube_api/keyword_search" do
-        subject.keyword_search "george carlin"
+        subject.keyword_search "harry potter"
       end
 
       unique_author = Set.new result.map &:author
@@ -481,8 +481,8 @@ describe Aji::YoutubeAPI, :unit, :net do
     subject { YoutubeAPI.new "brentalfloss" }
 
     describe "#uploaded_videos" do
-      it "hits youtube twice: 1 for video_info call and 1 for author_info" do
-        subject.tracker.should_receive(:hit!).twice
+      it "hits youtube once" do
+        subject.tracker.should_receive(:hit!)
 
         videos = VCR.use_cassette "youtube_api/uploaded_videos" do
           subject.uploaded_videos
