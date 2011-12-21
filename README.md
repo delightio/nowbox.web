@@ -11,12 +11,12 @@ Quick Tricks and Tips
 - Run remote console: `heroku run console`
 - Run spec tests: `bin/aji spec` or `bin/aji sp`
 - Run local web server: `bin/foreman start web`
-- Run local full stack: `bin/foreman start -c resque=3`
+- Run local full stack: `bin/foreman start -c worker=3`
 - Get Heroku process status: `heroku ps`
-- Change Heroku worker count: `heroku scale web=x resque=y`
+- Change Heroku worker count: `heroku scale web=x worker=y ytworker=z`
 - Create database migration template: `bin/aji migration [migration_file_name]`
 - Generate fresh documentation `bin/aji docs`
-- Update resque\_schedule.yml:
+- Update config/resque_schedule.yml:
     ``heroku config:add RESQUE_SCHEDULE="`cat config/resque_schedule.yml`"``
 
 Technology Stack
@@ -30,7 +30,8 @@ an overview though.
 - LightHouse for project and ticket management.
 - Bundler for gem dependency mangement and resolution.
 - Thor for command line interaction with the application and environment.
-- Rake for some legacy interaction with Resque.
+- Rake for simple task running.
+- Pry for interactive development and debugging.
 - Rspec for unit and integration testing.
 - Factory Girl for object mocking.
 - Rocco for API and internal documentation generation.
@@ -49,11 +50,11 @@ an overview though.
 - Thin for better-than-WEBrick http performance.
 
 ### Production
-- Lumberjack will be used for logging.
 - Heroku for easy application management, hosting, and deployment.
 - Heroku also provides our Postgres database.
 - RedisToGo provides our Redis database Tools.
 - NewRelic will provide realtime monitoring and notification.
+- Membase provides a Memcached instance to cache expensive or frequently hit pages.
 
 Application Structure
 ---------------------
@@ -84,7 +85,7 @@ global gemset for these as they will be useful across any number of projects.
 3. Follow [this article][1] to get Heroku set up. Make a note of where you clone
 the application and change to that directory.
 
-4. Run `bundle install`, this will pull all necessary rubygems and install them
+4. Run `bundle install --binstubs`, this will pull all necessary rubygems and install them
 cleanly.
 
 5. Open `config/settings.template.yml` in your preferred editor and customize
