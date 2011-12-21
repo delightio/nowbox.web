@@ -1,7 +1,7 @@
 require 'bundler'
 
 Bundler.require
-require_relative 'lib/rpm_contrib/instrumentation/grape'
+require_relative 'lib/patches/rpm_contrib/instrumentation/grape'
 
 Faraday.default_adapter = :typhoeus
 
