@@ -321,7 +321,21 @@ to come in. However, the engineering cost in making things thread safe may
 ultimately not be worth it. I've not done enough multi-threaded Ruby to know for
 certain.
 
-- Client-heavy Application Layers
+Client-heavy Application Layers
+-------------------------------
+
+If we ever ressurrect the browser concept we had for Nowmov, it probably makes
+the most sense to do it as a client-side system rather than using something like
+Rails. Furthermore, I think any kind of analytics or advertising platform we
+might build as part of a monetization strategy would likely be better served by
+a browser-side application. They tend to be easier for UX engineers to work
+with, and they also enhance the level of interactivity, and by extension,
+engagement with the user. There's already a handful of good ones out there. The
+Ruby community is quite enamored with [Backbone.js][backbone] at the moment.
+While it works well on top of Rails, Rails might also be more than you need.
+Something like [Padrino][] may be the perfect balance for a client-heavy
+application.
+
 - Static-Server Share Pages
 - Consumer, B2B, and Internal Uses for Events
 
@@ -407,6 +421,10 @@ Appendix B: Noteworthy Libraries to Keep on your Radar
 - [Goliath][]
 - [Faye][]
 
+- [Backbone.js][backbone]
+- [Ember.js][ember]
+- [Knockout.js][knockout]
+
 [Padrino]: http://padrinorb.com
 [Sinatra]: http://sinatrarb.com
 [Goliath]: http://postrank-labs.github.com/goliath/
@@ -431,3 +449,6 @@ Appendix C: Developer Resources
 [blog2]: http://aslakhellesoy.com/post/11055981222/the-training-wheels-came-off
 [Steak]: https://github.com/cavalle/steak
 [GrapeML]: https://groups.google.com/forum/?hl=en#!forum/ruby-grape
+[backbone]: http://backbonejs.org/
+[knockout]: http://knockoutjs.com/
+[ember]: http://emberjs.com
