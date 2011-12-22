@@ -282,10 +282,28 @@ rendering. Wherever possible, Presenters/Decorators should be implemented via
 object composition rather than mixins as it helps with testability and
 maintenance.
 
+Becoming Realtime
+-----------------
+
+One of the competitive edges that the NOWBOX app has is the realtime feel. As
+you're watching, more things are happening in the background. This is one of the
+chief places where REST is going to hold Aji back. REST has no way to facilitate
+continuous communication. The pattern is all about solitary, stateless, atomic
+operations between clients. What we want is somewhat akin to a two-way Twitter
+firehose. Where we shovel videos and channels onto the user and they shovel
+video events back onto us. There is an up-and-coming technology called Web
+Sockets which establishes a semi-permanent connection abstraction on top of
+HTTP. iOS has native WebSockets support beginning with 4.2 and there appear to
+be a number of Java/Android libraries available as well. If realtime is where
+Aji wants to go. WebSockets are probably best-equipped to take it there.
+
+There are a number of libraries built on top of WebSockets that could be
+helpful. [Faye][] is a suite of Ruby and Javascript tools implementing the
+Bayeux pub-sub protocol. I've seen simple, yet powerful demonstrations of this
+protocol used to great effect.
+
 - ROFLScaling
 - Sinatra
-- Faye
-- becoming realtime
 - Client-heavy Application Layers
 - Static-Server Share Pages
 - Consumer, B2B, and Internal Uses for Events
