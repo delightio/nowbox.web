@@ -387,6 +387,9 @@ Appendix C: Developer Resources
 - IRC
 - Ruby Meetups
 
+[GOF]: http://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612?tag=duckduckgo-d-20
+[Decorator]: https://en.wikipedia.org/wiki/Decorator_pattern
+
 [blog1]: http://blog.nuclearsandwich.com/blog/2011/06/25/a-sane-configuration-setup-for-rack-applications-on-heroku/
 [Rocco]: http://rtomayko.github.com/rocco/
 [HATEOAS]: https://en.wikipedia.org/wiki/HATEOAS
