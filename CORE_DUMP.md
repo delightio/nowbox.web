@@ -9,15 +9,16 @@ Preamble
 Hi, my name is Steven! Chances are if you're reading this, you're either Thomas.
 (Hi Thomas!) or fine lady or gentleman they've found to replace me. If at any
 time reading through my code or this document you feel I owe you a drink. My
-email address is <steven@nuclearsandwich.com>, let me know and I'll buy you one.
-Chances are I owe you it. I've striven to create a quality application capable
+email address is <steven@nuclearsandwich.com>, let me know and I'll buy you one,
+chances are I owe it you. I've striven to create a quality application capable
 of growing to millions of users and yet allow it to be easily extensible.
 
 
 Where Aji is Now
-----------------
+================
 
-### Architecture ###
+Architecture
+------------
 
 Right now the Aji application is laid out in the somewhat standard Ruby
 convention. It's very similar to the layout of a Ruby on Rails application but
@@ -47,7 +48,8 @@ could probably do with a rename and might even become a completely separate
 project. See the sections *Client-Heavy Application Layer* and *Static-Server
 Share Page* in __Where I Think It's Going__.
 
-### Feature set ###
+Feature Set
+-----------
 
 Right now the Aji application has a rather comprehensive set of tests on the
 following resources:
@@ -89,7 +91,8 @@ following resources:
 
 - Videos: *Our app plays videos, this is the resource that represents one.*
 
-### Test Comprehensiveness ###
+Test Comprehensiveness
+----------------------
 
 Our testing is pretty decent but not ideal. We have a number of tests which only
 test the "happy path", most notably `spec/models/mention_processor_spec.rb`. We
@@ -105,7 +108,8 @@ finds them a little too abstract and in the future something like
 [Steak][] might be preferred. Although Capybara really sucks for API-driven
 work.
 
-### Some Targets for Refactoring ###
+Some Targets for Refactoring
+----------------------------
 
 - `Channel::FacebookStream` and `Channel::TwitterStream`  
 When I wrote these two classes, I was in a hurry. The feature they implement has
@@ -137,25 +141,97 @@ writing in my first Java class...I just can't figure out an idiomatic Ruby way
 to do algorithmic stuff like this. If you find something that looks good, I'd
 love to see the solution.
 
-### Tooling Past, Tooling Present, and Maintaining Tools ###
+- Unmangle the User<->Accounts relationship.  
 
----
+Tooling Past, Tooling Present, and Maintaining Tools
+----------------------------------------------------
 
-- Where I think it's going
-  - ROFLScaling
-  - presenter pattern
-  - Sinatra
-  - becoming realtime
-  - Client-heavy Application Layers
-  - Static-Server Share Pages
-  - Consumer, B2B, and Internal Uses for Events
+I feel like the tooling on Aji is a lot more sensible and deliberate than the
+tooling decisions made for Nowmov. Then again, that could simply be because I
+chose many of them. One of the things I'm completely proud of is the fact that
+only *one* of the gems in our Gemfile references a git checkout rather than a
+release, and that's only to fix a dependency conflict. Git gems create problems
+when someone doesn't use `Gemfile.lock` or `bundle update` properly. An eye
+should be kept on Grape and someone within the company should definitely be on
+the [Grape Mailing List][GrapeML]. Grape has a major internal refactoring
+underway and the next released version of the Gem is going to change things
+massively. It's going to make Grape faster, better, and easier to use, but it's
+also (if left on its own) going to break my hacked up NewRelic instrumentation
+for Grape. I'm spending my January 2012 doing open source development and as
+part of that want to work with the Grape and RPM contrib folks on getting a good
+Instrumentation solution that works Out of the Box on the next release of Grape.
 
-- Pitfalls in the current implementation
-  - events
-  - idenitities
-  - accounts <-> users
+Additionally, there's the distinct possibility that a lack of courageous
+developers might push you to port the app back to Sinatra. I couldn't
+necessarily blame you, and the port wouldn't be that hard. But if you do, be
+aware that you'll want a separate Sinatra application per controller, and you'll
+need to do the url versioning and routing in `app.rb`.
 
-- Solutions to as-yet unexhibited problems
+### An Example ###
+```ruby
+# shares_controller_grape.rb
+class Aji::API
+  version '1'
+  resource :shares do
+    get "/:share_id" do
+      Share.find params[:share_id]
+    end
+  end
+end
+
+# app.rb
+map "http://api.#{Aji.conf['TLD']}/" do
+  use Rack::Cache,
+    :verbose => true,
+    :metastore   => "memcached://localhost:11211/api/meta",
+    :entitystore => "memcached://localhost:11211/api/body"
+    run Aji::API
+  end
+end
+```
+
+Would become
+
+```ruby
+class Aji::SharesController
+  get "/:share_id" do
+    json_encode(Share.find params[:share_id])
+  end
+end
+
+# app.rb
+map "http://api.#{Aji.conf['TLD']}/1/shares" do
+  use Rack::Cache,
+    :verbose => true,
+    :metastore   => "memcached://localhost:11211/api/meta",
+    :entitystore => "memcached://localhost:11211/api/body"
+  run Aji::SharesController
+end
+# ... other controllers.
+```
+
+Other than the currently git-ed Grape, I highly recommend you join the lists for
+each and every gem we rely on. YouTubeIt, Pry, RSpec, VCR, Sinatra,
+Rails/ActiveRecord. We should have a representative of the company on each of
+these mailing lists. Hitherto it has been me. I am naturally passing that torch
+along with everything else. The reason you should be there is to keep an eye on
+changes. We can prevent changes that hurt us or minimize the damage by knowing
+early.
+
+I'm also worried that YouTubeIt is a completely dead project. I'm going to try
+and merge my monkey-patched changes into the main source and submit a pull
+request but I'm not sure if anyone is there to listen.
+
+
+Where I Think It's Going
+========================
+- ROFLScaling
+- presenter pattern
+- Sinatra
+- becoming realtime
+- Client-heavy Application Layers
+- Static-Server Share Pages
+- Consumer, B2B, and Internal Uses for Events
 
 - Maintenance, Bolt-ons, and Totally New Features
 The nice thing about building servers for mobile applications is that we get to
@@ -167,7 +243,7 @@ doesn't necessarily mean you should. Think hard about what aspect of the product
 your building, then determine if it fits obviously as an extension of what we
 have or if it's something new.
 
----
+
 
 Appendices
 ==========
@@ -248,4 +324,4 @@ Appendix C: Developer Resources
 [HATEOAS]: https://en.wikipedia.org/wiki/HATEOAS
 [blog2]: http://aslakhellesoy.com/post/11055981222/the-training-wheels-came-off
 [Steak]: https://github.com/cavalle/steak
-
+[GrapeML]: https://groups.google.com/forum/?hl=en#!forum/ruby-grape
