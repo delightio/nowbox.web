@@ -47,14 +47,14 @@ module Aji
 
     def subscribe_to channel_uid
       tracker.hit! :post
-      client.subscribe_channel channel_uid
+      post_client.subscribe_channel channel_uid
     rescue UploadError => e
       raise e unless e.message =~ /Subscription already exists/
     end
 
     def unsubscribe_from channel_uid
       tracker.hit! :post
-      client.unsubscribe_channel subscription_ids[channel_uid]
+      post_client.unsubscribe_channel subscription_ids[channel_uid]
     rescue UploadError => e
       Aji.log :WARN, "#{e.class}:#{e.message}"
     end
@@ -85,14 +85,14 @@ module Aji
 
     def add_to_favorites video_external_id
       tracker.hit! :post
-      client.add_favorite video_external_id
+      post_client.add_favorite video_external_id
     rescue UploadError => e
       raise e unless e.message =~ /Favorite already exists/
     end
 
     def remove_from_favorites video_external_id
       tracker.hit! :post
-      client.delete_favorite video_external_id
+      post_client.delete_favorite video_external_id
     rescue UploadError => e
       raise e unless e.message =~ /Video favorite not found/
     end
@@ -134,14 +134,14 @@ module Aji
 
     def add_to_watch_later video_external_id
       tracker.hit! :post
-      client.add_watch_later video_external_id
+      post_client.add_watch_later video_external_id
     rescue UploadError => e
       raise e unless e.message =~ /This resource already exists/
     end
 
     def remove_from_watch_later video_external_id
       tracker.hit! :post
-      client.delete_watch_later watch_later_entry_ids[video_external_id] if
+      post_client.delete_watch_later watch_later_entry_ids[video_external_id] if
       watch_later_entry_ids.has_key? video_external_id
     rescue UploadError => e
       raise e unless e.message =~ /Playlist video not found/
@@ -245,6 +245,18 @@ module Aji
         end
     end
     private :client
+
+    def post_client
+      raise "Cannot create post client without token and secret" unless
+        @token and @secret
+
+      @post_client ||= YouTubeIt::OAuthClient.new(
+        consumer_key: Aji.conf['YOUTUBE_OA_KEY'], username: @uid,
+        consumer_secret: Aji.conf['YOUTUBE_OA_SECRET'],
+        dev_key: Aji.conf['YOUTUBE_KEY_AUTH_POST']).tap do |c|
+          c.authorize_from_access @token, @secret
+        end
+    end
 
     def self.api
       @singleton ||= new
