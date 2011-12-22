@@ -446,18 +446,34 @@ resource or process specific to our product really goes here.
 Appendix B: Noteworthy Libraries to Keep on your Radar
 ------------------------------------------------------
 
-- [Sinatra][]
-- [Padrino][]
-- [Sinatra::Synchrony][SS]
-- [Rack::Test::REST][RTR]
-- [RABL][]
-- [Draper][]
-- [Goliath][]
-- [Faye][]
+- [Sinatra][]: An alternative to Grape with fewer assumptions and more community
+  support and adoption.
 
-- [Backbone.js][backbone]
-- [Ember.js][ember]
-- [Knockout.js][knockout]
+- [Padrino][]: A web framework built on Sinatra but with more of the niceties
+  you expect, such as Rails-style generators.
+
+- [Sinatra::Synchrony][SS]: Sinatra extension for improving concurrency features
+  of the microframework.
+
+- [Rack::Test::REST][RTR]: An assumption-heavy extension to rack-test for making
+  API assertions.
+
+- [RABL][]: Analogous to erb or HAML but for JSON and XML.
+
+- [Draper][]: A good decorator library for Ruby objects.
+
+- [Goliath][]: A concurrent web server with many niceties on top of Event
+  Machine.
+
+- [Faye][]: A Ruby, backend JavaScript, and frontent JavaScript implementation
+  of the Bayeux pub-sub protocol.
+
+- [Backbone.js][backbone]: An MVC library for client-side JavaScript.
+
+- [Ember.js][ember]: A complete MVC Application framework for client-side
+  JavaScript.
+
+- [Knockout.js][knockout]: An MVVM framework for client-side JavaScript.
 
 [Padrino]: http://padrinorb.com
 [Sinatra]: http://sinatrarb.com
@@ -470,9 +486,39 @@ Appendix B: Noteworthy Libraries to Keep on your Radar
 
 Appendix C: Developer Resources
 -------------------------------
-- Books
-- IRC
-- Ruby Meetups
+
+I will not lie, a lot of the things I claim as "simple", "typical", or "plain"
+are only so within the context of software development and design. This appendix
+includes a list of resources I used or recommend to help you grow this software.
+
+### Books
+
+- [Ruby Best Practice Patterns](http://rubybestpractices.com/)
+- [Eloquent Ruby](http://eloquentruby.com/)
+- [Design Patterns (a.k.a. Gang of Four)][GOF]
+- [Smalltalk Best Practice Patterns](http://www.amazon.com/Smalltalk-Best-Practice-Patterns-Kent/dp/013476904X?tag=duckduckgo-d-20)
+- [Programming Ruby 1.9](http://pragprog.com/book/ruby3/programming-ruby-1-9)
+- [The Well-Grounded Rubyist](http://manning.com/black2/)
+
+### IRC
+
+Rubyists also spend an inordinate amount of time on IRC. [Limechat][] is my
+preferred OS X client but [Adium][] will do just fine.
+
+Some good channels, all of which are on the [Freenode
+network](http://freenode.net).
+
+- `#ruby-lang`: The official Ruby language channel.
+- `#sinatra`: Channel for the Sinatra web framework.
+- `#rest`: The channel for everything to do with REST.
+- `#mendicant`: Channel for the Ruby Mendicant University.
+
+I lurk in all of these and a handful of others as nuclearsandwich.
+
+### Ruby Meetups
+
+If you want to find good Rubyists, the obvious place to look is your local [Ruby
+meetup group](http://sfruby.info).
 
 [GOF]: http://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612?tag=duckduckgo-d-20
 [Decorator]: https://en.wikipedia.org/wiki/Decorator_pattern
