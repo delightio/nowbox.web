@@ -173,7 +173,7 @@ describe Aji::YoutubeAPI, :unit, :net do
       let(:channel_uid) { "lisanova" }
 
       it "hits youtube once" do
-        subject.tracker.should_receive(:hit!).with(:post)
+        subject.post_tracker.should_receive(:hit!).with(:post)
         VCR.use_cassette "youtube_api/subscribe_to" do
           subject.subscribe_to channel_uid
         end
@@ -258,7 +258,7 @@ describe Aji::YoutubeAPI, :unit, :net do
       let(:external_id) { "dYCLXDtvrbs" }
 
       it "hits youtube once" do
-        subject.tracker.should_receive(:hit!).with(:post)
+        subject.post_tracker.should_receive(:hit!).with(:post)
         VCR.use_cassette "youtube_api/add_to_favorites" do
           subject.add_to_favorites external_id
         end
@@ -307,7 +307,7 @@ describe Aji::YoutubeAPI, :unit, :net do
       let(:external_id) { "rqweCwAMan0" }
 
       it "hits youtube once" do
-        subject.tracker.should_receive(:hit!).with(:post)
+        subject.post_tracker.should_receive(:hit!).with(:post)
         VCR.use_cassette "youtube_api/add_to_watch_later" do
           subject.add_to_watch_later external_id
         end
