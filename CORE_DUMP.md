@@ -241,6 +241,7 @@ Where I Think It's Going
 - ROFLScaling
 - presenter pattern
 - Sinatra
+- Faye
 - becoming realtime
 - Client-heavy Application Layers
 - Static-Server Share Pages
@@ -325,6 +326,15 @@ Appendix B: Noteworthy Libraries to Keep on your Radar
 - [Rack::Test::REST][RTR]
 - [RABL][]
 - [Draper][]
+- [Goliath][]
+
+[Padrino]: http://padrinorb.com
+[Sinatra]: http://sinatrarb.com
+[Goliath]: http://postrank-labs.github.com/goliath/
+[Draper]: https://github.com/jcasimir/draper
+[RABL]: https://github.com/nesquena/rabl
+[RTR]: https://github.com/josephruscio/rack-test-rest
+[SS]: https://github.com/kyledrake/sinatra-synchrony
 
 Appendix C: Developer Resources
 -------------------------------
