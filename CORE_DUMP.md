@@ -302,8 +302,25 @@ helpful. [Faye][] is a suite of Ruby and Javascript tools implementing the
 Bayeux pub-sub protocol. I've seen simple, yet powerful demonstrations of this
 protocol used to great effect.
 
-- ROFLScaling
-- Sinatra
+Becoming ROFLScale
+------------------
+
+Scaling. Scaling is big, scary, and tough. Presently, we're not in the best
+shape performance-wise due to some architectural mistakes in how we fetch
+information. It's likely much better to simply build a list of uris to fetch and
+have each video resource be cached. Additionally, we spend a *lot* of time
+fetching information from the database and more time still making web requests.
+There's a few things we can do to amortize this cost. We already make quite a
+few expensive calls in the background, but some we have to block for such as
+getting author info or performing IndexTank searches. Something worth looking
+into might be transitioning to a concurrent application stack such as
+[Goliath][] or [Sinatra][] with [Sinatra::Synchrony][SS]. The concurrency likely
+wouldn't do much for individual request response times but it should allow us to
+get more for our dollars by serving other requests while waiting for responses
+to come in. However, the engineering cost in making things thread safe may
+ultimately not be worth it. I've not done enough multi-threaded Ruby to know for
+certain.
+
 - Client-heavy Application Layers
 - Static-Server Share Pages
 - Consumer, B2B, and Internal Uses for Events
