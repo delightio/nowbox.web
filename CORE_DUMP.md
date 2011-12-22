@@ -336,10 +336,33 @@ While it works well on top of Rails, Rails might also be more than you need.
 Something like [Padrino][] may be the perfect balance for a client-heavy
 application.
 
-- Static-Server Share Pages
-- Consumer, B2B, and Internal Uses for Events
+Static-Server Share Pages
+-------------------------
 
-- Maintenance, Bolt-ons, and Totally New Features
+An interesting idea which I've been pondering for the last few weeks is having a
+completely static server side for nowbox.com and its related functionality. If
+the share page was entirely static and built using backbone, knockout, or
+whatever becomes the new hotness in client-side JS libraries, the site itself
+would be completely static, which scales pretty cheaply. Dynamic content such as
+the specific share could easily be loaded directly from the API.
+
+Consumer, B2B, and Internal Uses for Events
+-------------------------------------------
+
+With all the raging I've done over the event system since I learned how it
+worked, you might think I don't like it. While I don't like it's implementation,
+nor the RPC layer that's been built on top of it, I also think it represents our
+best chance for monetization and value-adding as the app moves forward. From a
+business to business perspective, our greatest asset is probably the events
+table and what it says about peoples viewing habits. Turning it into a graph
+using Riak, Mongo or Neo4j and get all kinds of information out of it. However,
+in it's current form it isn't that useful for us. Someone with a flair for
+information architechture could probably guide us toward a model that is useful
+without waste.
+
+Maintenance, Bolt-ons, and Totally New Features
+-----------------------------------------------
+
 The nice thing about building servers for mobile applications is that we get to
 go Service-Oriented Architecture by default. It's my opinion we should embrace
 that and no matter where the product goes, attempt to maintain a collection of
@@ -349,6 +372,17 @@ doesn't necessarily mean you should. Think hard about what aspect of the product
 your building, then determine if it fits obviously as an extension of what we
 have or if it's something new.
 
+That said, don't be afraid to get your hands dirty and break shit. If you treat
+the written code as sacrosanct, you'll never make any true progress. If
+something is different enough from the existing code that you can bolt it on
+instead of extend what's already there, don't bolt it on, build it next door.
+Just make a separate app that *maybe* shares some data structures. If you can't
+do that, then look at what's already there, [read the code][blog3], and extend
+it with the features you want. Evolution is part of the software lifecycle and
+I've done my best to leave readable, sensible code behind me. Some basic
+literacy with software design is probably needed to be aware of the patterns
+used and as such I've included a list of good resources on that front in
+__Appendix C__.
 
 
 Appendices
@@ -444,6 +478,7 @@ Appendix C: Developer Resources
 [Decorator]: https://en.wikipedia.org/wiki/Decorator_pattern
 
 [blog1]: http://blog.nuclearsandwich.com/blog/2011/06/25/a-sane-configuration-setup-for-rack-applications-on-heroku/
+[blog3]: http://blog.nuclearsandwich.com/blog/2011/11/29/sightread-your-code/
 [Rocco]: http://rtomayko.github.com/rocco/
 [HATEOAS]: https://en.wikipedia.org/wiki/HATEOAS
 [blog2]: http://aslakhellesoy.com/post/11055981222/the-training-wheels-came-off
