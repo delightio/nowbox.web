@@ -30,7 +30,7 @@ module Aji
       end
 
     rescue AuthenticationError, UploadError => e
-      @api.tracker.close_session! if e.message =~ /too_many_recent_calls/
+      @api.post_tracker.close_session! if e.message =~ /too_many_recent_calls/
     end
 
     def post_method? method_name
