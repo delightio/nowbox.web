@@ -238,8 +238,51 @@ request but I'm not sure if anyone is there to listen.
 
 Where I Think It's Going
 ========================
+
+Hypermedia
+----------
+
+Hypermedia is the last essential component for a true REST API. It's the one the
+Rails community has yet to fully embrace, and yet it's the component which
+brings the most advantage to APIs like ours. I won't bother with the
+technicalities of how Hypermedia works, there are better resources on that
+listed in __Appendix C__ of this document. Instead I'll address what it would
+give Aji, and why that's important. Above all else, Hypermedia gives an API
+discoverability. In plain words, it allows you to see where you can go from
+where you are. I can already predict your first question: "What does
+discoverability matter to an internal API?" Discoverability grants us several
+things.
+
+- It makes our API semi-resistant to evolutionary changes. If we hand Bill a
+  link to a resource instead of a resource id, his client no longer needs the
+  knowledge of how to construct that uri.
+
+- It allows us to simplify the amount of duplicated code between different
+  mobile platforms. If an Android port is going to happen, you'll need to
+  rewrite a substantial portion of the NOWBOX iOS backend in Java (and won't
+  *that* be fun for you). Why write uri constructors twice? Furthermore, what if
+  we actually end up with internal behavioral differences between Android and
+  iOS? It'd be far easier to bake those differences into the Hypermedia
+  constraints rather than complect the device-level logic with such things.
+  Embracing hypermedia in our REST API will allow us to more easily extend to
+  Android, Windows Mobile, and who knows what other platforms in the future.
+
+- It forces us as API writers to *think* about the semantics of our API, which
+  will be far more productive in improving it than anything else.
+
+Decorators and Presenters
+-------------------------
+
+In order to facilitate Hypermedia, as well as simplify and decouple the
+codebase, you'll likely want to refactor our JSON rendering to use Presenters.
+In the [Gang of Four][GOF] book, the [Decorator][] pattern is used to extend an
+existing protocol. The term *Presenter* has recently come into prominence as the
+term for a decorator which adds an entirely new protocol, such as JSON
+rendering. Wherever possible, Presenters/Decorators should be implemented via
+object composition rather than mixins as it helps with testability and
+maintenance.
+
 - ROFLScaling
-- presenter pattern
 - Sinatra
 - Faye
 - becoming realtime
@@ -327,12 +370,14 @@ Appendix B: Noteworthy Libraries to Keep on your Radar
 - [RABL][]
 - [Draper][]
 - [Goliath][]
+- [Faye][]
 
 [Padrino]: http://padrinorb.com
 [Sinatra]: http://sinatrarb.com
 [Goliath]: http://postrank-labs.github.com/goliath/
 [Draper]: https://github.com/jcasimir/draper
 [RABL]: https://github.com/nesquena/rabl
+[Faye]: http://faye.jcoglan.com/
 [RTR]: https://github.com/josephruscio/rack-test-rest
 [SS]: https://github.com/kyledrake/sinatra-synchrony
 
