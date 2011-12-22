@@ -3,6 +3,17 @@ Core Dump:
 
 *A Journal of Engineering Notes*
 
+Preamble
+--------
+
+Hi, my name is Steven! Chances are if you're reading this, you're either Thomas.
+(Hi Thomas!) or fine lady or gentleman they've found to replace me. If at any
+time reading through my code or this document you feel I owe you a drink. My
+email address is <steven@nuclearsandwich.com>, let me know and I'll buy you one.
+Chances are I owe you it. I've striven to create a quality application capable
+of growing to millions of users and yet allow it to be easily extensible.
+
+
 Where Aji is Now
 ----------------
 
@@ -28,17 +39,17 @@ Update, Destroy) API powered by Grape. It isn't yet a proper REST API due to the
 lack of [HATEOAS (Hypermedia as the Engine of Application State)][HATEOAS] The
 API application is entirely model-driven although it is not MVC. The sole
 responsibility of the controllers is validating parameters and creating or
-retrieving resources. The `Aji::API` class is a `Grape::API`, OmniAuth callbacks
-are kept in `controllers/auth_controller.rb` A Sinatra app which is also
-responsible for security token provisioning. The [nowbox.com](http://nowbox.com)
-homepage is served from the Sinatra application `Aji::Viewer` located in
-`lib/viewer`. It could probably do with a rename and might even become a
-completely separate project. See the sections *Client-Heavy Application Layer*
-and *Static-Server Share Page* in __Where I Think It's Going__.
+retrieving resources. The OmniAuth callbacks are kept in
+`controllers/auth_controller.rb` A Sinatra app which is also responsible for
+security token provisioning. The [nowbox.com](http://nowbox.com) homepage is
+served from the Sinatra application `Aji::Viewer` located in `lib/viewer`. It
+could probably do with a rename and might even become a completely separate
+project. See the sections *Client-Heavy Application Layer* and *Static-Server
+Share Page* in __Where I Think It's Going__.
 
 ### Feature set ###
 
-Right now the Aji application we have a rather comprehensive set of tests on the
+Right now the Aji application has a rather comprehensive set of tests on the
 following resources:
 
 - Accounts: *User accounts on other services, currently Facebook, Twitter, and
@@ -78,15 +89,55 @@ following resources:
 
 - Videos: *Our app plays videos, this is the resource that represents one.*
 
-- Test comprehensiveness
-- Primary candidates for refactoring
-- Secondary candidates for refactoring
-- Tooling past, present, and maintenance
-I find
-  them easier verification of feature completeness than trying to do the same
-thing using only RSpec and Rack Test. I believe Thomas finds them a little too
-abstract and in the future something like [Steak](https://github.com/cavalle/steak)
-might be preferred. Although Capybara really sucks for API-driven work.
+### Test Comprehensiveness ###
+
+Our testing is pretty decent but not ideal. We have a number of tests which only
+test the "happy path", most notably `spec/models/mention_processor_spec.rb`. We
+also have a bit of a schism happening right now, I was beginning a transition
+from doing controller tests integration style in RSpec to doing them Acceptance
+style in Spinach. I'd done tests for Youtube Syncing, Authentication and
+Authorization, and the Users API. The Users API is double covered between RSpec
+and Spinach. I think Spinach completely decouples our controller tests from our
+implementation details and does more to prevent [poor acceptance
+testing][blog2].I find them easier verification of feature completeness than
+trying to do the same thing using only RSpec and Rack Test. I believe Thomas
+finds them a little too abstract and in the future something like
+[Steak][] might be preferred. Although Capybara really sucks for API-driven
+work.
+
+### Some Targets for Refactoring ###
+
+- `Channel::FacebookStream` and `Channel::TwitterStream`  
+When I wrote these two classes, I was in a hurry. The feature they implement has
+been promised as just around the corner for weeks and I was anxious to get it
+out. I was also uncertain whether I was writing the code so similarly because I
+was writing them in parallel or if it was because there's no difference between
+the two other than the type of account that owns them. At this point I'm pretty
+certain they ought to be merged into one `Channel::SocialStream` or something.
+
+- `Event`, `Share`, and hooks  
+I spent a good amount of time thinking ahead for this one. When the time came to
+implement YouTube account login, which at the time of writing is the most
+complete of our external account integrations, I didn't want to hack something
+up the way I hacked apart Twitter and Facebook accounts. The hook system is a
+way to delegate secondary actions from User actions to any accounts associated
+with that user. It makes use of the Identity model. Basically, a hook on an
+action is called and the identity walks through associated accounts and calls a
+method if it's implemented on that account. This allows users signed in with
+youtube to push video and channel actions without requiring any knowledge, or
+even presence/absence knowledge, of our Youtube interface. I would like to see
+this system used to do as much of the live interaction between accounts and
+users. I think sharing is probably a touch too complicated for the hook service,
+but certainly a "frictionless" Facebook or Twitter sharing could be enabled
+through this interface.
+
+- `TwitterAPI/FacebookAPI#video_mentions_in_feed`  
+This method just looks ugly as sin. It looks like the kind of nonsense I was
+writing in my first Java class...I just can't figure out an idiomatic Ruby way
+to do algorithmic stuff like this. If you find something that looks good, I'd
+love to see the solution.
+
+### Tooling Past, Tooling Present, and Maintaining Tools ###
 
 ---
 
@@ -95,18 +146,26 @@ might be preferred. Although Capybara really sucks for API-driven work.
   - presenter pattern
   - Sinatra
   - becoming realtime
-  - Share page => Client-heavy OR Server-static.
+  - Client-heavy Application Layers
+  - Static-Server Share Pages
   - Consumer, B2B, and Internal Uses for Events
 
 - Pitfalls in the current implementation
   - events
   - idenitities
   - accounts <-> users
-  - 
 
 - Solutions to as-yet unexhibited problems
 
 - Maintenance, Bolt-ons, and Totally New Features
+The nice thing about building servers for mobile applications is that we get to
+go Service-Oriented Architecture by default. It's my opinion we should embrace
+that and no matter where the product goes, attempt to maintain a collection of
+loosely coupled applications whose only relation is the domain they model. While
+it should be easy to add features to the API and Viewer applications, that
+doesn't necessarily mean you should. Think hard about what aspect of the product
+your building, then determine if it fits obviously as an extension of what we
+have or if it's something new.
 
 ---
 
@@ -168,7 +227,17 @@ resource or process specific to our product really goes here.
     into this journal.
   - `CORE_DUMP.md`: This file.
 
-Appendix B: Developer Resources
+Appendix B: Noteworthy Libraries to Keep on your Radar
+------------------------------------------------------
+
+- [Sinatra][]
+- [Padrino][]
+- [Sinatra::Synchrony][SS]
+- [Rack::Test::REST][RTR]
+- [RABL][]
+- [Draper][]
+
+Appendix C: Developer Resources
 -------------------------------
 - Books
 - IRC
@@ -177,4 +246,6 @@ Appendix B: Developer Resources
 [blog1]: http://blog.nuclearsandwich.com/blog/2011/06/25/a-sane-configuration-setup-for-rack-applications-on-heroku/
 [Rocco]: http://rtomayko.github.com/rocco/
 [HATEOAS]: https://en.wikipedia.org/wiki/HATEOAS
+[blog2]: http://aslakhellesoy.com/post/11055981222/the-training-wheels-came-off
+[Steak]: https://github.com/cavalle/steak
 
