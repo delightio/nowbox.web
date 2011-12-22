@@ -142,6 +142,18 @@ to do algorithmic stuff like this. If you find something that looks good, I'd
 love to see the solution.
 
 - Unmangle the User<->Accounts relationship.  
+When I first built the Application, Twitter and Facebook both behaved like
+YouTube login does now. Attempting to log in to the same channel from a new user
+id merged that id into the old one, along with all their channels and videos.
+At the time, this upset some of the semantics of the application and we made the
+relationship much more disgusting. Users have a `social_subscriptions` Redis
+list which holds their stream channels. The presence or absence of these
+channels is the only indication that a user is "linked" to one of these account
+types. Accounts from unsubscribed channels will continue to be refreshed until
+the tokens expire. Furthermore, there's no way to use Twitter or Facebook as a
+login/authentication mechanism for the application. I'd like to see Twitter and
+Facebook be promoted back to using identity for account<->user relationships and
+to see the hooks system there used to facilitate interactions.
 
 Tooling Past, Tooling Present, and Maintaining Tools
 ----------------------------------------------------
@@ -169,7 +181,7 @@ need to do the url versioning and routing in `app.rb`.
 
 ### An Example ###
 ```ruby
-# shares_controller_grape.rb
+# shares_controller.rb
 class Aji::API
   version '1'
   resource :shares do
@@ -193,6 +205,7 @@ end
 Would become
 
 ```ruby
+# shares_controller.rb
 class Aji::SharesController
   get "/:share_id" do
     json_encode(Share.find params[:share_id])
