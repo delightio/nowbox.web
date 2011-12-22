@@ -46,15 +46,15 @@ module Aji
     end
 
     def subscribe_to channel_uid
-      tracker.hit! :post
-      client.subscribe_channel channel_uid
+      post_tracker.hit! :post
+      post_client.subscribe_channel channel_uid
     rescue UploadError => e
       raise e unless e.message =~ /Subscription already exists/
     end
 
     def unsubscribe_from channel_uid
-      tracker.hit! :post
-      client.unsubscribe_channel subscription_ids[channel_uid]
+      post_tracker.hit! :post
+      post_client.unsubscribe_channel subscription_ids[channel_uid]
     rescue UploadError => e
       Aji.log :WARN, "#{e.class}:#{e.message}"
     end
@@ -84,15 +84,15 @@ module Aji
     end
 
     def add_to_favorites video_external_id
-      tracker.hit! :post
-      client.add_favorite video_external_id
+      post_tracker.hit! :post
+      post_client.add_favorite video_external_id
     rescue UploadError => e
       raise e unless e.message =~ /Favorite already exists/
     end
 
     def remove_from_favorites video_external_id
-      tracker.hit! :post
-      client.delete_favorite video_external_id
+      post_tracker.hit! :post
+      post_client.delete_favorite video_external_id
     rescue UploadError => e
       raise e unless e.message =~ /Video favorite not found/
     end
@@ -133,15 +133,15 @@ module Aji
     end
 
     def add_to_watch_later video_external_id
-      tracker.hit! :post
-      client.add_watch_later video_external_id
+      post_tracker.hit! :post
+      post_client.add_watch_later video_external_id
     rescue UploadError => e
       raise e unless e.message =~ /This resource already exists/
     end
 
     def remove_from_watch_later video_external_id
-      tracker.hit! :post
-      client.delete_watch_later watch_later_entry_ids[video_external_id] if
+      post_tracker.hit! :post
+      post_client.delete_watch_later watch_later_entry_ids[video_external_id] if
       watch_later_entry_ids.has_key? video_external_id
     rescue UploadError => e
       raise e unless e.message =~ /Playlist video not found/
@@ -221,11 +221,16 @@ module Aji
       @tracker ||= if @token and @secret
                      APITracker.new "#{self.class.to_s}:auth", Aji.redis,
                        cooldown: 20.minutes, hits_per_session: 10000,
-                       method_limits: { post: 0.002 }
+                       method_limits: { post: 0.0 }
                    else
                      APITracker.new "#{self.class.to_s}:global", Aji.redis,
                        cooldown: 1.hour, hits_per_session: 40000
                    end
+    end
+
+    def post_tracker
+      @post_tracker ||= APITracker.new "#{self.class.to_s}:auth_post",
+        Aji.redis, cooldown: 20.minutes, hits_per_session: 500,
     end
 
     def uid_from_channel channel
@@ -245,6 +250,18 @@ module Aji
         end
     end
     private :client
+
+    def post_client
+      raise "Cannot create post client without token and secret" unless
+        @token and @secret
+
+      @post_client ||= YouTubeIt::OAuthClient.new(
+        consumer_key: Aji.conf['YOUTUBE_OA_KEY'], username: @uid,
+        consumer_secret: Aji.conf['YOUTUBE_OA_SECRET'],
+        dev_key: Aji.conf['YOUTUBE_KEY_AUTH_POST']).tap do |c|
+          c.authorize_from_access @token, @secret
+        end
+    end
 
     def self.api
       @singleton ||= new

@@ -475,10 +475,14 @@ Appendix B: Noteworthy Libraries to Keep on your Radar
 
 - [Knockout.js][knockout]: An MVVM framework for client-side JavaScript.
 
+[backbone]: http://backbonejs.org/
+[knockout]: http://knockoutjs.com/
 [Padrino]: http://padrinorb.com
 [Sinatra]: http://sinatrarb.com
 [Goliath]: http://postrank-labs.github.com/goliath/
 [Draper]: https://github.com/jcasimir/draper
+[ember]: http://emberjs.com
+[Steak]: https://github.com/cavalle/steak
 [RABL]: https://github.com/nesquena/rabl
 [Faye]: http://faye.jcoglan.com/
 [RTR]: https://github.com/josephruscio/rack-test-rest
@@ -528,8 +532,4 @@ meetup group](http://sfruby.info).
 [Rocco]: http://rtomayko.github.com/rocco/
 [HATEOAS]: https://en.wikipedia.org/wiki/HATEOAS
 [blog2]: http://aslakhellesoy.com/post/11055981222/the-training-wheels-came-off
-[Steak]: https://github.com/cavalle/steak
 [GrapeML]: https://groups.google.com/forum/?hl=en#!forum/ruby-grape
-[backbone]: http://backbonejs.org/
-[knockout]: http://knockoutjs.com/
-[ember]: http://emberjs.com
