@@ -23,10 +23,9 @@ gem 'pg'
 gem 'activerecord', '~>3.0.9', :require => 'active_record'
 gem "newrelic_rpm", '~>3.3.1'
 
-# Literate comments, generating lovely documentation HTML.
-gem 'rdiscount' # Required for Rocco.
 group :development do
-  gem 'rocco', '~>0.8.2'
+  gem 'rocco', '~>0.8.2' # Literate comments, generating documentation HTML
+  gem 'rdiscount' # Required for Rocco.
   gem 'flog'
   gem 'flay'
   gem 'gestalt'
