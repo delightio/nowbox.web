@@ -9,7 +9,7 @@ module Aji
         api_info['secret']
 
       # If we're throttled, wait ten seconds, then try again.
-      if api.tracker.available? :post
+      if api.post_tracker.available? :post
         api.send api_method, *args
       else
         Resque.enqueue_in_front self, api_info, api_method, *args
@@ -17,8 +17,10 @@ module Aji
       end
 
     rescue AuthenticationError, UploadError => e
-      Resque.enqueue_in_front self, api_info, api_method, *args
-      api.tracker.close_session! if e.message =~ /too_many_recent_calls/
+      if e.message =~ /too_many_recent_calls/
+        Resque.enqueue_in_front self, api_info, api_method, *args
+        api.tracker.close_session! 
+      end
     end
   end
 end
