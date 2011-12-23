@@ -26,9 +26,9 @@ module Aji
       end
 
       # Process method limits as a proportion of total hits.
+      # If no methods are limited, each has the complete quota available.
+      @method_limits = Hash.new @hits_per_session
       if options[:method_limits]
-        # If no methods are limited, each has the complete quota available.
-        @method_limits = Hash.new @hits_per_session
         options[:method_limits].each do |method, proportion|
           @method_limits[method] = (@hits_per_session * proportion).floor
         end
@@ -49,7 +49,7 @@ module Aji
     def available? api_method = nil
       if api_method
         #return false unless hit_count < hits_per_session
-        return false unless hit_count(api_method) < method_limits[api_method]
+        return false unless hit_count(api_method) < @method_limits[api_method]
         return false if throttle_set?
       else
         return false unless hit_count < hits_per_session
