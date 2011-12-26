@@ -2,9 +2,9 @@
 body { background: url(/images/textures/aji-tiles-crosshatch-white.jpg) repeat; color: #090909; }
 
 /* body#video_layout, *//* removing original background  --patrick */
-body#channel_layout { 
-  background-color: #333; 
-  background: url(http://nowbox.com/images/textures/aji-tiles-darkgray.jpg) repeat; color: #090909; 
+body#channel_layout {
+  background-color: #333;
+  background: url(http://nowbox.com/images/textures/aji-tiles-darkgray.jpg) repeat; color: #090909;
 }
 
 /* changing video page background  --patrick */
@@ -237,32 +237,32 @@ margin-left: 20px;}
 
 #video .call_to_action_social{ }
 
-#video #embed { 
-  position: relative; 
-  height: 510px; 
-  margin: 0px 0px; 
-  padding: 0px; 
-  text-align: center; 
+#video #embed {
+  position: relative;
+  height: 510px;
+  margin: 0px 0px;
+  padding: 0px;
+  text-align: center;
   /* begin change video embed background  --patrick */
   background: url(../images/new/video_embed_bg.png) no-repeat center top;
-  /* 
-    background-color: #111; 
+  /*
+    background-color: #111;
     background: rgba(0, 0, 0, 0.4);
   */
   /* end change video embed background */
 }
 
-	#video #embed iframe { 
+	#video #embed iframe {
     background-color: #000;
-    margin: auto; 
+    margin: auto;
   }
 
   /* begin remove video footer styles  --patrick */
   /*
     #share_button{ float: right; }
     #share_buttons{ float: right; height: 70px; display: none;}
-    #info{ margin-top: 10px;} --patrick 
-    #video_info{ float: left; display: block; text-shadow: 0px 1px 1px #000; width: 520px; text-overflow: ellipsis; overflow: hidden;  line-height:  25px;}    
+    #info{ margin-top: 10px;} --patrick
+    #video_info{ float: left; display: block; text-shadow: 0px 1px 1px #000; width: 520px; text-overflow: ellipsis; overflow: hidden;  line-height:  25px;}
     #video_info .title{ font-size: 16px; color: #EEE; }
     #video_info .description { font-size: 12px; color: #AAA; line-height:  20px; text-shadow: 0px 1px 1px #222;}
     #video_info .description a{ color: #666; font-style: italic;}
@@ -315,46 +315,38 @@ margin-left: 20px;}
 
   #header .blurb,
   #header .profile_pic,
-  #header .win_ipad a,
-  #header .app_store,
   #header .app_store a {
     float: left;
   }
-  
+
     #header .profile_pic {
       padding-top: 1px;
       margin-right: 22px;
     }
-  
+
     #header .blurb {
-      width: 578px;
-      margin-right: 15px;
+      width: 582px;
     }
-  
+
       #header .blurb dt {
         color: #727272;
         font-size: 14px;
         font-style: italic;
         margin-bottom: 2px;
       }
-  
+
         #header .blurb em {
           color: #ffce3d;
         }
-  
+
       #header .blurb dd {
         color: #e0e0e0;
         font-size: 13px;
         line-height: 21px;
       }
-  
-  #header .app_store {
-    margin-right: 15px;
-  }
 
-  #header .win_ipad {
+  #header .app_store {
     float: right;
-    margin-top: -20px;
   }
 
 #video_layout .logo {
@@ -365,7 +357,7 @@ margin-left: 20px;}
 
   #video_layout .logo a {
     float: left;
-    width: 132px; 
+    width: 132px;
     height: 18px;
   }
 
@@ -374,40 +366,40 @@ margin-left: 20px;}
   margin-top: 0;
 }
 
-  #video_info { 
-    float: left; 
+  #video_info {
+    float: left;
     border-left: 1px solid #121212;
     margin-right: 22px;
   }
-  
-    #video_info .wrap { 
+
+    #video_info .wrap {
       width: 542px;
-      overflow: hidden;  
-      text-overflow: ellipsis; 
-      text-shadow: 0px 1px 1px #000; 
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow: 0px 1px 1px #000;
       border-left: 1px solid #2f2f2f;
       padding: 0 0 0 21px;
     }
-  
-    #video_info .title { 
-      color: #eee; 
-      font-size: 18px; 
+
+    #video_info .title {
+      color: #eee;
+      font-size: 18px;
       line-height: 25px;
     }
 
-    #video_info .description { 
-      color: #686868; 
-      font-size: 13px; 
+    #video_info .description {
+      color: #686868;
+      font-size: 13px;
       line-height: 20px;
       text-shadow: 0px 1px 1px #222;
     }
 
-      #video_info .description a { 
-        color: #bababa; 
+      #video_info .description a {
+        color: #bababa;
       }
-      
-        #video_info .description a:hover { 
-          color: #FF9900; 
+
+        #video_info .description a:hover {
+          color: #FF9900;
         }
 
 #share_button a,
@@ -415,8 +407,8 @@ margin-left: 20px;}
   float: left;
 }
 
-  #share_button { 
-    float: left; 
+  #share_button {
+    float: left;
     width: 70px;
     position: relative;
     margin-right: 16px;
@@ -441,7 +433,7 @@ margin-left: 20px;}
       box-shadow: 0 1px #333;
       padding: 9px 9px 9px 18px;
     }
-  
+
       #share_buttons .close {
         top: -1px;
         right: 4px;
