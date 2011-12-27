@@ -2,13 +2,24 @@ require_relative '../aji'
 
 include Aji
 
-def print_stats api
-  time_remaining = api.seconds_until_available.seconds
-  time_since_start = (api.cooldown - time_remaining).seconds
+class APITracker
+  def print_recent_throttles n=10
+    throttles = redis.zrevrange throttle_count_key, 0, n, :with_scores=>true
+    throttles.each_slice(2) do |h, t|
+      puts "#{Time.now.to_i-t.to_i} s ago: #{h}"
+    end
+  end
 
-  puts "#{api.namespace} (availabe? #{api.available?}, throttle_set? #{api.throttle_set?}) \
-has made #{api.hit_count} of #{api.hits_per_session} in the last #{time_since_start.inspect} \
-and has #{time_remaining.inspect} until resetting."
+  def print_stats
+    time_remaining = seconds_until_available.seconds
+    time_since_start = (cooldown - time_remaining).seconds
+
+    puts "#{namespace} (availabe? #{available?}, throttle_set? #{throttle_set?}) " +
+         "has made #{hit_count} of #{hits_per_session} in the last #{time_since_start.inspect} " +
+         "and has #{time_remaining.inspect} until resetting."
+    print_recent_throttles
+    puts
+  end
 end
 
 def print_aggregate_stats apis
@@ -42,9 +53,9 @@ end
   end
 end
 
-print_stats @facebook_tracker
-print_stats @youtube_gt
-print_stats @youtube_at
+@facebook_tracker.print_stats
+@youtube_gt.print_stats
+@youtube_at.print_stats
 
 print_aggregate_stats @twitter_trackers
 
