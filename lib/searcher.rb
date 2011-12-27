@@ -15,6 +15,8 @@ module Aji
     end
 
     def initialize query
+      query.gsub! "\"", ""
+      query.gsub! "\'", ""
       @query = query.strip
     end
 

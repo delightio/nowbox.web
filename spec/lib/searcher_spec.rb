@@ -15,6 +15,24 @@ describe Searcher, :net do
       searcher = Searcher.new query_with_spaces
       searcher.query.should == query
     end
+
+    it "saves given query internally" do
+      query = random_string
+      searcher = Searcher.new query
+      searcher.query.should == query
+    end
+
+    it "removes any quotation within the query" do
+      query = random_string
+      query_with_single_quote = " \' #{query}"
+      searcher = Searcher.new query_with_single_quote
+      searcher.query.should == query
+
+      query_with_double_quote = " \" #{query}"
+      searcher = Searcher.new query_with_double_quote
+      searcher.query.should == query
+
+    end
   end
 
   describe "#account_results_from_indextank" do
