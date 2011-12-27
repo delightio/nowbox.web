@@ -9,21 +9,20 @@ describe Searcher, :net do
   end
 
   describe "#initialize" do
+    let(:query) { random_string }
+
     it "strips out spaces" do
-      query = random_string
       query_with_spaces = "\t  #{query}  \r\n"
       searcher = Searcher.new query_with_spaces
       searcher.query.should == query
     end
 
     it "saves given query internally" do
-      query = random_string
       searcher = Searcher.new query
       searcher.query.should == query
     end
 
     it "removes any quotation within the query" do
-      query = random_string
       query_with_single_quote = " \' #{query}"
       searcher = Searcher.new query_with_single_quote
       searcher.query.should == query
