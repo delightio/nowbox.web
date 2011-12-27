@@ -70,7 +70,7 @@ module Aji
     end
 
     def seconds_until_available
-      redis.ttl(key).to_i
+      redis.ttl key
     end
 
     def reset_session!
@@ -93,7 +93,12 @@ module Aji
       redis.hset(key, throttle_key, "yes")
       redis.expire key, cooldown # reset expiry time
       redis.zadd(throttle_count_key, Time.now.to_i,
-                 MultiJson.encode(redis.hgetall(key)))
+                 MultiJson.encode(to_json))
+    end
+
+    def to_json
+      h = redis.hgetall key
+      h.merge "ttl" => seconds_until_available.to_s # consistent w/ hgetall
     end
 
     def count_key
