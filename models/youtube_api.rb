@@ -8,7 +8,15 @@ module Aji
       raise ArgumentError, "Invalid credentials" unless
         (token and secret) or not (token or secret)
       @uid, @token, @secret = uid, token, secret
+      reset_subscription_ids
+      reset_watch_later_entry_ids
+    end
+
+    def reset_subscription_ids
       @subscription_ids = {}
+    end
+
+    def reset_watch_later_entry_ids
       @watch_later_entry_ids = {}
     end
 
@@ -54,7 +62,10 @@ module Aji
 
     def unsubscribe_from channel_uid
       post_tracker.hit! :post
-      post_client.unsubscribe_channel subscription_ids[channel_uid]
+      reset_subscription_ids unless subscription_ids[channel_uid]
+      if subscription_ids[channel_uid]
+        post_client.unsubscribe_channel subscription_ids[channel_uid]
+      end
     rescue UploadError => e
       Aji.log :WARN, "#{e.class}:#{e.message}"
     end
@@ -141,8 +152,10 @@ module Aji
 
     def remove_from_watch_later video_external_id
       post_tracker.hit! :post
-      post_client.delete_watch_later watch_later_entry_ids[video_external_id] if
-      watch_later_entry_ids.has_key? video_external_id
+      reset_watch_later_entry_ids unless watch_later_entry_ids[video_external_id]
+      if watch_later_entry_ids[video_external_id]
+        post_client.delete_watch_later watch_later_entry_ids[video_external_id]
+      end
     rescue UploadError => e
       raise e unless e.message =~ /Playlist video not found/
     end
@@ -250,7 +263,7 @@ module Aji
           @@client ||= YouTubeIt::Client.new dev_key: Aji.conf['YOUTUBE_KEY_GLOBAL']
         end
     end
-    private :client
+    private :client, :reset_subscription_ids, :reset_watch_later_entry_ids
 
     def post_client
       raise "Cannot create post client without token and secret" unless

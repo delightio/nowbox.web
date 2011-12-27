@@ -298,9 +298,10 @@ describe Aji::YoutubeSync, :unit do
       subject.push_subscribed_channels
     end
 
-    it "clears the youtube subscriptions cache" do
-      subject.push_subscribed_channels
-      subject.instance_variable_get(:@youtube_subscriptions).should be_nil
+    it "adds newly subscribed channels into subscription cache" do
+      expect { subject.push_subscribed_channels }.
+        to change { subject.youtube_subscriptions.count }.
+        by(remotely_unsubscribed_channels.count)
     end
   end
 
@@ -313,9 +314,10 @@ describe Aji::YoutubeSync, :unit do
       subject.push_favorite_videos
     end
 
-    it "clears the youtube favorites cache" do
-      subject.push_favorite_videos
-      subject.instance_variable_get(:@youtube_favorite_videos).should be_nil
+    it "adds locally favorited youtube videos into favorite cache" do
+      expect { subject.push_favorite_videos }.
+        to change { subject.youtube_favorite_videos.count }.
+        by(remotely_unfavorited_videos.count)
     end
   end
 
@@ -326,6 +328,12 @@ describe Aji::YoutubeSync, :unit do
       end
 
       subject.push_watch_later_videos
+    end
+
+    it "adds locally enqueued youtube videos into watch later cache" do
+      expect { subject.push_watch_later_videos }.
+        to change { subject.youtube_watch_later_videos.count }.
+        by(remotely_watched_videos.count)
     end
 
     it "clears the youtube watch later cache" do

@@ -6,9 +6,9 @@
     body: !!null 
     headers:
       authorization:
-      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="6b89034e2b645fea53a42a624a7c92a6",
-        oauth_signature="K3ulgXJIhjV2dAX%2F5mk%2Bq2HruEI%3D", oauth_signature_method="HMAC-SHA1",
-        oauth_timestamp="1321342030", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="9520349ad635d14796055b239a91d3f1",
+        oauth_signature="R7ASDRWnABVw0eaqHfbCFZvwsZY%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1324959911", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
         oauth_version="1.0"
   response: !ruby/struct:VCR::Response
     status: !ruby/struct:VCR::ResponseStatus
@@ -20,9 +20,9 @@
       content-type:
       - application/atom+xml; charset=UTF-8
       expires:
-      - Tue, 15 Nov 2011 07:27:10 GMT
+      - Tue, 27 Dec 2011 04:25:11 GMT
       date:
-      - Tue, 15 Nov 2011 07:27:10 GMT
+      - Tue, 27 Dec 2011 04:25:11 GMT
       cache-control:
       - private, max-age=0, must-revalidate, no-transform
       vary:
@@ -30,7 +30,7 @@
       gdata-version:
       - '1.0'
       last-modified:
-      - Tue, 15 Nov 2011 07:05:23 GMT
+      - Tue, 27 Dec 2011 04:22:28 GMT
       transfer-encoding:
       - chunked
       x-content-type-options:
@@ -41,27 +41,26 @@
       - 1; mode=block
       server:
       - GSE
-    body: ! '<?xml version=''1.0'' encoding=''UTF-8''?><entry xmlns=''http://www.w3.org/2005/Atom''
-      xmlns:media=''http://search.yahoo.com/mrss/'' xmlns:gd=''http://schemas.google.com/g/2005''
-      xmlns:yt=''http://gdata.youtube.com/schemas/2007''><id>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</id><published>2011-11-04T17:18:01.000-07:00</published><updated>2011-11-14T23:05:23.000-08:00</updated><category
-      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#userProfile''/><category
-      scheme=''http://gdata.youtube.com/schemas/2007/channeltypes.cat'' term=''Standard''/><title
-      type=''text''>YouTube user: nowmovnowbox</title><link rel=''alternate'' type=''text/html''
-      href=''http://www.youtube.com/profile?user=nowmovnowbox''/><link rel=''http://gdata.youtube.com/schemas/2007#insight.views''
-      type=''text/html'' href=''http://insight.youtube.com/video-analytics/csvreports?query=nowmovnowbox&amp;type=c&amp;starttime=1235865600000&amp;endtime=1321228800000&amp;user_starttime=1320624000000&amp;user_endtime=1321228800000&amp;region=world&amp;token=9DTn0n5S8eGl31a1kU4jYoaLKUh8MTMyMTM0MzgzMEAxMzIxMzQyMDMw&amp;hl=en_US''/><link
-      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:age>34</yt:age><gd:feedLink
-      rel=''http://gdata.youtube.com/schemas/2007#user.favorites'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/favorites''
-      countHint=''1''/><gd:feedLink rel=''http://gdata.youtube.com/schemas/2007#user.contacts''
-      href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/contacts'' countHint=''0''/><gd:feedLink
-      rel=''http://gdata.youtube.com/schemas/2007#user.inbox'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/inbox''
-      countHint=''0''/><gd:feedLink rel=''http://gdata.youtube.com/schemas/2007#user.playlists''
-      href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/playlists''/><gd:feedLink
-      rel=''http://gdata.youtube.com/schemas/2007#user.subscriptions'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions''
-      countHint=''4''/><gd:feedLink rel=''http://gdata.youtube.com/schemas/2007#user.uploads''
-      href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/uploads'' countHint=''0''/><gd:feedLink
-      rel=''http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/newsubscriptionvideos''/><yt:gender>m</yt:gender><yt:location>US</yt:location><yt:statistics
-      lastWebAccess=''2011-11-04T17:18:01.000-07:00'' subscriberCount=''0'' videoWatchCount=''0''
-      viewCount=''3'' totalUploadViews=''0''/><media:thumbnail url=''http://s.ytimg.com/yt/img/no_videos_140-vfl1fDI7-.png''/><yt:username>nowmovnowbox</yt:username></entry>'
+    body: <?xml version='1.0' encoding='UTF-8'?><entry xmlns='http://www.w3.org/2005/Atom'
+      xmlns:media='http://search.yahoo.com/mrss/' xmlns:gd='http://schemas.google.com/g/2005'
+      xmlns:yt='http://gdata.youtube.com/schemas/2007'><id>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</id><published>2011-11-04T17:18:01.000-07:00</published><updated>2011-12-26T20:22:28.000-08:00</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#userProfile'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/channeltypes.cat' term='Standard'/><title
+      type='text'>nowmovnowbox</title><link rel='alternate' type='text/html' href='http://www.youtube.com/profile?user=nowmovnowbox'/><link
+      rel='http://gdata.youtube.com/schemas/2007#insight.views' type='text/html' href='http://insight.youtube.com/video-analytics/csvreports?query=nowmovnowbox&amp;type=c&amp;starttime=1235865600000&amp;endtime=1324857600000&amp;user_starttime=1324252800000&amp;user_endtime=1324857600000&amp;region=world&amp;token=rpU-HQMjcY6RtcGpME1CmNlQdPB8MTMyNDk2MTcxMUAxMzI0OTU5OTEx&amp;hl=en_US'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox'/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:age>34</yt:age><gd:feedLink
+      rel='http://gdata.youtube.com/schemas/2007#user.favorites' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/favorites'
+      countHint='1'/><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.contacts'
+      href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/contacts' countHint='0'/><gd:feedLink
+      rel='http://gdata.youtube.com/schemas/2007#user.inbox' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/inbox'
+      countHint='0'/><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.playlists'
+      href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/playlists'/><gd:feedLink
+      rel='http://gdata.youtube.com/schemas/2007#user.subscriptions' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions'
+      countHint='4'/><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.uploads'
+      href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/uploads' countHint='0'/><gd:feedLink
+      rel='http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/newsubscriptionvideos'/><yt:gender>m</yt:gender><yt:location>US</yt:location><yt:statistics
+      lastWebAccess='2011-11-04T17:18:01.000-07:00' subscriberCount='0' videoWatchCount='0'
+      viewCount='4' totalUploadViews='0'/><media:thumbnail url='http://s.ytimg.com/yt/img/no_videos_140-vfl1fDI7-.png'/><yt:username>nowmovnowbox</yt:username></entry>
     http_version: '1.1'
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
@@ -72,14 +71,14 @@
       term="channel"/><yt:username>freddiew</yt:username></entry>
     headers:
       authorization:
-      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="f874442dafa76b325115daf64a8a6a32",
-        oauth_signature="dwrpyY3T%2FqQ%2FjXp4d7J2TOwYpu4%3D", oauth_signature_method="HMAC-SHA1",
-        oauth_timestamp="1321342030", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="c00b6913d6b137960ad120fca863a79c",
+        oauth_signature="pU2SeS%2B9dsRTNDCtZIjFMnfAjn4%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1324959911", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
         oauth_version="1.0"
       x-gdata-client:
       - youtube_it
       x-gdata-key:
-      - key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA
+      - key=AI39si4CUmVJSHUvVBrxXYRrVWbu4XKwuS2FGS9eacCykE-P5Ea6_VRPJBTkRH3cHZ7ju-PPAW6YfkCjwp0W1NTXpKqLujQXag
       gdata-version:
       - '2'
       content-type:
@@ -96,9 +95,9 @@
       content-type:
       - application/atom+xml; charset=UTF-8; type=entry
       expires:
-      - Tue, 15 Nov 2011 07:27:11 GMT
+      - Tue, 27 Dec 2011 04:25:12 GMT
       date:
-      - Tue, 15 Nov 2011 07:27:11 GMT
+      - Tue, 27 Dec 2011 04:25:12 GMT
       cache-control:
       - private, max-age=0, must-revalidate, no-transform
       vary:
@@ -106,7 +105,7 @@
       gdata-version:
       - '2.1'
       etag:
-      - W/"CEcHQH47eCp7I2A9WhRSE0k."
+      - W/"A04FQ347eCp7I2A9WhRXGUg."
       location:
       - http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA?client=youtube_it
       content-location:
@@ -123,7 +122,7 @@
       - GSE
     body: ! '<?xml version=''1.0'' encoding=''UTF-8''?><entry xmlns=''http://www.w3.org/2005/Atom''
       xmlns:app=''http://www.w3.org/2007/app'' xmlns:gd=''http://schemas.google.com/g/2005''
-      xmlns:yt=''http://gdata.youtube.com/schemas/2007'' gd:etag=''W/&quot;CEcHQH47eCp7I2A9WhRSE0k.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA</id><published>2011-11-14T23:27:11.000-08:00</published><updated>2011-11-14T23:27:11.000-08:00</updated><app:edited>2011-11-14T23:27:11.000-08:00</app:edited><category
+      xmlns:yt=''http://gdata.youtube.com/schemas/2007'' gd:etag=''W/&quot;A04FQ347eCp7I2A9WhRXGUg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA</id><published>2011-12-27T04:25:12.000Z</published><updated>2011-12-27T04:25:12.000Z</updated><app:edited>2011-12-27T04:25:12.000Z</app:edited><category
       scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
       scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''channel''/><title>Videos
       published by : freddiew</title><content type=''application/atom+xml;type=feed''
@@ -140,9 +139,9 @@
     body: !!null 
     headers:
       authorization:
-      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="30f00a492d9069449226bddc59d63d58",
-        oauth_signature="MduU6C2NvTZMzSszrNRJ6x2QIc4%3D", oauth_signature_method="HMAC-SHA1",
-        oauth_timestamp="1321342031", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="4106486e290ef32fb33721bcd201f0e6",
+        oauth_signature="ebCbsGhUBlbAHXnu9Lk2pOfLgy8%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1324959912", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
         oauth_version="1.0"
       x-gdata-client:
       - youtube_it
@@ -164,9 +163,9 @@
       content-type:
       - application/atom+xml; charset=UTF-8; type=feed
       expires:
-      - Tue, 15 Nov 2011 07:27:11 GMT
+      - Tue, 27 Dec 2011 04:25:12 GMT
       date:
-      - Tue, 15 Nov 2011 07:27:11 GMT
+      - Tue, 27 Dec 2011 04:25:12 GMT
       cache-control:
       - private, max-age=0, must-revalidate, no-transform
       vary:
@@ -174,9 +173,9 @@
       gdata-version:
       - '2.1'
       etag:
-      - W/"CEcHQHYzfip7I2A9WhRSE0k."
+      - W/"A04FQ3kyfCp7I2A9WhRXGUg."
       last-modified:
-      - Tue, 15 Nov 2011 07:27:11 GMT
+      - Tue, 27 Dec 2011 04:25:12 GMT
       transfer-encoding:
       - chunked
       x-content-type-options:
@@ -190,7 +189,7 @@
     body: ! '<?xml version=''1.0'' encoding=''UTF-8''?><feed xmlns=''http://www.w3.org/2005/Atom''
       xmlns:app=''http://www.w3.org/2007/app'' xmlns:openSearch=''http://a9.com/-/spec/opensearch/1.1/''
       xmlns:gd=''http://schemas.google.com/g/2005'' xmlns:yt=''http://gdata.youtube.com/schemas/2007''
-      gd:etag=''W/&quot;CEcHQHYzfip7I2A9WhRSE0k.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscriptions</id><updated>2011-11-15T07:27:11.886Z</updated><category
+      gd:etag=''W/&quot;A04FQ3kyfCp7I2A9WhRXGUg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscriptions</id><updated>2011-12-27T04:25:12.794Z</updated><category
       scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><title>Subscriptions
       of nowmovnowbox</title><logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo><link
       rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox?client=youtube_it''/><link
@@ -204,7 +203,7 @@
       rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions?start-index=1&amp;max-results=50&amp;client=youtube_it''/><link
       rel=''service'' type=''application/atomsvc+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions?alt=atom-service''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><generator
       version=''2.1'' uri=''http://gdata.youtube.com''>YouTube data API</generator><openSearch:totalResults>5</openSearch:totalResults><openSearch:startIndex>1</openSearch:startIndex><openSearch:itemsPerPage>50</openSearch:itemsPerPage><entry
-      gd:etag=''W/&quot;CEcHQH47eCp7I2A9WhRSE0k.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA</id><published>2011-11-14T23:27:11.000-08:00</published><updated>2011-11-14T23:27:11.000-08:00</updated><app:edited>2011-11-14T23:27:11.000-08:00</app:edited><category
+      gd:etag=''W/&quot;A04FQH47eCp7I2A9WhRXGUg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA</id><published>2011-12-27T04:25:11.000Z</published><updated>2011-12-27T04:25:11.000Z</updated><app:edited>2011-12-27T04:25:11.000Z</app:edited><category
       scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
       scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''channel''/><title>Videos
       published by : freddiew</title><content type=''application/atom+xml;type=feed''
@@ -212,8 +211,8 @@
       type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/freddiew?client=youtube_it''/><link
       rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/profile?user=freddiew#p/u''/><link
       rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA?client=youtube_it''/><link
-      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:countHint>118</yt:countHint><yt:username>freddiew</yt:username></entry><entry
-      gd:etag=''W/&quot;CEcGSH47eCp7I2A9WhRSE0k.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY</id><published>2011-11-14T23:27:09.000-08:00</published><updated>2011-11-14T23:27:09.000-08:00</updated><app:edited>2011-11-14T23:27:09.000-08:00</app:edited><category
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:countHint>122</yt:countHint><yt:username>freddiew</yt:username></entry><entry
+      gd:etag=''W/&quot;A04ESH47eCp7I2A9WhRXGUg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY</id><published>2011-12-27T04:25:09.000Z</published><updated>2011-12-27T04:25:09.000Z</updated><app:edited>2011-12-27T04:25:09.000Z</app:edited><category
       scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
       scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''channel''/><title>Videos
       published by : LisaNova</title><content type=''application/atom+xml;type=feed''
@@ -222,7 +221,7 @@
       rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/profile?user=LisaNova#p/u''/><link
       rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY?client=youtube_it''/><link
       rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:countHint>217</yt:countHint><yt:username>LisaNova</yt:username></entry><entry
-      gd:etag=''W/&quot;CEAHRX47eCp7I2A9WhRSEUw.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJhIrNzpoPjkX_oCZZDif6R4</id><published>2011-11-12T07:45:34.000-08:00</published><updated>2011-11-12T07:45:34.000-08:00</updated><app:edited>2011-11-12T07:45:34.000-08:00</app:edited><category
+      gd:etag=''W/&quot;CEAHRX47eCp7I2A9WhRSEUw.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJhIrNzpoPjkX_oCZZDif6R4</id><published>2011-11-12T15:45:34.000Z</published><updated>2011-11-12T15:45:34.000Z</updated><app:edited>2011-11-12T15:45:34.000Z</app:edited><category
       scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
       scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''channel''/><title>Videos
       published by : RayWilliamJohnson</title><content type=''application/atom+xml;type=feed''
@@ -230,12 +229,12 @@
       rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/raywilliamjohnson?client=youtube_it''/><link
       rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/profile?user=RayWilliamJohnson#p/u''/><link
       rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJhIrNzpoPjkX_oCZZDif6R4?client=youtube_it''/><link
-      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJhIrNzpoPjkX_oCZZDif6R4?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:countHint>241</yt:countHint><yt:username>RayWilliamJohnson</yt:username></entry></feed>'
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJhIrNzpoPjkX_oCZZDif6R4?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:countHint>250</yt:countHint><yt:username>RayWilliamJohnson</yt:username></entry></feed>'
     http_version: '1.1'
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :get
-    uri: http://gdata.youtube.com:80/feeds/api/users/freddiew?alt=json&v=2
+    uri: http://gdata.youtube.com:80/feeds/api/users/freddiew?alt=json&dev_key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
     body: !!null 
     headers: !!null 
   response: !ruby/struct:VCR::Response
@@ -250,9 +249,9 @@
       access-control-allow-origin:
       - ! '*'
       expires:
-      - Tue, 15 Nov 2011 07:32:12 GMT
+      - Tue, 27 Dec 2011 04:30:13 GMT
       date:
-      - Tue, 15 Nov 2011 07:27:12 GMT
+      - Tue, 27 Dec 2011 04:25:13 GMT
       cache-control:
       - public, max-age=300, no-transform
       vary:
@@ -260,9 +259,9 @@
       gdata-version:
       - '2.1'
       etag:
-      - W/"C0IESX47eCp7I2A9WhRSE0k."
+      - W/"A0IBSX47eCp7I2A9WhRXGUg."
       last-modified:
-      - Tue, 15 Nov 2011 07:18:28 GMT
+      - Tue, 27 Dec 2011 04:19:18 GMT
       transfer-encoding:
       - chunked
       x-content-type-options:
@@ -273,20 +272,19 @@
       - 1; mode=block
       server:
       - GSE
-    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"C0IESX47eCp7I2A9WhRSE0k.\"","id":{"$t":"tag:youtube.com,2008:user:freddiew"},"published":{"$t":"2006-02-22T00:22:49.000-08:00"},"updated":{"$t":"2011-11-14T23:18:28.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Director"}],"title":{"$t":"YouTube
-      user: freddiew"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=freddiew"},{"rel":"related","type":"text/html","href":"http://facerocker.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/freddiew?v=2"}],"author":[{"name":{"$t":"freddiew"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/freddiew"}}],"yt$aboutMe":{"$t":"WAIT!
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"A0IBSX47eCp7I2A9WhRXGUg.\"","id":{"$t":"tag:youtube.com,2008:user:freddiew"},"published":{"$t":"2006-02-22T00:22:49.000-08:00"},"updated":{"$t":"2011-12-26T20:19:18.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Director"}],"title":{"$t":"freddiew"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=freddiew"},{"rel":"related","type":"text/html","href":"http://facerocker.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/freddiew?v=2"}],"author":[{"name":{"$t":"freddiew"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/freddiew"}}],"yt$aboutMe":{"$t":"WAIT!
       Don''t send me a YouTube message!\n\nThey''re really difficult for me to respond
       to, and I can''t see our conversation thread. Email me using the link at the
       top instead!\n\nSubscribe to us on Facebook http://apps.facebook.com/freddiew/\n\nWanna
-      send me stuff?\n\nFrederick Wong\nPO Box 862272\nLos Angeles, CA 90086"},"yt$age":{"$t":36},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/freddiew/favorites?v=2","countHint":132},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/freddiew/contacts?v=2","countHint":79608},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/freddiew/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/freddiew/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/freddiew/subscriptions?v=2","countHint":10},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/freddiew/uploads?v=2","countHint":118},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/freddiew/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Freddie
+      send me stuff?\n\nFrederick Wong\nPO Box 862272\nLos Angeles, CA 90086"},"yt$age":{"$t":36},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/freddiew/favorites?v=2","countHint":133},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/freddiew/contacts?v=2","countHint":79567},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/freddiew/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/freddiew/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/freddiew/subscriptions?v=2","countHint":10},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/freddiew/uploads?v=2","countHint":122},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/freddiew/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Freddie
       Wong & Brandon Laatsch"},"yt$gender":{"$t":"m"},"yt$hometown":{"$t":"Los Angeles"},"yt$lastName":{"$t":"Wong"},"yt$location":{"$t":"Los
       Angeles, US"},"yt$occupation":{"$t":"Film"},"yt$school":{"$t":"USC School of
-      Cinema-Television"},"yt$statistics":{"lastWebAccess":"2011-10-21T17:22:33.000-07:00","subscriberCount":"2528137","videoWatchCount":0,"viewCount":"44221615","totalUploadViews":"457514803"},"media$thumbnail":{"url":"http://i1.ytimg.com/i/DsO-0Yo5zpJk575nKXgMVA/1.jpg?v=bb31cf"},"yt$username":{"$t":"freddiew"}}}'
+      Cinema-Television"},"yt$statistics":{"lastWebAccess":"2011-12-13T22:03:59.000-08:00","subscriberCount":"2731256","videoWatchCount":0,"viewCount":"47620594","totalUploadViews":"492520764"},"media$thumbnail":{"url":"http://i1.ytimg.com/i/DsO-0Yo5zpJk575nKXgMVA/1.jpg?v=bb31cf"},"yt$username":{"$t":"freddiew"}}}'
     http_version: '1.1'
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :get
-    uri: http://gdata.youtube.com:80/feeds/api/users/lisanova?alt=json&v=2
+    uri: http://gdata.youtube.com:80/feeds/api/users/lisanova?alt=json&dev_key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
     body: !!null 
     headers: !!null 
   response: !ruby/struct:VCR::Response
@@ -301,9 +299,9 @@
       access-control-allow-origin:
       - ! '*'
       expires:
-      - Tue, 15 Nov 2011 07:31:33 GMT
+      - Tue, 27 Dec 2011 04:30:06 GMT
       date:
-      - Tue, 15 Nov 2011 07:26:33 GMT
+      - Tue, 27 Dec 2011 04:25:06 GMT
       cache-control:
       - public, max-age=300, no-transform
       vary:
@@ -311,9 +309,9 @@
       gdata-version:
       - '2.1'
       etag:
-      - W/"Dk4EQ347eCp7I2A9WhRSE08."
+      - W/"DkIDQH47eCp7I2A9WhRXGUg."
       last-modified:
-      - Tue, 15 Nov 2011 02:41:42 GMT
+      - Tue, 27 Dec 2011 02:56:11 GMT
       x-content-type-options:
       - nosniff
       x-frame-options:
@@ -321,20 +319,19 @@
       x-xss-protection:
       - 1; mode=block
       content-length:
-      - '3191'
+      - '3177'
       server:
       - GSE
-    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"Dk4EQ347eCp7I2A9WhRSE08.\"","id":{"$t":"tag:youtube.com,2008:user:LisaNova"},"published":{"$t":"2006-06-05T01:10:54.000-07:00"},"updated":{"$t":"2011-11-14T18:41:42.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Director"}],"title":{"$t":"YouTube
-      user: LisaNova"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=LisaNova"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/fp4Uq6M50ZA?v=2"},{"rel":"related","type":"text/html","href":"http://www.twitter.com/lisa_nova"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/LisaNova?v=2"}],"author":[{"name":{"$t":"LisaNova"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/lisanova"}}],"yt$aboutMe":{"$t":"I
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"DkIDQH47eCp7I2A9WhRXGUg.\"","id":{"$t":"tag:youtube.com,2008:user:LisaNova"},"published":{"$t":"2006-06-05T01:10:54.000-07:00"},"updated":{"$t":"2011-12-26T18:56:11.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Director"}],"title":{"$t":"LisaNova"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=LisaNova"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/zkqXwJoY3hc?v=2"},{"rel":"related","type":"text/html","href":"http://www.twitter.com/lisa_nova"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/LisaNova?v=2"}],"author":[{"name":{"$t":"LisaNova"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/lisanova"}}],"yt$aboutMe":{"$t":"I
       don''t usually check my Youtube inbox\r\nFor business only contact:\r\nContact[at]MakerNetwork.com"},"yt$age":{"$t":31},"yt$company":{"$t":"Zappin
-      Productions"},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.liveevent","href":"http://gdata.youtube.com/feeds/api/users/lisanova/live/events?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/lisanova/favorites?v=2","countHint":1120},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/lisanova/contacts?v=2","countHint":96552},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/lisanova/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/lisanova/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/lisanova/subscriptions?v=2","countHint":627},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/lisanova/uploads?v=2","countHint":217},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/lisanova/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Lisa"},"yt$gender":{"$t":"f"},"yt$hobbies":{"$t":"movies"},"yt$hometown":{"$t":"New
+      Productions"},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.liveevent","href":"http://gdata.youtube.com/feeds/api/users/lisanova/live/events?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/lisanova/favorites?v=2","countHint":1141},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/lisanova/contacts?v=2","countHint":96509},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/lisanova/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/lisanova/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/lisanova/subscriptions?v=2","countHint":634},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/lisanova/uploads?v=2","countHint":217},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/lisanova/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Lisa"},"yt$gender":{"$t":"f"},"yt$hobbies":{"$t":"movies"},"yt$hometown":{"$t":"New
       York"},"yt$location":{"$t":"Venice, US"},"yt$movies":{"$t":"The Last Detail.
-      Cool Hand Luke. Stand by Me"},"yt$music":{"$t":"Loretta Lynn. Carl Perkins."},"yt$occupation":{"$t":"Videomaker"},"yt$statistics":{"lastWebAccess":"2011-06-03T19:12:50.000-07:00","subscriberCount":"720643","videoWatchCount":0,"viewCount":"21076424","totalUploadViews":"175932263"},"media$thumbnail":{"url":"http://i2.ytimg.com/i/mhPUWvs_C-zJCnTVXrn5fA/1.jpg?v=d2b112"},"yt$username":{"$t":"LisaNova"}}}'
+      Cool Hand Luke. Stand by Me"},"yt$music":{"$t":"Loretta Lynn. Carl Perkins."},"yt$occupation":{"$t":"Videomaker"},"yt$statistics":{"lastWebAccess":"2011-11-29T19:16:34.000-08:00","subscriberCount":"718697","videoWatchCount":0,"viewCount":"21212509","totalUploadViews":"176564625"},"media$thumbnail":{"url":"http://i2.ytimg.com/i/mhPUWvs_C-zJCnTVXrn5fA/1.jpg?v=d2b112"},"yt$username":{"$t":"LisaNova"}}}'
     http_version: '1.1'
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :get
-    uri: http://gdata.youtube.com:80/feeds/api/users/raywilliamjohnson?alt=json&v=2
+    uri: http://gdata.youtube.com:80/feeds/api/users/raywilliamjohnson?alt=json&dev_key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
     body: !!null 
     headers: !!null 
   response: !ruby/struct:VCR::Response
@@ -349,9 +346,9 @@
       access-control-allow-origin:
       - ! '*'
       expires:
-      - Tue, 15 Nov 2011 07:31:34 GMT
+      - Tue, 27 Dec 2011 04:30:06 GMT
       date:
-      - Tue, 15 Nov 2011 07:26:34 GMT
+      - Tue, 27 Dec 2011 04:25:06 GMT
       cache-control:
       - public, max-age=300, no-transform
       vary:
@@ -359,9 +356,9 @@
       gdata-version:
       - '2.1'
       etag:
-      - W/"A0UCQX47eCp7I2A9WhRSE04."
+      - W/"A0YAR347eCp7I2A9WhRXGUg."
       last-modified:
-      - Tue, 15 Nov 2011 06:41:00 GMT
+      - Tue, 27 Dec 2011 04:12:26 GMT
       x-content-type-options:
       - nosniff
       x-frame-options:
@@ -369,14 +366,14 @@
       x-xss-protection:
       - 1; mode=block
       content-length:
-      - '3142'
+      - '3033'
       server:
       - GSE
-    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"A0UCQX47eCp7I2A9WhRSE04.\"","id":{"$t":"tag:youtube.com,2008:user:RayWilliamJohnson"},"published":{"$t":"2008-05-25T21:54:23.000-07:00"},"updated":{"$t":"2011-11-14T22:41:00.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Comedian"}],"title":{"$t":"YouTube
-      user: RayWilliamJohnson"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=RayWilliamJohnson"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/Tkesof3YJZI?v=2"},{"rel":"related","type":"text/html","href":"http://RayWJ.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/RayWilliamJohnson?v=2"}],"author":[{"name":{"$t":"RayWilliamJohnson"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson"}}],"yt$aboutMe":{"$t":"Please
-      don''t contact me with business offers. Thank you."},"yt$age":{"$t":30},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.liveevent","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/live/events?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/favorites?v=2","countHint":39},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/contacts?v=2","countHint":438437},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/subscriptions?v=2","countHint":4},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/uploads?v=2","countHint":241},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Ray"},"yt$gender":{"$t":"m"},"yt$hometown":{"$t":"Your
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"A0YAR347eCp7I2A9WhRXGUg.\"","id":{"$t":"tag:youtube.com,2008:user:RayWilliamJohnson"},"published":{"$t":"2008-05-25T21:54:23.000-07:00"},"updated":{"$t":"2011-12-26T20:12:26.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Comedian"}],"title":{"$t":"RayWilliamJohnson"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=RayWilliamJohnson"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/TDJiNa4gMsA?v=2"},{"rel":"related","type":"text/html","href":"http://RayWJ.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/RayWilliamJohnson?v=2"}],"author":[{"name":{"$t":"RayWilliamJohnson"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson"}}],"yt$aboutMe":{"$t":"I''m
+      not interested in making money or business deals in general. Please do not contact
+      me with business offers. Thank you."},"yt$age":{"$t":30},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/favorites?v=2","countHint":43},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/contacts?v=2","countHint":438212},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/subscriptions?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/uploads?v=2","countHint":250},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Ray"},"yt$gender":{"$t":"m"},"yt$hometown":{"$t":"Your
       Pants"},"yt$lastName":{"$t":"Johnson"},"yt$location":{"$t":"New York, US"},"yt$occupation":{"$t":"I
-      work part time as a garden gnome."},"yt$statistics":{"lastWebAccess":"2011-07-20T23:59:18.000-07:00","subscriberCount":"4998510","videoWatchCount":0,"viewCount":"323724327","totalUploadViews":"1431234357"},"media$thumbnail":{"url":"http://i4.ytimg.com/i/Gt7X90Au6BV8rf49BiM6Dg/1.jpg?v=d46c71"},"yt$username":{"$t":"RayWilliamJohnson"}}}'
+      work part time as a garden gnome."},"yt$statistics":{"lastWebAccess":"2011-07-20T23:59:18.000-07:00","subscriberCount":"5201311","videoWatchCount":0,"viewCount":"335344508","totalUploadViews":"1515085281"},"media$thumbnail":{"url":"http://i4.ytimg.com/i/Gt7X90Au6BV8rf49BiM6Dg/1.jpg?v=dc01e3"},"yt$username":{"$t":"RayWilliamJohnson"}}}'
     http_version: '1.1'
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
@@ -385,14 +382,14 @@
     body: !!null 
     headers:
       authorization:
-      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="6ecac334501b7baf41651dd285bbb4db",
-        oauth_signature="DNi4bhI5m6vxZ0pHisqbaRq0JwU%3D", oauth_signature_method="HMAC-SHA1",
-        oauth_timestamp="1321342032", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="073a397d3125e471b24590530c619f0c",
+        oauth_signature="WL7iefAznRroLddazIitxLJjszE%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1324959913", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
         oauth_version="1.0"
       x-gdata-client:
       - youtube_it
       x-gdata-key:
-      - key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA
+      - key=AI39si4CUmVJSHUvVBrxXYRrVWbu4XKwuS2FGS9eacCykE-P5Ea6_VRPJBTkRH3cHZ7ju-PPAW6YfkCjwp0W1NTXpKqLujQXag
       gdata-version:
       - '2'
       content-type:
@@ -409,9 +406,9 @@
       gdata-version:
       - '2.1'
       date:
-      - Tue, 15 Nov 2011 07:27:12 GMT
+      - Tue, 27 Dec 2011 04:25:13 GMT
       expires:
-      - Tue, 15 Nov 2011 07:27:12 GMT
+      - Tue, 27 Dec 2011 04:25:13 GMT
       cache-control:
       - private, max-age=0
       x-content-type-options:
@@ -435,9 +432,9 @@
     body: !!null 
     headers:
       authorization:
-      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="b6a63e76d75c0596593529c858da8c02",
-        oauth_signature="iTDs5hC8i64eG5w63o1jug%2FO4yo%3D", oauth_signature_method="HMAC-SHA1",
-        oauth_timestamp="1321342032", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="db29aeb6dbab3f927a31a9439478645e",
+        oauth_signature="VJEaQJrOuWMCY6367V6%2BtBHYPeQ%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1324959914", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
         oauth_version="1.0"
       x-gdata-client:
       - youtube_it
@@ -459,9 +456,9 @@
       content-type:
       - application/atom+xml; charset=UTF-8; type=feed
       expires:
-      - Tue, 15 Nov 2011 07:27:13 GMT
+      - Tue, 27 Dec 2011 04:25:14 GMT
       date:
-      - Tue, 15 Nov 2011 07:27:13 GMT
+      - Tue, 27 Dec 2011 04:25:14 GMT
       cache-control:
       - private, max-age=0, must-revalidate, no-transform
       vary:
@@ -469,9 +466,9 @@
       gdata-version:
       - '2.1'
       etag:
-      - W/"CEcHQn87cCp7I2A9WhRSE0k."
+      - W/"A04FRXw8eyp7I2A9WhRXGUg."
       last-modified:
-      - Tue, 15 Nov 2011 07:27:13 GMT
+      - Tue, 27 Dec 2011 04:25:14 GMT
       transfer-encoding:
       - chunked
       x-content-type-options:
@@ -485,7 +482,7 @@
     body: ! '<?xml version=''1.0'' encoding=''UTF-8''?><feed xmlns=''http://www.w3.org/2005/Atom''
       xmlns:app=''http://www.w3.org/2007/app'' xmlns:openSearch=''http://a9.com/-/spec/opensearch/1.1/''
       xmlns:gd=''http://schemas.google.com/g/2005'' xmlns:yt=''http://gdata.youtube.com/schemas/2007''
-      gd:etag=''W/&quot;CEcHQn87cCp7I2A9WhRSE0k.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscriptions</id><updated>2011-11-15T07:27:13.108Z</updated><category
+      gd:etag=''W/&quot;A04FRXw8eyp7I2A9WhRXGUg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscriptions</id><updated>2011-12-27T04:25:14.273Z</updated><category
       scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><title>Subscriptions
       of nowmovnowbox</title><logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo><link
       rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox?client=youtube_it''/><link
@@ -499,7 +496,7 @@
       rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions?start-index=1&amp;max-results=50&amp;client=youtube_it''/><link
       rel=''service'' type=''application/atomsvc+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions?alt=atom-service''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><generator
       version=''2.1'' uri=''http://gdata.youtube.com''>YouTube data API</generator><openSearch:totalResults>4</openSearch:totalResults><openSearch:startIndex>1</openSearch:startIndex><openSearch:itemsPerPage>50</openSearch:itemsPerPage><entry
-      gd:etag=''W/&quot;CEcGSH47eCp7I2A9WhRSE0k.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY</id><published>2011-11-14T23:27:09.000-08:00</published><updated>2011-11-14T23:27:09.000-08:00</updated><app:edited>2011-11-14T23:27:09.000-08:00</app:edited><category
+      gd:etag=''W/&quot;A04ESH47eCp7I2A9WhRXGUg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY</id><published>2011-12-27T04:25:09.000Z</published><updated>2011-12-27T04:25:09.000Z</updated><app:edited>2011-12-27T04:25:09.000Z</app:edited><category
       scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
       scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''channel''/><title>Videos
       published by : LisaNova</title><content type=''application/atom+xml;type=feed''
@@ -508,7 +505,7 @@
       rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/profile?user=LisaNova#p/u''/><link
       rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY?client=youtube_it''/><link
       rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJlxcXl2CI3IBh50X0ckhlyY?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:countHint>217</yt:countHint><yt:username>LisaNova</yt:username></entry><entry
-      gd:etag=''W/&quot;CEAHRX47eCp7I2A9WhRSEUw.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJhIrNzpoPjkX_oCZZDif6R4</id><published>2011-11-12T07:45:34.000-08:00</published><updated>2011-11-12T07:45:34.000-08:00</updated><app:edited>2011-11-12T07:45:34.000-08:00</app:edited><category
+      gd:etag=''W/&quot;CEAHRX47eCp7I2A9WhRSEUw.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJhIrNzpoPjkX_oCZZDif6R4</id><published>2011-11-12T15:45:34.000Z</published><updated>2011-11-12T15:45:34.000Z</updated><app:edited>2011-11-12T15:45:34.000Z</app:edited><category
       scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
       scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''channel''/><title>Videos
       published by : RayWilliamJohnson</title><content type=''application/atom+xml;type=feed''
@@ -516,439 +513,5 @@
       rel=''related'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/raywilliamjohnson?client=youtube_it''/><link
       rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/profile?user=RayWilliamJohnson#p/u''/><link
       rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJhIrNzpoPjkX_oCZZDif6R4?client=youtube_it''/><link
-      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJhIrNzpoPjkX_oCZZDif6R4?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:countHint>241</yt:countHint><yt:username>RayWilliamJohnson</yt:username></entry></feed>'
-    http_version: '1.1'
-- !ruby/struct:VCR::HTTPInteraction
-  request: !ruby/struct:VCR::Request
-    method: :get
-    uri: http://gdata.youtube.com:80/feeds/api/users/freddiew?alt=json&dev_key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA&v=2
-    body: !!null 
-    headers: !!null 
-  response: !ruby/struct:VCR::Response
-    status: !ruby/struct:VCR::ResponseStatus
-      code: 200
-      message: OK
-    headers:
-      x-gdata-user-country:
-      - US
-      content-type:
-      - application/json; charset=UTF-8
-      access-control-allow-origin:
-      - ! '*'
-      expires:
-      - Tue, 29 Nov 2011 21:38:18 GMT
-      date:
-      - Tue, 29 Nov 2011 21:33:18 GMT
-      cache-control:
-      - public, max-age=300, no-transform
-      vary:
-      - Accept, X-GData-Authorization, GData-Version
-      gdata-version:
-      - '2.1'
-      etag:
-      - W/"CEQNQH47eCp7I2A9WhRRFk0."
-      last-modified:
-      - Tue, 29 Nov 2011 21:33:11 GMT
-      transfer-encoding:
-      - chunked
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      server:
-      - GSE
-    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"CEQNQH47eCp7I2A9WhRRFk0.\"","id":{"$t":"tag:youtube.com,2008:user:freddiew"},"published":{"$t":"2006-02-22T00:22:49.000-08:00"},"updated":{"$t":"2011-11-29T13:33:11.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Director"}],"title":{"$t":"YouTube
-      user: freddiew"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=freddiew"},{"rel":"related","type":"text/html","href":"http://facerocker.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/freddiew?v=2"}],"author":[{"name":{"$t":"freddiew"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/freddiew"}}],"yt$aboutMe":{"$t":"WAIT!
-      Don''t send me a YouTube message!\n\nThey''re really difficult for me to respond
-      to, and I can''t see our conversation thread. Email me using the link at the
-      top instead!\n\nSubscribe to us on Facebook http://apps.facebook.com/freddiew/\n\nWanna
-      send me stuff?\n\nFrederick Wong\nPO Box 862272\nLos Angeles, CA 90086"},"yt$age":{"$t":36},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/freddiew/favorites?v=2","countHint":132},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/freddiew/contacts?v=2","countHint":79591},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/freddiew/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/freddiew/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/freddiew/subscriptions?v=2","countHint":10},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/freddiew/uploads?v=2","countHint":119},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/freddiew/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Freddie
-      Wong & Brandon Laatsch"},"yt$gender":{"$t":"m"},"yt$hometown":{"$t":"Los Angeles"},"yt$lastName":{"$t":"Wong"},"yt$location":{"$t":"Los
-      Angeles, US"},"yt$occupation":{"$t":"Film"},"yt$school":{"$t":"USC School of
-      Cinema-Television"},"yt$statistics":{"lastWebAccess":"2011-10-21T17:22:33.000-07:00","subscriberCount":"2575920","videoWatchCount":0,"viewCount":"45365240","totalUploadViews":"470381888"},"media$thumbnail":{"url":"http://i1.ytimg.com/i/DsO-0Yo5zpJk575nKXgMVA/1.jpg?v=bb31cf"},"yt$username":{"$t":"freddiew"}}}'
-    http_version: '1.1'
-- !ruby/struct:VCR::HTTPInteraction
-  request: !ruby/struct:VCR::Request
-    method: :get
-    uri: http://gdata.youtube.com:80/feeds/api/users/lisanova?alt=json&dev_key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA&v=2
-    body: !!null 
-    headers: !!null 
-  response: !ruby/struct:VCR::Response
-    status: !ruby/struct:VCR::ResponseStatus
-      code: 200
-      message: OK
-    headers:
-      x-gdata-user-country:
-      - US
-      content-type:
-      - application/json; charset=UTF-8
-      access-control-allow-origin:
-      - ! '*'
-      expires:
-      - Tue, 29 Nov 2011 21:38:18 GMT
-      date:
-      - Tue, 29 Nov 2011 21:33:18 GMT
-      cache-control:
-      - public, max-age=300, no-transform
-      vary:
-      - Accept, X-GData-Authorization, GData-Version
-      gdata-version:
-      - '2.1'
-      etag:
-      - W/"A0IEQX47eCp7I2A9WhRRFUg."
-      last-modified:
-      - Tue, 29 Nov 2011 09:38:20 GMT
-      transfer-encoding:
-      - chunked
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      server:
-      - GSE
-    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"A0IEQX47eCp7I2A9WhRRFUg.\"","id":{"$t":"tag:youtube.com,2008:user:LisaNova"},"published":{"$t":"2006-06-05T01:10:54.000-07:00"},"updated":{"$t":"2011-11-29T01:38:20.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Director"}],"title":{"$t":"YouTube
-      user: LisaNova"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=LisaNova"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/YYP-QiKRMgc?v=2"},{"rel":"related","type":"text/html","href":"http://www.twitter.com/lisa_nova"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/LisaNova?v=2"}],"author":[{"name":{"$t":"LisaNova"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/lisanova"}}],"yt$aboutMe":{"$t":"I
-      don''t usually check my Youtube inbox\r\nFor business only contact:\r\nContact[at]MakerNetwork.com"},"yt$age":{"$t":31},"yt$company":{"$t":"Zappin
-      Productions"},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.liveevent","href":"http://gdata.youtube.com/feeds/api/users/lisanova/live/events?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/lisanova/favorites?v=2","countHint":1132},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/lisanova/contacts?v=2","countHint":96536},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/lisanova/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/lisanova/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/lisanova/subscriptions?v=2","countHint":627},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/lisanova/uploads?v=2","countHint":217},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/lisanova/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Lisa"},"yt$gender":{"$t":"f"},"yt$hobbies":{"$t":"movies"},"yt$hometown":{"$t":"New
-      York"},"yt$location":{"$t":"Venice, US"},"yt$movies":{"$t":"The Last Detail.
-      Cool Hand Luke. Stand by Me"},"yt$music":{"$t":"Loretta Lynn. Carl Perkins."},"yt$occupation":{"$t":"Videomaker"},"yt$statistics":{"lastWebAccess":"2011-06-03T19:12:50.000-07:00","subscriberCount":"723052","videoWatchCount":0,"viewCount":"21119098","totalUploadViews":"176171964"},"media$thumbnail":{"url":"http://i2.ytimg.com/i/mhPUWvs_C-zJCnTVXrn5fA/1.jpg?v=d2b112"},"yt$username":{"$t":"LisaNova"}}}'
-    http_version: '1.1'
-- !ruby/struct:VCR::HTTPInteraction
-  request: !ruby/struct:VCR::Request
-    method: :get
-    uri: http://gdata.youtube.com:80/feeds/api/users/raywilliamjohnson?alt=json&dev_key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA&v=2
-    body: !!null 
-    headers: !!null 
-  response: !ruby/struct:VCR::Response
-    status: !ruby/struct:VCR::ResponseStatus
-      code: 200
-      message: OK
-    headers:
-      x-gdata-user-country:
-      - US
-      content-type:
-      - application/json;charset=UTF-8
-      access-control-allow-origin:
-      - ! '*'
-      expires:
-      - Tue, 29 Nov 2011 21:38:17 GMT
-      date:
-      - Tue, 29 Nov 2011 21:33:17 GMT
-      cache-control:
-      - public, max-age=300, no-transform
-      vary:
-      - Accept, X-GData-Authorization, GData-Version
-      gdata-version:
-      - '2.1'
-      etag:
-      - W/"CEcDQn47eCp7I2A9WhRRFk0."
-      last-modified:
-      - Tue, 29 Nov 2011 21:27:53 GMT
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      content-length:
-      - '2821'
-      server:
-      - GSE
-    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"CEcDQn47eCp7I2A9WhRRFk0.\"","id":{"$t":"tag:youtube.com,2008:user:RayWilliamJohnson"},"published":{"$t":"2008-05-25T21:54:23.000-07:00"},"updated":{"$t":"2011-11-29T13:27:53.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Comedian"}],"title":{"$t":"YouTube
-      user: RayWilliamJohnson"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=RayWilliamJohnson"},{"rel":"related","type":"text/html","href":"http://RayWJ.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/RayWilliamJohnson?v=2"}],"author":[{"name":{"$t":"RayWilliamJohnson"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson"}}],"yt$aboutMe":{"$t":"Please
-      don''t contact me with business offers. Thank you."},"yt$age":{"$t":30},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/favorites?v=2","countHint":40},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/contacts?v=2","countHint":438248},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/subscriptions?v=2","countHint":4},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/uploads?v=2","countHint":243},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Ray"},"yt$gender":{"$t":"m"},"yt$hometown":{"$t":"Your
-      Pants"},"yt$lastName":{"$t":"Johnson"},"yt$location":{"$t":"New York, US"},"yt$occupation":{"$t":"I
-      work part time as a garden gnome."},"yt$statistics":{"lastWebAccess":"2011-07-20T23:59:18.000-07:00","subscriberCount":"5073512","videoWatchCount":0,"viewCount":"327469019","totalUploadViews":"1461156260"},"media$thumbnail":{"url":"http://i4.ytimg.com/i/Gt7X90Au6BV8rf49BiM6Dg/1.jpg?v=d46c71"},"yt$username":{"$t":"RayWilliamJohnson"}}}'
-    http_version: '1.1'
-- !ruby/struct:VCR::HTTPInteraction
-  request: !ruby/struct:VCR::Request
-    method: :get
-    uri: http://gdata.youtube.com:80/feeds/api/users/freddiew?alt=json&dev_key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
-    body: !!null 
-    headers: !!null 
-  response: !ruby/struct:VCR::Response
-    status: !ruby/struct:VCR::ResponseStatus
-      code: 200
-      message: OK
-    headers:
-      x-gdata-user-country:
-      - US
-      content-type:
-      - application/json; charset=UTF-8
-      access-control-allow-origin:
-      - ! '*'
-      expires:
-      - Thu, 15 Dec 2011 23:05:14 GMT
-      date:
-      - Thu, 15 Dec 2011 23:00:14 GMT
-      cache-control:
-      - public, max-age=300, no-transform
-      vary:
-      - Accept, X-GData-Authorization, GData-Version
-      gdata-version:
-      - '2.1'
-      etag:
-      - W/"A0IMRX47eCp7I2A9WhRQGUU."
-      last-modified:
-      - Thu, 15 Dec 2011 22:53:04 GMT
-      transfer-encoding:
-      - chunked
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      server:
-      - GSE
-    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"A0IMRX47eCp7I2A9WhRQGUU.\"","id":{"$t":"tag:youtube.com,2008:user:freddiew"},"published":{"$t":"2006-02-22T00:22:49.000-08:00"},"updated":{"$t":"2011-12-15T14:53:04.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Director"}],"title":{"$t":"freddiew"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=freddiew"},{"rel":"related","type":"text/html","href":"http://facerocker.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/freddiew?v=2"}],"author":[{"name":{"$t":"freddiew"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/freddiew"}}],"yt$aboutMe":{"$t":"WAIT!
-      Don''t send me a YouTube message!\n\nThey''re really difficult for me to respond
-      to, and I can''t see our conversation thread. Email me using the link at the
-      top instead!\n\nSubscribe to us on Facebook http://apps.facebook.com/freddiew/\n\nWanna
-      send me stuff?\n\nFrederick Wong\nPO Box 862272\nLos Angeles, CA 90086"},"yt$age":{"$t":36},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/freddiew/favorites?v=2","countHint":132},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/freddiew/contacts?v=2","countHint":79572},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/freddiew/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/freddiew/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/freddiew/subscriptions?v=2","countHint":10},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/freddiew/uploads?v=2","countHint":120},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/freddiew/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Freddie
-      Wong & Brandon Laatsch"},"yt$gender":{"$t":"m"},"yt$hometown":{"$t":"Los Angeles"},"yt$lastName":{"$t":"Wong"},"yt$location":{"$t":"Los
-      Angeles, US"},"yt$occupation":{"$t":"Film"},"yt$school":{"$t":"USC School of
-      Cinema-Television"},"yt$statistics":{"lastWebAccess":"2011-12-13T22:03:59.000-08:00","subscriberCount":"2655823","videoWatchCount":0,"viewCount":"46411420","totalUploadViews":"481359285"},"media$thumbnail":{"url":"http://i1.ytimg.com/i/DsO-0Yo5zpJk575nKXgMVA/1.jpg?v=bb31cf"},"yt$username":{"$t":"freddiew"}}}'
-    http_version: '1.1'
-- !ruby/struct:VCR::HTTPInteraction
-  request: !ruby/struct:VCR::Request
-    method: :get
-    uri: http://gdata.youtube.com:80/feeds/api/users/lisanova?alt=json&dev_key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
-    body: !!null 
-    headers: !!null 
-  response: !ruby/struct:VCR::Response
-    status: !ruby/struct:VCR::ResponseStatus
-      code: 200
-      message: OK
-    headers:
-      x-gdata-user-country:
-      - US
-      content-type:
-      - application/json; charset=UTF-8
-      access-control-allow-origin:
-      - ! '*'
-      expires:
-      - Thu, 15 Dec 2011 23:05:14 GMT
-      date:
-      - Thu, 15 Dec 2011 23:00:14 GMT
-      cache-control:
-      - public, max-age=300, no-transform
-      vary:
-      - Accept, X-GData-Authorization, GData-Version
-      gdata-version:
-      - '2.1'
-      etag:
-      - W/"DEEGQH47eCp7I2A9WhRQGUU."
-      last-modified:
-      - Thu, 15 Dec 2011 22:03:41 GMT
-      transfer-encoding:
-      - chunked
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      server:
-      - GSE
-    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"DEEGQH47eCp7I2A9WhRQGUU.\"","id":{"$t":"tag:youtube.com,2008:user:LisaNova"},"published":{"$t":"2006-06-05T01:10:54.000-07:00"},"updated":{"$t":"2011-12-15T14:03:41.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Director"}],"title":{"$t":"LisaNova"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=LisaNova"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/zkqXwJoY3hc?v=2"},{"rel":"related","type":"text/html","href":"http://www.twitter.com/lisa_nova"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/LisaNova?v=2"}],"author":[{"name":{"$t":"LisaNova"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/lisanova"}}],"yt$aboutMe":{"$t":"I
-      don''t usually check my Youtube inbox\r\nFor business only contact:\r\nContact[at]MakerNetwork.com"},"yt$age":{"$t":31},"yt$company":{"$t":"Zappin
-      Productions"},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.liveevent","href":"http://gdata.youtube.com/feeds/api/users/lisanova/live/events?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/lisanova/favorites?v=2","countHint":1141},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/lisanova/contacts?v=2","countHint":96518},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/lisanova/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/lisanova/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/lisanova/subscriptions?v=2","countHint":633},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/lisanova/uploads?v=2","countHint":217},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/lisanova/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Lisa"},"yt$gender":{"$t":"f"},"yt$hobbies":{"$t":"movies"},"yt$hometown":{"$t":"New
-      York"},"yt$location":{"$t":"Venice, US"},"yt$movies":{"$t":"The Last Detail.
-      Cool Hand Luke. Stand by Me"},"yt$music":{"$t":"Loretta Lynn. Carl Perkins."},"yt$occupation":{"$t":"Videomaker"},"yt$statistics":{"lastWebAccess":"2011-11-29T19:16:34.000-08:00","subscriberCount":"719918","videoWatchCount":0,"viewCount":"21173039","totalUploadViews":"176408686"},"media$thumbnail":{"url":"http://i2.ytimg.com/i/mhPUWvs_C-zJCnTVXrn5fA/1.jpg?v=d2b112"},"yt$username":{"$t":"LisaNova"}}}'
-    http_version: '1.1'
-- !ruby/struct:VCR::HTTPInteraction
-  request: !ruby/struct:VCR::Request
-    method: :get
-    uri: http://gdata.youtube.com:80/feeds/api/users/raywilliamjohnson?alt=json&dev_key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
-    body: !!null 
-    headers: !!null 
-  response: !ruby/struct:VCR::Response
-    status: !ruby/struct:VCR::ResponseStatus
-      code: 200
-      message: OK
-    headers:
-      x-gdata-user-country:
-      - US
-      content-type:
-      - application/json;charset=UTF-8
-      access-control-allow-origin:
-      - ! '*'
-      expires:
-      - Thu, 15 Dec 2011 23:05:12 GMT
-      date:
-      - Thu, 15 Dec 2011 23:00:12 GMT
-      cache-control:
-      - public, max-age=300, no-transform
-      vary:
-      - Accept, X-GData-Authorization, GData-Version
-      gdata-version:
-      - '2.1'
-      etag:
-      - W/"A08FRH47eCp7I2A9WhRQGUU."
-      last-modified:
-      - Thu, 15 Dec 2011 22:56:55 GMT
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      content-length:
-      - '3033'
-      server:
-      - GSE
-    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"A08FRH47eCp7I2A9WhRQGUU.\"","id":{"$t":"tag:youtube.com,2008:user:RayWilliamJohnson"},"published":{"$t":"2008-05-25T21:54:23.000-07:00"},"updated":{"$t":"2011-12-15T14:56:55.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Comedian"}],"title":{"$t":"RayWilliamJohnson"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=RayWilliamJohnson"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/CcQG2Ulm198?v=2"},{"rel":"related","type":"text/html","href":"http://RayWJ.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/RayWilliamJohnson?v=2"}],"author":[{"name":{"$t":"RayWilliamJohnson"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson"}}],"yt$aboutMe":{"$t":"I''m
-      not interested in making money or business deals in general. Please do not contact
-      me with business offers. Thank you."},"yt$age":{"$t":30},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/favorites?v=2","countHint":42},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/contacts?v=2","countHint":438125},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/subscriptions?v=2","countHint":3},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/uploads?v=2","countHint":247},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Ray"},"yt$gender":{"$t":"m"},"yt$hometown":{"$t":"Your
-      Pants"},"yt$lastName":{"$t":"Johnson"},"yt$location":{"$t":"New York, US"},"yt$occupation":{"$t":"I
-      work part time as a garden gnome."},"yt$statistics":{"lastWebAccess":"2011-07-20T23:59:18.000-07:00","subscriberCount":"5168099","videoWatchCount":0,"viewCount":"332352478","totalUploadViews":"1493065918"},"media$thumbnail":{"url":"http://i4.ytimg.com/i/Gt7X90Au6BV8rf49BiM6Dg/1.jpg?v=dc01e3"},"yt$username":{"$t":"RayWilliamJohnson"}}}'
-    http_version: '1.1'
-- !ruby/struct:VCR::HTTPInteraction
-  request: !ruby/struct:VCR::Request
-    method: :get
-    uri: http://gdata.youtube.com:80/feeds/api/users/freddiew?alt=json&dev_key=&v=2
-    body: !!null 
-    headers: !!null 
-  response: !ruby/struct:VCR::Response
-    status: !ruby/struct:VCR::ResponseStatus
-      code: 200
-      message: OK
-    headers:
-      x-gdata-user-country:
-      - US
-      content-type:
-      - application/json; charset=UTF-8
-      access-control-allow-origin:
-      - ! '*'
-      expires:
-      - Tue, 27 Dec 2011 04:16:15 GMT
-      date:
-      - Tue, 27 Dec 2011 04:11:15 GMT
-      cache-control:
-      - public, max-age=300, no-transform
-      vary:
-      - Accept, X-GData-Authorization, GData-Version
-      gdata-version:
-      - '2.1'
-      etag:
-      - W/"AkUESH47eCp7I2A9WhRXGUg."
-      last-modified:
-      - Tue, 27 Dec 2011 03:56:49 GMT
-      transfer-encoding:
-      - chunked
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      server:
-      - GSE
-    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"AkUESH47eCp7I2A9WhRXGUg.\"","id":{"$t":"tag:youtube.com,2008:user:freddiew"},"published":{"$t":"2006-02-22T00:22:49.000-08:00"},"updated":{"$t":"2011-12-26T19:56:49.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Director"}],"title":{"$t":"freddiew"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=freddiew"},{"rel":"related","type":"text/html","href":"http://facerocker.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/freddiew?v=2"}],"author":[{"name":{"$t":"freddiew"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/freddiew"}}],"yt$aboutMe":{"$t":"WAIT!
-      Don''t send me a YouTube message!\n\nThey''re really difficult for me to respond
-      to, and I can''t see our conversation thread. Email me using the link at the
-      top instead!\n\nSubscribe to us on Facebook http://apps.facebook.com/freddiew/\n\nWanna
-      send me stuff?\n\nFrederick Wong\nPO Box 862272\nLos Angeles, CA 90086"},"yt$age":{"$t":36},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/freddiew/favorites?v=2","countHint":133},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/freddiew/contacts?v=2","countHint":79567},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/freddiew/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/freddiew/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/freddiew/subscriptions?v=2","countHint":10},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/freddiew/uploads?v=2","countHint":122},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/freddiew/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Freddie
-      Wong & Brandon Laatsch"},"yt$gender":{"$t":"m"},"yt$hometown":{"$t":"Los Angeles"},"yt$lastName":{"$t":"Wong"},"yt$location":{"$t":"Los
-      Angeles, US"},"yt$occupation":{"$t":"Film"},"yt$school":{"$t":"USC School of
-      Cinema-Television"},"yt$statistics":{"lastWebAccess":"2011-12-13T22:03:59.000-08:00","subscriberCount":"2731196","videoWatchCount":0,"viewCount":"47620594","totalUploadViews":"492520764"},"media$thumbnail":{"url":"http://i1.ytimg.com/i/DsO-0Yo5zpJk575nKXgMVA/1.jpg?v=bb31cf"},"yt$username":{"$t":"freddiew"}}}'
-    http_version: '1.1'
-- !ruby/struct:VCR::HTTPInteraction
-  request: !ruby/struct:VCR::Request
-    method: :get
-    uri: http://gdata.youtube.com:80/feeds/api/users/lisanova?alt=json&dev_key=&v=2
-    body: !!null 
-    headers: !!null 
-  response: !ruby/struct:VCR::Response
-    status: !ruby/struct:VCR::ResponseStatus
-      code: 200
-      message: OK
-    headers:
-      x-gdata-user-country:
-      - US
-      content-type:
-      - application/json; charset=UTF-8
-      access-control-allow-origin:
-      - ! '*'
-      expires:
-      - Tue, 27 Dec 2011 04:16:16 GMT
-      date:
-      - Tue, 27 Dec 2011 04:11:16 GMT
-      cache-control:
-      - public, max-age=300, no-transform
-      vary:
-      - Accept, X-GData-Authorization, GData-Version
-      gdata-version:
-      - '2.1'
-      etag:
-      - W/"DkIDQH47eCp7I2A9WhRXGUg."
-      last-modified:
-      - Tue, 27 Dec 2011 02:56:11 GMT
-      transfer-encoding:
-      - chunked
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      server:
-      - GSE
-    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"DkIDQH47eCp7I2A9WhRXGUg.\"","id":{"$t":"tag:youtube.com,2008:user:LisaNova"},"published":{"$t":"2006-06-05T01:10:54.000-07:00"},"updated":{"$t":"2011-12-26T18:56:11.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Director"}],"title":{"$t":"LisaNova"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=LisaNova"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/zkqXwJoY3hc?v=2"},{"rel":"related","type":"text/html","href":"http://www.twitter.com/lisa_nova"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/LisaNova?v=2"}],"author":[{"name":{"$t":"LisaNova"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/lisanova"}}],"yt$aboutMe":{"$t":"I
-      don''t usually check my Youtube inbox\r\nFor business only contact:\r\nContact[at]MakerNetwork.com"},"yt$age":{"$t":31},"yt$company":{"$t":"Zappin
-      Productions"},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.liveevent","href":"http://gdata.youtube.com/feeds/api/users/lisanova/live/events?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/lisanova/favorites?v=2","countHint":1141},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/lisanova/contacts?v=2","countHint":96509},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/lisanova/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/lisanova/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/lisanova/subscriptions?v=2","countHint":634},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/lisanova/uploads?v=2","countHint":217},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/lisanova/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Lisa"},"yt$gender":{"$t":"f"},"yt$hobbies":{"$t":"movies"},"yt$hometown":{"$t":"New
-      York"},"yt$location":{"$t":"Venice, US"},"yt$movies":{"$t":"The Last Detail.
-      Cool Hand Luke. Stand by Me"},"yt$music":{"$t":"Loretta Lynn. Carl Perkins."},"yt$occupation":{"$t":"Videomaker"},"yt$statistics":{"lastWebAccess":"2011-11-29T19:16:34.000-08:00","subscriberCount":"718699","videoWatchCount":0,"viewCount":"21212509","totalUploadViews":"176564625"},"media$thumbnail":{"url":"http://i2.ytimg.com/i/mhPUWvs_C-zJCnTVXrn5fA/1.jpg?v=d2b112"},"yt$username":{"$t":"LisaNova"}}}'
-    http_version: '1.1'
-- !ruby/struct:VCR::HTTPInteraction
-  request: !ruby/struct:VCR::Request
-    method: :get
-    uri: http://gdata.youtube.com:80/feeds/api/users/raywilliamjohnson?alt=json&dev_key=&v=2
-    body: !!null 
-    headers: !!null 
-  response: !ruby/struct:VCR::Response
-    status: !ruby/struct:VCR::ResponseStatus
-      code: 200
-      message: OK
-    headers:
-      x-gdata-user-country:
-      - US
-      content-type:
-      - application/json;charset=UTF-8
-      access-control-allow-origin:
-      - ! '*'
-      expires:
-      - Tue, 27 Dec 2011 04:16:13 GMT
-      date:
-      - Tue, 27 Dec 2011 04:11:13 GMT
-      cache-control:
-      - public, max-age=300, no-transform
-      vary:
-      - Accept, X-GData-Authorization, GData-Version
-      gdata-version:
-      - '2.1'
-      etag:
-      - W/"Ak8NQn47eCp7I2A9WhRXGUg."
-      last-modified:
-      - Tue, 27 Dec 2011 04:08:13 GMT
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      content-length:
-      - '3033'
-      server:
-      - GSE
-    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"Ak8NQn47eCp7I2A9WhRXGUg.\"","id":{"$t":"tag:youtube.com,2008:user:RayWilliamJohnson"},"published":{"$t":"2008-05-25T21:54:23.000-07:00"},"updated":{"$t":"2011-12-26T20:08:13.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Comedian"}],"title":{"$t":"RayWilliamJohnson"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=RayWilliamJohnson"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/TDJiNa4gMsA?v=2"},{"rel":"related","type":"text/html","href":"http://RayWJ.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/RayWilliamJohnson?v=2"}],"author":[{"name":{"$t":"RayWilliamJohnson"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson"}}],"yt$aboutMe":{"$t":"I''m
-      not interested in making money or business deals in general. Please do not contact
-      me with business offers. Thank you."},"yt$age":{"$t":30},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/favorites?v=2","countHint":43},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/contacts?v=2","countHint":438212},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/subscriptions?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/uploads?v=2","countHint":250},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Ray"},"yt$gender":{"$t":"m"},"yt$hometown":{"$t":"Your
-      Pants"},"yt$lastName":{"$t":"Johnson"},"yt$location":{"$t":"New York, US"},"yt$occupation":{"$t":"I
-      work part time as a garden gnome."},"yt$statistics":{"lastWebAccess":"2011-07-20T23:59:18.000-07:00","subscriberCount":"5201267","videoWatchCount":0,"viewCount":"335344508","totalUploadViews":"1515085281"},"media$thumbnail":{"url":"http://i4.ytimg.com/i/Gt7X90Au6BV8rf49BiM6Dg/1.jpg?v=dc01e3"},"yt$username":{"$t":"RayWilliamJohnson"}}}'
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJhIrNzpoPjkX_oCZZDif6R4?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:countHint>250</yt:countHint><yt:username>RayWilliamJohnson</yt:username></entry></feed>'
     http_version: '1.1'
