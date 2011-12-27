@@ -17,9 +17,13 @@ module Aji
         expect{ subject.hit }.to change{ subject.hit_count }.by(1)
       end
 
-      it "raises an error when the limit is reached" do
-        hits_per_session.times { subject.hit }
-        expect{ subject.hit }.to raise_error APITracker::LimitReached
+      let(:api_method) { :get }
+      it "records throttle reason and raises an error when not aviailable" do
+        subject.stub :available? => false
+        subject.should_receive(:close_session!).
+          with("available? #{api_method} => false")
+
+        expect{ subject.hit(api_method) }.to raise_error APITracker::LimitReached
       end
 
       it "executes an optional block unless the rate limit is exceeded" do
@@ -78,7 +82,8 @@ module Aji
 
     describe "#seconds_until_available" do
       it "returns the remaining cooldown time in seconds" do
-        redis.should_receive(:ttl).with("api_tracker:spec").and_return("30")
+        redis.should_receive(:ttl).with(key_name).and_return(30)
+
         subject.seconds_until_available.should == 30
       end
     end
@@ -99,10 +104,14 @@ module Aji
     end
 
     describe "#close_session!" do
-      it "sets the throttle key" do
-        subject.redis.should_receive(:hset).with(key_name, 'throttled', 'yes')
+      let(:reason) { random_string }
+      it "sets the throttle key and reason" do
+        subject.redis.should_receive(:hset).
+          with(key_name, subject.throttle_key, 'yes')
+        subject.redis.should_receive(:hset).
+          with(key_name, subject.throttle_reason_key, reason)
 
-        subject.close_session!
+        subject.close_session! reason
       end
 
       it "resets the cool down period" do

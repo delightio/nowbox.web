@@ -30,7 +30,9 @@ module Aji
       end
 
     rescue AuthenticationError, UploadError => e
-      @api.tracker.close_session! if e.message =~ /too_many_recent_calls/
+      reason = "#{@api_info[:uid]}:#{method_name} => #{e.inspect}"
+      Aji.log :ERROR, reason
+      @api.tracker.close_session!(reason) if e.message =~ /too_many_recent_calls/
     end
 
     def post_method? method_name

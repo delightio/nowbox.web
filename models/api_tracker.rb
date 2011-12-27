@@ -40,20 +40,18 @@ module Aji
         hit! api_method
         if block_given? then yield else true end
       else
-        close_session! unless throttle_set?
+        close_session!("available? #{api_method} => false") unless throttle_set?
         raise LimitReached,
           "Exceeded #{hits_per_session} #{namespace} hits before #{cooldown}"
       end
     end
 
     def available? api_method = nil
+      return false if throttle_set?
       if api_method
-        #return false unless hit_count < hits_per_session
         return false unless hit_count(api_method) < @method_limits[api_method]
-        return false if throttle_set?
       else
         return false unless hit_count < hits_per_session
-        return false if throttle_set?
       end
 
       true
@@ -89,11 +87,12 @@ module Aji
       redis.hexists(key, throttle_key)
     end
 
-    def close_session!
-      redis.hset(key, throttle_key, "yes")
+    def close_session! reason=""
+      redis.hset key, throttle_key, "yes"
+      redis.hset key, throttle_reason_key, reason
       redis.expire key, cooldown # reset expiry time
-      redis.zadd(throttle_count_key, Time.now.to_i,
-                 MultiJson.encode(to_json))
+
+      redis.zadd throttle_count_key, Time.now.to_i, MultiJson.encode(to_json)
     end
 
     def to_json
@@ -107,6 +106,10 @@ module Aji
 
     def throttle_key
       'throttled'
+    end
+
+    def throttle_reason_key
+      'throttled_reason'
     end
 
     def throttle_count_key
