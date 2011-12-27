@@ -30,7 +30,7 @@ module Aji
             @subscription_ids[cid] = sub.id
             subs.push(
               Account::Youtube.create_or_find_by_lower_uid(cid).to_channel)
-          end 
+          end
 
           tracker.hit! :get
           options['start-index'] += options['max-results']
@@ -41,7 +41,7 @@ module Aji
           cid = sub.title.split(" ").last.downcase
           @subscription_ids[cid] = sub.id
           subs.push(Account::Youtube.create_or_find_by_lower_uid(cid).to_channel)
-        end 
+        end
       end
     end
 
@@ -153,6 +153,7 @@ module Aji
     end
 
     def valid_uid? uid=uid
+      return false unless uid.ascii_only?
       tracker.hit!
       feed_url = "#{USER_FEED_URL}/#{uid}?dev_key=#{Aji.conf['YOUTUBE_KEY_GLOBAL']}"
       Faraday.get(feed_url).status == 200

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require File.expand_path("../../spec_helper", __FILE__)
 
 include Aji
@@ -430,6 +432,11 @@ describe Aji::YoutubeAPI, :unit, :net do
     end
 
     describe "#valid_uid?" do
+      it "returns false if uid is not in ASCII" do
+        subject.tracker.should_not_receive :hit!
+        subject.valid_uid?("Südafrika").should be_false
+      end
+
       it "hits youtube only once" do
         subject.tracker.should_receive(:hit!)
 
