@@ -104,6 +104,12 @@ module Aji
 
         subject.close_session!
       end
+
+      it "resets the cool down period" do
+        subject.redis.should_receive(:expire).with(key_name, cooldown)
+
+        subject.close_session!
+      end
     end
 
     describe "#key_name" do

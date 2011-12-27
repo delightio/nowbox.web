@@ -91,6 +91,7 @@ module Aji
 
     def close_session!
       redis.hset(key, throttle_key, "yes")
+      redis.expire key, cooldown # reset expiry time
       redis.zadd(throttle_count_key, Time.now.to_i,
                  MultiJson.encode(redis.hgetall(key)))
     end
