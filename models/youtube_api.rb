@@ -234,7 +234,7 @@ module Aji
     def tracker
       @tracker ||= if @token and @secret
                      APITracker.new "#{self.class.to_s}:auth", Aji.redis,
-                       cooldown: 20.minutes, hits_per_session: 10000,
+                       cooldown: 10.minutes, hits_per_session: 100000,
                        method_limits: { post: 0.0 }
                    else
                      APITracker.new "#{self.class.to_s}:global", Aji.redis,
