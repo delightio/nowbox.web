@@ -32,9 +32,11 @@ end
 
 def print_dropped_api_calls n=10
   dropped = Aji.redis.zrevrange "youtube_api:dropped_gets", 0, n, :with_scores=>true
+  puts "#{dropped.count} recent dropped API calls:"
   dropped.each_slice(2) do |h, t|
     puts "#{Time.now.to_i-t.to_i} s ago: #{h}"
   end
+  puts
 end
 
 @facebook_tracker = FacebookAPI.new("dummy token").tracker
@@ -63,6 +65,8 @@ end
 @facebook_tracker.print_stats
 @youtube_gt.print_stats
 @youtube_at.print_stats
+
+print_dropped_api_calls
 
 print_aggregate_stats @twitter_trackers
 
