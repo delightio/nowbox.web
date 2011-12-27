@@ -42,6 +42,7 @@ end
 @facebook_tracker = FacebookAPI.new("dummy token").tracker
 @youtube_gt = YoutubeAPI.global_tracker
 @youtube_at = YoutubeAPI.authed_tracker
+@youtube_at_post = YoutubeAPI.authed_post_tracker
 
 @default_twitter_tracker = TwitterAPI.new(uid: "dummy id").tracker
 
@@ -65,6 +66,7 @@ end
 @facebook_tracker.print_stats
 @youtube_gt.print_stats
 @youtube_at.print_stats
+@youtube_at_post.print_stats
 
 print_dropped_api_calls
 

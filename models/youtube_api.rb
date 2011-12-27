@@ -289,6 +289,10 @@ module Aji
       @authed_tracker ||= new("foo","bar","baz").tracker
     end
 
+    def self.authed_post_tracker
+      @authed_post_tracker ||= new.post_tracker
+    end
+
     class DataGrabber
       def initialize youtube_uid, data=nil
         @youtube_uid = youtube_uid
