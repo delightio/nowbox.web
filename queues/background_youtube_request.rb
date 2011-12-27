@@ -19,7 +19,8 @@ module Aji
     rescue AuthenticationError, UploadError => e
       if e.message =~ /too_many_recent_calls/
         Resque.enqueue_in_front self, api_info, api_method, *args
-        api.tracker.close_session! 
+        api.post_tracker.close_session!(
+          "#{api_info[:uid]}:#{api_method}:#{args * ","} => #{e.inspect}")
       end
     end
   end
