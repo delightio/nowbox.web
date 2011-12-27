@@ -6,9 +6,9 @@ def print_stats api
   time_remaining = api.seconds_until_available.seconds
   time_since_start = (api.cooldown - time_remaining).seconds
 
-  puts "#{api.namespace} has made #{api.hit_count} of #{api.hits_per_session} \
-in the last #{time_since_start.inspect} and has #{time_remaining.inspect} \
-until resetting."
+  puts "#{api.namespace} (availabe? #{api.available?}, throttle_set? #{api.throttle_set?}) \
+has made #{api.hit_count} of #{api.hits_per_session} in the last #{time_since_start.inspect} \
+and has #{time_remaining.inspect} until resetting."
 end
 
 def print_aggregate_stats apis
