@@ -149,6 +149,15 @@ module Aji
       YoutubeSync.new(self).background_push_and_synchronize!
     end
 
+    def unlink_and_destroy
+      if user
+        Aji.log "Unlinking User[#{user.id}]..."
+        user.identity.accounts.delete self
+      end
+      Aji.log "Destroying self..."
+      destroy
+    end
+
     def self.from_auth_hash auth_hash
       info = YoutubeAPI::DataGrabber.new(auth_hash['uid'],
         auth_hash['extra']['user_hash']).build_hash
