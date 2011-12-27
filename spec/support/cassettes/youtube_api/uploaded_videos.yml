@@ -10617,3 +10617,48 @@
       soxors. \nI roxor them."},"yt$age":{"$t":27},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/brentalfloss/favorites?v=2","countHint":85},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/brentalfloss/contacts?v=2","countHint":10436},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/brentalfloss/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/brentalfloss/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/brentalfloss/subscriptions?v=2","countHint":14},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/brentalfloss/uploads?v=2","countHint":274},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/brentalfloss/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Brent"},"yt$gender":{"$t":"m"},"yt$hometown":{"$t":"Irving,
       TX"},"yt$location":{"$t":"New York City, US"},"yt$statistics":{"lastWebAccess":"2011-11-25T12:12:41.000-08:00","subscriberCount":"128245","videoWatchCount":0,"viewCount":"4098893","totalUploadViews":"39579850"},"media$thumbnail":{"url":"http://i3.ytimg.com/i/n0TDqRR4NjwWiAQR9FAd5w/1.jpg?v=779866"},"yt$username":{"$t":"brentalfloss"}}}'
     http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/brentalfloss?alt=json&dev_key=&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Tue, 27 Dec 2011 04:17:03 GMT
+      date:
+      - Tue, 27 Dec 2011 04:12:03 GMT
+      cache-control:
+      - public, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DEcFQH47eCp7I2A9WhRXGUg."
+      last-modified:
+      - Tue, 27 Dec 2011 03:20:11 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"DEcFQH47eCp7I2A9WhRXGUg.\"","id":{"$t":"tag:youtube.com,2008:user:brentalfloss"},"published":{"$t":"2006-10-23T15:59:56.000-07:00"},"updated":{"$t":"2011-12-26T19:20:11.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Director"}],"title":{"$t":"brentalfloss"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=brentalfloss"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/e0EaygJdxyc?v=2"},{"rel":"related","type":"text/html","href":"http://brentalfloss.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/brentalfloss?v=2"}],"author":[{"name":{"$t":"brentalfloss"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/brentalfloss"}}],"yt$aboutMe":{"$t":"Your
+      soxors. \nI roxor them."},"yt$age":{"$t":27},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/brentalfloss/favorites?v=2","countHint":85},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/brentalfloss/contacts?v=2","countHint":10543},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/brentalfloss/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/brentalfloss/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/brentalfloss/subscriptions?v=2","countHint":14},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/brentalfloss/uploads?v=2","countHint":278},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/brentalfloss/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"Brent"},"yt$gender":{"$t":"m"},"yt$hometown":{"$t":"Irving,
+      TX"},"yt$location":{"$t":"New York City, US"},"yt$statistics":{"lastWebAccess":"2011-12-24T14:34:54.000-08:00","subscriberCount":"129971","videoWatchCount":0,"viewCount":"4176004","totalUploadViews":"40317916"},"media$thumbnail":{"url":"http://i3.ytimg.com/i/n0TDqRR4NjwWiAQR9FAd5w/1.jpg?v=779866"},"yt$username":{"$t":"brentalfloss"}}}'
+    http_version: '1.1'
