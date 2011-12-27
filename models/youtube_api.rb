@@ -238,7 +238,7 @@ module Aji
                        method_limits: { post: 0.0 }
                    else
                      APITracker.new "#{self.class.to_s}:global", Aji.redis,
-                       cooldown: 1.hour, hits_per_session: 100000
+                       cooldown: 1.hour, hits_per_session: 1000000
                    end
     end
 
