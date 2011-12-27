@@ -30,6 +30,13 @@ def print_aggregate_stats apis
   puts "With an average hit rate of #{average_hits} over #{1.hour.inspect}"
 end
 
+def print_dropped_api_calls n=10
+  dropped = Aji.redis.zrevrange "youtube_api:dropped_gets", 0, n, :with_scores=>true
+  dropped.each_slice(2) do |h, t|
+    puts "#{Time.now.to_i-t.to_i} s ago: #{h}"
+  end
+end
+
 @facebook_tracker = FacebookAPI.new("dummy token").tracker
 @youtube_gt = YoutubeAPI.global_tracker
 @youtube_at = YoutubeAPI.authed_tracker
