@@ -14,7 +14,7 @@ class APITracker
     time_remaining = seconds_until_available.seconds
     time_since_start = (cooldown - time_remaining).seconds
 
-    puts "#{namespace} (availabe? #{available?}, throttle_set? #{throttle_set?}) " +
+    puts "#{namespace} (availabe? #{available?}, throttled? #{throttled?}) " +
          "has made #{hit_count} of #{hits_per_session} in the last #{time_since_start.inspect} " +
          "and has #{time_remaining.inspect} until resetting."
     print_recent_throttles

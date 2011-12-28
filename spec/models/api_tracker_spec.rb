@@ -80,6 +80,14 @@ module Aji
       end
     end
 
+    describe "#throttled?" do
+      it "is true after we close_session!" do
+        expect { subject.close_session! }.
+          to change { subject.throttled? }.
+          from(false).to(true)
+      end
+    end
+
     describe "#seconds_until_available" do
       it "returns the remaining cooldown time in seconds" do
         redis.should_receive(:ttl).with(key_name).and_return(30)

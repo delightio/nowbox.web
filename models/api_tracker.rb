@@ -40,14 +40,14 @@ module Aji
         hit! api_method
         if block_given? then yield else true end
       else
-        close_session!("available? #{api_method} => false") unless throttle_set?
+        close_session!("available? #{api_method} => false") unless throttled?
         raise LimitReached,
           "Exceeded #{hits_per_session} #{namespace} hits before #{cooldown}"
       end
     end
 
     def available? api_method = nil
-      return false if throttle_set?
+      return false if throttled?
       if api_method
         return false unless hit_count(api_method) < @method_limits[api_method]
       else
@@ -83,7 +83,7 @@ module Aji
       end
     end
 
-    def throttle_set?
+    def throttled?
       redis.hexists(key, throttle_key)
     end
 
