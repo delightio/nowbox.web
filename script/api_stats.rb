@@ -3,11 +3,19 @@ require_relative '../aji'
 include Aji
 
 class APITracker
-  def print_recent_throttles n=10
-    throttles = redis.zrevrange throttle_count_key, 0, n, :with_scores=>true
-    throttles.each_slice(2) do |h, t|
+  def print_zset k, n=10
+    zset = redis.zrevrange k, 0, n, :with_scores=>true
+    zset.each_slice(2) do |h, t|
       puts "#{Time.now.to_i-t.to_i} s ago: #{h}"
     end
+  end
+
+  def print_recent_throttles n=10
+    print_zset throttle_count_key, n
+  end
+
+  def print_recent_missed_calls n=10
+    print_zset missed_calls_key, n
   end
 
   def print_stats
@@ -17,7 +25,9 @@ class APITracker
     puts "#{namespace} (availabe? #{available?}, throttled? #{throttled?}) " +
          "has made #{hit_count} of #{hits_per_session} in the last #{time_since_start.inspect} " +
          "and has #{time_remaining.inspect} until resetting."
+
     print_recent_throttles
+    print_recent_missed_calls
     puts
   end
 end

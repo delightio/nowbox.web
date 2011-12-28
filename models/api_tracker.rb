@@ -95,6 +95,10 @@ module Aji
       redis.zadd throttle_count_key, Time.now.to_i, MultiJson.encode(to_json)
     end
 
+    def add_missed_call info
+      redis.zadd missed_calls_key, Time.now.to_i, info
+    end
+
     def to_json
       h = redis.hgetall key
       h.merge "ttl" => seconds_until_available.to_s # consistent w/ hgetall
@@ -114,6 +118,10 @@ module Aji
 
     def throttle_count_key
       "#{key}:throttle_count"
+    end
+
+    def missed_calls_key
+      "#{key}:missed_calls"
     end
 
     def key

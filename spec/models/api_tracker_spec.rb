@@ -88,6 +88,16 @@ module Aji
       end
     end
 
+    describe "#add_missed_call" do
+      let(:call_info) { random_string }
+      it "saves missed call info" do
+        redis.should_receive(:zadd).
+          with(subject.missed_calls_key, an_instance_of(Fixnum), call_info)
+
+        subject.add_missed_call call_info
+      end
+    end
+
     describe "#seconds_until_available" do
       it "returns the remaining cooldown time in seconds" do
         redis.should_receive(:ttl).with(key_name).and_return(30)

@@ -12,6 +12,7 @@ module Aji
     def method_missing method_name, *args, &block
       super unless @api.respond_to? method_name
 
+      call_info = "#{@api_info[:uid]}:#{method_name}:#{args * ","}"
       if post_method? method_name
         Resque.enqueue Queues::BackgroundYoutubeRequest, @api_info, method_name,
           *args
@@ -19,8 +20,8 @@ module Aji
         if @api.tracker.available?
           @api.send method_name, *args, &block
         else
-          Aji.redis.zadd "youtube_api:dropped_gets", Time.now.to_i,
-            "#{@api_info[:uid]}:#{method_name}:#{args * ","}"
+          @api.tracker.add_missed_call call_info
+
           if array_method? method_name
             []
           else
@@ -30,8 +31,9 @@ module Aji
       end
 
     rescue AuthenticationError, UploadError => e
-      reason = "#{@api_info[:uid]}:#{method_name} => #{e.inspect}"
-      Aji.log :ERROR, reason
+      @api.tracker.add_missed_call call_info
+
+      reason = "#{call_info} => #{e.inspect}"
       @api.tracker.close_session!(reason) if e.message =~ /too_many_recent_calls/
     end
 
