@@ -2,8 +2,9 @@ module Aji
   class YoutubeSync
     attr_reader :user, :account
 
-    def initialize account
+    def initialize account, min_delay_between_calls=1
       @account, @user = account, account.user
+      @min_delay_between_calls = min_delay_between_calls
     end
 
     def synchronize! disable_resync = false
@@ -21,9 +22,10 @@ module Aji
     end
 
     def push_and_synchronize! disable_resync = false
-      push_subscribed_channels
-      push_favorite_videos
-      push_watch_later_videos
+      # Disable mass subscription push per YouTube API team request.
+      # push_subscribed_channels
+      # push_favorite_videos
+      # push_watch_later_videos
 
       synchronize! disable_resync
     end
@@ -61,18 +63,21 @@ module Aji
         c.background_refresh_content
         user.subscribe c
       end
+      delay
     end
 
     def sync_watch_later
       youtube_watch_later_videos.each do |v|
         user.enqueue_video v, Time.now
       end
+      delay
     end
 
     def sync_favorites
       youtube_favorite_videos.each do |v|
         user.favorite_video v, Time.now
       end
+      delay
     end
 
     def youtube_subscriptions
@@ -113,5 +118,16 @@ module Aji
       Resque.enqueue Queues::SynchronizeWithYoutube, account.id,
         disable_resync, :push_first
     end
+
+    def delay
+      unless @min_delay_between_calls==0
+        sleep random_cooldown
+      end
+    end
+
+    def random_cooldown
+      @min_delay_between_calls + rand(@min_delay_between_calls*2)
+    end
+    private :delay, :random_cooldown
   end
 end

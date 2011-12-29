@@ -20,7 +20,7 @@ describe Aji::YoutubeSync, :unit do
     end
   end
 
-  subject { Aji::YoutubeSync.new account }
+  subject { Aji::YoutubeSync.new account, 0 }
 
   let(:account) do
     mock "account", :api => api, :id => 11, :user => user, :save => true,
@@ -386,6 +386,34 @@ describe Aji::YoutubeSync, :unit do
         :push_first)
 
       subject.background_push_and_synchronize! :disable_resync
+    end
+  end
+
+  describe "#delay" do
+    it "does not sleep when minimum delay is 0" do
+      delay =0
+      subject = Aji::YoutubeSync.new account, delay
+      subject.should_not_receive(:sleep)
+
+      subject.send :delay
+    end
+
+    it "sleeps a random number of second specified by random_cooldown" do
+      delay = 10
+      subject = Aji::YoutubeSync.new account, delay
+      subject.stub :random_cooldown => delay
+      subject.should_receive(:sleep).with(delay)
+
+      subject.send :delay
+    end
+  end
+
+  describe "#random_cooldown" do
+    let(:min) { 10 }
+    let(:max) { 3 * min}
+    let(:subject) { Aji::YoutubeSync.new account, min }
+    it "generates a random number between @min_delay_between_calls and 3 x @min_delay_between_calls" do
+      subject.send(:random_cooldown).should be_between(min, max)
     end
   end
 
