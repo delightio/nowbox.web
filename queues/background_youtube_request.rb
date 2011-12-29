@@ -4,13 +4,7 @@ module Aji
 
     @queue = :background_youtube_request
 
-    def self.droppable? api_method
-      ["subscribe_to"].include? api_method
-    end
-
     def self.perform api_info, api_method, *args
-      return if droppable? api_method
-
       api = YoutubeAPI.new api_info['uid'], api_info['token'],
         api_info['secret']
 
