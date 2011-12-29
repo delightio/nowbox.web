@@ -48,7 +48,7 @@ describe Aji::YoutubeSync, :unit do
 
   let(:youtube_subscriptions) { other_channels }
   let(:youtube_watch_later_videos) do
-    other_queued_videos.select{ |v| v.source == :youtubei }
+    other_queued_videos.select{ |v| v.source == :youtube }
   end
 
   let(:youtube_favorite_videos) do
@@ -174,6 +174,12 @@ describe Aji::YoutubeSync, :unit do
 
       subject.sync_subscribed_channels
     end
+
+    it "applies a delay between existing" do
+      subject.should_receive(:delay).once
+
+      subject.sync_subscribed_channels
+    end
   end
 
   describe "#sync_watch_later" do
@@ -198,6 +204,12 @@ describe Aji::YoutubeSync, :unit do
       other_queued_videos.each do |v|
         user.should_not_receive(:dequeue_video).with(v)
       end
+
+      subject.sync_watch_later
+    end
+
+    it "applies a delay between existing" do
+      subject.should_receive(:delay).once
 
       subject.sync_watch_later
     end
@@ -227,7 +239,13 @@ describe Aji::YoutubeSync, :unit do
         user.should_not_receive(:unfavorite).with(v)
       end
 
-      subject.sync_watch_later
+      subject.sync_favorites
+    end
+
+    it "applies a delay between existing" do
+      subject.should_receive(:delay).once
+
+      subject.sync_favorites
     end
   end
 
@@ -279,9 +297,10 @@ describe Aji::YoutubeSync, :unit do
 
   describe "#push_and_synchronize!" do
     it "pushes videos and channels to youtube before sync" do
-      subject.should_receive(:push_subscribed_channels)
-      subject.should_receive(:push_favorite_videos)
-      subject.should_receive(:push_watch_later_videos)
+      # Disable mass subscription push per YouTube API team request.
+      # subject.should_receive(:push_subscribed_channels)
+      # subject.should_receive(:push_favorite_videos)
+      # subject.should_receive(:push_watch_later_videos)
 
       subject.should_receive(:synchronize!)
 
@@ -335,11 +354,6 @@ describe Aji::YoutubeSync, :unit do
         to change { subject.youtube_watch_later_videos.count }.
         by(remotely_watched_videos.count)
     end
-
-    it "clears the youtube watch later cache" do
-      subject.push_watch_later_videos
-      subject.instance_variable_get(:@youtube_watch_later_videos).should be_nil
-    end
   end
 
   describe "#background_synchronize!" do
@@ -374,5 +388,6 @@ describe Aji::YoutubeSync, :unit do
       subject.background_push_and_synchronize! :disable_resync
     end
   end
+
 end
 
