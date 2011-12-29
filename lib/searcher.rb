@@ -59,6 +59,7 @@ module Aji
 
     def results
       return [] unless Searcher.enabled?
+      return [] if @query.empty?
 
       authors = account_results + authors_from_keyword_search
       filtered_authors = unique_and_sorted authors

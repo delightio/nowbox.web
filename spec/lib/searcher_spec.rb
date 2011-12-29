@@ -124,7 +124,7 @@ describe Searcher, :net do
     subject { @searcher }
     before do
       @account_count = 2
-      @searcher = Searcher.new ""
+      @searcher = Searcher.new random_string
       @accounts = (1..@account_count).map do |n|
         account = mock("account", :id => n,
                        :username => random_string,
@@ -142,6 +142,13 @@ describe Searcher, :net do
         y.accounts.first.subscriber_count <=> x.accounts.first.subscriber_count
       end
       @searcher.stub(:account_results).and_return(@accounts)
+    end
+
+    it "returns right the way when query is empty" do
+      subject = Searcher.new " "
+      subject.should_not_receive :account_results
+
+      subject.results.should be_empty
     end
 
     context "multiple results are found" do
