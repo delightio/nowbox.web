@@ -39,6 +39,16 @@ module Aji
       write_attribute(:action, value.to_s)
     end
 
+    def video_action?
+      Event.video_actions.include? action
+    end
+
+    def to_s
+      str = "Event[#{id}]: U[#{user.id}] #{action.to_s.ljust(11)} @ %.2f s" % video_elapsed
+      str+= " V[#{video.id}]: '#{video.title.max(20)}' in" if video_action?
+      str+= " Ch[#{channel.id}]: #{channel.title}"
+    end
+
     private
     def process
       user.process_event self

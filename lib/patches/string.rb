@@ -77,5 +77,13 @@ module Aji::StringTokenizer
 
 end
 
+module Aji::StringFormatter
+  def max n
+     return self if length < n
+     "#{self[0..(n-1-3)]}..."
+  end
+end
+
 String.extend Aji::RandomString
 String.send :include, Aji::StringTokenizer
+String.send :include, Aji::StringFormatter
