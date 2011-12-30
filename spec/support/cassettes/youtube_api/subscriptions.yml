@@ -246,3 +246,97 @@
       Pants"},"yt$lastName":{"$t":"Johnson"},"yt$location":{"$t":"New York, US"},"yt$occupation":{"$t":"I
       work part time as a garden gnome."},"yt$statistics":{"lastWebAccess":"2011-07-20T23:59:18.000-07:00","subscriberCount":"5201311","videoWatchCount":0,"viewCount":"335344508","totalUploadViews":"1515085281"},"media$thumbnail":{"url":"http://i4.ytimg.com/i/Gt7X90Au6BV8rf49BiM6Dg/1.jpg?v=dc01e3"},"yt$username":{"$t":"RayWilliamJohnson"}}}'
     http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/lisanova?alt=json&key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Fri, 30 Dec 2011 03:20:48 GMT
+      date:
+      - Fri, 30 Dec 2011 03:20:48 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"Dk8HRH47eCp7I2A9WhRWEk0."
+      last-modified:
+      - Fri, 30 Dec 2011 00:27:15 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"Dk8HRH47eCp7I2A9WhRWEk0.\"","id":{"$t":"tag:youtube.com,2008:user:LisaNova"},"published":{"$t":"2006-06-05T01:10:54.000-07:00"},"updated":{"$t":"2011-12-29T16:27:15.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Director"}],"title":{"$t":"LisaNova"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=LisaNova"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/zkqXwJoY3hc?v=2"},{"rel":"related","type":"text/html","href":"http://www.twitter.com/lisa_nova"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/LisaNova?v=2"}],"author":[{"name":{"$t":"LisaNova"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/lisanova"}}],"yt$aboutMe":{"$t":"I
+      don''t usually check my Youtube inbox\r\nFor business only contact:\r\nContact[at]MakerNetwork.com"},"yt$age":{"$t":31},"yt$company":{"$t":"Zappin
+      Productions"},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.liveevent","href":"http://gdata.youtube.com/feeds/api/users/lisanova/live/events?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/lisanova/favorites?v=2","countHint":1141},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/lisanova/contacts?v=2","countHint":96504},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/lisanova/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/lisanova/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/lisanova/subscriptions?v=2","countHint":634},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/lisanova/uploads?v=2","countHint":217},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/lisanova/newsubscriptionvideos?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.recentactivity","href":"http://gdata.youtube.com/feeds/api/users/lisanova/events?v=2"}],"yt$firstName":{"$t":"Lisa"},"yt$gender":{"$t":"f"},"yt$hobbies":{"$t":"movies"},"yt$hometown":{"$t":"New
+      York"},"yt$location":{"$t":"Venice, US"},"yt$movies":{"$t":"The Last Detail.
+      Cool Hand Luke. Stand by Me"},"yt$music":{"$t":"Loretta Lynn. Carl Perkins."},"yt$occupation":{"$t":"Videomaker"},"yt$statistics":{"lastWebAccess":"2011-11-29T19:16:34.000-08:00","subscriberCount":"718402","videoWatchCount":0,"viewCount":"21218328","totalUploadViews":"176607639"},"media$thumbnail":{"url":"http://i2.ytimg.com/i/mhPUWvs_C-zJCnTVXrn5fA/1.jpg?v=d2b112"},"yt$username":{"$t":"LisaNova"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/raywilliamjohnson?alt=json&key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Fri, 30 Dec 2011 03:20:48 GMT
+      date:
+      - Fri, 30 Dec 2011 03:20:48 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"Dk8CSX47eCp7I2A9WhRWEkw."
+      last-modified:
+      - Fri, 30 Dec 2011 03:14:28 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"Dk8CSX47eCp7I2A9WhRWEkw.\"","id":{"$t":"tag:youtube.com,2008:user:RayWilliamJohnson"},"published":{"$t":"2008-05-25T21:54:23.000-07:00"},"updated":{"$t":"2011-12-29T19:14:28.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Comedian"}],"title":{"$t":"RayWilliamJohnson"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=RayWilliamJohnson"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/TDJiNa4gMsA?v=2"},{"rel":"related","type":"text/html","href":"http://RayWJ.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/RayWilliamJohnson?v=2"}],"author":[{"name":{"$t":"RayWilliamJohnson"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson"}}],"yt$aboutMe":{"$t":"I''m
+      not interested in making money or business deals in general. Please do not contact
+      me with business offers. Thank you."},"yt$age":{"$t":30},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/favorites?v=2","countHint":44},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/contacts?v=2","countHint":438199},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/subscriptions?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/uploads?v=2","countHint":250},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/newsubscriptionvideos?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.recentactivity","href":"http://gdata.youtube.com/feeds/api/users/raywilliamjohnson/events?v=2"}],"yt$firstName":{"$t":"Ray"},"yt$gender":{"$t":"m"},"yt$hometown":{"$t":"Your
+      Pants"},"yt$lastName":{"$t":"Johnson"},"yt$location":{"$t":"New York, US"},"yt$occupation":{"$t":"I
+      work part time as a garden gnome."},"yt$statistics":{"lastWebAccess":"2011-07-20T23:59:18.000-07:00","subscriberCount":"5209052","videoWatchCount":0,"viewCount":"335701052","totalUploadViews":"1518711747"},"media$thumbnail":{"url":"http://i4.ytimg.com/i/Gt7X90Au6BV8rf49BiM6Dg/1.jpg?v=dc01e3"},"yt$username":{"$t":"RayWilliamJohnson"}}}'
+    http_version: '1.1'

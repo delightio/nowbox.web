@@ -178,3 +178,51 @@
       [Hawks]"},"yt$gender":{"$t":"m"},"yt$hobbies":{"$t":"Makin z videox"},"yt$location":{"$t":"CA"},"yt$movies":{"$t":"Austin
       Powers"},"yt$music":{"$t":"Tool, Rage Against the Machine, APC"},"yt$occupation":{"$t":"Student"},"yt$statistics":{"lastWebAccess":"2011-08-16T06:33:35.000-07:00","subscriberCount":"664","videoWatchCount":0,"viewCount":"13450","totalUploadViews":"963776"},"media$thumbnail":{"url":"http://i1.ytimg.com/i/0YcjhK7b76VDoce80SU0-w/1.jpg?v=af6c3e"},"yt$username":{"$t":"lookitsmyvideo"}}}'
     http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/lookitsmyvideo?alt=json&key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Fri, 30 Dec 2011 03:21:07 GMT
+      date:
+      - Fri, 30 Dec 2011 03:21:07 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DUUCSH47eCp7I2A9WhRWEUg."
+      last-modified:
+      - Thu, 29 Dec 2011 11:14:29 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"DUUCSH47eCp7I2A9WhRWEUg.\"","id":{"$t":"tag:youtube.com,2008:user:lookitsmyvideo"},"published":{"$t":"2008-10-13T15:23:40.000-07:00"},"updated":{"$t":"2011-12-29T03:14:29.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Director"}],"title":{"$t":"lookitsmyvideo"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=lookitsmyvideo"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/PFZbDu8P-e0?v=2"},{"rel":"related","type":"text/html","href":"http://twitter.com/lookitsmyvideo"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo?v=2"}],"author":[{"name":{"$t":"lookitsmyvideo"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo"}}],"yt$aboutMe":{"$t":"AMD
+      Phenom 955 BE OC''d to 3.6GHz Quad Core\nEVGA GeForce GTX560ti 1GB\n8GB DDR3
+      1333mhz Corsair XMS3 RAM\n250GB 7200 RPM\n1.5TB 7200 RPM\nMSi NF750-G55 Mobo\nCorsair
+      H70\n\nNOT A SUB4SUB CHANNEL"},"yt$age":{"$t":18},"yt$books":{"$t":"NO"},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/favorites?v=2","countHint":147},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/contacts?v=2","countHint":192},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/subscriptions?v=2","countHint":76},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/uploads?v=2","countHint":202},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/newsubscriptionvideos?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.recentactivity","href":"http://gdata.youtube.com/feeds/api/users/lookitsmyvideo/events?v=2"}],"yt$firstName":{"$t":"Alex
+      [Hawks]"},"yt$gender":{"$t":"m"},"yt$hobbies":{"$t":"Makin z videox"},"yt$location":{"$t":"CA"},"yt$movies":{"$t":"Austin
+      Powers"},"yt$music":{"$t":"Tool, Rage Against the Machine, APC"},"yt$occupation":{"$t":"Student"},"yt$statistics":{"lastWebAccess":"2011-08-16T06:33:35.000-07:00","subscriberCount":"675","videoWatchCount":0,"viewCount":"13523","totalUploadViews":"969700"},"media$thumbnail":{"url":"http://i1.ytimg.com/i/0YcjhK7b76VDoce80SU0-w/1.jpg?v=af6c3e"},"yt$username":{"$t":"lookitsmyvideo"}}}'
+    http_version: '1.1'

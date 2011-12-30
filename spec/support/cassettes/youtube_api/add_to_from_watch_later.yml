@@ -470,3 +470,97 @@
       Entertainment"},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.liveevent","href":"http://gdata.youtube.com/feeds/api/users/funimation/live/events?v=2","countHint":19},{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/funimation/favorites?v=2","countHint":7},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/funimation/contacts?v=2","countHint":35800},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/funimation/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/funimation/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/funimation/subscriptions?v=2","countHint":11},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/funimation/uploads?v=2","countHint":5871},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/funimation/newsubscriptionvideos?v=2"}],"yt$firstName":{"$t":"FUNimation"},"yt$hobbies":{"$t":"Anime,
       Manga, Music, Video Games"},"yt$location":{"$t":"Flower Mound, TX, US"},"yt$statistics":{"lastWebAccess":"2011-10-25T08:19:57.000-07:00","subscriberCount":"324690","videoWatchCount":0,"viewCount":"11110121","totalUploadViews":"119894782"},"media$thumbnail":{"url":"http://i3.ytimg.com/i/Vi2lI40LetxLBKn-rtWC3A/1.jpg?v=4ee7ae2c"},"yt$username":{"$t":"FUNimation"}}}'
     http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/funimation?alt=json&key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Fri, 30 Dec 2011 03:21:00 GMT
+      date:
+      - Fri, 30 Dec 2011 03:21:00 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"D0UBRX47eCp7I2A9WhRWEkw."
+      last-modified:
+      - Fri, 30 Dec 2011 03:20:54 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"D0UBRX47eCp7I2A9WhRWEkw.\"","id":{"$t":"tag:youtube.com,2008:user:FUNimation"},"published":{"$t":"2006-09-19T11:44:04.000-07:00"},"updated":{"$t":"2011-12-29T19:20:54.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Director"}],"title":{"$t":"FUNimation"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=FUNimation"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/zBa-9Zl3yfA?v=2"},{"rel":"related","type":"text/html","href":"http://www.funimation.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/FUNimation?v=2"}],"author":[{"name":{"$t":"FUNimation"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/funimation"}}],"yt$aboutMe":{"$t":"Do
+      you love anime? We sure do! And we work hard to bring you the best in anime.\r\n\r\nStay
+      Connected with us at:\r\n\r\nhttp://FUNimation.com/news\r\nhttp://facebook.com/FUNimation\r\nhttp://twitter.com/FUNimation"},"yt$age":{"$t":23},"yt$company":{"$t":"FUNimation
+      Entertainment"},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.liveevent","href":"http://gdata.youtube.com/feeds/api/users/funimation/live/events?v=2","countHint":19},{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/funimation/favorites?v=2","countHint":7},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/funimation/contacts?v=2","countHint":35798},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/funimation/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/funimation/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/funimation/subscriptions?v=2","countHint":11},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/funimation/uploads?v=2","countHint":5878},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/funimation/newsubscriptionvideos?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.recentactivity","href":"http://gdata.youtube.com/feeds/api/users/funimation/events?v=2"}],"yt$firstName":{"$t":"FUNimation"},"yt$hobbies":{"$t":"Anime,
+      Manga, Music, Video Games"},"yt$location":{"$t":"Flower Mound, TX, US"},"yt$statistics":{"lastWebAccess":"2011-10-25T08:19:57.000-07:00","subscriberCount":"325815","videoWatchCount":0,"viewCount":"11188153","totalUploadViews":"120371282"},"media$thumbnail":{"url":"http://i3.ytimg.com/i/Vi2lI40LetxLBKn-rtWC3A/1.jpg?v=4ee7ae2c"},"yt$username":{"$t":"FUNimation"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/funimation?alt=json&key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Fri, 30 Dec 2011 03:21:01 GMT
+      date:
+      - Fri, 30 Dec 2011 03:21:01 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"D0UBRX47eCp7I2A9WhRWEkw."
+      last-modified:
+      - Fri, 30 Dec 2011 03:20:54 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"D0UBRX47eCp7I2A9WhRWEkw.\"","id":{"$t":"tag:youtube.com,2008:user:FUNimation"},"published":{"$t":"2006-09-19T11:44:04.000-07:00"},"updated":{"$t":"2011-12-29T19:20:54.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Director"}],"title":{"$t":"FUNimation"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=FUNimation"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/zBa-9Zl3yfA?v=2"},{"rel":"related","type":"text/html","href":"http://www.funimation.com"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/FUNimation?v=2"}],"author":[{"name":{"$t":"FUNimation"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/funimation"}}],"yt$aboutMe":{"$t":"Do
+      you love anime? We sure do! And we work hard to bring you the best in anime.\r\n\r\nStay
+      Connected with us at:\r\n\r\nhttp://FUNimation.com/news\r\nhttp://facebook.com/FUNimation\r\nhttp://twitter.com/FUNimation"},"yt$age":{"$t":23},"yt$company":{"$t":"FUNimation
+      Entertainment"},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.liveevent","href":"http://gdata.youtube.com/feeds/api/users/funimation/live/events?v=2","countHint":19},{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/funimation/favorites?v=2","countHint":7},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/funimation/contacts?v=2","countHint":35798},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/funimation/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/funimation/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/funimation/subscriptions?v=2","countHint":11},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/funimation/uploads?v=2","countHint":5878},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/funimation/newsubscriptionvideos?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.recentactivity","href":"http://gdata.youtube.com/feeds/api/users/funimation/events?v=2"}],"yt$firstName":{"$t":"FUNimation"},"yt$hobbies":{"$t":"Anime,
+      Manga, Music, Video Games"},"yt$location":{"$t":"Flower Mound, TX, US"},"yt$statistics":{"lastWebAccess":"2011-10-25T08:19:57.000-07:00","subscriberCount":"325815","videoWatchCount":0,"viewCount":"11188153","totalUploadViews":"120371282"},"media$thumbnail":{"url":"http://i3.ytimg.com/i/Vi2lI40LetxLBKn-rtWC3A/1.jpg?v=4ee7ae2c"},"yt$username":{"$t":"FUNimation"}}}'
+    http_version: '1.1'

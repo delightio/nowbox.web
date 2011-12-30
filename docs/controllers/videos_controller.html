@@ -88,6 +88,7 @@
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="n">get</span> <span class="s1">&#39;/:video_id&#39;</span> <span class="k">do</span>
+        <span class="n">publicly_cacheable!</span> <span class="mi">1</span><span class="o">.</span><span class="n">hour</span>
         <span class="n">find_video_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:video_id</span><span class="o">]</span>
       <span class="k">end</span>
     <span class="k">end</span>
