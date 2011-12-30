@@ -26,7 +26,7 @@ class Stats
     Stats.print "Most subscribed channels:", Channel, Channel.most_subscribed(period)
     Stats.print "Most unsubscribed channels:", Channel, Channel.most_unsubscribed(period)
 
-    Stats.print "Most active users:", User, User.most_active(period)
+    Stats.print "Most active users:", User, User.most_active(period, 20)
   end
 end
 
