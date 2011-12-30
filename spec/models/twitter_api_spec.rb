@@ -9,11 +9,11 @@ include Aji
 # TODO: Only be authorized for the tests that need it!
 describe Aji::TwitterAPI, :unit, :net do
   subject do
-    TwitterAPI.new "RWUyehmqjKRBMSlVTeZDw",
-      "BglumdMZZoYjosQIV8acdf9twivPrH15jE6AL2jmw",
-      # uid: "128416456932204544"
-      token: "178492493-AmMNGcEjYmK7OuCL7jNlPVv85yHGNmVmVMfJhTtN",
-      secret: "DwRJZLB8UYAovc7L9fqavHvRPDNoFoX0IPM3V34z0"
+    TwitterAPI.new "wUhKhUtZKz39SvGRvcEXQ",
+      "rJ0XLCxMChhcO0GK3vhRRLTg42T24m5rMov30Oav4ww",
+      # uid: "14373489" # on staging
+      token: "14373489-7eVCmhQkOWM5pFytjXSwN63MaCA8p5JOKMIktcqqG",
+      secret: "fhQLo5aZQm3xYgwPoqCEYyNp2sPdfJSwRlb6dF6ss"
   end
 
   describe "#valid_uid?" do
