@@ -47,6 +47,12 @@ module Aji
     end
 
     def available? api_method = nil
+
+      # Temp fix for why key still exists but there is no expiry time.
+      unless seconds_until_available > 0
+        redis.expire key, cooldown
+      end
+
       return false if throttled?
       if api_method
         return false unless hit_count(api_method) < @method_limits[api_method]
