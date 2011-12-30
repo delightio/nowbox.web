@@ -86,13 +86,7 @@ end
 
 period = 1.days.ago..Time.now
 
-# Stats.print "Most popular videos:", Video, Video.most_popular(period)
-# Stats.print "Most shared videos:", Video, Video.most_shared(period)
-
-# Stats.print "Most subscribed channels:", Channel, Channel.most_subscribed(period)
-# Stats.print "Most unsubscribed channels:", Channel, Channel.most_unsubscribed(period)
-
-# Stats.print "Most active users:", User, User.most_active(period)
-
 Stats.print_all period
+
+
 binding.pry if ARGV.first == '-i'
