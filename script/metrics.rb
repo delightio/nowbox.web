@@ -55,7 +55,7 @@ class Channel
     Stats.group_by_occurance unsubscribed, :channel_id, n
   end
 
-  def to_s; "#{id.to_s.rjust(8)} #{title} in #{category.title}"; end
+  def to_s; "#{id.to_s.rjust(8)} #{title} in #{categories.first.try(:title)}"; end
 end
 
 class User
