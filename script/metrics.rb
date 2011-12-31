@@ -16,45 +16,43 @@ class Stats
       o = klass.find oid
       puts " #{count.to_s.rjust(4)} | #{o.to_s}"
     end
-    puts
   end
 
   def self.print_all period
-    Stats.print "Most popular videos:", Video, Video.most_popular(period)
-    Stats.print "Most shared videos:", Video, Video.most_shared(period)
-
-    Stats.print "Most subscribed channels:", Channel, Channel.most_subscribed(period)
-    Stats.print "Most unsubscribed channels:", Channel, Channel.most_unsubscribed(period)
-
     Stats.print "Most active users:", User, User.most_active(period, 20)
+    puts
+    puts
+
+    Stats.print_video_events period
+    puts
+    Stats.print_channel_events period
   end
+
+  def self.print_video_events period, n=10
+    Event.video_actions.each do |action|
+      events = Event.where :created_at => period, :action => action
+      events_with_count = Stats.group_by_occurance events, :video_id, n
+      Stats.print "#{events.count} #{action} events:", Video, events_with_count
+      puts
+    end
+  end
+
+  def self.print_channel_events period, n=10
+    Event.channel_actions.each do |action|
+      events = Event.where :created_at => period, :action => action
+      events_with_count = Stats.group_by_occurance events, :channel_id, n
+      Stats.print "#{events.count} #{action} events:", Channel, events_with_count
+      puts
+    end
+  end
+
 end
 
 class Video
-  def self.most_popular period, n=10
-    viewed = Event.where(:created_at => period, :action => :view)
-    Stats.group_by_occurance viewed, :video_id, n
-  end
-
-  def self.most_shared period, n=10
-    viewed = Event.where(:created_at => period, :action => :share)
-    Stats.group_by_occurance viewed, :video_id, n
-  end
-
-  def to_s; "#{id.to_s.rjust(8)} #{title}" end
+  def to_s; "#{id.to_s.rjust(8)} #{title}"; end
 end
 
 class Channel
-  def self.most_subscribed period, n=10
-    subscribed = Event.where(:created_at => period, :action => :subscribe)
-    Stats.group_by_occurance subscribed, :channel_id, n
-  end
-
-  def self.most_unsubscribed period, n=10
-    unsubscribed = Event.where(:created_at => period, :action => :unsubscribe)
-    Stats.group_by_occurance unsubscribed, :channel_id, n
-  end
-
   def to_s; "#{id.to_s.rjust(8)} #{title} in #{categories.first.try(:title)}"; end
 end
 
