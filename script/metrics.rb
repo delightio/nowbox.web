@@ -64,8 +64,12 @@ class User
     Stats.group_by_occurance events, :user_id, n
   end
 
-  def time_on_app period=1.days.ago..Time.now
-    viewed = Event.where(:created_at => period, :action => :view, :user_id => id)
+  def minutes_on_app period=nil
+    viewed = if period
+                Event.where(:created_at => period, :action => :view, :user_id => id)
+              else
+                Event.where(:action => :view, :user_id => id)
+              end
     total = 0
     viewed.each do | event |
       duration = event.video_elapsed - event.video_start
@@ -75,12 +79,18 @@ class User
     Integer total/60
   end
 
-  def to_s
+  def youtube_account
+    return nil if identity.accounts.empty?
+    identity.accounts.select{|a| a.class == Account::Youtube }.first
+  end
+
+  def to_s period=1.days.ago..Time.now
     info = [].tap do |names|
+      names << "yt: #{youtube_account.username}" if youtube_account
       names << "t: #{twitter_account.username}" if twitter_account
-      names << "f: #{facebook_account.username}" if facebook_account
+      names << "fb: #{facebook_account.username}" if facebook_account
     end
-    "#{id.to_s.rjust(8)}, #{time_on_app} m, #{info.join(", ")}"
+    "#{id.to_s.rjust(8)}, #{(minutes_on_app period).to_s.rjust(3)} / #{minutes_on_app.to_s.rjust(3)} m, #{info.join(", ")}"
   end
 end
 
