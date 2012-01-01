@@ -94,9 +94,10 @@ module Aji
     end
 
     def serializable_hash options={}
+      vid_offset = 4194303
       if populated?
         {
-          "id" => id,
+          "id" => id+vid_offset,
           "title" => title,
           "description" => description,
           "thumbnail_uri" => thumbnail_uri,
@@ -109,7 +110,7 @@ module Aji
           "author" => author.serializable_hash
         }
       else
-        { "id" => id, "external_id" => external_id, "source" => source.to_s }
+        { "id" => id+vid_offset, "external_id" => external_id, "source" => source.to_s }
       end
     end
 

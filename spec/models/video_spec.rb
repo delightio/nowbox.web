@@ -145,6 +145,10 @@ module Aji
          :serializable_hash => "a category")
       end
 
+      it "returns video id bigger than 4194303" do
+        subject.serializable_hash['id'].should > 4194303
+      end
+
       it "contains only source, external_id, and id when not populated" do
         subject.serializable_hash.should == { "id" => 42,
           "external_id" => "afakevideo1", "source" => 'youtube' }
