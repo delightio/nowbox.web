@@ -293,6 +293,22 @@ module Aji
       @authed_post_tracker ||= new.post_tracker
     end
 
+    def default_return method_name
+      return [] if array_method? method_name
+      nil
+    end
+
+    def post_method? method_name
+      [:subscribe_to, :unsubscribe_from, :add_to_favorites, :add_to_watch_later,
+       :remove_from_favorites, :remove_from_watch_later].include? method_name
+    end
+
+    def array_method? method_name
+      [:subscriptions, :favorite_videos, :uploaded_videos,
+       :watch_later_videos].include? method_name
+    end
+
+
     class DataGrabber
       def initialize youtube_uid, data=nil
         @youtube_uid = youtube_uid

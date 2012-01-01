@@ -510,4 +510,48 @@ describe Aji::YoutubeAPI, :unit, :net do
       end
     end
   end
+
+  describe "#default_return" do
+    subject { YoutubeAPI.new }
+    it "returns [] if method expects an array" do
+      subject.stub :array_method? => true
+
+      subject.default_return(stub).should == []
+    end
+
+    it "returns nil otherwise" do
+      subject.stub :array_method? => false
+      subject.default_return(stub).should be_nil
+    end
+  end
+
+  describe "#post_method?" do
+    subject { YoutubeAPI.new }
+
+    it "returns true if it's a POST" do
+      [ :subscribe_to, :unsubscribe_from, :add_to_favorites, :add_to_watch_later,
+        :remove_from_favorites, :remove_from_watch_later].each do |method|
+        subject.post_method?(method).should be_true
+      end
+    end
+
+    it "returns false otherwise" do
+      subject.post_method?(stub).should be_false
+    end
+  end
+
+  describe "#array_method?" do
+    subject { YoutubeAPI.new }
+
+    it "returns true if method expects to output an array" do
+      [ :subscriptions, :favorite_videos, :uploaded_videos,
+       :watch_later_videos].each do |method|
+        subject.array_method?(method).should be_true
+      end
+    end
+
+    it "returns false otherwise" do
+      subject.array_method?(stub).should be_false
+    end
+  end
 end
