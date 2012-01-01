@@ -105,7 +105,9 @@ module Aji
           break if new_videos.count >= total
         end
       end
-      new_videos[(total-limit)...total].to_a
+      # iOS nsindexset can't handle video ID bigger than 4194303
+      # new_videos[(total-limit)...total].to_a
+      new_videos.select{|v| v.id < 4194303 }[(total-limit)...total].to_a
     end
 
     def background_refresh_content time = nil
