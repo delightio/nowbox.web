@@ -88,6 +88,7 @@ module Aji
         # Always returns user channels in ascending order and
         # ignores blacklisted or viewed
         content_video_ids_rev.each do |channel_video_id|
+          next unless channel_video_id < 4194303
           video = Video.find_by_id channel_video_id
           new_videos << video unless video.nil?
           break if new_videos.count >= total
@@ -99,15 +100,14 @@ module Aji
         # TODO: use Redis for this.. zdiff not found?
         viewed_video_ids = user.history_channel.content_video_ids
         content_video_ids.each do |channel_video_id|
+          next unless channel_video_id < 4194303
           video = Video.find_by_id channel_video_id
           next if video.nil? || video.blacklisted?
           new_videos << video if !viewed_video_ids.member? channel_video_id
           break if new_videos.count >= total
         end
       end
-      # iOS nsindexset can't handle video ID bigger than 4194303
-      # new_videos[(total-limit)...total].to_a
-      new_videos.select{|v| v.id < 4194303 }[(total-limit)...total].to_a
+      new_videos[(total-limit)...total].to_a
     end
 
     def background_refresh_content time = nil
