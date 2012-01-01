@@ -2,7 +2,7 @@ module Aji
   class YoutubeSync
     attr_reader :user, :account
 
-    def initialize account, min_delay_between_calls=1
+    def initialize account, min_delay_between_calls=0
       @account, @user = account, account.user
       @min_delay_between_calls = min_delay_between_calls
     end
