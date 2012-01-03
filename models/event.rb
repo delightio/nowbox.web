@@ -43,6 +43,13 @@ module Aji
       Event.video_actions.include? action
     end
 
+    def verified_video_elapsed
+      return nil unless video_action?
+      video_duration = Video.select('duration').find(video_id).duration
+      return 0.0 if video_elapsed > video_duration
+      video_elapsed
+    end
+
     def to_s
       str = "Event[#{id}]: U[#{user.id}] #{action.to_s.ljust(11)} @ %.2f s" % video_elapsed
       str+= " V[#{video.id}]: '#{video.title.max(20)}' in" if video_action?
