@@ -2,6 +2,8 @@ require_relative '../aji'
 include Aji
 
 class Stats
+  @@launch_date = Time.local(2012,12,14) # give it one extra day
+
   def self.group_by_occurance values, key, n
     grouped = values.all.map(&key).group_by{|g| g}
     sorted = grouped.sort { |x,y| y.last.count <=> x.last.count }
@@ -26,6 +28,10 @@ class Stats
     Stats.print_video_events period
     puts
     Stats.print_channel_events period
+    puts
+
+    Stats.print_time_on_app period
+    Stats.print_time_on_app
   end
 
   def self.print_video_events period, n=10
@@ -44,6 +50,21 @@ class Stats
       Stats.print "#{events.count} #{action} events:", Channel, events_with_count
       puts
     end
+  end
+
+  def self.print_time_on_app period=@@launch_date..Time.now
+    events = Event.where :created_at => period, :action => :view
+    total = 0.tap do |total|
+      events.each do |event|
+        total += event.verified_video_elapsed
+      end
+    end
+
+    users = User.where :created_at => period
+    user_count = users.count
+    avg = total / user_count.to_f
+
+    puts "Average time on App (#{period}) = #{total/user_count.to_f} (#{total} s / #{user_count} users)"
   end
 
 end
