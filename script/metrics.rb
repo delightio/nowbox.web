@@ -2,7 +2,7 @@ require_relative '../aji'
 include Aji
 
 class Stats
-  @@launch_date = Time.local(2012,12,14) # give it one extra day
+  @@launch_date = Time.local(2011,12,14) # give it one extra day
 
   def self.group_by_occurance values, key, n
     grouped = values.all.map(&key).group_by{|g| g}
