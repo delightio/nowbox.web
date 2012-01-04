@@ -53,8 +53,7 @@ class Stats
   end
 
   def self.print_time_on_app period=@@launch_date..Time.now
-    events = Event.where :created_at => period, :action => :view
-    total = events.map(&:verified_video_elapsed).reduce(:+)
+    total = Event.where(:created_at => period, :action => :view).sum('video_elapsed')
 
     users = User.where :created_at => period
     user_count = users.count
