@@ -54,12 +54,10 @@ class Stats
 
   def self.print_time_on_app period=@@launch_date..Time.now
     total = Event.where(:created_at => period, :action => :view).sum('video_elapsed')
+    user_count = Event.where(:created_at => period, :action => :view).select('user_id').count(:distinct=>true)
+    avg_mins = total / user_count / 60.0
 
-    users = User.where :created_at => period
-    user_count = users.count
-    avg = total / user_count.to_f
-
-    puts "Average time on App (#{period}) = #{total/user_count.to_f} (#{total} s / #{user_count} users)"
+    puts "Average time on App (#{period}) = %.2f m (#{total} s / #{user_count} users)" % avg_mins
     summary = [].tap do |summary|
       Event.video_actions.each do |action|
         summary << (
