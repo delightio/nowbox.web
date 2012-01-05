@@ -20,14 +20,6 @@ describe Aji::Channel do
   end
 
   describe "#personalized_content_videos" do
-    let(:small_vid) { stub :id => 100 }
-    let(:big_vid) { stub :id => 4194393 }
-    it "never return video ID >= 4194393" do
-      fixed_channel = Channel::Fixed.create
-      fixed_channel.stub :content_videos_rev => [small_vid, big_vid]
-      fixed_channel.personalized_content_videos(user: mock).should == [small_vid]
-    end
-
     context "when dealing with fixed channels" do
       let(:blacklisted) { mock "blacklisted", :blacklisted? => true, :id => 10 }
       let(:viewed) { mock "viewed", :blacklisted? => false, :id => 20 }
