@@ -20,7 +20,6 @@ describe Aji::Channel do
   end
 
   describe "#personalized_content_videos" do
-
     context "when dealing with fixed channels" do
       let(:blacklisted) { mock "blacklisted", :blacklisted? => true, :id => 10 }
       let(:viewed) { mock "viewed", :blacklisted? => false, :id => 20 }
