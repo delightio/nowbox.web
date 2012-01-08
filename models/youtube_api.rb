@@ -202,7 +202,8 @@ module Aji
     def channel_search keywords
       tracker.hit!
       @conn ||= Faraday.new :url => 'https://gdata.youtube.com/'
-      request = "feeds/api/channels/?v=2&alt=json&q=#{URI.escape(keywords)}"
+      request = "feeds/api/channels/?v=2&key=#{Aji.conf['YOUTUBE_KEY_GLOBAL']}"
+      request+= "&alt=json&q=#{URI.escape(keywords)}"
       response = @conn.get request
       json = JSON.parse response.body
       json['feed']['entry'].map {|r| r["author"].first['name']["$t"].downcase }
