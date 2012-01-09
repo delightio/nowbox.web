@@ -18,6 +18,7 @@ Quick Tricks and Tips
 - Generate fresh documentation `bin/aji docs`
 - Update config/resque_schedule.yml:
     ``heroku config:add RESQUE_SCHEDULE="`cat config/resque_schedule.yml`"``
+- Flush/reset memcache: `heroku run rake flush_memcache --app $APPNAME`
 
 Technology Stack
 ----------------
