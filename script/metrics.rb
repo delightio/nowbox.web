@@ -31,6 +31,13 @@ class Stats
     puts
 
     Stats.print_time_on_app period
+    puts
+
+    puts "Last 7 days"
+    Stats.print_time_on_app 7.days.ago..Time.now
+    puts
+
+    puts "Since launch"
     Stats.print_time_on_app
   end
 
@@ -73,6 +80,8 @@ class Stats
       end
     end
     puts "  Channel: #{summary.join ', '}"
+
+    puts "  User: new #{User.where(:created_at=>period).count}"
   end
 
 end
