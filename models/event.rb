@@ -12,7 +12,7 @@ module Aji
   # - updated_at: DateTime
   class Event < ActiveRecord::Base
     def self.video_actions
-      [ :view, :share, :enqueue, :dequeue, :examine, :unfavorite ]
+      [ :view, :share, :enqueue, :dequeue, :examine, :favorite, :unfavorite ]
     end
 
     def self.channel_actions
