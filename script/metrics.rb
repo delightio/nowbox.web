@@ -81,7 +81,8 @@ class Stats
     end
     puts "  Channel: #{summary.join ', '}"
 
-    puts "  User: new #{User.where(:created_at=>period).count}"
+    new_user_count = User.where(:created_at=>period).count
+    puts "  User: new #{new_user_count}, returning #{user_count-new_user_count}"
   end
 
 end
