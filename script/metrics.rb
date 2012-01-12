@@ -12,11 +12,11 @@ class Stats
 
   def self.print description, klass, stats
     puts description
-    stats.each do |h|
+    stats.each_with_index do |h,index|
       oid = h.keys.first
       count = h.values.first
       o = klass.find oid
-      puts " #{count.to_s.rjust(4)} | #{o.to_s}"
+      puts "#{(index+1).to_s.rjust(3)}.  #{count.to_s.rjust(4)} | #{o.to_s}"
     end
   end
 
@@ -31,6 +31,13 @@ class Stats
     puts
 
     Stats.print_time_on_app period
+    puts
+
+    puts "Last 7 days"
+    Stats.print_time_on_app 7.days.ago..Time.now
+    puts
+
+    puts "Since launch"
     Stats.print_time_on_app
   end
 
@@ -73,6 +80,9 @@ class Stats
       end
     end
     puts "  Channel: #{summary.join ', '}"
+
+    new_user_count = User.where(:created_at=>period).count
+    puts "  User: new #{new_user_count}, returning #{user_count-new_user_count}"
   end
 
 end
@@ -117,7 +127,7 @@ class User
       names << "t: #{twitter_account.username}" if twitter_account
       names << "fb: #{facebook_account.username}, #{facebook_account.[:auth_info]["user_info"]["email"]}" if facebook_account
     end
-    "#{id.to_s.rjust(8)}, #{(minutes_on_app period).to_s.rjust(3)} / #{minutes_on_app.to_s.rjust(3)} m, #{info.join(", ")}"
+    "#{id.to_s.rjust(8)}, #{(minutes_on_app period).to_s.rjust(3)} / #{minutes_on_app.to_s.rjust(3)} m, #{events.count} events, #{subscribed_channel_ids.count} channels, #{info.join(", ")}"
   end
 end
 
