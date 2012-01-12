@@ -125,15 +125,21 @@ class User
     info = [].tap do |names|
       names << "yt: #{youtube_account.username}" if youtube_account
       names << "t: #{twitter_account.username}" if twitter_account
-      names << "fb: #{facebook_account.username}" if facebook_account
+      names << "fb: #{facebook_account.username}, #{facebook_account.[:auth_info]["user_info"]["email"]}" if facebook_account
     end
     "#{id.to_s.rjust(8)}, #{(minutes_on_app period).to_s.rjust(3)} / #{minutes_on_app.to_s.rjust(3)} m, #{events.count} events, #{subscribed_channel_ids.count} channels, #{info.join(", ")}"
   end
 end
 
-period = 1.days.ago..Time.now
+first_arg = ARGV.first
+n = if first_arg.to_i.to_s == first_arg
+      first_arg.to_i
+    else
+      1
+    end
+period = n.days.ago..Time.now
 
 Stats.print_all period
 
 
-binding.pry if ARGV.first == '-i'
+binding.pry if first_arg == '-i'
