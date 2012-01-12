@@ -4,10 +4,14 @@ include Aji
 class Stats
   @@launch_date = Time.local(2011,12,14) # give it one extra day
 
-  def self.group_by_occurance values, key, n
+  def self.group_by_occurance_all values, key
     grouped = values.all.map(&key).group_by{|g| g}
     sorted = grouped.sort { |x,y| y.last.count <=> x.last.count }
-    formatted = sorted.map {|h| { h.first => h.last.count } }.first(n)
+    formatted = sorted.map {|h| { h.first => h.last.count } }
+  end
+
+  def self.group_by_occurance values, key, n
+    group_by_occurance_all(values,key).first(n)
   end
 
   def self.print description, klass, stats
@@ -23,6 +27,7 @@ class Stats
   def self.print_all period
     Stats.print "Most active users:", User, User.most_active(period, 20)
     puts
+    Stats.print "Least active users:", User, User.least_active(period, 20)
     puts
 
     Stats.print_video_events period
@@ -99,6 +104,11 @@ class User
   def self.most_active period, n=10
     events = Event.where(:created_at => period)
     Stats.group_by_occurance events, :user_id, n
+  end
+
+  def self.least_active period, n=10
+    events = Event.where(:created_at => period)
+    Stats.group_by_occurance_all(events, :user_id).last(n)
   end
 
   def minutes_on_app period=nil
