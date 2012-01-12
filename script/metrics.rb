@@ -25,9 +25,9 @@ class Stats
   end
 
   def self.print_all period
-    Stats.print "Most active users:", User, User.most_active(period, 20)
+    Stats.print "Most active users:", User, User.most_active(period, 40)
     puts
-    Stats.print "Least active users:", User, User.least_active(period, 20)
+    Stats.print "Least active users:", User, User.least_active(period, 40)
     puts
 
     Stats.print_video_events period
@@ -108,7 +108,7 @@ class User
 
   def self.least_active period, n=10
     events = Event.where(:created_at => period)
-    Stats.group_by_occurance_all(events, :user_id).last(n)
+    Stats.group_by_occurance_all(events, :user_id).last(100).sample(n)
   end
 
   def minutes_on_app period=nil
