@@ -125,7 +125,7 @@ class User
     info = [].tap do |names|
       names << "yt: #{youtube_account.username}" if youtube_account
       names << "t: #{twitter_account.username}" if twitter_account
-      names << "fb: #{facebook_account.username}, #{facebook_account.[:auth_info]["user_info"]["email"]}" if facebook_account
+      names << "fb: #{facebook_account.username}, #{facebook_account.auth_info["user_info"]["email"]}" if facebook_account
     end
     "#{id.to_s.rjust(8)}, #{(minutes_on_app period).to_s.rjust(3)} / #{minutes_on_app.to_s.rjust(3)} m, #{events.count} events, #{subscribed_channel_ids.count} channels, #{info.join(", ")}"
   end
