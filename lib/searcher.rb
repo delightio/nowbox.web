@@ -40,7 +40,7 @@ module Aji
       return [] if @query.empty?
 
       filtered_authors = unique_and_sorted authors_from_channel_search
-      channels = filtered_authors.first(20).map(&:to_channel)
+      channels = filtered_authors.first(10).map(&:to_channel)
 
       # TODO: hack to make NowPopular searchable
       # splits = @query.split ' '
