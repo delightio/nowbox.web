@@ -34,69 +34,21 @@ describe Searcher, :net do
     end
   end
 
-  describe "#account_results_from_indextank" do
-
-    context "when searching for existing account" do
-      subject { Searcher.new @query }
-      before :each do
-        @query = "nowmov"
-        @account = Account::Twitter.new(:uid => "355199843",
-                                        :username => @query)
-        @account.stub(:searchable?).and_return(true)
-        @account.save
-      end
-
-      it "returns result from IndexTank" do
-        subject.account_results.should include @account
-      end
-    end
-  end
-
-  describe "#account_results" do
-    it "creates YouTube channel if we don't have it in our db" do
-      query = random_string
-      subject = Searcher.new query
-
-      youtube_account = mock "youtube"
-      Account::Youtube.should_receive(:create_if_existing).
-        with(query).and_return(youtube_account)
-
-      subject.stub(:account_results_from_indextank).and_return([])
-      subject.account_results.should == [youtube_account]
-    end
-
-    it "will not search youtube for existing accounts if query has more than 1 word" do
-      query = "steve jobs"
-      subject = Searcher.new query
-
-      subject.stub(:account_results_from_indextank).and_return([])
-      Account::Youtube.should_receive(:create_if_existing).never
-
-      subject.account_results
-    end
-
-  end
-
-  describe "#video_results_from_keywords" do
+  describe "#authors_from_channel_search" do
+    let(:uids) { [stub, stub] }
+    let(:accounts) { [stub, stub] }
     let(:query) { "blah" }
     subject { Searcher.new query }
 
-    it "does a search on given query as keyword search on YouTube" do
-      YoutubeAPI.any_instance.should_receive(:keyword_search).
-        with(query, Searcher.max_video_count_from_keyword_search)
-      subject.video_results_from_keywords
-    end
-  end
+    it "creates Account object from channel_search" do
+      YoutubeAPI.any_instance.should_receive(:channel_search).
+        with(query).and_return(uids)
+      uids.each_with_index do |uid, index|
+        Account::Youtube.should_receive(:find_or_create_by_lower_uid).
+          with(uid).and_return(accounts[index])
+      end
 
-  describe "#authors_from_keyword_search" do
-    subject { Searcher.new "" }
-    it "returns authors from keyword search result" do
-      author = mock "author"
-      video = mock "video", :author => author
-      videos = [video]
-      subject.should_receive(:video_results_from_keywords).
-        and_return(videos)
-      subject.authors_from_keyword_search.should == [author]
+      subject.authors_from_channel_search.should == accounts
     end
   end
 
@@ -136,12 +88,10 @@ describe Searcher, :net do
                               :accounts => [account]))
                               account
       end
-      @channels = @accounts.map &:to_channel
-
-      @sorted_channels = @channels.sort do |x,y|
-        y.accounts.first.subscriber_count <=> x.accounts.first.subscriber_count
+      @sorted_accounts = @accounts.sort do |x,y|
+        y.subscriber_count <=> x.subscriber_count
       end
-      @searcher.stub(:account_results).and_return(@accounts)
+      @sorted_channels = @sorted_accounts.map &:to_channel
     end
 
     it "returns right the way when query is empty" do
@@ -153,18 +103,14 @@ describe Searcher, :net do
 
     context "multiple results are found" do
       before :each do
-        subject.stub(:account_results).and_return(@accounts)
-        subject.stub(:authors_from_keyword_search).and_return(@accounts)
-      end
-
-      it "returns unique results" do
-        results = subject.results
-        results.should have(@account_count).channels
-        results.should == @sorted_channels
+        subject.should_receive(:authors_from_channel_search).
+          and_return(@accounts)
+        subject.should_receive(:unique_and_sorted).
+          with(@accounts).and_return(@sorted_accounts)
       end
 
       it "enqueue all channels for refresh" do
-        @channels.each do |ch|
+        @sorted_channels.each do |ch|
           ch.should_receive(:background_refresh_content).once
         end
         subject.results

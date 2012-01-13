@@ -485,6 +485,35 @@ describe Aji::YoutubeAPI, :unit, :net do
     end
   end
 
+  describe "#channel_search" do
+    let(:query) { "freddie wong" }
+    subject { YoutubeAPI.new }
+
+    it "hits youtube once for the search" do
+      result = VCR.use_cassette "youtube_api/channel_search" do
+        subject.channel_search query
+      end
+
+      subject.tracker.hit_count.should == 1
+    end
+
+    it "returns an array of channel uids" do
+      result = VCR.use_cassette "youtube_api/channel_search" do
+        subject.channel_search query
+      end
+
+      result.should include 'freddiew'
+    end
+
+    it "returns empty array if anything goes wrong" do
+      Faraday.should_receive(:new).and_return(
+        lambda { raise "error" } )
+
+      result = subject.channel_search query
+      result.should == []
+    end
+  end
+
   context "for a user with uploaded content" do
     subject { YoutubeAPI.new "brentalfloss" }
 
