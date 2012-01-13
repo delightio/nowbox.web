@@ -209,7 +209,10 @@ module Aji
       json['feed']['entry'].map {|r| r["author"].first['name']["$t"].downcase }
 
     rescue => e
-      Aji.log "Error in #channel_search(#{keywords}) => #{e.message}"
+      Aji.log :error, "Error getting: #{request}"
+      Aji.log :error, "  Raw response: #{response}"
+      Aji.log :error, "  JSON: #{json}"
+      Aji.log :error, "Error in #channel_search(#{keywords}) => #{e.message}"
       []
     end
 
