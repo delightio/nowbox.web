@@ -9,7 +9,7 @@ Event.where(:created_at => n.days.ago..Time.now, :action => :view).
   order('video_elapsed DESC').limit(limit).each_with_index do |e, index|
     if e.video_elapsed > e.video.duration + 1.0
       puts "#{index}  #{e}"
-      # e.destroy
+      e.destroy
     end
   end;
 puts
@@ -19,7 +19,7 @@ Event.where(:created_at => n.days.ago..Time.now, :action => :view).
   order('video_elapsed ASC').limit(limit).each_with_index do |e, index|
     if e.video_elapsed < 0
       puts "#{index}  #{e}"
-      # e.destroy
+      e.destroy
     end
   end;
 puts
@@ -29,7 +29,7 @@ Event.where(:created_at => n.days.ago..Time.now, :action => :view).
   order('video_start DESC').limit(limit).each_with_index do |e, index|
     if e.video_start > e.video.duration + 1.0
       puts "#{index}  #{e}"
-      # e.destroy
+      e.destroy
     end
   end;
 puts
@@ -39,6 +39,6 @@ Event.where(:created_at => n.days.ago..Time.now, :action => :view).
   order('video_start ASC').limit(limit).each_with_index do |e, index|
     if e.video_start < 0
       puts "#{index}  #{e}"
-      # e.destroy
+      e.destroy
     end
   end;
