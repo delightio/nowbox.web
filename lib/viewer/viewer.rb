@@ -127,33 +127,32 @@ module Aji
     #   deliver('channel', 'layout_channel')
     # end
 
-    # this should not be used anymore?
-    # get '/video/:video_id/:share_id' do
-    #    begin
-    #     @video = Video.find(params[:video_id])
-    #     if(params[:share_id])
-    #       @share = Share.find(params[:share_id])
-    #       @user = @share.user
-    #       @rec_videos = Share.where("user_id = ? AND id <> ?", @user.id, @share.id).limit(3 * 3)
-    #       @share_url = "http://nowbox.com/video/#{@video.id}/#{@share.id}"
-    #     else
-    #       @rec_videos = Share.find(:all, :order => "id desc", :limit => 3 * 3)
-    #       @share_url = "http://nowbox.com/video/#{@video.id}"
-    #     end
-    #
-    #     deliver('video', 'layout_video')
-    #   rescue
-    #     Aji.log :WARN, "#{e.class}: #{e.message}"
-    #     erb :'404', {:layout => :layout_error}
-    #   end
-    # end
+    get '/videos/:video_id' do
+      begin
+        @share = nil
+        @video = Video.find params[:video_id]
+        @link = URI.escape @video.share_link
+        @message = ""
+        # + 2 so it's always even. We don't get a share event when sharing via email.
+        @username = "#{2 + Share.where(:video_id => @video.id).count} people"
+        @profile_pic = "/images/graphics/user_placeholder_image.png"
+
+        erb :video, { :layout => :layout_video }
+
+      rescue => e
+        Aji.log :WARN, "#{e.class}: #{e.message}"
+        erb :'404', {:layout => :layout_error}
+      end
+    end
 
     get '/shares/:share_id' do
        begin
         @share      = Share.find(params[:share_id])
-        @user       = @share.user
         @video      = @share.video
-        @rec_videos = [] # Don't show recommended videos
+        @link       = URI.escape @share.link
+        @message    = @share.message
+        @username   = @share.publisher.username
+        @profile_pic= @share.publisher.thumbnail_uri
 
         erb :video, { :layout => :layout_video }
 

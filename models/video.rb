@@ -73,6 +73,10 @@ module Aji
       end
     end
 
+    def share_link
+      "http://#{Aji.conf['TLD']}/videos/#{id}"
+    end
+
     # Since Video#relevance is usually used when calculating a large collection
     # of videos, we request the input parameter to be an integer to save
     # unnecessary .to_i conversion on the time object

@@ -31,6 +31,12 @@ module Aji
       end
     end
 
+    describe "#share_link" do
+      it "is in http://TLD/videos/:id format" do
+        subject.share_link.should == "http://#{Aji.conf['TLD']}/videos/#{subject.id}"
+      end
+    end
+
     describe "#populate" do
       it "should not be populated unless explicitly asked" do
         subject.should_not be_populated
