@@ -92,6 +92,7 @@ end
 
 require 'active_support/core_ext/object'
 # Monkey Patching
+require_relative 'lib/patches/time'
 require_relative 'lib/patches/string'
 require_relative 'lib/patches/resque'
 require_relative 'lib/patches/youtube_it/parser'

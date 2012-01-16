@@ -46,7 +46,7 @@ module Aji
     end
 
     def to_s
-      str = "Event[#{id}]: U[#{user.id}] #{action.to_s.ljust(11)} @ %.2f s" % video_elapsed
+      str = "#{created_at.age} Event[#{id}]: U[#{user.id}] #{action.to_s.ljust(11)} @ %.2f s" % video_elapsed
       str+= " V[#{video.id}]: '#{video.title.max(20)}' in" if video_action?
       str+= " Ch[#{channel.id}]: #{channel.title}"
     end
