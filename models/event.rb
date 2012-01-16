@@ -31,6 +31,8 @@ module Aji
 
     after_create :process
 
+    scope :latest, lambda { |n=10| order('created_at desc').limit(n) }
+
     def action
       read_attribute(:action).to_sym
     end
