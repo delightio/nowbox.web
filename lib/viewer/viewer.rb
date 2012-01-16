@@ -117,9 +117,9 @@ module Aji
       redirect to("/shares/#{random_share.id}")
     end
 
-    get '/giveaway' do
-      erb :giveaway, { :layout => :layout_giveaway }
-    end
+    # get '/giveaway' do
+    #   erb :giveaway, { :layout => :layout_giveaway }
+    # end
 
     # get '/channel/:channel_id' do
     #   @channel = Channel.find(params[:channel_id]).serializable_hash(:inline_videos => 3 * 6)
