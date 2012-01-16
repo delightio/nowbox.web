@@ -117,6 +117,10 @@ module Aji
       redirect to("/shares/#{random_share.id}")
     end
 
+    get '/tos' do
+      erb :tos
+    end
+
     # get '/giveaway' do
     #   erb :giveaway, { :layout => :layout_giveaway }
     # end
