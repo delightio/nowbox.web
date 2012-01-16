@@ -11,6 +11,10 @@ module Aji
       "http://#{Aji.conf['TLD']}/images/icons/categories/recommended.png"
     end
 
+    def title
+      "Recommended"
+    end
+
     def refresh_content force=false
     end
 
