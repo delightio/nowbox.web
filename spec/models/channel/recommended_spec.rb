@@ -52,6 +52,12 @@ describe Channel::Recommended do
       ids = subject.content_video_ids
     end
 
+    it "truncates to only 20 videos" do
+      subject.should_receive(:truncate).with(20)
+
+      subject.content_video_ids
+    end
+
     context "when there were events" do
       let(:another_video) { Video.create(:source => :youtube, :external_id => 'afakevideo3') }
       it "ranks one by events associated with the given channel" do

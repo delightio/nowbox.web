@@ -25,7 +25,7 @@ module Aji
         Aji.redis.expire content_zset.key, content_zset_ttl
 
         # Re rank based on user's past events.
-        (content_zset.revrange 0, 20).each do |vid|
+        (content_zset.revrange 0, 30).each do |vid|
           video = Video.find_by_id vid
           next if video.nil?
           channel = video.author.to_channel
@@ -42,8 +42,10 @@ module Aji
           new_score = bias + relevance_of(video)
           push video, new_score
         end
-      end
 
+        # Keep top 20 videos
+        truncate 20
+      end
       (content_zset.revrange 0, (limit-1)).map(&:to_i)
     end
 
