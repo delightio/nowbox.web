@@ -282,6 +282,7 @@ module Aji
       history_channel.merge! other.history_channel
       favorite_channel.merge! other.favorite_channel
       queue_channel.merge! other.queue_channel
+      recommended_channel.merge! other.recommended_channel
 
       self.region = other.region
       self.settings = other.settings

@@ -12,6 +12,7 @@ describe Aji::User do
       u.stub :history_channel => stub(:merge! => true, :push => true)
       u.stub :favorite_channel => stub(:merge! => true, :push => true)
       u.stub :queue_channel => stub(:merge! => true, :push => true)
+      u.stub :recommended_channel => stub(:merge! => true, :push => true)
       u.stub :save => true
       u.stub :identity => identity
     end
@@ -765,15 +766,18 @@ describe Aji::User do
       end
     end
 
-    it "combines history, favorites, and queues of the two users" do
+    it "combines recommended, history, favorites, and queues of the two users" do
       subject.history_channel.should_receive(
         :merge!).with(other_user.history_channel)
-        subject.favorite_channel.should_receive(
-          :merge!).with(other_user.favorite_channel)
-          subject.queue_channel.should_receive(
-            :merge!).with(other_user.queue_channel)
-            subject.merge! other_user
+      subject.favorite_channel.should_receive(
+        :merge!).with(other_user.favorite_channel)
+      subject.queue_channel.should_receive(
+        :merge!).with(other_user.queue_channel)
+      subject.recommended_channel.should_receive(
+        :merge!).with(other_user.recommended_channel)
 
+
+      subject.merge! other_user
     end
 
     it "keeps the identity of the local (implicit) user" do

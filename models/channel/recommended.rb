@@ -47,5 +47,21 @@ module Aji
       (content_zset.revrange 0, (limit-1)).map(&:to_i)
     end
 
+    def merge! other
+      other.content_zset.members(:with_scores => true).each do |(vid,score)|
+        content_zset[vid] = score
+      end
+
+      other.category_id_zset.members(:with_scores => true).each do |(cid,score)|
+        category_id_zset[cid] = score
+      end
+
+      other.events.each do |ev|
+        events << ev
+      end
+
+      save
+    end
+
   end
 end
