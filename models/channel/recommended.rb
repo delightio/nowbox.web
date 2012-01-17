@@ -23,7 +23,27 @@ module Aji
         keys = user.subscribed_channels.map {|c| c.content_zset.key}
         Aji.redis.zunionstore content_zset.key, keys
         Aji.redis.expire content_zset.key, content_zset_ttl
+
+        # Re rank based on user's past events.
+        (content_zset.revrange 0, 20).each do |vid|
+          video = Video.find_by_id vid
+          next if video.nil?
+          channel = video.author.to_channel
+          liked = Event.where( :user_id => user.id,
+                               :channel_id => channel.id,
+                               :action => [:share, :favorite]).count
+          viewed = Event.where( :user_id => user.id,
+                                :channel_id => channel.id,
+                                :action => :view).count
+
+          # Score is a huge number as it's seconds from epoch.
+          # Use addition rather than multiplication
+          bias = liked * 2.hours + viewed * 1.hours
+          new_score = bias + relevance_of(video)
+          push video, new_score
+        end
       end
+
       (content_zset.revrange 0, (limit-1)).map(&:to_i)
     end
 
