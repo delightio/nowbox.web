@@ -165,6 +165,34 @@ describe Aji::Channel do
     end
   end
 
+  describe "#time_limited_refresh_content" do
+    it "does not throw exception when timed out" do
+      Channel.stub :refresh_content_time_limit => 0
+
+      expect { subject.time_limited_refresh_content }.
+        to_not raise_error
+    end
+
+    it "times out if refresh_content takes too long" do
+      Channel.stub :refresh_content_time_limit => 01
+      subject.should_receive(:refresh_content).
+        and_return do
+          sleep 2
+          subject.content_zset[2] = 10
+        end
+
+      expect { subject.time_limited_refresh_content }.
+        to_not change { subject.content_video_ids }
+    end
+
+    it "returns whatever we cache if timed out" do
+      Channel.stub :refresh_content_time_limit => 0
+
+      expect { subject.time_limited_refresh_content }.
+        to_not change { subject.content_video_ids }
+    end
+  end
+
   describe "#background_refresh_content" do
     it "enqueues the channel for refresh in Resque" do
       Resque.should_receive(:enqueue).with(Queues::RefreshChannel, subject.id)
