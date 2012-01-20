@@ -100,6 +100,7 @@ module Aji
       get '/:channel_id/videos' do
         authenticate!
         channel = find_channel_by_id_or_error params[:channel_id]
+        channel.time_limited_refresh_content
         channel.personalized_content_videos params.merge(
           :user => current_user)
       end

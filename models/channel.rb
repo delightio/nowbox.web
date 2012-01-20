@@ -109,7 +109,7 @@ module Aji
     end
 
     def self.refresh_content_time_limit
-      15
+      15.seconds
     end
     def time_limited_refresh_content
       Timeout.timeout(Channel.refresh_content_time_limit) {
