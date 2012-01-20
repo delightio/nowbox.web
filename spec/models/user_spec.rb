@@ -12,6 +12,7 @@ describe Aji::User do
       u.stub :history_channel => stub(:merge! => true, :push => true)
       u.stub :favorite_channel => stub(:merge! => true, :push => true)
       u.stub :queue_channel => stub(:merge! => true, :push => true)
+      u.stub :recommended_channel => stub(:merge! => true, :push => true)
       u.stub :save => true
       u.stub :identity => identity
     end
@@ -65,6 +66,13 @@ describe Aji::User do
     it "creates user channels" do
       Channel::User.should_receive(:create).exactly(3).times
       subject.send :create_user_channels
+    end
+  end
+
+  describe "#create_recommended_channel" do
+    it "creates recommended channel" do
+      Channel::Recommended.should_receive(:create).once
+      subject.send :create_recommended_channel
     end
   end
 
@@ -578,13 +586,15 @@ describe Aji::User do
     let(:displayable_user_channels) { [mock("fav channel"), mock("queue channel")] }
     let(:subscribed_channels) { [mock("hilarious channel")] }
     let(:social_channels) { [mock("fb channel"), mock("twitter channel")] }
+    let(:recommended_channel) { mock "recommended" }
 
     it "returns an array of of all displayable channels" do
       subject.stub(:displayable_user_channels).and_return(displayable_user_channels)
       subject.stub(:subscribed_channels).and_return(subscribed_channels)
       subject.stub(:social_channels).and_return(social_channels)
+      subject.stub :recommended_channel => recommended_channel
       subject.display_channels.should == displayable_user_channels +
-        social_channels + subscribed_channels
+        social_channels + [recommended_channel] + subscribed_channels
     end
   end
 
@@ -597,6 +607,7 @@ describe Aji::User do
         u.stub :queue_channel_id => 1
         u.stub :favorite_channel_id => 2
         u.stub :history_channel_id => 3
+        u.stub :recommended_channel_id => 4
         u.stub :twitter_channel_id => nil
         u.stub :facebook_channel_id => 5
         u.stub :subscribed_channel_ids => [6,7,8,9,10]
@@ -615,6 +626,7 @@ describe Aji::User do
         'queue_channel_id' => 1,
         'favorite_channel_id' => 2,
         'history_channel_id' => 3,
+        'recommended_channel_id' => 4,
         'twitter_channel_id' => nil,
         'facebook_channel_id' => 5,
         'subscribed_channel_ids' => [6,7,8,9,10],
@@ -763,15 +775,18 @@ describe Aji::User do
       end
     end
 
-    it "combines history, favorites, and queues of the two users" do
+    it "combines recommended, history, favorites, and queues of the two users" do
       subject.history_channel.should_receive(
         :merge!).with(other_user.history_channel)
-        subject.favorite_channel.should_receive(
-          :merge!).with(other_user.favorite_channel)
-          subject.queue_channel.should_receive(
-            :merge!).with(other_user.queue_channel)
-            subject.merge! other_user
+      subject.favorite_channel.should_receive(
+        :merge!).with(other_user.favorite_channel)
+      subject.queue_channel.should_receive(
+        :merge!).with(other_user.queue_channel)
+      subject.recommended_channel.should_receive(
+        :merge!).with(other_user.recommended_channel)
 
+
+      subject.merge! other_user
     end
 
     it "keeps the identity of the local (implicit) user" do
