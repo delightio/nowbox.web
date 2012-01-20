@@ -19,7 +19,7 @@ module Aji
     end
 
     def content_video_ids limit=0
-      if Aji.redis.ttl(content_zset.key)==-1
+      if Aji.redis.ttl(content_zset.key)==-1 and user.subscribed_channels.count > 0
         keys = user.subscribed_channels.map {|c| c.content_zset.key}
         Aji.redis.zunionstore content_zset.key, keys
         Aji.redis.expire content_zset.key, content_zset_ttl
