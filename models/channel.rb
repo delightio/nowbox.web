@@ -118,6 +118,7 @@ module Aji
     rescue => e
       Aji.log :error, "Channel[#{id}].refresh_content took more than " +
                       "#{Channel.refresh_content_time_limit} s"
+      background_refresh_content
     end
 
     def background_refresh_content time = nil
