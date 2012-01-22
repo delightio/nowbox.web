@@ -108,6 +108,19 @@ module Aji
       new_videos[(total-limit)...total].to_a
     end
 
+    def self.refresh_content_time_limit
+      5.seconds
+    end
+    def time_limited_refresh_content
+      Timeout.timeout(Channel.refresh_content_time_limit) {
+        refresh_content
+      }
+    rescue => e
+      Aji.log :error, "Channel[#{id}].refresh_content took more than " +
+                      "#{Channel.refresh_content_time_limit} s"
+      background_refresh_content
+    end
+
     def background_refresh_content time = nil
       if time.nil?
         Resque.enqueue Queues::RefreshChannel, id
@@ -146,7 +159,7 @@ module Aji
     end
 
     def self.refreshable_types
-      [ Channel::Account, Channel::Keyword, Channel::FacebookStream,
+      [ Channel::FacebookStream,
         Channel::TwitterStream ]
     end
   end
