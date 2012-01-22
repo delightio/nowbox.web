@@ -1,4 +1,17 @@
 shared_examples_for "any content holder" do
+
+  describe "#recently_populated?" do
+    it "is true when refreshed within refresh_period" do
+      subject.stub :populated_at => (subject.class.refresh_period/2).ago
+      subject.should be_recently_populated
+    end
+
+    it "is false otherwise" do
+      subject.stub :populated_at => (2*subject.class.refresh_period).ago
+      subject.should_not be_recently_populated
+    end
+  end
+
   describe "#refresh_content(force)" do
     it "fetches videos" do
       expect { subject.refresh_content }.

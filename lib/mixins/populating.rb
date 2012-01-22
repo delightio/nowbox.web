@@ -7,8 +7,12 @@ module Aji
         !populated_at.nil?
       end
 
+      def self.refresh_period
+        6.hours
+      end
+
       def recently_populated?
-        populated? && (populated_at > 6.hours.ago)
+        populated? && (populated_at > self.class.refresh_period.ago)
       end
     end
   end
