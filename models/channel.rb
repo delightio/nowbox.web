@@ -159,7 +159,7 @@ module Aji
     end
 
     def self.refreshable_types
-      [ Channel::Account, Channel::Keyword, Channel::FacebookStream,
+      [ Channel::FacebookStream,
         Channel::TwitterStream ]
     end
   end
