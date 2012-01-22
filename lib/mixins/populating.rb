@@ -8,7 +8,7 @@ module Aji
       end
 
       def recently_populated?
-        populated? && (populated_at > 6.hours.ago)
+        populated? && (populated_at > 1.hours.ago)
       end
     end
   end
