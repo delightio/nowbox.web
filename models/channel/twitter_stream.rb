@@ -14,10 +14,6 @@ module Aji
       "Videos from #{owner.username}'s Twitter Feed"
     end
 
-    def self.refresh_period
-      1.hours
-    end
-
     def refresh_content force=false
       super force do |new_videos|
         owner.api.video_mentions_in_feed.each do |m|
