@@ -4,6 +4,7 @@ module Aji
     include Mixins::CanRefreshContent
     include Mixins::Formatters::Facebook
     include Aji::TankerDefaults::Account
+    include Mixins::EmailCollectors::Facebook
 
     has_many :mentions, :foreign_key => :author_id, :dependent => :destroy
 
@@ -41,6 +42,10 @@ module Aji
 
     def realname
       info["name"]
+    end
+
+    def email
+      info['email']
     end
 
     def subscriber_count
@@ -84,6 +89,8 @@ module Aji
           account.auth_info = auth_hash
           account.info = auth_hash['extra']['user_hash']
           account.save!
+
+          account.collect_email
         end
     end
 
