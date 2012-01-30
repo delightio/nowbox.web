@@ -124,15 +124,15 @@ describe Aji::User do
       end
 
 
-      specify "share favorites a video and creates a share from the event" do
+      specify "share favorites a video and marks it viewed" do
         event.stub :action => :share
-        subject.should_receive(:favorite_video).with(video, event.created_at)
+        subject.should_not_receive(:favorite_video).with(video, event.created_at)
         subject.should_receive(:watched_video).with(video, event.created_at)
 
         subject.process_event event
       end
 
-      specify "favorite favorites a video and creates a share from the event" do
+      specify "favorite favorites a video and marks it viewed" do
         event.stub :action => :favorite
         subject.should_receive(:favorite_video).with(video, event.created_at)
         subject.should_receive(:watched_video).with(video, event.created_at)

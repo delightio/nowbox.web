@@ -55,7 +55,10 @@ module Aji
       when :unsubscribe
         unsubscribe_from_all event.channel
 
-      when :share, :favorite
+      when :share
+        watched_video event.video, event.created_at
+
+      when :favorite
         watched_video event.video, event.created_at
         favorite_video event.video, event.created_at
 
