@@ -18,6 +18,22 @@ module Aji
     def refresh_content force=false
     end
 
+    def bias video, user
+      channel = video.author.to_channel
+
+      @cached_bias ||= Hash.new
+      if @cached_bias[channel.id]
+        liked = @cached_bias[channel.id]
+      else
+        liked = Event.where( :user_id => user.id,
+                             :channel_id => channel.id,
+                             :action => [:share, :favorite, :view] ).count
+        @cached_bias[channel.id] = liked
+      end
+
+      liked * 1.hours
+    end
+
     def content_video_ids limit=0
       if Aji.redis.ttl(content_zset.key)==-1 and user.subscribed_channels.count > 0
         keys = user.subscribed_channels.map {|c| c.content_zset.key}
@@ -28,19 +44,10 @@ module Aji
         (content_zset.revrange 0, 30).each do |vid|
           video = Video.find_by_id vid
           next if video.nil?
-          channel = video.author.to_channel
-          liked = Event.where( :user_id => user.id,
-                               :channel_id => channel.id,
-                               :action => [:share, :favorite]).count
-          viewed = Event.where( :user_id => user.id,
-                                :channel_id => channel.id,
-                                :action => :view).count
 
           # Score is a huge number as it's seconds from epoch.
           # Use addition rather than multiplication
-          bias = liked * 2.hours + viewed * 1.hours
-          new_score = bias + relevance_of(video)
-          push video, new_score
+          push video, relevance_of(video) + bias(video,user)
         end
 
         # Keep top 20 videos
