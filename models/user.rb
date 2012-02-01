@@ -23,9 +23,11 @@ module Aji
       :dependent => :destroy
     belongs_to :history_channel, :class_name => 'Channel::User',
       :dependent => :destroy
+    belongs_to :recommended_channel, :class_name => 'Channel::Recommended',
+      :dependent => :destroy
 
     after_initialize :initialize_settings
-    before_create :create_user_channels
+    before_create :create_user_channels, :create_recommended_channel
     after_create :create_identity
     after_destroy :delete_redis_keys
 
@@ -84,6 +86,7 @@ module Aji
         "queue_channel_id" => queue_channel_id,
         "favorite_channel_id" => favorite_channel_id,
         "history_channel_id" => history_channel_id,
+        "recommended_channel_id" => recommended_channel_id,
         "twitter_channel_id" => twitter_channel_id,
         "facebook_channel_id" => facebook_channel_id,
         "subscribed_channel_ids" => subscribed_channel_ids,
@@ -255,7 +258,8 @@ module Aji
     end
 
     def display_channels
-      displayable_user_channels + social_channels + subscribed_channels
+      displayable_user_channels + social_channels +
+        [recommended_channel] + subscribed_channels
     end
 
     def first_name
@@ -281,6 +285,7 @@ module Aji
       history_channel.merge! other.history_channel
       favorite_channel.merge! other.favorite_channel
       queue_channel.merge! other.queue_channel
+      recommended_channel.merge! other.recommended_channel
 
       self.region = other.region
       self.settings = other.settings
@@ -296,6 +301,10 @@ module Aji
     end
 
     private
+    def create_recommended_channel
+      self.recommended_channel = Channel::Recommended.create
+    end
+
     def create_user_channels
       self.queue_channel = Channel::User.create :title => 'Watch Later'
       self.favorite_channel = Channel::User.create :title => 'Favorites'
