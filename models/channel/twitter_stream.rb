@@ -25,6 +25,11 @@ module Aji
           end
         end
       end
+    rescue Twitter::Unauthorized => e
+      key = "Errors::RefreshContent::#{e.class}::channels"
+      is_new = redis.sadd key, self.id
+      Aji.log "Error refreshing #{self.class}[#{id}]: #{e.inspect}" if is_new
     end
+
   end
 end
