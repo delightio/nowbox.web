@@ -13,7 +13,7 @@ Aji.conf.dup.each do |convar, value|
 end
 
 db = URI Aji.conf['DATABASE_URL']
-redis = URI Aji.conf['REDISTOGO_URL']
+redis = URI Aji.conf['REDISTOGO_URL_2'] # so we won't conflict with Heroku one
 
 # Parse Postgres connection settings.
 Aji.conf['DATABASE'] = {
