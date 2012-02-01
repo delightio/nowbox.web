@@ -44,6 +44,24 @@ describe Channel::Recommended do
     end
   end
 
+  describe "#bias" do
+    it "updates based on previous events on video's channel" do
+      another_video = Video.create(:source => :youtube, :external_id => 'afakevideo3')
+      viewed = Event.create(:user => user, :channel => channel2,
+                            :video => another_video, :video_elapsed => 14.023,
+                            :action => :view)
+
+      subject.bias(video2,user).should > subject.bias(video1,user)
+    end
+
+    it "uses cached value when possible" do
+      subject.bias(video2, user)
+
+      Event.should_not_receive :where
+      subject.bias(video2, user)
+    end
+  end
+
   describe "#content_video_ids" do
     it "uses cached versions if it has not been expired" do
       ids = subject.content_video_ids
@@ -59,11 +77,9 @@ describe Channel::Recommended do
     end
 
     context "when there were events" do
-      let(:another_video) { Video.create(:source => :youtube, :external_id => 'afakevideo3') }
-      it "ranks one by events associated with the given channel" do
-        viewed = Event.create(:user => user, :channel => channel2,
-          :video => another_video, :video_elapsed => 14.023,
-          :action => :view)
+      it "ranks according to the bias" do
+        subject.stub(:bias).with(video1,user).and_return(0)
+        subject.stub(:bias).with(video2,user).and_return(100)
 
         subject.content_video_ids.should == [video2.id, video1.id]
       end
