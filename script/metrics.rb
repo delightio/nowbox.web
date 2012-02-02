@@ -19,8 +19,9 @@ class Stats
     stats.each_with_index do |h,index|
       oid = h.keys.first
       count = h.values.first
-      o = klass.find oid
-      puts "#{(index+1).to_s.rjust(3)}.  #{count.to_s.rjust(4)} | #{o.to_s}"
+      o = klass.find_by_id oid
+      puts "#{(index+1).to_s.rjust(3)}.  #{count.to_s.rjust(4)} | #{o.to_s}" unless o.nil?
+      puts "  #{klass}[#{oid}] not found" if o.nil?
     end
   end
 
