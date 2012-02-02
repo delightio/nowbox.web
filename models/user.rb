@@ -258,8 +258,7 @@ module Aji
     end
 
     def display_channels
-      displayable_user_channels + social_channels +
-        [recommended_channel] + subscribed_channels
+      displayable_user_channels + social_channels + subscribed_channels
     end
 
     def first_name
