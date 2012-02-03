@@ -156,7 +156,6 @@ n = if first_arg.to_i.to_s == first_arg
     end
 period = n.days.ago..Time.now
 
-Stats.print_all period
-
-
 binding.pry if first_arg == '-i'
+
+Stats.print_all period
