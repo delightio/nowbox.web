@@ -112,6 +112,11 @@ class User
     Stats.group_by_occurance_all(events, :user_id).last(100).sample(n)
   end
 
+  def track_time_on_app seconds
+    key = "user_ids_by_seconds"
+    redis.zadd key, seconds, id
+  end
+
   def minutes_on_app period=nil
     viewed = if period
                 Event.where(:created_at => period, :action => :view, :user_id => id)
@@ -124,6 +129,7 @@ class User
       duration = 0 if duration < 0
       total += duration unless duration > event.video.duration
     end
+    track_time_on_app total
     Integer total/60
   end
 
@@ -136,7 +142,7 @@ class User
     info = [].tap do |names|
       names << "yt: #{youtube_account.username}" if youtube_account
       names << "t: #{twitter_account.username}" if twitter_account
-      names << "fb: #{facebook_account.username}, #{facebook_account.auth_info["user_info"]["email"]}" if facebook_account
+      names << "fb: #{facebook_account.username}, #{facebook_account.email}" if facebook_account
     end
     "#{id.to_s.rjust(8)}, #{(minutes_on_app period).to_s.rjust(3)} / #{minutes_on_app.to_s.rjust(3)} m, #{events.count} events, #{subscribed_channel_ids.count} channels, #{info.join(", ")}"
   end
