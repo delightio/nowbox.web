@@ -299,6 +299,26 @@ module Aji
       save
     end
 
+    def track_time_on_app seconds
+      key = "user_ids_by_seconds"
+      redis.zadd key, seconds, id
+    end
+
+    def minutes_on_app period=nil
+      viewed = if period
+                  Event.where(:created_at => period, :action => :view, :user_id => id)
+                else
+                  Event.where(:action => :view, :user_id => id)
+                end
+      total = 0
+      viewed.each do | event |
+        duration = event.video_elapsed - event.video_start
+        duration = 0 if duration < 0
+        total += duration unless duration > event.video.duration
+      end
+      Integer total/60
+    end
+
     private
     def create_recommended_channel
       self.recommended_channel = Channel::Recommended.create
