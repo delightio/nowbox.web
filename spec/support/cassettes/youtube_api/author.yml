@@ -103,3 +103,54 @@
       Angeles, CA, US"},"yt$occupation":{"$t":"Starcraft 2 Player and Commentator"},"yt$school":{"$t":"Harvey
       Mudd College, USC"},"yt$statistics":{"lastWebAccess":"2011-12-21T00:45:46.000-08:00","subscriberCount":"247556","videoWatchCount":0,"viewCount":"12624386","totalUploadViews":"36677769"},"media$thumbnail":{"url":"http://i2.ytimg.com/i/axar6TBM-94_ezoS00fLkA/1.jpg?v=b5d95a"},"yt$username":{"$t":"day9tv"}}}'
     http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/day9tv?alt=json&key=&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 403
+      message: Invalid developer key
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - text/html; charset=UTF-8
+      date:
+      - Fri, 10 Feb 2012 09:01:20 GMT
+      expires:
+      - Fri, 10 Feb 2012 09:01:20 GMT
+      cache-control:
+      - private, max-age=0
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+      transfer-encoding:
+      - chunked
+    body: ! '<HTML>
+
+      <HEAD>
+
+      <TITLE>Invalid developer key</TITLE>
+
+      </HEAD>
+
+      <BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+      <H1>Invalid developer key</H1>
+
+      <H2>Error 403</H2>
+
+      </BODY>
+
+      </HTML>
+
+'
+    http_version: '1.1'

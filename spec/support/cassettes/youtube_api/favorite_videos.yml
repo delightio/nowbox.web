@@ -288,3 +288,54 @@
       Pants"},"yt$lastName":{"$t":"Johnson"},"yt$location":{"$t":"New York, US"},"yt$occupation":{"$t":"I
       work part time as a garden gnome."},"yt$statistics":{"lastWebAccess":"2011-07-20T23:59:18.000-07:00","subscriberCount":"5209052","videoWatchCount":0,"viewCount":"335701052","totalUploadViews":"1518711747"},"media$thumbnail":{"url":"http://i4.ytimg.com/i/Gt7X90Au6BV8rf49BiM6Dg/1.jpg?v=dc01e3"},"yt$username":{"$t":"RayWilliamJohnson"}}}'
     http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/raywilliamjohnson?alt=json&key=&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 403
+      message: Invalid developer key
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - text/html; charset=UTF-8
+      content-length:
+      - '165'
+      date:
+      - Fri, 10 Feb 2012 09:01:22 GMT
+      expires:
+      - Fri, 10 Feb 2012 09:01:22 GMT
+      cache-control:
+      - private, max-age=0
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '<HTML>
+
+      <HEAD>
+
+      <TITLE>Invalid developer key</TITLE>
+
+      </HEAD>
+
+      <BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+      <H1>Invalid developer key</H1>
+
+      <H2>Error 403</H2>
+
+      </BODY>
+
+      </HTML>
+
+'
+    http_version: '1.1'

@@ -65,3 +65,54 @@
       - GSE
     body: User not found
     http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/noaosldfads?key=
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 403
+      message: Invalid developer key
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - text/html; charset=UTF-8
+      content-length:
+      - '165'
+      date:
+      - Fri, 10 Feb 2012 09:01:30 GMT
+      expires:
+      - Fri, 10 Feb 2012 09:01:30 GMT
+      cache-control:
+      - private, max-age=0
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '<HTML>
+
+      <HEAD>
+
+      <TITLE>Invalid developer key</TITLE>
+
+      </HEAD>
+
+      <BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+      <H1>Invalid developer key</H1>
+
+      <H2>Error 403</H2>
+
+      </BODY>
+
+      </HTML>
+
+'
+    http_version: '1.1'
