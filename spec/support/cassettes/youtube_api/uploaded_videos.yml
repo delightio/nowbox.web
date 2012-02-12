@@ -7177,3 +7177,1862 @@
 
 '
     http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/videos?author=rhopatztube&key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&max-results=50&orderby=published&start-index=1&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=feed
+      expires:
+      - Sun, 12 Feb 2012 00:03:56 GMT
+      date:
+      - Sun, 12 Feb 2012 00:03:56 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - ! '*'
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"D0cHR3s5fSp7I2A9WhRaEE0."
+      last-modified:
+      - Sun, 12 Feb 2012 00:03:56 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: <?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom'
+      xmlns:media='http://search.yahoo.com/mrss/' xmlns:openSearch='http://a9.com/-/spec/opensearch/1.1/'
+      xmlns:gd='http://schemas.google.com/g/2005' xmlns:yt='http://gdata.youtube.com/schemas/2007'
+      gd:etag='W/&quot;D0cHR3s5fSp7I2A9WhRaEE0.&quot;'><id>tag:youtube.com,2008:videos</id><updated>2012-02-12T00:03:56.525Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><title>YouTube
+      Videos</title><logo>http://www.youtube.com/img/pic_youtubelogo_123x63.gif</logo><link
+      rel='alternate' type='text/html' href='http://www.youtube.com'/><link rel='http://schemas.google.com/g/2005#feed'
+      type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos?v=2'/><link
+      rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/batch?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos?author=rhopatztube&amp;start-index=1&amp;max-results=50&amp;orderby=published&amp;v=2'/><link
+      rel='service' type='application/atomsvc+xml' href='http://gdata.youtube.com/feeds/api/videos?alt=atom-service&amp;v=2'/><author><name>YouTube</name><uri>http://www.youtube.com/</uri></author><generator
+      version='2.1' uri='http://gdata.youtube.com'>YouTube data API</generator><openSearch:totalResults>28</openSearch:totalResults><openSearch:startIndex>1</openSearch:startIndex><openSearch:itemsPerPage>50</openSearch:itemsPerPage><entry
+      gd:etag='W/&quot;Ck4HRn47eCp7I2A9WxFQF0s.&quot;'><id>tag:youtube.com,2008:video:qn5W09WgZy8</id><published>2010-04-02T00:02:42.000Z</published><updated>2010-05-13T14:28:57.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='People'
+      label='People &amp; Blogs'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='lindsey'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='tantrum'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='youtube'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='sharing'/><title>lindsey tantrum-YouTube sharing.mov</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/qn5W09WgZy8?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=qn5W09WgZy8&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/qn5W09WgZy8/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/qn5W09WgZy8/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/qn5W09WgZy8/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/qn5W09WgZy8/related?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=qn5W09WgZy8'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/qn5W09WgZy8?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/qn5W09WgZy8/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='People &amp; Blogs' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>People</media:category><media:content
+      url='http://www.youtube.com/v/qn5W09WgZy8?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='133' yt:format='5'/><media:content url='rtsp://v2.cache7.c.youtube.com/CkULENy73wIaPAkvZ6DV01Z-qhMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='133' yt:format='1'/><media:content
+      url='rtsp://v5.cache2.c.youtube.com/CkULENy73wIaPAkvZ6DV01Z-qhMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='133' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>toddler tantrum soon forgotten. This was 20 years ago. Wow.</media:description><media:keywords>lindsey,
+      tantrum, youtube, sharing</media:keywords><media:license type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=qn5W09WgZy8&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/qn5W09WgZy8/default.jpg' height='90' width='120'
+      time='00:01:06.500' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/qn5W09WgZy8/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/qn5W09WgZy8/1.jpg'
+      height='90' width='120' time='00:00:33.250' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/qn5W09WgZy8/2.jpg' height='90' width='120' time='00:01:06.500'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/qn5W09WgZy8/3.jpg'
+      height='90' width='120' time='00:01:39.750' yt:name='end'/><media:title type='plain'>lindsey
+      tantrum-YouTube sharing.mov</media:title><yt:duration seconds='133'/><yt:uploaded>2010-04-02T00:02:42.000Z</yt:uploaded><yt:videoid>qn5W09WgZy8</yt:videoid></media:group><gd:rating
+      average='5.0' max='5' min='1' numRaters='1' rel='http://schemas.google.com/g/2005#overall'/><yt:statistics
+      favoriteCount='0' viewCount='242'/><yt:rating numDislikes='0' numLikes='1'/></entry><entry
+      gd:etag='W/&quot;A0YMQH47eCp7I2A9WxRTFU4.&quot;'><id>tag:youtube.com,2008:video:ODlSfUNXAaQ</id><published>2008-07-27T23:34:44.000Z</published><updated>2008-09-04T14:39:41.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Sports'
+      label='Sports'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='basketball'/><title>Basketball 2</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/ODlSfUNXAaQ?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=ODlSfUNXAaQ&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/ODlSfUNXAaQ/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/ODlSfUNXAaQ/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/ODlSfUNXAaQ/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/ODlSfUNXAaQ/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/ODlSfUNXAaQ?v=2'/><author><name/><uri>http://gdata.youtube.com/feeds/api/users/</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/ODlSfUNXAaQ/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Sports' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Sports</media:category><media:content
+      url='http://www.youtube.com/v/ODlSfUNXAaQ?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='46' yt:format='5'/><media:content url='rtsp://v2.cache1.c.youtube.com/CkULENy73wIaPAmkAVdDfVI5OBMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='46' yt:format='1'/><media:content
+      url='rtsp://v8.cache8.c.youtube.com/CkULENy73wIaPAmkAVdDfVI5OBMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='46' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>Shane, Joe and the Feil boys</media:description><media:keywords>basketball</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=ODlSfUNXAaQ&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/ODlSfUNXAaQ/default.jpg' height='90' width='120'
+      time='00:00:23' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/ODlSfUNXAaQ/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/ODlSfUNXAaQ/1.jpg'
+      height='90' width='120' time='00:00:11.500' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/ODlSfUNXAaQ/2.jpg' height='90' width='120' time='00:00:23'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/ODlSfUNXAaQ/3.jpg'
+      height='90' width='120' time='00:00:34.500' yt:name='end'/><media:title type='plain'>Basketball
+      2</media:title><yt:duration seconds='46'/><yt:uploaded>2008-07-27T23:34:44.000Z</yt:uploaded><yt:videoid>ODlSfUNXAaQ</yt:videoid></media:group><yt:recorded>2008-07-26</yt:recorded><yt:statistics
+      favoriteCount='0' viewCount='53'/></entry><entry gd:etag='W/&quot;C0cNQn47eCp7I2A9WxdUEk0.&quot;'><id>tag:youtube.com,2008:video:2Tzfa-MoU9U</id><published>2008-07-27T23:24:53.000Z</published><updated>2008-07-27T23:24:53.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Sports'
+      label='Sports'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='nephews'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='basketball'/><title>Basketball game 1</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/2Tzfa-MoU9U?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=2Tzfa-MoU9U&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/2Tzfa-MoU9U/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/2Tzfa-MoU9U/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/2Tzfa-MoU9U/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/2Tzfa-MoU9U/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/2Tzfa-MoU9U?v=2'/><author><name/><uri>http://gdata.youtube.com/feeds/api/users/</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/2Tzfa-MoU9U/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Sports' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Sports</media:category><media:content
+      url='http://www.youtube.com/v/2Tzfa-MoU9U?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='37' yt:format='5'/><media:content url='rtsp://v4.cache3.c.youtube.com/CkULENy73wIaPAnVUyjja9882RMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='37' yt:format='1'/><media:content
+      url='rtsp://v2.cache2.c.youtube.com/CkULENy73wIaPAnVUyjja9882RMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='37' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>Shane, Joe and the Feil boys</media:description><media:keywords>nephews,
+      basketball</media:keywords><media:license type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=2Tzfa-MoU9U&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/2Tzfa-MoU9U/default.jpg' height='90' width='120'
+      time='00:00:18.500' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/2Tzfa-MoU9U/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/2Tzfa-MoU9U/1.jpg'
+      height='90' width='120' time='00:00:09.250' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/2Tzfa-MoU9U/2.jpg' height='90' width='120' time='00:00:18.500'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/2Tzfa-MoU9U/3.jpg'
+      height='90' width='120' time='00:00:27.750' yt:name='end'/><media:title type='plain'>Basketball
+      game 1</media:title><yt:duration seconds='37'/><yt:uploaded>2008-07-27T23:24:53.000Z</yt:uploaded><yt:videoid>2Tzfa-MoU9U</yt:videoid></media:group><yt:recorded>2008-07-26</yt:recorded><yt:statistics
+      favoriteCount='0' viewCount='33'/></entry><entry gd:etag='W/&quot;DE8ERH47eCp7I2A9WxFXEEo.&quot;'><id>tag:youtube.com,2008:video:aUk4JNGU47E</id><published>2008-02-05T02:18:19.000Z</published><updated>2010-05-17T06:13:25.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Education'
+      label='Education'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='lefse'/><title>Lefse 12</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/aUk4JNGU47E?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=aUk4JNGU47E&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/aUk4JNGU47E/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/aUk4JNGU47E/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/aUk4JNGU47E/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/aUk4JNGU47E/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/aUk4JNGU47E?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/aUk4JNGU47E/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Education' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Education</media:category><media:content
+      url='http://www.youtube.com/v/aUk4JNGU47E?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='22' yt:format='5'/><media:content url='rtsp://v3.cache1.c.youtube.com/CkULENy73wIaPAmx45TRJDhJaRMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='22' yt:format='1'/><media:content
+      url='rtsp://v1.cache8.c.youtube.com/CkULENy73wIaPAmx45TRJDhJaRMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='22' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>lefse</media:description><media:keywords>lefse</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=aUk4JNGU47E&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/aUk4JNGU47E/default.jpg' height='90' width='120'
+      time='00:00:11' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/aUk4JNGU47E/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/aUk4JNGU47E/1.jpg'
+      height='90' width='120' time='00:00:05.500' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/aUk4JNGU47E/2.jpg' height='90' width='120' time='00:00:11'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/aUk4JNGU47E/3.jpg'
+      height='90' width='120' time='00:00:16.500' yt:name='end'/><media:title type='plain'>Lefse
+      12</media:title><yt:duration seconds='22'/><yt:uploaded>2008-02-05T02:18:19.000Z</yt:uploaded><yt:videoid>aUk4JNGU47E</yt:videoid></media:group><yt:statistics
+      favoriteCount='0' viewCount='162'/></entry><entry gd:etag='W/&quot;DEENQn47eCp7I2A9WxFTGUk.&quot;'><id>tag:youtube.com,2008:video:u2hQV0cbHa4</id><published>2008-02-05T02:14:19.000Z</published><updated>2010-04-11T00:44:53.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Education'
+      label='Education'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='lefse'/><title>Lefse 11</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/u2hQV0cbHa4?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=u2hQV0cbHa4&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/u2hQV0cbHa4/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/u2hQV0cbHa4/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/u2hQV0cbHa4/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/u2hQV0cbHa4/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/u2hQV0cbHa4?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/u2hQV0cbHa4/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Education' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Education</media:category><media:content
+      url='http://www.youtube.com/v/u2hQV0cbHa4?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='7' yt:format='5'/><media:content url='rtsp://v3.cache6.c.youtube.com/CkULENy73wIaPAmuHRtHV1BouxMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='7' yt:format='1'/><media:content
+      url='rtsp://v2.cache8.c.youtube.com/CkULENy73wIaPAmuHRtHV1BouxMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='7' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>Lefse</media:description><media:keywords>lefse</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=u2hQV0cbHa4&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/u2hQV0cbHa4/default.jpg' height='90' width='120'
+      time='00:00:03.500' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/u2hQV0cbHa4/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/u2hQV0cbHa4/1.jpg'
+      height='90' width='120' time='00:00:01.750' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/u2hQV0cbHa4/2.jpg' height='90' width='120' time='00:00:03.500'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/u2hQV0cbHa4/3.jpg'
+      height='90' width='120' time='00:00:05.250' yt:name='end'/><media:title type='plain'>Lefse
+      11</media:title><yt:duration seconds='7'/><yt:uploaded>2008-02-05T02:14:19.000Z</yt:uploaded><yt:videoid>u2hQV0cbHa4</yt:videoid></media:group><yt:statistics
+      favoriteCount='0' viewCount='80'/></entry><entry gd:etag='W/&quot;CUYMSX47eCp7I2A9Wx5REkQ.&quot;'><id>tag:youtube.com,2008:video:xxQc92M9TmI</id><published>2008-02-05T02:11:48.000Z</published><updated>2010-08-20T08:33:08.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Education'
+      label='Education'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='lefse'/><title>Lefse 10</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/xxQc92M9TmI?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=xxQc92M9TmI&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/xxQc92M9TmI/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/xxQc92M9TmI/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/xxQc92M9TmI/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/xxQc92M9TmI/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/xxQc92M9TmI?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/xxQc92M9TmI/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Education' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Education</media:category><media:content
+      url='http://www.youtube.com/v/xxQc92M9TmI?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='97' yt:format='5'/><media:content url='rtsp://v3.cache1.c.youtube.com/CkULENy73wIaPAliTj1j9xwUxxMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='97' yt:format='1'/><media:content
+      url='rtsp://v8.cache3.c.youtube.com/CkULENy73wIaPAliTj1j9xwUxxMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='97' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>lefse</media:description><media:keywords>lefse</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=xxQc92M9TmI&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/xxQc92M9TmI/default.jpg' height='90' width='120'
+      time='00:00:48.500' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/xxQc92M9TmI/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/xxQc92M9TmI/1.jpg'
+      height='90' width='120' time='00:00:24.250' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/xxQc92M9TmI/2.jpg' height='90' width='120' time='00:00:48.500'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/xxQc92M9TmI/3.jpg'
+      height='90' width='120' time='00:01:12.750' yt:name='end'/><media:title type='plain'>Lefse
+      10</media:title><yt:duration seconds='97'/><yt:uploaded>2008-02-05T02:11:48.000Z</yt:uploaded><yt:videoid>xxQc92M9TmI</yt:videoid></media:group><gd:rating
+      average='5.0' max='5' min='1' numRaters='1' rel='http://schemas.google.com/g/2005#overall'/><yt:statistics
+      favoriteCount='2' viewCount='1289'/><yt:rating numDislikes='0' numLikes='1'/></entry><entry
+      gd:etag='W/&quot;DEcAQ347eCp7I2A9WxFVGUg.&quot;'><id>tag:youtube.com,2008:video:NpC-m677e7c</id><published>2008-02-05T01:58:11.000Z</published><updated>2010-06-19T14:00:42.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Education'
+      label='Education'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='lefse'/><title>lefse 9</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/NpC-m677e7c?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=NpC-m677e7c&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/NpC-m677e7c/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/NpC-m677e7c/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/NpC-m677e7c/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/NpC-m677e7c/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/NpC-m677e7c?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/NpC-m677e7c/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Education' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Education</media:category><media:content
+      url='http://www.youtube.com/v/NpC-m677e7c?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='38' yt:format='5'/><media:content url='rtsp://v1.cache3.c.youtube.com/CkULENy73wIaPAm3e_uum76QNhMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='38' yt:format='1'/><media:content
+      url='rtsp://v6.cache7.c.youtube.com/CkULENy73wIaPAm3e_uum76QNhMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='38' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>lefse</media:description><media:keywords>lefse</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=NpC-m677e7c&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/NpC-m677e7c/default.jpg' height='90' width='120'
+      time='00:00:19' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/NpC-m677e7c/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/NpC-m677e7c/1.jpg'
+      height='90' width='120' time='00:00:09.500' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/NpC-m677e7c/2.jpg' height='90' width='120' time='00:00:19'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/NpC-m677e7c/3.jpg'
+      height='90' width='120' time='00:00:28.500' yt:name='end'/><media:title type='plain'>lefse
+      9</media:title><yt:duration seconds='38'/><yt:uploaded>2008-02-05T01:58:11.000Z</yt:uploaded><yt:videoid>NpC-m677e7c</yt:videoid></media:group><yt:statistics
+      favoriteCount='0' viewCount='174'/></entry><entry gd:etag='W/&quot;DUYEQ347eCp7I2A9WxNbEk8.&quot;'><id>tag:youtube.com,2008:video:3OMce7eOv6k</id><published>2008-02-05T01:52:54.000Z</published><updated>2009-11-14T19:31:42.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Education'
+      label='Education'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='lefse'/><title>lefse 8</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/3OMce7eOv6k?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=3OMce7eOv6k&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/3OMce7eOv6k/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/3OMce7eOv6k/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/3OMce7eOv6k/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/3OMce7eOv6k/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/3OMce7eOv6k?v=2'/><author><name/><uri>http://gdata.youtube.com/feeds/api/users/</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/3OMce7eOv6k/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Education' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Education</media:category><media:content
+      url='http://www.youtube.com/v/3OMce7eOv6k?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='54' yt:format='5'/><media:content url='rtsp://v4.cache1.c.youtube.com/CkULENy73wIaPAmpv463exzj3BMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='54' yt:format='1'/><media:content
+      url='rtsp://v1.cache1.c.youtube.com/CkULENy73wIaPAmpv463exzj3BMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='54' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>Lefse</media:description><media:keywords>lefse</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=3OMce7eOv6k&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/3OMce7eOv6k/default.jpg' height='90' width='120'
+      time='00:00:27' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/3OMce7eOv6k/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/3OMce7eOv6k/1.jpg'
+      height='90' width='120' time='00:00:13.500' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/3OMce7eOv6k/2.jpg' height='90' width='120' time='00:00:27'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/3OMce7eOv6k/3.jpg'
+      height='90' width='120' time='00:00:40.500' yt:name='end'/><media:title type='plain'>lefse
+      8</media:title><yt:duration seconds='54'/><yt:uploaded>2008-02-05T01:52:54.000Z</yt:uploaded><yt:videoid>3OMce7eOv6k</yt:videoid></media:group><yt:statistics
+      favoriteCount='0' viewCount='56'/></entry><entry gd:etag='W/&quot;Ck8MSX47eCp7I2A9WxZXGE8.&quot;'><id>tag:youtube.com,2008:video:cvqG1E9Uz64</id><published>2008-02-05T01:48:09.000Z</published><updated>2008-03-06T16:28:08.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Education'
+      label='Education'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='lefse'/><title>lefse 8</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/cvqG1E9Uz64?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=cvqG1E9Uz64&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/cvqG1E9Uz64/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/cvqG1E9Uz64/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/cvqG1E9Uz64/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/cvqG1E9Uz64/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/cvqG1E9Uz64?v=2'/><author><name/><uri>http://gdata.youtube.com/feeds/api/users/</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/cvqG1E9Uz64/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Education' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Education</media:category><media:content
+      url='http://www.youtube.com/v/cvqG1E9Uz64?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='54' yt:format='5'/><media:content url='rtsp://v1.cache4.c.youtube.com/CkULENy73wIaPAmuz1RP1Ib6chMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='54' yt:format='1'/><media:content
+      url='rtsp://v5.cache5.c.youtube.com/CkULENy73wIaPAmuz1RP1Ib6chMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='54' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>lefse</media:description><media:keywords>lefse</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=cvqG1E9Uz64&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/cvqG1E9Uz64/default.jpg' height='90' width='120'
+      time='00:00:27' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/cvqG1E9Uz64/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/cvqG1E9Uz64/1.jpg'
+      height='90' width='120' time='00:00:13.500' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/cvqG1E9Uz64/2.jpg' height='90' width='120' time='00:00:27'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/cvqG1E9Uz64/3.jpg'
+      height='90' width='120' time='00:00:40.500' yt:name='end'/><media:title type='plain'>lefse
+      8</media:title><yt:duration seconds='54'/><yt:uploaded>2008-02-05T01:48:09.000Z</yt:uploaded><yt:videoid>cvqG1E9Uz64</yt:videoid></media:group><yt:statistics
+      favoriteCount='0' viewCount='75'/></entry><entry gd:etag='W/&quot;CEcARn47eCp7I2A9WxNWE00.&quot;'><id>tag:youtube.com,2008:video:nwx6urMZPT8</id><published>2008-02-05T01:42:16.000Z</published><updated>2009-10-11T23:00:47.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Education'
+      label='Education'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='lefse'/><title>Lefse 7</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/nwx6urMZPT8?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=nwx6urMZPT8&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/nwx6urMZPT8/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/nwx6urMZPT8/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/nwx6urMZPT8/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/nwx6urMZPT8/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/nwx6urMZPT8?v=2'/><author><name/><uri>http://gdata.youtube.com/feeds/api/users/</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/nwx6urMZPT8/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Education' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Education</media:category><media:content
+      url='http://www.youtube.com/v/nwx6urMZPT8?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='13' yt:format='5'/><media:content url='rtsp://v8.cache1.c.youtube.com/CkULENy73wIaPAk_PRmzunoMnxMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='13' yt:format='1'/><media:content
+      url='rtsp://v3.cache4.c.youtube.com/CkULENy73wIaPAk_PRmzunoMnxMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='13' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>lefse</media:description><media:keywords>lefse</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=nwx6urMZPT8&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/nwx6urMZPT8/default.jpg' height='90' width='120'
+      time='00:00:06.500' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/nwx6urMZPT8/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/nwx6urMZPT8/1.jpg'
+      height='90' width='120' time='00:00:03.250' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/nwx6urMZPT8/2.jpg' height='90' width='120' time='00:00:06.500'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/nwx6urMZPT8/3.jpg'
+      height='90' width='120' time='00:00:09.750' yt:name='end'/><media:title type='plain'>Lefse
+      7</media:title><yt:duration seconds='13'/><yt:uploaded>2008-02-05T01:42:16.000Z</yt:uploaded><yt:videoid>nwx6urMZPT8</yt:videoid></media:group><yt:statistics
+      favoriteCount='0' viewCount='51'/></entry><entry gd:etag='W/&quot;D0YMSH47eCp7I2A9WxFTGUs.&quot;'><id>tag:youtube.com,2008:video:nz8qVpPdBWU</id><published>2008-02-05T01:36:45.000Z</published><updated>2010-04-11T05:53:09.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Education'
+      label='Education'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='lefse'/><title>lefse 7</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/nz8qVpPdBWU?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=nz8qVpPdBWU&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/nz8qVpPdBWU/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/nz8qVpPdBWU/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/nz8qVpPdBWU/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/nz8qVpPdBWU/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/nz8qVpPdBWU?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/nz8qVpPdBWU/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Education' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Education</media:category><media:content
+      url='http://www.youtube.com/v/nz8qVpPdBWU?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='25' yt:format='5'/><media:content url='rtsp://v1.cache7.c.youtube.com/CkULENy73wIaPAllBd2TVio_nxMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='25' yt:format='1'/><media:content
+      url='rtsp://v6.cache4.c.youtube.com/CkULENy73wIaPAllBd2TVio_nxMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='25' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>lefse</media:description><media:keywords>lefse</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=nz8qVpPdBWU&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/nz8qVpPdBWU/default.jpg' height='90' width='120'
+      time='00:00:12.500' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/nz8qVpPdBWU/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/nz8qVpPdBWU/1.jpg'
+      height='90' width='120' time='00:00:06.250' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/nz8qVpPdBWU/2.jpg' height='90' width='120' time='00:00:12.500'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/nz8qVpPdBWU/3.jpg'
+      height='90' width='120' time='00:00:18.750' yt:name='end'/><media:title type='plain'>lefse
+      7</media:title><yt:duration seconds='25'/><yt:uploaded>2008-02-05T01:36:45.000Z</yt:uploaded><yt:videoid>nz8qVpPdBWU</yt:videoid></media:group><yt:statistics
+      favoriteCount='0' viewCount='51'/></entry><entry gd:etag='W/&quot;DUYNQn47eCp7I2A9WxNbEk8.&quot;'><id>tag:youtube.com,2008:video:o9nK-ybjqwQ</id><published>2008-02-05T01:32:58.000Z</published><updated>2009-11-14T19:33:13.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Education'
+      label='Education'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='lefse'/><title>Lefse 6</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/o9nK-ybjqwQ?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=o9nK-ybjqwQ&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/o9nK-ybjqwQ/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/o9nK-ybjqwQ/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/o9nK-ybjqwQ/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/o9nK-ybjqwQ/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/o9nK-ybjqwQ?v=2'/><author><name/><uri>http://gdata.youtube.com/feeds/api/users/</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/o9nK-ybjqwQ/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Education' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Education</media:category><media:content
+      url='http://www.youtube.com/v/o9nK-ybjqwQ?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='40' yt:format='5'/><media:content url='rtsp://v4.cache6.c.youtube.com/CkULENy73wIaPAkEq-Mm-8rZoxMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='40' yt:format='1'/><media:content
+      url='rtsp://v2.cache6.c.youtube.com/CkULENy73wIaPAkEq-Mm-8rZoxMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='40' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>lefse</media:description><media:keywords>lefse</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=o9nK-ybjqwQ&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/o9nK-ybjqwQ/default.jpg' height='90' width='120'
+      time='00:00:20' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/o9nK-ybjqwQ/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/o9nK-ybjqwQ/1.jpg'
+      height='90' width='120' time='00:00:10' yt:name='start'/><media:thumbnail url='http://i.ytimg.com/vi/o9nK-ybjqwQ/2.jpg'
+      height='90' width='120' time='00:00:20' yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/o9nK-ybjqwQ/3.jpg'
+      height='90' width='120' time='00:00:30' yt:name='end'/><media:title type='plain'>Lefse
+      6</media:title><yt:duration seconds='40'/><yt:uploaded>2008-02-05T01:32:58.000Z</yt:uploaded><yt:videoid>o9nK-ybjqwQ</yt:videoid></media:group><yt:statistics
+      favoriteCount='0' viewCount='82'/></entry><entry gd:etag='W/&quot;AkECQn47eCp7I2A9WxFRFk4.&quot;'><id>tag:youtube.com,2008:video:9IYafMNeFWI</id><published>2008-02-05T01:26:46.000Z</published><updated>2010-04-30T14:44:23.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Education'
+      label='Education'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='lefse'/><title>Lefse 5</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/9IYafMNeFWI?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=9IYafMNeFWI&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/9IYafMNeFWI/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/9IYafMNeFWI/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/9IYafMNeFWI/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/9IYafMNeFWI/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/9IYafMNeFWI?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/9IYafMNeFWI/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Education' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Education</media:category><media:content
+      url='http://www.youtube.com/v/9IYafMNeFWI?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='38' yt:format='5'/><media:content url='rtsp://v7.cache4.c.youtube.com/CkULENy73wIaPAliFV7DfBqG9BMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='38' yt:format='1'/><media:content
+      url='rtsp://v4.cache5.c.youtube.com/CkULENy73wIaPAliFV7DfBqG9BMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='38' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>lefse</media:description><media:keywords>lefse</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=9IYafMNeFWI&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/9IYafMNeFWI/default.jpg' height='90' width='120'
+      time='00:00:19' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/9IYafMNeFWI/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/9IYafMNeFWI/1.jpg'
+      height='90' width='120' time='00:00:09.500' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/9IYafMNeFWI/2.jpg' height='90' width='120' time='00:00:19'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/9IYafMNeFWI/3.jpg'
+      height='90' width='120' time='00:00:28.500' yt:name='end'/><media:title type='plain'>Lefse
+      5</media:title><yt:duration seconds='38'/><yt:uploaded>2008-02-05T01:26:46.000Z</yt:uploaded><yt:videoid>9IYafMNeFWI</yt:videoid></media:group><yt:statistics
+      favoriteCount='0' viewCount='83'/></entry><entry gd:etag='W/&quot;AkANRX47eCp7I2A9WxFTGUk.&quot;'><id>tag:youtube.com,2008:video:nqcj415p9lA</id><published>2008-02-05T01:21:48.000Z</published><updated>2010-04-11T01:19:54.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Education'
+      label='Education'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='lefse'/><title>Lefse 4</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/nqcj415p9lA?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=nqcj415p9lA&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/nqcj415p9lA/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/nqcj415p9lA/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/nqcj415p9lA/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/nqcj415p9lA/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/nqcj415p9lA?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/nqcj415p9lA/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Education' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Education</media:category><media:content
+      url='http://www.youtube.com/v/nqcj415p9lA?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='12' yt:format='5'/><media:content url='rtsp://v8.cache4.c.youtube.com/CkULENy73wIaPAlQ9mle4yOnnhMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='12' yt:format='1'/><media:content
+      url='rtsp://v2.cache8.c.youtube.com/CkULENy73wIaPAlQ9mle4yOnnhMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='12' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>lefse</media:description><media:keywords>lefse</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=nqcj415p9lA&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/nqcj415p9lA/default.jpg' height='90' width='120'
+      time='00:00:06' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/nqcj415p9lA/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/nqcj415p9lA/1.jpg'
+      height='90' width='120' time='00:00:03' yt:name='start'/><media:thumbnail url='http://i.ytimg.com/vi/nqcj415p9lA/2.jpg'
+      height='90' width='120' time='00:00:06' yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/nqcj415p9lA/3.jpg'
+      height='90' width='120' time='00:00:09' yt:name='end'/><media:title type='plain'>Lefse
+      4</media:title><yt:duration seconds='12'/><yt:uploaded>2008-02-05T01:21:48.000Z</yt:uploaded><yt:videoid>nqcj415p9lA</yt:videoid></media:group><yt:statistics
+      favoriteCount='0' viewCount='81'/></entry><entry gd:etag='W/&quot;CkAMQ347eCp7I2A9WxFRFk4.&quot;'><id>tag:youtube.com,2008:video:aCpkNCwH9pQ</id><published>2008-02-05T01:18:45.000Z</published><updated>2010-04-30T12:33:02.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Education'
+      label='Education'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='lefse'/><title>Lefse 3</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/aCpkNCwH9pQ?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=aCpkNCwH9pQ&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/aCpkNCwH9pQ/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/aCpkNCwH9pQ/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/aCpkNCwH9pQ/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/aCpkNCwH9pQ/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/aCpkNCwH9pQ?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/aCpkNCwH9pQ/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Education' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Education</media:category><media:content
+      url='http://www.youtube.com/v/aCpkNCwH9pQ?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='28' yt:format='5'/><media:content url='rtsp://v3.cache8.c.youtube.com/CkULENy73wIaPAmU9gcsNGQqaBMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='28' yt:format='1'/><media:content
+      url='rtsp://v2.cache6.c.youtube.com/CkULENy73wIaPAmU9gcsNGQqaBMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='28' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>lefse</media:description><media:keywords>lefse</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=aCpkNCwH9pQ&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/aCpkNCwH9pQ/default.jpg' height='90' width='120'
+      time='00:00:14' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/aCpkNCwH9pQ/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/aCpkNCwH9pQ/1.jpg'
+      height='90' width='120' time='00:00:07' yt:name='start'/><media:thumbnail url='http://i.ytimg.com/vi/aCpkNCwH9pQ/2.jpg'
+      height='90' width='120' time='00:00:14' yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/aCpkNCwH9pQ/3.jpg'
+      height='90' width='120' time='00:00:21' yt:name='end'/><media:title type='plain'>Lefse
+      3</media:title><yt:duration seconds='28'/><yt:uploaded>2008-02-05T01:18:45.000Z</yt:uploaded><yt:videoid>aCpkNCwH9pQ</yt:videoid></media:group><yt:statistics
+      favoriteCount='0' viewCount='86'/></entry><entry gd:etag='W/&quot;Dk8MR347eCp7I2A9WxFTGUs.&quot;'><id>tag:youtube.com,2008:video:fcS9NDiUZAo</id><published>2008-02-05T01:14:01.000Z</published><updated>2010-04-11T05:48:06.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Education'
+      label='Education'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='lefse'/><title>Lefse 2</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/fcS9NDiUZAo?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=fcS9NDiUZAo&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/fcS9NDiUZAo/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/fcS9NDiUZAo/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/fcS9NDiUZAo/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/fcS9NDiUZAo/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/fcS9NDiUZAo?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/fcS9NDiUZAo/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Education' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Education</media:category><media:content
+      url='http://www.youtube.com/v/fcS9NDiUZAo?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='12' yt:format='5'/><media:content url='rtsp://v7.cache4.c.youtube.com/CkULENy73wIaPAkKZJQ4NL3EfRMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='12' yt:format='1'/><media:content
+      url='rtsp://v2.cache6.c.youtube.com/CkULENy73wIaPAkKZJQ4NL3EfRMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='12' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>lefse</media:description><media:keywords>lefse</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=fcS9NDiUZAo&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/fcS9NDiUZAo/default.jpg' height='90' width='120'
+      time='00:00:06' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/fcS9NDiUZAo/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/fcS9NDiUZAo/1.jpg'
+      height='90' width='120' time='00:00:03' yt:name='start'/><media:thumbnail url='http://i.ytimg.com/vi/fcS9NDiUZAo/2.jpg'
+      height='90' width='120' time='00:00:06' yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/fcS9NDiUZAo/3.jpg'
+      height='90' width='120' time='00:00:09' yt:name='end'/><media:title type='plain'>Lefse
+      2</media:title><yt:duration seconds='12'/><yt:uploaded>2008-02-05T01:14:01.000Z</yt:uploaded><yt:videoid>fcS9NDiUZAo</yt:videoid></media:group><yt:statistics
+      favoriteCount='0' viewCount='109'/></entry><entry gd:etag='W/&quot;CkMCSH47eCp7I2A9WxFaFU8.&quot;'><id>tag:youtube.com,2008:video:wC0RzG0ULDQ</id><published>2008-02-05T01:11:23.000Z</published><updated>2010-07-19T06:21:09.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Education'
+      label='Education'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='lefse'/><title>Lefse</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/wC0RzG0ULDQ?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=wC0RzG0ULDQ&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/wC0RzG0ULDQ/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/wC0RzG0ULDQ/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/wC0RzG0ULDQ/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/wC0RzG0ULDQ/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/wC0RzG0ULDQ?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/wC0RzG0ULDQ/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Education' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Education</media:category><media:content
+      url='http://www.youtube.com/v/wC0RzG0ULDQ?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='16' yt:format='5'/><media:content url='rtsp://v2.cache8.c.youtube.com/CkULENy73wIaPAk0LBRtzBEtwBMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='16' yt:format='1'/><media:content
+      url='rtsp://v3.cache2.c.youtube.com/CkULENy73wIaPAk0LBRtzBEtwBMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='16' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>Lefse</media:description><media:keywords>lefse</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=wC0RzG0ULDQ&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/wC0RzG0ULDQ/default.jpg' height='90' width='120'
+      time='00:00:08' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/wC0RzG0ULDQ/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/wC0RzG0ULDQ/1.jpg'
+      height='90' width='120' time='00:00:04' yt:name='start'/><media:thumbnail url='http://i.ytimg.com/vi/wC0RzG0ULDQ/2.jpg'
+      height='90' width='120' time='00:00:08' yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/wC0RzG0ULDQ/3.jpg'
+      height='90' width='120' time='00:00:12' yt:name='end'/><media:title type='plain'>Lefse</media:title><yt:duration
+      seconds='16'/><yt:uploaded>2008-02-05T01:11:23.000Z</yt:uploaded><yt:videoid>wC0RzG0ULDQ</yt:videoid></media:group><yt:statistics
+      favoriteCount='0' viewCount='130'/></entry><entry gd:etag='W/&quot;C0IHSX47eCp7I2A9WxFSF0Q.&quot;'><id>tag:youtube.com,2008:video:e4OuKey8wNI</id><published>2008-01-03T03:37:46.000Z</published><updated>2010-04-20T19:25:38.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='People'
+      label='People &amp; Blogs'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='dogs'/><title>Bella</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/e4OuKey8wNI?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=e4OuKey8wNI&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/e4OuKey8wNI/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/e4OuKey8wNI/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/e4OuKey8wNI/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/e4OuKey8wNI/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/e4OuKey8wNI?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/e4OuKey8wNI/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='People &amp; Blogs' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>People</media:category><media:content
+      url='http://www.youtube.com/v/e4OuKey8wNI?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='58' yt:format='5'/><media:content url='rtsp://v6.cache5.c.youtube.com/CkULENy73wIaPAnSwLzsKa6DexMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='58' yt:format='1'/><media:content
+      url='rtsp://v7.cache5.c.youtube.com/CkULENy73wIaPAnSwLzsKa6DexMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='58' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>The Chihuahua sleeping</media:description><media:keywords>dogs</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=e4OuKey8wNI&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/e4OuKey8wNI/default.jpg' height='90' width='120'
+      time='00:00:29' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/e4OuKey8wNI/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/e4OuKey8wNI/1.jpg'
+      height='90' width='120' time='00:00:14.500' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/e4OuKey8wNI/2.jpg' height='90' width='120' time='00:00:29'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/e4OuKey8wNI/3.jpg'
+      height='90' width='120' time='00:00:43.500' yt:name='end'/><media:title type='plain'>Bella</media:title><yt:duration
+      seconds='58'/><yt:uploaded>2008-01-03T03:37:46.000Z</yt:uploaded><yt:videoid>e4OuKey8wNI</yt:videoid></media:group><gd:rating
+      average='5.0' max='5' min='1' numRaters='1' rel='http://schemas.google.com/g/2005#overall'/><yt:statistics
+      favoriteCount='0' viewCount='98'/><yt:rating numDislikes='0' numLikes='1'/></entry><entry
+      gd:etag='W/&quot;DEYEQX47eCp7I2A9WxNWFEQ.&quot;'><id>tag:youtube.com,2008:video:h3gogqNVA1I</id><published>2007-12-30T15:07:02.000Z</published><updated>2009-10-14T04:55:00.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Animals'
+      label='Pets &amp; Animals'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='dogs'/><title>Bailey &amp; Bella 2</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/h3gogqNVA1I?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=h3gogqNVA1I&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/h3gogqNVA1I/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/h3gogqNVA1I/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/h3gogqNVA1I/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/h3gogqNVA1I/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/h3gogqNVA1I?v=2'/><author><name/><uri>http://gdata.youtube.com/feeds/api/users/</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/h3gogqNVA1I/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Pets &amp; Animals' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Animals</media:category><media:content
+      url='http://www.youtube.com/v/h3gogqNVA1I?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='84' yt:format='5'/><media:content url='rtsp://v3.cache5.c.youtube.com/CkULENy73wIaPAlSA1Wjgih4hxMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='84' yt:format='1'/><media:content
+      url='rtsp://v1.cache1.c.youtube.com/CkULENy73wIaPAlSA1Wjgih4hxMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='84' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>dogs play fighting</media:description><media:keywords>dogs</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=h3gogqNVA1I&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/h3gogqNVA1I/default.jpg' height='90' width='120'
+      time='00:00:42' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/h3gogqNVA1I/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/h3gogqNVA1I/1.jpg'
+      height='90' width='120' time='00:00:21' yt:name='start'/><media:thumbnail url='http://i.ytimg.com/vi/h3gogqNVA1I/2.jpg'
+      height='90' width='120' time='00:00:42' yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/h3gogqNVA1I/3.jpg'
+      height='90' width='120' time='00:01:03' yt:name='end'/><media:title type='plain'>Bailey
+      &amp; Bella 2</media:title><yt:duration seconds='84'/><yt:uploaded>2007-12-30T15:07:02.000Z</yt:uploaded><yt:videoid>h3gogqNVA1I</yt:videoid></media:group><yt:statistics
+      favoriteCount='0' viewCount='53'/></entry><entry gd:etag='W/&quot;DUMBQH47eCp7I2A9Wx5RF0k.&quot;'><id>tag:youtube.com,2008:video:0-0FU5x_ih0</id><published>2007-12-30T14:55:53.000Z</published><updated>2010-08-25T14:44:11.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Animals'
+      label='Pets &amp; Animals'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='dogs'/><title>Bailey &amp; Bella 1</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/0-0FU5x_ih0?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=0-0FU5x_ih0&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/0-0FU5x_ih0/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/0-0FU5x_ih0/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/0-0FU5x_ih0/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/0-0FU5x_ih0/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/0-0FU5x_ih0?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/0-0FU5x_ih0/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Pets &amp; Animals' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Animals</media:category><media:content
+      url='http://www.youtube.com/v/0-0FU5x_ih0?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='83' yt:format='5'/><media:content url='rtsp://v7.cache2.c.youtube.com/CkULENy73wIaPAkdin-cUwXt0xMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='83' yt:format='1'/><media:content
+      url='rtsp://v5.cache1.c.youtube.com/CkULENy73wIaPAkdin-cUwXt0xMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='83' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>Golden Retriever and Chihuahua fighing</media:description><media:keywords>dogs</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=0-0FU5x_ih0&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/0-0FU5x_ih0/default.jpg' height='90' width='120'
+      time='00:00:41.500' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/0-0FU5x_ih0/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/0-0FU5x_ih0/1.jpg'
+      height='90' width='120' time='00:00:20.750' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/0-0FU5x_ih0/2.jpg' height='90' width='120' time='00:00:41.500'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/0-0FU5x_ih0/3.jpg'
+      height='90' width='120' time='00:01:02.250' yt:name='end'/><media:title type='plain'>Bailey
+      &amp; Bella 1</media:title><yt:duration seconds='83'/><yt:uploaded>2007-12-30T14:55:53.000Z</yt:uploaded><yt:videoid>0-0FU5x_ih0</yt:videoid></media:group><gd:rating
+      average='5.0' max='5' min='1' numRaters='1' rel='http://schemas.google.com/g/2005#overall'/><yt:statistics
+      favoriteCount='0' viewCount='78'/><yt:rating numDislikes='0' numLikes='1'/></entry><entry
+      gd:etag='W/&quot;CkUFSH47eCp7I2A9WxFQGEU.&quot;'><id>tag:youtube.com,2008:video:otkyTCvlu20</id><published>2007-06-27T15:43:14.000Z</published><updated>2010-05-14T23:36:59.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Comedy'
+      label='Comedy'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='babies'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='birthdays'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='humor'/><title>It's MY "Happy Birthday"</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/otkyTCvlu20?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=otkyTCvlu20&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/otkyTCvlu20/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/otkyTCvlu20/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/otkyTCvlu20/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/otkyTCvlu20/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/otkyTCvlu20?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/otkyTCvlu20/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Comedy' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Comedy</media:category><media:content
+      url='http://www.youtube.com/v/otkyTCvlu20?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='67' yt:format='5'/><media:content url='rtsp://v5.cache8.c.youtube.com/CkULENy73wIaPAltu-UrTDLZohMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='67' yt:format='1'/><media:content
+      url='rtsp://v4.cache5.c.youtube.com/CkULENy73wIaPAltu-UrTDLZohMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='67' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>The birthday girl, age 2, doesn't want her sister to sing the "Happy
+      Birthday" song.</media:description><media:keywords>babies, birthdays, humor</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=otkyTCvlu20&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/otkyTCvlu20/default.jpg' height='90' width='120'
+      time='00:00:33.500' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/otkyTCvlu20/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/otkyTCvlu20/1.jpg'
+      height='90' width='120' time='00:00:16.750' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/otkyTCvlu20/2.jpg' height='90' width='120' time='00:00:33.500'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/otkyTCvlu20/3.jpg'
+      height='90' width='120' time='00:00:50.250' yt:name='end'/><media:title type='plain'>It's
+      MY "Happy Birthday"</media:title><yt:duration seconds='67'/><yt:uploaded>2007-06-27T15:43:14.000Z</yt:uploaded><yt:videoid>otkyTCvlu20</yt:videoid></media:group><yt:statistics
+      favoriteCount='1' viewCount='198'/></entry><entry gd:etag='W/&quot;DEEARn47eCp7I2A9Wx5RGEk.&quot;'><id>tag:youtube.com,2008:video:dDJvfmzO0CI</id><published>2007-04-17T20:29:17.000Z</published><updated>2010-08-26T18:17:27.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Travel'
+      label='Travel &amp; Events'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='riu'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Caribe'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Cancun'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='kayaking'/><title>beach5</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/dDJvfmzO0CI?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=dDJvfmzO0CI&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/dDJvfmzO0CI/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/dDJvfmzO0CI/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/dDJvfmzO0CI/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/dDJvfmzO0CI/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/dDJvfmzO0CI?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/dDJvfmzO0CI/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Travel &amp; Events' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Travel</media:category><media:content
+      url='http://www.youtube.com/v/dDJvfmzO0CI?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='32' yt:format='5'/><media:content url='rtsp://v3.cache3.c.youtube.com/CkULENy73wIaPAki0M5sfm8ydBMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='32' yt:format='1'/><media:content
+      url='rtsp://v5.cache7.c.youtube.com/CkULENy73wIaPAki0M5sfm8ydBMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='32' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>at end of kayaking</media:description><media:keywords>riu, Caribe,
+      Cancun, kayaking</media:keywords><media:license type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=dDJvfmzO0CI&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/dDJvfmzO0CI/default.jpg' height='90' width='120'
+      time='00:00:16' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/dDJvfmzO0CI/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/dDJvfmzO0CI/1.jpg'
+      height='90' width='120' time='00:00:08' yt:name='start'/><media:thumbnail url='http://i.ytimg.com/vi/dDJvfmzO0CI/2.jpg'
+      height='90' width='120' time='00:00:16' yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/dDJvfmzO0CI/3.jpg'
+      height='90' width='120' time='00:00:24' yt:name='end'/><media:title type='plain'>beach5</media:title><yt:duration
+      seconds='32'/><yt:uploaded>2007-04-17T20:29:17.000Z</yt:uploaded><yt:videoid>dDJvfmzO0CI</yt:videoid></media:group><yt:statistics
+      favoriteCount='2' viewCount='1173'/></entry><entry gd:etag='W/&quot;C04NQ347eCp7I2A9Wx5RF0Q.&quot;'><id>tag:youtube.com,2008:video:nw1bHMFzKQ0</id><published>2007-04-17T20:27:20.000Z</published><updated>2010-08-26T03:06:32.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Travel'
+      label='Travel &amp; Events'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='riu'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Caribe'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Cancun'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='kayaking'/><title>beach4</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/nw1bHMFzKQ0?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=nw1bHMFzKQ0&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/nw1bHMFzKQ0/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/nw1bHMFzKQ0/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/nw1bHMFzKQ0/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/nw1bHMFzKQ0/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/nw1bHMFzKQ0?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/nw1bHMFzKQ0/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Travel &amp; Events' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Travel</media:category><media:content
+      url='http://www.youtube.com/v/nw1bHMFzKQ0?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='22' yt:format='5'/><media:content url='rtsp://v3.cache5.c.youtube.com/CkULENy73wIaPAkNKXPBHFsNnxMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='22' yt:format='1'/><media:content
+      url='rtsp://v4.cache8.c.youtube.com/CkULENy73wIaPAkNKXPBHFsNnxMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='22' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>girls back to beach after kayaking</media:description><media:keywords>riu,
+      Caribe, Cancun, kayaking</media:keywords><media:license type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=nw1bHMFzKQ0&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/nw1bHMFzKQ0/default.jpg' height='90' width='120'
+      time='00:00:11' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/nw1bHMFzKQ0/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/nw1bHMFzKQ0/1.jpg'
+      height='90' width='120' time='00:00:05.500' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/nw1bHMFzKQ0/2.jpg' height='90' width='120' time='00:00:11'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/nw1bHMFzKQ0/3.jpg'
+      height='90' width='120' time='00:00:16.500' yt:name='end'/><media:title type='plain'>beach4</media:title><yt:duration
+      seconds='22'/><yt:uploaded>2007-04-17T20:27:20.000Z</yt:uploaded><yt:videoid>nw1bHMFzKQ0</yt:videoid></media:group><yt:statistics
+      favoriteCount='1' viewCount='850'/></entry><entry gd:etag='W/&quot;CkQFRH47eCp7I2A9Wx5RE04.&quot;'><id>tag:youtube.com,2008:video:kVBZiKwFyNg</id><published>2007-04-17T20:24:19.000Z</published><updated>2010-08-20T18:51:55.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Travel'
+      label='Travel &amp; Events'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='riu'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Caribe'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Cancun'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='kayaking'/><title>beach3</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/kVBZiKwFyNg?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=kVBZiKwFyNg&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/kVBZiKwFyNg/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/kVBZiKwFyNg/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/kVBZiKwFyNg/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/kVBZiKwFyNg/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/kVBZiKwFyNg?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/kVBZiKwFyNg/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Travel &amp; Events' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Travel</media:category><media:content
+      url='http://www.youtube.com/v/kVBZiKwFyNg?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='58' yt:format='5'/><media:content url='rtsp://v8.cache2.c.youtube.com/CkULENy73wIaPAnYyAWsiFlQkRMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='58' yt:format='1'/><media:content
+      url='rtsp://v1.cache7.c.youtube.com/CkULENy73wIaPAnYyAWsiFlQkRMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='58' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>more beach and kayaking</media:description><media:keywords>riu,
+      Caribe, Cancun, kayaking</media:keywords><media:license type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=kVBZiKwFyNg&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/kVBZiKwFyNg/default.jpg' height='90' width='120'
+      time='00:00:29' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/kVBZiKwFyNg/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/kVBZiKwFyNg/1.jpg'
+      height='90' width='120' time='00:00:14.500' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/kVBZiKwFyNg/2.jpg' height='90' width='120' time='00:00:29'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/kVBZiKwFyNg/3.jpg'
+      height='90' width='120' time='00:00:43.500' yt:name='end'/><media:title type='plain'>beach3</media:title><yt:duration
+      seconds='58'/><yt:uploaded>2007-04-17T20:24:19.000Z</yt:uploaded><yt:videoid>kVBZiKwFyNg</yt:videoid></media:group><yt:statistics
+      favoriteCount='1' viewCount='643'/></entry><entry gd:etag='W/&quot;A0YMR347eCp7I2A9Wx5RE08.&quot;'><id>tag:youtube.com,2008:video:Mrw19HOWOsw</id><published>2007-04-17T20:11:32.000Z</published><updated>2010-08-20T18:33:06.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Travel'
+      label='Travel &amp; Events'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Riu'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Caribe'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Cancun'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='kayaking'/><title>beach2</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/Mrw19HOWOsw?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=Mrw19HOWOsw&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/Mrw19HOWOsw/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/Mrw19HOWOsw/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/Mrw19HOWOsw/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/Mrw19HOWOsw/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/Mrw19HOWOsw?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/Mrw19HOWOsw/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Travel &amp; Events' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Travel</media:category><media:content
+      url='http://www.youtube.com/v/Mrw19HOWOsw?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='21' yt:format='5'/><media:content url='rtsp://v7.cache1.c.youtube.com/CkULENy73wIaPAnMOpZz9DW8MhMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='21' yt:format='1'/><media:content
+      url='rtsp://v2.cache8.c.youtube.com/CkULENy73wIaPAnMOpZz9DW8MhMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='21' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>more kayaking</media:description><media:keywords>Riu, Caribe, Cancun,
+      kayaking</media:keywords><media:license type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=Mrw19HOWOsw&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/Mrw19HOWOsw/default.jpg' height='90' width='120'
+      time='00:00:10.500' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/Mrw19HOWOsw/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/Mrw19HOWOsw/1.jpg'
+      height='90' width='120' time='00:00:05.250' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/Mrw19HOWOsw/2.jpg' height='90' width='120' time='00:00:10.500'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/Mrw19HOWOsw/3.jpg'
+      height='90' width='120' time='00:00:15.750' yt:name='end'/><media:title type='plain'>beach2</media:title><yt:duration
+      seconds='21'/><yt:uploaded>2007-04-17T20:11:32.000Z</yt:uploaded><yt:videoid>Mrw19HOWOsw</yt:videoid></media:group><yt:statistics
+      favoriteCount='3' viewCount='953'/></entry><entry gd:etag='W/&quot;AkUFRX47eCp7I2A9Wx5SF0s.&quot;'><id>tag:youtube.com,2008:video:5go4oQKfSIw</id><published>2007-04-17T20:05:59.000Z</published><updated>2010-08-14T06:43:34.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Travel'
+      label='Travel &amp; Events'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Riu'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Caribe'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Cancun'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='kayaking'/><title>beach1</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/5go4oQKfSIw?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=5go4oQKfSIw&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/5go4oQKfSIw/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/5go4oQKfSIw/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/5go4oQKfSIw/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/5go4oQKfSIw/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/5go4oQKfSIw?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/5go4oQKfSIw/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Travel &amp; Events' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Travel</media:category><media:content
+      url='http://www.youtube.com/v/5go4oQKfSIw?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='24' yt:format='5'/><media:content url='rtsp://v5.cache1.c.youtube.com/CkULENy73wIaPAmMSJ8CoTgK5hMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='24' yt:format='1'/><media:content
+      url='rtsp://v6.cache7.c.youtube.com/CkULENy73wIaPAmMSJ8CoTgK5hMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='24' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>Michael and the kids kayaking</media:description><media:keywords>Riu,
+      Caribe, Cancun, kayaking</media:keywords><media:license type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=5go4oQKfSIw&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/5go4oQKfSIw/default.jpg' height='90' width='120'
+      time='00:00:12' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/5go4oQKfSIw/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/5go4oQKfSIw/1.jpg'
+      height='90' width='120' time='00:00:06' yt:name='start'/><media:thumbnail url='http://i.ytimg.com/vi/5go4oQKfSIw/2.jpg'
+      height='90' width='120' time='00:00:12' yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/5go4oQKfSIw/3.jpg'
+      height='90' width='120' time='00:00:18' yt:name='end'/><media:title type='plain'>beach1</media:title><yt:duration
+      seconds='24'/><yt:uploaded>2007-04-17T20:05:59.000Z</yt:uploaded><yt:videoid>5go4oQKfSIw</yt:videoid></media:group><yt:statistics
+      favoriteCount='1' viewCount='391'/></entry><entry gd:etag='W/&quot;CkYERX47eCp7I2A9WhZQEUU.&quot;'><id>tag:youtube.com,2008:video:JVGUGy_JBSs</id><published>2007-04-17T15:24:03.000Z</published><updated>2011-04-19T02:28:24.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Travel'
+      label='Travel &amp; Events'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Riu'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Caribe'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='Cancun'/><title>Riu Caribe hotel</title><content type='video/3gpp' src='rtsp://v1.cache8.c.youtube.com/CkULENy73wIaPAkrBckvG5RRJRMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=JVGUGy_JBSs&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/JVGUGy_JBSs/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/JVGUGy_JBSs/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/JVGUGy_JBSs/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/JVGUGy_JBSs/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/JVGUGy_JBSs?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='moderated'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='denied'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/JVGUGy_JBSs/comments?v=2' countHint='18'/></gd:comments><yt:location>Riu
+      Caribe, Cancun</yt:location><media:group><media:category label='Travel &amp;
+      Events' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Travel</media:category><media:content
+      url='rtsp://v1.cache8.c.youtube.com/CkULENy73wIaPAkrBckvG5RRJRMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' isDefault='true' expression='full' duration='203'
+      yt:format='1'/><media:content url='rtsp://v8.cache6.c.youtube.com/CkULENy73wIaPAkrBckvG5RRJRMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='203' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube' yt:type='partner'>rhopatztube</media:credit><media:description
+      type='plain'>Riu Caribe hotel</media:description><media:keywords>Riu, Caribe,
+      Cancun</media:keywords><media:license type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=JVGUGy_JBSs&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/JVGUGy_JBSs/default.jpg' height='90' width='120'
+      time='00:01:41.500' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/JVGUGy_JBSs/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/JVGUGy_JBSs/1.jpg'
+      height='90' width='120' time='00:00:50.750' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/JVGUGy_JBSs/2.jpg' height='90' width='120' time='00:01:41.500'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/JVGUGy_JBSs/3.jpg'
+      height='90' width='120' time='00:02:32.250' yt:name='end'/><media:title type='plain'>Riu
+      Caribe hotel</media:title><yt:duration seconds='203'/><yt:uploaded>2007-04-17T15:24:03.000Z</yt:uploaded><yt:videoid>JVGUGy_JBSs</yt:videoid></media:group><yt:noembed/><gd:rating
+      average='3.8' max='5' min='1' numRaters='5' rel='http://schemas.google.com/g/2005#overall'/><yt:recorded>2007-04-12</yt:recorded><yt:statistics
+      favoriteCount='8' viewCount='24574'/><yt:rating numDislikes='1' numLikes='4'/></entry><entry
+      gd:etag='W/&quot;A0IFRX47eCp7I2A9Wx5RGUw.&quot;'><id>tag:youtube.com,2008:video:ZzWL9xy4Cuc</id><published>2007-04-17T15:08:43.000Z</published><updated>2010-08-27T14:31:54.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Travel'
+      label='Travel &amp; Events'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='parasailing'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='riu'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='caribe'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='cancun'/><title>Riu Caribe</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/ZzWL9xy4Cuc?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=ZzWL9xy4Cuc&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/ZzWL9xy4Cuc/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/ZzWL9xy4Cuc/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/ZzWL9xy4Cuc/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/ZzWL9xy4Cuc/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/ZzWL9xy4Cuc?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='moderated'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/ZzWL9xy4Cuc/comments?v=2' countHint='0'/></gd:comments><yt:location>Riu
+      Caribe, Cancun</yt:location><media:group><media:category label='Travel &amp;
+      Events' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Travel</media:category><media:content
+      url='http://www.youtube.com/v/ZzWL9xy4Cuc?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='116' yt:format='5'/><media:content url='rtsp://v2.cache6.c.youtube.com/CkULENy73wIaPAnnCrgc94s1ZxMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='116' yt:format='1'/><media:content
+      url='rtsp://v5.cache5.c.youtube.com/CkULENy73wIaPAnnCrgc94s1ZxMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='116' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>Para-Sailing</media:description><media:keywords>parasailing, riu,
+      caribe, cancun</media:keywords><media:license type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=ZzWL9xy4Cuc&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/ZzWL9xy4Cuc/default.jpg' height='90' width='120'
+      time='00:00:58' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/ZzWL9xy4Cuc/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/ZzWL9xy4Cuc/1.jpg'
+      height='90' width='120' time='00:00:29' yt:name='start'/><media:thumbnail url='http://i.ytimg.com/vi/ZzWL9xy4Cuc/2.jpg'
+      height='90' width='120' time='00:00:58' yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/ZzWL9xy4Cuc/3.jpg'
+      height='90' width='120' time='00:01:27' yt:name='end'/><media:title type='plain'>Riu
+      Caribe</media:title><yt:duration seconds='116'/><yt:uploaded>2007-04-17T15:08:43.000Z</yt:uploaded><yt:videoid>ZzWL9xy4Cuc</yt:videoid></media:group><yt:recorded>2007-04-13</yt:recorded><yt:statistics
+      favoriteCount='3' viewCount='2652'/></entry></feed>
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/rhopatztube?alt=json&key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Sun, 12 Feb 2012 00:03:58 GMT
+      date:
+      - Sun, 12 Feb 2012 00:03:58 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"CE8BSX47eCp7I2A9WhRbGU4."
+      last-modified:
+      - Sat, 11 Feb 2012 04:00:58 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"CE8BSX47eCp7I2A9WhRbGU4.\"","id":{"$t":"tag:youtube.com,2008:user:rhopatztube"},"published":{"$t":"2007-04-17T07:09:27.000-07:00"},"updated":{"$t":"2012-02-10T20:00:58.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Standard"}],"title":{"$t":"rhopatztube"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=rhopatztube"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/rhopatztube?v=2"}],"author":[{"name":{"$t":"rhopatztube"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/rhopatztube"}}],"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/rhopatztube/favorites?v=2","countHint":12},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/rhopatztube/contacts?v=2","countHint":1},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/rhopatztube/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/rhopatztube/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/rhopatztube/subscriptions?v=2","countHint":40},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/rhopatztube/uploads?v=2","countHint":29},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/rhopatztube/newsubscriptionvideos?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.recentactivity","href":"http://gdata.youtube.com/feeds/api/users/rhopatztube/events?v=2"}],"yt$firstName":{"$t":"Rho"},"yt$gender":{"$t":"f"},"yt$location":{"$t":"US"},"yt$maxUploadDuration":{"seconds":"43200"},"yt$statistics":{"lastWebAccess":"2012-02-04T08:12:40.000-08:00","subscriberCount":"1","videoWatchCount":0,"viewCount":"631","totalUploadViews":"41634"},"media$thumbnail":{"url":"http://i2.ytimg.com/vi/e4OuKey8wNI/default.jpg"},"yt$username":{"$t":"rhopatztube"}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/videos/ODlSfUNXAaQ?key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=entry
+      expires:
+      - Sun, 12 Feb 2012 00:03:58 GMT
+      date:
+      - Sun, 12 Feb 2012 00:03:58 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - ! '*'
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"A0YMQH47eCp7I2A9WxRTFU4."
+      last-modified:
+      - Thu, 04 Sep 2008 14:39:41 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: <?xml version='1.0' encoding='UTF-8'?><entry xmlns='http://www.w3.org/2005/Atom'
+      xmlns:media='http://search.yahoo.com/mrss/' xmlns:gd='http://schemas.google.com/g/2005'
+      xmlns:yt='http://gdata.youtube.com/schemas/2007' gd:etag='W/&quot;A0YMQH47eCp7I2A9WxRTFU4.&quot;'><id>tag:youtube.com,2008:video:ODlSfUNXAaQ</id><published>2008-07-27T23:34:44.000Z</published><updated>2008-09-04T14:39:41.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Sports'
+      label='Sports'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='basketball'/><title>Basketball 2</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/ODlSfUNXAaQ?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=ODlSfUNXAaQ&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/ODlSfUNXAaQ/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/ODlSfUNXAaQ/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/ODlSfUNXAaQ/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/ODlSfUNXAaQ/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/ODlSfUNXAaQ?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/ODlSfUNXAaQ/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Sports' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Sports</media:category><media:content
+      url='http://www.youtube.com/v/ODlSfUNXAaQ?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='46' yt:format='5'/><media:content url='rtsp://v2.cache1.c.youtube.com/CkULENy73wIaPAmkAVdDfVI5OBMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='46' yt:format='1'/><media:content
+      url='rtsp://v8.cache8.c.youtube.com/CkULENy73wIaPAmkAVdDfVI5OBMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='46' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>Shane, Joe and the Feil boys</media:description><media:keywords>basketball</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=ODlSfUNXAaQ&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/ODlSfUNXAaQ/default.jpg' height='90' width='120'
+      time='00:00:23' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/ODlSfUNXAaQ/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/ODlSfUNXAaQ/1.jpg'
+      height='90' width='120' time='00:00:11.500' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/ODlSfUNXAaQ/2.jpg' height='90' width='120' time='00:00:23'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/ODlSfUNXAaQ/3.jpg'
+      height='90' width='120' time='00:00:34.500' yt:name='end'/><media:title type='plain'>Basketball
+      2</media:title><yt:duration seconds='46'/><yt:uploaded>2008-07-27T23:34:44.000Z</yt:uploaded><yt:videoid>ODlSfUNXAaQ</yt:videoid></media:group><yt:recorded>2008-07-26</yt:recorded><yt:statistics
+      favoriteCount='0' viewCount='54'/></entry>
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/videos/2Tzfa-MoU9U?key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=entry
+      expires:
+      - Sun, 12 Feb 2012 00:03:58 GMT
+      date:
+      - Sun, 12 Feb 2012 00:03:58 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - ! '*'
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DEEDRX47eCp7I2A9WxdUEk0."
+      last-modified:
+      - Mon, 28 Jul 2008 00:57:54 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: <?xml version='1.0' encoding='UTF-8'?><entry xmlns='http://www.w3.org/2005/Atom'
+      xmlns:media='http://search.yahoo.com/mrss/' xmlns:gd='http://schemas.google.com/g/2005'
+      xmlns:yt='http://gdata.youtube.com/schemas/2007' gd:etag='W/&quot;DEEDRX47eCp7I2A9WxdUEk0.&quot;'><id>tag:youtube.com,2008:video:2Tzfa-MoU9U</id><published>2008-07-27T23:24:53.000Z</published><updated>2008-07-28T00:57:54.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Sports'
+      label='Sports'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='nephews'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='basketball'/><title>Basketball game 1</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/2Tzfa-MoU9U?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=2Tzfa-MoU9U&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/2Tzfa-MoU9U/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/2Tzfa-MoU9U/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/2Tzfa-MoU9U/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/2Tzfa-MoU9U/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/2Tzfa-MoU9U?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/2Tzfa-MoU9U/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Sports' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Sports</media:category><media:content
+      url='http://www.youtube.com/v/2Tzfa-MoU9U?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='37' yt:format='5'/><media:content url='rtsp://v4.cache3.c.youtube.com/CkULENy73wIaPAnVUyjja9882RMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='37' yt:format='1'/><media:content
+      url='rtsp://v2.cache2.c.youtube.com/CkULENy73wIaPAnVUyjja9882RMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='37' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>Shane, Joe and the Feil boys</media:description><media:keywords>nephews,
+      basketball</media:keywords><media:license type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=2Tzfa-MoU9U&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/2Tzfa-MoU9U/default.jpg' height='90' width='120'
+      time='00:00:18.500' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/2Tzfa-MoU9U/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/2Tzfa-MoU9U/1.jpg'
+      height='90' width='120' time='00:00:09.250' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/2Tzfa-MoU9U/2.jpg' height='90' width='120' time='00:00:18.500'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/2Tzfa-MoU9U/3.jpg'
+      height='90' width='120' time='00:00:27.750' yt:name='end'/><media:title type='plain'>Basketball
+      game 1</media:title><yt:duration seconds='37'/><yt:uploaded>2008-07-27T23:24:53.000Z</yt:uploaded><yt:videoid>2Tzfa-MoU9U</yt:videoid></media:group><yt:recorded>2008-07-26</yt:recorded><yt:statistics
+      favoriteCount='0' viewCount='34'/></entry>
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/videos/3OMce7eOv6k?key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=entry
+      expires:
+      - Sun, 12 Feb 2012 00:03:59 GMT
+      date:
+      - Sun, 12 Feb 2012 00:03:59 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - ! '*'
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DUYEQ347eCp7I2A9WxNbEk8."
+      last-modified:
+      - Sat, 14 Nov 2009 19:31:42 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: <?xml version='1.0' encoding='UTF-8'?><entry xmlns='http://www.w3.org/2005/Atom'
+      xmlns:media='http://search.yahoo.com/mrss/' xmlns:gd='http://schemas.google.com/g/2005'
+      xmlns:yt='http://gdata.youtube.com/schemas/2007' gd:etag='W/&quot;DUYEQ347eCp7I2A9WxNbEk8.&quot;'><id>tag:youtube.com,2008:video:3OMce7eOv6k</id><published>2008-02-05T01:52:54.000Z</published><updated>2009-11-14T19:31:42.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Education'
+      label='Education'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='lefse'/><title>lefse 8</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/3OMce7eOv6k?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=3OMce7eOv6k&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/3OMce7eOv6k/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/3OMce7eOv6k/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/3OMce7eOv6k/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/3OMce7eOv6k/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/3OMce7eOv6k?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/3OMce7eOv6k/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Education' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Education</media:category><media:content
+      url='http://www.youtube.com/v/3OMce7eOv6k?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='54' yt:format='5'/><media:content url='rtsp://v4.cache1.c.youtube.com/CkULENy73wIaPAmpv463exzj3BMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='54' yt:format='1'/><media:content
+      url='rtsp://v1.cache1.c.youtube.com/CkULENy73wIaPAmpv463exzj3BMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='54' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>Lefse</media:description><media:keywords>lefse</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=3OMce7eOv6k&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/3OMce7eOv6k/default.jpg' height='90' width='120'
+      time='00:00:27' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/3OMce7eOv6k/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/3OMce7eOv6k/1.jpg'
+      height='90' width='120' time='00:00:13.500' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/3OMce7eOv6k/2.jpg' height='90' width='120' time='00:00:27'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/3OMce7eOv6k/3.jpg'
+      height='90' width='120' time='00:00:40.500' yt:name='end'/><media:title type='plain'>lefse
+      8</media:title><yt:duration seconds='54'/><yt:uploaded>2008-02-05T01:52:54.000Z</yt:uploaded><yt:videoid>3OMce7eOv6k</yt:videoid></media:group><yt:statistics
+      favoriteCount='0' viewCount='59'/></entry>
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/videos/cvqG1E9Uz64?key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=entry
+      expires:
+      - Sun, 12 Feb 2012 00:03:59 GMT
+      date:
+      - Sun, 12 Feb 2012 00:03:59 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - ! '*'
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"Ck8MSX47eCp7I2A9WxZXGE8."
+      last-modified:
+      - Thu, 06 Mar 2008 16:28:08 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: <?xml version='1.0' encoding='UTF-8'?><entry xmlns='http://www.w3.org/2005/Atom'
+      xmlns:media='http://search.yahoo.com/mrss/' xmlns:gd='http://schemas.google.com/g/2005'
+      xmlns:yt='http://gdata.youtube.com/schemas/2007' gd:etag='W/&quot;Ck8MSX47eCp7I2A9WxZXGE8.&quot;'><id>tag:youtube.com,2008:video:cvqG1E9Uz64</id><published>2008-02-05T01:48:09.000Z</published><updated>2008-03-06T16:28:08.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Education'
+      label='Education'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='lefse'/><title>lefse 8</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/cvqG1E9Uz64?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=cvqG1E9Uz64&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/cvqG1E9Uz64/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/cvqG1E9Uz64/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/cvqG1E9Uz64/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/cvqG1E9Uz64/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/cvqG1E9Uz64?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/cvqG1E9Uz64/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Education' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Education</media:category><media:content
+      url='http://www.youtube.com/v/cvqG1E9Uz64?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='54' yt:format='5'/><media:content url='rtsp://v1.cache4.c.youtube.com/CkULENy73wIaPAmuz1RP1Ib6chMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='54' yt:format='1'/><media:content
+      url='rtsp://v5.cache5.c.youtube.com/CkULENy73wIaPAmuz1RP1Ib6chMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='54' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>lefse</media:description><media:keywords>lefse</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=cvqG1E9Uz64&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/cvqG1E9Uz64/default.jpg' height='90' width='120'
+      time='00:00:27' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/cvqG1E9Uz64/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/cvqG1E9Uz64/1.jpg'
+      height='90' width='120' time='00:00:13.500' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/cvqG1E9Uz64/2.jpg' height='90' width='120' time='00:00:27'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/cvqG1E9Uz64/3.jpg'
+      height='90' width='120' time='00:00:40.500' yt:name='end'/><media:title type='plain'>lefse
+      8</media:title><yt:duration seconds='54'/><yt:uploaded>2008-02-05T01:48:09.000Z</yt:uploaded><yt:videoid>cvqG1E9Uz64</yt:videoid></media:group><yt:statistics
+      favoriteCount='0' viewCount='75'/></entry>
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/videos/nwx6urMZPT8?key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=entry
+      expires:
+      - Sun, 12 Feb 2012 00:03:59 GMT
+      date:
+      - Sun, 12 Feb 2012 00:03:59 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - ! '*'
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"CEcARn47eCp7I2A9WxNWE00."
+      last-modified:
+      - Sun, 11 Oct 2009 23:00:47 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: <?xml version='1.0' encoding='UTF-8'?><entry xmlns='http://www.w3.org/2005/Atom'
+      xmlns:media='http://search.yahoo.com/mrss/' xmlns:gd='http://schemas.google.com/g/2005'
+      xmlns:yt='http://gdata.youtube.com/schemas/2007' gd:etag='W/&quot;CEcARn47eCp7I2A9WxNWE00.&quot;'><id>tag:youtube.com,2008:video:nwx6urMZPT8</id><published>2008-02-05T01:42:16.000Z</published><updated>2009-10-11T23:00:47.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Education'
+      label='Education'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='lefse'/><title>Lefse 7</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/nwx6urMZPT8?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=nwx6urMZPT8&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/nwx6urMZPT8/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/nwx6urMZPT8/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/nwx6urMZPT8/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/nwx6urMZPT8/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/nwx6urMZPT8?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/nwx6urMZPT8/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Education' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Education</media:category><media:content
+      url='http://www.youtube.com/v/nwx6urMZPT8?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='13' yt:format='5'/><media:content url='rtsp://v8.cache1.c.youtube.com/CkULENy73wIaPAk_PRmzunoMnxMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='13' yt:format='1'/><media:content
+      url='rtsp://v3.cache4.c.youtube.com/CkULENy73wIaPAk_PRmzunoMnxMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='13' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>lefse</media:description><media:keywords>lefse</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=nwx6urMZPT8&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/nwx6urMZPT8/default.jpg' height='90' width='120'
+      time='00:00:06.500' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/nwx6urMZPT8/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/nwx6urMZPT8/1.jpg'
+      height='90' width='120' time='00:00:03.250' yt:name='start'/><media:thumbnail
+      url='http://i.ytimg.com/vi/nwx6urMZPT8/2.jpg' height='90' width='120' time='00:00:06.500'
+      yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/nwx6urMZPT8/3.jpg'
+      height='90' width='120' time='00:00:09.750' yt:name='end'/><media:title type='plain'>Lefse
+      7</media:title><yt:duration seconds='13'/><yt:uploaded>2008-02-05T01:42:16.000Z</yt:uploaded><yt:videoid>nwx6urMZPT8</yt:videoid></media:group><yt:statistics
+      favoriteCount='0' viewCount='59'/></entry>
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/videos/o9nK-ybjqwQ?key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=entry
+      expires:
+      - Sun, 12 Feb 2012 00:03:59 GMT
+      date:
+      - Sun, 12 Feb 2012 00:03:59 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - ! '*'
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DUYNQn47eCp7I2A9WxNbEk8."
+      last-modified:
+      - Sat, 14 Nov 2009 19:33:13 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: <?xml version='1.0' encoding='UTF-8'?><entry xmlns='http://www.w3.org/2005/Atom'
+      xmlns:media='http://search.yahoo.com/mrss/' xmlns:gd='http://schemas.google.com/g/2005'
+      xmlns:yt='http://gdata.youtube.com/schemas/2007' gd:etag='W/&quot;DUYNQn47eCp7I2A9WxNbEk8.&quot;'><id>tag:youtube.com,2008:video:o9nK-ybjqwQ</id><published>2008-02-05T01:32:58.000Z</published><updated>2009-11-14T19:33:13.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Education'
+      label='Education'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='lefse'/><title>Lefse 6</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/o9nK-ybjqwQ?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=o9nK-ybjqwQ&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/o9nK-ybjqwQ/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/o9nK-ybjqwQ/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/o9nK-ybjqwQ/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/o9nK-ybjqwQ/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/o9nK-ybjqwQ?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/o9nK-ybjqwQ/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Education' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Education</media:category><media:content
+      url='http://www.youtube.com/v/o9nK-ybjqwQ?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='40' yt:format='5'/><media:content url='rtsp://v4.cache6.c.youtube.com/CkULENy73wIaPAkEq-Mm-8rZoxMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='40' yt:format='1'/><media:content
+      url='rtsp://v2.cache6.c.youtube.com/CkULENy73wIaPAkEq-Mm-8rZoxMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='40' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>lefse</media:description><media:keywords>lefse</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=o9nK-ybjqwQ&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/o9nK-ybjqwQ/default.jpg' height='90' width='120'
+      time='00:00:20' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/o9nK-ybjqwQ/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/o9nK-ybjqwQ/1.jpg'
+      height='90' width='120' time='00:00:10' yt:name='start'/><media:thumbnail url='http://i.ytimg.com/vi/o9nK-ybjqwQ/2.jpg'
+      height='90' width='120' time='00:00:20' yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/o9nK-ybjqwQ/3.jpg'
+      height='90' width='120' time='00:00:30' yt:name='end'/><media:title type='plain'>Lefse
+      6</media:title><yt:duration seconds='40'/><yt:uploaded>2008-02-05T01:32:58.000Z</yt:uploaded><yt:videoid>o9nK-ybjqwQ</yt:videoid></media:group><yt:statistics
+      favoriteCount='0' viewCount='86'/></entry>
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/videos/h3gogqNVA1I?key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=entry
+      expires:
+      - Sun, 12 Feb 2012 00:04:00 GMT
+      date:
+      - Sun, 12 Feb 2012 00:04:00 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - ! '*'
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DEYEQX47eCp7I2A9WxNWFEQ."
+      last-modified:
+      - Wed, 14 Oct 2009 04:55:00 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: <?xml version='1.0' encoding='UTF-8'?><entry xmlns='http://www.w3.org/2005/Atom'
+      xmlns:media='http://search.yahoo.com/mrss/' xmlns:gd='http://schemas.google.com/g/2005'
+      xmlns:yt='http://gdata.youtube.com/schemas/2007' gd:etag='W/&quot;DEYEQX47eCp7I2A9WxNWFEQ.&quot;'><id>tag:youtube.com,2008:video:h3gogqNVA1I</id><published>2007-12-30T15:07:02.000Z</published><updated>2009-10-14T04:55:00.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+      scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Animals'
+      label='Pets &amp; Animals'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+      term='dogs'/><title>Bailey &amp; Bella 2</title><content type='application/x-shockwave-flash'
+      src='http://www.youtube.com/v/h3gogqNVA1I?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+      rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=h3gogqNVA1I&amp;feature=youtube_gdata'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/h3gogqNVA1I/responses?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/h3gogqNVA1I/ratings?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/h3gogqNVA1I/complaints?v=2'/><link
+      rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+      href='http://gdata.youtube.com/feeds/api/videos/h3gogqNVA1I/related?v=2'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/h3gogqNVA1I?v=2'/><author><name>rhopatztube</name><uri>http://gdata.youtube.com/feeds/api/users/PMDcmh58nThxLcoW4kVIWw</uri></author><yt:accessControl
+      action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+      permission='allowed'/><yt:accessControl action='videoRespond' permission='allowed'/><yt:accessControl
+      action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+      action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+      action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+      href='http://gdata.youtube.com/feeds/api/videos/h3gogqNVA1I/comments?v=2' countHint='0'/></gd:comments><media:group><media:category
+      label='Pets &amp; Animals' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Animals</media:category><media:content
+      url='http://www.youtube.com/v/h3gogqNVA1I?version=3&amp;f=videos&amp;d=AW_J5Sxp-JiT7-T5O4N9aUMO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+      duration='84' yt:format='5'/><media:content url='rtsp://v3.cache5.c.youtube.com/CkULENy73wIaPAlSA1Wjgih4hxMYDSANFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='84' yt:format='1'/><media:content
+      url='rtsp://v1.cache1.c.youtube.com/CkULENy73wIaPAlSA1Wjgih4hxMYESARFEgGUgZ2aWRlb3NyIQFvyeUsafiYk-_k-TuDfWlDDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+      type='video/3gpp' medium='video' expression='full' duration='84' yt:format='6'/><media:credit
+      role='uploader' scheme='urn:youtube'>rhopatztube</media:credit><media:description
+      type='plain'>dogs play fighting</media:description><media:keywords>dogs</media:keywords><media:license
+      type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+      url='http://www.youtube.com/watch?v=h3gogqNVA1I&amp;feature=youtube_gdata_player'/><media:thumbnail
+      url='http://i.ytimg.com/vi/h3gogqNVA1I/default.jpg' height='90' width='120'
+      time='00:00:42' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/h3gogqNVA1I/hqdefault.jpg'
+      height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/h3gogqNVA1I/1.jpg'
+      height='90' width='120' time='00:00:21' yt:name='start'/><media:thumbnail url='http://i.ytimg.com/vi/h3gogqNVA1I/2.jpg'
+      height='90' width='120' time='00:00:42' yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/h3gogqNVA1I/3.jpg'
+      height='90' width='120' time='00:01:03' yt:name='end'/><media:title type='plain'>Bailey
+      &amp; Bella 2</media:title><yt:duration seconds='84'/><yt:uploaded>2007-12-30T15:07:02.000Z</yt:uploaded><yt:videoid>h3gogqNVA1I</yt:videoid></media:group><yt:statistics
+      favoriteCount='0' viewCount='53'/></entry>
+    http_version: '1.1'

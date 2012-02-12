@@ -7,14 +7,14 @@
       xmlns:yt="http://gdata.youtube.com/schemas/2007"><id>dYCLXDtvrbs</id></entry>
     headers:
       authorization:
-      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="cb7dd568d60846e1cd629f0cfb85b781",
-        oauth_signature="vKAjfkzS5ADzL%2BOazpESJLp%2BTrE%3D", oauth_signature_method="HMAC-SHA1",
-        oauth_timestamp="1324071490", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="2bd2696a84ce285d6845ab94fc236b5f",
+        oauth_signature="b66gwnNaKXm9qUEYB3VGSSsAIrg%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1329005008", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
         oauth_version="1.0"
       x-gdata-client:
       - youtube_it
       x-gdata-key:
-      - key=AI39si6vm0IJIRknhyygB3SfAk3ZlSWY79qZQe8Qn7XTLxKV-X-13a0BasM9yYgXHR7hMBeWQXD0610rRCQNaEqUUkSaZW-PoA
+      - key=AI39si4CUmVJSHUvVBrxXYRrVWbu4XKwuS2FGS9eacCykE-P5Ea6_VRPJBTkRH3cHZ7ju-PPAW6YfkCjwp0W1NTXpKqLujQXag
       gdata-version:
       - '2'
       content-type:
@@ -31,9 +31,9 @@
       content-type:
       - application/atom+xml; charset=UTF-8; type=entry
       expires:
-      - Fri, 16 Dec 2011 21:38:09 GMT
+      - Sun, 12 Feb 2012 00:03:29 GMT
       date:
-      - Fri, 16 Dec 2011 21:38:09 GMT
+      - Sun, 12 Feb 2012 00:03:29 GMT
       cache-control:
       - private, max-age=0, must-revalidate, no-transform
       vary:
@@ -41,7 +41,7 @@
       gdata-version:
       - '2.1'
       etag:
-      - W/"C0MMSH47eCp7I2A9WhRXEEo."
+      - W/"D0cESH47eCp7I2A9WhRaEE0."
       location:
       - http://gdata.youtube.com/feeds/api/users/nowmovnowbox/favorites/vjVQa1PpcFOwQxSyRZ3jkaWYRFSCEN47ZwGG_NlOiJs?client=youtube_it
       content-location:
@@ -59,7 +59,7 @@
     body: ! "<?xml version='1.0' encoding='UTF-8'?><entry xmlns='http://www.w3.org/2005/Atom'
       xmlns:app='http://www.w3.org/2007/app' xmlns:media='http://search.yahoo.com/mrss/'
       xmlns:gd='http://schemas.google.com/g/2005' xmlns:yt='http://gdata.youtube.com/schemas/2007'
-      gd:etag='W/&quot;C0MMSH47eCp7I2A9WhRXEEo.&quot;'><id>tag:youtube.com,2008:favorite:vjVQa1PpcFOwQxSyRZ3jkaWYRFSCEN47ZwGG_NlOiJs</id><published>2011-12-16T21:38:09.000Z</published><updated>2011-12-16T21:38:09.000Z</updated><app:edited>2011-12-16T21:38:09.000Z</app:edited><category
+      gd:etag='W/&quot;D0cESH47eCp7I2A9WhRaEE0.&quot;'><id>tag:youtube.com,2008:favorite:vjVQa1PpcFOwQxSyRZ3jkaWYRFSCEN47ZwGG_NlOiJs</id><published>2012-02-12T00:03:29.000Z</published><updated>2012-02-12T00:03:29.000Z</updated><app:edited>2012-02-12T00:03:29.000Z</app:edited><category
       scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#favorite'/><category
       scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
       label='Entertainment'/><category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
@@ -90,11 +90,11 @@
       action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
       action='syndicate' permission='allowed'/><yt:hd/><media:group><media:category
       label='Entertainment' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
-      url='http://www.youtube.com/v/dYCLXDtvrbs?version=3&amp;f=user_favorites&amp;c=youtube_it&amp;d=AVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+      url='http://www.youtube.com/v/dYCLXDtvrbs?version=3&amp;f=user_favorites&amp;c=youtube_it&amp;d=Aavd8FDZAgQGryPp22M9JwkO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
       type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
-      duration='404' yt:format='5'/><media:content url='rtsp://v2.cache1.c.youtube.com/ClkLENy73wIaUAm7rW87XIuAdRMYDSANFEIKeW91dHViZV9pdEgGUg51c2VyX2Zhdm9yaXRlc3IhAVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDmDA==/0/0/0/video.3gp'
+      duration='404' yt:format='5'/><media:content url='rtsp://v2.cache1.c.youtube.com/ClkLENy73wIaUAm7rW87XIuAdRMYDSANFEIKeW91dHViZV9pdEgGUg51c2VyX2Zhdm9yaXRlc3IhAavd8FDZAgQGryPp22M9JwkO88HsQjpE1a8d1GxQnGDmDA==/0/0/0/video.3gp'
       type='video/3gpp' medium='video' expression='full' duration='404' yt:format='1'/><media:content
-      url='rtsp://v4.cache5.c.youtube.com/ClkLENy73wIaUAm7rW87XIuAdRMYESARFEIKeW91dHViZV9pdEgGUg51c2VyX2Zhdm9yaXRlc3IhAVu6va3IyLhd5D3vm5XMf3MO88HsQjpE1a8d1GxQnGDmDA==/0/0/0/video.3gp'
+      url='rtsp://v4.cache5.c.youtube.com/ClkLENy73wIaUAm7rW87XIuAdRMYESARFEIKeW91dHViZV9pdEgGUg51c2VyX2Zhdm9yaXRlc3IhAavd8FDZAgQGryPp22M9JwkO88HsQjpE1a8d1GxQnGDmDA==/0/0/0/video.3gp'
       type='video/3gpp' medium='video' expression='full' duration='404' yt:format='6'/><media:credit
       role='uploader' scheme='urn:youtube' yt:type='partner'>RayWilliamJohnson</media:credit><media:description
       type='plain'>RAY'S PERSONAL VIDEO: http://www.youtube.com/watch?v=Jkg2HTqUPKg\r\n\r\nRAY'S
@@ -119,6 +119,6 @@
       height='90' width='120' time='00:05:03' yt:name='end'/><media:title type='plain'>CONFESSING
       MY LOVE</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
       seconds='404'/><yt:uploaded>2011-08-30T00:34:54.000Z</yt:uploaded><yt:videoid>dYCLXDtvrbs</yt:videoid></media:group><gd:rating
-      average='4.7422647' max='5' min='1' numRaters='61893' rel='http://schemas.google.com/g/2005#overall'/><yt:statistics
-      favoriteCount='9690' viewCount='6448950'/><yt:rating numDislikes='3988' numLikes='57905'/><yt:favoriteId>vjVQa1PpcFOwQxSyRZ3jkaWYRFSCEN47ZwGG_NlOiJs</yt:favoriteId></entry>"
+      average='4.742066' max='5' min='1' numRaters='62295' rel='http://schemas.google.com/g/2005#overall'/><yt:statistics
+      favoriteCount='9656' viewCount='6634904'/><yt:rating numDislikes='4017' numLikes='58278'/><yt:favoriteId>vjVQa1PpcFOwQxSyRZ3jkaWYRFSCEN47ZwGG_NlOiJs</yt:favoriteId></entry>"
     http_version: '1.1'

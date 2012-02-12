@@ -187,8 +187,17 @@ module Aji
 
     def uploaded_videos uid=uid
       tracker.hit!
-      client.videos_by(:author => uid, :order_by => 'published',
-                       :per_page => 50).videos.map{ |v| youtube_it_to_video v }
+      [].tap do |videos|
+        client.videos_by(:author => uid, :order_by => 'published',
+                         :per_page => 50).videos.each do |v|
+          begin
+            videos << youtube_it_to_video(v)
+          rescue => e
+            Aji.log :error, "#{e.inspect} when getting #{v.inspect}"
+            videos << video(v.video_id.split(':').last)
+          end
+        end
+      end
     end
 
     def keyword_search keywords, per_page=50
