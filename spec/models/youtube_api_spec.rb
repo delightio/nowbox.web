@@ -527,7 +527,6 @@ describe Aji::YoutubeAPI, :unit, :net do
 
       it "ignores random invalid author info returned from YouTube" do
         subject.stub(:youtube_it_to_video).and_raise(NoMethodError)
-        subject.should_receive(:video).at_least(:once)
 
         videos = VCR.use_cassette "youtube_api/uploaded_videos" do
           subject.uploaded_videos

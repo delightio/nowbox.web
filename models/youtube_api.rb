@@ -193,8 +193,7 @@ module Aji
           begin
             videos << youtube_it_to_video(v)
           rescue => e
-            Aji.log :error, "#{e.inspect} when getting #{v.inspect}"
-            videos << video(v.video_id.split(':').last)
+            Aji.log :error, "#{e.inspect} when getting #{v.video_id}"
           end
         end
       end
