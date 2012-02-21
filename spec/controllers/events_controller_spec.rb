@@ -37,6 +37,21 @@ describe Aji::API do
         post "#{resource_uri}", :user_id => @user.id
         last_response.status.should == 400
       end
+
+      it "creates event objects from video external id" do
+        Event.send(:video_actions).each do |action|
+          params = { :user_id => @user.id,
+                     :video_elapsed => rand(10),
+                     :action => action,
+                     :channel_id => @channel.id,
+                     :video_source => @video.source,
+                     :video_external_id => @video.external_id }
+          expect { post("#{resource_uri}/", params) }.
+            to change { Event.count }.by(1)
+          last_response.status.should == 201
+        end
+      end
+
     end
   end
 end

@@ -33,6 +33,27 @@ module Aji
 
     scope :latest, lambda { |n=10| order('created_at desc').limit(n) }
 
+
+    def self.create_video_if_needed params
+      action = params[:action] || params["action"]
+      video_id = params[:video_id] || params["video_id"]
+      if Event.video_actions.include?(action.to_sym) and video_id.nil?
+        source = params[:video_source] || params["video_source"]
+        external_id = params[:video_external_id] || params["video_external_id"]
+        video = Video.find_or_create_by_source_and_external_id source, external_id
+        unless video.nil?
+          params[:video_id] = video.id
+          params = params.delete_if {|k| k==:video_source or k=="video_source" }
+          params = params.delete_if {|k| k==:video_external_id or k=="video_external_id" }
+        end
+      end
+      params
+    end
+
+    def self.parse_params params
+      params = create_video_if_needed params
+    end
+
     def action
       read_attribute(:action).to_sym
     end

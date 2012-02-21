@@ -53,26 +53,40 @@
         </div>
         <h2>POST events</h2>
 
-<p><strong>Creates</strong> an event with given parameters.
-<strong>Returns</strong> the created event and HTTP Status Code 201 if successful or
+<p><strong>Creates</strong> an event with given parameters.</p>
+
+<p><strong>Returns</strong> the created event and HTTP Status Code 201 if successful or
 a JSON encoded error message if not.</p>
 
-<p><strong>Required params</strong>
-<code>user_id</code> unique id of the action (user)
-<code>channel_id</code> unique id of the channel being acted on
-<code>action</code> action being triggered:
+<p><strong>Required params</strong></p>
+
+<p><code>user_id</code> unique id of the action (user)</p>
+
+<p><code>channel_id</code> unique id of the channel being acted on</p>
+
+<p><code>action</code> action being triggered:
   channel: <code>subscribe</code>, <code>unsubscribe</code>
-  video: <code>view</code>, <code>share</code>, <code>enqueue</code>, <code>dequeue</code>, <code>examine</code>, <code>favorite</code>, <code>unfavorite</code>
-<strong>Optional params</strong>
+  video: <code>view</code>, <code>share</code>, <code>enqueue</code>, <code>dequeue</code>, <code>examine</code>, <code>favorite</code>, <code>unfavorite</code></p>
+
+<p><strong>Optional params</strong>
 <code>reason</code> string containing the reason for examination</p>
 
-<p>When an video action is sent,
-<strong>Required params</strong>
-<code>video_id</code> unique id of the video being acted on
-<code>video_elapsed</code> time in seconds from <code>video_start</code> when the event is triggered
-<strong>Optional params</strong>
-<code>video_start</code>: time in seconds when the event starts tracking (normally 0.0)
-<code>message</code>: the share message passed by the user when sharing a video.</p>
+<p>When an video action is sent,</p>
+
+<p><strong>Required params</strong></p>
+
+<p><code>video_id</code> unique id of the video being acted on.
+if <code>video_id</code> is not present,
+  <code>video_source</code> youtube
+  <code>video_external_id</code>external ID of given video</p>
+
+<p><code>video_elapsed</code> time in seconds from <code>video_start</code> when the event is triggered</p>
+
+<p><strong>Optional params</strong></p>
+
+<p><code>video_start</code>: time in seconds when the event starts tracking (normally 0.0)</p>
+
+<p><code>message</code>: the share message passed by the user when sharing a video.</p>
 
       </td>
       <td class=code>
@@ -81,7 +95,8 @@ a JSON encoded error message if not.</p>
 
         <span class="nb">p</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">delete_if</span> <span class="p">{</span><span class="o">|</span><span class="n">k</span><span class="o">|</span> <span class="n">k</span><span class="o">==</span><span class="s2">&quot;version&quot;</span> <span class="o">||</span> <span class="n">k</span><span class="o">==</span><span class="ss">:version</span><span class="p">}</span>
         <span class="k">begin</span>
-          <span class="n">event</span> <span class="o">=</span> <span class="no">Event</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="nb">p</span><span class="p">)</span>
+          <span class="nb">p</span> <span class="o">=</span> <span class="no">Event</span><span class="o">.</span><span class="n">parse_params</span> <span class="nb">p</span>
+          <span class="n">event</span> <span class="o">=</span> <span class="no">Event</span><span class="o">.</span><span class="n">create</span> <span class="nb">p</span>
         <span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">e</span>
           <span class="n">error!</span><span class="p">(</span><span class="s2">&quot;Cannot create event from: </span><span class="si">#{</span><span class="nb">p</span><span class="o">.</span><span class="n">inspect</span><span class="si">}</span><span class="s2">. Error: </span><span class="si">#{</span><span class="n">e</span><span class="o">.</span><span class="n">inspect</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
         <span class="k">end</span>
