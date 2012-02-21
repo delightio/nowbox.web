@@ -5,8 +5,8 @@ include Aji
 describe Aji::Event, :unit do
   describe ".create_video_if_needed" do
     let(:video) { mock :id => 10, :external_id => '2wjh0N1EzPI', :source => :youtube}
-    let(:video_params) {{ :action => :view,
-                          :video_external_id => video.external_id,
+    let(:video_params) { {:action => :view,
+                          :video_uid => video.external_id,
                           :video_source => :youtube} }
 
     it "creates video object if video action" do
@@ -19,7 +19,7 @@ describe Aji::Event, :unit do
       parsed[:video_id].should == video.id
 
       parsed.should_not have_key :video_source
-      parsed.should_not have_key :video_external_id
+      parsed.should_not have_key :video_uid
     end
   end
 

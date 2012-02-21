@@ -79,9 +79,8 @@ a JSON encoded error message if not.</p>
  <code>channel_source</code> (facebook, twitter, youtube) and <code>channel_uid</code></p>
 
 <p><code>video_id</code> unique id of the video being acted on.
-if <code>video_id</code> is not present,
-  <code>video_source</code> should be youtube
-  <code>video_external_id</code> should be external ID of given video</p>
+if <code>video_id</code> is not present, we expect
+  <code>video_source</code> (youtube) and <code>video_uid</code> (11 YouTube video ID)</p>
 
 <p><code>video_elapsed</code> time in seconds from <code>video_start</code> when the event is triggered</p>
 

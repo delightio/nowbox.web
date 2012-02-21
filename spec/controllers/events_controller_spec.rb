@@ -45,7 +45,7 @@ describe Aji::API do
                      :action => action,
                      :channel_id => @channel.id,
                      :video_source => @video.source,
-                     :video_external_id => @video.external_id }
+                     :video_uid => @video.external_id }
           expect { post("#{resource_uri}/", params) }.
             to change { Event.count }.by(1)
           last_response.status.should == 201

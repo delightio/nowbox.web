@@ -61,12 +61,12 @@ module Aji
       video_id = params[:video_id] || params["video_id"]
       if Event.video_actions.include?(action.to_sym) and video_id.nil?
         source = params[:video_source] || params["video_source"]
-        external_id = params[:video_external_id] || params["video_external_id"]
+        external_id = params[:video_uid] || params["video_uid"]
         video = Video.find_or_create_by_source_and_external_id source, external_id
         unless video.nil?
           params[:video_id] = video.id
           params = params.delete_if {|k| k==:video_source or k=="video_source" }
-          params = params.delete_if {|k| k==:video_external_id or k=="video_external_id" }
+          params = params.delete_if {|k| k==:video_uid or k=="video_uid" }
         end
       end
       params

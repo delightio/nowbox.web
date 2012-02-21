@@ -33,9 +33,8 @@ module Aji
       #  `channel_source` (facebook, twitter, youtube) and `channel_uid`
       #
       # `video_id` unique id of the video being acted on.
-      # if `video_id` is not present,
-      #   `video_source` should be youtube
-      #   `video_external_id` should be external ID of given video
+      # if `video_id` is not present, we expect
+      #   `video_source` (youtube) and `video_uid` (11 YouTube video ID)
       #
       # `video_elapsed` time in seconds from `video_start` when the event is triggered
       #
