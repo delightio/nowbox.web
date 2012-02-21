@@ -52,6 +52,18 @@ describe Aji::API do
         end
       end
 
+      it "creates event objects from channel uid" do
+        Event.send(:channel_actions).each do |action|
+          params = { :user_id => @user.id,
+                     :action => action,
+                     :channel_uid => '501776555',
+                     :channel_source => 'facebook' }
+          expect { post("#{resource_uri}/", params) }.
+            to change { Event.count }.by(1)
+          last_response.status.should == 201
+        end
+      end
+
     end
   end
 end

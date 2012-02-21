@@ -33,6 +33,28 @@ module Aji
 
     scope :latest, lambda { |n=10| order('created_at desc').limit(n) }
 
+    def self.create_channel_if_needed params
+      action = params[:action] || params["action"]
+      channel_id = params[:channel_id] || params["channel_id"]
+      if Event.channel_actions.include?(action.to_sym) and channel_id.nil?
+        source = params[:channel_source] || params["channel_source"]
+        uid = params[:channel_uid] || params["channel_uid"]
+        account_class = case source
+          when 'twitter' then Account::Twitter
+          when 'facebook' then Account::Facebook
+          when 'youtube' then Account::Youtube
+          end
+
+        account = account_class.find_or_create_by_lower_uid uid.downcase
+        channel = account.to_channel
+        unless channel.nil?
+          params[:channel_id] = channel.id
+          params = params.delete_if {|k| k==:channel_source or k=="channel_source" }
+          params = params.delete_if {|k| k==:channel_uid or k=="channel_uid" }
+        end
+      end
+      params
+    end
 
     def self.create_video_if_needed params
       action = params[:action] || params["action"]
@@ -51,6 +73,7 @@ module Aji
     end
 
     def self.parse_params params
+      params = create_channel_if_needed params
       params = create_video_if_needed params
     end
 

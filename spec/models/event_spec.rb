@@ -23,9 +23,27 @@ describe Aji::Event, :unit do
     end
   end
 
+  describe ".create_channel_if_needed" do
+    let(:channel) { mock(:id => 20) }
+    let(:account) { mock(:provider => 'facebook', :uid => "97989797987").tap do |a|
+                      Account::Facebook.stub(:find_or_create_by_lower_uid).with(a.uid).
+                        and_return(a)
+                      a.stub(:to_channel).and_return(channel)
+                    end }
+    let(:params) {{ :action => :subscribe,
+                    :channel_source => account.provider,
+                    :channel_uid => account.uid }}
+
+    it "creates channel object if channel_id missing" do
+      parsed = Event.parse_params params
+      parsed[:channel_id].should == channel.id
+    end
+  end
+
   describe ".parse_params" do
     let(:params) { mock }
     it "creates video object if needed" do
+      Event.should_receive(:create_channel_if_needed).with(params).and_return(params)
       Event.should_receive(:create_video_if_needed).with(params).and_return(params)
       Event.parse_params params
     end

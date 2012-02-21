@@ -29,6 +29,9 @@ module Aji
       #
       # __Required params__
       #
+      # if `channel_id` is not present, we expect
+      #  `channel_source` (facebook, twitter, youtube) and `channel_uid`
+      #
       # `video_id` unique id of the video being acted on.
       # if `video_id` is not present,
       #   `video_source` should be youtube
