@@ -42,7 +42,7 @@ describe Aji::Event, :unit do
 
   describe ".parse_params" do
     let(:params) { mock }
-    it "creates video object if needed" do
+    it "creates video and channel objects if needed" do
       Event.should_receive(:create_channel_if_needed).with(params).and_return(params)
       Event.should_receive(:create_video_if_needed).with(params).and_return(params)
       Event.parse_params params
