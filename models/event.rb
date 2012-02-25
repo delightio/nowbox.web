@@ -33,10 +33,15 @@ module Aji
 
     scope :latest, lambda { |n=10| order('created_at desc').limit(n) }
 
+    def self.require_channel? action
+      channel_actions.include?(action.to_sym) or
+      video_actions.include?(action.to_sym)
+    end
+
     def self.create_channel_if_needed params
       action = params[:action] || params["action"]
       channel_id = params[:channel_id] || params["channel_id"]
-      if Event.channel_actions.include?(action.to_sym) and channel_id.nil?
+      if require_channel?(action) and channel_id.nil?
         source = params[:channel_source] || params["channel_source"]
         uid = params[:channel_uid] || params["channel_uid"]
         account_class = case source
@@ -59,7 +64,7 @@ module Aji
     def self.create_video_if_needed params
       action = params[:action] || params["action"]
       video_id = params[:video_id] || params["video_id"]
-      if Event.video_actions.include?(action.to_sym) and video_id.nil?
+      if video_actions.include?(action.to_sym) and video_id.nil?
         source = params[:video_source] || params["video_source"]
         external_id = params[:video_uid] || params["video_uid"]
         video = Video.find_or_create_by_source_and_external_id source, external_id
@@ -75,6 +80,7 @@ module Aji
     def self.parse_params params
       params = create_channel_if_needed params
       params = create_video_if_needed params
+      params
     end
 
     def action

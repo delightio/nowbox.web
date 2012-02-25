@@ -3,11 +3,30 @@ require File.expand_path("../../spec_helper", __FILE__)
 include Aji
 
 describe Aji::Event, :unit do
+  describe ".require_channel?" do
+
+    it "returns true if given action is a video action" do
+      Event.video_actions.each { |action|
+        Event.require_channel?(action).should be_true }
+    end
+
+    it "returns true if given action is a channel action" do
+      Event.channel_actions.each { |action|
+        Event.require_channel?(action).should be_true }
+    end
+
+    it "returns false otherwise" do
+      action = "#{Event.channel_actions.sample}.random".to_sym
+      Event.require_channel?(action).should be_false
+    end
+  end
+
   describe ".create_video_if_needed" do
     let(:video) { mock :id => 10, :external_id => '2wjh0N1EzPI', :source => :youtube}
     let(:video_params) { {:action => :view,
                           :video_uid => video.external_id,
-                          :video_source => :youtube} }
+                          :video_source => :youtube,
+                          :channel_id => 300} }
 
     it "creates video object if video action" do
       Video.should_receive(:find_or_create_by_source_and_external_id).
@@ -30,7 +49,8 @@ describe Aji::Event, :unit do
                         and_return(a)
                       a.stub(:to_channel).and_return(channel)
                     end }
-    let(:params) {{ :action => :subscribe,
+    let(:params) {{ :action => :view,
+                    :video_id => 2000,
                     :channel_source => account.provider,
                     :channel_uid => account.uid }}
 
