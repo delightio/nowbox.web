@@ -67,7 +67,7 @@ module Aji
     end
 
     def redis_keys
-      [ channel_id_zset ].map &:key
+      [ channel_id_zset, onboard_channel_ids ].map &:key
     end
 
     def delete_redis_keys
