@@ -198,8 +198,10 @@ module Aji
     end
 
     describe "#set_top_trending_in_category" do
+      let(:category) { mock }
       it "sets self as the top trending video in its category" do
-        subject.category.should_receive(:set_top_video).with(subject)
+        subject.stub :category => category
+        category.should_receive(:set_top_video_in_trending).with(subject)
 
         subject.set_top_trending_in_category
       end

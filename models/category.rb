@@ -80,6 +80,15 @@ module Aji
       update_attribute(:title, raw_title) if title.nil?
     end
 
+    def trending
+      @trending ||= Channel::Trending.find_or_create_by_title title
+    end
+
+    def set_top_video_in_trending video
+      top_relevance = trending.relevance_of trending.content_videos(1)
+      trending.push video, top_relevance + 1 # so it's always top
+    end
+
     def self.undefined
       self.find_or_create_by_raw_title "*** undefined ***"
     end
