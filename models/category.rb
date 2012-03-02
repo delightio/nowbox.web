@@ -81,7 +81,7 @@ module Aji
     end
 
     def trending
-      @trending ||= Channel::Trending.find_or_create_by_title title
+      @trending ||= Channel::Trending.find_or_create_by_title "Now#{title}"
     end
 
     def set_top_video_in_trending video
