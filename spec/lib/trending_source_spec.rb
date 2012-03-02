@@ -39,17 +39,12 @@ describe TrendingSource do
       subject.stub :video_uids => [ video1.external_id ]
     end
 
-    it "updates trending videos in category" do
+    it "populates all videos" do
       video1.should_receive :populate
 
       subject.refresh
     end
 
-    it "populates all videos" do
-      video1.should_receive(:populate).and_yield(video1)
-      video1.should_receive :set_top_trending_in_category
-
-      subject.refresh
-    end
+    it "updates trending videos in each category"
   end
 end

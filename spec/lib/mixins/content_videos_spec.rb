@@ -153,6 +153,10 @@ module Aji
       end
     end
 
+    describe "#lpush" do
+      it "always push given object to the head"
+    end
+
     describe "#pop" do
       let(:video) { subject.content_videos.sample }
 

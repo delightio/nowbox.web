@@ -56,6 +56,11 @@ module Aji
         content_zset[video.id] = relevance.to_i
       end
 
+      def lpush video
+        top = relevance_of content_videos(1)
+        push video, top + 1
+      end
+
       def pop_by_id video_id
         content_zset.delete video_id
       end

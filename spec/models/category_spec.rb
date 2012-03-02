@@ -106,10 +106,6 @@ module Aji
         subject.featured_channels.should_not include ch1
       end
 
-    describe "#set_top_video_in_trending" do
-      it "pushes given video with the highest score among all existing vidoes"
-    end
-
     end
   end
 end
