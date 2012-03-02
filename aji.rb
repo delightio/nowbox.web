@@ -106,6 +106,7 @@ require_relative 'lib/decay'
 require_relative 'lib/parsers'
 require_relative 'lib/searcher'
 require_relative 'lib/info'
+require_relative 'lib/trending_source'
 
 Dir.glob("models/*.rb").each { |r| require_relative r }
 # Must load channel subtypes after other models for dependency reasons.
