@@ -196,5 +196,13 @@ module Aji
         Video.new(:source => :youtube).send :api
       end
     end
+
+    describe "#set_top_trending_in_category" do
+      it "sets self as the top trending video in its category" do
+        subject.category.should_receive(:set_top_video).with(subject)
+
+        subject.set_top_trending_in_category
+      end
+    end
   end
 end

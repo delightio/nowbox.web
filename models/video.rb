@@ -123,6 +123,10 @@ module Aji
       existing_or_new
     end
 
+    def set_top_trending_in_category
+      category.set_top_video self
+    end
+
     private
     MAX_FAILED_ATTEMPTS = 10
 
