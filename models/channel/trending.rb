@@ -21,6 +21,10 @@ module Aji
       "What #{category} videos the world is watching right now!"
     end
 
+    def self.global
+      find_or_create_by_title 'NowTrending'
+    end
+
   end
 end
 
