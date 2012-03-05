@@ -57,7 +57,8 @@ module Aji
       end
 
       def lpush video
-        top = relevance_of content_videos(1).first
+        top = 0
+        top = relevance_of(content_videos(1).first)  if content_video_id_count > 0
         push video, top + 1
       end
 

@@ -32,10 +32,13 @@ module Aji
       video_uids.reverse.each do |uid|
         video = Video.find_or_create_by_source_and_external_id @video_source, uid
         video.populate do |v|
+          puts "adding #{v.external_id}, #{v.title}, to #{v.category.title}"
+
           v.category.trending.lpush v
           nowtrending.lpush v
         end
       end
     end
+
   end
 end

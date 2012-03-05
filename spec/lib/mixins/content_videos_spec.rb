@@ -154,7 +154,18 @@ module Aji
     end
 
     describe "#lpush" do
-      it "always push given object to the head"
+      let(:new_video) do
+        mock("video", :id => 6).tap do |v|
+          Video.stub(:find_by_id).with(v.id).and_return(v)
+        end
+      end
+
+      it "always push given object to the head" do
+        was_top = subject.content_video_ids.first
+        expect { subject.lpush new_video }.
+          to change { subject.content_video_ids.first }.
+          from(was_top).to(new_video.id)
+      end
     end
 
     describe "#pop" do
