@@ -49,9 +49,24 @@ describe Aji::Channel do
         history.stub(:content_video_ids).and_return(viewed_video_ids)
         personalized_video_ids = channel.personalized_content_videos(
           :user => user).map(&:id)
-          viewed_video_ids.each do | id |
-            personalized_video_ids.should_not include id
-          end
+        viewed_video_ids.each do | id |
+          personalized_video_ids.should_not include id
+        end
+      end
+
+      it "returns viewed videos when asked", :slow do
+        channel = Factory :youtube_channel_with_videos
+        viewed_video_ids = channel.content_videos.sample(channel.content_videos.length / 2).map(&:id)
+
+        user = mock("user")
+        history = mock("history")
+        user.stub(:history_channel).and_return(history)
+        history.stub(:content_video_ids).and_return(viewed_video_ids)
+        personalized_video_ids = channel.personalized_content_videos(
+          :user => user, :include_viewed => true).map(&:id)
+        viewed_video_ids.each do | id |
+          personalized_video_ids.should include id
+        end
       end
 
       it "returns videos according to descending order on score", :slow do

@@ -181,6 +181,8 @@ to subscribe the user to given the selected categories</p>
 
 <ul>
 <li><p><code>limit</code> max. number of videos to return</p></li>
+<li><p><code>include_viewed</code> returns viewed videos if this parameter is present,
+regardless of values</p></li>
 <li><p><code>page</code> which page of videos to return, starts at 1</p></li>
 </ul>
       </td>
@@ -188,6 +190,7 @@ to subscribe the user to given the selected categories</p>
         <div class='highlight'><pre>      <span class="n">get</span> <span class="s1">&#39;/:channel_id/videos&#39;</span> <span class="k">do</span>
         <span class="n">authenticate!</span>
         <span class="n">channel</span> <span class="o">=</span> <span class="n">find_channel_by_id_or_error</span> <span class="n">params</span><span class="o">[</span><span class="ss">:channel_id</span><span class="o">]</span>
+        <span class="n">channel</span><span class="o">.</span><span class="n">time_limited_refresh_content</span>
         <span class="n">channel</span><span class="o">.</span><span class="n">personalized_content_videos</span> <span class="n">params</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
           <span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">current_user</span><span class="p">)</span>
       <span class="k">end</span></pre></div>
