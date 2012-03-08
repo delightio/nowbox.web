@@ -95,11 +95,11 @@ describe Aji::Channel do
       it "returns videos in ascending order", :slow do
         first_video = Factory :video
         event = Factory :event, :user => @user,
-          :action => :share,  :video => first_video,
+          :action => :favorite,  :video => first_video,
           :created_at => 20.seconds.ago
         second_video = Factory :video
         event = Factory :event, :user => @user,
-          :action => :share,  :video => second_video,
+          :action => :favorite,  :video => second_video,
           :created_at => Time.now
         @favorite_channel.personalized_content_videos(:user => @user).
           first.should == first_video
@@ -110,7 +110,7 @@ describe Aji::Channel do
       it "returns viewed videos" do
         video = Factory :video
         event = Factory :event, :user => @user,
-          :action => :share,  :video => video
+          :action => :favorite,  :video => video
         @user.history_channel.content_videos.should include video
         @favorite_channel.personalized_content_videos(:user => @user).
           should include video
@@ -119,7 +119,7 @@ describe Aji::Channel do
       it "returns blacklisted videos" do
         video = Factory :video, :blacklisted_at => Time.now
         event = Factory :event, :user => @user,
-          :action => :share,  :video => video
+          :action => :favorite,  :video => video
         @favorite_channel.personalized_content_videos(:user => @user).
           should include video
       end
