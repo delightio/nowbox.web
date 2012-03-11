@@ -97,7 +97,10 @@ module Aji
         new_videos = content_videos_rev(total)
       else
         # TODO: use Redis for this.. zdiff not found?
-        viewed_video_ids = user.history_channel.content_video_ids
+        viewed_video_ids = []
+        if !args[:include_viewed] and !args["include_viewed"]
+          viewed_video_ids = user.history_channel.content_video_ids
+        end
         content_video_ids.each do |channel_video_id|
           video = Video.find_by_id channel_video_id
           next if video.nil? || video.blacklisted?

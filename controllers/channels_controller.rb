@@ -96,6 +96,9 @@ module Aji
       #
       # - `limit` max. number of videos to return
       #
+      # - `include_viewed` returns viewed videos if this parameter is present,
+      #   regardless of values
+      #
       # - `page` which page of videos to return, starts at 1
       get '/:channel_id/videos' do
         authenticate!
