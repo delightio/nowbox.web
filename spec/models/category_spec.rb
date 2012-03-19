@@ -107,5 +107,9 @@ module Aji
       end
 
     end
+
+    describe "#trending" do
+      it "is an account channel with the top 20 channels within current category"
+    end
   end
 end

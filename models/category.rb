@@ -81,7 +81,14 @@ module Aji
     end
 
     def trending
-      @trending ||= Channel::Trending.find_or_create_by_title "Now#{title}"
+      @trending ||= Channel::Account.find_or_create_by_title "Now#{title}"
+    end
+
+    def update_trending
+      trending.accounts = featured_channels.map {|fch| fch.accounts.first }
+      trending.save
+
+      Aji.log "#{trending.title} contains: #{trending.accounts.map &:username}"
     end
 
     def self.undefined
