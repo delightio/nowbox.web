@@ -4,7 +4,7 @@ describe Aji::Mixins::Formatters do
   let(:long_message) { "A really #{"long" * 15} string" }
   let(:short_message) { "Hah this video!" }
   let(:link_text) { "http://nowbox.com/shares/51232" }
-  let(:coda) { " #{link_text} via @nowbox for iPad" }
+  let(:coda) { " #{link_text} via @nowbox" }
 
   describe Aji::Mixins::Formatters::Twitter do
     subject { Class.new { include Aji::Mixins::Formatters::Twitter }.new }
@@ -30,12 +30,14 @@ describe Aji::Mixins::Formatters do
   describe Aji::Mixins::Formatters::Facebook do
     subject { Class.new { include Aji::Mixins::Formatters::Facebook }.new }
 
+    let(:publisher) { stub :realname => "fb user"}
     let(:video)   { stub :title => stub, :thumbnail_uri => stub }
     let(:channel) { stub :title => stub }
     let(:share)   { stub :message => "A message",
                         :link => "http://link.io",
                         :video => video,
-                        :channel => channel }
+                        :channel => channel,
+                        :publisher => publisher }
 
     it "returns a message" do
       message, attachment = *subject.format(share)
