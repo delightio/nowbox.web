@@ -99,6 +99,26 @@ describe Aji::Channel do
         channel.personalized_content_videos(:user=>user,
                                             :limit=>channel.content_videos.count).should_not include video
       end
+
+      it "respects max_id and returns videos that rank lower than max_id" do
+        ch = Factory :single_youtube_account_channel
+        videos = ch.content_videos
+        max_video = videos[videos.size/2]
+        expected = videos[videos.size/2+1 .. -1]
+
+        ch.personalized_content_videos(:user => (Factory :user),
+                                       :max_id => max_video.id).should == expected
+      end
+
+      it "respects since_id and returns videos that rank higher than since_id" do
+        ch = Factory :single_youtube_account_channel
+        videos = ch.content_videos
+        min_video = videos[videos.size/2]
+        expected = videos[0..videos.size/2-1]
+
+        ch.personalized_content_videos(:user => (Factory :user),
+                                       :since_id => min_video.id).should == expected
+      end
     end
 
     context "when dealing with user channels" do
@@ -107,34 +127,11 @@ describe Aji::Channel do
         @favorite_channel = @user.favorite_channel
       end
 
-      it "returns videos in ascending order", :slow do
-        first_video = Factory :video
-        event = Factory :event, :user => @user,
-          :action => :favorite,  :video => first_video,
-          :created_at => 20.seconds.ago
-        second_video = Factory :video
-        event = Factory :event, :user => @user,
-          :action => :favorite,  :video => second_video,
-          :created_at => Time.now
-        @favorite_channel.personalized_content_videos(:user => @user).
-          first.should == first_video
-        @favorite_channel.personalized_content_videos(:user => @user).
-          last.should == second_video
-      end
-
       it "returns viewed videos" do
         video = Factory :video
         event = Factory :event, :user => @user,
           :action => :favorite,  :video => video
         @user.history_channel.content_videos.should include video
-        @favorite_channel.personalized_content_videos(:user => @user).
-          should include video
-      end
-
-      it "returns blacklisted videos" do
-        video = Factory :video, :blacklisted_at => Time.now
-        event = Factory :event, :user => @user,
-          :action => :favorite,  :video => video
         @favorite_channel.personalized_content_videos(:user => @user).
           should include video
       end

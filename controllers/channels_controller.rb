@@ -96,6 +96,10 @@ module Aji
       #
       # - `limit` max. number of videos to return
       #
+      # - `max_id` only returns videos which are older than given video id
+      #
+      # - `since_id` only returns videos which are newer than given video id
+      #
       # - `include_viewed` returns viewed videos if this parameter is present,
       #   regardless of values
       #

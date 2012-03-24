@@ -14,8 +14,8 @@ module Aji
 
       # TODO: This isn't a particularly robust interface. I'm writing my own
       # Redis object library so when that's finished we'll use it.
-      def content_video_ids limit=0
-        (content_zset.revrange 0, (limit-1)).map(&:to_i)
+      def content_video_ids limit=0, start=0
+        (content_zset.revrange start, (start+limit-1)).map(&:to_i)
       end
 
       def content_videos limit=0
@@ -35,8 +35,8 @@ module Aji
         content_video_ids.count
       end
 
-      def content_video_ids_rev limit=0
-        (content_zset.range 0, (limit-1)).map(&:to_i)
+      def content_video_ids_rev limit=0, start=0
+        (content_zset.range start, (start+limit-1)).map(&:to_i)
       end
 
       def content_videos_rev limit=0
