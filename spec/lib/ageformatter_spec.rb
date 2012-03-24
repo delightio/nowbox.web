@@ -9,7 +9,8 @@ describe "Time#age" do
   end
 
   it "prints out nicely format time diff" do
-    from = Time.now
+    # make sure we pick a period which doesn't to overlap with day light saving
+    from = Time.new 2011, 10, 10
     subject = from
 
     subject -= 2.seconds
