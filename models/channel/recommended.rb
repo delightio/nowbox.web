@@ -15,9 +15,6 @@ module Aji
       "Recommended"
     end
 
-    def refresh_content force=false
-    end
-
     def bias video, user
       channel = video.author.to_channel
 
@@ -34,8 +31,9 @@ module Aji
       liked * 1.hours
     end
 
-    def content_video_ids limit=0
-      if Aji.redis.ttl(content_zset.key)==-1 and user.subscribed_channels.count > 0
+    def refresh_content force=false
+      if force or (Aji.redis.ttl(content_zset.key)==-1 and
+                   user.subscribed_channels.count>0)
         keys = user.subscribed_channels.map {|c| c.content_zset.key}
         Aji.redis.zunionstore content_zset.key, keys
         Aji.redis.expire content_zset.key, content_zset_ttl
@@ -53,7 +51,16 @@ module Aji
         # Keep top 20 videos
         truncate 20
       end
-      (content_zset.revrange 0, (limit-1)).map(&:to_i)
+    end
+
+    def content_video_ids limit=0, start=0
+      refresh_content
+      (content_zset.revrange start, (start+limit-1)).map(&:to_i)
+    end
+
+    def content_video_ids_rev limit=0, start=0
+      refresh_content
+      (content_zset.range start, (start+limit-1)).map(&:to_i)
     end
 
     def merge! other

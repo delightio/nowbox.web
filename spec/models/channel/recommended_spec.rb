@@ -37,13 +37,6 @@ describe Channel::Recommended do
     end
   end
 
-  describe "#refresh_content" do
-    it "is no-op" do
-      expect { subject.refresh_content :force }.
-        to_not change { subject.content_videos.count }
-    end
-  end
-
   describe "#bias" do
     it "updates based on previous events on video's channel" do
       another_video = Video.create(:source => :youtube, :external_id => 'afakevideo3')
