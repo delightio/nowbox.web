@@ -97,10 +97,12 @@ module Aji
 
         candidate_video_ids = []
         if args[:max_id]
-          start = content_zset.revrank args[:max_id]
+          start = Aji.redis.zrevrank content_zset.key, args[:max_id]
+          return [] if start.nil?
           candidate_video_ids = content_video_ids total*2, start+1
         elsif args[:since_id]
-          start = content_zset.rank args[:since_id]
+          start = Aji.redis.zrank content_zset.key, args[:since_id]
+          return [] if start.nil?
           candidate_video_ids = content_video_ids_rev total*2, start+1
         else
           candidate_video_ids = content_video_ids

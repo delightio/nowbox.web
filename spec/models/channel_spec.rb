@@ -119,6 +119,24 @@ describe Aji::Channel do
         ch.personalized_content_videos(:user => (Factory :user),
                                        :since_id => min_video.id).should == expected
       end
+
+      context "when since_id or max_id is not found" do
+        let(:channel) { Factory :single_youtube_account_channel }
+        let(:missing_id) { videos = channel.content_videos
+                           ((1..20).to_a - (videos.map &:id)).sample }
+
+        it "returns empty list when since_id is not found" do
+          channel.personalized_content_videos(
+            :user => (Factory :user),
+            :since_id => missing_id).should == []
+        end
+
+        it "returns empty lsit when max_id is not found" do
+          channel.personalized_content_videos(
+            :user => (Factory :user),
+            :max_id => missing_id).should == []
+        end
+      end
     end
 
     context "when dealing with user channels" do
