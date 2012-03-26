@@ -125,16 +125,18 @@ describe Aji::Channel do
         let(:missing_id) { videos = channel.content_videos
                            ((1..20).to_a - (videos.map &:id)).sample }
 
-        it "returns empty list when since_id is not found" do
-          channel.personalized_content_videos(
-            :user => (Factory :user),
-            :since_id => missing_id).should == []
+        it "throws an error when since_id is not found" do
+          lambda { channel.personalized_content_videos(
+                      :user => (Factory :user),
+                      :since_id => missing_id)}.
+            should throw_symbol :missing_video_id
         end
 
         it "returns empty lsit when max_id is not found" do
-          channel.personalized_content_videos(
-            :user => (Factory :user),
-            :max_id => missing_id).should == []
+          lambda { channel.personalized_content_videos(
+                      :user => (Factory :user),
+                      :max_id => missing_id)}.
+            should throw_symbol :missing_video_id
         end
       end
     end
