@@ -25,6 +25,10 @@ module Aji
       end
     end
 
+    def clear_cached_content_video_ids
+      Aji.redis.expire content_zset.key, 0
+    end
+
     def cache_content_video_ids
       if Aji.redis.ttl(content_zset.key)==-1
         keys = accounts.map{|a| a.content_zset.key}
