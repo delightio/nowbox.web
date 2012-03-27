@@ -84,24 +84,31 @@ module Aji
       page = (args[:page] || 1).to_i
       total = limit * page
       new_videos = []
-      if self.class == Channel::User
-        # Always returns user channels in ascending order and
-        # ignores blacklisted or viewed
-        content_video_ids_rev.each do |channel_video_id|
-          video = Video.find_by_id channel_video_id
-          new_videos << video unless video.nil?
-          break if new_videos.count >= total
-        end
-      elsif self.class == Channel::Fixed
+      if self.class == Channel::Fixed
         # Don't care if the videos are blacklisted or viewed
         new_videos = content_videos_rev(total)
       else
         # TODO: use Redis for this.. zdiff not found?
         viewed_video_ids = []
-        if !args[:include_viewed] and !args["include_viewed"]
+        if self.class!=Channel::User and
+          !args[:include_viewed] and !args["include_viewed"]
           viewed_video_ids = user.history_channel.content_video_ids
         end
-        content_video_ids.each do |channel_video_id|
+
+        candidate_video_ids = []
+        if args[:max_id]
+          start = Aji.redis.zrevrank content_zset.key, args[:max_id]
+          throw :missing_video_id if start.nil?
+          candidate_video_ids = content_video_ids total*2, start+1
+        elsif args[:since_id]
+          start = Aji.redis.zrank content_zset.key, args[:since_id]
+          throw :missing_video_id if start.nil?
+          candidate_video_ids = content_video_ids_rev total*2, start+1
+        else
+          candidate_video_ids = content_video_ids
+        end
+
+        candidate_video_ids.each do |channel_video_id|
           video = Video.find_by_id channel_video_id
           next if video.nil? || video.blacklisted?
           new_videos << video if !viewed_video_ids.member? channel_video_id

@@ -25,13 +25,26 @@ module Aji
       end
     end
 
-    def content_video_ids limit=0
+    def clear_cached_content_video_ids
+      Aji.redis.expire content_zset.key, 0
+    end
+
+    def cache_content_video_ids
       if Aji.redis.ttl(content_zset.key)==-1
         keys = accounts.map{|a| a.content_zset.key}
         Aji.redis.zunionstore content_zset.key, keys
         Aji.redis.expire content_zset.key, content_zset_ttl
       end
-      (content_zset.revrange 0, (limit-1)).map(&:to_i)
+    end
+
+    def content_video_ids limit=0, start=0
+      cache_content_video_ids
+      (content_zset.revrange start, (start+limit-1)).map(&:to_i)
+    end
+
+    def content_video_ids_rev limit=0, start=0
+      cache_content_video_ids
+      (content_zset.range start, (start+limit-1)).map(&:to_i)
     end
 
     def relevance

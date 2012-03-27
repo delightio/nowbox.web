@@ -172,6 +172,22 @@ module Aji
           video_ids = body_hash.map {|h| h["video"]["id"]}
           video_ids.should_not include viewed_video.id
         end
+
+        let(:channel) { Factory :single_youtube_account_channel }
+        let(:missing_id) { videos = channel.content_videos
+                           ((1..20).to_a - (videos.map &:id)).sample }
+        it "returns 404 if since_id is not found" do
+          params = {:user_id => user.id, :since_id => missing_id }
+          get "#{resource_uri}/#{channel.id}/videos", params
+          last_response.status.should == 404
+        end
+
+        it "returns 404 if max_id is not found" do
+          params = {:user_id => user.id, :max_id => missing_id }
+          get "#{resource_uri}/#{channel.id}/videos", params
+          last_response.status.should == 404
+        end
+
       end
 
       describe "post #{resource_uri}" do

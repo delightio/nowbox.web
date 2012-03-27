@@ -96,6 +96,10 @@ module Aji
       #
       # - `limit` max. number of videos to return
       #
+      # - `max_id` only returns videos which are older than given video id
+      #
+      # - `since_id` only returns videos which are newer than given video id
+      #
       # - `include_viewed` returns viewed videos if this parameter is present,
       #   regardless of values
       #
@@ -104,8 +108,11 @@ module Aji
         authenticate!
         channel = find_channel_by_id_or_error params[:channel_id]
         channel.time_limited_refresh_content
-        channel.personalized_content_videos params.merge(
-          :user => current_user)
+        result = catch(:missing_video_id) {
+                  channel.personalized_content_videos params.merge(
+                    :user => current_user) }
+        not_found_error! "Video not found", params if result.nil?
+        result
       end
 
       # ## POST channels/

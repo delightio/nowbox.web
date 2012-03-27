@@ -191,7 +191,7 @@ Factory.define :twitter_account,
 Factory.define :youtube_account_with_videos,
   :parent => :youtube_account do |a|
     a.after_create do |ea|
-      3.times { ea.push(Factory :populated_video, author: ea) }
+      3.times {|n| ea.push (Factory :populated_video, author: ea), n+1 }
     end
   end
 
