@@ -360,7 +360,9 @@ module Aji
       end
 
       def category
-        @data.fetch('category', [nil,{}])[1].fetch('term', '*** undefined ***')
+        @data['category']['term']
+      rescue
+        Category.undefined.title
       end
 
       def title
