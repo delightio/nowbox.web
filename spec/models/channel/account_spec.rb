@@ -35,6 +35,11 @@ module Aji
         channel.refresh_content
       end
 
+      it "clears content_videos cache" do
+        subject.should_receive(:clear_cached_content_video_ids)
+        subject.refresh_content
+      end
+
       it "updates category relevance after" do
         subject.accounts.each {|a| a.should_receive(:refresh_content).and_return([mock])}
         subject.should_receive(:update_relevance_in_categories)

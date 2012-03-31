@@ -21,6 +21,7 @@ module Aji
             accounts_populated_at << account.populated_at
           end
         end
+        clear_cached_content_video_ids
         update_relevance_in_categories
       end
     end
