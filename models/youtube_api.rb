@@ -360,7 +360,7 @@ module Aji
       end
 
       def category
-        @data['category']['term']
+        @data['category'][1]['term']
       rescue
         Category.undefined.title
       end
