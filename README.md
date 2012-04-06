@@ -19,6 +19,19 @@ Quick Tricks and Tips
 - Update config/resque_schedule.yml:
     ``heroku config:add RESQUE_SCHEDULE="`cat config/resque_schedule.yml`"``
 - Flush/reset memcache: `heroku run rake flush_memcache --app $APPNAME`
+- Kill all dead workers: ``
+
+Dead workers in Resque
+----------------
+More info:
+https://github.com/defunkt/resque/issues/319#issuecomment-3422648
+
+For now, we can use manually delete all dead workers thru console by:
+  `Resque.workers.each do |w| w.unregister_worker end`
+
+Remember to restart all workers!!!
+https://github.com/defunkt/resque/issues/319#issuecomment-1890216
+
 
 Technology Stack
 ----------------
