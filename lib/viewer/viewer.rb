@@ -99,6 +99,10 @@ module Aji
       erb :tour
     end
 
+    get '/privacy/?' do
+      erb :privacy
+    end
+
     get '/press/?' do
       erb :press
     end
