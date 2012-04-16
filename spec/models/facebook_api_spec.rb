@@ -7,6 +7,15 @@ describe FacebookAPI, :net do
     FacebookAPI.new "AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD"
   end
 
+  describe '#video_mentions_i_post' do
+    it "uses video_mentions_in_feed but with only me posts" do
+      subject.should_receive(:video_mentions_in_feed).
+        with(5, ["me"])
+
+      subject.video_mentions_i_post
+    end
+  end
+
   describe "#video_mentions_in_feed" do
     it "hits facebook once per page" do
       VCR.use_cassette "facebook_api/home_feed" do
