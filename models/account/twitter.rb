@@ -5,7 +5,6 @@ module Aji
 
     include Redis::Objects
     include Mixins::RecentVideos
-    include Aji::TankerDefaults::Account
     include Mixins::Formatters::Twitter
 
     has_many :mentions, :foreign_key => :author_id, :dependent => :destroy

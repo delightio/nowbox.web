@@ -19,7 +19,6 @@ module Aji
     include Mixins::CanRefreshContent
     include Mixins::Populating
     include Mixins::Blacklisting
-    include Aji::TankerDefaults::Account
 
     # All of the accounts that this account receives content from.
     set :influencer_set
@@ -41,8 +40,7 @@ module Aji
 
     before_save :downcase_uid
     after_initialize :initialize_info_hashes
-    after_save :update_tank_indexes_if_searchable
-    after_destroy :delete_redis_keys, :delete_tank_indexes_if_searchable
+    after_destroy :delete_redis_keys
 
     def profile_uri
       raise InterfaceMethodNotImplemented

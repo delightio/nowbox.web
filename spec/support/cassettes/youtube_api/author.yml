@@ -54,58 +54,6 @@
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :get
-    uri: http://gdata.youtube.com:80/feeds/api/users/day9tv?alt=json&key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
-    body: !!null 
-    headers: !!null 
-  response: !ruby/struct:VCR::Response
-    status: !ruby/struct:VCR::ResponseStatus
-      code: 200
-      message: OK
-    headers:
-      x-gdata-user-country:
-      - US
-      content-type:
-      - application/json; charset=UTF-8
-      access-control-allow-origin:
-      - ! '*'
-      expires:
-      - Fri, 30 Dec 2011 03:20:48 GMT
-      date:
-      - Fri, 30 Dec 2011 03:20:48 GMT
-      cache-control:
-      - private, max-age=300, no-transform
-      vary:
-      - Accept, X-GData-Authorization, GData-Version
-      gdata-version:
-      - '2.1'
-      etag:
-      - W/"Dk4NQ347eCp7I2A9WhRWEkw."
-      last-modified:
-      - Fri, 30 Dec 2011 03:16:32 GMT
-      transfer-encoding:
-      - chunked
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      server:
-      - GSE
-    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"Dk4NQ347eCp7I2A9WhRWEkw.\"","id":{"$t":"tag:youtube.com,2008:user:day9tv"},"published":{"$t":"2010-04-22T14:48:11.000-07:00"},"updated":{"$t":"2011-12-29T19:16:32.000-08:00"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"Guru"}],"title":{"$t":"day9tv"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/profile?user=day9tv"},{"rel":"http://gdata.youtube.com/schemas/2007#featured-video","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/videos/iCqwwTfXr1Q?v=2"},{"rel":"related","type":"text/html","href":"http://day9.tv"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/day9tv?v=2"}],"author":[{"name":{"$t":"day9tv"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/day9tv"}}],"yt$aboutMe":{"$t":"I''ve
-      qualified for the WCG USA finals 7 times, the WCG Grand Finals 3 times, and
-      won the Pan American Championship in 2007 for StarCraft. In StarCraft 2 I play
-      as random.\n\nI grew up playing Starcraft with my brother, Nick (Tasteless).
-      With the launch of Starcraft 2, I''m dedicated to helping the eSports movement
-      grow in popularity around the world.\n\nWatch my video autobiography here: http://www.youtube.com/watch?v=NJztfsXKcPQ"},"yt$age":{"$t":26},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.liveevent","href":"http://gdata.youtube.com/feeds/api/users/day9tv/live/events?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/day9tv/favorites?v=2","countHint":3},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/day9tv/contacts?v=2","countHint":1},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/day9tv/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/day9tv/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/day9tv/subscriptions?v=2","countHint":11},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/day9tv/uploads?v=2","countHint":1143},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/day9tv/newsubscriptionvideos?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.recentactivity","href":"http://gdata.youtube.com/feeds/api/users/day9tv/events?v=2"}],"yt$firstName":{"$t":"Sean
-      Day[9]"},"yt$gender":{"$t":"m"},"yt$hobbies":{"$t":"Starcraft 2, Diablo 3, and
-      other video games!"},"yt$hometown":{"$t":"Leawood, KS"},"yt$lastName":{"$t":"Plott"},"yt$location":{"$t":"Los
-      Angeles, CA, US"},"yt$occupation":{"$t":"Starcraft 2 Player and Commentator"},"yt$school":{"$t":"Harvey
-      Mudd College, USC"},"yt$statistics":{"lastWebAccess":"2011-12-21T00:45:46.000-08:00","subscriberCount":"247556","videoWatchCount":0,"viewCount":"12624386","totalUploadViews":"36677769"},"media$thumbnail":{"url":"http://i2.ytimg.com/i/axar6TBM-94_ezoS00fLkA/1.jpg?v=b5d95a"},"yt$username":{"$t":"day9tv"}}}'
-    http_version: '1.1'
-- !ruby/struct:VCR::HTTPInteraction
-  request: !ruby/struct:VCR::Request
-    method: :get
     uri: http://gdata.youtube.com:80/feeds/api/users/day9tv?alt=json&key=&v=2
     body: !!null 
     headers: !!null 
@@ -153,4 +101,68 @@
       </HTML>
 
 '
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/day9tv?alt=json&key=AI39si5CP89uZx9Bkl3h2aP6Sys2pWohPJPi-a6IVNsTdk5g6AUcIQadlXbTt38eKaJcx_YxPPj5FFxrw3ft16N7N5dp_KZgzw&v=2
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/json; charset=UTF-8
+      access-control-allow-origin:
+      - ! '*'
+      expires:
+      - Thu, 19 Apr 2012 00:45:41 GMT
+      date:
+      - Thu, 19 Apr 2012 00:45:41 GMT
+      cache-control:
+      - private, max-age=300, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"AkUNRH47eCp7I2A9WhVXF0g."
+      last-modified:
+      - Wed, 18 Apr 2012 14:11:35 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '{"version":"1.0","encoding":"UTF-8","entry":{"xmlns":"http://www.w3.org/2005/Atom","xmlns$media":"http://search.yahoo.com/mrss/","xmlns$gd":"http://schemas.google.com/g/2005","xmlns$yt":"http://gdata.youtube.com/schemas/2007","gd$etag":"W/\"AkUNRH47eCp7I2A9WhVXF0g.\"","id":{"$t":"tag:youtube.com,2008:user:axar6TBM-94_ezoS00fLkA"},"published":{"$t":"2010-04-22T21:48:11.000Z"},"updated":{"$t":"2012-04-18T14:11:35.000Z"},"category":[{"scheme":"http://schemas.google.com/g/2005#kind","term":"http://gdata.youtube.com/schemas/2007#userProfile"},{"scheme":"http://gdata.youtube.com/schemas/2007/channeltypes.cat","term":"GURU"}],"title":{"$t":"Starcraft
+      2 & Skyrim"},"summary":{"$t":"Starcraft 2 strategy from a 12-year veteran and
+      top player. Now with Diablo 3 and other video games!\n\n---------------------------------------------------------------------\n\nDONATION
+      PAGE:\nhttp://day9.tv/tipjar/\nAll donations appreciated ^_^\n\nLive Starcraft
+      2 Casts:\nThe Day[9] Daily is streamed live every Sunday through Thursday night
+      at 7pm PST\nhttp://www.day9.tv/live\n\nTwitter: http://www.twitter.com/day9tv\nFacebook:
+      http://www.facebook.com/day9tv\n\nCOMPUTER SPECS\n\n*Windows 7 - 64 Bit\n*Tower:
+      Cooler Master HAF 922\n*Processor: Intel Core i7-2600k Sandy Bridge 4.7GHz\n*Heatsink:
+      Noctua NH-D14\n*Ram: G.SKILL 16GB Ripjaws X Series Dual Channel\n*Graphics Card:
+      Nvidia Geforce GTX 560Ti\n*Mother Board: ASRock Z68 Extreme4\n*Power Supply:
+      Corsair TX750 V2\n*Storage Drive: Samsung Spinpoint F3 1TB\n*Boot Drive: OCZ
+      Vertex 3 SSD 120GB"},"link":[{"rel":"alternate","type":"text/html","href":"http://www.youtube.com/channel/UCaxar6TBM-94_ezoS00fLkA"},{"rel":"related","type":"text/html","href":"http://day9.tv"},{"rel":"self","type":"application/atom+xml","href":"http://gdata.youtube.com/feeds/api/users/axar6TBM-94_ezoS00fLkA?v=2"}],"author":[{"name":{"$t":"day9tv"},"uri":{"$t":"http://gdata.youtube.com/feeds/api/users/day9tv"},"yt$userId":{"$t":"axar6TBM-94_ezoS00fLkA"}}],"yt$aboutMe":{"$t":"I''ve
+      qualified for the WCG USA finals 7 times, the WCG Grand Finals 3 times, and
+      won the Pan American Championship in 2007 for StarCraft. In StarCraft 2 I play
+      as random.\r\n\r\nI grew up playing Starcraft with my brother, Nick (Tasteless).
+      With the launch of Starcraft 2, I''m dedicated to helping the eSports movement
+      grow in popularity around the world.\r\n\r\nWatch my video autobiography here:
+      http://www.youtube.com/watch?v=NJztfsXKcPQ"},"yt$age":{"$t":26},"gd$feedLink":[{"rel":"http://gdata.youtube.com/schemas/2007#user.liveevent","href":"http://gdata.youtube.com/feeds/api/users/day9tv/live/events?v=2","countHint":0},{"rel":"http://gdata.youtube.com/schemas/2007#user.favorites","href":"http://gdata.youtube.com/feeds/api/users/day9tv/favorites?v=2","countHint":3},{"rel":"http://gdata.youtube.com/schemas/2007#user.contacts","href":"http://gdata.youtube.com/feeds/api/users/day9tv/contacts?v=2","countHint":1},{"rel":"http://gdata.youtube.com/schemas/2007#user.inbox","href":"http://gdata.youtube.com/feeds/api/users/day9tv/inbox?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.playlists","href":"http://gdata.youtube.com/feeds/api/users/day9tv/playlists?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.subscriptions","href":"http://gdata.youtube.com/feeds/api/users/day9tv/subscriptions?v=2","countHint":12},{"rel":"http://gdata.youtube.com/schemas/2007#user.uploads","href":"http://gdata.youtube.com/feeds/api/users/day9tv/uploads?v=2","countHint":1455},{"rel":"http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos","href":"http://gdata.youtube.com/feeds/api/users/day9tv/newsubscriptionvideos?v=2"},{"rel":"http://gdata.youtube.com/schemas/2007#user.recentactivity","href":"http://gdata.youtube.com/feeds/api/users/day9tv/events?v=2"}],"yt$firstName":{"$t":"Sean
+      Day[9]"},"yt$gender":{"$t":"m"},"yt$hobbies":{"$t":"Starcraft 2, Diablo 3, and
+      other video games!"},"yt$hometown":{"$t":"Leawood, KS"},"yt$lastName":{"$t":"Plott"},"yt$location":{"$t":"Los
+      Angeles, CA, US"},"yt$occupation":{"$t":"Starcraft 2 Player and Commentator"},"yt$school":{"$t":"Harvey
+      Mudd College, USC"},"yt$statistics":{"lastWebAccess":"2012-04-04T06:35:06.000Z","subscriberCount":"266066","videoWatchCount":0,"viewCount":"14424767","totalUploadViews":"45470708"},"media$thumbnail":{"url":"http://i2.ytimg.com/i/axar6TBM-94_ezoS00fLkA/1.jpg?v=4f28fbda"},"yt$userId":{"$t":"axar6TBM-94_ezoS00fLkA"},"yt$username":{"$t":"day9tv","display":"day9tv"}}}'
     http_version: '1.1'

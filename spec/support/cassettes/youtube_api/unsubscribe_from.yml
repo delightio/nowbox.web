@@ -2,139 +2,6 @@
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :get
-    uri: http://gdata.youtube.com:80/feeds/api/users/default
-    body: !!null 
-    headers:
-      authorization:
-      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="9520349ad635d14796055b239a91d3f1",
-        oauth_signature="R7ASDRWnABVw0eaqHfbCFZvwsZY%3D", oauth_signature_method="HMAC-SHA1",
-        oauth_timestamp="1324959911", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
-        oauth_version="1.0"
-  response: !ruby/struct:VCR::Response
-    status: !ruby/struct:VCR::ResponseStatus
-      code: 200
-      message: OK
-    headers:
-      x-gdata-user-country:
-      - US
-      content-type:
-      - application/atom+xml; charset=UTF-8
-      expires:
-      - Tue, 27 Dec 2011 04:25:11 GMT
-      date:
-      - Tue, 27 Dec 2011 04:25:11 GMT
-      cache-control:
-      - private, max-age=0, must-revalidate, no-transform
-      vary:
-      - Accept, X-GData-Authorization, GData-Version
-      gdata-version:
-      - '1.0'
-      last-modified:
-      - Tue, 27 Dec 2011 04:22:28 GMT
-      transfer-encoding:
-      - chunked
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      server:
-      - GSE
-    body: <?xml version='1.0' encoding='UTF-8'?><entry xmlns='http://www.w3.org/2005/Atom'
-      xmlns:media='http://search.yahoo.com/mrss/' xmlns:gd='http://schemas.google.com/g/2005'
-      xmlns:yt='http://gdata.youtube.com/schemas/2007'><id>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</id><published>2011-11-04T17:18:01.000-07:00</published><updated>2011-12-26T20:22:28.000-08:00</updated><category
-      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#userProfile'/><category
-      scheme='http://gdata.youtube.com/schemas/2007/channeltypes.cat' term='Standard'/><title
-      type='text'>nowmovnowbox</title><link rel='alternate' type='text/html' href='http://www.youtube.com/profile?user=nowmovnowbox'/><link
-      rel='http://gdata.youtube.com/schemas/2007#insight.views' type='text/html' href='http://insight.youtube.com/video-analytics/csvreports?query=nowmovnowbox&amp;type=c&amp;starttime=1235865600000&amp;endtime=1324857600000&amp;user_starttime=1324252800000&amp;user_endtime=1324857600000&amp;region=world&amp;token=rpU-HQMjcY6RtcGpME1CmNlQdPB8MTMyNDk2MTcxMUAxMzI0OTU5OTEx&amp;hl=en_US'/><link
-      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox'/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:age>34</yt:age><gd:feedLink
-      rel='http://gdata.youtube.com/schemas/2007#user.favorites' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/favorites'
-      countHint='1'/><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.contacts'
-      href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/contacts' countHint='0'/><gd:feedLink
-      rel='http://gdata.youtube.com/schemas/2007#user.inbox' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/inbox'
-      countHint='0'/><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.playlists'
-      href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/playlists'/><gd:feedLink
-      rel='http://gdata.youtube.com/schemas/2007#user.subscriptions' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions'
-      countHint='4'/><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.uploads'
-      href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/uploads' countHint='0'/><gd:feedLink
-      rel='http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/newsubscriptionvideos'/><yt:gender>m</yt:gender><yt:location>US</yt:location><yt:statistics
-      lastWebAccess='2011-11-04T17:18:01.000-07:00' subscriberCount='0' videoWatchCount='0'
-      viewCount='4' totalUploadViews='0'/><media:thumbnail url='http://s.ytimg.com/yt/img/no_videos_140-vfl1fDI7-.png'/><yt:username>nowmovnowbox</yt:username></entry>
-    http_version: '1.1'
-- !ruby/struct:VCR::HTTPInteraction
-  request: !ruby/struct:VCR::Request
-    method: :post
-    uri: http://gdata.youtube.com:80/feeds/api/users/default/subscriptions
-    body: <?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom"
-      xmlns:yt="http://gdata.youtube.com/schemas/2007"><category scheme="http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat"
-      term="channel"/><yt:username>freddiew</yt:username></entry>
-    headers:
-      authorization:
-      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="c00b6913d6b137960ad120fca863a79c",
-        oauth_signature="pU2SeS%2B9dsRTNDCtZIjFMnfAjn4%3D", oauth_signature_method="HMAC-SHA1",
-        oauth_timestamp="1324959911", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
-        oauth_version="1.0"
-      x-gdata-client:
-      - youtube_it
-      x-gdata-key:
-      - key=AI39si4CUmVJSHUvVBrxXYRrVWbu4XKwuS2FGS9eacCykE-P5Ea6_VRPJBTkRH3cHZ7ju-PPAW6YfkCjwp0W1NTXpKqLujQXag
-      gdata-version:
-      - '2'
-      content-type:
-      - application/atom+xml; charset=UTF-8
-      content-length:
-      - '268'
-  response: !ruby/struct:VCR::Response
-    status: !ruby/struct:VCR::ResponseStatus
-      code: 201
-      message: Created
-    headers:
-      x-gdata-user-country:
-      - US
-      content-type:
-      - application/atom+xml; charset=UTF-8; type=entry
-      expires:
-      - Tue, 27 Dec 2011 04:25:12 GMT
-      date:
-      - Tue, 27 Dec 2011 04:25:12 GMT
-      cache-control:
-      - private, max-age=0, must-revalidate, no-transform
-      vary:
-      - Accept, X-GData-Authorization, GData-Version
-      gdata-version:
-      - '2.1'
-      etag:
-      - W/"A04FQ347eCp7I2A9WhRXGUg."
-      location:
-      - http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA?client=youtube_it
-      content-location:
-      - http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA?client=youtube_it
-      transfer-encoding:
-      - chunked
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      server:
-      - GSE
-    body: ! '<?xml version=''1.0'' encoding=''UTF-8''?><entry xmlns=''http://www.w3.org/2005/Atom''
-      xmlns:app=''http://www.w3.org/2007/app'' xmlns:gd=''http://schemas.google.com/g/2005''
-      xmlns:yt=''http://gdata.youtube.com/schemas/2007'' gd:etag=''W/&quot;A04FQ347eCp7I2A9WhRXGUg.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA</id><published>2011-12-27T04:25:12.000Z</published><updated>2011-12-27T04:25:12.000Z</updated><app:edited>2011-12-27T04:25:12.000Z</app:edited><category
-      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
-      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''channel''/><title>Videos
-      published by : freddiew</title><content type=''application/atom+xml;type=feed''
-      src=''http://gdata.youtube.com/feeds/api/users/freddiew/uploads''/><link rel=''related''
-      type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/freddiew?client=youtube_it''/><link
-      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/profile?user=freddiew#p/u''/><link
-      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA?client=youtube_it''/><link
-      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:username>freddiew</yt:username></entry>'
-    http_version: '1.1'
-- !ruby/struct:VCR::HTTPInteraction
-  request: !ruby/struct:VCR::Request
-    method: :get
     uri: http://gdata.youtube.com:80/feeds/api/users/nowmovnowbox/subscriptions?max-results=50&start-index=1&v=2
     body: !!null 
     headers:
@@ -811,4 +678,138 @@
       </HTML>
 
 '
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://gdata.youtube.com:80/feeds/api/users/default
+    body: !!null 
+    headers:
+      authorization:
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="ffbc90fb4d5b2f83543e9cb1d8777fe8",
+        oauth_signature="bBruo%2FDKdkLOP%2FUuNiYXmuBJWMA%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1334796345", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
+        oauth_version="1.0"
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8
+      expires:
+      - Thu, 19 Apr 2012 00:45:45 GMT
+      date:
+      - Thu, 19 Apr 2012 00:45:45 GMT
+      cache-control:
+      - private, max-age=0, must-revalidate, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '1.0'
+      last-modified:
+      - Sat, 24 Mar 2012 00:18:14 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: <?xml version='1.0' encoding='UTF-8'?><entry xmlns='http://www.w3.org/2005/Atom'
+      xmlns:media='http://search.yahoo.com/mrss/' xmlns:gd='http://schemas.google.com/g/2005'
+      xmlns:yt='http://gdata.youtube.com/schemas/2007'><id>http://gdata.youtube.com/feeds/api/users/1_lC1MpGFAadVbhT9QE9Xw</id><published>2011-11-05T00:18:01.000Z</published><updated>2012-03-24T00:18:14.000Z</updated><category
+      scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#userProfile'/><title
+      type='text'>nowmovnowbox</title><content type='text'/><link rel='alternate'
+      type='text/html' href='http://www.youtube.com/channel/UC1_lC1MpGFAadVbhT9QE9Xw'/><link
+      rel='http://gdata.youtube.com/schemas/2007#insight.views' type='text/html' href='http://insight.youtube.com/video-analytics/csvreports?query=nowmovnowbox&amp;type=c&amp;starttime=1235865600000&amp;endtime=1334707200000&amp;user_starttime=1334102400000&amp;user_endtime=1334707200000&amp;region=world&amp;token=RUWtrxKkYuMDFzst0d2MDZd11ex8MTMzNDc5ODE0NUAxMzM0Nzk2MzQ1&amp;hl=en_US'/><link
+      rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/1_lC1MpGFAadVbhT9QE9Xw'/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri></author><yt:age>34</yt:age><gd:feedLink
+      rel='http://gdata.youtube.com/schemas/2007#user.favorites' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/favorites'
+      countHint='1'/><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.contacts'
+      href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/contacts' countHint='0'/><gd:feedLink
+      rel='http://gdata.youtube.com/schemas/2007#user.inbox' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/inbox'
+      countHint='0'/><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.playlists'
+      href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/playlists'/><gd:feedLink
+      rel='http://gdata.youtube.com/schemas/2007#user.subscriptions' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions'
+      countHint='2'/><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.uploads'
+      href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/uploads' countHint='0'/><gd:feedLink
+      rel='http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos' href='http://gdata.youtube.com/feeds/api/users/nowmovnowbox/newsubscriptionvideos'/><yt:gender>m</yt:gender><yt:location>US</yt:location><yt:maxUploadDuration
+      seconds='930'/><yt:statistics lastWebAccess='2011-11-05T00:18:01.000Z' subscriberCount='0'
+      videoWatchCount='0' viewCount='4' totalUploadViews='0'/><media:thumbnail url='http://s.ytimg.com/yt/img/no_videos_140-vfl1fDI7-.png'/><yt:username>nowmovnowbox</yt:username></entry>
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://gdata.youtube.com:80/feeds/api/users/default/subscriptions
+    body: <?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom"
+      xmlns:yt="http://gdata.youtube.com/schemas/2007"><category scheme="http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat"
+      term="channel"/><yt:username>freddiew</yt:username></entry>
+    headers:
+      authorization:
+      - OAuth oauth_consumer_key="api.nowbox.com", oauth_nonce="3272edd10dc45f7fd02cdc40024df818",
+        oauth_signature="XWnnFGdd%2F%2FidOXmJJSTBv12p1mI%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1334796345", oauth_token="1%2FMVVpQ67oY_0lEYs4JaYjLJa6RBPoxyej2_1e1AJdvkk",
+        oauth_version="1.0"
+      x-gdata-client:
+      - youtube_it
+      x-gdata-key:
+      - key=AI39si4CUmVJSHUvVBrxXYRrVWbu4XKwuS2FGS9eacCykE-P5Ea6_VRPJBTkRH3cHZ7ju-PPAW6YfkCjwp0W1NTXpKqLujQXag
+      gdata-version:
+      - '2'
+      content-type:
+      - application/atom+xml; charset=UTF-8
+      content-length:
+      - '268'
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 201
+      message: Created
+    headers:
+      x-gdata-user-country:
+      - US
+      content-type:
+      - application/atom+xml; charset=UTF-8; type=entry
+      expires:
+      - Thu, 19 Apr 2012 00:45:46 GMT
+      date:
+      - Thu, 19 Apr 2012 00:45:46 GMT
+      cache-control:
+      - private, max-age=0, must-revalidate, no-transform
+      vary:
+      - Accept, X-GData-Authorization, GData-Version
+      gdata-version:
+      - '2.1'
+      etag:
+      - W/"DEQAR347eCp7I2A9WhVXF0Q."
+      location:
+      - http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA?client=youtube_it
+      content-location:
+      - http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA?client=youtube_it
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+    body: ! '<?xml version=''1.0'' encoding=''UTF-8''?><entry xmlns=''http://www.w3.org/2005/Atom''
+      xmlns:app=''http://www.w3.org/2007/app'' xmlns:gd=''http://schemas.google.com/g/2005''
+      xmlns:yt=''http://gdata.youtube.com/schemas/2007'' gd:etag=''W/&quot;DEQAR347eCp7I2A9WhVXF0Q.&quot;''><id>tag:youtube.com,2008:user:nowmovnowbox:subscription:MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA</id><published>2012-04-19T00:45:46.000Z</published><updated>2012-04-19T00:45:46.000Z</updated><app:edited>2012-04-19T00:45:46.000Z</app:edited><category
+      scheme=''http://schemas.google.com/g/2005#kind'' term=''http://gdata.youtube.com/schemas/2007#subscription''/><category
+      scheme=''http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'' term=''channel''/><title>Videos
+      published by: freddiew</title><content type=''application/atom+xml;type=feed''
+      src=''http://gdata.youtube.com/feeds/api/users/freddiew/uploads''/><link rel=''related''
+      type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/freddiew?client=youtube_it''/><link
+      rel=''alternate'' type=''text/html'' href=''http://www.youtube.com/channel/UCDsO-0Yo5zpJk575nKXgMVA/videos''/><link
+      rel=''self'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA?client=youtube_it''/><link
+      rel=''edit'' type=''application/atom+xml'' href=''http://gdata.youtube.com/feeds/api/users/nowmovnowbox/subscriptions/MXI_oULwl00LRAB7K0plJvPEOz87U2kCVFRRRlbnODA?client=youtube_it''/><author><name>nowmovnowbox</name><uri>http://gdata.youtube.com/feeds/api/users/nowmovnowbox</uri><yt:userId>1_lC1MpGFAadVbhT9QE9Xw</yt:userId></author><yt:userId>DsO-0Yo5zpJk575nKXgMVA</yt:userId><yt:username
+      display=''freddiew''>freddiew</yt:username></entry>'
     http_version: '1.1'

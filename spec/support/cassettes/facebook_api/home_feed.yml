@@ -2,170 +2,6 @@
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :get
-    uri: https://graph.facebook.com:443/me/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD
-    body: !!null 
-    headers: !!null 
-  response: !ruby/struct:VCR::Response
-    status: !ruby/struct:VCR::ResponseStatus
-      code: 200
-      message: OK
-    headers:
-      access-control-allow-origin:
-      - ! '*'
-      cache-control:
-      - private, no-cache, no-store, must-revalidate
-      content-type:
-      - text/javascript; charset=UTF-8
-      etag:
-      - ! '"481c88b95ad0eed022924389c5a98be0914f8547"'
-      expires:
-      - Sat, 01 Jan 2000 00:00:00 GMT
-      pragma:
-      - no-cache
-      x-fb-rev:
-      - '466493'
-      x-fb-server:
-      - 10.32.42.116
-      x-cnection:
-      - close
-      date:
-      - Wed, 02 Nov 2011 00:54:37 GMT
-      content-length:
-      - '23223'
-    body: ! '{"data":[{"id":"333700136_511621427738","from":{"name":"Cherelle Gour","id":"333700136"},"story":"Cherelle
-      Gour is now friends with John Ramirez and 2 other people.","story_tags":{"0":[{"id":333700136,"name":"Cherelle
-      Gour","offset":0,"length":13}],"34":[{"id":100001590388604,"name":"John Ramirez","offset":34,"length":12}],"51":[{"id":1532853653,"name":"Taylor
-      Rhymenocerous Kinnicutt","offset":51,"length":14},{"id":1256523080,"name":"Ryan
-      Schlater","offset":51,"length":14}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/161501_100001590388604_1953417_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=100001590388604&ref=nf_fr","type":"link","created_time":"2011-11-02T00:34:27+0000","updated_time":"2011-11-02T00:34:27+0000","comments":{"count":0}},{"from":{"name":"Stephen
-      Morrissey","id":"682646955"},"story":"Stephen Morrissey likes Travel + Leisure\u00a0says
-      Intelligentsia is one of America\u2019s coolest coffeehouses and America''s
-      Coolest Coffeehouses.","story_tags":{"0":[{"id":682646955,"name":"Stephen Morrissey","offset":0,"length":17}]},"picture":"https:\/\/s-external.ak.fbcdn.net\/safe_image.php?d=AQDkIXp5guIEi0Ub&w=90&h=90&url=http\u00253A\u00252F\u00252Fmedia.avclub.com\u00252Fimages\u00252Farticles\u00252Farticle\u00252F64\u00252F64301\u00252F4294526044_2a8e03a15c_b_jpg_130x130_crop-smart_upscale_q85.jpg","link":"http:\/\/www.avclub.com\/chicago\/articles\/travel-leisure-says-intelligentsia-is-one-of-ameri,64301\/","name":"Travel
-      + Leisure\u00a0says Intelligentsia is one of America\u2019s coolest coffeehouses","description":"Does
-      this mean it isn\u2019t cool to go to Intelligentsia anymore?\u00a0","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yD\/r\/aS8ecmYRys0.gif","type":"link","application":{"name":"Likes","canvas_name":"awesomeprops","namespace":"awesomeprops","id":"2409997254"},"created_time":"2011-11-02T00:33:55+0000","updated_time":"2011-11-02T00:33:55+0000","comments":{"count":0}},{"id":"1357854925_2616599978424","from":{"name":"Tracy
-      Allen","id":"1357854925"},"story":"Tracy Allen is now friends with \u7a32\u4e95\u514b\u5229
-      and Junichi Yamaguchi.","story_tags":{"0":[{"id":1357854925,"name":"Tracy Allen","offset":0,"length":11}],"32":[{"id":100002961461875,"name":"\u7a32\u4e95\u514b\u5229","offset":32,"length":4}],"41":[{"id":100003052982276,"name":"Junichi
-      Yamaguchi","offset":41,"length":17}]},"type":"status","created_time":"2011-11-02T00:31:00+0000","updated_time":"2011-11-02T00:31:00+0000","comments":{"count":0}},{"id":"1206335_10100729082384863","from":{"name":"Stephen
-      S. Wade","id":"1206335"},"message":"Chef friends, a question: I believe I may
-      have signed on for a stage where I''m in over my head. Do I contact chef and
-      call off or do I go thru with it?","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1206335\/posts\/10100729082384863"},{"name":"Like","link":"http:\/\/www.facebook.com\/1206335\/posts\/10100729082384863"}],"type":"status","application":{"name":"Facebook
-      for iPhone","canvas_name":"fbtouch","namespace":"fbtouch","id":"6628568379"},"created_time":"2011-11-02T00:30:52+0000","updated_time":"2011-11-02T00:53:28+0000","comments":{"data":[{"id":"1206335_10100729082384863_9783093","from":{"name":"Will
-      Gibson","id":"1525704047"},"message":"What Deno said. I didn''t realize you
-      were doing the chef thing.","created_time":"2011-11-02T00:51:30+0000"},{"id":"1206335_10100729082384863_9783128","from":{"name":"Stephen
-      S. Wade","id":"1206335"},"message":"\u0040 Deno, thanks. Chef and I spoke this
-      afternoon when I got the offer. She is placing me on a 9-6 brunch slot in the
-      pastry department. I feel confident in my basic skill set, but I know the covers\/turns
-      per table they do, and it can be crazy intense as a service. I don''t know their
-      recipe list, and while I have basics set to memory (pate brisee, rough puff,
-      etc) I''m just worried about pulling the team into the weeds I''ve done stages
-      in production baking environments before, I''m just anxious in a way about whether
-      I can keep up -- which I know I can. I think it''s just nerves -- it''s a chef
-      whose work I think +++ of, and worried that it''s going to be a massive cock-up.
-      ","created_time":"2011-11-02T00:53:28+0000"}],"count":4}},{"id":"1453973049_2435900784261","from":{"name":"Kevin
-      Magnuson","id":"1453973049"},"story":"Kevin Magnuson is now friends with Mickey
-      Lorenzini and Raffi Tchekmedyian.","story_tags":{"0":[{"id":1453973049,"name":"Kevin
-      Magnuson","offset":0,"length":14}],"35":[{"id":100000257577241,"name":"Mickey
-      Lorenzini","offset":35,"length":16}],"56":[{"id":1041030130,"name":"Raffi Tchekmedyian","offset":56,"length":18}]},"type":"status","created_time":"2011-11-02T00:20:10+0000","updated_time":"2011-11-02T00:20:10+0000","comments":{"count":0}},{"id":"1075392174_2386961588193","from":{"name":"Vienna
-      Teng","id":"1075392174"},"story":"Vienna Teng is now friends with Lina Schmidt
-      and 13 other people.","story_tags":{"0":[{"id":1075392174,"name":"Vienna Teng","offset":0,"length":11}],"32":[{"id":550011584,"name":"Lina
-      Schmidt","offset":32,"length":12}],"49":[{"id":68137699,"name":"Dawn Watson","offset":49,"length":15},{"id":100000110264464,"name":"Linda
-      Madeline","offset":49,"length":15},{"id":501960749,"name":"Trebor Lloyd","offset":49,"length":15},{"id":1079971043,"name":"Stewart
-      David Ikeda","offset":49,"length":15},{"id":514846258,"name":"Charles McEnerney","offset":49,"length":15},{"id":523810198,"name":"Heidi
-      Claville Nielsen","offset":49,"length":15},{"id":752933067,"name":"Amie Penwell","offset":49,"length":15},{"id":834412439,"name":"Tara
-      Madrone","offset":49,"length":15},{"id":652096654,"name":"Ash Lampman","offset":49,"length":15},{"id":1306548,"name":"Ian
-      Holljes","offset":49,"length":15},{"id":100002618725478,"name":"Luckyz Erigah
-      Imonibuebu","offset":49,"length":15},{"id":1255620162,"name":"Tom Bridge","offset":49,"length":15},{"id":692429026,"name":"Ken
-      Anderson","offset":49,"length":15}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/370228_550011584_737048120_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=550011584&ref=nf_fr","type":"link","created_time":"2011-11-02T00:18:33+0000","updated_time":"2011-11-02T00:18:33+0000","comments":{"count":0}},{"id":"1259046563_2553328633387","from":{"name":"Christopher
-      Nicely Abel Alameda","id":"1259046563"},"message":"Spirit uplifting flavor.  \u2014
-      Drinking a TAP6 Unser Aventinus \u2014 http:\/\/t.co\/tXdtp9x5","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v27562\/23\/2231777543\/app_2_2231777543_9553.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1259046563\/posts\/2553328633387"},{"name":"Like","link":"http:\/\/www.facebook.com\/1259046563\/posts\/2553328633387"},{"name":"\u0040nicely85
-      on Twitter","link":"http:\/\/twitter.com\/nicely85?utm_source=fb&utm_medium=fb&utm_campaign=nicely85&utm_content=131525271517007875"}],"type":"status","application":{"name":"Twitter","canvas_name":"twitter","namespace":"twitter","id":"2231777543"},"created_time":"2011-11-02T00:17:23+0000","updated_time":"2011-11-02T00:17:23+0000","comments":{"count":0}},{"id":"1237900_10100725806345073","from":{"name":"Brooke
-      Su","id":"1237900"},"story":"Brooke Su is now friends with R\u00fczly Mantara
-      and 2 other people.","story_tags":{"0":[{"id":1237900,"name":"Brooke Su","offset":0,"length":9}],"30":[{"id":1242434,"name":"R\u00fczly
-      Mantara","offset":30,"length":13}],"48":[{"id":1222760,"name":"Robert Lee","offset":48,"length":14},{"id":4203876,"name":"Gavi
-      Elkind","offset":48,"length":14}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/274762_1242434_91679664_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=1242434&ref=nf_fr","type":"link","created_time":"2011-11-02T00:15:05+0000","updated_time":"2011-11-02T00:15:05+0000","comments":{"count":0}},{"id":"1055790634_1524075495927","from":{"name":"Nicole
-      He","id":"1055790634"},"message":"Looks like no one travels in January - I''m
-      flying into Paris and out of Stockholm for $591.","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1055790634\/posts\/1524075495927"},{"name":"Like","link":"http:\/\/www.facebook.com\/1055790634\/posts\/1524075495927"}],"type":"status","created_time":"2011-11-02T00:11:48+0000","updated_time":"2011-11-02T00:11:48+0000","likes":{"data":[{"name":"Yizhi
-      Wu","id":"600204039"}],"count":2},"comments":{"count":0}},{"id":"1670318850_2057259365674","from":{"name":"Andy
-      Newbom","id":"1670318850"},"story":"Andy Newbom is now friends with Ingenieria
-      Cervecera and 10 other people.","story_tags":{"0":[{"id":1670318850,"name":"Andy
-      Newbom","offset":0,"length":11}],"32":[{"id":100002428587014,"name":"Ingenieria
-      Cervecera","offset":32,"length":20}],"57":[{"id":100003086744680,"name":"Luis
-      Fcp","offset":57,"length":15},{"id":1840433513,"name":"Todd Hsu","offset":57,"length":15},{"id":679963656,"name":"Federico
-      Pacas","offset":57,"length":15},{"id":100003041744648,"name":"Mozencahua Brewery","offset":57,"length":15},{"id":100002353824725,"name":"Ringgit
-      Hills Coffee Farm","offset":57,"length":15},{"id":1503845,"name":"Case Taintor","offset":57,"length":15},{"id":523376335,"name":"Jennifer
-      Leslie","offset":57,"length":15},{"id":100003067455061,"name":"MeGusta LaCerveza","offset":57,"length":15},{"id":100002237662459,"name":"Caf\u00e9-Palacio
-      Santa Tecla","offset":57,"length":15},{"id":500834209,"name":"Marcela Pacas
-      de Arce","offset":57,"length":15}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/186098_100002428587014_4343207_q.jpg","link":"http:\/\/www.facebook.com\/ingenieria.cervecera?ref=nf_fr","type":"link","created_time":"2011-11-02T00:06:37+0000","updated_time":"2011-11-02T00:06:37+0000","comments":{"count":0}},{"id":"139400317_538246414105","from":{"name":"Susan
-      Schneider","id":"139400317"},"message":"Ready for the car ride home!","picture":"https:\/\/fbcdn-photos-a.akamaihd.net\/hphotos-ak-snc7\/377474_538245999935_139400317_30741329_352209509_s.jpg","link":"http:\/\/www.facebook.com\/photo.php?fbid=538245999935&set=a.528005756465.2023717.139400317&type=1","name":"Mobile
-      Uploads","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yx\/r\/og8V99JVf8G.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/139400317\/posts\/538246414105"},{"name":"Like","link":"http:\/\/www.facebook.com\/139400317\/posts\/538246414105"}],"type":"photo","object_id":"538245999935","application":{"name":"Facebook
-      for iPhone","canvas_name":"fbtouch","namespace":"fbtouch","id":"6628568379"},"created_time":"2011-11-01T23:42:13+0000","updated_time":"2011-11-02T00:46:41+0000","likes":{"data":[{"name":"Tracie
-      Snowder","id":"17803830"}],"count":3},"comments":{"data":[{"id":"139400317_538246414105_510580","from":{"name":"Editha
-      Andriputri","id":"2528245"},"message":"omg she''s sooo precious, Susan!!! love
-      love love her!!! \u003c3 \u003c3 \u003c3","created_time":"2011-11-02T00:24:11+0000"},{"id":"139400317_538246414105_510586","from":{"name":"Lin
-      Villagom\u00e9z Cruz","id":"549157063"},"message":"Awwww...My Leilanis little
-      baby girl cousin","created_time":"2011-11-02T00:46:41+0000"}],"count":2}},{"id":"1055790035_1523832089842","from":{"name":"Christie
-      S. Cho","id":"1055790035"},"story":"Christie S. Cho likes Terra Nova.","story_tags":{"22":[{"id":116769271697030,"name":"Terra
-      Nova","offset":22,"length":10}],"0":[{"id":1055790035,"name":"Christie S. Cho","offset":0,"length":15}]},"type":"status","application":{"name":"Pages","id":"2530096808"},"created_time":"2011-11-01T23:39:17+0000","updated_time":"2011-11-01T23:39:17+0000","comments":{"count":0}},{"id":"663235486_10150891845620487","from":{"name":"Richard
-      Lam","id":"663235486"},"story":"Richard Lam is now friends with Andrew Strommen
-      and Packie Michael Ross.","story_tags":{"0":[{"id":663235486,"name":"Richard
-      Lam","offset":0,"length":11}],"32":[{"id":1387406756,"name":"Andrew Strommen","offset":32,"length":15}],"52":[{"id":680613377,"name":"Packie
-      Michael Ross","offset":52,"length":19}]},"type":"status","created_time":"2011-11-01T23:31:41+0000","updated_time":"2011-11-01T23:31:41+0000","comments":{"count":0}},{"id":"1055790431_220808754652328","from":{"name":"Mallik
-      Reddy","id":"1055790431"},"message":"Oh my god.","picture":"https:\/\/s-external.ak.fbcdn.net\/safe_image.php?d=AQB4ebcuBaaNNMnH&w=90&h=90&url=http\u00253A\u00252F\u00252Fgraphics8.nytimes.com\u00252Fimages\u00252Fblogs_v3\u00252Fthelede\u00252Fthelede75.gif","link":"http:\/\/thelede.blogs.nytimes.com\/2011\/11\/01\/japanese-official-drinks-water-from-fukushima-reactor-buildings\/","name":"Japanese
-      Official Drinks Water From Fukushima Reactor Buildings","caption":"thelede.blogs.nytimes.com","description":"After
-      insisting that water collected from the stricken Fukushima Daiichi nuclear plant
-      posed no threat to human health once it was decontaminated, a Japanese government
-      official poured himself a glass of the liquid and drank it.","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yD\/r\/aS8ecmYRys0.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1055790431\/posts\/220808754652328"},{"name":"Like","link":"http:\/\/www.facebook.com\/1055790431\/posts\/220808754652328"}],"type":"link","created_time":"2011-11-01T23:29:45+0000","updated_time":"2011-11-01T23:51:38+0000","comments":{"data":[{"id":"1055790431_220808754652328_2220361","from":{"name":"Ellen
-      Bane","id":"3625223"},"message":"you would NEVER catch an american politician
-      doing that","created_time":"2011-11-01T23:51:38+0000"}],"count":1}},{"id":"3227475_10100588725865473","from":{"name":"Deepti
-      Menon","id":"3227475"},"picture":"https:\/\/www.facebook.com\/app_full_proxy.php?app=96105046534&v=1&size=z&cksum=2d9d36c9bc4f0d4c9fdbaa8568183e87&src=http\u00253A\u00252F\u00252Fi-beta.crackedcdn.com\u00252Fphpimages\u00252Farticle\u00252F7\u00252F1\u00252F6\u00252F98716.jpg\u00253Fv\u00253D1","link":"http:\/\/www.cracked.com\/article_19468_5-logical-fallacies-that-make-you-wrong-more-than-you-think.html","name":"5
-      Logical Fallacies That Make You Wrong More Than You Think","caption":"www.cracked.com","description":"The
-      Internet has introduced a golden age of ill-informed arguments. You can''t post
-      a video of an adorable kitten without a raging debate about pet issues spawning
-      in the comment section. These days, everyone is a pundit....","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v27562\/70\/96105046534\/app_2_96105046534_2214.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/3227475\/posts\/10100588725865473"},{"name":"Like","link":"http:\/\/www.facebook.com\/3227475\/posts\/10100588725865473"}],"type":"link","application":{"name":"RockMelt","canvas_name":"rockmelt","namespace":"rockmelt","id":"96105046534"},"created_time":"2011-11-01T23:25:59+0000","updated_time":"2011-11-01T23:25:59+0000","likes":{"data":[{"name":"Anna
-      Tchetchetkine","id":"505413416"},{"name":"Kevin J. Lee","id":"608670585"}],"count":2},"comments":{"count":0}},{"id":"1418897861_2578288542697","from":{"name":"Barrett
-      Shepherd","id":"1418897861"},"story":"Barrett Shepherd is now friends with Carly
-      Reier and 5 other people.","story_tags":{"0":[{"id":1418897861,"name":"Barrett
-      Shepherd","offset":0,"length":16}],"37":[{"id":1441220478,"name":"Carly Reier","offset":37,"length":11}],"53":[{"id":1610121071,"name":"Jennifer
-      Beam","offset":53,"length":14},{"id":56100943,"name":"Sarah Paul","offset":53,"length":14},{"id":100001314061270,"name":"Cindy
-      Morales","offset":53,"length":14},{"id":1590368553,"name":"Jason Beam","offset":53,"length":14},{"id":1575316799,"name":"Allison
-      Porter Sealy","offset":53,"length":14}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/368873_1441220478_681759790_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=1441220478&ref=nf_fr","type":"link","created_time":"2011-11-01T23:23:57+0000","updated_time":"2011-11-01T23:23:57+0000","comments":{"count":0}},{"id":"1214194329_2141326452095","from":{"name":"David
-      Vicente Johnson","id":"1214194329"},"message":"I fear nothing, but the doubt
-      that''s still judging.","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1214194329\/posts\/2141326452095"},{"name":"Like","link":"http:\/\/www.facebook.com\/1214194329\/posts\/2141326452095"}],"type":"status","application":{"name":"Facebook
-      for Android","id":"350685531728"},"created_time":"2011-11-01T22:53:19+0000","updated_time":"2011-11-01T22:53:19+0000","comments":{"count":0}},{"id":"1327525369_133772743395153","from":{"name":"Jacob
-      Newbom","id":"1327525369"},"message":"I almost feel guilty liking this.\n","link":"http:\/\/www.youtube.com\/watch?v=tUYSOtNfzm8&feature=related","name":"http:\/\/www.youtube.com\/watch?v=tUYSOtNfzm8","caption":"www.youtube.com","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yD\/r\/aS8ecmYRys0.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1327525369\/posts\/133772743395153"},{"name":"Like","link":"http:\/\/www.facebook.com\/1327525369\/posts\/133772743395153"}],"type":"link","created_time":"2011-11-01T22:52:15+0000","updated_time":"2011-11-01T22:52:22+0000","likes":{"data":[{"name":"Jacob
-      Newbom","id":"1327525369"}],"count":1},"comments":{"data":[{"id":"1327525369_133772743395153_255342","from":{"name":"Jacob
-      Newbom","id":"1327525369"},"message":"Almost.","created_time":"2011-11-01T22:52:19+0000","likes":1},{"id":"1327525369_133772743395153_255344","from":{"name":"Jacob
-      Newbom","id":"1327525369"},"message":"Not quite","created_time":"2011-11-01T22:52:22+0000","likes":1}],"count":2}},{"id":"1788845898_1910395938131","from":{"name":"Hiver
-      van Geenhoven","id":"1788845898"},"picture":"https:\/\/fbcdn-photos-a.akamaihd.net\/hphotos-ak-snc7\/301695_1910482620298_1788845898_1296888_581792506_s.jpg","link":"http:\/\/www.facebook.com\/photo.php?fbid=1910482620298&set=a.1744712236142.71186.1788845898&type=1","name":"Mobile
-      Uploads","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yx\/r\/og8V99JVf8G.gif","type":"photo","object_id":"1910482620298","created_time":"2011-11-01T22:50:47+0000","updated_time":"2011-11-01T22:50:47+0000","comments":{"count":0}},{"id":"541764248_10150348694269249","from":{"name":"Anna
-      Julian","id":"541764248"},"story":"Anna Julian is now friends with Christine
-      Herrera Ramon and Sam Nachison.","story_tags":{"0":[{"id":541764248,"name":"Anna
-      Julian","offset":0,"length":11}],"32":[{"id":100003140104851,"name":"Christine
-      Herrera Ramon","offset":32,"length":23}],"60":[{"id":656182780,"name":"Sam Nachison","offset":60,"length":12}]},"type":"status","created_time":"2011-11-01T22:42:47+0000","updated_time":"2011-11-01T22:42:47+0000","comments":{"count":0}},{"id":"1327525369_2569126910616","from":{"name":"Jacob
-      Newbom","id":"1327525369"},"message":"Im not saying that we could do better,
-      but given the chance we''d try.","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1327525369\/posts\/2569126910616"},{"name":"Like","link":"http:\/\/www.facebook.com\/1327525369\/posts\/2569126910616"}],"type":"status","created_time":"2011-11-01T22:35:13+0000","updated_time":"2011-11-01T22:36:33+0000","likes":{"data":[{"name":"Roman
-      Faria","id":"100000474531046"}],"count":1},"comments":{"data":[{"id":"1327525369_2569126910616_3498459","from":{"name":"Roman
-      Faria","id":"100000474531046"},"message":"We dig up the earth''s time worn soil","created_time":"2011-11-01T22:36:11+0000","likes":1},{"id":"1327525369_2569126910616_3498462","from":{"name":"Jacob
-      Newbom","id":"1327525369"},"message":"And fill the trench with greedy eyes","created_time":"2011-11-01T22:36:33+0000","likes":1}],"count":2}},{"id":"30901951_572988779040","from":{"name":"Sharon
-      Walsh","id":"30901951"},"picture":"https:\/\/fbcdn-photos-a.akamaihd.net\/hphotos-ak-ash4\/317816_572956967790_30901951_31808989_1851614861_s.jpg","link":"http:\/\/www.facebook.com\/photo.php?fbid=572956967790&set=a.572956907910.2062299.30901951&type=1","name":"Quito,
-      Ecuador: Last day in South America!!","caption":"182 new photos","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yz\/r\/StEh3RhPvjk.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/30901951\/posts\/572988779040"},{"name":"Like","link":"http:\/\/www.facebook.com\/30901951\/posts\/572988779040"}],"type":"photo","object_id":"572956967790","created_time":"2011-11-01T22:29:51+0000","updated_time":"2011-11-01T22:29:51+0000","comments":{"count":0}},{"id":"682646955_10150351242761956","from":{"name":"Stephen
-      Morrissey","id":"682646955"},"story":"Stephen Morrissey is now friends with
-      Rachel Shechtman and Jen Apodaca.","story_tags":{"0":[{"id":682646955,"name":"Stephen
-      Morrissey","offset":0,"length":17}],"38":[{"id":570741804,"name":"Rachel Shechtman","offset":38,"length":16}],"59":[{"id":100000361941976,"name":"Jen
-      Apodaca","offset":59,"length":11}]},"type":"status","created_time":"2011-11-01T22:20:13+0000","updated_time":"2011-11-01T22:20:13+0000","comments":{"count":0}},{"id":"26200286_692516813853","from":{"name":"Siobhan
-      Granvold","id":"26200286"},"story":"Siobhan Granvold and Aleena Cheney are now
-      friends.","story_tags":{"21":[{"id":773033664,"name":"Aleena Cheney","offset":21,"length":13}],"0":[{"id":26200286,"name":"Siobhan
-      Granvold","offset":0,"length":16}]},"actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/26200286\/posts\/692516813853"},{"name":"Like","link":"http:\/\/www.facebook.com\/26200286\/posts\/692516813853"}],"type":"status","created_time":"2011-11-01T21:50:14+0000","updated_time":"2011-11-01T21:50:14+0000","comments":{"count":0}},{"id":"26200286_692514962563","from":{"name":"Siobhan
-      Granvold","id":"26200286"},"picture":"https:\/\/www.facebook.com\/app_full_proxy.php?app=48119224995&v=1&size=z&cksum=954dde72ba3a036b9155f25787070e03&src=http\u00253A\u00252F\u00252F25.media.tumblr.com\u00252Ftumblr_lu049kA3Yb1qkxbvvo1_250.jpg","link":"http:\/\/siogran.tumblr.com\/post\/12210463651","caption":"Hello
-      November! How are you today? I have missed you and you look awfully beautiful
-      today!\nWith November comes NaNoWriMo. Yay!\nAlso comes the second month of
-      trying to drastically reduce the amount of caffeine I intake on a daily basis.
-      Sleep is...","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v43\/135\/48119224995\/app_2_48119224995_4168.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/26200286\/posts\/692514962563"},{"name":"Like","link":"http:\/\/www.facebook.com\/26200286\/posts\/692514962563"},{"name":"View
-      post","link":"http:\/\/siogran.tumblr.com\/post\/12210463651"}],"type":"link","application":{"name":"Tumblr","canvas_name":"tumblr-feed","namespace":"tumblr-feed","id":"48119224995"},"created_time":"2011-11-01T21:41:48+0000","updated_time":"2011-11-01T21:41:48+0000","likes":{"data":[{"name":"Alison
-      Uyehara","id":"19507890"}],"count":1},"comments":{"count":0}}],"paging":{"previous":"https:\/\/graph.facebook.com\/me\/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&since=1320194067","next":"https:\/\/graph.facebook.com\/me\/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&until=1320183707"}}'
-    http_version: '1.1'
-- !ruby/struct:VCR::HTTPInteraction
-  request: !ruby/struct:VCR::Request
-    method: :get
     uri: https://graph.facebook.com:443/me/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&until=1320183707
     body: !!null 
     headers: !!null 
@@ -833,168 +669,6 @@
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :get
-    uri: https://graph.facebook.com:443/me/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD
-    body: !!null 
-    headers: !!null 
-  response: !ruby/struct:VCR::Response
-    status: !ruby/struct:VCR::ResponseStatus
-      code: 200
-      message: OK
-    headers:
-      access-control-allow-origin:
-      - ! '*'
-      cache-control:
-      - private, no-cache, no-store, must-revalidate
-      content-type:
-      - text/javascript; charset=UTF-8
-      etag:
-      - ! '"74a5e1280941b211b30e7d8e11c77f154d0bb50b"'
-      expires:
-      - Sat, 01 Jan 2000 00:00:00 GMT
-      pragma:
-      - no-cache
-      x-fb-rev:
-      - '466493'
-      x-fb-server:
-      - 10.32.18.124
-      x-cnection:
-      - close
-      date:
-      - Wed, 02 Nov 2011 00:54:55 GMT
-      content-length:
-      - '23078'
-    body: ! '{"data":[{"id":"333700136_511621427738","from":{"name":"Cherelle Gour","id":"333700136"},"story":"Cherelle
-      Gour is now friends with John Ramirez and 2 other people.","story_tags":{"0":[{"id":333700136,"name":"Cherelle
-      Gour","offset":0,"length":13}],"34":[{"id":100001590388604,"name":"John Ramirez","offset":34,"length":12}],"51":[{"id":1532853653,"name":"Taylor
-      Rhymenocerous Kinnicutt","offset":51,"length":14},{"id":1256523080,"name":"Ryan
-      Schlater","offset":51,"length":14}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/161501_100001590388604_1953417_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=100001590388604&ref=nf_fr","type":"link","created_time":"2011-11-02T00:34:27+0000","updated_time":"2011-11-02T00:34:27+0000","comments":{"count":0}},{"from":{"name":"Stephen
-      Morrissey","id":"682646955"},"story":"Stephen Morrissey likes Travel + Leisure\u00a0says
-      Intelligentsia is one of America\u2019s coolest coffeehouses and America''s
-      Coolest Coffeehouses.","story_tags":{"0":[{"id":682646955,"name":"Stephen Morrissey","offset":0,"length":17}]},"picture":"https:\/\/s-external.ak.fbcdn.net\/safe_image.php?d=AQDkIXp5guIEi0Ub&w=90&h=90&url=http\u00253A\u00252F\u00252Fmedia.avclub.com\u00252Fimages\u00252Farticles\u00252Farticle\u00252F64\u00252F64301\u00252F4294526044_2a8e03a15c_b_jpg_130x130_crop-smart_upscale_q85.jpg","link":"http:\/\/www.avclub.com\/chicago\/articles\/travel-leisure-says-intelligentsia-is-one-of-ameri,64301\/","name":"Travel
-      + Leisure\u00a0says Intelligentsia is one of America\u2019s coolest coffeehouses","description":"Does
-      this mean it isn\u2019t cool to go to Intelligentsia anymore?\u00a0","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yD\/r\/aS8ecmYRys0.gif","type":"link","application":{"name":"Likes","canvas_name":"awesomeprops","namespace":"awesomeprops","id":"2409997254"},"created_time":"2011-11-02T00:33:55+0000","updated_time":"2011-11-02T00:33:55+0000","comments":{"count":0}},{"id":"1357854925_2616599978424","from":{"name":"Tracy
-      Allen","id":"1357854925"},"story":"Tracy Allen is now friends with \u7a32\u4e95\u514b\u5229
-      and Junichi Yamaguchi.","story_tags":{"0":[{"id":1357854925,"name":"Tracy Allen","offset":0,"length":11}],"32":[{"id":100002961461875,"name":"\u7a32\u4e95\u514b\u5229","offset":32,"length":4}],"41":[{"id":100003052982276,"name":"Junichi
-      Yamaguchi","offset":41,"length":17}]},"type":"status","created_time":"2011-11-02T00:31:00+0000","updated_time":"2011-11-02T00:31:00+0000","comments":{"count":0}},{"id":"1206335_10100729082384863","from":{"name":"Stephen
-      S. Wade","id":"1206335"},"message":"Chef friends, a question: I believe I may
-      have signed on for a stage where I''m in over my head. Do I contact chef and
-      call off or do I go thru with it?","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1206335\/posts\/10100729082384863"},{"name":"Like","link":"http:\/\/www.facebook.com\/1206335\/posts\/10100729082384863"}],"type":"status","application":{"name":"Facebook
-      for iPhone","canvas_name":"fbtouch","namespace":"fbtouch","id":"6628568379"},"created_time":"2011-11-02T00:30:52+0000","updated_time":"2011-11-02T00:53:28+0000","comments":{"data":[{"id":"1206335_10100729082384863_9783093","from":{"name":"Will
-      Gibson","id":"1525704047"},"message":"What Deno said. I didn''t realize you
-      were doing the chef thing.","created_time":"2011-11-02T00:51:30+0000"},{"id":"1206335_10100729082384863_9783128","from":{"name":"Stephen
-      S. Wade","id":"1206335"},"message":"\u0040 Deno, thanks. Chef and I spoke this
-      afternoon when I got the offer. She is placing me on a 9-6 brunch slot in the
-      pastry department. I feel confident in my basic skill set, but I know the covers\/turns
-      per table they do, and it can be crazy intense as a service. I don''t know their
-      recipe list, and while I have basics set to memory (pate brisee, rough puff,
-      etc) I''m just worried about pulling the team into the weeds I''ve done stages
-      in production baking environments before, I''m just anxious in a way about whether
-      I can keep up -- which I know I can. I think it''s just nerves -- it''s a chef
-      whose work I think +++ of, and worried that it''s going to be a massive cock-up.
-      ","created_time":"2011-11-02T00:53:28+0000"}],"count":4}},{"id":"1453973049_2435900784261","from":{"name":"Kevin
-      Magnuson","id":"1453973049"},"story":"Kevin Magnuson is now friends with Mickey
-      Lorenzini and Raffi Tchekmedyian.","story_tags":{"0":[{"id":1453973049,"name":"Kevin
-      Magnuson","offset":0,"length":14}],"35":[{"id":100000257577241,"name":"Mickey
-      Lorenzini","offset":35,"length":16}],"56":[{"id":1041030130,"name":"Raffi Tchekmedyian","offset":56,"length":18}]},"type":"status","created_time":"2011-11-02T00:20:10+0000","updated_time":"2011-11-02T00:20:10+0000","comments":{"count":0}},{"id":"1075392174_2386961588193","from":{"name":"Vienna
-      Teng","id":"1075392174"},"story":"Vienna Teng is now friends with Lina Schmidt
-      and 13 other people.","story_tags":{"0":[{"id":1075392174,"name":"Vienna Teng","offset":0,"length":11}],"32":[{"id":550011584,"name":"Lina
-      Schmidt","offset":32,"length":12}],"49":[{"id":68137699,"name":"Dawn Watson","offset":49,"length":15},{"id":100000110264464,"name":"Linda
-      Madeline","offset":49,"length":15},{"id":501960749,"name":"Trebor Lloyd","offset":49,"length":15},{"id":1079971043,"name":"Stewart
-      David Ikeda","offset":49,"length":15},{"id":514846258,"name":"Charles McEnerney","offset":49,"length":15},{"id":523810198,"name":"Heidi
-      Claville Nielsen","offset":49,"length":15},{"id":752933067,"name":"Amie Penwell","offset":49,"length":15},{"id":834412439,"name":"Tara
-      Madrone","offset":49,"length":15},{"id":652096654,"name":"Ash Lampman","offset":49,"length":15},{"id":1306548,"name":"Ian
-      Holljes","offset":49,"length":15},{"id":100002618725478,"name":"Luckyz Erigah
-      Imonibuebu","offset":49,"length":15},{"id":1255620162,"name":"Tom Bridge","offset":49,"length":15},{"id":692429026,"name":"Ken
-      Anderson","offset":49,"length":15}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/370228_550011584_737048120_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=550011584&ref=nf_fr","type":"link","created_time":"2011-11-02T00:18:33+0000","updated_time":"2011-11-02T00:18:33+0000","comments":{"count":0}},{"id":"1259046563_2553328633387","from":{"name":"Christopher
-      Nicely Abel Alameda","id":"1259046563"},"message":"Spirit uplifting flavor.  \u2014
-      Drinking a TAP6 Unser Aventinus \u2014 http:\/\/t.co\/tXdtp9x5","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v27562\/23\/2231777543\/app_2_2231777543_9553.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1259046563\/posts\/2553328633387"},{"name":"Like","link":"http:\/\/www.facebook.com\/1259046563\/posts\/2553328633387"},{"name":"\u0040nicely85
-      on Twitter","link":"http:\/\/twitter.com\/nicely85?utm_source=fb&utm_medium=fb&utm_campaign=nicely85&utm_content=131525271517007875"}],"type":"status","application":{"name":"Twitter","canvas_name":"twitter","namespace":"twitter","id":"2231777543"},"created_time":"2011-11-02T00:17:23+0000","updated_time":"2011-11-02T00:17:23+0000","comments":{"count":0}},{"id":"1237900_10100725806345073","from":{"name":"Brooke
-      Su","id":"1237900"},"story":"Brooke Su is now friends with R\u00fczly Mantara
-      and 2 other people.","story_tags":{"0":[{"id":1237900,"name":"Brooke Su","offset":0,"length":9}],"30":[{"id":1242434,"name":"R\u00fczly
-      Mantara","offset":30,"length":13}],"48":[{"id":1222760,"name":"Robert Lee","offset":48,"length":14},{"id":4203876,"name":"Gavi
-      Elkind","offset":48,"length":14}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/274762_1242434_91679664_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=1242434&ref=nf_fr","type":"link","created_time":"2011-11-02T00:15:05+0000","updated_time":"2011-11-02T00:15:05+0000","comments":{"count":0}},{"id":"1055790634_1524075495927","from":{"name":"Nicole
-      He","id":"1055790634"},"message":"Looks like no one travels in January - I''m
-      flying into Paris and out of Stockholm for $591.","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1055790634\/posts\/1524075495927"},{"name":"Like","link":"http:\/\/www.facebook.com\/1055790634\/posts\/1524075495927"}],"type":"status","created_time":"2011-11-02T00:11:48+0000","updated_time":"2011-11-02T00:11:48+0000","likes":{"data":[{"name":"Yizhi
-      Wu","id":"600204039"}],"count":2},"comments":{"count":0}},{"id":"1670318850_2057259365674","from":{"name":"Andy
-      Newbom","id":"1670318850"},"story":"Andy Newbom is now friends with Ingenieria
-      Cervecera and 9 other people.","story_tags":{"0":[{"id":1670318850,"name":"Andy
-      Newbom","offset":0,"length":11}],"32":[{"id":100002428587014,"name":"Ingenieria
-      Cervecera","offset":32,"length":20}],"57":[{"id":100003086744680,"name":"Luis
-      Fcp","offset":57,"length":14},{"id":1840433513,"name":"Todd Hsu","offset":57,"length":14},{"id":679963656,"name":"Federico
-      Pacas","offset":57,"length":14},{"id":100003041744648,"name":"Mozencahua Brewery","offset":57,"length":14},{"id":100002353824725,"name":"Ringgit
-      Hills Coffee Farm","offset":57,"length":14},{"id":1503845,"name":"Case Taintor","offset":57,"length":14},{"id":523376335,"name":"Jennifer
-      Leslie","offset":57,"length":14},{"id":100003067455061,"name":"MeGusta LaCerveza","offset":57,"length":14},{"id":100002237662459,"name":"Caf\u00e9-Palacio
-      Santa Tecla","offset":57,"length":14}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/186098_100002428587014_4343207_q.jpg","link":"http:\/\/www.facebook.com\/ingenieria.cervecera?ref=nf_fr","type":"link","created_time":"2011-11-02T00:06:37+0000","updated_time":"2011-11-02T00:06:37+0000","comments":{"count":0}},{"id":"139400317_538246414105","from":{"name":"Susan
-      Schneider","id":"139400317"},"message":"Ready for the car ride home!","picture":"https:\/\/fbcdn-photos-a.akamaihd.net\/hphotos-ak-snc7\/377474_538245999935_139400317_30741329_352209509_s.jpg","link":"http:\/\/www.facebook.com\/photo.php?fbid=538245999935&set=a.528005756465.2023717.139400317&type=1","name":"Mobile
-      Uploads","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yx\/r\/og8V99JVf8G.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/139400317\/posts\/538246414105"},{"name":"Like","link":"http:\/\/www.facebook.com\/139400317\/posts\/538246414105"}],"type":"photo","object_id":"538245999935","application":{"name":"Facebook
-      for iPhone","canvas_name":"fbtouch","namespace":"fbtouch","id":"6628568379"},"created_time":"2011-11-01T23:42:13+0000","updated_time":"2011-11-02T00:46:41+0000","likes":{"data":[{"name":"Tracie
-      Snowder","id":"17803830"}],"count":3},"comments":{"data":[{"id":"139400317_538246414105_510580","from":{"name":"Editha
-      Andriputri","id":"2528245"},"message":"omg she''s sooo precious, Susan!!! love
-      love love her!!! \u003c3 \u003c3 \u003c3","created_time":"2011-11-02T00:24:11+0000"},{"id":"139400317_538246414105_510586","from":{"name":"Lin
-      Villagom\u00e9z Cruz","id":"549157063"},"message":"Awwww...My Leilanis little
-      baby girl cousin","created_time":"2011-11-02T00:46:41+0000"}],"count":2}},{"id":"1055790035_1523832089842","from":{"name":"Christie
-      S. Cho","id":"1055790035"},"story":"Christie S. Cho likes Terra Nova.","story_tags":{"22":[{"id":116769271697030,"name":"Terra
-      Nova","offset":22,"length":10}],"0":[{"id":1055790035,"name":"Christie S. Cho","offset":0,"length":15}]},"type":"status","application":{"name":"Pages","id":"2530096808"},"created_time":"2011-11-01T23:39:17+0000","updated_time":"2011-11-01T23:39:17+0000","comments":{"count":0}},{"id":"663235486_10150891845620487","from":{"name":"Richard
-      Lam","id":"663235486"},"story":"Richard Lam is now friends with Andrew Strommen
-      and Packie Michael Ross.","story_tags":{"0":[{"id":663235486,"name":"Richard
-      Lam","offset":0,"length":11}],"32":[{"id":1387406756,"name":"Andrew Strommen","offset":32,"length":15}],"52":[{"id":680613377,"name":"Packie
-      Michael Ross","offset":52,"length":19}]},"type":"status","created_time":"2011-11-01T23:31:41+0000","updated_time":"2011-11-01T23:31:41+0000","comments":{"count":0}},{"id":"1055790431_220808754652328","from":{"name":"Mallik
-      Reddy","id":"1055790431"},"message":"Oh my god.","picture":"https:\/\/s-external.ak.fbcdn.net\/safe_image.php?d=AQB4ebcuBaaNNMnH&w=90&h=90&url=http\u00253A\u00252F\u00252Fgraphics8.nytimes.com\u00252Fimages\u00252Fblogs_v3\u00252Fthelede\u00252Fthelede75.gif","link":"http:\/\/thelede.blogs.nytimes.com\/2011\/11\/01\/japanese-official-drinks-water-from-fukushima-reactor-buildings\/","name":"Japanese
-      Official Drinks Water From Fukushima Reactor Buildings","caption":"thelede.blogs.nytimes.com","description":"After
-      insisting that water collected from the stricken Fukushima Daiichi nuclear plant
-      posed no threat to human health once it was decontaminated, a Japanese government
-      official poured himself a glass of the liquid and drank it.","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yD\/r\/aS8ecmYRys0.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1055790431\/posts\/220808754652328"},{"name":"Like","link":"http:\/\/www.facebook.com\/1055790431\/posts\/220808754652328"}],"type":"link","created_time":"2011-11-01T23:29:45+0000","updated_time":"2011-11-01T23:51:38+0000","comments":{"data":[{"id":"1055790431_220808754652328_2220361","from":{"name":"Ellen
-      Bane","id":"3625223"},"message":"you would NEVER catch an american politician
-      doing that","created_time":"2011-11-01T23:51:38+0000"}],"count":1}},{"id":"3227475_10100588725865473","from":{"name":"Deepti
-      Menon","id":"3227475"},"picture":"https:\/\/www.facebook.com\/app_full_proxy.php?app=96105046534&v=1&size=z&cksum=2d9d36c9bc4f0d4c9fdbaa8568183e87&src=http\u00253A\u00252F\u00252Fi-beta.crackedcdn.com\u00252Fphpimages\u00252Farticle\u00252F7\u00252F1\u00252F6\u00252F98716.jpg\u00253Fv\u00253D1","link":"http:\/\/www.cracked.com\/article_19468_5-logical-fallacies-that-make-you-wrong-more-than-you-think.html","name":"5
-      Logical Fallacies That Make You Wrong More Than You Think","caption":"www.cracked.com","description":"The
-      Internet has introduced a golden age of ill-informed arguments. You can''t post
-      a video of an adorable kitten without a raging debate about pet issues spawning
-      in the comment section. These days, everyone is a pundit....","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v27562\/70\/96105046534\/app_2_96105046534_2214.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/3227475\/posts\/10100588725865473"},{"name":"Like","link":"http:\/\/www.facebook.com\/3227475\/posts\/10100588725865473"}],"type":"link","application":{"name":"RockMelt","canvas_name":"rockmelt","namespace":"rockmelt","id":"96105046534"},"created_time":"2011-11-01T23:25:59+0000","updated_time":"2011-11-01T23:25:59+0000","likes":{"data":[{"name":"Anna
-      Tchetchetkine","id":"505413416"},{"name":"Kevin J. Lee","id":"608670585"}],"count":2},"comments":{"count":0}},{"id":"1418897861_2578288542697","from":{"name":"Barrett
-      Shepherd","id":"1418897861"},"story":"Barrett Shepherd is now friends with Carly
-      Reier and 4 other people.","story_tags":{"0":[{"id":1418897861,"name":"Barrett
-      Shepherd","offset":0,"length":16}],"37":[{"id":1441220478,"name":"Carly Reier","offset":37,"length":11}],"53":[{"id":1610121071,"name":"Jennifer
-      Beam","offset":53,"length":14},{"id":56100943,"name":"Sarah Paul","offset":53,"length":14},{"id":100001314061270,"name":"Cindy
-      Morales","offset":53,"length":14},{"id":1590368553,"name":"Jason Beam","offset":53,"length":14}]},"picture":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-snc4\/368873_1441220478_681759790_q.jpg","link":"http:\/\/www.facebook.com\/profile.php?id=1441220478&ref=nf_fr","type":"link","created_time":"2011-11-01T23:23:57+0000","updated_time":"2011-11-01T23:23:57+0000","comments":{"count":0}},{"id":"1214194329_2141326452095","from":{"name":"David
-      Vicente Johnson","id":"1214194329"},"message":"I fear nothing, but the doubt
-      that''s still judging.","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1214194329\/posts\/2141326452095"},{"name":"Like","link":"http:\/\/www.facebook.com\/1214194329\/posts\/2141326452095"}],"type":"status","application":{"name":"Facebook
-      for Android","id":"350685531728"},"created_time":"2011-11-01T22:53:19+0000","updated_time":"2011-11-01T22:53:19+0000","comments":{"count":0}},{"id":"1327525369_133772743395153","from":{"name":"Jacob
-      Newbom","id":"1327525369"},"message":"I almost feel guilty liking this.\n","link":"http:\/\/www.youtube.com\/watch?v=tUYSOtNfzm8&feature=related","name":"http:\/\/www.youtube.com\/watch?v=tUYSOtNfzm8","caption":"www.youtube.com","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yD\/r\/aS8ecmYRys0.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1327525369\/posts\/133772743395153"},{"name":"Like","link":"http:\/\/www.facebook.com\/1327525369\/posts\/133772743395153"}],"type":"link","created_time":"2011-11-01T22:52:15+0000","updated_time":"2011-11-01T22:52:22+0000","likes":{"data":[{"name":"Jacob
-      Newbom","id":"1327525369"}],"count":1},"comments":{"data":[{"id":"1327525369_133772743395153_255342","from":{"name":"Jacob
-      Newbom","id":"1327525369"},"message":"Almost.","created_time":"2011-11-01T22:52:19+0000","likes":1},{"id":"1327525369_133772743395153_255344","from":{"name":"Jacob
-      Newbom","id":"1327525369"},"message":"Not quite","created_time":"2011-11-01T22:52:22+0000","likes":1}],"count":2}},{"id":"1788845898_1910395938131","from":{"name":"Hiver
-      van Geenhoven","id":"1788845898"},"picture":"https:\/\/fbcdn-photos-a.akamaihd.net\/hphotos-ak-snc7\/301695_1910482620298_1788845898_1296888_581792506_s.jpg","link":"http:\/\/www.facebook.com\/photo.php?fbid=1910482620298&set=a.1744712236142.71186.1788845898&type=1","name":"Mobile
-      Uploads","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yx\/r\/og8V99JVf8G.gif","type":"photo","object_id":"1910482620298","created_time":"2011-11-01T22:50:47+0000","updated_time":"2011-11-01T22:50:47+0000","comments":{"count":0}},{"id":"541764248_10150348694269249","from":{"name":"Anna
-      Julian","id":"541764248"},"story":"Anna Julian is now friends with Christine
-      Herrera Ramon and Sam Nachison.","story_tags":{"0":[{"id":541764248,"name":"Anna
-      Julian","offset":0,"length":11}],"32":[{"id":100003140104851,"name":"Christine
-      Herrera Ramon","offset":32,"length":23}],"60":[{"id":656182780,"name":"Sam Nachison","offset":60,"length":12}]},"type":"status","created_time":"2011-11-01T22:42:47+0000","updated_time":"2011-11-01T22:42:47+0000","comments":{"count":0}},{"id":"1327525369_2569126910616","from":{"name":"Jacob
-      Newbom","id":"1327525369"},"message":"Im not saying that we could do better,
-      but given the chance we''d try.","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/1327525369\/posts\/2569126910616"},{"name":"Like","link":"http:\/\/www.facebook.com\/1327525369\/posts\/2569126910616"}],"type":"status","created_time":"2011-11-01T22:35:13+0000","updated_time":"2011-11-01T22:36:33+0000","likes":{"data":[{"name":"Roman
-      Faria","id":"100000474531046"}],"count":1},"comments":{"data":[{"id":"1327525369_2569126910616_3498459","from":{"name":"Roman
-      Faria","id":"100000474531046"},"message":"We dig up the earth''s time worn soil","created_time":"2011-11-01T22:36:11+0000","likes":1},{"id":"1327525369_2569126910616_3498462","from":{"name":"Jacob
-      Newbom","id":"1327525369"},"message":"And fill the trench with greedy eyes","created_time":"2011-11-01T22:36:33+0000","likes":1}],"count":2}},{"id":"30901951_572988779040","from":{"name":"Sharon
-      Walsh","id":"30901951"},"picture":"https:\/\/fbcdn-photos-a.akamaihd.net\/hphotos-ak-ash4\/317816_572956967790_30901951_31808989_1851614861_s.jpg","link":"http:\/\/www.facebook.com\/photo.php?fbid=572956967790&set=a.572956907910.2062299.30901951&type=1","name":"Quito,
-      Ecuador: Last day in South America!!","caption":"182 new photos","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yz\/r\/StEh3RhPvjk.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/30901951\/posts\/572988779040"},{"name":"Like","link":"http:\/\/www.facebook.com\/30901951\/posts\/572988779040"}],"type":"photo","object_id":"572956967790","created_time":"2011-11-01T22:29:51+0000","updated_time":"2011-11-01T22:29:51+0000","comments":{"count":0}},{"id":"682646955_10150351242761956","from":{"name":"Stephen
-      Morrissey","id":"682646955"},"story":"Stephen Morrissey is now friends with
-      Rachel Shechtman and Jen Apodaca.","story_tags":{"0":[{"id":682646955,"name":"Stephen
-      Morrissey","offset":0,"length":17}],"38":[{"id":570741804,"name":"Rachel Shechtman","offset":38,"length":16}],"59":[{"id":100000361941976,"name":"Jen
-      Apodaca","offset":59,"length":11}]},"type":"status","created_time":"2011-11-01T22:20:13+0000","updated_time":"2011-11-01T22:20:13+0000","comments":{"count":0}},{"id":"26200286_692516813853","from":{"name":"Siobhan
-      Granvold","id":"26200286"},"story":"Siobhan Granvold and Aleena Cheney are now
-      friends.","story_tags":{"21":[{"id":773033664,"name":"Aleena Cheney","offset":21,"length":13}],"0":[{"id":26200286,"name":"Siobhan
-      Granvold","offset":0,"length":16}]},"actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/26200286\/posts\/692516813853"},{"name":"Like","link":"http:\/\/www.facebook.com\/26200286\/posts\/692516813853"}],"type":"status","created_time":"2011-11-01T21:50:14+0000","updated_time":"2011-11-01T21:50:14+0000","comments":{"count":0}},{"id":"26200286_692514962563","from":{"name":"Siobhan
-      Granvold","id":"26200286"},"picture":"https:\/\/www.facebook.com\/app_full_proxy.php?app=48119224995&v=1&size=z&cksum=954dde72ba3a036b9155f25787070e03&src=http\u00253A\u00252F\u00252F25.media.tumblr.com\u00252Ftumblr_lu049kA3Yb1qkxbvvo1_250.jpg","link":"http:\/\/siogran.tumblr.com\/post\/12210463651","caption":"Hello
-      November! How are you today? I have missed you and you look awfully beautiful
-      today!\nWith November comes NaNoWriMo. Yay!\nAlso comes the second month of
-      trying to drastically reduce the amount of caffeine I intake on a daily basis.
-      Sleep is...","icon":"https:\/\/fbcdn-photos-a.akamaihd.net\/photos-ak-snc1\/v43\/135\/48119224995\/app_2_48119224995_4168.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/26200286\/posts\/692514962563"},{"name":"Like","link":"http:\/\/www.facebook.com\/26200286\/posts\/692514962563"},{"name":"View
-      post","link":"http:\/\/siogran.tumblr.com\/post\/12210463651"}],"type":"link","application":{"name":"Tumblr","canvas_name":"tumblr-feed","namespace":"tumblr-feed","id":"48119224995"},"created_time":"2011-11-01T21:41:48+0000","updated_time":"2011-11-01T21:41:48+0000","likes":{"data":[{"name":"Alison
-      Uyehara","id":"19507890"}],"count":1},"comments":{"count":0}}],"paging":{"previous":"https:\/\/graph.facebook.com\/me\/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&since=1320194067","next":"https:\/\/graph.facebook.com\/me\/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&until=1320183707"}}'
-    http_version: '1.1'
-- !ruby/struct:VCR::HTTPInteraction
-  request: !ruby/struct:VCR::Request
-    method: :get
     uri: https://graph.facebook.com:443/me/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&until=1320183707
     body: !!null 
     headers: !!null 
@@ -1483,4 +1157,41 @@
       that the world would end on October 21, can now be put aside: The world is still
       here (as far as I can determine) and humanity is still busy going about it''s
       evil ways which [...]","icon":"https:\/\/s-static.ak.facebook.com\/rsrc.php\/v1\/yD\/r\/aS8ecmYRys0.gif","actions":[{"name":"Comment","link":"http:\/\/www.facebook.com\/122604843\/posts\/255214071197444"},{"name":"Like","link":"http:\/\/www.facebook.com\/122604843\/posts\/255214071197444"}],"type":"link","application":null,"created_time":"2011-11-01T04:32:41+0000","updated_time":"2011-11-01T04:32:41+0000","comments":{"count":0}}],"paging":{"previous":"https:\/\/graph.facebook.com\/me\/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&since=1320134106","next":"https:\/\/graph.facebook.com\/me\/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD&limit=25&until=1320121960"}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://graph.facebook.com:443/me/home?access_token=AAACF78hfSZBEBAM0leS4CSzXZARd7S68Al6uVzs8DwJ8huZAm1YsjYeiZA2gBR3p7Ue8l3EPrKjkv6EtmOQuXo95aNTIcPIZD
+    body: !!null 
+    headers: !!null 
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 400
+      message: Bad Request
+    headers:
+      access-control-allow-origin:
+      - ! '*'
+      cache-control:
+      - no-store
+      content-type:
+      - text/javascript; charset=UTF-8
+      expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      pragma:
+      - no-cache
+      www-authenticate:
+      - ! 'OAuth "Facebook Platform" "invalid_token" "Error validating access token:
+        The session has been invalidated because the user has changed the password."'
+      x-fb-rev:
+      - '543598'
+      x-fb-debug:
+      - 7HghMweCMOaXmBmm3PKjWT4eIxY0jPccU1Qpko2tDs0=
+      x-cnection:
+      - close
+      date:
+      - Thu, 19 Apr 2012 00:45:29 GMT
+      content-length:
+      - '165'
+    body: ! '{"error":{"message":"Error validating access token: The session has been
+      invalidated because the user has changed the password.","type":"OAuthException","code":190}}'
     http_version: '1.1'

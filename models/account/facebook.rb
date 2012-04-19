@@ -3,7 +3,6 @@ module Aji
     include Redis::Objects
     include Mixins::CanRefreshContent
     include Mixins::Formatters::Facebook
-    include Aji::TankerDefaults::Account
     include Mixins::EmailCollectors::Facebook
 
     has_many :mentions, :foreign_key => :author_id, :dependent => :destroy

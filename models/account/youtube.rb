@@ -1,6 +1,5 @@
 module Aji
   class Account::Youtube < Account
-    include Aji::TankerDefaults::Account
 
     before_create :get_info_from_youtube_api, :unless => :authorized?
 

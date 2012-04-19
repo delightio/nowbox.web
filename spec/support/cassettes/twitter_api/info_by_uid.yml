@@ -2,111 +2,6 @@
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :get
-    uri: https://api.twitter.com:443/1/users/show.json?user_id=178492493
-    body: !!null 
-    headers:
-      accept:
-      - application/json
-      user-agent:
-      - Twitter Ruby Gem 1.7.2
-      authorization:
-      - OAuth oauth_consumer_key="RWUyehmqjKRBMSlVTeZDw", oauth_nonce="de17dd7157b4f8fd4f7a9f69f9a414ed",
-        oauth_signature="CfZTw42OaizCTdjK8MakbpRGhpQ%3D", oauth_signature_method="HMAC-SHA1",
-        oauth_timestamp="1320346369", oauth_token="178492493-AmMNGcEjYmK7OuCL7jNlPVv85yHGNmVmVMfJhTtN",
-        oauth_version="1.0"
-      accept-encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response: !ruby/struct:VCR::Response
-    status: !ruby/struct:VCR::ResponseStatus
-      code: 200
-      message: OK
-    headers:
-      date:
-      - Thu, 03 Nov 2011 18:52:49 GMT
-      server:
-      - hi
-      status:
-      - 200 OK
-      x-ratelimit-limit:
-      - '350'
-      x-transaction:
-      - 1320346369-95190-27617
-      etag:
-      - ! '"be3d073793b4fbf6bb395491e9ae0dd0"'
-      x-frame-options:
-      - SAMEORIGIN
-      last-modified:
-      - Thu, 03 Nov 2011 18:52:49 GMT
-      x-ratelimit-remaining:
-      - '327'
-      x-runtime:
-      - '0.02870'
-      x-transaction-mask:
-      - a6183ffa5f8ca943ff1b53b5644ef1145155e735
-      content-type:
-      - application/json; charset=utf-8
-      pragma:
-      - no-cache
-      x-access-level:
-      - read-write
-      x-ratelimit-class:
-      - api_identified
-      x-content-type-options:
-      - nosniff
-      x-revision:
-      - DEV
-      expires:
-      - Tue, 31 Mar 1981 05:00:00 GMT
-      cache-control:
-      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
-      x-ratelimit-reset:
-      - '1320347112'
-      x-mid:
-      - 0bbefb5fdbbbc67915f8b41bbe16af1ebcfe2bf5
-      set-cookie:
-      - _twitter_sess=BAh7CToPY3JlYXRlZF9hdGwrCG69xmozAToHdWEwOgdpZCIlZmFhMTczMzhk%250AMzQ0MDM0MjdkNDk1MTFmZTRjYzA5MzEiCmZsYXNoSUM6J0FjdGlvbkNvbnRy%250Ab2xsZXI6OkZsYXNoOjpGbGFzaEhhc2h7AAY6CkB1c2VkewA%253D--324bf277e21f756859b2464cd1783ab43f6ce378;
-        domain=.twitter.com; path=/; HttpOnly
-      - guest_id=v1%3A132034636938249532; domain=.twitter.com; path=/; expires=Sun,
-        03-Nov-2013 06:52:49 GMT
-      - k=173.247.193.198.1320346369378830; path=/; expires=Thu, 10-Nov-11 18:52:49
-        GMT; domain=.twitter.com
-      - lang=en; path=/
-      - twid=u%3D178492493%7Cf%2FCy9ytSF4mjQzI1srlbjag1gaQ%3D; domain=.twitter.com;
-        path=/
-      vary:
-      - Accept-Encoding
-      content-encoding:
-      - gzip
-      transfer-encoding:
-      - chunked
-    body: !binary |-
-      H4sIAAAAAAAAAwIAAAD//7VV264iRRT9lT31YDQi9BUaEhPPEM6TjkZGjQlJ
-      p+jeDSXVVVgXODiZf3cX0Fzm4DwYPS+crsu+rLXXqg/MiRbLv7RCNmE/8Uo0
-      ooL3tAZf/jKHL2DKFa/5V6zHtkY3QmIphdqUlZba0I1i9jaN89Ouw8phzSYN
-      lxZ7rDLI6bvkjs7NuYMnv4I4gySZZPkkH8PXEf1BEsXRTXTR8hWW3shy7dzW
-      0tXj72QxWAysiPpuL9pVv9LtYnB3xS4GcZYmo+EoGUZ01OEOVal8JZEby1W9
-      F9U63CuVNi2X/a1aUVrF29D4/Hj8DfzMV4qbhY+iZrih7RXqEhVfypu+Gr7T
-      3giHllDwirpLx8m1gSWvNitDG/UFpHT49LZ4onA1NtxLV95VfgmstAvocye0
-      spfVB3EdfbOJM562vatK3TQWqY5vkqKIopDGVkZsQxzKPp0vBj9wtwbrfI3K
-      9eB7ofwLeIsGCBh4/nE+B9pYeyu4dX2YvWyJSnAaLCIQZts+2Er0QXnn0Bx6
-      0IZ4XDlR2d4xhlsj6LqGrbYO+FJ7ByuC1oI2sNR6Y/vwmzabCQQ2j2QqvW/1
-      LjBCwFjHHdVzQZR4LAhpLaXeCyKqA2OHhiC6IaNDx4oal9yU9CEvuE+fZsNk
-      xrpAaC7x4yR/MHLnYTuWx9P/etROPbLJB7aVvCIClZeyxwy6PaLrKiP6hCoN
-      buWhdLokIjEEP43pH9g0Bg+CV1pp9onE3q89vNM7iFKIC+pwkt1ILGaXTDfo
-      3WU6lleKmv4L4MVpEmdFPB6P4nyYjbKiYPcXwvxcjydpksZpGvJQcc6IpXfa
-      2K7Lh5mIh1dJCCdSV4CHBRmmUw5rg823iys1Nmivv9J6JfFET1hZDA7a+MZv
-      PImEjjEwKOma0if2F6d4s9/p1PP51DEBcX3aCf3ddp8XaZSmo2KUjUjhJzfo
-      +gkmEDzgBstzO/e3Ahra1EIRTw/BOKNII38GsMdI2Krit7EdvgSGv7vjnzTH
-      1ca+gSWCUKRLpEmsg2rXNIewX9MKHAhMC7VoGjR99rGTAuX/09P50mIYun8Q
-      05Iqp+o6OT0/53kUvFrqk0kF4xRSUDHwK5cSyRimweaELZ3hykruwsXuPbgZ
-      i1emej/nVzG1LWnptXO+KplgvHXIs7GeLfJe2fv9vv9ArHfsj4psnGTjNMh2
-      TXBRd6VQ9PJh2WIt+Ofc+V+8YJ/eDg6TJzQMxXi4GLwsa57wJh7HWZQP82JU
-      D6usGFd1hhGO69HZX7pgYViuT89zRnHYeTy7tohCEYalMx0yQ8mDzTJU7PNN
-      3Xnk/9dMYwSq+vrCZvHHvwHzxUfYqwgAAA==
-    http_version: '1.1'
-- !ruby/struct:VCR::HTTPInteraction
-  request: !ruby/struct:VCR::Request
-    method: :get
     uri: https://api.twitter.com:443/1/users/show.json?user_id=0
     body: !!null 
     headers:
@@ -179,4 +74,88 @@
     body: !binary |-
       H4sIAAAAAAAAA6tWSi0qyi9SslLyyy9RSMsvzUtR0lEqSi0sTS0uAYrG6BvG
       6JcWpxYVx+gXZ+SX62UV5+fZgwTiM1NsDZRqActq5g1BAAAA
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://api.twitter.com:443/1/users/show.json?user_id=178492493
+    body: !!null 
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - Twitter Ruby Gem 1.7.2
+      authorization:
+      - OAuth oauth_consumer_key="wUhKhUtZKz39SvGRvcEXQ", oauth_nonce="9d221771d4962c6b27408a15608e1b86",
+        oauth_signature="Y3bmyNy7eMQtmdk6zw0hL52SYak%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1334796331", oauth_token="14373489-7eVCmhQkOWM5pFytjXSwN63MaCA8p5JOKMIktcqqG",
+        oauth_version="1.0"
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-access-level:
+      - read-write
+      x-ratelimit-limit:
+      - '350'
+      x-ratelimit-remaining:
+      - '349'
+      x-ratelimit-reset:
+      - '1334799931'
+      x-ratelimit-class:
+      - api_identified
+      content-type:
+      - application/json;charset=utf-8
+      set-cookie:
+      - guest_id="v1:133479633151402699";Expires=Sat, 19-Apr-14 00:45:31 GMT;Path=/;Domain=.twitter.com
+      - k=76.217.210.174.2848bc518e0cbfb8; path=/; expires=Thu, 26-Apr-2012 00:45:31
+        UTC; domain=.api.twitter.com; httponly
+      - lang=en
+      last-modified:
+      - Thu, 19 Apr 2012 00:45:31 GMT
+      expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      pragma:
+      - no-cache
+      cache-control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      x-transaction:
+      - ed55c5dade8c1414
+      x-frame-options:
+      - SAMEORIGIN
+      status:
+      - 200 OK
+      date:
+      - Thu, 19 Apr 2012 00:45:31 GMT
+      content-encoding:
+      - gzip
+      content-length:
+      - '924'
+      server:
+      - tfe
+    body: !binary |-
+      H4sIAAAAAAAC/7xVW4/rNBD+KyYPXERpc28SiYee1a5AOkcgyuUlkuU6k9Sq
+      awfb2e7hiP/OuGnT7qVIIEReknzzzX3G/hSIJqiiZZGWcVomM/yl1pmgCiYs
+      mAWK7QGhtYNHUJ+Rn1inmKmHMGzzHYotNwCKnlhq4BKYsUw1B8G3KJeaMye0
+      8iaEFFwr8iuTEj7OyN0K5Q2gBdGfKO8HhWxOvmN8BwYp63rxgbktsW5oQLkZ
+      eS/U8EQGC4agE/Lww3pNULAdrGDWzcn9Uw/cEaeJBSBc7/s5sVzMiRqcA4Nu
+      994eU+jGzo423BaIbhrSa+sI2+jBkQ7TsUQbstF6Z+cY52Akxrd1rq/qRb14
+      kegcHSGpN9qhd8CytkxamAWtllIfwFjK9aAclrvMEDUCVDNhabrEQgmLimcI
+      ASws8whzvnbMkdXQkSglcVylWZWV5OsQHxKHUYiuW/aoByMcXKyWKYbtONVt
+      awGBb+KiCMNZ4MQe6B9a+Yb9yLhoseA/I0a+/GVNPid3TLGGfYU2O9AUFNvI
+      q4QewaDCFWAdc9iOyW2SxOhXMtWheVDBmRFUn56n9Bs0ZNUbEhUkyqukqJL4
+      klIczMbpLOM8S5K0DLMoy9Mwia/H9JUQtRw8eeu2Xkitu/G1wxexXxy2WMXv
+      SQeOtNhbpR3BjukWo2qE6nybLRaR+8L4CU84I1sD7bf1pfHCj6GYc1YHxIBE
+      kdJjk+tRB0YGEo4W6sX4AT40MyjOrsdDKGqglx+p03QsE/VZq0HKG8Ix9dcE
+      vxE3dE+iW5rPNngUY+PPn1xrg8XBqO0Z6iXjcJErZ8RmcNpMBAPuAODOExGO
+      0+mH85L5iTMhfz439WruhKXOMGUlQ/GEYvtaIYFu8LzoDLrzCyQ9IUjy1bti
+      FbzJEXvWAX2x0iycu4PYd36X68UtLZykKIuTJCrKvF48bRoWszYqozTM8qxY
+      NjlPi5I3KYRQNst5j2vw9yFQH4A9BWKPkVjxv4bi8D+ocDivCvoPKjTFkibx
+      Ml/GeYgZHG8L+sYpSZU2eyZfRPMvqvFfuJVC7aaBKe7fJVF2JbW4yRtm6AY3
+      ADfozHt4yLIwfIOHP3Ji3a3u8/j+iuXPpctwPqTYuCsp7uir/p57Yrf6QPHO
+      pEJhwED30Ag2rUADLRukoydLt/CzyWf3kvCH9OhkBPBU+H0A66gFv7knMh6U
+      /pI43uP2vK9/AQAA//8DAIMvRIM+CAAA
     http_version: '1.1'
