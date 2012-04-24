@@ -4,8 +4,8 @@ module Aji
       case device
       when "ipad"
         {
-          :current_version => "1.4",
-          :minimum_version => "1.4",
+          :current_version => "1.3",
+          :minimum_version => "1.3",
           :link => { :rel => "latest",
                      :url => "http://itunes.apple.com/app/nowbox/id464416202?mt=8&uo=4" },
           :links => [{ :rel => "latest",
