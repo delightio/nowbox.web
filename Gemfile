@@ -48,6 +48,8 @@ gem 'yajl-ruby'
 gem 'twitter', '~>1.7.2'
 gem 'koala', '~>1.2.0beta'
 
+gem 'hirefireapp'
+
 gem 'tanker'
 gem 'will_paginate'
 
