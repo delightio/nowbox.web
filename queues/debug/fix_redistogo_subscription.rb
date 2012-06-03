@@ -13,6 +13,8 @@ module Aji
 
           user.events.order('created_at asc').each do |e|
             ch = e.channel
+            next if ch.nil?
+
             case e.action
             when :unsubscribe
               user.unsubscribe ch
