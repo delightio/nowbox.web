@@ -4,12 +4,12 @@ module Aji
       case device
       when "ipad"
         {
-          :current_version => "1.4.3",
-          :minimum_version => "1.4.3",
+          :current_version => "1.4.1",
+          :minimum_version => "1.4",
           :link => { :rel => "latest",
-                     :url => "http://nowbox.com" },
+                     :url => "http://itunes.apple.com/app/nowbox/id464416202?mt=8&uo=4" },
           :links => [{ :rel => "latest",
-                       :url => "http://nowbox.com" },
+                     :url => "http://itunes.apple.com/app/nowbox/id464416202?mt=8&uo=4" },
                      { :rel => "ratings",
                        :url => "itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=464416202" }]
 
