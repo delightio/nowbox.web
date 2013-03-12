@@ -13,33 +13,33 @@ module Aji
     File.expand_path('..', __FILE__)
   end
 
-  # Logging interface for local development and heroku.
-  # There are four internal Log levels aliased to the standard SYSLOG levels.
-  # The INFO level is used if no level is specified. Other options are `:DEBUG`,
-  # for DEBUG and `:WARN`, `:FATAL`, `:ERROR` for ERROR as well as a `:WTF`
-  # option for Really Bad Things. downcased versions of these work as well.
-  # DEBUG logs are not logged in production environments so conditional logging
-  # should not be used.
-  def Aji.log level=:INFO, message
-    return if RACK_ENV == 'test' unless ENV['LOG']
+  # # Logging interface for local development and heroku.
+  # # There are four internal Log levels aliased to the standard SYSLOG levels.
+  # # The INFO level is used if no level is specified. Other options are `:DEBUG`,
+  # # for DEBUG and `:WARN`, `:FATAL`, `:ERROR` for ERROR as well as a `:WTF`
+  # # option for Really Bad Things. downcased versions of these work as well.
+  # # DEBUG logs are not logged in production environments so conditional logging
+  # # should not be used.
+  # def Aji.log level=:INFO, message
+  #   return if RACK_ENV == 'test' unless ENV['LOG']
 
-    case level
-    when :ERROR, :WARN, :FATAL, :error, :warn, :fatal
-      $stderr.puts message
-    when :DEBUG, :debug
-      return if RACK_ENV == 'production'
-      $stdout.puts '----------DEBUG----------', message,
-        '----------DEBUG----------'
-    when :WTF, :wtf
-      $stderr.puts "!!!!!!!!!!!!!!!!!!!! LOOOK AT ME DAMMIT !!!!!!!!!!!!!!!!!!!!",
-           "!!!!!!!!!!!!!!!!!!!! I AM NOT RIGHT MAN !!!!!!!!!!!!!!!!!!!!",
-           message,
-           "!!!!!!!!!!!!!!!!!!!!   FOR FUCK'S SAKE   !!!!!!!!!!!!!!!!!!!",
-           "!!!!!!!!!!!!!!!!!!!! JUST LOOK UP PLEASE !!!!!!!!!!!!!!!!!!!"
-    else
-      $stdout.puts message
-    end
-  end
+  #   case level
+  #   when :ERROR, :WARN, :FATAL, :error, :warn, :fatal
+  #     $stderr.puts message
+  #   when :DEBUG, :debug
+  #     return if RACK_ENV == 'production'
+  #     $stdout.puts '----------DEBUG----------', message,
+  #       '----------DEBUG----------'
+  #   when :WTF, :wtf
+  #     $stderr.puts "!!!!!!!!!!!!!!!!!!!! LOOOK AT ME DAMMIT !!!!!!!!!!!!!!!!!!!!",
+  #          "!!!!!!!!!!!!!!!!!!!! I AM NOT RIGHT MAN !!!!!!!!!!!!!!!!!!!!",
+  #          message,
+  #          "!!!!!!!!!!!!!!!!!!!!   FOR FUCK'S SAKE   !!!!!!!!!!!!!!!!!!!",
+  #          "!!!!!!!!!!!!!!!!!!!! JUST LOOK UP PLEASE !!!!!!!!!!!!!!!!!!!"
+  #   else
+  #     $stdout.puts message
+  #   end
+  # end
 
   # Set Rack environment if not specified.
   RACK_ENV = ENV['RACK_ENV'] || "development"
@@ -53,15 +53,15 @@ module Aji
   require_relative 'config/setup.rb'
 
   # Establish Redis connection and initialize Redis-backed utilities.
-  def Aji.redis
-    @redis ||= Redis.new conf['REDIS']
-  end
+  # def Aji.redis
+  #   @redis ||= Redis.new conf['REDIS']
+  # end
 
-  Resque.redis = redis
-  Redis::Objects.redis = redis
-  Resque.schedule = conf['RESQUE_SCHEDULE']
-  Resque.before_fork = proc { ActiveRecord::Base.establish_connection(
-    Aji.conf['DATABASE']) }
+  # Resque.redis = redis
+  # Redis::Objects.redis = redis
+  # Resque.schedule = conf['RESQUE_SCHEDULE']
+  # Resque.before_fork = proc { ActiveRecord::Base.establish_connection(
+  #   Aji.conf['DATABASE']) }
 
   Resque::Failure::Exceptional.configure do |config|
     config.api_key = Aji.conf['EXCEPTIONAL_API_KEY']
@@ -87,37 +87,37 @@ module Aji
   end
 end
 
-require 'active_support/core_ext/object'
-# Monkey Patching
-require_relative 'lib/patches/time'
-require_relative 'lib/patches/string'
-require_relative 'lib/patches/resque'
-require_relative 'lib/patches/youtube_it/parser'
-require_relative 'lib/patches/youtube_it/request/video_upload'
-require_relative 'lib/patches/youtube_it/client'
+# require 'active_support/core_ext/object'
+# # Monkey Patching
+# require_relative 'lib/patches/time'
+# require_relative 'lib/patches/string'
+# require_relative 'lib/patches/resque'
+# require_relative 'lib/patches/youtube_it/parser'
+# require_relative 'lib/patches/youtube_it/request/video_upload'
+# require_relative 'lib/patches/youtube_it/client'
 
-Aji::Mixins = Module.new
-Dir.glob("lib/mixins/*.rb").each { |r| require_relative r }
-require_relative 'lib/decay'
-require_relative 'lib/parsers'
-require_relative 'lib/searcher'
-require_relative 'lib/info'
+# Aji::Mixins = Module.new
+# Dir.glob("lib/mixins/*.rb").each { |r| require_relative r }
+# require_relative 'lib/decay'
+# require_relative 'lib/parsers'
+# require_relative 'lib/searcher'
+# require_relative 'lib/info'
 
-Dir.glob("models/*.rb").each { |r| require_relative r }
-# Must load channel subtypes after other models for dependency reasons.
-Dir.glob("models/channel/*.rb").each { |r| require_relative r }
-Dir.glob("models/account/*.rb").each { |r| require_relative r }
+# Dir.glob("models/*.rb").each { |r| require_relative r }
+# # Must load channel subtypes after other models for dependency reasons.
+# Dir.glob("models/channel/*.rb").each { |r| require_relative r }
+# Dir.glob("models/account/*.rb").each { |r| require_relative r }
 
-Dir.glob("helpers/*.rb").each { |r| require_relative r }
-Dir.glob("controllers/*_controller.rb").each { |r| require_relative r }
-require_relative 'queues/with_database_connection.rb'
-Dir.glob("queues/*.rb").each { |r| require_relative r }
-Dir.glob("queues/mention/*.rb").each { |r| require_relative r }
-Dir.glob("queues/debug/*.rb").each { |r| require_relative r }
+# Dir.glob("helpers/*.rb").each { |r| require_relative r }
+# Dir.glob("controllers/*_controller.rb").each { |r| require_relative r }
+# require_relative 'queues/with_database_connection.rb'
+# Dir.glob("queues/*.rb").each { |r| require_relative r }
+# Dir.glob("queues/mention/*.rb").each { |r| require_relative r }
+# Dir.glob("queues/debug/*.rb").each { |r| require_relative r }
 
-# Add Sinatra web viewer.
-require_relative 'lib/google_auth'
+# # Add Sinatra web viewer.
+# require_relative 'lib/google_auth'
 require_relative 'lib/viewer/viewer'
-require_relative 'lib/mailer/mailer'
+# require_relative 'lib/mailer/mailer'
 
 require_relative 'app'
