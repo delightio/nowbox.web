@@ -312,7 +312,7 @@ DEPENDENCIES
   tanker
   thin
   thor
-  twitter (~> 1.7.2)
+  twitter
   typhoeus
   vcr (~> 2.0.0.beta1)
   webmock

@@ -45,7 +45,7 @@ gem 'omniauth', '~>0.3.2', :require => 'oa-oauth'
 gem 'youtube_it', '~>2.0.0'
 gem 'erubis'
 gem 'yajl-ruby'
-gem 'twitter', '~>1.7.2'
+gem 'twitter'
 gem 'koala', '~>1.2.0beta'
 
 gem 'hirefireapp'
