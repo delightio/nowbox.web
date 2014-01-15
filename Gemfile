@@ -4,7 +4,7 @@ source 'http://rubygems.org'
 gem 'rake'
 gem 'thor' # Better command line utility than rake.
 gem 'foreman' # Local process monitor.
-gem 'grape', :git => 'git://github.com/intridea/grape.git'
+gem 'grape'
 gem 'sinatra', :require => 'sinatra/base'
 gem 'thin' # Heroku recommends the Thin web server.
 gem 'resque',
